@@ -12,22 +12,22 @@ cumulus-primitives-parachain-inherent = { path = "../../primitives/parachain-inh
 cumulus-pallet-parachain-system-proc-macro = { path = "proc-macro", default-features = false }
 
 # Polkadot dependencies
-polkadot-parachain = { git = "https://github.com/paritytech/polkadot", default-features = false, features = [ "wasm-api" ], branch = "release-v0.9.10" }
-xcm = { git = "https://github.com/paritytech/polkadot", default-features = false, branch = "release-v0.9.10" }
+polkadot-parachain = { git = "https://github.com/PlasmNetwork/polkadot", default-features = false, features = [ "wasm-api" ], branch = "release-v0.9.10" }
+xcm = { git = "https://github.com/PlasmNetwork/polkadot", default-features = false, branch = "release-v0.9.10" }
 
 # Substrate dependencies
-frame-support = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-pallet-balances = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-core = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-inherents = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-io = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-std = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-runtime = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-version = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-frame-system = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-state-machine = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-trie = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-externalities = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+frame-support = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+pallet-balances = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-core = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-inherents = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-io = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-std = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-runtime = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-version = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+frame-system = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-state-machine = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-trie = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-externalities = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
 
 # Other Dependencies
 codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"]}
@@ -41,10 +41,10 @@ hex-literal = "0.2.1"
 lazy_static = "1.4"
 
 # Substrate dependencies
-sp-version = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.10" }
-sc-client-api = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.10" }
-sp-keyring = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.10" }
-sp-tracing = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.10" }
+sp-version = { git = "https://github.com/PlasmNetwork/substrate", branch = "polkadot-v0.9.10" }
+sc-client-api = { git = "https://github.com/PlasmNetwork/substrate", branch = "polkadot-v0.9.10" }
+sp-keyring = { git = "https://github.com/PlasmNetwork/substrate", branch = "polkadot-v0.9.10" }
+sp-tracing = { git = "https://github.com/PlasmNetwork/substrate", branch = "polkadot-v0.9.10" }
 
 # Cumulus dependencies
 cumulus-test-client = { path = "../../test/client" }

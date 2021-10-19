@@ -6,17 +6,17 @@ edition = "2018"
 
 [dependencies]
 # Substrate dependencies
-sp-inherents = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-core = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sc-client-api = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.10" }
-sp-runtime = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.10" }
-sp-std = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-state-machine = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.10" }
-sp-trie = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.10" }
-sp-api = { git = "https://github.com/paritytech/substrate", optional = true , branch = "polkadot-v0.9.10" }
+sp-inherents = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-core = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sc-client-api = { git = "https://github.com/PlasmNetwork/substrate", optional = true , branch = "polkadot-v0.9.10" }
+sp-runtime = { git = "https://github.com/PlasmNetwork/substrate", optional = true , branch = "polkadot-v0.9.10" }
+sp-std = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-state-machine = { git = "https://github.com/PlasmNetwork/substrate", optional = true , branch = "polkadot-v0.9.10" }
+sp-trie = { git = "https://github.com/PlasmNetwork/substrate", default-features = false, branch = "polkadot-v0.9.10" }
+sp-api = { git = "https://github.com/PlasmNetwork/substrate", optional = true , branch = "polkadot-v0.9.10" }
 
 # Polkadot dependencies
-polkadot-client = { git = "https://github.com/paritytech/polkadot", optional = true, branch = "release-v0.9.10" }
+polkadot-client = { git = "https://github.com/PlasmNetwork/polkadot", optional = true, branch = "release-v0.9.10" }
 
 # Cumulus dependencies
 cumulus-primitives-core = { path = "../core", default-features = false }
