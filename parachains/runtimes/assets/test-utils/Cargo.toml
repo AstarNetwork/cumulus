@@ -9,15 +9,15 @@ description = "Statemint parachain runtime"
 
 # Substrate
 
-frame-support = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.27" }
-frame-system = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.27" }
-pallet-balances = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.27" }
-pallet-session = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.27" }
-sp-consensus-aura = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.27" }
-sp-io = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.27" }
-sp-runtime = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.27" }
-sp-std = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.27" }
-sp-core = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.27" }
+frame-support = { git = "https://github.com/AstarNetwork/substrate", default-features = false, branch = "polkadot-v0.9.27" }
+frame-system = { git = "https://github.com/AstarNetwork/substrate", default-features = false, branch = "polkadot-v0.9.27" }
+pallet-balances = { git = "https://github.com/AstarNetwork/substrate", default-features = false, branch = "polkadot-v0.9.27" }
+pallet-session = { git = "https://github.com/AstarNetwork/substrate", default-features = false, branch = "polkadot-v0.9.27" }
+sp-consensus-aura = { git = "https://github.com/AstarNetwork/substrate", default-features = false, branch = "polkadot-v0.9.27" }
+sp-io = { git = "https://github.com/AstarNetwork/substrate", default-features = false, branch = "polkadot-v0.9.27" }
+sp-runtime = { git = "https://github.com/AstarNetwork/substrate", default-features = false, branch = "polkadot-v0.9.27" }
+sp-std = { git = "https://github.com/AstarNetwork/substrate", default-features = false, branch = "polkadot-v0.9.27" }
+sp-core = { git = "https://github.com/AstarNetwork/substrate", default-features = false, branch = "polkadot-v0.9.27" }
 
 # Cumulus
 pallet-collator-selection = { path = "../../../../pallets/collator-selection", default-features = false }
@@ -27,7 +27,7 @@ parachains-common = { path = "../../../common", default-features = false }
 hex-literal = "0.3.4"
 
 [build-dependencies]
-substrate-wasm-builder = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.27" }
+substrate-wasm-builder = { git = "https://github.com/AstarNetwork/substrate", branch = "polkadot-v0.9.27" }
 
 [features]
 default = [ "std" ]
