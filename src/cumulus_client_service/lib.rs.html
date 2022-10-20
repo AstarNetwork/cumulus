@@ -1,9 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/service/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_service/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/service/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_service/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -264,20 +259,6 @@
 <span id="259">259</span>
 <span id="260">260</span>
 <span id="261">261</span>
-<span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of Cumulus.</span>
 
@@ -298,7 +279,6 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Provides functions for starting a collator node or a normal full node.</span>
 
-<span class="kw">use</span> <span class="ident">cumulus_client_cli::CollatorOptions</span>;
 <span class="kw">use</span> <span class="ident">cumulus_client_consensus_common::ParachainConsensus</span>;
 <span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{<span class="ident">CollectCollationInfo</span>, <span class="ident">ParaId</span>};
 <span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface::RelayChainInterface</span>;
@@ -307,7 +287,7 @@
 	<span class="ident">Backend</span> <span class="kw">as</span> <span class="ident">BackendT</span>, <span class="ident">BlockBackend</span>, <span class="ident">BlockchainEvents</span>, <span class="ident">Finalizer</span>, <span class="ident">UsageProvider</span>,
 };
 <span class="kw">use</span> <span class="ident">sc_consensus</span>::{
-	<span class="ident">import_queue</span>::{<span class="ident">ImportQueue</span>, <span class="ident">IncomingBlock</span>, <span class="ident">Link</span>, <span class="ident">Origin</span>},
+	<span class="ident">import_queue</span>::{<span class="ident">ImportQueue</span>, <span class="ident">IncomingBlock</span>, <span class="ident">Link</span>, <span class="ident">RuntimeOrigin</span>},
 	<span class="ident">BlockImport</span>,
 };
 <span class="kw">use</span> <span class="ident">sc_service</span>::{<span class="ident">Configuration</span>, <span class="ident">TaskManager</span>};
@@ -388,8 +368,7 @@
 
 	<span class="kw">let</span> <span class="ident">overseer_handle</span> <span class="op">=</span> <span class="ident">relay_chain_interface</span>
 		.<span class="ident">overseer_handle</span>()
-		.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">sc_service::Error::Application</span>(<span class="ident">Box::new</span>(<span class="ident">e</span>)))<span class="question-mark">?</span>
-		.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;Polkadot full node did not provide an `OverseerHandle`!&quot;</span>)<span class="question-mark">?</span>;
+		.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">sc_service::Error::Application</span>(<span class="ident">Box::new</span>(<span class="ident">e</span>)))<span class="question-mark">?</span>;
 
 	<span class="kw">let</span> <span class="ident">pov_recovery</span> <span class="op">=</span> <span class="ident">cumulus_client_pov_recovery::PoVRecovery::new</span>(
 		<span class="ident">overseer_handle</span>.<span class="ident">clone</span>(),
@@ -405,9 +384,8 @@
 	<span class="ident">task_manager</span>
 		.<span class="ident">spawn_essential_handle</span>()
 		.<span class="ident">spawn</span>(<span class="string">&quot;cumulus-pov-recovery&quot;</span>, <span class="prelude-val">None</span>, <span class="ident">pov_recovery</span>.<span class="ident">run</span>());
-
 	<span class="ident">cumulus_client_collator::start_collator</span>(<span class="ident">cumulus_client_collator::StartCollatorParams</span> {
-		<span class="ident">runtime_api</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
+		<span class="ident">runtime_api</span>: <span class="ident">client</span>,
 		<span class="ident">block_status</span>,
 		<span class="ident">announce_block</span>,
 		<span class="ident">overseer_handle</span>,
@@ -430,7 +408,6 @@
 	<span class="kw">pub</span> <span class="ident">announce_block</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">Block::Hash</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>,
 	<span class="kw">pub</span> <span class="ident">relay_chain_slot_duration</span>: <span class="ident">Duration</span>,
 	<span class="kw">pub</span> <span class="ident">import_queue</span>: <span class="ident">IQ</span>,
-	<span class="kw">pub</span> <span class="ident">collator_options</span>: <span class="ident">CollatorOptions</span>,
 }
 
 <span class="doccomment">/// Start a full node for a parachain.</span>
@@ -446,7 +423,6 @@
 		<span class="ident">para_id</span>,
 		<span class="ident">relay_chain_slot_duration</span>,
 		<span class="ident">import_queue</span>,
-		<span class="ident">collator_options</span>,
 	}: <span class="ident">StartFullNodeParams</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Client</span>, <span class="ident">RCInterface</span>, <span class="ident">IQ</span><span class="op">&gt;</span>,
 ) -&gt; <span class="ident">sc_service::error::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -474,18 +450,9 @@
 		.<span class="ident">spawn_essential_handle</span>()
 		.<span class="ident">spawn</span>(<span class="string">&quot;cumulus-consensus&quot;</span>, <span class="prelude-val">None</span>, <span class="ident">consensus</span>);
 
-	<span class="comment">// PoV Recovery is currently not supported when we connect to the</span>
-	<span class="comment">// relay chain via RPC, so we return early. The node will work, but not be able to recover PoVs from the</span>
-	<span class="comment">// relay chain if blocks are not announced on parachain. This will be enabled again once</span>
-	<span class="comment">// https://github.com/paritytech/cumulus/issues/545 is finished.</span>
-	<span class="kw">if</span> <span class="ident">collator_options</span>.<span class="ident">relay_chain_rpc_url</span>.<span class="ident">is_some</span>() {
-		<span class="kw">return</span> <span class="prelude-val">Ok</span>(())
-	}
-
 	<span class="kw">let</span> <span class="ident">overseer_handle</span> <span class="op">=</span> <span class="ident">relay_chain_interface</span>
 		.<span class="ident">overseer_handle</span>()
-		.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">sc_service::Error::Application</span>(<span class="ident">Box::new</span>(<span class="ident">e</span>)))<span class="question-mark">?</span>
-		.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;Polkadot full node did not provide an `OverseerHandle`!&quot;</span>)<span class="question-mark">?</span>;
+		.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">sc_service::Error::Application</span>(<span class="ident">Box::new</span>(<span class="ident">e</span>)))<span class="question-mark">?</span>;
 
 	<span class="kw">let</span> <span class="ident">pov_recovery</span> <span class="op">=</span> <span class="ident">cumulus_client_pov_recovery::PoVRecovery::new</span>(
 		<span class="ident">overseer_handle</span>,
@@ -541,7 +508,7 @@
 
 	<span class="kw">fn</span> <span class="ident">import_justifications</span>(
 		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">who</span>: <span class="ident">Origin</span>,
+		<span class="ident">who</span>: <span class="ident">RuntimeOrigin</span>,
 		<span class="ident">hash</span>: <span class="ident">Block::Hash</span>,
 		<span class="ident">number</span>: <span class="ident">NumberFor</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
 		<span class="ident">justifications</span>: <span class="ident">Justifications</span>,
@@ -554,5 +521,4 @@
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_service" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.1 (e092d0b6b 2022-07-16)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_service" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>

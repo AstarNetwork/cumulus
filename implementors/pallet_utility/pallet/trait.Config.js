@@ -1,4 +1,5 @@
 (function() {var implementors = {};
+implementors["collectives_polkadot_runtime"] = [{"text":"impl Config for <a class=\"struct\" href=\"collectives_polkadot_runtime/struct.Runtime.html\" title=\"struct collectives_polkadot_runtime::Runtime\">Runtime</a>","synthetic":false,"types":["collectives_polkadot_runtime::Runtime"]}];
 implementors["contracts_rococo_runtime"] = [{"text":"impl Config for <a class=\"struct\" href=\"contracts_rococo_runtime/struct.Runtime.html\" title=\"struct contracts_rococo_runtime::Runtime\">Runtime</a>","synthetic":false,"types":["contracts_rococo_runtime::Runtime"]}];
 implementors["statemine_runtime"] = [{"text":"impl Config for <a class=\"struct\" href=\"statemine_runtime/struct.Runtime.html\" title=\"struct statemine_runtime::Runtime\">Runtime</a>","synthetic":false,"types":["statemine_runtime::Runtime"]}];
 implementors["statemint_runtime"] = [{"text":"impl Config for <a class=\"struct\" href=\"statemint_runtime/struct.Runtime.html\" title=\"struct statemint_runtime::Runtime\">Runtime</a>","synthetic":false,"types":["statemint_runtime::Runtime"]}];

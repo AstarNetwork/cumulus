@@ -1,9 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachain-template/node/src/service.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>service.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../parachain_template_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../parachain_template_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../parachain_template_node/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachain-template/node/src/service.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>service.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../parachain_template_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../parachain_template_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../parachain_template_node/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -421,134 +416,14 @@
 <span id="416">416</span>
 <span id="417">417</span>
 <span id="418">418</span>
-<span id="419">419</span>
-<span id="420">420</span>
-<span id="421">421</span>
-<span id="422">422</span>
-<span id="423">423</span>
-<span id="424">424</span>
-<span id="425">425</span>
-<span id="426">426</span>
-<span id="427">427</span>
-<span id="428">428</span>
-<span id="429">429</span>
-<span id="430">430</span>
-<span id="431">431</span>
-<span id="432">432</span>
-<span id="433">433</span>
-<span id="434">434</span>
-<span id="435">435</span>
-<span id="436">436</span>
-<span id="437">437</span>
-<span id="438">438</span>
-<span id="439">439</span>
-<span id="440">440</span>
-<span id="441">441</span>
-<span id="442">442</span>
-<span id="443">443</span>
-<span id="444">444</span>
-<span id="445">445</span>
-<span id="446">446</span>
-<span id="447">447</span>
-<span id="448">448</span>
-<span id="449">449</span>
-<span id="450">450</span>
-<span id="451">451</span>
-<span id="452">452</span>
-<span id="453">453</span>
-<span id="454">454</span>
-<span id="455">455</span>
-<span id="456">456</span>
-<span id="457">457</span>
-<span id="458">458</span>
-<span id="459">459</span>
-<span id="460">460</span>
-<span id="461">461</span>
-<span id="462">462</span>
-<span id="463">463</span>
-<span id="464">464</span>
-<span id="465">465</span>
-<span id="466">466</span>
-<span id="467">467</span>
-<span id="468">468</span>
-<span id="469">469</span>
-<span id="470">470</span>
-<span id="471">471</span>
-<span id="472">472</span>
-<span id="473">473</span>
-<span id="474">474</span>
-<span id="475">475</span>
-<span id="476">476</span>
-<span id="477">477</span>
-<span id="478">478</span>
-<span id="479">479</span>
-<span id="480">480</span>
-<span id="481">481</span>
-<span id="482">482</span>
-<span id="483">483</span>
-<span id="484">484</span>
-<span id="485">485</span>
-<span id="486">486</span>
-<span id="487">487</span>
-<span id="488">488</span>
-<span id="489">489</span>
-<span id="490">490</span>
-<span id="491">491</span>
-<span id="492">492</span>
-<span id="493">493</span>
-<span id="494">494</span>
-<span id="495">495</span>
-<span id="496">496</span>
-<span id="497">497</span>
-<span id="498">498</span>
-<span id="499">499</span>
-<span id="500">500</span>
-<span id="501">501</span>
-<span id="502">502</span>
-<span id="503">503</span>
-<span id="504">504</span>
-<span id="505">505</span>
-<span id="506">506</span>
-<span id="507">507</span>
-<span id="508">508</span>
-<span id="509">509</span>
-<span id="510">510</span>
-<span id="511">511</span>
-<span id="512">512</span>
-<span id="513">513</span>
-<span id="514">514</span>
-<span id="515">515</span>
-<span id="516">516</span>
-<span id="517">517</span>
-<span id="518">518</span>
-<span id="519">519</span>
-<span id="520">520</span>
-<span id="521">521</span>
-<span id="522">522</span>
-<span id="523">523</span>
-<span id="524">524</span>
-<span id="525">525</span>
-<span id="526">526</span>
-<span id="527">527</span>
-<span id="528">528</span>
-<span id="529">529</span>
-<span id="530">530</span>
-<span id="531">531</span>
-<span id="532">532</span>
-<span id="533">533</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Service and ServiceFactory implementation. Specialized wrapper over substrate service.</span>
 
 <span class="comment">// std</span>
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">sync::Arc</span>, <span class="ident">time::Duration</span>};
 
-<span class="comment">// rpc</span>
-<span class="kw">use</span> <span class="ident">jsonrpsee::RpcModule</span>;
-
 <span class="kw">use</span> <span class="ident">cumulus_client_cli::CollatorOptions</span>;
 <span class="comment">// Local Runtime Types</span>
-<span class="kw">use</span> <span class="ident">parachain_template_runtime</span>::{
-	<span class="ident">opaque::Block</span>, <span class="ident">AccountId</span>, <span class="ident">Balance</span>, <span class="ident">Hash</span>, <span class="ident">Index</span> <span class="kw">as</span> <span class="ident">Nonce</span>, <span class="ident">RuntimeApi</span>,
-};
+<span class="kw">use</span> <span class="ident">parachain_template_runtime</span>::{<span class="ident">opaque::Block</span>, <span class="ident">Hash</span>, <span class="ident">RuntimeApi</span>};
 
 <span class="comment">// Cumulus Imports</span>
 <span class="kw">use</span> <span class="ident">cumulus_client_consensus_aura</span>::{<span class="ident">AuraConsensus</span>, <span class="ident">BuildAuraConsensusParams</span>, <span class="ident">SlotProportion</span>};
@@ -560,25 +435,23 @@
 <span class="kw">use</span> <span class="ident">cumulus_primitives_core::ParaId</span>;
 <span class="kw">use</span> <span class="ident">cumulus_relay_chain_inprocess_interface::build_inprocess_relay_chain</span>;
 <span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface</span>::{<span class="ident">RelayChainError</span>, <span class="ident">RelayChainInterface</span>, <span class="ident">RelayChainResult</span>};
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_rpc_interface</span>::{<span class="ident">create_client_and_start_worker</span>, <span class="ident">RelayChainRpcInterface</span>};
+<span class="kw">use</span> <span class="ident">cumulus_relay_chain_minimal_node::build_minimal_relay_chain_node</span>;
 
 <span class="comment">// Substrate Imports</span>
-<span class="kw">use</span> <span class="ident">sc_client_api::ExecutorProvider</span>;
 <span class="kw">use</span> <span class="ident">sc_executor::NativeElseWasmExecutor</span>;
 <span class="kw">use</span> <span class="ident">sc_network::NetworkService</span>;
+<span class="kw">use</span> <span class="ident">sc_network_common::service::NetworkBlock</span>;
 <span class="kw">use</span> <span class="ident">sc_service</span>::{<span class="ident">Configuration</span>, <span class="ident">PartialComponents</span>, <span class="ident">TFullBackend</span>, <span class="ident">TFullClient</span>, <span class="ident">TaskManager</span>};
 <span class="kw">use</span> <span class="ident">sc_telemetry</span>::{<span class="ident">Telemetry</span>, <span class="ident">TelemetryHandle</span>, <span class="ident">TelemetryWorker</span>, <span class="ident">TelemetryWorkerHandle</span>};
-<span class="kw">use</span> <span class="ident">sp_api::ConstructRuntimeApi</span>;
 <span class="kw">use</span> <span class="ident">sp_keystore::SyncCryptoStorePtr</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::BlakeTwo256</span>;
 <span class="kw">use</span> <span class="ident">substrate_prometheus_endpoint::Registry</span>;
 
 <span class="kw">use</span> <span class="ident">polkadot_service::CollatorPair</span>;
 
-<span class="doccomment">/// Native executor instance.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TemplateRuntimeExecutor</span>;
+<span class="doccomment">/// Native executor type.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ParachainNativeExecutor</span>;
 
-<span class="kw">impl</span> <span class="ident">sc_executor::NativeExecutionDispatch</span> <span class="kw">for</span> <span class="ident">TemplateRuntimeExecutor</span> {
+<span class="kw">impl</span> <span class="ident">sc_executor::NativeExecutionDispatch</span> <span class="kw">for</span> <span class="ident">ParachainNativeExecutor</span> {
 	<span class="kw">type</span> <span class="ident">ExtendHostFunctions</span> <span class="op">=</span> <span class="ident">frame_benchmarking::benchmarking::HostFunctions</span>;
 
 	<span class="kw">fn</span> <span class="ident">dispatch</span>(<span class="ident">method</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
@@ -590,59 +463,29 @@
 	}
 }
 
+<span class="kw">type</span> <span class="ident">ParachainExecutor</span> <span class="op">=</span> <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">ParachainNativeExecutor</span><span class="op">&gt;</span>;
+
+<span class="kw">type</span> <span class="ident">ParachainClient</span> <span class="op">=</span> <span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">ParachainExecutor</span><span class="op">&gt;</span>;
+
+<span class="kw">type</span> <span class="ident">ParachainBackend</span> <span class="op">=</span> <span class="ident">TFullBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>;
+
 <span class="doccomment">/// Starts a `ServiceBuilder` for a full service.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Use this macro if you don&#39;t actually need the full service, but just the builder in order to</span>
 <span class="doccomment">/// be able to perform chain operations.</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::type_complexity</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_partial</span><span class="op">&lt;</span><span class="ident">RuntimeApi</span>, <span class="ident">Executor</span>, <span class="ident">BIQ</span><span class="op">&gt;</span>(
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_partial</span>(
 	<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Configuration</span>,
-	<span class="ident">build_import_queue</span>: <span class="ident">BIQ</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
 	<span class="ident">PartialComponents</span><span class="op">&lt;</span>
-		<span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">TFullBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+		<span class="ident">ParachainClient</span>,
+		<span class="ident">ParachainBackend</span>,
 		(),
-		<span class="ident">sc_consensus::DefaultImportQueue</span><span class="op">&lt;</span>
-			<span class="ident">Block</span>,
-			<span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="op">&gt;</span>,
-		<span class="ident">sc_transaction_pool::FullPool</span><span class="op">&lt;</span>
-			<span class="ident">Block</span>,
-			<span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="op">&gt;</span>,
+		<span class="ident">sc_consensus::DefaultImportQueue</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">ParachainClient</span><span class="op">&gt;</span>,
+		<span class="ident">sc_transaction_pool::FullPool</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">ParachainClient</span><span class="op">&gt;</span>,
 		(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Telemetry</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryWorkerHandle</span><span class="op">&gt;</span>),
 	<span class="op">&gt;</span>,
 	<span class="ident">sc_service::Error</span>,
-<span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">RuntimeApi</span>: <span class="ident">ConstructRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">Send</span>
-		<span class="op">+</span> <span class="ident">Sync</span>
-		<span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">RuntimeApi::RuntimeApi</span>: <span class="ident">sp_transaction_pool::runtime_api::TaggedTransactionQueue</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">sp_api::Metadata</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">sp_session::SessionKeys</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">sp_api::ApiExt</span><span class="op">&lt;</span>
-			<span class="ident">Block</span>,
-			<span class="ident">StateBackend</span> <span class="op">=</span> <span class="ident">sc_client_api::StateBackendFor</span><span class="op">&lt;</span><span class="ident">TFullBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>, <span class="ident">Block</span><span class="op">&gt;</span>,
-		<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">sp_offchain::OffchainWorkerApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">sp_block_builder::BlockBuilder</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">sc_client_api::StateBackendFor</span><span class="op">&lt;</span><span class="ident">TFullBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>, <span class="ident">Block</span><span class="op">&gt;</span>: <span class="ident">sp_api::StateBackend</span><span class="op">&lt;</span><span class="ident">BlakeTwo256</span><span class="op">&gt;</span>,
-	<span class="ident">Executor</span>: <span class="ident">sc_executor::NativeExecutionDispatch</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">BIQ</span>: <span class="ident">FnOnce</span>(
-		<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="kw-2">&amp;</span><span class="ident">Configuration</span>,
-		<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryHandle</span><span class="op">&gt;</span>,
-		<span class="kw-2">&amp;</span><span class="ident">TaskManager</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-		<span class="ident">sc_consensus::DefaultImportQueue</span><span class="op">&lt;</span>
-			<span class="ident">Block</span>,
-			<span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="op">&gt;</span>,
-		<span class="ident">sc_service::Error</span>,
-	<span class="op">&gt;</span>,
-{
+<span class="op">&gt;</span> {
 	<span class="kw">let</span> <span class="ident">telemetry</span> <span class="op">=</span> <span class="ident">config</span>
 		.<span class="ident">telemetry_endpoints</span>
 		.<span class="ident">clone</span>()
@@ -654,7 +497,7 @@
 		})
 		.<span class="ident">transpose</span>()<span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">sc_executor::NativeElseWasmExecutor</span>::<span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="ident">::new</span>(
+	<span class="kw">let</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">ParachainExecutor::new</span>(
 		<span class="ident">config</span>.<span class="ident">wasm_method</span>,
 		<span class="ident">config</span>.<span class="ident">default_heap_pages</span>,
 		<span class="ident">config</span>.<span class="ident">max_runtime_instances</span>,
@@ -691,7 +534,7 @@
 		<span class="kw-2">&amp;</span><span class="ident">task_manager</span>,
 	)<span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="ident">PartialComponents</span> {
+	<span class="prelude-val">Ok</span>(<span class="ident">PartialComponents</span> {
 		<span class="ident">backend</span>,
 		<span class="ident">client</span>,
 		<span class="ident">import_queue</span>,
@@ -700,9 +543,7 @@
 		<span class="ident">transaction_pool</span>,
 		<span class="ident">select_chain</span>: (),
 		<span class="ident">other</span>: (<span class="ident">telemetry</span>, <span class="ident">telemetry_worker_handle</span>),
-	};
-
-	<span class="prelude-val">Ok</span>(<span class="ident">params</span>)
+	})
 }
 
 <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">build_relay_chain_interface</span>(
@@ -714,10 +555,8 @@
 	<span class="ident">hwbench</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sc_sysinfo::HwBench</span><span class="op">&gt;</span>,
 ) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span>(<span class="ident">Arc</span><span class="op">&lt;</span>(<span class="kw">dyn</span> <span class="ident">RelayChainInterface</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>)<span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CollatorPair</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
 	<span class="kw">match</span> <span class="ident">collator_options</span>.<span class="ident">relay_chain_rpc_url</span> {
-		<span class="prelude-val">Some</span>(<span class="ident">relay_chain_url</span>) =&gt; {
-			<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">create_client_and_start_worker</span>(<span class="ident">relay_chain_url</span>, <span class="ident">task_manager</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-			<span class="prelude-val">Ok</span>((<span class="ident">Arc::new</span>(<span class="ident">RelayChainRpcInterface::new</span>(<span class="ident">client</span>)) <span class="kw">as</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="prelude-val">None</span>))
-		},
+		<span class="prelude-val">Some</span>(<span class="ident">relay_chain_url</span>) =&gt;
+			<span class="ident">build_minimal_relay_chain_node</span>(<span class="ident">polkadot_config</span>, <span class="ident">task_manager</span>, <span class="ident">relay_chain_url</span>).<span class="kw">await</span>,
 		<span class="prelude-val">None</span> =&gt; <span class="ident">build_inprocess_relay_chain</span>(
 			<span class="ident">polkadot_config</span>,
 			<span class="ident">parachain_config</span>,
@@ -732,74 +571,16 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This is the actual implementation that is abstract over the executor and the runtime api.</span>
 <span class="attribute">#[<span class="ident">sc_tracing::logging::prefix_logs_with</span>(<span class="string">&quot;Parachain&quot;</span>)]</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">start_node_impl</span><span class="op">&lt;</span><span class="ident">RuntimeApi</span>, <span class="ident">Executor</span>, <span class="ident">RB</span>, <span class="ident">BIQ</span>, <span class="ident">BIC</span><span class="op">&gt;</span>(
+<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">start_node_impl</span>(
 	<span class="ident">parachain_config</span>: <span class="ident">Configuration</span>,
 	<span class="ident">polkadot_config</span>: <span class="ident">Configuration</span>,
 	<span class="ident">collator_options</span>: <span class="ident">CollatorOptions</span>,
 	<span class="ident">id</span>: <span class="ident">ParaId</span>,
-	<span class="ident">_rpc_ext_builder</span>: <span class="ident">RB</span>,
-	<span class="ident">build_import_queue</span>: <span class="ident">BIQ</span>,
-	<span class="ident">build_consensus</span>: <span class="ident">BIC</span>,
 	<span class="ident">hwbench</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sc_sysinfo::HwBench</span><span class="op">&gt;</span>,
-) -&gt; <span class="ident">sc_service::error::Result</span><span class="op">&lt;</span>(
-	<span class="ident">TaskManager</span>,
-	<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-)<span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">RuntimeApi</span>: <span class="ident">ConstructRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">Send</span>
-		<span class="op">+</span> <span class="ident">Sync</span>
-		<span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">RuntimeApi::RuntimeApi</span>: <span class="ident">sp_transaction_pool::runtime_api::TaggedTransactionQueue</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">sp_api::Metadata</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">sp_session::SessionKeys</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">sp_api::ApiExt</span><span class="op">&lt;</span>
-			<span class="ident">Block</span>,
-			<span class="ident">StateBackend</span> <span class="op">=</span> <span class="ident">sc_client_api::StateBackendFor</span><span class="op">&lt;</span><span class="ident">TFullBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>, <span class="ident">Block</span><span class="op">&gt;</span>,
-		<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">sp_offchain::OffchainWorkerApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">sp_block_builder::BlockBuilder</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">cumulus_primitives_core::CollectCollationInfo</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">pallet_transaction_payment_rpc::TransactionPaymentRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Balance</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">substrate_frame_rpc_system::AccountNonceApi</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">AccountId</span>, <span class="ident">Nonce</span><span class="op">&gt;</span>,
-	<span class="ident">sc_client_api::StateBackendFor</span><span class="op">&lt;</span><span class="ident">TFullBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>, <span class="ident">Block</span><span class="op">&gt;</span>: <span class="ident">sp_api::StateBackend</span><span class="op">&lt;</span><span class="ident">BlakeTwo256</span><span class="op">&gt;</span>,
-	<span class="ident">Executor</span>: <span class="ident">sc_executor::NativeExecutionDispatch</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">RB</span>: <span class="ident">Fn</span>(
-			<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RpcModule</span><span class="op">&lt;</span>()<span class="op">&gt;</span>, <span class="ident">sc_service::Error</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">Send</span>
-		<span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">BIQ</span>: <span class="ident">FnOnce</span>(
-			<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-			<span class="kw-2">&amp;</span><span class="ident">Configuration</span>,
-			<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryHandle</span><span class="op">&gt;</span>,
-			<span class="kw-2">&amp;</span><span class="ident">TaskManager</span>,
-		) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-			<span class="ident">sc_consensus::DefaultImportQueue</span><span class="op">&lt;</span>
-				<span class="ident">Block</span>,
-				<span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-			<span class="op">&gt;</span>,
-			<span class="ident">sc_service::Error</span>,
-		<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">BIC</span>: <span class="ident">FnOnce</span>(
-		<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Registry</span><span class="op">&gt;</span>,
-		<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryHandle</span><span class="op">&gt;</span>,
-		<span class="kw-2">&amp;</span><span class="ident">TaskManager</span>,
-		<span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RelayChainInterface</span><span class="op">&gt;</span>,
-		<span class="ident">Arc</span><span class="op">&lt;</span>
-			<span class="ident">sc_transaction_pool::FullPool</span><span class="op">&lt;</span>
-				<span class="ident">Block</span>,
-				<span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">Executor</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-			<span class="op">&gt;</span>,
-		<span class="op">&gt;</span>,
-		<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">NetworkService</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">SyncCryptoStorePtr</span>,
-		<span class="ident">bool</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">sc_service::Error</span><span class="op">&gt;</span>,
-{
+) -&gt; <span class="ident">sc_service::error::Result</span><span class="op">&lt;</span>(<span class="ident">TaskManager</span>, <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ParachainClient</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
 	<span class="kw">let</span> <span class="ident">parachain_config</span> <span class="op">=</span> <span class="ident">prepare_node_config</span>(<span class="ident">parachain_config</span>);
 
-	<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="ident">new_partial</span>::<span class="op">&lt;</span><span class="ident">RuntimeApi</span>, <span class="ident">Executor</span>, <span class="ident">BIQ</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">parachain_config</span>, <span class="ident">build_import_queue</span>)<span class="question-mark">?</span>;
+	<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="ident">new_partial</span>(<span class="kw-2">&amp;</span><span class="ident">parachain_config</span>)<span class="question-mark">?</span>;
 	<span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">telemetry</span>, <span class="ident">telemetry_worker_handle</span>) <span class="op">=</span> <span class="ident">params</span>.<span class="ident">other</span>;
 
 	<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">params</span>.<span class="ident">client</span>.<span class="ident">clone</span>();
@@ -827,7 +608,7 @@
 	<span class="kw">let</span> <span class="ident">prometheus_registry</span> <span class="op">=</span> <span class="ident">parachain_config</span>.<span class="ident">prometheus_registry</span>().<span class="ident">cloned</span>();
 	<span class="kw">let</span> <span class="ident">transaction_pool</span> <span class="op">=</span> <span class="ident">params</span>.<span class="ident">transaction_pool</span>.<span class="ident">clone</span>();
 	<span class="kw">let</span> <span class="ident">import_queue</span> <span class="op">=</span> <span class="ident">cumulus_client_service::SharedImportQueue::new</span>(<span class="ident">params</span>.<span class="ident">import_queue</span>);
-	<span class="kw">let</span> (<span class="ident">network</span>, <span class="ident">system_rpc_tx</span>, <span class="ident">start_network</span>) <span class="op">=</span>
+	<span class="kw">let</span> (<span class="ident">network</span>, <span class="ident">system_rpc_tx</span>, <span class="ident">tx_handler_controller</span>, <span class="ident">start_network</span>) <span class="op">=</span>
 		<span class="ident">sc_service::build_network</span>(<span class="ident">sc_service::BuildNetworkParams</span> {
 			<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">parachain_config</span>,
 			<span class="ident">client</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
@@ -865,6 +646,7 @@
 		<span class="ident">backend</span>: <span class="ident">backend</span>.<span class="ident">clone</span>(),
 		<span class="ident">network</span>: <span class="ident">network</span>.<span class="ident">clone</span>(),
 		<span class="ident">system_rpc_tx</span>,
+		<span class="ident">tx_handler_controller</span>,
 		<span class="ident">telemetry</span>: <span class="ident">telemetry</span>.<span class="ident">as_mut</span>(),
 	})<span class="question-mark">?</span>;
 
@@ -899,10 +681,10 @@
 			<span class="ident">network</span>,
 			<span class="ident">params</span>.<span class="ident">keystore_container</span>.<span class="ident">sync_keystore</span>(),
 			<span class="ident">force_authoring</span>,
+			<span class="ident">id</span>,
 		)<span class="question-mark">?</span>;
 
 		<span class="kw">let</span> <span class="ident">spawner</span> <span class="op">=</span> <span class="ident">task_manager</span>.<span class="ident">spawn_handle</span>();
-
 		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="ident">StartCollatorParams</span> {
 			<span class="ident">para_id</span>: <span class="ident">id</span>,
 			<span class="ident">block_status</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
@@ -927,7 +709,6 @@
 			<span class="ident">relay_chain_interface</span>,
 			<span class="ident">relay_chain_slot_duration</span>,
 			<span class="ident">import_queue</span>,
-			<span class="ident">collator_options</span>,
 		};
 
 		<span class="ident">start_full_node</span>(<span class="ident">params</span>)<span class="question-mark">?</span>;
@@ -939,19 +720,12 @@
 }
 
 <span class="doccomment">/// Build the import queue for the parachain runtime.</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::type_complexity</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parachain_build_import_queue</span>(
-	<span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">TemplateRuntimeExecutor</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="kw">fn</span> <span class="ident">build_import_queue</span>(
+	<span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ParachainClient</span><span class="op">&gt;</span>,
 	<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">Configuration</span>,
 	<span class="ident">telemetry</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryHandle</span><span class="op">&gt;</span>,
 	<span class="ident">task_manager</span>: <span class="kw-2">&amp;</span><span class="ident">TaskManager</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-	<span class="ident">sc_consensus::DefaultImportQueue</span><span class="op">&lt;</span>
-		<span class="ident">Block</span>,
-		<span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">TemplateRuntimeExecutor</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="op">&gt;</span>,
-	<span class="ident">sc_service::Error</span>,
-<span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">sc_consensus::DefaultImportQueue</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">ParachainClient</span><span class="op">&gt;</span>, <span class="ident">sc_service::Error</span><span class="op">&gt;</span> {
 	<span class="kw">let</span> <span class="ident">slot_duration</span> <span class="op">=</span> <span class="ident">cumulus_client_consensus_aura::slot_duration</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">client</span>)<span class="question-mark">?</span>;
 
 	<span class="ident">cumulus_client_consensus_aura::import_queue</span>::<span class="op">&lt;</span>
@@ -961,27 +735,93 @@
 		<span class="kw">_</span>,
 		<span class="kw">_</span>,
 		<span class="kw">_</span>,
-		<span class="kw">_</span>,
 	<span class="op">&gt;</span>(<span class="ident">cumulus_client_consensus_aura::ImportQueueParams</span> {
 		<span class="ident">block_import</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
 		<span class="ident">client</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
 		<span class="ident">create_inherent_data_providers</span>: <span class="kw">move</span> <span class="op">|</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">|</span> <span class="kw">async</span> <span class="kw">move</span> {
-			<span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">sp_timestamp::InherentDataProvider::from_system_time</span>();
+			<span class="kw">let</span> <span class="ident">timestamp</span> <span class="op">=</span> <span class="ident">sp_timestamp::InherentDataProvider::from_system_time</span>();
 
 			<span class="kw">let</span> <span class="ident">slot</span> <span class="op">=</span>
 				<span class="ident">sp_consensus_aura::inherents::InherentDataProvider::from_timestamp_and_slot_duration</span>(
-					<span class="kw-2">*</span><span class="ident">time</span>,
+					<span class="kw-2">*</span><span class="ident">timestamp</span>,
 					<span class="ident">slot_duration</span>,
 				);
 
-			<span class="prelude-val">Ok</span>((<span class="ident">time</span>, <span class="ident">slot</span>))
+			<span class="prelude-val">Ok</span>((<span class="ident">slot</span>, <span class="ident">timestamp</span>))
 		},
 		<span class="ident">registry</span>: <span class="ident">config</span>.<span class="ident">prometheus_registry</span>(),
-		<span class="ident">can_author_with</span>: <span class="ident">sp_consensus::CanAuthorWithNativeVersion::new</span>(<span class="ident">client</span>.<span class="ident">executor</span>().<span class="ident">clone</span>()),
 		<span class="ident">spawner</span>: <span class="kw-2">&amp;</span><span class="ident">task_manager</span>.<span class="ident">spawn_essential_handle</span>(),
 		<span class="ident">telemetry</span>,
 	})
 	.<span class="ident">map_err</span>(<span class="ident">Into::into</span>)
+}
+
+<span class="kw">fn</span> <span class="ident">build_consensus</span>(
+	<span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ParachainClient</span><span class="op">&gt;</span>,
+	<span class="ident">prometheus_registry</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Registry</span><span class="op">&gt;</span>,
+	<span class="ident">telemetry</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryHandle</span><span class="op">&gt;</span>,
+	<span class="ident">task_manager</span>: <span class="kw-2">&amp;</span><span class="ident">TaskManager</span>,
+	<span class="ident">relay_chain_interface</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RelayChainInterface</span><span class="op">&gt;</span>,
+	<span class="ident">transaction_pool</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">sc_transaction_pool::FullPool</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">ParachainClient</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+	<span class="ident">sync_oracle</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">NetworkService</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+	<span class="ident">keystore</span>: <span class="ident">SyncCryptoStorePtr</span>,
+	<span class="ident">force_authoring</span>: <span class="ident">bool</span>,
+	<span class="ident">id</span>: <span class="ident">ParaId</span>,
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">sc_service::Error</span><span class="op">&gt;</span> {
+	<span class="kw">let</span> <span class="ident">slot_duration</span> <span class="op">=</span> <span class="ident">cumulus_client_consensus_aura::slot_duration</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">client</span>)<span class="question-mark">?</span>;
+
+	<span class="kw">let</span> <span class="ident">proposer_factory</span> <span class="op">=</span> <span class="ident">sc_basic_authorship::ProposerFactory::with_proof_recording</span>(
+		<span class="ident">task_manager</span>.<span class="ident">spawn_handle</span>(),
+		<span class="ident">client</span>.<span class="ident">clone</span>(),
+		<span class="ident">transaction_pool</span>,
+		<span class="ident">prometheus_registry</span>,
+		<span class="ident">telemetry</span>.<span class="ident">clone</span>(),
+	);
+
+	<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="ident">BuildAuraConsensusParams</span> {
+		<span class="ident">proposer_factory</span>,
+		<span class="ident">create_inherent_data_providers</span>: <span class="kw">move</span> <span class="op">|</span><span class="kw">_</span>, (<span class="ident">relay_parent</span>, <span class="ident">validation_data</span>)<span class="op">|</span> {
+			<span class="kw">let</span> <span class="ident">relay_chain_interface</span> <span class="op">=</span> <span class="ident">relay_chain_interface</span>.<span class="ident">clone</span>();
+			<span class="kw">async</span> <span class="kw">move</span> {
+				<span class="kw">let</span> <span class="ident">parachain_inherent</span> <span class="op">=</span>
+					<span class="ident">cumulus_primitives_parachain_inherent::ParachainInherentData::create_at</span>(
+						<span class="ident">relay_parent</span>,
+						<span class="kw-2">&amp;</span><span class="ident">relay_chain_interface</span>,
+						<span class="kw-2">&amp;</span><span class="ident">validation_data</span>,
+						<span class="ident">id</span>,
+					)
+					.<span class="kw">await</span>;
+				<span class="kw">let</span> <span class="ident">timestamp</span> <span class="op">=</span> <span class="ident">sp_timestamp::InherentDataProvider::from_system_time</span>();
+
+				<span class="kw">let</span> <span class="ident">slot</span> <span class="op">=</span>
+						<span class="ident">sp_consensus_aura::inherents::InherentDataProvider::from_timestamp_and_slot_duration</span>(
+							<span class="kw-2">*</span><span class="ident">timestamp</span>,
+							<span class="ident">slot_duration</span>,
+						);
+
+				<span class="kw">let</span> <span class="ident">parachain_inherent</span> <span class="op">=</span> <span class="ident">parachain_inherent</span>.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+					<span class="ident">Box</span>::<span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">std::error::Error</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span><span class="ident">::from</span>(
+						<span class="string">&quot;Failed to create parachain inherent&quot;</span>,
+					)
+				})<span class="question-mark">?</span>;
+				<span class="prelude-val">Ok</span>((<span class="ident">slot</span>, <span class="ident">timestamp</span>, <span class="ident">parachain_inherent</span>))
+			}
+		},
+		<span class="ident">block_import</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
+		<span class="ident">para_client</span>: <span class="ident">client</span>,
+		<span class="ident">backoff_authoring_blocks</span>: <span class="prelude-ty">Option</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span><span class="ident">::None</span>,
+		<span class="ident">sync_oracle</span>,
+		<span class="ident">keystore</span>,
+		<span class="ident">force_authoring</span>,
+		<span class="ident">slot_duration</span>,
+		<span class="comment">// We got around 500ms for proposing</span>
+		<span class="ident">block_proposal_slot_portion</span>: <span class="ident">SlotProportion::new</span>(<span class="number">1f32</span> <span class="op">/</span> <span class="number">24f32</span>),
+		<span class="comment">// And a maximum of 750ms if slots are skipped</span>
+		<span class="ident">max_block_proposal_slot_portion</span>: <span class="prelude-val">Some</span>(<span class="ident">SlotProportion::new</span>(<span class="number">1f32</span> <span class="op">/</span> <span class="number">16f32</span>)),
+		<span class="ident">telemetry</span>,
+	};
+
+	<span class="prelude-val">Ok</span>(<span class="ident">AuraConsensus::build</span>::<span class="op">&lt;</span><span class="ident">sp_consensus_aura::sr25519::AuthorityPair</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">params</span>))
 }
 
 <span class="doccomment">/// Start a parachain node.</span>
@@ -991,84 +831,8 @@
 	<span class="ident">collator_options</span>: <span class="ident">CollatorOptions</span>,
 	<span class="ident">id</span>: <span class="ident">ParaId</span>,
 	<span class="ident">hwbench</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sc_sysinfo::HwBench</span><span class="op">&gt;</span>,
-) -&gt; <span class="ident">sc_service::error::Result</span><span class="op">&lt;</span>(
-	<span class="ident">TaskManager</span>,
-	<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">TFullClient</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="ident">NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">TemplateRuntimeExecutor</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-)<span class="op">&gt;</span> {
-	<span class="ident">start_node_impl</span>::<span class="op">&lt;</span><span class="ident">RuntimeApi</span>, <span class="ident">TemplateRuntimeExecutor</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span>(
-		<span class="ident">parachain_config</span>,
-		<span class="ident">polkadot_config</span>,
-		<span class="ident">collator_options</span>,
-		<span class="ident">id</span>,
-		<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="ident">RpcModule::new</span>(())),
-		<span class="ident">parachain_build_import_queue</span>,
-		<span class="op">|</span><span class="ident">client</span>,
-		 <span class="ident">prometheus_registry</span>,
-		 <span class="ident">telemetry</span>,
-		 <span class="ident">task_manager</span>,
-		 <span class="ident">relay_chain_interface</span>,
-		 <span class="ident">transaction_pool</span>,
-		 <span class="ident">sync_oracle</span>,
-		 <span class="ident">keystore</span>,
-		 <span class="ident">force_authoring</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">slot_duration</span> <span class="op">=</span> <span class="ident">cumulus_client_consensus_aura::slot_duration</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">client</span>)<span class="question-mark">?</span>;
-
-			<span class="kw">let</span> <span class="ident">proposer_factory</span> <span class="op">=</span> <span class="ident">sc_basic_authorship::ProposerFactory::with_proof_recording</span>(
-				<span class="ident">task_manager</span>.<span class="ident">spawn_handle</span>(),
-				<span class="ident">client</span>.<span class="ident">clone</span>(),
-				<span class="ident">transaction_pool</span>,
-				<span class="ident">prometheus_registry</span>,
-				<span class="ident">telemetry</span>.<span class="ident">clone</span>(),
-			);
-
-			<span class="prelude-val">Ok</span>(<span class="ident">AuraConsensus::build</span>::<span class="op">&lt;</span><span class="ident">sp_consensus_aura::sr25519::AuthorityPair</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span>(
-				<span class="ident">BuildAuraConsensusParams</span> {
-					<span class="ident">proposer_factory</span>,
-					<span class="ident">create_inherent_data_providers</span>: <span class="kw">move</span> <span class="op">|</span><span class="kw">_</span>, (<span class="ident">relay_parent</span>, <span class="ident">validation_data</span>)<span class="op">|</span> {
-						<span class="kw">let</span> <span class="ident">relay_chain_interface</span> <span class="op">=</span> <span class="ident">relay_chain_interface</span>.<span class="ident">clone</span>();
-						<span class="kw">async</span> <span class="kw">move</span> {
-							<span class="kw">let</span> <span class="ident">parachain_inherent</span> <span class="op">=</span>
-							<span class="ident">cumulus_primitives_parachain_inherent::ParachainInherentData::create_at</span>(
-								<span class="ident">relay_parent</span>,
-								<span class="kw-2">&amp;</span><span class="ident">relay_chain_interface</span>,
-								<span class="kw-2">&amp;</span><span class="ident">validation_data</span>,
-								<span class="ident">id</span>,
-							).<span class="kw">await</span>;
-							<span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">sp_timestamp::InherentDataProvider::from_system_time</span>();
-
-							<span class="kw">let</span> <span class="ident">slot</span> <span class="op">=</span>
-						<span class="ident">sp_consensus_aura::inherents::InherentDataProvider::from_timestamp_and_slot_duration</span>(
-							<span class="kw-2">*</span><span class="ident">time</span>,
-							<span class="ident">slot_duration</span>,
-						);
-
-							<span class="kw">let</span> <span class="ident">parachain_inherent</span> <span class="op">=</span> <span class="ident">parachain_inherent</span>.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
-								<span class="ident">Box</span>::<span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">std::error::Error</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span><span class="ident">::from</span>(
-									<span class="string">&quot;Failed to create parachain inherent&quot;</span>,
-								)
-							})<span class="question-mark">?</span>;
-							<span class="prelude-val">Ok</span>((<span class="ident">time</span>, <span class="ident">slot</span>, <span class="ident">parachain_inherent</span>))
-						}
-					},
-					<span class="ident">block_import</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-					<span class="ident">para_client</span>: <span class="ident">client</span>,
-					<span class="ident">backoff_authoring_blocks</span>: <span class="prelude-ty">Option</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span><span class="ident">::None</span>,
-					<span class="ident">sync_oracle</span>,
-					<span class="ident">keystore</span>,
-					<span class="ident">force_authoring</span>,
-					<span class="ident">slot_duration</span>,
-					<span class="comment">// We got around 500ms for proposing</span>
-					<span class="ident">block_proposal_slot_portion</span>: <span class="ident">SlotProportion::new</span>(<span class="number">1f32</span> <span class="op">/</span> <span class="number">24f32</span>),
-					<span class="comment">// And a maximum of 750ms if slots are skipped</span>
-					<span class="ident">max_block_proposal_slot_portion</span>: <span class="prelude-val">Some</span>(<span class="ident">SlotProportion::new</span>(<span class="number">1f32</span> <span class="op">/</span> <span class="number">16f32</span>)),
-					<span class="ident">telemetry</span>,
-				},
-			))
-		},
-		<span class="ident">hwbench</span>,
-	)
-	.<span class="kw">await</span>
+) -&gt; <span class="ident">sc_service::error::Result</span><span class="op">&lt;</span>(<span class="ident">TaskManager</span>, <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ParachainClient</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
+	<span class="ident">start_node_impl</span>(<span class="ident">parachain_config</span>, <span class="ident">polkadot_config</span>, <span class="ident">collator_options</span>, <span class="ident">id</span>, <span class="ident">hwbench</span>).<span class="kw">await</span>
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="parachain_template_node" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.1 (e092d0b6b 2022-07-16)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="parachain_template_node" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>

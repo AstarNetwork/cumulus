@@ -1,9 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/service/src/cli.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cli.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../test_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../test_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../test_parachain/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/service/src/cli.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cli.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../test_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../test_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../test_parachain/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -343,6 +338,15 @@
 <span id="338">338</span>
 <span id="339">339</span>
 <span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of Cumulus.</span>
 
@@ -369,30 +373,30 @@
 <span class="kw">use</span> <span class="ident">sc_service::BasePath</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">clap::Parser</span>)]</span>
-<span class="attribute">#[<span class="ident">clap</span>(
+<span class="attribute">#[<span class="ident">command</span>(
 	<span class="ident">version</span>,
 	<span class="ident">propagate_version</span> <span class="op">=</span> <span class="bool-val">true</span>,
 	<span class="ident">args_conflicts_with_subcommands</span> <span class="op">=</span> <span class="bool-val">true</span>,
 	<span class="ident">subcommand_negates_reqs</span> <span class="op">=</span> <span class="bool-val">true</span>
 )]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TestCollatorCli</span> {
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">subcommand</span>)]</span>
+	<span class="attribute">#[<span class="ident">command</span>(<span class="ident">subcommand</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">subcommand</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Subcommand</span><span class="op">&gt;</span>,
 
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>)]</span>
+	<span class="attribute">#[<span class="ident">command</span>(<span class="ident">flatten</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">run</span>: <span class="ident">cumulus_client_cli::RunCmd</span>,
 
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">default_value_t</span> <span class="op">=</span> <span class="number">2000u32</span>)]</span>
+	<span class="attribute">#[<span class="ident">arg</span>(<span class="ident">default_value_t</span> <span class="op">=</span> <span class="number">2000u32</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">parachain_id</span>: <span class="ident">u32</span>,
 
 	<span class="doccomment">/// Relay chain arguments</span>
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">raw</span> <span class="op">=</span> <span class="bool-val">true</span>, <span class="ident">conflicts_with</span> <span class="op">=</span> <span class="string">&quot;relay-chain-rpc-url&quot;</span>)]</span>
+	<span class="attribute">#[<span class="ident">arg</span>(<span class="ident">raw</span> <span class="op">=</span> <span class="bool-val">true</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">relaychain_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>)]</span>
+	<span class="attribute">#[<span class="ident">arg</span>(<span class="ident">long</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">use_null_consensus</span>: <span class="ident">bool</span>,
 
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">long</span>)]</span>
+	<span class="attribute">#[<span class="ident">arg</span>(<span class="ident">long</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">disable_block_announcements</span>: <span class="ident">bool</span>,
 }
 
@@ -409,11 +413,12 @@
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">clap::Parser</span>)]</span>
+<span class="attribute">#[<span class="ident">group</span>(<span class="ident">skip</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExportGenesisStateCommand</span> {
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">default_value_t</span> <span class="op">=</span> <span class="number">2000u32</span>)]</span>
+	<span class="attribute">#[<span class="ident">arg</span>(<span class="ident">default_value_t</span> <span class="op">=</span> <span class="number">2000u32</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">parachain_id</span>: <span class="ident">u32</span>,
 
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>)]</span>
+	<span class="attribute">#[<span class="ident">command</span>(<span class="ident">flatten</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">base</span>: <span class="ident">cumulus_client_cli::ExportGenesisStateCommand</span>,
 }
 
@@ -425,11 +430,12 @@
 
 <span class="doccomment">/// Command for exporting the genesis wasm file.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">clap::Parser</span>)]</span>
+<span class="attribute">#[<span class="ident">group</span>(<span class="ident">skip</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExportGenesisWasmCommand</span> {
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">default_value_t</span> <span class="op">=</span> <span class="number">2000u32</span>)]</span>
+	<span class="attribute">#[<span class="ident">arg</span>(<span class="ident">default_value_t</span> <span class="op">=</span> <span class="number">2000u32</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">parachain_id</span>: <span class="ident">u32</span>,
 
-	<span class="attribute">#[<span class="ident">clap</span>(<span class="ident">flatten</span>)]</span>
+	<span class="attribute">#[<span class="ident">command</span>(<span class="ident">flatten</span>)]</span>
 	<span class="kw">pub</span> <span class="ident">base</span>: <span class="ident">cumulus_client_cli::ExportGenesisWasmCommand</span>,
 }
 
@@ -482,7 +488,7 @@
 	<span class="kw">fn</span> <span class="ident">base_path</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">CliResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BasePath</span><span class="op">&gt;</span><span class="op">&gt;</span> {
 		<span class="prelude-val">Ok</span>(<span class="self">self</span>
 			.<span class="ident">shared_params</span>()
-			.<span class="ident">base_path</span>()
+			.<span class="ident">base_path</span>()<span class="question-mark">?</span>
 			.<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">base_path</span>.<span class="ident">clone</span>().<span class="ident">map</span>(<span class="ident">Into::into</span>)))
 	}
 
@@ -536,8 +542,8 @@
 		<span class="self">self</span>.<span class="ident">base</span>.<span class="ident">base</span>.<span class="ident">transaction_pool</span>(<span class="ident">is_dev</span>)
 	}
 
-	<span class="kw">fn</span> <span class="ident">state_cache_child_ratio</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">CliResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">base</span>.<span class="ident">base</span>.<span class="ident">state_cache_child_ratio</span>()
+	<span class="kw">fn</span> <span class="ident">trie_cache_maximum_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">CliResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+		<span class="self">self</span>.<span class="ident">base</span>.<span class="ident">base</span>.<span class="ident">trie_cache_maximum_size</span>()
 	}
 
 	<span class="kw">fn</span> <span class="ident">rpc_methods</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">CliResult</span><span class="op">&lt;</span><span class="ident">sc_service::config::RpcMethods</span><span class="op">&gt;</span> {
@@ -633,9 +639,16 @@
 		<span class="number">2017</span>
 	}
 
-	<span class="kw">fn</span> <span class="ident">load_spec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">std::result::Result</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">sc_service::ChainSpec</span><span class="op">&gt;</span>, <span class="ident">String</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="ident">Box::new</span>(<span class="ident">cumulus_test_service::get_chain_spec</span>(<span class="ident">ParaId::from</span>(<span class="self">self</span>.<span class="ident">parachain_id</span>)))
-			<span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>)
+	<span class="kw">fn</span> <span class="ident">load_spec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">std::result::Result</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">sc_service::ChainSpec</span><span class="op">&gt;</span>, <span class="ident">String</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">id</span> {
+			<span class="string">&quot;&quot;</span> =&gt; <span class="ident">Box::new</span>(<span class="ident">cumulus_test_service::get_chain_spec</span>(<span class="ident">ParaId::from</span>(<span class="self">self</span>.<span class="ident">parachain_id</span>)))
+				<span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>,
+			<span class="ident">path</span> =&gt; {
+				<span class="kw">let</span> <span class="ident">chain_spec</span> <span class="op">=</span>
+					<span class="ident">cumulus_test_service::chain_spec::ChainSpec::from_json_file</span>(<span class="ident">path</span>.<span class="ident">into</span>())<span class="question-mark">?</span>;
+				<span class="ident">Box::new</span>(<span class="ident">chain_spec</span>)
+			},
+		})
 	}
 
 	<span class="kw">fn</span> <span class="ident">native_runtime_version</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ChainSpec</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">RuntimeVersion</span> {
@@ -684,5 +697,4 @@
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="test_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.1 (e092d0b6b 2022-07-16)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="test_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>

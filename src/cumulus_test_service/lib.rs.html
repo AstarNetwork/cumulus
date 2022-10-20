@@ -1,9 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/service/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_test_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_test_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_test_service/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/service/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_test_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_test_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_test_service/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -811,6 +806,14 @@
 <span id="806">806</span>
 <span id="807">807</span>
 <span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of Cumulus.</span>
 
@@ -831,7 +834,7 @@
 
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
 
-<span class="kw">mod</span> <span class="ident">chain_spec</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">chain_spec</span>;
 <span class="kw">mod</span> <span class="ident">genesis</span>;
 
 <span class="kw">use</span> <span class="ident">std</span>::{
@@ -841,6 +844,7 @@
 };
 <span class="kw">use</span> <span class="ident">url::Url</span>;
 
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::runtime::Weight</span>;
 <span class="kw">use</span> <span class="ident">cumulus_client_cli::CollatorOptions</span>;
 <span class="kw">use</span> <span class="ident">cumulus_client_consensus_common</span>::{<span class="ident">ParachainCandidate</span>, <span class="ident">ParachainConsensus</span>};
 <span class="kw">use</span> <span class="ident">cumulus_client_network::BlockAnnounceValidator</span>;
@@ -850,18 +854,19 @@
 <span class="kw">use</span> <span class="ident">cumulus_primitives_core::ParaId</span>;
 <span class="kw">use</span> <span class="ident">cumulus_relay_chain_inprocess_interface::RelayChainInProcessInterface</span>;
 <span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface</span>::{<span class="ident">RelayChainError</span>, <span class="ident">RelayChainInterface</span>, <span class="ident">RelayChainResult</span>};
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_rpc_interface</span>::{<span class="ident">create_client_and_start_worker</span>, <span class="ident">RelayChainRpcInterface</span>};
+<span class="kw">use</span> <span class="ident">cumulus_relay_chain_minimal_node::build_minimal_relay_chain_node</span>;
+
 <span class="kw">use</span> <span class="ident">cumulus_test_runtime</span>::{<span class="ident">Hash</span>, <span class="ident">Header</span>, <span class="ident">NodeBlock</span> <span class="kw">as</span> <span class="ident">Block</span>, <span class="ident">RuntimeApi</span>};
-<span class="kw">use</span> <span class="ident">parking_lot::Mutex</span>;
 
 <span class="kw">use</span> <span class="ident">frame_system_rpc_runtime_api::AccountNonceApi</span>;
 <span class="kw">use</span> <span class="ident">polkadot_primitives::v2</span>::{<span class="ident">CollatorPair</span>, <span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">PersistedValidationData</span>};
 <span class="kw">use</span> <span class="ident">polkadot_service::ProvideRuntimeApi</span>;
 <span class="kw">use</span> <span class="ident">sc_client_api::execution_extensions::ExecutionStrategies</span>;
-<span class="kw">use</span> <span class="ident">sc_network</span>::{<span class="ident">config::TransportConfig</span>, <span class="ident">multiaddr</span>, <span class="ident">NetworkService</span>};
+<span class="kw">use</span> <span class="ident">sc_network</span>::{<span class="ident">multiaddr</span>, <span class="ident">NetworkBlock</span>, <span class="ident">NetworkService</span>};
+<span class="kw">use</span> <span class="ident">sc_network_common</span>::{<span class="ident">config::TransportConfig</span>, <span class="ident">service::NetworkStateInfo</span>};
 <span class="kw">use</span> <span class="ident">sc_service</span>::{
 	<span class="ident">config</span>::{
-		<span class="ident">DatabaseSource</span>, <span class="ident">KeepBlocks</span>, <span class="ident">KeystoreConfig</span>, <span class="ident">MultiaddrWithPeerId</span>, <span class="ident">NetworkConfiguration</span>,
+		<span class="ident">BlocksPruning</span>, <span class="ident">DatabaseSource</span>, <span class="ident">KeystoreConfig</span>, <span class="ident">MultiaddrWithPeerId</span>, <span class="ident">NetworkConfiguration</span>,
 		<span class="ident">OffchainWorkerConfig</span>, <span class="ident">PruningMode</span>, <span class="ident">WasmExecutionMethod</span>,
 	},
 	<span class="ident">BasePath</span>, <span class="ident">ChainSpec</span>, <span class="ident">Configuration</span>, <span class="ident">Error</span> <span class="kw">as</span> <span class="ident">ServiceError</span>, <span class="ident">PartialComponents</span>, <span class="ident">Role</span>,
@@ -995,8 +1000,9 @@
 	<span class="ident">task_manager</span>: <span class="kw-2">&amp;mut</span> <span class="ident">TaskManager</span>,
 ) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RelayChainInterface</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span> {
 	<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">relay_chain_url</span>) <span class="op">=</span> <span class="ident">collator_options</span>.<span class="ident">relay_chain_rpc_url</span> {
-		<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">create_client_and_start_worker</span>(<span class="ident">relay_chain_url</span>, <span class="ident">task_manager</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-		<span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Arc::new</span>(<span class="ident">RelayChainRpcInterface::new</span>(<span class="ident">client</span>)) <span class="kw">as</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>)
+		<span class="kw">return</span> <span class="ident">build_minimal_relay_chain_node</span>(<span class="ident">relay_chain_config</span>, <span class="ident">task_manager</span>, <span class="ident">relay_chain_url</span>)
+			.<span class="kw">await</span>
+			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">r</span>.<span class="number">0</span>)
 	}
 
 	<span class="kw">let</span> <span class="ident">relay_chain_full_node</span> <span class="op">=</span> <span class="ident">polkadot_test_service::new_full</span>(
@@ -1010,12 +1016,15 @@
 	)<span class="question-mark">?</span>;
 
 	<span class="ident">task_manager</span>.<span class="ident">add_child</span>(<span class="ident">relay_chain_full_node</span>.<span class="ident">task_manager</span>);
+	<span class="macro">tracing::info!</span>(<span class="string">&quot;Using inprocess node.&quot;</span>);
 	<span class="prelude-val">Ok</span>(<span class="ident">Arc::new</span>(<span class="ident">RelayChainInProcessInterface::new</span>(
 		<span class="ident">relay_chain_full_node</span>.<span class="ident">client</span>.<span class="ident">clone</span>(),
 		<span class="ident">relay_chain_full_node</span>.<span class="ident">backend</span>.<span class="ident">clone</span>(),
-		<span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(<span class="ident">Box::new</span>(<span class="ident">relay_chain_full_node</span>.<span class="ident">network</span>.<span class="ident">clone</span>()))),
-		<span class="ident">relay_chain_full_node</span>.<span class="ident">overseer_handle</span>,
-	)) <span class="kw">as</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>)
+		<span class="ident">Arc::new</span>(<span class="ident">relay_chain_full_node</span>.<span class="ident">network</span>.<span class="ident">clone</span>()),
+		<span class="ident">relay_chain_full_node</span>.<span class="ident">overseer_handle</span>.<span class="ident">ok_or</span>(<span class="ident">RelayChainError::GenericError</span>(
+			<span class="string">&quot;Overseer should be running in full node.&quot;</span>.<span class="ident">to_string</span>(),
+		))<span class="question-mark">?</span>,
+	)))
 }
 
 <span class="doccomment">/// Start a node with the given parachain `Configuration` and relay chain `Configuration`.</span>
@@ -1069,7 +1078,7 @@
 
 	<span class="kw">let</span> <span class="ident">prometheus_registry</span> <span class="op">=</span> <span class="ident">parachain_config</span>.<span class="ident">prometheus_registry</span>().<span class="ident">cloned</span>();
 	<span class="kw">let</span> <span class="ident">import_queue</span> <span class="op">=</span> <span class="ident">cumulus_client_service::SharedImportQueue::new</span>(<span class="ident">params</span>.<span class="ident">import_queue</span>);
-	<span class="kw">let</span> (<span class="ident">network</span>, <span class="ident">system_rpc_tx</span>, <span class="ident">start_network</span>) <span class="op">=</span>
+	<span class="kw">let</span> (<span class="ident">network</span>, <span class="ident">system_rpc_tx</span>, <span class="ident">tx_handler_controller</span>, <span class="ident">start_network</span>) <span class="op">=</span>
 		<span class="ident">sc_service::build_network</span>(<span class="ident">sc_service::BuildNetworkParams</span> {
 			<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">parachain_config</span>,
 			<span class="ident">client</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
@@ -1096,6 +1105,7 @@
 		<span class="ident">backend</span>,
 		<span class="ident">network</span>: <span class="ident">network</span>.<span class="ident">clone</span>(),
 		<span class="ident">system_rpc_tx</span>,
+		<span class="ident">tx_handler_controller</span>,
 		<span class="ident">telemetry</span>: <span class="prelude-val">None</span>,
 	})<span class="question-mark">?</span>;
 
@@ -1178,7 +1188,6 @@
 			<span class="comment">// the recovery delay of pov-recovery. We don&#39;t want to wait for too</span>
 			<span class="comment">// long on the full node to recover, so we reduce this time here.</span>
 			<span class="ident">relay_chain_slot_duration</span>: <span class="ident">Duration::from_millis</span>(<span class="number">6</span>),
-			<span class="ident">collator_options</span>,
 		};
 
 		<span class="ident">start_full_node</span>(<span class="ident">params</span>)<span class="question-mark">?</span>;
@@ -1284,9 +1293,9 @@
 	<span class="doccomment">/// node.</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">connect_to_parachain_nodes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
 		<span class="kw-2">mut</span> <span class="self">self</span>,
-		<span class="ident">nodes</span>: <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">TestNode</span><span class="op">&gt;</span>,
+		<span class="ident">nodes</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">TestNode</span><span class="op">&gt;</span>,
 	) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">parachain_nodes</span>.<span class="ident">extend</span>(<span class="ident">nodes</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">addr</span>.<span class="ident">clone</span>()));
+		<span class="self">self</span>.<span class="ident">parachain_nodes</span>.<span class="ident">extend</span>(<span class="ident">nodes</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">addr</span>.<span class="ident">clone</span>()));
 		<span class="self">self</span>
 	}
 
@@ -1420,7 +1429,7 @@
 	<span class="ident">is_collator</span>: <span class="ident">bool</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Configuration</span>, <span class="ident">ServiceError</span><span class="op">&gt;</span> {
 	<span class="kw">let</span> <span class="ident">base_path</span> <span class="op">=</span> <span class="ident">BasePath::new_temp_dir</span>()<span class="question-mark">?</span>;
-	<span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="ident">base_path</span>.<span class="ident">path</span>().<span class="ident">to_path_buf</span>();
+	<span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="ident">base_path</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;cumulus_test_service_{}&quot;</span>, <span class="ident">key</span>.<span class="ident">to_string</span>()));
 	<span class="kw">let</span> <span class="ident">role</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">is_collator</span> { <span class="ident">Role::Authority</span> } <span class="kw">else</span> { <span class="ident">Role::Full</span> };
 	<span class="kw">let</span> <span class="ident">key_seed</span> <span class="op">=</span> <span class="ident">key</span>.<span class="ident">to_seed</span>();
 	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">chain_spec::get_chain_spec</span>(<span class="ident">para_id</span>));
@@ -1440,7 +1449,7 @@
 	<span class="kw">if</span> <span class="ident">nodes_exlusive</span> {
 		<span class="ident">network_config</span>.<span class="ident">default_peers_set</span>.<span class="ident">reserved_nodes</span> <span class="op">=</span> <span class="ident">nodes</span>;
 		<span class="ident">network_config</span>.<span class="ident">default_peers_set</span>.<span class="ident">non_reserved_mode</span> <span class="op">=</span>
-			<span class="ident">sc_network::config::NonReservedPeerMode::Deny</span>;
+			<span class="ident">sc_network_common::config::NonReservedPeerMode::Deny</span>;
 	} <span class="kw">else</span> {
 		<span class="ident">network_config</span>.<span class="ident">boot_nodes</span> <span class="op">=</span> <span class="ident">nodes</span>;
 	}
@@ -1463,10 +1472,9 @@
 		<span class="ident">keystore</span>: <span class="ident">KeystoreConfig::InMemory</span>,
 		<span class="ident">keystore_remote</span>: <span class="ident">Default::default</span>(),
 		<span class="ident">database</span>: <span class="ident">DatabaseSource::RocksDb</span> { <span class="ident">path</span>: <span class="ident">root</span>.<span class="ident">join</span>(<span class="string">&quot;db&quot;</span>), <span class="ident">cache_size</span>: <span class="number">128</span> },
-		<span class="ident">state_cache_size</span>: <span class="number">67108864</span>,
-		<span class="ident">state_cache_child_ratio</span>: <span class="prelude-val">None</span>,
+		<span class="ident">trie_cache_maximum_size</span>: <span class="prelude-val">Some</span>(<span class="number">64</span> <span class="op">*</span> <span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span>),
 		<span class="ident">state_pruning</span>: <span class="prelude-val">Some</span>(<span class="ident">PruningMode::ArchiveAll</span>),
-		<span class="ident">keep_blocks</span>: <span class="ident">KeepBlocks::All</span>,
+		<span class="ident">blocks_pruning</span>: <span class="ident">BlocksPruning::KeepAll</span>,
 		<span class="ident">chain_spec</span>: <span class="ident">spec</span>,
 		<span class="ident">wasm_method</span>: <span class="ident">WasmExecutionMethod::Interpreted</span>,
 		<span class="comment">// NOTE: we enforce the use of the native runtime to make the errors more debuggable</span>
@@ -1518,7 +1526,7 @@
 	<span class="doccomment">/// Send an extrinsic to this node.</span>
 	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">send_extrinsic</span>(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">function</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">runtime::Call</span><span class="op">&gt;</span>,
+		<span class="ident">function</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">runtime::RuntimeCall</span><span class="op">&gt;</span>,
 		<span class="ident">caller</span>: <span class="ident">Sr25519Keyring</span>,
 	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RpcTransactionOutput</span>, <span class="ident">RpcTransactionError</span><span class="op">&gt;</span> {
 		<span class="kw">let</span> <span class="ident">extrinsic</span> <span class="op">=</span> <span class="ident">construct_extrinsic</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">client</span>, <span class="ident">function</span>, <span class="ident">caller</span>.<span class="ident">pair</span>(), <span class="prelude-val">Some</span>(<span class="number">0</span>));
@@ -1531,7 +1539,10 @@
 		<span class="kw">let</span> <span class="ident">call</span> <span class="op">=</span> <span class="ident">frame_system::Call::set_code</span> { <span class="ident">code</span>: <span class="ident">validation</span> };
 
 		<span class="self">self</span>.<span class="ident">send_extrinsic</span>(
-			<span class="ident">runtime::SudoCall::sudo_unchecked_weight</span> { <span class="ident">call</span>: <span class="ident">Box::new</span>(<span class="ident">call</span>.<span class="ident">into</span>()), <span class="ident">weight</span>: <span class="number">1_000</span> },
+			<span class="ident">runtime::SudoCall::sudo_unchecked_weight</span> {
+				<span class="ident">call</span>: <span class="ident">Box::new</span>(<span class="ident">call</span>.<span class="ident">into</span>()),
+				<span class="ident">weight</span>: <span class="ident">Weight::from_ref_time</span>(<span class="number">1_000</span>),
+			},
 			<span class="ident">Sr25519Keyring::Alice</span>,
 		)
 		.<span class="kw">await</span>
@@ -1551,7 +1562,7 @@
 <span class="doccomment">/// Construct an extrinsic that can be applied to the test runtime.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">construct_extrinsic</span>(
 	<span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="ident">Client</span>,
-	<span class="ident">function</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">runtime::Call</span><span class="op">&gt;</span>,
+	<span class="ident">function</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">runtime::RuntimeCall</span><span class="op">&gt;</span>,
 	<span class="ident">caller</span>: <span class="ident">sp_core::sr25519::Pair</span>,
 	<span class="ident">nonce</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
 ) -&gt; <span class="ident">runtime::UncheckedExtrinsic</span> {
@@ -1620,5 +1631,4 @@
 	)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_test_service" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.1 (e092d0b6b 2022-07-16)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_test_service" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>

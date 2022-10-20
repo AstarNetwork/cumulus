@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["COLLECTIVES_POLKADOT_ED",""]],"fn":[["collectives_polkadot_development_config",""],["collectives_polkadot_genesis",""],["collectives_polkadot_local_config","Collectives Polkadot Local Config."],["collectives_polkadot_session_keys","Generate the session keys from individual elements."]],"type":[["CollectivesPolkadotChainSpec",""]]};
