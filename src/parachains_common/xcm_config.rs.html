@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/common/src/xcm_config.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>xcm_config.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../parachains_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/common/src/xcm_config.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>xcm_config.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../parachains_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -119,126 +119,126 @@
 <span id="119">119</span>
 <span id="120">120</span>
 <span id="121">121</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::impls::AccountIdOf</span>;
-<span class="kw">use</span> <span class="ident">core::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">frame_support</span>::{
-	<span class="ident">log</span>,
-	<span class="ident">traits</span>::{<span class="ident">fungibles::Inspect</span>, <span class="ident">tokens::BalanceConversion</span>},
-	<span class="ident">weights</span>::{<span class="ident">Weight</span>, <span class="ident">WeightToFee</span>, <span class="ident">WeightToFeePolynomial</span>},
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::impls::AccountIdOf;
+<span class="kw">use </span>core::marker::PhantomData;
+<span class="kw">use </span>frame_support::{
+	log,
+	traits::{fungibles::Inspect, tokens::BalanceConversion},
+	weights::{Weight, WeightToFee, WeightToFeePolynomial},
 };
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::Get</span>;
-<span class="kw">use</span> <span class="ident">xcm::latest</span>::{<span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">Weight</span> <span class="kw">as</span> <span class="ident">XCMWeight</span>};
-<span class="kw">use</span> <span class="ident">xcm_executor::traits</span>::{<span class="ident">FilterAssetLocation</span>, <span class="ident">ShouldExecute</span>};
+<span class="kw">use </span>sp_runtime::traits::Get;
+<span class="kw">use </span>xcm::latest::{prelude::<span class="kw-2">*</span>, Weight <span class="kw">as </span>XCMWeight};
+<span class="kw">use </span>xcm_executor::traits::{FilterAssetLocation, ShouldExecute};
 
-<span class="comment">//TODO: move DenyThenTry to polkadot&#39;s xcm module.</span>
-<span class="doccomment">/// Deny executing the XCM if it matches any of the Deny filter regardless of anything else.</span>
-<span class="doccomment">/// If it passes the Deny, and matches one of the Allow cases then it is let through.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DenyThenTry</span><span class="op">&lt;</span><span class="ident">Deny</span>, <span class="ident">Allow</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Deny</span><span class="op">&gt;</span>, <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Allow</span><span class="op">&gt;</span>)
-<span class="kw">where</span>
-	<span class="ident">Deny</span>: <span class="ident">ShouldExecute</span>,
-	<span class="ident">Allow</span>: <span class="ident">ShouldExecute</span>;
+<span class="comment">//TODO: move DenyThenTry to polkadot&#39;s xcm module.
+</span><span class="doccomment">/// Deny executing the XCM if it matches any of the Deny filter regardless of anything else.
+/// If it passes the Deny, and matches one of the Allow cases then it is let through.
+</span><span class="kw">pub struct </span>DenyThenTry&lt;Deny, Allow&gt;(PhantomData&lt;Deny&gt;, PhantomData&lt;Allow&gt;)
+<span class="kw">where
+	</span>Deny: ShouldExecute,
+	Allow: ShouldExecute;
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Deny</span>, <span class="ident">Allow</span><span class="op">&gt;</span> <span class="ident">ShouldExecute</span> <span class="kw">for</span> <span class="ident">DenyThenTry</span><span class="op">&lt;</span><span class="ident">Deny</span>, <span class="ident">Allow</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Deny</span>: <span class="ident">ShouldExecute</span>,
-	<span class="ident">Allow</span>: <span class="ident">ShouldExecute</span>,
+<span class="kw">impl</span>&lt;Deny, Allow&gt; ShouldExecute <span class="kw">for </span>DenyThenTry&lt;Deny, Allow&gt;
+<span class="kw">where
+	</span>Deny: ShouldExecute,
+	Allow: ShouldExecute,
 {
-	<span class="kw">fn</span> <span class="ident">should_execute</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>(
-		<span class="ident">origin</span>: <span class="kw-2">&amp;</span><span class="ident">MultiLocation</span>,
-		<span class="ident">message</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Xcm</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>,
-		<span class="ident">max_weight</span>: <span class="ident">XCMWeight</span>,
-		<span class="ident">weight_credit</span>: <span class="kw-2">&amp;mut</span> <span class="ident">XCMWeight</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
-		<span class="ident">Deny::should_execute</span>(<span class="ident">origin</span>, <span class="ident">message</span>, <span class="ident">max_weight</span>, <span class="ident">weight_credit</span>)<span class="question-mark">?</span>;
-		<span class="ident">Allow::should_execute</span>(<span class="ident">origin</span>, <span class="ident">message</span>, <span class="ident">max_weight</span>, <span class="ident">weight_credit</span>)
+	<span class="kw">fn </span>should_execute&lt;RuntimeCall&gt;(
+		origin: <span class="kw-2">&amp;</span>MultiLocation,
+		message: <span class="kw-2">&amp;mut </span>Xcm&lt;RuntimeCall&gt;,
+		max_weight: XCMWeight,
+		weight_credit: <span class="kw-2">&amp;mut </span>XCMWeight,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(), ()&gt; {
+		Deny::should_execute(origin, message, max_weight, weight_credit)<span class="question-mark">?</span>;
+		Allow::should_execute(origin, message, max_weight, weight_credit)
 	}
 }
 
-<span class="comment">// See issue #5233</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DenyReserveTransferToRelayChain</span>;
-<span class="kw">impl</span> <span class="ident">ShouldExecute</span> <span class="kw">for</span> <span class="ident">DenyReserveTransferToRelayChain</span> {
-	<span class="kw">fn</span> <span class="ident">should_execute</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>(
-		<span class="ident">origin</span>: <span class="kw-2">&amp;</span><span class="ident">MultiLocation</span>,
-		<span class="ident">message</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Xcm</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>,
-		<span class="ident">_max_weight</span>: <span class="ident">XCMWeight</span>,
-		<span class="ident">_weight_credit</span>: <span class="kw-2">&amp;mut</span> <span class="ident">XCMWeight</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
-		<span class="kw">if</span> <span class="ident">message</span>.<span class="number">0</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">inst</span><span class="op">|</span> {
+<span class="comment">// See issue &lt;https://github.com/paritytech/polkadot/issues/5233&gt;
+</span><span class="kw">pub struct </span>DenyReserveTransferToRelayChain;
+<span class="kw">impl </span>ShouldExecute <span class="kw">for </span>DenyReserveTransferToRelayChain {
+	<span class="kw">fn </span>should_execute&lt;RuntimeCall&gt;(
+		origin: <span class="kw-2">&amp;</span>MultiLocation,
+		message: <span class="kw-2">&amp;mut </span>Xcm&lt;RuntimeCall&gt;,
+		_max_weight: XCMWeight,
+		_weight_credit: <span class="kw-2">&amp;mut </span>XCMWeight,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(), ()&gt; {
+		<span class="kw">if </span>message.<span class="number">0</span>.iter().any(|inst| {
 			<span class="macro">matches!</span>(
-				<span class="ident">inst</span>,
-				<span class="ident">InitiateReserveWithdraw</span> {
-					<span class="ident">reserve</span>: <span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">Here</span> },
+				inst,
+				InitiateReserveWithdraw {
+					reserve: MultiLocation { parents: <span class="number">1</span>, interior: Here },
 					..
-				} <span class="op">|</span> <span class="ident">DepositReserveAsset</span> { <span class="ident">dest</span>: <span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">Here</span> }, .. } <span class="op">|</span>
-					<span class="ident">TransferReserveAsset</span> {
-						<span class="ident">dest</span>: <span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">Here</span> },
+				} | DepositReserveAsset { dest: MultiLocation { parents: <span class="number">1</span>, interior: Here }, .. } |
+					TransferReserveAsset {
+						dest: MultiLocation { parents: <span class="number">1</span>, interior: Here },
 						..
 					}
 			)
 		}) {
-			<span class="kw">return</span> <span class="prelude-val">Err</span>(()) <span class="comment">// Deny</span>
-		}
+			<span class="kw">return </span><span class="prelude-val">Err</span>(()) <span class="comment">// Deny
+		</span>}
 
-		<span class="comment">// An unexpected reserve transfer has arrived from the Relay Chain. Generally, `IsReserve`</span>
-		<span class="comment">// should not allow this, but we just log it here.</span>
-		<span class="kw">if</span> <span class="macro">matches!</span>(<span class="ident">origin</span>, <span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">Here</span> }) <span class="op">&amp;&amp;</span>
-			<span class="ident">message</span>.<span class="number">0</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">inst</span><span class="op">|</span> <span class="macro">matches!</span>(<span class="ident">inst</span>, <span class="ident">ReserveAssetDeposited</span> { .. }))
+		<span class="comment">// An unexpected reserve transfer has arrived from the Relay Chain. Generally, `IsReserve`
+		// should not allow this, but we just log it here.
+		</span><span class="kw">if </span><span class="macro">matches!</span>(origin, MultiLocation { parents: <span class="number">1</span>, interior: Here }) &amp;&amp;
+			message.<span class="number">0</span>.iter().any(|inst| <span class="macro">matches!</span>(inst, ReserveAssetDeposited { .. }))
 		{
 			<span class="macro">log::warn!</span>(
-				<span class="ident">target</span>: <span class="string">&quot;xcm::barrier&quot;</span>,
+				target: <span class="string">&quot;xcm::barriers&quot;</span>,
 				<span class="string">&quot;Unexpected ReserveAssetDeposited from the Relay Chain&quot;</span>,
 			);
 		}
-		<span class="comment">// Permit everything else</span>
-		<span class="prelude-val">Ok</span>(())
+		<span class="comment">// Permit everything else
+		</span><span class="prelude-val">Ok</span>(())
 	}
 }
 
-<span class="doccomment">/// A `ChargeFeeInFungibles` implementation that converts the output of</span>
-<span class="doccomment">/// a given WeightToFee implementation an amount charged in</span>
-<span class="doccomment">/// a particular assetId from pallet-assets</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AssetFeeAsExistentialDepositMultiplier</span><span class="op">&lt;</span><span class="ident">Runtime</span>, <span class="ident">WeightToFee</span>, <span class="ident">BalanceConverter</span><span class="op">&gt;</span>(
-	<span class="ident">PhantomData</span><span class="op">&lt;</span>(<span class="ident">Runtime</span>, <span class="ident">WeightToFee</span>, <span class="ident">BalanceConverter</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// A `ChargeFeeInFungibles` implementation that converts the output of
+/// a given WeightToFee implementation an amount charged in
+/// a particular assetId from pallet-assets
+</span><span class="kw">pub struct </span>AssetFeeAsExistentialDepositMultiplier&lt;Runtime, WeightToFee, BalanceConverter&gt;(
+	PhantomData&lt;(Runtime, WeightToFee, BalanceConverter)&gt;,
 );
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">CurrencyBalance</span>, <span class="ident">Runtime</span>, <span class="ident">WeightToFee</span>, <span class="ident">BalanceConverter</span><span class="op">&gt;</span>
-	<span class="ident">cumulus_primitives_utility::ChargeWeightInFungibles</span><span class="op">&lt;</span>
-		<span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span>,
-		<span class="ident">pallet_assets::Pallet</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span>,
-	<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AssetFeeAsExistentialDepositMultiplier</span><span class="op">&lt;</span><span class="ident">Runtime</span>, <span class="ident">WeightToFee</span>, <span class="ident">BalanceConverter</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Runtime</span>: <span class="ident">pallet_assets::Config</span>,
-	<span class="ident">WeightToFee</span>: <span class="ident">WeightToFeePolynomial</span><span class="op">&lt;</span><span class="ident">Balance</span> <span class="op">=</span> <span class="ident">CurrencyBalance</span><span class="op">&gt;</span>,
-	<span class="ident">BalanceConverter</span>: <span class="ident">BalanceConversion</span><span class="op">&lt;</span>
-		<span class="ident">CurrencyBalance</span>,
-		<span class="op">&lt;</span><span class="ident">Runtime</span> <span class="kw">as</span> <span class="ident">pallet_assets::Config</span><span class="op">&gt;</span><span class="ident">::AssetId</span>,
-		<span class="op">&lt;</span><span class="ident">Runtime</span> <span class="kw">as</span> <span class="ident">pallet_assets::Config</span><span class="op">&gt;</span><span class="ident">::Balance</span>,
-	<span class="op">&gt;</span>,
-	<span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span>:
-		<span class="ident">From</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;CurrencyBalance, Runtime, WeightToFee, BalanceConverter&gt;
+	cumulus_primitives_utility::ChargeWeightInFungibles&lt;
+		AccountIdOf&lt;Runtime&gt;,
+		pallet_assets::Pallet&lt;Runtime&gt;,
+	&gt; <span class="kw">for </span>AssetFeeAsExistentialDepositMultiplier&lt;Runtime, WeightToFee, BalanceConverter&gt;
+<span class="kw">where
+	</span>Runtime: pallet_assets::Config,
+	WeightToFee: WeightToFeePolynomial&lt;Balance = CurrencyBalance&gt;,
+	BalanceConverter: BalanceConversion&lt;
+		CurrencyBalance,
+		&lt;Runtime <span class="kw">as </span>pallet_assets::Config&gt;::AssetId,
+		&lt;Runtime <span class="kw">as </span>pallet_assets::Config&gt;::Balance,
+	&gt;,
+	AccountIdOf&lt;Runtime&gt;:
+		From&lt;polkadot_primitives::v2::AccountId&gt; + Into&lt;polkadot_primitives::v2::AccountId&gt;,
 {
-	<span class="kw">fn</span> <span class="ident">charge_weight_in_fungibles</span>(
-		<span class="ident">asset_id</span>: <span class="op">&lt;</span><span class="ident">pallet_assets::Pallet</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">Inspect</span><span class="op">&lt;</span><span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::AssetId</span>,
-		<span class="ident">weight</span>: <span class="ident">Weight</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">pallet_assets::Pallet</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">Inspect</span><span class="op">&lt;</span><span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::Balance</span>, <span class="ident">XcmError</span><span class="op">&gt;</span>
+	<span class="kw">fn </span>charge_weight_in_fungibles(
+		asset_id: &lt;pallet_assets::Pallet&lt;Runtime&gt; <span class="kw">as </span>Inspect&lt;AccountIdOf&lt;Runtime&gt;&gt;&gt;::AssetId,
+		weight: Weight,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;&lt;pallet_assets::Pallet&lt;Runtime&gt; <span class="kw">as </span>Inspect&lt;AccountIdOf&lt;Runtime&gt;&gt;&gt;::Balance, XcmError&gt;
 	{
-		<span class="kw">let</span> <span class="ident">amount</span> <span class="op">=</span> <span class="ident">WeightToFee::weight_to_fee</span>(<span class="kw-2">&amp;</span><span class="ident">weight</span>);
-		<span class="comment">// If the amount gotten is not at least the ED, then make it be the ED of the asset</span>
-		<span class="comment">// This is to avoid burning assets and decreasing the supply</span>
-		<span class="kw">let</span> <span class="ident">asset_amount</span> <span class="op">=</span> <span class="ident">BalanceConverter::to_asset_balance</span>(<span class="ident">amount</span>, <span class="ident">asset_id</span>)
-			.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">XcmError::TooExpensive</span>)<span class="question-mark">?</span>;
-		<span class="prelude-val">Ok</span>(<span class="ident">asset_amount</span>)
+		<span class="kw">let </span>amount = WeightToFee::weight_to_fee(<span class="kw-2">&amp;</span>weight);
+		<span class="comment">// If the amount gotten is not at least the ED, then make it be the ED of the asset
+		// This is to avoid burning assets and decreasing the supply
+		</span><span class="kw">let </span>asset_amount = BalanceConverter::to_asset_balance(amount, asset_id)
+			.map_err(|<span class="kw">_</span>| XcmError::TooExpensive)<span class="question-mark">?</span>;
+		<span class="prelude-val">Ok</span>(asset_amount)
 	}
 }
 
-<span class="doccomment">/// Accepts an asset if it is a native asset from a particular `MultiLocation`.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ConcreteNativeAssetFrom</span><span class="op">&lt;</span><span class="ident">Location</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Location</span><span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Location</span>: <span class="ident">Get</span><span class="op">&lt;</span><span class="ident">MultiLocation</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">FilterAssetLocation</span> <span class="kw">for</span> <span class="ident">ConcreteNativeAssetFrom</span><span class="op">&lt;</span><span class="ident">Location</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">filter_asset_location</span>(<span class="ident">asset</span>: <span class="kw-2">&amp;</span><span class="ident">MultiAsset</span>, <span class="ident">origin</span>: <span class="kw-2">&amp;</span><span class="ident">MultiLocation</span>) -&gt; <span class="ident">bool</span> {
-		<span class="macro">log::trace!</span>(<span class="ident">target</span>: <span class="string">&quot;xcm::filter_asset_location&quot;</span>,
+<span class="doccomment">/// Accepts an asset if it is a native asset from a particular `MultiLocation`.
+</span><span class="kw">pub struct </span>ConcreteNativeAssetFrom&lt;Location&gt;(PhantomData&lt;Location&gt;);
+<span class="kw">impl</span>&lt;Location: Get&lt;MultiLocation&gt;&gt; FilterAssetLocation <span class="kw">for </span>ConcreteNativeAssetFrom&lt;Location&gt; {
+	<span class="kw">fn </span>filter_asset_location(asset: <span class="kw-2">&amp;</span>MultiAsset, origin: <span class="kw-2">&amp;</span>MultiLocation) -&gt; bool {
+		<span class="macro">log::trace!</span>(target: <span class="string">&quot;xcm::filter_asset_location&quot;</span>,
 			<span class="string">&quot;ConcreteNativeAsset asset: {:?}, origin: {:?}, location: {:?}&quot;</span>,
-			<span class="ident">asset</span>, <span class="ident">origin</span>, <span class="ident">Location::get</span>());
-		<span class="macro">matches!</span>(<span class="ident">asset</span>.<span class="ident">id</span>, <span class="ident">Concrete</span>(<span class="kw-2">ref</span> <span class="ident">id</span>) <span class="kw">if</span> <span class="ident">id</span> <span class="op">==</span> <span class="ident">origin</span> <span class="op">&amp;&amp;</span> <span class="ident">origin</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="ident">Location::get</span>())
+			asset, origin, Location::get());
+		<span class="macro">matches!</span>(asset.id, Concrete(<span class="kw-2">ref </span>id) <span class="kw">if </span>id == origin &amp;&amp; origin == <span class="kw-2">&amp;</span>Location::get())
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="parachains_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="parachains_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

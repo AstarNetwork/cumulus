@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/runtimes/contracts/contracts-rococo/src/contracts.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>contracts.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../contracts_rococo_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../contracts_rococo_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../contracts_rococo_runtime/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/runtimes/contracts/contracts-rococo/src/contracts.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>contracts.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../contracts_rococo_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../contracts_rococo_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../contracts_rococo_runtime/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -58,65 +58,67 @@
 <span id="58">58</span>
 <span id="59">59</span>
 <span id="60">60</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
-	<span class="ident">constants::currency::deposit</span>, <span class="ident">Balance</span>, <span class="ident">Balances</span>, <span class="ident">RandomnessCollectiveFlip</span>, <span class="ident">Runtime</span>,
-	<span class="ident">RuntimeBlockWeights</span>, <span class="ident">RuntimeCall</span>, <span class="ident">RuntimeEvent</span>, <span class="ident">Timestamp</span>,
+<span id="61">61</span>
+</pre><pre class="rust"><code><span class="kw">use crate</span>::{
+	constants::currency::deposit, Balance, Balances, RandomnessCollectiveFlip, Runtime,
+	RuntimeBlockWeights, RuntimeCall, RuntimeEvent, Timestamp,
 };
-<span class="kw">use</span> <span class="ident">frame_support</span>::{
-	<span class="ident">parameter_types</span>,
-	<span class="ident">traits</span>::{<span class="ident">ConstU32</span>, <span class="ident">Nothing</span>},
-	<span class="ident">weights::Weight</span>,
+<span class="kw">use </span>frame_support::{
+	parameter_types,
+	traits::{ConstBool, ConstU32, Nothing},
+	weights::Weight,
 };
-<span class="kw">use</span> <span class="ident">pallet_contracts</span>::{
-	<span class="ident">weights</span>::{<span class="ident">SubstrateWeight</span>, <span class="ident">WeightInfo</span>},
-	<span class="ident">Config</span>, <span class="ident">DefaultAddressGenerator</span>, <span class="ident">Frame</span>, <span class="ident">Schedule</span>,
+<span class="kw">use </span>pallet_contracts::{
+	weights::{SubstrateWeight, WeightInfo},
+	Config, DefaultAddressGenerator, Frame, Schedule,
 };
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">parachains_common::AVERAGE_ON_INITIALIZE_RATIO</span>;
+<span class="kw">pub use </span>parachains_common::AVERAGE_ON_INITIALIZE_RATIO;
 
-<span class="comment">// Prints debug output of the `contracts` pallet to stdout if the node is</span>
-<span class="comment">// started with `-lruntime::contracts=debug`.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONTRACTS_DEBUG_OUTPUT</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">true</span>;
+<span class="comment">// Prints debug output of the `contracts` pallet to stdout if the node is
+// started with `-lruntime::contracts=debug`.
+</span><span class="kw">pub const </span>CONTRACTS_DEBUG_OUTPUT: bool = <span class="bool-val">true</span>;
 
-<span class="macro">parameter_types!</span> {
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DepositPerItem</span>: <span class="ident">Balance</span> <span class="op">=</span> <span class="ident">deposit</span>(<span class="number">1</span>, <span class="number">0</span>);
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DepositPerByte</span>: <span class="ident">Balance</span> <span class="op">=</span> <span class="ident">deposit</span>(<span class="number">0</span>, <span class="number">1</span>);
-	<span class="comment">// The lazy deletion runs inside on_initialize.</span>
-	<span class="kw">pub</span> <span class="ident">DeletionWeightLimit</span>: <span class="ident">Weight</span> <span class="op">=</span> <span class="ident">AVERAGE_ON_INITIALIZE_RATIO</span> <span class="op">*</span>
-		<span class="ident">RuntimeBlockWeights::get</span>().<span class="ident">max_block</span>;
-	<span class="comment">// The weight needed for decoding the queue should be less or equal than a fifth</span>
-	<span class="comment">// of the overall weight dedicated to the lazy deletion.</span>
-	<span class="kw">pub</span> <span class="ident">DeletionQueueDepth</span>: <span class="ident">u32</span> <span class="op">=</span> ((<span class="ident">DeletionWeightLimit::get</span>().<span class="ident">ref_time</span>() <span class="op">/</span> (
-			<span class="op">&lt;</span><span class="ident">Runtime</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::WeightInfo::on_initialize_per_queue_item</span>(<span class="number">1</span>).<span class="ident">ref_time</span>() <span class="op">-</span>
-			<span class="op">&lt;</span><span class="ident">Runtime</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::WeightInfo::on_initialize_per_queue_item</span>(<span class="number">0</span>).<span class="ident">ref_time</span>()
-		)) <span class="op">/</span> <span class="number">5</span>) <span class="kw">as</span> <span class="ident">u32</span>;
-	<span class="kw">pub</span> <span class="ident">MySchedule</span>: <span class="ident">Schedule</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Default::default</span>();
+<span class="macro">parameter_types! </span>{
+	<span class="kw">pub const </span>DepositPerItem: Balance = deposit(<span class="number">1</span>, <span class="number">0</span>);
+	<span class="kw">pub const </span>DepositPerByte: Balance = deposit(<span class="number">0</span>, <span class="number">1</span>);
+	<span class="comment">// The lazy deletion runs inside on_initialize.
+	</span><span class="kw">pub </span>DeletionWeightLimit: Weight = AVERAGE_ON_INITIALIZE_RATIO *
+		RuntimeBlockWeights::get().max_block;
+	<span class="comment">// The weight needed for decoding the queue should be less or equal than a fifth
+	// of the overall weight dedicated to the lazy deletion.
+	</span><span class="kw">pub </span>DeletionQueueDepth: u32 = ((DeletionWeightLimit::get().ref_time() / (
+			&lt;Runtime <span class="kw">as </span>Config&gt;::WeightInfo::on_initialize_per_queue_item(<span class="number">1</span>).ref_time() -
+			&lt;Runtime <span class="kw">as </span>Config&gt;::WeightInfo::on_initialize_per_queue_item(<span class="number">0</span>).ref_time()
+		)) / <span class="number">5</span>) <span class="kw">as </span>u32;
+	<span class="kw">pub </span>MySchedule: Schedule&lt;Runtime&gt; = Default::default();
 }
 
-<span class="kw">impl</span> <span class="ident">Config</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-	<span class="kw">type</span> <span class="ident">Time</span> <span class="op">=</span> <span class="ident">Timestamp</span>;
-	<span class="kw">type</span> <span class="ident">Randomness</span> <span class="op">=</span> <span class="ident">RandomnessCollectiveFlip</span>;
-	<span class="kw">type</span> <span class="ident">Currency</span> <span class="op">=</span> <span class="ident">Balances</span>;
-	<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-	<span class="kw">type</span> <span class="ident">RuntimeCall</span> <span class="op">=</span> <span class="ident">RuntimeCall</span>;
-	<span class="doccomment">/// The safest default is to allow no calls at all.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Runtimes should whitelist dispatchables that are allowed to be called from contracts</span>
-	<span class="doccomment">/// and make sure they are stable. Dispatchables exposed to contracts are not allowed to</span>
-	<span class="doccomment">/// change because that would break already deployed contracts. The `Call` structure itself</span>
-	<span class="doccomment">/// is not allowed to change the indices of existing pallets, too.</span>
-	<span class="kw">type</span> <span class="ident">CallFilter</span> <span class="op">=</span> <span class="ident">Nothing</span>;
-	<span class="kw">type</span> <span class="ident">DepositPerItem</span> <span class="op">=</span> <span class="ident">DepositPerItem</span>;
-	<span class="kw">type</span> <span class="ident">DepositPerByte</span> <span class="op">=</span> <span class="ident">DepositPerByte</span>;
-	<span class="kw">type</span> <span class="ident">WeightPrice</span> <span class="op">=</span> <span class="ident">pallet_transaction_payment::Pallet</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">WeightInfo</span> <span class="op">=</span> <span class="ident">SubstrateWeight</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">ChainExtension</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">DeletionQueueDepth</span> <span class="op">=</span> <span class="ident">DeletionQueueDepth</span>;
-	<span class="kw">type</span> <span class="ident">DeletionWeightLimit</span> <span class="op">=</span> <span class="ident">DeletionWeightLimit</span>;
-	<span class="kw">type</span> <span class="ident">Schedule</span> <span class="op">=</span> <span class="ident">MySchedule</span>;
-	<span class="kw">type</span> <span class="ident">CallStack</span> <span class="op">=</span> [<span class="ident">Frame</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>; <span class="number">31</span>];
-	<span class="kw">type</span> <span class="ident">AddressGenerator</span> <span class="op">=</span> <span class="ident">DefaultAddressGenerator</span>;
-	<span class="kw">type</span> <span class="ident">MaxCodeLen</span> <span class="op">=</span> <span class="ident">ConstU32</span><span class="op">&lt;</span>{ <span class="number">128</span> <span class="op">*</span> <span class="number">1024</span> }<span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">MaxStorageKeyLen</span> <span class="op">=</span> <span class="ident">ConstU32</span><span class="op">&lt;</span><span class="number">128</span><span class="op">&gt;</span>;
+<span class="kw">impl </span>Config <span class="kw">for </span>Runtime {
+	<span class="kw">type </span>Time = Timestamp;
+	<span class="kw">type </span>Randomness = RandomnessCollectiveFlip;
+	<span class="kw">type </span>Currency = Balances;
+	<span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+	<span class="kw">type </span>RuntimeCall = RuntimeCall;
+	<span class="doccomment">/// The safest default is to allow no calls at all.
+	///
+	/// Runtimes should whitelist dispatchables that are allowed to be called from contracts
+	/// and make sure they are stable. Dispatchables exposed to contracts are not allowed to
+	/// change because that would break already deployed contracts. The `Call` structure itself
+	/// is not allowed to change the indices of existing pallets, too.
+	</span><span class="kw">type </span>CallFilter = Nothing;
+	<span class="kw">type </span>DepositPerItem = DepositPerItem;
+	<span class="kw">type </span>DepositPerByte = DepositPerByte;
+	<span class="kw">type </span>WeightPrice = pallet_transaction_payment::Pallet&lt;<span class="self">Self</span>&gt;;
+	<span class="kw">type </span>WeightInfo = SubstrateWeight&lt;<span class="self">Self</span>&gt;;
+	<span class="kw">type </span>ChainExtension = ();
+	<span class="kw">type </span>DeletionQueueDepth = DeletionQueueDepth;
+	<span class="kw">type </span>DeletionWeightLimit = DeletionWeightLimit;
+	<span class="kw">type </span>Schedule = MySchedule;
+	<span class="kw">type </span>CallStack = [Frame&lt;<span class="self">Self</span>&gt;; <span class="number">31</span>];
+	<span class="kw">type </span>AddressGenerator = DefaultAddressGenerator;
+	<span class="kw">type </span>MaxCodeLen = ConstU32&lt;{ <span class="number">128 </span>* <span class="number">1024 </span>}&gt;;
+	<span class="kw">type </span>MaxStorageKeyLen = ConstU32&lt;<span class="number">128</span>&gt;;
+	<span class="kw">type </span>UnsafeUnstableInterface = ConstBool&lt;<span class="bool-val">true</span>&gt;;
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="contracts_rococo_runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="contracts_rococo_runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

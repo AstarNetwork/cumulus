@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-minimal-node/src/blockchain_rpc_client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>blockchain_rpc_client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_minimal_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_minimal_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_minimal_node/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-minimal-node/src/blockchain_rpc_client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>blockchain_rpc_client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_minimal_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_minimal_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_minimal_node/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -461,468 +461,468 @@
 <span id="461">461</span>
 <span id="462">462</span>
 <span id="463">463</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">pin::Pin</span>, <span class="ident">str::FromStr</span>};
+</span><span class="kw">use </span>std::{pin::Pin, str::FromStr};
 
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface</span>::{<span class="ident">RelayChainError</span>, <span class="ident">RelayChainResult</span>};
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_rpc_interface::RelayChainRpcClient</span>;
-<span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">Future</span>, <span class="ident">Stream</span>, <span class="ident">StreamExt</span>};
-<span class="kw">use</span> <span class="ident">polkadot_core_primitives</span>::{<span class="ident">Block</span>, <span class="ident">BlockId</span>, <span class="ident">Hash</span>, <span class="ident">Header</span>};
-<span class="kw">use</span> <span class="ident">polkadot_overseer::RuntimeApiSubsystemClient</span>;
-<span class="kw">use</span> <span class="ident">polkadot_service</span>::{<span class="ident">AuxStore</span>, <span class="ident">HeaderBackend</span>};
-<span class="kw">use</span> <span class="ident">sc_authority_discovery::AuthorityDiscovery</span>;
+<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainError, RelayChainResult};
+<span class="kw">use </span>cumulus_relay_chain_rpc_interface::RelayChainRpcClient;
+<span class="kw">use </span>futures::{Future, Stream, StreamExt};
+<span class="kw">use </span>polkadot_core_primitives::{Block, BlockId, Hash, Header};
+<span class="kw">use </span>polkadot_overseer::RuntimeApiSubsystemClient;
+<span class="kw">use </span>polkadot_service::{AuxStore, HeaderBackend};
+<span class="kw">use </span>sc_authority_discovery::AuthorityDiscovery;
 
-<span class="kw">use</span> <span class="ident">sc_network_common::config::MultiaddrWithPeerId</span>;
-<span class="kw">use</span> <span class="ident">sp_api</span>::{<span class="ident">ApiError</span>, <span class="ident">RuntimeApiInfo</span>};
-<span class="kw">use</span> <span class="ident">sp_blockchain::Info</span>;
+<span class="kw">use </span>sc_network_common::config::MultiaddrWithPeerId;
+<span class="kw">use </span>sp_api::{ApiError, RuntimeApiInfo};
+<span class="kw">use </span>sp_blockchain::Info;
 
-<span class="kw">const</span> <span class="ident">LOG_TARGET</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;blockchain-rpc-client&quot;</span>;
+<span class="kw">const </span>LOG_TARGET: <span class="kw-2">&amp;</span>str = <span class="string">&quot;blockchain-rpc-client&quot;</span>;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BlockChainRpcClient</span> {
-	<span class="ident">rpc_client</span>: <span class="ident">RelayChainRpcClient</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>BlockChainRpcClient {
+	rpc_client: RelayChainRpcClient,
 }
 
-<span class="kw">impl</span> <span class="ident">BlockChainRpcClient</span> {
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">rpc_client</span>: <span class="ident">RelayChainRpcClient</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> { <span class="ident">rpc_client</span> }
+<span class="kw">impl </span>BlockChainRpcClient {
+	<span class="kw">pub fn </span>new(rpc_client: RelayChainRpcClient) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ rpc_client }
 	}
 
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">chain_get_header</span>(
+	<span class="kw">pub async fn </span>chain_get_header(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">hash</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Header</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_header</span>(<span class="ident">hash</span>).<span class="kw">await</span>
-	}
+		hash: <span class="prelude-ty">Option</span>&lt;Hash&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Header&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.rpc_client.chain_get_header(hash).<span class="kw">await
+	</span>}
 
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">block_get_hash</span>(
+	<span class="kw">pub async fn </span>block_get_hash(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">number</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">polkadot_service::BlockNumber</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_block_hash</span>(<span class="ident">number</span>).<span class="kw">await</span>
-	}
+		number: <span class="prelude-ty">Option</span>&lt;polkadot_service::BlockNumber&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Hash&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.rpc_client.chain_get_block_hash(number).<span class="kw">await
+	</span>}
 }
 
-<span class="comment">// Implementation required by Availability-Distribution subsystem</span>
-<span class="comment">// but never called in our case.</span>
-<span class="kw">impl</span> <span class="ident">AuxStore</span> <span class="kw">for</span> <span class="ident">BlockChainRpcClient</span> {
-	<span class="kw">fn</span> <span class="ident">insert_aux</span><span class="op">&lt;</span>
+<span class="comment">// Implementation required by Availability-Distribution subsystem
+// but never called in our case.
+</span><span class="kw">impl </span>AuxStore <span class="kw">for </span>BlockChainRpcClient {
+	<span class="kw">fn </span>insert_aux&lt;
 		<span class="lifetime">&#39;a</span>,
 		<span class="lifetime">&#39;b</span>: <span class="lifetime">&#39;a</span>,
 		<span class="lifetime">&#39;c</span>: <span class="lifetime">&#39;a</span>,
-		<span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> (<span class="kw-2">&amp;</span><span class="lifetime">&#39;c</span> [<span class="ident">u8</span>], <span class="kw-2">&amp;</span><span class="lifetime">&#39;c</span> [<span class="ident">u8</span>])<span class="op">&gt;</span>,
-		<span class="ident">D</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> [<span class="ident">u8</span>]<span class="op">&gt;</span>,
-	<span class="op">&gt;</span>(
+		I: IntoIterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;c </span>[u8], <span class="kw-2">&amp;</span><span class="lifetime">&#39;c </span>[u8])&gt;,
+		D: IntoIterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>[u8]&gt;,
+	&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">_insert</span>: <span class="ident">I</span>,
-		<span class="ident">_delete</span>: <span class="ident">D</span>,
-	) -&gt; <span class="ident">sp_blockchain::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+		_insert: I,
+		_delete: D,
+	) -&gt; sp_blockchain::Result&lt;()&gt; {
 		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
 	}
 
-	<span class="kw">fn</span> <span class="ident">get_aux</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_key</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">sp_blockchain::Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+	<span class="kw">fn </span>get_aux(<span class="kw-2">&amp;</span><span class="self">self</span>, _key: <span class="kw-2">&amp;</span>[u8]) -&gt; sp_blockchain::Result&lt;<span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;&gt; {
 		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
 	}
 }
 
-<span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
-<span class="kw">impl</span> <span class="ident">RuntimeApiSubsystemClient</span> <span class="kw">for</span> <span class="ident">BlockChainRpcClient</span> {
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validators</span>(
+<span class="attribute">#[async_trait::async_trait]
+</span><span class="kw">impl </span>RuntimeApiSubsystemClient <span class="kw">for </span>BlockChainRpcClient {
+	<span class="kw">async fn </span>validators(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::ValidatorId</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_validators</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;polkadot_primitives::v2::ValidatorId&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_validators(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validator_groups</span>(
+	<span class="kw">async fn </span>validator_groups(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
+		at: Hash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;
 		(
-			<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::ValidatorIndex</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-			<span class="ident">polkadot_primitives::v2::GroupRotationInfo</span><span class="op">&lt;</span><span class="ident">polkadot_core_primitives::BlockNumber</span><span class="op">&gt;</span>,
+			Vec&lt;Vec&lt;polkadot_primitives::v2::ValidatorIndex&gt;&gt;,
+			polkadot_primitives::v2::GroupRotationInfo&lt;polkadot_core_primitives::BlockNumber&gt;,
 		),
-		<span class="ident">sp_api::ApiError</span>,
-	<span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_validator_groups</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		sp_api::ApiError,
+	&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_validator_groups(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">availability_cores</span>(
+	<span class="kw">async fn </span>availability_cores(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-		<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::CoreState</span><span class="op">&lt;</span><span class="ident">Hash</span>, <span class="ident">polkadot_core_primitives::BlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">sp_api::ApiError</span>,
-	<span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_availability_cores</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;
+		Vec&lt;polkadot_primitives::v2::CoreState&lt;Hash, polkadot_core_primitives::BlockNumber&gt;&gt;,
+		sp_api::ApiError,
+	&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_availability_cores(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">persisted_validation_data</span>(
+	<span class="kw">async fn </span>persisted_validation_data(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">para_id</span>: <span class="ident">cumulus_primitives_core::ParaId</span>,
-		<span class="ident">assumption</span>: <span class="ident">polkadot_primitives::v2::OccupiedCoreAssumption</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-		<span class="prelude-ty">Option</span><span class="op">&lt;</span>
-			<span class="ident">cumulus_primitives_core::PersistedValidationData</span><span class="op">&lt;</span>
-				<span class="ident">Hash</span>,
-				<span class="ident">polkadot_core_primitives::BlockNumber</span>,
-			<span class="op">&gt;</span>,
-		<span class="op">&gt;</span>,
-		<span class="ident">sp_api::ApiError</span>,
-	<span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>
-			.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_persisted_validation_data</span>(<span class="ident">at</span>, <span class="ident">para_id</span>, <span class="ident">assumption</span>)
+		at: Hash,
+		para_id: cumulus_primitives_core::ParaId,
+		assumption: polkadot_primitives::v2::OccupiedCoreAssumption,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;
+		<span class="prelude-ty">Option</span>&lt;
+			cumulus_primitives_core::PersistedValidationData&lt;
+				Hash,
+				polkadot_core_primitives::BlockNumber,
+			&gt;,
+		&gt;,
+		sp_api::ApiError,
+	&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self
+			</span>.rpc_client
+			.parachain_host_persisted_validation_data(at, para_id, assumption)
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">assumed_validation_data</span>(
+	<span class="kw">async fn </span>assumed_validation_data(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">para_id</span>: <span class="ident">cumulus_primitives_core::ParaId</span>,
-		<span class="ident">expected_persisted_validation_data_hash</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-		<span class="prelude-ty">Option</span><span class="op">&lt;</span>(
-			<span class="ident">cumulus_primitives_core::PersistedValidationData</span><span class="op">&lt;</span>
-				<span class="ident">Hash</span>,
-				<span class="ident">polkadot_core_primitives::BlockNumber</span>,
-			<span class="op">&gt;</span>,
-			<span class="ident">polkadot_primitives::v2::ValidationCodeHash</span>,
-		)<span class="op">&gt;</span>,
-		<span class="ident">sp_api::ApiError</span>,
-	<span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>
-			.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_assumed_validation_data</span>(
-				<span class="ident">at</span>,
-				<span class="ident">para_id</span>,
-				<span class="ident">expected_persisted_validation_data_hash</span>,
+		at: Hash,
+		para_id: cumulus_primitives_core::ParaId,
+		expected_persisted_validation_data_hash: Hash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;
+		<span class="prelude-ty">Option</span>&lt;(
+			cumulus_primitives_core::PersistedValidationData&lt;
+				Hash,
+				polkadot_core_primitives::BlockNumber,
+			&gt;,
+			polkadot_primitives::v2::ValidationCodeHash,
+		)&gt;,
+		sp_api::ApiError,
+	&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self
+			</span>.rpc_client
+			.parachain_host_assumed_validation_data(
+				at,
+				para_id,
+				expected_persisted_validation_data_hash,
 			)
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">check_validation_outputs</span>(
+	<span class="kw">async fn </span>check_validation_outputs(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">para_id</span>: <span class="ident">cumulus_primitives_core::ParaId</span>,
-		<span class="ident">outputs</span>: <span class="ident">polkadot_primitives::v2::CandidateCommitments</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>
-			.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_check_validation_outputs</span>(<span class="ident">at</span>, <span class="ident">para_id</span>, <span class="ident">outputs</span>)
+		at: Hash,
+		para_id: cumulus_primitives_core::ParaId,
+		outputs: polkadot_primitives::v2::CandidateCommitments,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;bool, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self
+			</span>.rpc_client
+			.parachain_host_check_validation_outputs(at, para_id, outputs)
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">session_index_for_child</span>(
+	<span class="kw">async fn </span>session_index_for_child(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::SessionIndex</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_session_index_for_child</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;polkadot_primitives::v2::SessionIndex, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_session_index_for_child(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validation_code</span>(
+	<span class="kw">async fn </span>validation_code(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">para_id</span>: <span class="ident">cumulus_primitives_core::ParaId</span>,
-		<span class="ident">assumption</span>: <span class="ident">polkadot_primitives::v2::OccupiedCoreAssumption</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::ValidationCode</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_validation_code</span>(<span class="ident">at</span>, <span class="ident">para_id</span>, <span class="ident">assumption</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+		para_id: cumulus_primitives_core::ParaId,
+		assumption: polkadot_primitives::v2::OccupiedCoreAssumption,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;polkadot_primitives::v2::ValidationCode&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_validation_code(at, para_id, assumption).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">candidate_pending_availability</span>(
+	<span class="kw">async fn </span>candidate_pending_availability(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">para_id</span>: <span class="ident">cumulus_primitives_core::ParaId</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::CommittedCandidateReceipt</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span>
+		at: Hash,
+		para_id: cumulus_primitives_core::ParaId,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;polkadot_primitives::v2::CommittedCandidateReceipt&lt;Hash&gt;&gt;, sp_api::ApiError&gt;
 	{
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>
-			.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_candidate_pending_availability</span>(<span class="ident">at</span>, <span class="ident">para_id</span>)
+		<span class="prelude-val">Ok</span>(<span class="self">self
+			</span>.rpc_client
+			.parachain_host_candidate_pending_availability(at, para_id)
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">candidate_events</span>(
+	<span class="kw">async fn </span>candidate_events(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::CandidateEvent</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_candidate_events</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;polkadot_primitives::v2::CandidateEvent&lt;Hash&gt;&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_candidate_events(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">dmq_contents</span>(
+	<span class="kw">async fn </span>dmq_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">recipient</span>: <span class="ident">cumulus_primitives_core::ParaId</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-		<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">cumulus_primitives_core::InboundDownwardMessage</span><span class="op">&lt;</span><span class="ident">polkadot_core_primitives::BlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">sp_api::ApiError</span>,
-	<span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_dmq_contents</span>(<span class="ident">recipient</span>, <span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+		recipient: cumulus_primitives_core::ParaId,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;
+		Vec&lt;cumulus_primitives_core::InboundDownwardMessage&lt;polkadot_core_primitives::BlockNumber&gt;&gt;,
+		sp_api::ApiError,
+	&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_dmq_contents(recipient, at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">inbound_hrmp_channels_contents</span>(
+	<span class="kw">async fn </span>inbound_hrmp_channels_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">recipient</span>: <span class="ident">cumulus_primitives_core::ParaId</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-		<span class="ident">std::collections::BTreeMap</span><span class="op">&lt;</span>
-			<span class="ident">cumulus_primitives_core::ParaId</span>,
-			<span class="ident">Vec</span><span class="op">&lt;</span>
-				<span class="ident">polkadot_core_primitives::InboundHrmpMessage</span><span class="op">&lt;</span><span class="ident">polkadot_core_primitives::BlockNumber</span><span class="op">&gt;</span>,
-			<span class="op">&gt;</span>,
-		<span class="op">&gt;</span>,
-		<span class="ident">sp_api::ApiError</span>,
-	<span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>
-			.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_inbound_hrmp_channels_contents</span>(<span class="ident">recipient</span>, <span class="ident">at</span>)
+		at: Hash,
+		recipient: cumulus_primitives_core::ParaId,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;
+		std::collections::BTreeMap&lt;
+			cumulus_primitives_core::ParaId,
+			Vec&lt;
+				polkadot_core_primitives::InboundHrmpMessage&lt;polkadot_core_primitives::BlockNumber&gt;,
+			&gt;,
+		&gt;,
+		sp_api::ApiError,
+	&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self
+			</span>.rpc_client
+			.parachain_host_inbound_hrmp_channels_contents(recipient, at)
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validation_code_by_hash</span>(
+	<span class="kw">async fn </span>validation_code_by_hash(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">validation_code_hash</span>: <span class="ident">polkadot_primitives::v2::ValidationCodeHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::ValidationCode</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>
-			.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_validation_code_by_hash</span>(<span class="ident">at</span>, <span class="ident">validation_code_hash</span>)
+		at: Hash,
+		validation_code_hash: polkadot_primitives::v2::ValidationCodeHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;polkadot_primitives::v2::ValidationCode&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self
+			</span>.rpc_client
+			.parachain_host_validation_code_by_hash(at, validation_code_hash)
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">on_chain_votes</span>(
+	<span class="kw">async fn </span>on_chain_votes(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::ScrapedOnChainVotes</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_on_chain_votes</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;polkadot_primitives::v2::ScrapedOnChainVotes&lt;Hash&gt;&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_on_chain_votes(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">session_info</span>(
+	<span class="kw">async fn </span>session_info(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">index</span>: <span class="ident">polkadot_primitives::v2::SessionIndex</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::SessionInfo</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_session_info</span>(<span class="ident">at</span>, <span class="ident">index</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+		index: polkadot_primitives::v2::SessionIndex,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;polkadot_primitives::v2::SessionInfo&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_session_info(at, index).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">session_info_before_version_2</span>(
+	<span class="kw">async fn </span>session_info_before_version_2(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">index</span>: <span class="ident">polkadot_primitives::v2::SessionIndex</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::OldV1SessionInfo</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_session_info_before_version_2</span>(<span class="ident">at</span>, <span class="ident">index</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+		index: polkadot_primitives::v2::SessionIndex,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;polkadot_primitives::v2::OldV1SessionInfo&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_session_info_before_version_2(at, index).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">submit_pvf_check_statement</span>(
+	<span class="kw">async fn </span>submit_pvf_check_statement(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">stmt</span>: <span class="ident">polkadot_primitives::v2::PvfCheckStatement</span>,
-		<span class="ident">signature</span>: <span class="ident">polkadot_primitives::v2::ValidatorSignature</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>
-			.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_submit_pvf_check_statement</span>(<span class="ident">at</span>, <span class="ident">stmt</span>, <span class="ident">signature</span>)
+		at: Hash,
+		stmt: polkadot_primitives::v2::PvfCheckStatement,
+		signature: polkadot_primitives::v2::ValidatorSignature,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(), sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self
+			</span>.rpc_client
+			.parachain_host_submit_pvf_check_statement(at, stmt, signature)
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">pvfs_require_precheck</span>(
+	<span class="kw">async fn </span>pvfs_require_precheck(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::ValidationCodeHash</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_pvfs_require_precheck</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;polkadot_primitives::v2::ValidationCodeHash&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_pvfs_require_precheck(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validation_code_hash</span>(
+	<span class="kw">async fn </span>validation_code_hash(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-		<span class="ident">para_id</span>: <span class="ident">cumulus_primitives_core::ParaId</span>,
-		<span class="ident">assumption</span>: <span class="ident">polkadot_primitives::v2::OccupiedCoreAssumption</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::ValidationCodeHash</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>
-			.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_validation_code_hash</span>(<span class="ident">at</span>, <span class="ident">para_id</span>, <span class="ident">assumption</span>)
+		at: Hash,
+		para_id: cumulus_primitives_core::ParaId,
+		assumption: polkadot_primitives::v2::OccupiedCoreAssumption,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;polkadot_primitives::v2::ValidationCodeHash&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self
+			</span>.rpc_client
+			.parachain_host_validation_code_hash(at, para_id, assumption)
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">current_epoch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">Hash</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">sp_consensus_babe::Epoch</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">babe_api_current_epoch</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+	<span class="kw">async fn </span>current_epoch(<span class="kw-2">&amp;</span><span class="self">self</span>, at: Hash) -&gt; <span class="prelude-ty">Result</span>&lt;sp_consensus_babe::Epoch, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.babe_api_current_epoch(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">authorities</span>(
+	<span class="kw">async fn </span>authorities(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="ident">std::result::Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AuthorityDiscoveryId</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">authority_discovery_authorities</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+	) -&gt; std::result::Result&lt;Vec&lt;polkadot_primitives::v2::AuthorityDiscoveryId&gt;, sp_api::ApiError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.authority_discovery_authorities(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">api_version_parachain_host</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">Hash</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">api_id</span> <span class="op">=</span> <span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">polkadot_primitives::runtime_api::ParachainHost</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::ID</span>;
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">runtime_version</span>(<span class="ident">at</span>).<span class="kw">await</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">api_version</span>(<span class="kw-2">&amp;</span><span class="ident">api_id</span>))<span class="question-mark">?</span>)
+	<span class="kw">async fn </span>api_version_parachain_host(<span class="kw-2">&amp;</span><span class="self">self</span>, at: Hash) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;u32&gt;, sp_api::ApiError&gt; {
+		<span class="kw">let </span>api_id = &lt;<span class="kw">dyn </span>polkadot_primitives::runtime_api::ParachainHost&lt;Block&gt;&gt;::ID;
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.runtime_version(at).<span class="kw">await</span>.map(|v| v.api_version(<span class="kw-2">&amp;</span>api_id))<span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">disputes</span>(
+	<span class="kw">async fn </span>disputes(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-		<span class="ident">Vec</span><span class="op">&lt;</span>(
-			<span class="ident">polkadot_primitives::v2::SessionIndex</span>,
-			<span class="ident">polkadot_primitives::v2::CandidateHash</span>,
-			<span class="ident">polkadot_primitives::v2::DisputeState</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::BlockNumber</span><span class="op">&gt;</span>,
-		)<span class="op">&gt;</span>,
-		<span class="ident">ApiError</span>,
-	<span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_staging_get_disputes</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>)
+		at: Hash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;
+		Vec&lt;(
+			polkadot_primitives::v2::SessionIndex,
+			polkadot_primitives::v2::CandidateHash,
+			polkadot_primitives::v2::DisputeState&lt;polkadot_primitives::v2::BlockNumber&gt;,
+		)&gt;,
+		ApiError,
+	&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.parachain_host_staging_get_disputes(at).<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 }
 
-<span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
-<span class="kw">impl</span> <span class="ident">AuthorityDiscovery</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BlockChainRpcClient</span> {
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">authorities</span>(
+<span class="attribute">#[async_trait::async_trait]
+</span><span class="kw">impl </span>AuthorityDiscovery&lt;Block&gt; <span class="kw">for </span>BlockChainRpcClient {
+	<span class="kw">async fn </span>authorities(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">Hash</span>,
-	) -&gt; <span class="ident">std::result::Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AuthorityDiscoveryId</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">authority_discovery_authorities</span>(<span class="ident">at</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-		<span class="prelude-val">Ok</span>(<span class="ident">result</span>)
+		at: Hash,
+	) -&gt; std::result::Result&lt;Vec&lt;polkadot_primitives::v2::AuthorityDiscoveryId&gt;, sp_api::ApiError&gt; {
+		<span class="kw">let </span>result = <span class="self">self</span>.rpc_client.authority_discovery_authorities(at).<span class="kw">await</span><span class="question-mark">?</span>;
+		<span class="prelude-val">Ok</span>(result)
 	}
 }
 
-<span class="kw">impl</span> <span class="ident">BlockChainRpcClient</span> {
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">local_listen_addresses</span>(
+<span class="kw">impl </span>BlockChainRpcClient {
+	<span class="kw">pub async fn </span>local_listen_addresses(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MultiaddrWithPeerId</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">addresses</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">system_local_listen_addresses</span>().<span class="kw">await</span><span class="question-mark">?</span>;
-		<span class="macro">tracing::debug!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="question-mark">?</span><span class="ident">addresses</span>, <span class="string">&quot;Fetched listen address from RPC node.&quot;</span>);
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;MultiaddrWithPeerId&gt;, RelayChainError&gt; {
+		<span class="kw">let </span>addresses = <span class="self">self</span>.rpc_client.system_local_listen_addresses().<span class="kw">await</span><span class="question-mark">?</span>;
+		<span class="macro">tracing::debug!</span>(target: LOG_TARGET, <span class="question-mark">?</span>addresses, <span class="string">&quot;Fetched listen address from RPC node.&quot;</span>);
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result_vec</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-		<span class="kw">for</span> <span class="ident">address</span> <span class="kw">in</span> <span class="ident">addresses</span> {
-			<span class="kw">match</span> <span class="ident">MultiaddrWithPeerId::from_str</span>(<span class="kw-2">&amp;</span><span class="ident">address</span>) {
-				<span class="prelude-val">Ok</span>(<span class="ident">addr</span>) =&gt; <span class="ident">result_vec</span>.<span class="ident">push</span>(<span class="ident">addr</span>),
-				<span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt;
-					<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RelayChainError::GenericError</span>(<span class="macro">format!</span>(
+		<span class="kw">let </span><span class="kw-2">mut </span>result_vec = Vec::new();
+		<span class="kw">for </span>address <span class="kw">in </span>addresses {
+			<span class="kw">match </span>MultiaddrWithPeerId::from_str(<span class="kw-2">&amp;</span>address) {
+				<span class="prelude-val">Ok</span>(addr) =&gt; result_vec.push(addr),
+				<span class="prelude-val">Err</span>(err) =&gt;
+					<span class="kw">return </span><span class="prelude-val">Err</span>(RelayChainError::GenericError(<span class="macro">format!</span>(
 						<span class="string">&quot;Failed to parse a local listen addresses from the RPC node: {}&quot;</span>,
-						<span class="ident">err</span>
+						err
 					))),
 			}
 		}
 
-		<span class="prelude-val">Ok</span>(<span class="ident">result_vec</span>)
+		<span class="prelude-val">Ok</span>(result_vec)
 	}
 
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">import_notification_stream</span>(
+	<span class="kw">pub async fn </span>import_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Header</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">get_imported_heads_stream</span>().<span class="kw">await</span><span class="question-mark">?</span>.<span class="ident">boxed</span>())
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = Header&gt; + Send&gt;&gt;&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.get_imported_heads_stream().<span class="kw">await</span><span class="question-mark">?</span>.boxed())
 	}
 
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">finality_notification_stream</span>(
+	<span class="kw">pub async fn </span>finality_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Header</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">get_finalized_heads_stream</span>().<span class="kw">await</span><span class="question-mark">?</span>.<span class="ident">boxed</span>())
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = Header&gt; + Send&gt;&gt;&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.rpc_client.get_finalized_heads_stream().<span class="kw">await</span><span class="question-mark">?</span>.boxed())
 	}
 }
 
-<span class="kw">fn</span> <span class="ident">block_local</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">fut</span>: <span class="kw">impl</span> <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">T</span> {
-	<span class="kw">let</span> <span class="ident">tokio_handle</span> <span class="op">=</span> <span class="ident">tokio::runtime::Handle::current</span>();
-	<span class="ident">tokio::task::block_in_place</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">tokio_handle</span>.<span class="ident">block_on</span>(<span class="ident">fut</span>))
+<span class="kw">fn </span>block_local&lt;T&gt;(fut: <span class="kw">impl </span>Future&lt;Output = T&gt;) -&gt; T {
+	<span class="kw">let </span>tokio_handle = tokio::runtime::Handle::current();
+	tokio::task::block_in_place(|| tokio_handle.block_on(fut))
 }
 
-<span class="kw">impl</span> <span class="ident">HeaderBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BlockChainRpcClient</span> {
-	<span class="kw">fn</span> <span class="ident">header</span>(
+<span class="kw">impl </span>HeaderBackend&lt;Block&gt; <span class="kw">for </span>BlockChainRpcClient {
+	<span class="kw">fn </span>header(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">id</span>: <span class="ident">BlockId</span>,
-	) -&gt; <span class="ident">sp_blockchain::Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">polkadot_service::BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">fetch_header</span> <span class="op">=</span> <span class="op">|</span><span class="ident">hash</span><span class="op">|</span> <span class="ident">block_local</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_header</span>(<span class="prelude-val">Some</span>(<span class="ident">hash</span>)));
+		id: BlockId,
+	) -&gt; sp_blockchain::Result&lt;<span class="prelude-ty">Option</span>&lt;&lt;Block <span class="kw">as </span>polkadot_service::BlockT&gt;::Header&gt;&gt; {
+		<span class="kw">let </span>fetch_header = |hash| block_local(<span class="self">self</span>.rpc_client.chain_get_header(<span class="prelude-val">Some</span>(hash)));
 
-		<span class="kw">match</span> <span class="ident">id</span> {
-			<span class="ident">BlockId::Hash</span>(<span class="ident">hash</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="ident">fetch_header</span>(<span class="ident">hash</span>)<span class="question-mark">?</span>),
-			<span class="ident">BlockId::Number</span>(<span class="ident">number</span>) =&gt; {
-				<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">hash</span>) <span class="op">=</span> <span class="ident">HeaderBackend</span>::<span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="ident">::hash</span>(<span class="self">self</span>, <span class="ident">number</span>)<span class="question-mark">?</span> {
-					<span class="prelude-val">Ok</span>(<span class="ident">fetch_header</span>(<span class="ident">hash</span>)<span class="question-mark">?</span>)
-				} <span class="kw">else</span> {
+		<span class="kw">match </span>id {
+			BlockId::Hash(hash) =&gt; <span class="prelude-val">Ok</span>(fetch_header(hash)<span class="question-mark">?</span>),
+			BlockId::Number(number) =&gt; {
+				<span class="kw">if let </span><span class="prelude-val">Some</span>(hash) = HeaderBackend::&lt;Block&gt;::hash(<span class="self">self</span>, number)<span class="question-mark">? </span>{
+					<span class="prelude-val">Ok</span>(fetch_header(hash)<span class="question-mark">?</span>)
+				} <span class="kw">else </span>{
 					<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
 				}
 			},
 		}
 	}
 
-	<span class="kw">fn</span> <span class="ident">info</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Info</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">best_header</span> <span class="op">=</span> <span class="ident">block_local</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_header</span>(<span class="prelude-val">None</span>))
-			.<span class="ident">expect</span>(<span class="string">&quot;Unable to get header from relay chain.&quot;</span>)
-			.<span class="ident">unwrap</span>();
-		<span class="kw">let</span> <span class="ident">genesis_hash</span> <span class="op">=</span> <span class="ident">block_local</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_head</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>)))
-			.<span class="ident">expect</span>(<span class="string">&quot;Unable to get header from relay chain.&quot;</span>);
-		<span class="kw">let</span> <span class="ident">finalized_head</span> <span class="op">=</span> <span class="ident">block_local</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_finalized_head</span>())
-			.<span class="ident">expect</span>(<span class="string">&quot;Unable to get finalized head from relay chain.&quot;</span>);
-		<span class="kw">let</span> <span class="ident">finalized_header</span> <span class="op">=</span> <span class="ident">block_local</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_header</span>(<span class="prelude-val">Some</span>(<span class="ident">finalized_head</span>)))
-			.<span class="ident">expect</span>(<span class="string">&quot;Unable to get finalized header from relay chain.&quot;</span>)
-			.<span class="ident">unwrap</span>();
-		<span class="ident">Info</span> {
-			<span class="ident">best_hash</span>: <span class="ident">best_header</span>.<span class="ident">hash</span>(),
-			<span class="ident">best_number</span>: <span class="ident">best_header</span>.<span class="ident">number</span>,
-			<span class="ident">genesis_hash</span>,
-			<span class="ident">finalized_hash</span>: <span class="ident">finalized_head</span>,
-			<span class="ident">finalized_number</span>: <span class="ident">finalized_header</span>.<span class="ident">number</span>,
-			<span class="ident">finalized_state</span>: <span class="prelude-val">None</span>,
-			<span class="ident">number_leaves</span>: <span class="number">1</span>,
-			<span class="ident">block_gap</span>: <span class="prelude-val">None</span>,
+	<span class="kw">fn </span>info(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Info&lt;Block&gt; {
+		<span class="kw">let </span>best_header = block_local(<span class="self">self</span>.rpc_client.chain_get_header(<span class="prelude-val">None</span>))
+			.expect(<span class="string">&quot;Unable to get header from relay chain.&quot;</span>)
+			.unwrap();
+		<span class="kw">let </span>genesis_hash = block_local(<span class="self">self</span>.rpc_client.chain_get_head(<span class="prelude-val">Some</span>(<span class="number">0</span>)))
+			.expect(<span class="string">&quot;Unable to get header from relay chain.&quot;</span>);
+		<span class="kw">let </span>finalized_head = block_local(<span class="self">self</span>.rpc_client.chain_get_finalized_head())
+			.expect(<span class="string">&quot;Unable to get finalized head from relay chain.&quot;</span>);
+		<span class="kw">let </span>finalized_header = block_local(<span class="self">self</span>.rpc_client.chain_get_header(<span class="prelude-val">Some</span>(finalized_head)))
+			.expect(<span class="string">&quot;Unable to get finalized header from relay chain.&quot;</span>)
+			.unwrap();
+		Info {
+			best_hash: best_header.hash(),
+			best_number: best_header.number,
+			genesis_hash,
+			finalized_hash: finalized_head,
+			finalized_number: finalized_header.number,
+			finalized_state: <span class="prelude-val">None</span>,
+			number_leaves: <span class="number">1</span>,
+			block_gap: <span class="prelude-val">None</span>,
 		}
 	}
 
-	<span class="kw">fn</span> <span class="ident">status</span>(
+	<span class="kw">fn </span>status(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">id</span>: <span class="ident">sp_api::BlockId</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">sp_blockchain::Result</span><span class="op">&lt;</span><span class="ident">sp_blockchain::BlockStatus</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">exists</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">id</span> {
-			<span class="ident">BlockId::Hash</span>(<span class="kw">_</span>) =&gt; <span class="self">self</span>.<span class="ident">header</span>(<span class="ident">id</span>)<span class="question-mark">?</span>.<span class="ident">is_some</span>(),
-			<span class="ident">BlockId::Number</span>(<span class="ident">n</span>) =&gt; {
-				<span class="kw">let</span> <span class="ident">best_header</span> <span class="op">=</span> <span class="ident">block_local</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_header</span>(<span class="prelude-val">None</span>))<span class="question-mark">?</span>;
-				<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">best</span>) <span class="op">=</span> <span class="ident">best_header</span> {
-					<span class="ident">n</span> <span class="op">&lt;</span> <span class="ident">best</span>.<span class="ident">number</span>
-				} <span class="kw">else</span> {
-					<span class="bool-val">false</span>
-				}
+		id: sp_api::BlockId&lt;Block&gt;,
+	) -&gt; sp_blockchain::Result&lt;sp_blockchain::BlockStatus&gt; {
+		<span class="kw">let </span>exists = <span class="kw">match </span>id {
+			BlockId::Hash(<span class="kw">_</span>) =&gt; <span class="self">self</span>.header(id)<span class="question-mark">?</span>.is_some(),
+			BlockId::Number(n) =&gt; {
+				<span class="kw">let </span>best_header = block_local(<span class="self">self</span>.rpc_client.chain_get_header(<span class="prelude-val">None</span>))<span class="question-mark">?</span>;
+				<span class="kw">if let </span><span class="prelude-val">Some</span>(best) = best_header {
+					n &lt; best.number
+				} <span class="kw">else </span>{
+					<span class="bool-val">false
+				</span>}
 			},
 		};
 
-		<span class="kw">if</span> <span class="ident">exists</span> {
-			<span class="prelude-val">Ok</span>(<span class="ident">sc_client_api::blockchain::BlockStatus::InChain</span>)
-		} <span class="kw">else</span> {
-			<span class="prelude-val">Ok</span>(<span class="ident">sc_client_api::blockchain::BlockStatus::Unknown</span>)
+		<span class="kw">if </span>exists {
+			<span class="prelude-val">Ok</span>(sc_client_api::blockchain::BlockStatus::InChain)
+		} <span class="kw">else </span>{
+			<span class="prelude-val">Ok</span>(sc_client_api::blockchain::BlockStatus::Unknown)
 		}
 	}
 
-	<span class="kw">fn</span> <span class="ident">number</span>(
+	<span class="kw">fn </span>number(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">hash</span>: <span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">polkadot_service::BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-	) -&gt; <span class="ident">sp_blockchain::Result</span><span class="op">&lt;</span>
-		<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">polkadot_service::BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span> <span class="kw">as</span> <span class="ident">polkadot_service::HeaderT</span><span class="op">&gt;</span><span class="ident">::Number</span><span class="op">&gt;</span>,
-	<span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">block_local</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_header</span>(<span class="prelude-val">Some</span>(<span class="ident">hash</span>)))<span class="question-mark">?</span>
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">maybe_header</span><span class="op">|</span> <span class="ident">maybe_header</span>.<span class="ident">number</span>);
-		<span class="prelude-val">Ok</span>(<span class="ident">result</span>)
+		hash: &lt;Block <span class="kw">as </span>polkadot_service::BlockT&gt;::Hash,
+	) -&gt; sp_blockchain::Result&lt;
+		<span class="prelude-ty">Option</span>&lt;&lt;&lt;Block <span class="kw">as </span>polkadot_service::BlockT&gt;::Header <span class="kw">as </span>polkadot_service::HeaderT&gt;::Number&gt;,
+	&gt; {
+		<span class="kw">let </span>result = block_local(<span class="self">self</span>.rpc_client.chain_get_header(<span class="prelude-val">Some</span>(hash)))<span class="question-mark">?
+			</span>.map(|maybe_header| maybe_header.number);
+		<span class="prelude-val">Ok</span>(result)
 	}
 
-	<span class="kw">fn</span> <span class="ident">hash</span>(
+	<span class="kw">fn </span>hash(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">number</span>: <span class="ident">polkadot_service::NumberFor</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">sp_blockchain::Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">polkadot_service::BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="ident">block_local</span>(<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_block_hash</span>(<span class="ident">number</span>.<span class="ident">into</span>()))<span class="question-mark">?</span>)
+		number: polkadot_service::NumberFor&lt;Block&gt;,
+	) -&gt; sp_blockchain::Result&lt;<span class="prelude-ty">Option</span>&lt;&lt;Block <span class="kw">as </span>polkadot_service::BlockT&gt;::Hash&gt;&gt; {
+		<span class="prelude-val">Ok</span>(block_local(<span class="self">self</span>.rpc_client.chain_get_block_hash(number.into()))<span class="question-mark">?</span>)
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_minimal_node" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_minimal_node" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

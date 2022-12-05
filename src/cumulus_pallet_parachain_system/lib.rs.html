@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/parachain-system/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_parachain_system/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/parachain-system/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_parachain_system/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -1124,1131 +1124,1133 @@
 <span id="1124">1124</span>
 <span id="1125">1125</span>
 <span id="1126">1126</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2020 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+<span id="1127">1127</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2020 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
+</span><span class="attribute">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
 
-<span class="doccomment">//! cumulus-pallet-parachain-system is a base pallet for cumulus-based parachains.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This pallet handles low-level details of being a parachain. It&#39;s responsibilities include:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! - ingestion of the parachain validation data</span>
-<span class="doccomment">//! - ingestion of incoming downward and lateral messages and dispatching them</span>
-<span class="doccomment">//! - coordinating upgrades with the relay-chain</span>
-<span class="doccomment">//! - communication of parachain outputs, such as sent messages, signalling an upgrade, etc.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Users must ensure that they register this pallet as an inherent provider.</span>
+</span><span class="doccomment">//! cumulus-pallet-parachain-system is a base pallet for cumulus-based parachains.
+//!
+//! This pallet handles low-level details of being a parachain. It&#39;s responsibilities include:
+//!
+//! - ingestion of the parachain validation data
+//! - ingestion of incoming downward and lateral messages and dispatching them
+//! - coordinating upgrades with the relay-chain
+//! - communication of parachain outputs, such as sent messages, signalling an upgrade, etc.
+//!
+//! Users must ensure that they register this pallet as an inherent provider.
 
-<span class="kw">use</span> <span class="ident">codec::Encode</span>;
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{
-	<span class="ident">relay_chain</span>, <span class="ident">AbridgedHostConfiguration</span>, <span class="ident">ChannelStatus</span>, <span class="ident">CollationInfo</span>, <span class="ident">DmpMessageHandler</span>,
-	<span class="ident">GetChannelInfo</span>, <span class="ident">InboundDownwardMessage</span>, <span class="ident">InboundHrmpMessage</span>, <span class="ident">MessageSendError</span>,
-	<span class="ident">OutboundHrmpMessage</span>, <span class="ident">ParaId</span>, <span class="ident">PersistedValidationData</span>, <span class="ident">UpwardMessage</span>, <span class="ident">UpwardMessageSender</span>,
-	<span class="ident">XcmpMessageHandler</span>, <span class="ident">XcmpMessageSource</span>,
+</span><span class="kw">use </span>codec::Encode;
+<span class="kw">use </span>cumulus_primitives_core::{
+	relay_chain, AbridgedHostConfiguration, ChannelStatus, CollationInfo, DmpMessageHandler,
+	GetChannelInfo, InboundDownwardMessage, InboundHrmpMessage, MessageSendError,
+	OutboundHrmpMessage, ParaId, PersistedValidationData, UpwardMessage, UpwardMessageSender,
+	XcmpMessageHandler, XcmpMessageSource,
 };
-<span class="kw">use</span> <span class="ident">cumulus_primitives_parachain_inherent</span>::{<span class="ident">MessageQueueChain</span>, <span class="ident">ParachainInherentData</span>};
-<span class="kw">use</span> <span class="ident">frame_support</span>::{
-	<span class="ident">dispatch</span>::{<span class="ident">DispatchError</span>, <span class="ident">DispatchResult</span>, <span class="ident">Pays</span>, <span class="ident">PostDispatchInfo</span>},
-	<span class="ident">ensure</span>,
-	<span class="ident">inherent</span>::{<span class="ident">InherentData</span>, <span class="ident">InherentIdentifier</span>, <span class="ident">ProvideInherent</span>},
-	<span class="ident">storage</span>,
-	<span class="ident">traits::Get</span>,
-	<span class="ident">weights::Weight</span>,
+<span class="kw">use </span>cumulus_primitives_parachain_inherent::{MessageQueueChain, ParachainInherentData};
+<span class="kw">use </span>frame_support::{
+	dispatch::{DispatchError, DispatchResult, Pays, PostDispatchInfo},
+	ensure,
+	inherent::{InherentData, InherentIdentifier, ProvideInherent},
+	storage,
+	traits::Get,
+	weights::Weight,
 };
-<span class="kw">use</span> <span class="ident">frame_system</span>::{<span class="ident">ensure_none</span>, <span class="ident">ensure_root</span>};
-<span class="kw">use</span> <span class="ident">polkadot_parachain::primitives::RelayChainBlockNumber</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{
-	<span class="ident">traits</span>::{<span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>, <span class="ident">BlockNumberProvider</span>, <span class="ident">Hash</span>},
-	<span class="ident">transaction_validity</span>::{
-		<span class="ident">InvalidTransaction</span>, <span class="ident">TransactionLongevity</span>, <span class="ident">TransactionSource</span>, <span class="ident">TransactionValidity</span>,
-		<span class="ident">ValidTransaction</span>,
+<span class="kw">use </span>frame_system::{ensure_none, ensure_root};
+<span class="kw">use </span>polkadot_parachain::primitives::RelayChainBlockNumber;
+<span class="kw">use </span>sp_runtime::{
+	traits::{Block <span class="kw">as </span>BlockT, BlockNumberProvider, Hash},
+	transaction_validity::{
+		InvalidTransaction, TransactionLongevity, TransactionSource, TransactionValidity,
+		ValidTransaction,
 	},
 };
-<span class="kw">use</span> <span class="ident">sp_std</span>::{<span class="ident">cmp</span>, <span class="ident">collections::btree_map::BTreeMap</span>, <span class="ident">prelude</span>::<span class="kw-2">*</span>};
+<span class="kw">use </span>sp_std::{cmp, collections::btree_map::BTreeMap, prelude::<span class="kw-2">*</span>};
 
-<span class="kw">mod</span> <span class="ident">migration</span>;
-<span class="kw">mod</span> <span class="ident">relay_state_snapshot</span>;
-<span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">validate_block</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span>;
+<span class="kw">mod </span>migration;
+<span class="kw">mod </span>relay_state_snapshot;
+<span class="attribute">#[macro_use]
+</span><span class="kw">pub mod </span>validate_block;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests;
 
-<span class="doccomment">/// Register the `validate_block` function that is used by parachains to validate blocks on a</span>
-<span class="doccomment">/// validator.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Does *nothing* when `std` feature is enabled.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Expects as parameters the runtime, a block executor and an inherent checker.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Example</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">///     struct BlockExecutor;</span>
-<span class="doccomment">///     struct Runtime;</span>
-<span class="doccomment">///     struct CheckInherents;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     cumulus_pallet_parachain_system::register_validate_block! {</span>
-<span class="doccomment">///         Runtime = Runtime,</span>
-<span class="doccomment">///         BlockExecutor = Executive,</span>
-<span class="doccomment">///         CheckInherents = CheckInherents,</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # fn main() {}</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cumulus_pallet_parachain_system_proc_macro::register_validate_block</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">relay_state_snapshot</span>::{<span class="ident">MessagingStateSnapshot</span>, <span class="ident">RelayChainStateProof</span>};
+<span class="doccomment">/// Register the `validate_block` function that is used by parachains to validate blocks on a
+/// validator.
+///
+/// Does *nothing* when `std` feature is enabled.
+///
+/// Expects as parameters the runtime, a block executor and an inherent checker.
+///
+/// # Example
+///
+/// ```
+///     struct BlockExecutor;
+///     struct Runtime;
+///     struct CheckInherents;
+///
+///     cumulus_pallet_parachain_system::register_validate_block! {
+///         Runtime = Runtime,
+///         BlockExecutor = Executive,
+///         CheckInherents = CheckInherents,
+///     }
+///
+/// # fn main() {}
+/// ```
+</span><span class="kw">pub use </span>cumulus_pallet_parachain_system_proc_macro::register_validate_block;
+<span class="kw">pub use </span>relay_state_snapshot::{MessagingStateSnapshot, RelayChainStateProof};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">pallet</span>::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>pallet::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// Something that can check the associated relay block number.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Each Parachain block is built in the context of a relay chain block, this trait allows us</span>
-<span class="doccomment">/// to validate the given relay chain block number. With async backing it is legal to build</span>
-<span class="doccomment">/// multiple Parachain blocks per relay chain parent. With this trait it is possible for the</span>
-<span class="doccomment">/// Parachain to ensure that still only one Parachain block is build per relay chain parent.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// By default [`RelayNumberStrictlyIncreases`] and [`AnyRelayNumber`] are provided.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CheckAssociatedRelayNumber</span> {
-	<span class="doccomment">/// Check the current relay number versus the previous relay number.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The implementation should panic when there is something wrong.</span>
-	<span class="kw">fn</span> <span class="ident">check_associated_relay_number</span>(
-		<span class="ident">current</span>: <span class="ident">RelayChainBlockNumber</span>,
-		<span class="ident">previous</span>: <span class="ident">RelayChainBlockNumber</span>,
+<span class="doccomment">/// Something that can check the associated relay block number.
+///
+/// Each Parachain block is built in the context of a relay chain block, this trait allows us
+/// to validate the given relay chain block number. With async backing it is legal to build
+/// multiple Parachain blocks per relay chain parent. With this trait it is possible for the
+/// Parachain to ensure that still only one Parachain block is build per relay chain parent.
+///
+/// By default [`RelayNumberStrictlyIncreases`] and [`AnyRelayNumber`] are provided.
+</span><span class="kw">pub trait </span>CheckAssociatedRelayNumber {
+	<span class="doccomment">/// Check the current relay number versus the previous relay number.
+	///
+	/// The implementation should panic when there is something wrong.
+	</span><span class="kw">fn </span>check_associated_relay_number(
+		current: RelayChainBlockNumber,
+		previous: RelayChainBlockNumber,
 	);
 }
 
-<span class="doccomment">/// Provides an implementation of [`CheckAssociatedRelayNumber`].</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// It will ensure that the associated relay block number strictly increases between Parachain</span>
-<span class="doccomment">/// blocks. This should be used by production Parachains when in doubt.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RelayNumberStrictlyIncreases</span>;
+<span class="doccomment">/// Provides an implementation of [`CheckAssociatedRelayNumber`].
+///
+/// It will ensure that the associated relay block number strictly increases between Parachain
+/// blocks. This should be used by production Parachains when in doubt.
+</span><span class="kw">pub struct </span>RelayNumberStrictlyIncreases;
 
-<span class="kw">impl</span> <span class="ident">CheckAssociatedRelayNumber</span> <span class="kw">for</span> <span class="ident">RelayNumberStrictlyIncreases</span> {
-	<span class="kw">fn</span> <span class="ident">check_associated_relay_number</span>(
-		<span class="ident">current</span>: <span class="ident">RelayChainBlockNumber</span>,
-		<span class="ident">previous</span>: <span class="ident">RelayChainBlockNumber</span>,
+<span class="kw">impl </span>CheckAssociatedRelayNumber <span class="kw">for </span>RelayNumberStrictlyIncreases {
+	<span class="kw">fn </span>check_associated_relay_number(
+		current: RelayChainBlockNumber,
+		previous: RelayChainBlockNumber,
 	) {
-		<span class="kw">if</span> <span class="ident">current</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">previous</span> {
+		<span class="kw">if </span>current &lt;= previous {
 			<span class="macro">panic!</span>(<span class="string">&quot;Relay chain block number needs to strictly increase between Parachain blocks!&quot;</span>)
 		}
 	}
 }
 
-<span class="doccomment">/// Provides an implementation of [`CheckAssociatedRelayNumber`].</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This will accept any relay chain block number combination. This is mainly useful for</span>
-<span class="doccomment">/// test parachains.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AnyRelayNumber</span>;
+<span class="doccomment">/// Provides an implementation of [`CheckAssociatedRelayNumber`].
+///
+/// This will accept any relay chain block number combination. This is mainly useful for
+/// test parachains.
+</span><span class="kw">pub struct </span>AnyRelayNumber;
 
-<span class="kw">impl</span> <span class="ident">CheckAssociatedRelayNumber</span> <span class="kw">for</span> <span class="ident">AnyRelayNumber</span> {
-	<span class="kw">fn</span> <span class="ident">check_associated_relay_number</span>(<span class="kw">_</span>: <span class="ident">RelayChainBlockNumber</span>, <span class="kw">_</span>: <span class="ident">RelayChainBlockNumber</span>) {}
+<span class="kw">impl </span>CheckAssociatedRelayNumber <span class="kw">for </span>AnyRelayNumber {
+	<span class="kw">fn </span>check_associated_relay_number(<span class="kw">_</span>: RelayChainBlockNumber, <span class="kw">_</span>: RelayChainBlockNumber) {}
 }
 
-<span class="attribute">#[<span class="ident">frame_support::pallet</span>]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">pallet</span> {
-	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">frame_support::pallet_prelude</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">frame_system::pallet_prelude</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[frame_support::pallet]
+</span><span class="kw">pub mod </span>pallet {
+	<span class="kw">use super</span>::<span class="kw-2">*</span>;
+	<span class="kw">use </span>frame_support::pallet_prelude::<span class="kw-2">*</span>;
+	<span class="kw">use </span>frame_system::pallet_prelude::<span class="kw-2">*</span>;
 
-	<span class="attribute">#[<span class="ident">pallet::pallet</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::storage_version</span>(<span class="ident">migration::STORAGE_VERSION</span>)]</span>
-	<span class="attribute">#[<span class="ident">pallet::without_storage_info</span>]</span>
-	<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw">_</span>);
+	<span class="attribute">#[pallet::pallet]
+	#[pallet::storage_version(migration::STORAGE_VERSION)]
+	#[pallet::generate_store(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">trait </span>Store)]
+	#[pallet::without_storage_info]
+	</span><span class="kw">pub struct </span>Pallet&lt;T&gt;(<span class="kw">_</span>);
 
-	<span class="attribute">#[<span class="ident">pallet::config</span>]</span>
-	<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Config</span>: <span class="ident">frame_system::Config</span><span class="op">&lt;</span><span class="ident">OnSetCode</span> <span class="op">=</span> <span class="ident">ParachainSetCode</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// The overarching event type.</span>
-		<span class="kw">type</span> <span class="ident">RuntimeEvent</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IsType</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::RuntimeEvent</span><span class="op">&gt;</span>;
+	<span class="attribute">#[pallet::config]
+	</span><span class="kw">pub trait </span>Config: frame_system::Config&lt;OnSetCode = ParachainSetCode&lt;<span class="self">Self</span>&gt;&gt; {
+		<span class="doccomment">/// The overarching event type.
+		</span><span class="kw">type </span>RuntimeEvent: From&lt;Event&lt;<span class="self">Self</span>&gt;&gt; + IsType&lt;&lt;<span class="self">Self </span><span class="kw">as </span>frame_system::Config&gt;::RuntimeEvent&gt;;
 
-		<span class="doccomment">/// Something which can be notified when the validation data is set.</span>
-		<span class="kw">type</span> <span class="ident">OnSystemEvent</span>: <span class="ident">OnSystemEvent</span>;
+		<span class="doccomment">/// Something which can be notified when the validation data is set.
+		</span><span class="kw">type </span>OnSystemEvent: OnSystemEvent;
 
-		<span class="doccomment">/// Returns the parachain ID we are running with.</span>
-		<span class="kw">type</span> <span class="ident">SelfParaId</span>: <span class="ident">Get</span><span class="op">&lt;</span><span class="ident">ParaId</span><span class="op">&gt;</span>;
+		<span class="doccomment">/// Returns the parachain ID we are running with.
+		</span><span class="kw">type </span>SelfParaId: Get&lt;ParaId&gt;;
 
-		<span class="doccomment">/// The place where outbound XCMP messages come from. This is queried in `finalize_block`.</span>
-		<span class="kw">type</span> <span class="ident">OutboundXcmpMessageSource</span>: <span class="ident">XcmpMessageSource</span>;
+		<span class="doccomment">/// The place where outbound XCMP messages come from. This is queried in `finalize_block`.
+		</span><span class="kw">type </span>OutboundXcmpMessageSource: XcmpMessageSource;
 
-		<span class="doccomment">/// The message handler that will be invoked when messages are received via DMP.</span>
-		<span class="kw">type</span> <span class="ident">DmpMessageHandler</span>: <span class="ident">DmpMessageHandler</span>;
+		<span class="doccomment">/// The message handler that will be invoked when messages are received via DMP.
+		</span><span class="kw">type </span>DmpMessageHandler: DmpMessageHandler;
 
-		<span class="doccomment">/// The weight we reserve at the beginning of the block for processing DMP messages.</span>
-		<span class="kw">type</span> <span class="ident">ReservedDmpWeight</span>: <span class="ident">Get</span><span class="op">&lt;</span><span class="ident">Weight</span><span class="op">&gt;</span>;
+		<span class="doccomment">/// The weight we reserve at the beginning of the block for processing DMP messages.
+		</span><span class="kw">type </span>ReservedDmpWeight: Get&lt;Weight&gt;;
 
-		<span class="doccomment">/// The message handler that will be invoked when messages are received via XCMP.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// The messages are dispatched in the order they were relayed by the relay chain. If</span>
-		<span class="doccomment">/// multiple messages were relayed at one block, these will be dispatched in ascending</span>
-		<span class="doccomment">/// order of the sender&#39;s para ID.</span>
-		<span class="kw">type</span> <span class="ident">XcmpMessageHandler</span>: <span class="ident">XcmpMessageHandler</span>;
+		<span class="doccomment">/// The message handler that will be invoked when messages are received via XCMP.
+		///
+		/// The messages are dispatched in the order they were relayed by the relay chain. If
+		/// multiple messages were relayed at one block, these will be dispatched in ascending
+		/// order of the sender&#39;s para ID.
+		</span><span class="kw">type </span>XcmpMessageHandler: XcmpMessageHandler;
 
-		<span class="doccomment">/// The weight we reserve at the beginning of the block for processing XCMP messages.</span>
-		<span class="kw">type</span> <span class="ident">ReservedXcmpWeight</span>: <span class="ident">Get</span><span class="op">&lt;</span><span class="ident">Weight</span><span class="op">&gt;</span>;
+		<span class="doccomment">/// The weight we reserve at the beginning of the block for processing XCMP messages.
+		</span><span class="kw">type </span>ReservedXcmpWeight: Get&lt;Weight&gt;;
 
-		<span class="doccomment">/// Something that can check the associated relay parent block number.</span>
-		<span class="kw">type</span> <span class="ident">CheckAssociatedRelayNumber</span>: <span class="ident">CheckAssociatedRelayNumber</span>;
+		<span class="doccomment">/// Something that can check the associated relay parent block number.
+		</span><span class="kw">type </span>CheckAssociatedRelayNumber: CheckAssociatedRelayNumber;
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::hooks</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Hooks</span><span class="op">&lt;</span><span class="ident">BlockNumberFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="kw">fn</span> <span class="ident">on_runtime_upgrade</span>() -&gt; <span class="ident">Weight</span> {
-			<span class="ident">migration::on_runtime_upgrade</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>()
+	<span class="attribute">#[pallet::hooks]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; <span class="kw">for </span>Pallet&lt;T&gt; {
+		<span class="kw">fn </span>on_runtime_upgrade() -&gt; Weight {
+			migration::on_runtime_upgrade::&lt;T&gt;()
 		}
 
-		<span class="kw">fn</span> <span class="ident">on_finalize</span>(<span class="kw">_</span>: <span class="ident">T::BlockNumber</span>) {
-			<span class="op">&lt;</span><span class="ident">DidSetValidationCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::kill</span>();
-			<span class="op">&lt;</span><span class="ident">UpgradeRestrictionSignal</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::kill</span>();
+		<span class="kw">fn </span>on_finalize(<span class="kw">_</span>: T::BlockNumber) {
+			&lt;DidSetValidationCode&lt;T&gt;&gt;::kill();
+			&lt;UpgradeRestrictionSignal&lt;T&gt;&gt;::kill();
 
 			<span class="macro">assert!</span>(
-				<span class="op">&lt;</span><span class="ident">ValidationData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::exists</span>(),
-				<span class="string">&quot;set_validation_data inherent needs to be present in every block!&quot;</span>
-			);
+				&lt;ValidationData&lt;T&gt;&gt;::exists(),
+				<span class="string">&quot;set_validation_data inherent needs to be present in every block!&quot;
+			</span>);
 
-			<span class="kw">let</span> <span class="ident">host_config</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident"><span class="self">Self</span>::host_configuration</span>() {
-				<span class="prelude-val">Some</span>(<span class="ident">ok</span>) =&gt; <span class="ident">ok</span>,
-				<span class="prelude-val">None</span> =&gt; {
+			<span class="kw">let </span>host_config = <span class="kw">match </span><span class="self">Self</span>::host_configuration() {
+				<span class="prelude-val">Some</span>(ok) =&gt; ok,
+				<span class="prelude-val">None </span>=&gt; {
 					<span class="macro">debug_assert!</span>(
 						<span class="bool-val">false</span>,
 						<span class="string">&quot;host configuration is promised to set until `on_finalize`; qed&quot;</span>,
 					);
-					<span class="kw">return</span>
-				},
+					<span class="kw">return
+				</span>},
 			};
-			<span class="kw">let</span> <span class="ident">relevant_messaging_state</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident"><span class="self">Self</span>::relevant_messaging_state</span>() {
-				<span class="prelude-val">Some</span>(<span class="ident">ok</span>) =&gt; <span class="ident">ok</span>,
-				<span class="prelude-val">None</span> =&gt; {
+			<span class="kw">let </span>relevant_messaging_state = <span class="kw">match </span><span class="self">Self</span>::relevant_messaging_state() {
+				<span class="prelude-val">Some</span>(ok) =&gt; ok,
+				<span class="prelude-val">None </span>=&gt; {
 					<span class="macro">debug_assert!</span>(
 						<span class="bool-val">false</span>,
 						<span class="string">&quot;relevant messaging state is promised to be set until `on_finalize`; \
 							qed&quot;</span>,
 					);
-					<span class="kw">return</span>
-				},
+					<span class="kw">return
+				</span>},
 			};
 
-			<span class="op">&lt;</span><span class="ident">PendingUpwardMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">up</span><span class="op">|</span> {
-				<span class="kw">let</span> (<span class="ident">count</span>, <span class="ident">size</span>) <span class="op">=</span> <span class="ident">relevant_messaging_state</span>.<span class="ident">relay_dispatch_queue_size</span>;
+			&lt;PendingUpwardMessages&lt;T&gt;&gt;::mutate(|up| {
+				<span class="kw">let </span>(count, size) = relevant_messaging_state.relay_dispatch_queue_size;
 
-				<span class="kw">let</span> <span class="ident">available_capacity</span> <span class="op">=</span> <span class="ident">cmp::min</span>(
-					<span class="ident">host_config</span>.<span class="ident">max_upward_queue_count</span>.<span class="ident">saturating_sub</span>(<span class="ident">count</span>),
-					<span class="ident">host_config</span>.<span class="ident">max_upward_message_num_per_candidate</span>,
+				<span class="kw">let </span>available_capacity = cmp::min(
+					host_config.max_upward_queue_count.saturating_sub(count),
+					host_config.max_upward_message_num_per_candidate,
 				);
-				<span class="kw">let</span> <span class="ident">available_size</span> <span class="op">=</span> <span class="ident">host_config</span>.<span class="ident">max_upward_queue_size</span>.<span class="ident">saturating_sub</span>(<span class="ident">size</span>);
+				<span class="kw">let </span>available_size = host_config.max_upward_queue_size.saturating_sub(size);
 
-				<span class="comment">// Count the number of messages we can possibly fit in the given constraints, i.e.</span>
-				<span class="comment">// available_capacity and available_size.</span>
-				<span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">up</span>
-					.<span class="ident">iter</span>()
-					.<span class="ident">scan</span>((<span class="ident">available_capacity</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="ident">available_size</span> <span class="kw">as</span> <span class="ident">usize</span>), <span class="op">|</span><span class="ident">state</span>, <span class="ident">msg</span><span class="op">|</span> {
-						<span class="kw">let</span> (<span class="ident">cap_left</span>, <span class="ident">size_left</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="ident">state</span>;
-						<span class="kw">match</span> (<span class="ident">cap_left</span>.<span class="ident">checked_sub</span>(<span class="number">1</span>), <span class="ident">size_left</span>.<span class="ident">checked_sub</span>(<span class="ident">msg</span>.<span class="ident">len</span>())) {
-							(<span class="prelude-val">Some</span>(<span class="ident">new_cap</span>), <span class="prelude-val">Some</span>(<span class="ident">new_size</span>)) =&gt; {
-								<span class="kw-2">*</span><span class="ident">state</span> <span class="op">=</span> (<span class="ident">new_cap</span>, <span class="ident">new_size</span>);
+				<span class="comment">// Count the number of messages we can possibly fit in the given constraints, i.e.
+				// available_capacity and available_size.
+				</span><span class="kw">let </span>num = up
+					.iter()
+					.scan((available_capacity <span class="kw">as </span>usize, available_size <span class="kw">as </span>usize), |state, msg| {
+						<span class="kw">let </span>(cap_left, size_left) = <span class="kw-2">*</span>state;
+						<span class="kw">match </span>(cap_left.checked_sub(<span class="number">1</span>), size_left.checked_sub(msg.len())) {
+							(<span class="prelude-val">Some</span>(new_cap), <span class="prelude-val">Some</span>(new_size)) =&gt; {
+								<span class="kw-2">*</span>state = (new_cap, new_size);
 								<span class="prelude-val">Some</span>(())
 							},
-							<span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
+							<span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
 						}
 					})
-					.<span class="ident">count</span>();
+					.count();
 
-				<span class="comment">// TODO: #274 Return back messages that do not longer fit into the queue.</span>
+				<span class="comment">// TODO: #274 Return back messages that do not longer fit into the queue.
 
-				<span class="ident">UpwardMessages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="kw-2">&amp;</span><span class="ident">up</span>[..<span class="ident">num</span>]);
-				<span class="kw-2">*</span><span class="ident">up</span> <span class="op">=</span> <span class="ident">up</span>.<span class="ident">split_off</span>(<span class="ident">num</span>);
+				</span>UpwardMessages::&lt;T&gt;::put(<span class="kw-2">&amp;</span>up[..num]);
+				<span class="kw-2">*</span>up = up.split_off(num);
 			});
 
-			<span class="comment">// Sending HRMP messages is a little bit more involved. There are the following</span>
-			<span class="comment">// constraints:</span>
-			<span class="comment">//</span>
-			<span class="comment">// - a channel should exist (and it can be closed while a message is buffered),</span>
-			<span class="comment">// - at most one message can be sent in a channel,</span>
-			<span class="comment">// - the sent out messages should be ordered by ascension of recipient para id.</span>
-			<span class="comment">// - the capacity and total size of the channel is limited,</span>
-			<span class="comment">// - the maximum size of a message is limited (and can potentially be changed),</span>
+			<span class="comment">// Sending HRMP messages is a little bit more involved. There are the following
+			// constraints:
+			//
+			// - a channel should exist (and it can be closed while a message is buffered),
+			// - at most one message can be sent in a channel,
+			// - the sent out messages should be ordered by ascension of recipient para id.
+			// - the capacity and total size of the channel is limited,
+			// - the maximum size of a message is limited (and can potentially be changed),
 
-			<span class="kw">let</span> <span class="ident">maximum_channels</span> <span class="op">=</span> <span class="ident">host_config</span>
-				.<span class="ident">hrmp_max_message_num_per_candidate</span>
-				.<span class="ident">min</span>(<span class="op">&lt;</span><span class="ident">AnnouncedHrmpMessagesPerCandidate</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::take</span>()) <span class="kw">as</span> <span class="ident">usize</span>;
+			</span><span class="kw">let </span>maximum_channels = host_config
+				.hrmp_max_message_num_per_candidate
+				.min(&lt;AnnouncedHrmpMessagesPerCandidate&lt;T&gt;&gt;::take()) <span class="kw">as </span>usize;
 
-			<span class="kw">let</span> <span class="ident">outbound_messages</span> <span class="op">=</span>
-				<span class="ident">T::OutboundXcmpMessageSource::take_outbound_messages</span>(<span class="ident">maximum_channels</span>)
-					.<span class="ident">into_iter</span>()
-					.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">recipient</span>, <span class="ident">data</span>)<span class="op">|</span> <span class="ident">OutboundHrmpMessage</span> { <span class="ident">recipient</span>, <span class="ident">data</span> })
-					.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+			<span class="kw">let </span>outbound_messages =
+				T::OutboundXcmpMessageSource::take_outbound_messages(maximum_channels)
+					.into_iter()
+					.map(|(recipient, data)| OutboundHrmpMessage { recipient, data })
+					.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
 
-			<span class="ident">HrmpOutboundMessages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">outbound_messages</span>);
+			HrmpOutboundMessages::&lt;T&gt;::put(outbound_messages);
 		}
 
-		<span class="kw">fn</span> <span class="ident">on_initialize</span>(<span class="ident">_n</span>: <span class="ident">T::BlockNumber</span>) -&gt; <span class="ident">Weight</span> {
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">weight</span> <span class="op">=</span> <span class="ident">Weight::zero</span>();
+		<span class="kw">fn </span>on_initialize(_n: T::BlockNumber) -&gt; Weight {
+			<span class="kw">let </span><span class="kw-2">mut </span>weight = Weight::zero();
 
-			<span class="comment">// To prevent removing `NewValidationCode` that was set by another `on_initialize`</span>
-			<span class="comment">// like for example from scheduler, we only kill the storage entry if it was not yet</span>
-			<span class="comment">// updated in the current block.</span>
-			<span class="kw">if</span> <span class="op">!</span><span class="op">&lt;</span><span class="ident">DidSetValidationCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>() {
-				<span class="ident">NewValidationCode</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::kill</span>();
-				<span class="ident">weight</span> <span class="op">+</span><span class="op">=</span> <span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span>);
+			<span class="comment">// To prevent removing `NewValidationCode` that was set by another `on_initialize`
+			// like for example from scheduler, we only kill the storage entry if it was not yet
+			// updated in the current block.
+			</span><span class="kw">if </span>!&lt;DidSetValidationCode&lt;T&gt;&gt;::get() {
+				NewValidationCode::&lt;T&gt;::kill();
+				weight += T::DbWeight::get().writes(<span class="number">1</span>);
 			}
 
-			<span class="comment">// Remove the validation from the old block.</span>
-			<span class="ident">ValidationData</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::kill</span>();
-			<span class="ident">ProcessedDownwardMessages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::kill</span>();
-			<span class="ident">HrmpWatermark</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::kill</span>();
-			<span class="ident">UpwardMessages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::kill</span>();
-			<span class="ident">HrmpOutboundMessages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::kill</span>();
-			<span class="ident">CustomValidationHeadData</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::kill</span>();
+			<span class="comment">// Remove the validation from the old block.
+			</span>ValidationData::&lt;T&gt;::kill();
+			ProcessedDownwardMessages::&lt;T&gt;::kill();
+			HrmpWatermark::&lt;T&gt;::kill();
+			UpwardMessages::&lt;T&gt;::kill();
+			HrmpOutboundMessages::&lt;T&gt;::kill();
+			CustomValidationHeadData::&lt;T&gt;::kill();
 
-			<span class="ident">weight</span> <span class="op">+</span><span class="op">=</span> <span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">6</span>);
+			weight += T::DbWeight::get().writes(<span class="number">6</span>);
 
-			<span class="comment">// Here, in `on_initialize` we must report the weight for both `on_initialize` and</span>
-			<span class="comment">// `on_finalize`.</span>
-			<span class="comment">//</span>
-			<span class="comment">// One complication here, is that the `host_configuration` is updated by an inherent</span>
-			<span class="comment">// and those are processed after the block initialization phase. Therefore, we have to</span>
-			<span class="comment">// be content only with the configuration as per the previous block. That means that</span>
-			<span class="comment">// the configuration can be either stale (or be abscent altogether in case of the</span>
-			<span class="comment">// beginning of the chain).</span>
-			<span class="comment">//</span>
-			<span class="comment">// In order to mitigate this, we do the following. At the time, we are only concerned</span>
-			<span class="comment">// about `hrmp_max_message_num_per_candidate`. We reserve the amount of weight to</span>
-			<span class="comment">// process the number of HRMP messages according to the potentially stale</span>
-			<span class="comment">// configuration. In `on_finalize` we will process only the maximum between the</span>
-			<span class="comment">// announced number of messages and the actual received in the fresh configuration.</span>
-			<span class="comment">//</span>
-			<span class="comment">// In the common case, they will be the same. In the case the actual value is smaller</span>
-			<span class="comment">// than the announced, we would waste some of weight. In the case the actual value is</span>
-			<span class="comment">// greater than the announced, we will miss opportunity to send a couple of messages.</span>
-			<span class="ident">weight</span> <span class="op">+</span><span class="op">=</span> <span class="ident">T::DbWeight::get</span>().<span class="ident">reads_writes</span>(<span class="number">1</span>, <span class="number">1</span>);
-			<span class="kw">let</span> <span class="ident">hrmp_max_message_num_per_candidate</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::host_configuration</span>()
-				.<span class="ident">map</span>(<span class="op">|</span><span class="ident">cfg</span><span class="op">|</span> <span class="ident">cfg</span>.<span class="ident">hrmp_max_message_num_per_candidate</span>)
-				.<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-			<span class="op">&lt;</span><span class="ident">AnnouncedHrmpMessagesPerCandidate</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">hrmp_max_message_num_per_candidate</span>);
+			<span class="comment">// Here, in `on_initialize` we must report the weight for both `on_initialize` and
+			// `on_finalize`.
+			//
+			// One complication here, is that the `host_configuration` is updated by an inherent
+			// and those are processed after the block initialization phase. Therefore, we have to
+			// be content only with the configuration as per the previous block. That means that
+			// the configuration can be either stale (or be abscent altogether in case of the
+			// beginning of the chain).
+			//
+			// In order to mitigate this, we do the following. At the time, we are only concerned
+			// about `hrmp_max_message_num_per_candidate`. We reserve the amount of weight to
+			// process the number of HRMP messages according to the potentially stale
+			// configuration. In `on_finalize` we will process only the maximum between the
+			// announced number of messages and the actual received in the fresh configuration.
+			//
+			// In the common case, they will be the same. In the case the actual value is smaller
+			// than the announced, we would waste some of weight. In the case the actual value is
+			// greater than the announced, we will miss opportunity to send a couple of messages.
+			</span>weight += T::DbWeight::get().reads_writes(<span class="number">1</span>, <span class="number">1</span>);
+			<span class="kw">let </span>hrmp_max_message_num_per_candidate = <span class="self">Self</span>::host_configuration()
+				.map(|cfg| cfg.hrmp_max_message_num_per_candidate)
+				.unwrap_or(<span class="number">0</span>);
+			&lt;AnnouncedHrmpMessagesPerCandidate&lt;T&gt;&gt;::put(hrmp_max_message_num_per_candidate);
 
-			<span class="comment">// NOTE that the actual weight consumed by `on_finalize` may turn out lower.</span>
-			<span class="ident">weight</span> <span class="op">+</span><span class="op">=</span> <span class="ident">T::DbWeight::get</span>().<span class="ident">reads_writes</span>(
-				<span class="number">3</span> <span class="op">+</span> <span class="ident">hrmp_max_message_num_per_candidate</span> <span class="kw">as</span> <span class="ident">u64</span>,
-				<span class="number">4</span> <span class="op">+</span> <span class="ident">hrmp_max_message_num_per_candidate</span> <span class="kw">as</span> <span class="ident">u64</span>,
+			<span class="comment">// NOTE that the actual weight consumed by `on_finalize` may turn out lower.
+			</span>weight += T::DbWeight::get().reads_writes(
+				<span class="number">3 </span>+ hrmp_max_message_num_per_candidate <span class="kw">as </span>u64,
+				<span class="number">4 </span>+ hrmp_max_message_num_per_candidate <span class="kw">as </span>u64,
 			);
 
-			<span class="ident">weight</span>
+			weight
 		}
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::call</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// Set the current validation data.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// This should be invoked exactly once per block. It will panic at the finalization</span>
-		<span class="doccomment">/// phase if the call was not invoked.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// The dispatch origin for this call must be `Inherent`</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// As a side effect, this function upgrades the current validation function</span>
-		<span class="doccomment">/// if the appropriate time has come.</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="number">0</span>, <span class="ident">DispatchClass::Mandatory</span>))]</span>
-		<span class="comment">// TODO: This weight should be corrected.</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_validation_data</span>(
-			<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-			<span class="ident">data</span>: <span class="ident">ParachainInherentData</span>,
-		) -&gt; <span class="ident">DispatchResultWithPostInfo</span> {
-			<span class="ident">ensure_none</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
+	<span class="attribute">#[pallet::call]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+		<span class="doccomment">/// Set the current validation data.
+		///
+		/// This should be invoked exactly once per block. It will panic at the finalization
+		/// phase if the call was not invoked.
+		///
+		/// The dispatch origin for this call must be `Inherent`
+		///
+		/// As a side effect, this function upgrades the current validation function
+		/// if the appropriate time has come.
+		</span><span class="attribute">#[pallet::weight((<span class="number">0</span>, DispatchClass::Mandatory))]
+		</span><span class="comment">// TODO: This weight should be corrected.
+		</span><span class="kw">pub fn </span>set_validation_data(
+			origin: OriginFor&lt;T&gt;,
+			data: ParachainInherentData,
+		) -&gt; DispatchResultWithPostInfo {
+			ensure_none(origin)<span class="question-mark">?</span>;
 			<span class="macro">assert!</span>(
-				<span class="op">!</span><span class="op">&lt;</span><span class="ident">ValidationData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::exists</span>(),
+				!&lt;ValidationData&lt;T&gt;&gt;::exists(),
 				<span class="string">&quot;ValidationData must be updated only once in a block&quot;</span>,
 			);
 
-			<span class="kw">let</span> <span class="ident">ParachainInherentData</span> {
-				<span class="ident">validation_data</span>: <span class="ident">vfp</span>,
-				<span class="ident">relay_chain_state</span>,
-				<span class="ident">downward_messages</span>,
-				<span class="ident">horizontal_messages</span>,
-			} <span class="op">=</span> <span class="ident">data</span>;
+			<span class="kw">let </span>ParachainInherentData {
+				validation_data: vfp,
+				relay_chain_state,
+				downward_messages,
+				horizontal_messages,
+			} = data;
 
-			<span class="ident"><span class="self">Self</span>::validate_validation_data</span>(<span class="kw-2">&amp;</span><span class="ident">vfp</span>);
+			<span class="self">Self</span>::validate_validation_data(<span class="kw-2">&amp;</span>vfp);
 
-			<span class="comment">// Check that the associated relay chain block number is as expected.</span>
-			<span class="ident">T::CheckAssociatedRelayNumber::check_associated_relay_number</span>(
-				<span class="ident">vfp</span>.<span class="ident">relay_parent_number</span>,
-				<span class="ident">LastRelayChainBlockNumber</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>(),
+			<span class="comment">// Check that the associated relay chain block number is as expected.
+			</span>T::CheckAssociatedRelayNumber::check_associated_relay_number(
+				vfp.relay_parent_number,
+				LastRelayChainBlockNumber::&lt;T&gt;::get(),
 			);
-			<span class="ident">LastRelayChainBlockNumber</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">vfp</span>.<span class="ident">relay_parent_number</span>);
+			LastRelayChainBlockNumber::&lt;T&gt;::put(vfp.relay_parent_number);
 
-			<span class="kw">let</span> <span class="ident">relay_state_proof</span> <span class="op">=</span> <span class="ident">RelayChainStateProof::new</span>(
-				<span class="ident">T::SelfParaId::get</span>(),
-				<span class="ident">vfp</span>.<span class="ident">relay_parent_storage_root</span>,
-				<span class="ident">relay_chain_state</span>.<span class="ident">clone</span>(),
+			<span class="kw">let </span>relay_state_proof = RelayChainStateProof::new(
+				T::SelfParaId::get(),
+				vfp.relay_parent_storage_root,
+				relay_chain_state.clone(),
 			)
-			.<span class="ident">expect</span>(<span class="string">&quot;Invalid relay chain state proof&quot;</span>);
+			.expect(<span class="string">&quot;Invalid relay chain state proof&quot;</span>);
 
-			<span class="comment">// initialization logic: we know that this runs exactly once every block,</span>
-			<span class="comment">// which means we can put the initialization logic here to remove the</span>
-			<span class="comment">// sequencing problem.</span>
-			<span class="kw">let</span> <span class="ident">upgrade_go_ahead_signal</span> <span class="op">=</span> <span class="ident">relay_state_proof</span>
-				.<span class="ident">read_upgrade_go_ahead_signal</span>()
-				.<span class="ident">expect</span>(<span class="string">&quot;Invalid upgrade go ahead signal&quot;</span>);
-			<span class="kw">match</span> <span class="ident">upgrade_go_ahead_signal</span> {
-				<span class="prelude-val">Some</span>(<span class="ident">relay_chain::v2::UpgradeGoAhead::GoAhead</span>) =&gt; {
+			<span class="comment">// initialization logic: we know that this runs exactly once every block,
+			// which means we can put the initialization logic here to remove the
+			// sequencing problem.
+			</span><span class="kw">let </span>upgrade_go_ahead_signal = relay_state_proof
+				.read_upgrade_go_ahead_signal()
+				.expect(<span class="string">&quot;Invalid upgrade go ahead signal&quot;</span>);
+			<span class="kw">match </span>upgrade_go_ahead_signal {
+				<span class="prelude-val">Some</span>(relay_chain::v2::UpgradeGoAhead::GoAhead) =&gt; {
 					<span class="macro">assert!</span>(
-						<span class="op">&lt;</span><span class="ident">PendingValidationCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::exists</span>(),
+						&lt;PendingValidationCode&lt;T&gt;&gt;::exists(),
 						<span class="string">&quot;No new validation function found in storage, GoAhead signal is not expected&quot;</span>,
 					);
-					<span class="kw">let</span> <span class="ident">validation_code</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">PendingValidationCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::take</span>();
+					<span class="kw">let </span>validation_code = &lt;PendingValidationCode&lt;T&gt;&gt;::take();
 
-					<span class="ident"><span class="self">Self</span>::put_parachain_code</span>(<span class="kw-2">&amp;</span><span class="ident">validation_code</span>);
-					<span class="op">&lt;</span><span class="ident">T::OnSystemEvent</span> <span class="kw">as</span> <span class="ident">OnSystemEvent</span><span class="op">&gt;</span><span class="ident">::on_validation_code_applied</span>();
-					<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::ValidationFunctionApplied</span> {
-						<span class="ident">relay_chain_block_num</span>: <span class="ident">vfp</span>.<span class="ident">relay_parent_number</span>,
+					<span class="self">Self</span>::put_parachain_code(<span class="kw-2">&amp;</span>validation_code);
+					&lt;T::OnSystemEvent <span class="kw">as </span>OnSystemEvent&gt;::on_validation_code_applied();
+					<span class="self">Self</span>::deposit_event(Event::ValidationFunctionApplied {
+						relay_chain_block_num: vfp.relay_parent_number,
 					});
 				},
-				<span class="prelude-val">Some</span>(<span class="ident">relay_chain::v2::UpgradeGoAhead::Abort</span>) =&gt; {
-					<span class="op">&lt;</span><span class="ident">PendingValidationCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::kill</span>();
-					<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::ValidationFunctionDiscarded</span>);
+				<span class="prelude-val">Some</span>(relay_chain::v2::UpgradeGoAhead::Abort) =&gt; {
+					&lt;PendingValidationCode&lt;T&gt;&gt;::kill();
+					<span class="self">Self</span>::deposit_event(Event::ValidationFunctionDiscarded);
 				},
-				<span class="prelude-val">None</span> =&gt; {},
+				<span class="prelude-val">None </span>=&gt; {},
 			}
-			<span class="op">&lt;</span><span class="ident">UpgradeRestrictionSignal</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(
-				<span class="ident">relay_state_proof</span>
-					.<span class="ident">read_upgrade_restriction_signal</span>()
-					.<span class="ident">expect</span>(<span class="string">&quot;Invalid upgrade restriction signal&quot;</span>),
+			&lt;UpgradeRestrictionSignal&lt;T&gt;&gt;::put(
+				relay_state_proof
+					.read_upgrade_restriction_signal()
+					.expect(<span class="string">&quot;Invalid upgrade restriction signal&quot;</span>),
 			);
 
-			<span class="kw">let</span> <span class="ident">host_config</span> <span class="op">=</span> <span class="ident">relay_state_proof</span>
-				.<span class="ident">read_abridged_host_configuration</span>()
-				.<span class="ident">expect</span>(<span class="string">&quot;Invalid host configuration in relay chain state proof&quot;</span>);
-			<span class="kw">let</span> <span class="ident">relevant_messaging_state</span> <span class="op">=</span> <span class="ident">relay_state_proof</span>
-				.<span class="ident">read_messaging_state_snapshot</span>()
-				.<span class="ident">expect</span>(<span class="string">&quot;Invalid messaging state in relay chain state proof&quot;</span>);
+			<span class="kw">let </span>host_config = relay_state_proof
+				.read_abridged_host_configuration()
+				.expect(<span class="string">&quot;Invalid host configuration in relay chain state proof&quot;</span>);
+			<span class="kw">let </span>relevant_messaging_state = relay_state_proof
+				.read_messaging_state_snapshot()
+				.expect(<span class="string">&quot;Invalid messaging state in relay chain state proof&quot;</span>);
 
-			<span class="op">&lt;</span><span class="ident">ValidationData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="kw-2">&amp;</span><span class="ident">vfp</span>);
-			<span class="op">&lt;</span><span class="ident">RelayStateProof</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">relay_chain_state</span>);
-			<span class="op">&lt;</span><span class="ident">RelevantMessagingState</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">relevant_messaging_state</span>.<span class="ident">clone</span>());
-			<span class="op">&lt;</span><span class="ident">HostConfiguration</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">host_config</span>);
+			&lt;ValidationData&lt;T&gt;&gt;::put(<span class="kw-2">&amp;</span>vfp);
+			&lt;RelayStateProof&lt;T&gt;&gt;::put(relay_chain_state);
+			&lt;RelevantMessagingState&lt;T&gt;&gt;::put(relevant_messaging_state.clone());
+			&lt;HostConfiguration&lt;T&gt;&gt;::put(host_config);
 
-			<span class="op">&lt;</span><span class="ident">T::OnSystemEvent</span> <span class="kw">as</span> <span class="ident">OnSystemEvent</span><span class="op">&gt;</span><span class="ident">::on_validation_data</span>(<span class="kw-2">&amp;</span><span class="ident">vfp</span>);
+			&lt;T::OnSystemEvent <span class="kw">as </span>OnSystemEvent&gt;::on_validation_data(<span class="kw-2">&amp;</span>vfp);
 
-			<span class="comment">// TODO: This is more than zero, but will need benchmarking to figure out what.</span>
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">total_weight</span> <span class="op">=</span> <span class="ident">Weight::zero</span>();
-			<span class="ident">total_weight</span> <span class="op">+</span><span class="op">=</span> <span class="ident"><span class="self">Self</span>::process_inbound_downward_messages</span>(
-				<span class="ident">relevant_messaging_state</span>.<span class="ident">dmq_mqc_head</span>,
-				<span class="ident">downward_messages</span>,
+			<span class="comment">// TODO: This is more than zero, but will need benchmarking to figure out what.
+			</span><span class="kw">let </span><span class="kw-2">mut </span>total_weight = Weight::zero();
+			total_weight += <span class="self">Self</span>::process_inbound_downward_messages(
+				relevant_messaging_state.dmq_mqc_head,
+				downward_messages,
 			);
-			<span class="ident">total_weight</span> <span class="op">+</span><span class="op">=</span> <span class="ident"><span class="self">Self</span>::process_inbound_horizontal_messages</span>(
-				<span class="kw-2">&amp;</span><span class="ident">relevant_messaging_state</span>.<span class="ident">ingress_channels</span>,
-				<span class="ident">horizontal_messages</span>,
-				<span class="ident">vfp</span>.<span class="ident">relay_parent_number</span>,
+			total_weight += <span class="self">Self</span>::process_inbound_horizontal_messages(
+				<span class="kw-2">&amp;</span>relevant_messaging_state.ingress_channels,
+				horizontal_messages,
+				vfp.relay_parent_number,
 			);
 
-			<span class="prelude-val">Ok</span>(<span class="ident">PostDispatchInfo</span> { <span class="ident">actual_weight</span>: <span class="prelude-val">Some</span>(<span class="ident">total_weight</span>), <span class="ident">pays_fee</span>: <span class="ident">Pays::No</span> })
+			<span class="prelude-val">Ok</span>(PostDispatchInfo { actual_weight: <span class="prelude-val">Some</span>(total_weight), pays_fee: Pays::No })
 		}
 
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="number">1_000</span>, <span class="ident">DispatchClass::Operational</span>))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sudo_send_upward_message</span>(
-			<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-			<span class="ident">message</span>: <span class="ident">UpwardMessage</span>,
-		) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::send_upward_message</span>(<span class="ident">message</span>);
+		<span class="attribute">#[pallet::weight((<span class="number">1_000</span>, DispatchClass::Operational))]
+		</span><span class="kw">pub fn </span>sudo_send_upward_message(
+			origin: OriginFor&lt;T&gt;,
+			message: UpwardMessage,
+		) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			<span class="kw">let _ </span>= <span class="self">Self</span>::send_upward_message(message);
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="number">1_000_000</span>, <span class="ident">DispatchClass::Operational</span>))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">authorize_upgrade</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">code_hash</span>: <span class="ident">T::Hash</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
+		<span class="attribute">#[pallet::weight((<span class="number">1_000_000</span>, DispatchClass::Operational))]
+		</span><span class="kw">pub fn </span>authorize_upgrade(origin: OriginFor&lt;T&gt;, code_hash: T::Hash) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
 
-			<span class="ident">AuthorizedUpgrade</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="kw-2">&amp;</span><span class="ident">code_hash</span>);
+			AuthorizedUpgrade::&lt;T&gt;::put(<span class="kw-2">&amp;</span>code_hash);
 
-			<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::UpgradeAuthorized</span> { <span class="ident">code_hash</span> });
+			<span class="self">Self</span>::deposit_event(Event::UpgradeAuthorized { code_hash });
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[<span class="ident">pallet::weight</span>(<span class="number">1_000_000</span>)]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enact_authorized_upgrade</span>(
-			<span class="kw">_</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-			<span class="ident">code</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-		) -&gt; <span class="ident">DispatchResultWithPostInfo</span> {
-			<span class="ident"><span class="self">Self</span>::validate_authorized_upgrade</span>(<span class="kw-2">&amp;</span><span class="ident">code</span>[..])<span class="question-mark">?</span>;
-			<span class="ident"><span class="self">Self</span>::schedule_code_upgrade</span>(<span class="ident">code</span>)<span class="question-mark">?</span>;
-			<span class="ident">AuthorizedUpgrade</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::kill</span>();
-			<span class="prelude-val">Ok</span>(<span class="ident">Pays::No</span>.<span class="ident">into</span>())
+		<span class="attribute">#[pallet::weight(<span class="number">1_000_000</span>)]
+		</span><span class="kw">pub fn </span>enact_authorized_upgrade(
+			<span class="kw">_</span>: OriginFor&lt;T&gt;,
+			code: Vec&lt;u8&gt;,
+		) -&gt; DispatchResultWithPostInfo {
+			<span class="self">Self</span>::validate_authorized_upgrade(<span class="kw-2">&amp;</span>code[..])<span class="question-mark">?</span>;
+			<span class="self">Self</span>::schedule_code_upgrade(code)<span class="question-mark">?</span>;
+			AuthorizedUpgrade::&lt;T&gt;::kill();
+			<span class="prelude-val">Ok</span>(Pays::No.into())
 		}
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::event</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::generate_deposit</span>(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">deposit_event</span>)]</span>
-	<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// The validation function has been scheduled to apply.</span>
-		<span class="ident">ValidationFunctionStored</span>,
-		<span class="doccomment">/// The validation function was applied as of the contained relay chain block number.</span>
-		<span class="ident">ValidationFunctionApplied</span> { <span class="ident">relay_chain_block_num</span>: <span class="ident">RelayChainBlockNumber</span> },
-		<span class="doccomment">/// The relay-chain aborted the upgrade process.</span>
-		<span class="ident">ValidationFunctionDiscarded</span>,
-		<span class="doccomment">/// An upgrade has been authorized.</span>
-		<span class="ident">UpgradeAuthorized</span> { <span class="ident">code_hash</span>: <span class="ident">T::Hash</span> },
-		<span class="doccomment">/// Some downward messages have been received and will be processed.</span>
-		<span class="ident">DownwardMessagesReceived</span> { <span class="ident">count</span>: <span class="ident">u32</span> },
-		<span class="doccomment">/// Downward messages were processed using the given weight.</span>
-		<span class="ident">DownwardMessagesProcessed</span> { <span class="ident">weight_used</span>: <span class="ident">Weight</span>, <span class="ident">dmq_head</span>: <span class="ident">relay_chain::Hash</span> },
+	<span class="attribute">#[pallet::event]
+	#[pallet::generate_deposit(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>deposit_event)]
+	</span><span class="kw">pub enum </span>Event&lt;T: Config&gt; {
+		<span class="doccomment">/// The validation function has been scheduled to apply.
+		</span>ValidationFunctionStored,
+		<span class="doccomment">/// The validation function was applied as of the contained relay chain block number.
+		</span>ValidationFunctionApplied { relay_chain_block_num: RelayChainBlockNumber },
+		<span class="doccomment">/// The relay-chain aborted the upgrade process.
+		</span>ValidationFunctionDiscarded,
+		<span class="doccomment">/// An upgrade has been authorized.
+		</span>UpgradeAuthorized { code_hash: T::Hash },
+		<span class="doccomment">/// Some downward messages have been received and will be processed.
+		</span>DownwardMessagesReceived { count: u32 },
+		<span class="doccomment">/// Downward messages were processed using the given weight.
+		</span>DownwardMessagesProcessed { weight_used: Weight, dmq_head: relay_chain::Hash },
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::error</span>]</span>
-	<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Error</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// Attempt to upgrade validation function while existing upgrade pending</span>
-		<span class="ident">OverlappingUpgrades</span>,
-		<span class="doccomment">/// Polkadot currently prohibits this parachain from upgrading its validation function</span>
-		<span class="ident">ProhibitedByPolkadot</span>,
-		<span class="doccomment">/// The supplied validation function has compiled into a blob larger than Polkadot is</span>
-		<span class="doccomment">/// willing to run</span>
-		<span class="ident">TooBig</span>,
-		<span class="doccomment">/// The inherent which supplies the validation data did not run this block</span>
-		<span class="ident">ValidationDataNotAvailable</span>,
-		<span class="doccomment">/// The inherent which supplies the host configuration did not run this block</span>
-		<span class="ident">HostConfigurationNotAvailable</span>,
-		<span class="doccomment">/// No validation function upgrade is currently scheduled.</span>
-		<span class="ident">NotScheduled</span>,
-		<span class="doccomment">/// No code upgrade has been authorized.</span>
-		<span class="ident">NothingAuthorized</span>,
-		<span class="doccomment">/// The given code upgrade has not been authorized.</span>
-		<span class="ident">Unauthorized</span>,
+	<span class="attribute">#[pallet::error]
+	</span><span class="kw">pub enum </span>Error&lt;T&gt; {
+		<span class="doccomment">/// Attempt to upgrade validation function while existing upgrade pending
+		</span>OverlappingUpgrades,
+		<span class="doccomment">/// Polkadot currently prohibits this parachain from upgrading its validation function
+		</span>ProhibitedByPolkadot,
+		<span class="doccomment">/// The supplied validation function has compiled into a blob larger than Polkadot is
+		/// willing to run
+		</span>TooBig,
+		<span class="doccomment">/// The inherent which supplies the validation data did not run this block
+		</span>ValidationDataNotAvailable,
+		<span class="doccomment">/// The inherent which supplies the host configuration did not run this block
+		</span>HostConfigurationNotAvailable,
+		<span class="doccomment">/// No validation function upgrade is currently scheduled.
+		</span>NotScheduled,
+		<span class="doccomment">/// No code upgrade has been authorized.
+		</span>NothingAuthorized,
+		<span class="doccomment">/// The given code upgrade has not been authorized.
+		</span>Unauthorized,
 	}
 
-	<span class="doccomment">/// In case of a scheduled upgrade, this storage field contains the validation code to be applied.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// As soon as the relay chain gives us the go-ahead signal, we will overwrite the [`:code`][well_known_keys::CODE]</span>
-	<span class="doccomment">/// which will result the next block process with the new validation code. This concludes the upgrade process.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// [well_known_keys::CODE]: sp_core::storage::well_known_keys::CODE</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::getter</span>(<span class="kw">fn</span> <span class="ident">new_validation_function</span>)]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">PendingValidationCode</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// In case of a scheduled upgrade, this storage field contains the validation code to be applied.
+	///
+	/// As soon as the relay chain gives us the go-ahead signal, we will overwrite the [`:code`][well_known_keys::CODE]
+	/// which will result the next block process with the new validation code. This concludes the upgrade process.
+	///
+	/// [well_known_keys::CODE]: sp_core::storage::well_known_keys::CODE
+	</span><span class="attribute">#[pallet::storage]
+	#[pallet::getter(<span class="kw">fn </span>new_validation_function)]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>PendingValidationCode&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, Vec&lt;u8&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// Validation code that is set by the parachain and is to be communicated to collator and</span>
-	<span class="doccomment">/// consequently the relay-chain.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This will be cleared in `on_initialize` of each new block if no other pallet already set</span>
-	<span class="doccomment">/// the value.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">NewValidationCode</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">OptionQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Validation code that is set by the parachain and is to be communicated to collator and
+	/// consequently the relay-chain.
+	///
+	/// This will be cleared in `on_initialize` of each new block if no other pallet already set
+	/// the value.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>NewValidationCode&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, Vec&lt;u8&gt;, OptionQuery&gt;;
 
-	<span class="doccomment">/// The [`PersistedValidationData`] set for this block.</span>
-	<span class="doccomment">/// This value is expected to be set only once per block and it&#39;s never stored</span>
-	<span class="doccomment">/// in the trie.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::getter</span>(<span class="kw">fn</span> <span class="ident">validation_data</span>)]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">ValidationData</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">PersistedValidationData</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The [`PersistedValidationData`] set for this block.
+	/// This value is expected to be set only once per block and it&#39;s never stored
+	/// in the trie.
+	</span><span class="attribute">#[pallet::storage]
+	#[pallet::getter(<span class="kw">fn </span>validation_data)]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>ValidationData&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, PersistedValidationData&gt;;
 
-	<span class="doccomment">/// Were the validation data set to notify the relay chain?</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">DidSetValidationCode</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">bool</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Were the validation data set to notify the relay chain?
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>DidSetValidationCode&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, bool, ValueQuery&gt;;
 
-	<span class="doccomment">/// The relay chain block number associated with the last parachain block.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">LastRelayChainBlockNumber</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">RelayChainBlockNumber</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The relay chain block number associated with the last parachain block.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>LastRelayChainBlockNumber&lt;T: Config&gt; =
+		StorageValue&lt;<span class="kw">_</span>, RelayChainBlockNumber, ValueQuery&gt;;
 
-	<span class="doccomment">/// An option which indicates if the relay-chain restricts signalling a validation code upgrade.</span>
-	<span class="doccomment">/// In other words, if this is `Some` and [`NewValidationCode`] is `Some` then the produced</span>
-	<span class="doccomment">/// candidate will be invalid.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This storage item is a mirror of the corresponding value for the current parachain from the</span>
-	<span class="doccomment">/// relay-chain. This value is ephemeral which means it doesn&#39;t hit the storage. This value is</span>
-	<span class="doccomment">/// set after the inherent.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">UpgradeRestrictionSignal</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">relay_chain::v2::UpgradeRestriction</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// An option which indicates if the relay-chain restricts signalling a validation code upgrade.
+	/// In other words, if this is `Some` and [`NewValidationCode`] is `Some` then the produced
+	/// candidate will be invalid.
+	///
+	/// This storage item is a mirror of the corresponding value for the current parachain from the
+	/// relay-chain. This value is ephemeral which means it doesn&#39;t hit the storage. This value is
+	/// set after the inherent.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>UpgradeRestrictionSignal&lt;T: Config&gt; =
+		StorageValue&lt;<span class="kw">_</span>, <span class="prelude-ty">Option</span>&lt;relay_chain::v2::UpgradeRestriction&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// The state proof for the last relay parent block.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This field is meant to be updated each block with the validation data inherent. Therefore,</span>
-	<span class="doccomment">/// before processing of the inherent, e.g. in `on_initialize` this data may be stale.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This data is also absent from the genesis.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::getter</span>(<span class="kw">fn</span> <span class="ident">relay_state_proof</span>)]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">RelayStateProof</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">sp_trie::StorageProof</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The state proof for the last relay parent block.
+	///
+	/// This field is meant to be updated each block with the validation data inherent. Therefore,
+	/// before processing of the inherent, e.g. in `on_initialize` this data may be stale.
+	///
+	/// This data is also absent from the genesis.
+	</span><span class="attribute">#[pallet::storage]
+	#[pallet::getter(<span class="kw">fn </span>relay_state_proof)]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>RelayStateProof&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, sp_trie::StorageProof&gt;;
 
-	<span class="doccomment">/// The snapshot of some state related to messaging relevant to the current parachain as per</span>
-	<span class="doccomment">/// the relay parent.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This field is meant to be updated each block with the validation data inherent. Therefore,</span>
-	<span class="doccomment">/// before processing of the inherent, e.g. in `on_initialize` this data may be stale.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This data is also absent from the genesis.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::getter</span>(<span class="kw">fn</span> <span class="ident">relevant_messaging_state</span>)]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">RelevantMessagingState</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">MessagingStateSnapshot</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The snapshot of some state related to messaging relevant to the current parachain as per
+	/// the relay parent.
+	///
+	/// This field is meant to be updated each block with the validation data inherent. Therefore,
+	/// before processing of the inherent, e.g. in `on_initialize` this data may be stale.
+	///
+	/// This data is also absent from the genesis.
+	</span><span class="attribute">#[pallet::storage]
+	#[pallet::getter(<span class="kw">fn </span>relevant_messaging_state)]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>RelevantMessagingState&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, MessagingStateSnapshot&gt;;
 
-	<span class="doccomment">/// The parachain host configuration that was obtained from the relay parent.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This field is meant to be updated each block with the validation data inherent. Therefore,</span>
-	<span class="doccomment">/// before processing of the inherent, e.g. in `on_initialize` this data may be stale.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This data is also absent from the genesis.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::getter</span>(<span class="kw">fn</span> <span class="ident">host_configuration</span>)]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">HostConfiguration</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">AbridgedHostConfiguration</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The parachain host configuration that was obtained from the relay parent.
+	///
+	/// This field is meant to be updated each block with the validation data inherent. Therefore,
+	/// before processing of the inherent, e.g. in `on_initialize` this data may be stale.
+	///
+	/// This data is also absent from the genesis.
+	</span><span class="attribute">#[pallet::storage]
+	#[pallet::getter(<span class="kw">fn </span>host_configuration)]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>HostConfiguration&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, AbridgedHostConfiguration&gt;;
 
-	<span class="doccomment">/// The last downward message queue chain head we have observed.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This value is loaded before and saved after processing inbound downward messages carried</span>
-	<span class="doccomment">/// by the system inherent.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">LastDmqMqcHead</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">MessageQueueChain</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The last downward message queue chain head we have observed.
+	///
+	/// This value is loaded before and saved after processing inbound downward messages carried
+	/// by the system inherent.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>LastDmqMqcHead&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, MessageQueueChain, ValueQuery&gt;;
 
-	<span class="doccomment">/// The message queue chain heads we have observed per each channel incoming channel.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This value is loaded before and saved after processing inbound downward messages carried</span>
-	<span class="doccomment">/// by the system inherent.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">LastHrmpMqcHeads</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ParaId</span>, <span class="ident">MessageQueueChain</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The message queue chain heads we have observed per each channel incoming channel.
+	///
+	/// This value is loaded before and saved after processing inbound downward messages carried
+	/// by the system inherent.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>LastHrmpMqcHeads&lt;T: Config&gt; =
+		StorageValue&lt;<span class="kw">_</span>, BTreeMap&lt;ParaId, MessageQueueChain&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// Number of downward messages processed in a block.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This will be cleared in `on_initialize` of each new block.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">ProcessedDownwardMessages</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">u32</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Number of downward messages processed in a block.
+	///
+	/// This will be cleared in `on_initialize` of each new block.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>ProcessedDownwardMessages&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, u32, ValueQuery&gt;;
 
-	<span class="doccomment">/// HRMP watermark that was set in a block.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This will be cleared in `on_initialize` of each new block.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">HrmpWatermark</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">relay_chain::v2::BlockNumber</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// HRMP watermark that was set in a block.
+	///
+	/// This will be cleared in `on_initialize` of each new block.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>HrmpWatermark&lt;T: Config&gt; =
+		StorageValue&lt;<span class="kw">_</span>, relay_chain::v2::BlockNumber, ValueQuery&gt;;
 
-	<span class="doccomment">/// HRMP messages that were sent in a block.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This will be cleared in `on_initialize` of each new block.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">HrmpOutboundMessages</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">OutboundHrmpMessage</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// HRMP messages that were sent in a block.
+	///
+	/// This will be cleared in `on_initialize` of each new block.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>HrmpOutboundMessages&lt;T: Config&gt; =
+		StorageValue&lt;<span class="kw">_</span>, Vec&lt;OutboundHrmpMessage&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// Upward messages that were sent in a block.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This will be cleared in `on_initialize` of each new block.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">UpwardMessages</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">UpwardMessage</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Upward messages that were sent in a block.
+	///
+	/// This will be cleared in `on_initialize` of each new block.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>UpwardMessages&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, Vec&lt;UpwardMessage&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// Upward messages that are still pending and not yet send to the relay chain.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">PendingUpwardMessages</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">UpwardMessage</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Upward messages that are still pending and not yet send to the relay chain.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>PendingUpwardMessages&lt;T: Config&gt; =
+		StorageValue&lt;<span class="kw">_</span>, Vec&lt;UpwardMessage&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// The number of HRMP messages we observed in `on_initialize` and thus used that number for</span>
-	<span class="doccomment">/// announcing the weight of `on_initialize` and `on_finalize`.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">AnnouncedHrmpMessagesPerCandidate</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">u32</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The number of HRMP messages we observed in `on_initialize` and thus used that number for
+	/// announcing the weight of `on_initialize` and `on_finalize`.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>AnnouncedHrmpMessagesPerCandidate&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, u32, ValueQuery&gt;;
 
-	<span class="doccomment">/// The weight we reserve at the beginning of the block for processing XCMP messages. This</span>
-	<span class="doccomment">/// overrides the amount set in the Config trait.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">ReservedXcmpWeightOverride</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Weight</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The weight we reserve at the beginning of the block for processing XCMP messages. This
+	/// overrides the amount set in the Config trait.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>ReservedXcmpWeightOverride&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, Weight&gt;;
 
-	<span class="doccomment">/// The weight we reserve at the beginning of the block for processing DMP messages. This</span>
-	<span class="doccomment">/// overrides the amount set in the Config trait.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">ReservedDmpWeightOverride</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Weight</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The weight we reserve at the beginning of the block for processing DMP messages. This
+	/// overrides the amount set in the Config trait.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>ReservedDmpWeightOverride&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, Weight&gt;;
 
-	<span class="doccomment">/// The next authorized upgrade, if there is one.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">AuthorizedUpgrade</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">T::Hash</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The next authorized upgrade, if there is one.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>AuthorizedUpgrade&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, T::Hash&gt;;
 
-	<span class="doccomment">/// A custom head data that should be returned as result of `validate_block`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// See [`Pallet::set_custom_validation_head_data`] for more information.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">CustomValidationHeadData</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">OptionQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// A custom head data that should be returned as result of `validate_block`.
+	///
+	/// See [`Pallet::set_custom_validation_head_data`] for more information.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>CustomValidationHeadData&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, Vec&lt;u8&gt;, OptionQuery&gt;;
 
-	<span class="attribute">#[<span class="ident">pallet::inherent</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">ProvideInherent</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="kw">type</span> <span class="ident">Call</span> <span class="op">=</span> <span class="ident">Call</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-		<span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">sp_inherents::MakeFatalError</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
-		<span class="kw">const</span> <span class="ident">INHERENT_IDENTIFIER</span>: <span class="ident">InherentIdentifier</span> <span class="op">=</span>
-			<span class="ident">cumulus_primitives_parachain_inherent::INHERENT_IDENTIFIER</span>;
+	<span class="attribute">#[pallet::inherent]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; ProvideInherent <span class="kw">for </span>Pallet&lt;T&gt; {
+		<span class="kw">type </span>Call = Call&lt;T&gt;;
+		<span class="kw">type </span>Error = sp_inherents::MakeFatalError&lt;()&gt;;
+		<span class="kw">const </span>INHERENT_IDENTIFIER: InherentIdentifier =
+			cumulus_primitives_parachain_inherent::INHERENT_IDENTIFIER;
 
-		<span class="kw">fn</span> <span class="ident">create_inherent</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">InherentData</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Call</span><span class="op">&gt;</span> {
-			<span class="kw">let</span> <span class="ident">data</span>: <span class="ident">ParachainInherentData</span> <span class="op">=</span>
-				<span class="ident">data</span>.<span class="ident">get_data</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::INHERENT_IDENTIFIER</span>).<span class="ident">ok</span>().<span class="ident">flatten</span>().<span class="ident">expect</span>(
+		<span class="kw">fn </span>create_inherent(data: <span class="kw-2">&amp;</span>InherentData) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Call&gt; {
+			<span class="kw">let </span>data: ParachainInherentData =
+				data.get_data(<span class="kw-2">&amp;</span><span class="self">Self</span>::INHERENT_IDENTIFIER).ok().flatten().expect(
 					<span class="string">&quot;validation function params are always injected into inherent data; qed&quot;</span>,
 				);
 
-			<span class="prelude-val">Some</span>(<span class="ident">Call::set_validation_data</span> { <span class="ident">data</span> })
+			<span class="prelude-val">Some</span>(Call::set_validation_data { data })
 		}
 
-		<span class="kw">fn</span> <span class="ident">is_inherent</span>(<span class="ident">call</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Call</span>) -&gt; <span class="ident">bool</span> {
-			<span class="macro">matches!</span>(<span class="ident">call</span>, <span class="ident">Call::set_validation_data</span> { .. })
-		}
-	}
-
-	<span class="attribute">#[<span class="ident">pallet::genesis_config</span>]</span>
-	<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-	<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GenesisConfig</span>;
-
-	<span class="attribute">#[<span class="ident">pallet::genesis_build</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">GenesisBuild</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GenesisConfig</span> {
-		<span class="kw">fn</span> <span class="ident">build</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-			<span class="comment">// TODO: Remove after https://github.com/paritytech/cumulus/issues/479</span>
-			<span class="ident">sp_io::storage::set</span>(<span class="string">b&quot;:c&quot;</span>, <span class="kw-2">&amp;</span>[]);
+		<span class="kw">fn </span>is_inherent(call: <span class="kw-2">&amp;</span><span class="self">Self</span>::Call) -&gt; bool {
+			<span class="macro">matches!</span>(call, Call::set_validation_data { .. })
 		}
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::validate_unsigned</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">sp_runtime::traits::ValidateUnsigned</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="kw">type</span> <span class="ident">Call</span> <span class="op">=</span> <span class="ident">Call</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
+	<span class="attribute">#[pallet::genesis_config]
+	#[derive(Default)]
+	</span><span class="kw">pub struct </span>GenesisConfig;
 
-		<span class="kw">fn</span> <span class="ident">validate_unsigned</span>(<span class="ident">_source</span>: <span class="ident">TransactionSource</span>, <span class="ident">call</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Call</span>) -&gt; <span class="ident">TransactionValidity</span> {
-			<span class="kw">if</span> <span class="kw">let</span> <span class="ident">Call::enact_authorized_upgrade</span> { <span class="kw-2">ref</span> <span class="ident">code</span> } <span class="op">=</span> <span class="ident">call</span> {
-				<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">hash</span>) <span class="op">=</span> <span class="ident"><span class="self">Self</span>::validate_authorized_upgrade</span>(<span class="ident">code</span>) {
-					<span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">ValidTransaction</span> {
-						<span class="ident">priority</span>: <span class="number">100</span>,
-						<span class="ident">requires</span>: <span class="ident">Vec::new</span>(),
-						<span class="ident">provides</span>: <span class="macro">vec!</span>[<span class="ident">hash</span>.<span class="ident">as_ref</span>().<span class="ident">to_vec</span>()],
-						<span class="ident">longevity</span>: <span class="ident">TransactionLongevity::max_value</span>(),
-						<span class="ident">propagate</span>: <span class="bool-val">true</span>,
+	<span class="attribute">#[pallet::genesis_build]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; GenesisBuild&lt;T&gt; <span class="kw">for </span>GenesisConfig {
+		<span class="kw">fn </span>build(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+			<span class="comment">// TODO: Remove after https://github.com/paritytech/cumulus/issues/479
+			</span>sp_io::storage::set(<span class="string">b&quot;:c&quot;</span>, <span class="kw-2">&amp;</span>[]);
+		}
+	}
+
+	<span class="attribute">#[pallet::validate_unsigned]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; sp_runtime::traits::ValidateUnsigned <span class="kw">for </span>Pallet&lt;T&gt; {
+		<span class="kw">type </span>Call = Call&lt;T&gt;;
+
+		<span class="kw">fn </span>validate_unsigned(_source: TransactionSource, call: <span class="kw-2">&amp;</span><span class="self">Self</span>::Call) -&gt; TransactionValidity {
+			<span class="kw">if let </span>Call::enact_authorized_upgrade { <span class="kw-2">ref </span>code } = call {
+				<span class="kw">if let </span><span class="prelude-val">Ok</span>(hash) = <span class="self">Self</span>::validate_authorized_upgrade(code) {
+					<span class="kw">return </span><span class="prelude-val">Ok</span>(ValidTransaction {
+						priority: <span class="number">100</span>,
+						requires: Vec::new(),
+						provides: <span class="macro">vec!</span>[hash.as_ref().to_vec()],
+						longevity: TransactionLongevity::max_value(),
+						propagate: <span class="bool-val">true</span>,
 					})
 				}
 			}
-			<span class="kw">if</span> <span class="kw">let</span> <span class="ident">Call::set_validation_data</span> { .. } <span class="op">=</span> <span class="ident">call</span> {
-				<span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Default::default</span>())
+			<span class="kw">if let </span>Call::set_validation_data { .. } = call {
+				<span class="kw">return </span><span class="prelude-val">Ok</span>(Default::default())
 			}
-			<span class="prelude-val">Err</span>(<span class="ident">InvalidTransaction::Call</span>.<span class="ident">into</span>())
+			<span class="prelude-val">Err</span>(InvalidTransaction::Call.into())
 		}
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">validate_authorized_upgrade</span>(<span class="ident">code</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Hash</span>, <span class="ident">DispatchError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">required_hash</span> <span class="op">=</span> <span class="ident">AuthorizedUpgrade</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">ok_or</span>(<span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::NothingAuthorized</span>)<span class="question-mark">?</span>;
-		<span class="kw">let</span> <span class="ident">actual_hash</span> <span class="op">=</span> <span class="ident">T::Hashing::hash</span>(<span class="kw-2">&amp;</span><span class="ident">code</span>[..]);
-		<span class="macro">ensure!</span>(<span class="ident">actual_hash</span> <span class="op">==</span> <span class="ident">required_hash</span>, <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::Unauthorized</span>);
-		<span class="prelude-val">Ok</span>(<span class="ident">actual_hash</span>)
+<span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+	<span class="kw">fn </span>validate_authorized_upgrade(code: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;T::Hash, DispatchError&gt; {
+		<span class="kw">let </span>required_hash = AuthorizedUpgrade::&lt;T&gt;::get().ok_or(Error::&lt;T&gt;::NothingAuthorized)<span class="question-mark">?</span>;
+		<span class="kw">let </span>actual_hash = T::Hashing::hash(<span class="kw-2">&amp;</span>code[..]);
+		<span class="macro">ensure!</span>(actual_hash == required_hash, Error::&lt;T&gt;::Unauthorized);
+		<span class="prelude-val">Ok</span>(actual_hash)
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">GetChannelInfo</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">get_channel_status</span>(<span class="ident">id</span>: <span class="ident">ParaId</span>) -&gt; <span class="ident">ChannelStatus</span> {
-		<span class="comment">// Note, that we are using `relevant_messaging_state` which may be from the previous</span>
-		<span class="comment">// block, in case this is called from `on_initialize`, i.e. before the inherent with</span>
-		<span class="comment">// fresh data is submitted.</span>
-		<span class="comment">//</span>
-		<span class="comment">// That shouldn&#39;t be a problem though because this is anticipated and already can</span>
-		<span class="comment">// happen. This is because sending implies that a message is buffered until there is</span>
-		<span class="comment">// space to send a message in the candidate. After a while waiting in a buffer, it may</span>
-		<span class="comment">// be discovered that the channel to which a message were addressed is now closed.</span>
-		<span class="comment">// Another possibility, is that the maximum message size was decreased so that a</span>
-		<span class="comment">// message in the buffer doesn&#39;t fit. Should any of that happen the sender should be</span>
-		<span class="comment">// notified about the message was discarded.</span>
-		<span class="comment">//</span>
-		<span class="comment">// Here it a similar case, with the difference that the realization that the channel is</span>
-		<span class="comment">// closed came the same block.</span>
-		<span class="kw">let</span> <span class="ident">channels</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident"><span class="self">Self</span>::relevant_messaging_state</span>() {
-			<span class="prelude-val">None</span> =&gt; {
+<span class="kw">impl</span>&lt;T: Config&gt; GetChannelInfo <span class="kw">for </span>Pallet&lt;T&gt; {
+	<span class="kw">fn </span>get_channel_status(id: ParaId) -&gt; ChannelStatus {
+		<span class="comment">// Note, that we are using `relevant_messaging_state` which may be from the previous
+		// block, in case this is called from `on_initialize`, i.e. before the inherent with
+		// fresh data is submitted.
+		//
+		// That shouldn&#39;t be a problem though because this is anticipated and already can
+		// happen. This is because sending implies that a message is buffered until there is
+		// space to send a message in the candidate. After a while waiting in a buffer, it may
+		// be discovered that the channel to which a message were addressed is now closed.
+		// Another possibility, is that the maximum message size was decreased so that a
+		// message in the buffer doesn&#39;t fit. Should any of that happen the sender should be
+		// notified about the message was discarded.
+		//
+		// Here it a similar case, with the difference that the realization that the channel is
+		// closed came the same block.
+		</span><span class="kw">let </span>channels = <span class="kw">match </span><span class="self">Self</span>::relevant_messaging_state() {
+			<span class="prelude-val">None </span>=&gt; {
 				<span class="macro">log::warn!</span>(<span class="string">&quot;calling `get_channel_status` with no RelevantMessagingState?!&quot;</span>);
-				<span class="kw">return</span> <span class="ident">ChannelStatus::Closed</span>
+				<span class="kw">return </span>ChannelStatus::Closed
 			},
-			<span class="prelude-val">Some</span>(<span class="ident">d</span>) =&gt; <span class="ident">d</span>.<span class="ident">egress_channels</span>,
+			<span class="prelude-val">Some</span>(d) =&gt; d.egress_channels,
 		};
-		<span class="comment">// ^^^ NOTE: This storage field should carry over from the previous block. So if it&#39;s</span>
-		<span class="comment">// None then it must be that this is an edge-case where a message is attempted to be</span>
-		<span class="comment">// sent at the first block. It should be safe to assume that there are no channels</span>
-		<span class="comment">// opened at all so early. At least, relying on this assumption seems to be a better</span>
-		<span class="comment">// tradeoff, compared to introducing an error variant that the clients should be</span>
-		<span class="comment">// prepared to handle.</span>
-		<span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">channels</span>.<span class="ident">binary_search_by_key</span>(<span class="kw-2">&amp;</span><span class="ident">id</span>, <span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="number">0</span>) {
-			<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return</span> <span class="ident">ChannelStatus::Closed</span>,
-			<span class="prelude-val">Ok</span>(<span class="ident">i</span>) =&gt; <span class="ident">i</span>,
+		<span class="comment">// ^^^ NOTE: This storage field should carry over from the previous block. So if it&#39;s
+		// None then it must be that this is an edge-case where a message is attempted to be
+		// sent at the first block. It should be safe to assume that there are no channels
+		// opened at all so early. At least, relying on this assumption seems to be a better
+		// tradeoff, compared to introducing an error variant that the clients should be
+		// prepared to handle.
+		</span><span class="kw">let </span>index = <span class="kw">match </span>channels.binary_search_by_key(<span class="kw-2">&amp;</span>id, |item| item.<span class="number">0</span>) {
+			<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span>ChannelStatus::Closed,
+			<span class="prelude-val">Ok</span>(i) =&gt; i,
 		};
-		<span class="kw">let</span> <span class="ident">meta</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">channels</span>[<span class="ident">index</span>].<span class="number">1</span>;
-		<span class="kw">if</span> <span class="ident">meta</span>.<span class="ident">msg_count</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&gt;</span> <span class="ident">meta</span>.<span class="ident">max_capacity</span> {
-			<span class="comment">// The channel is at its capacity. Skip it for now.</span>
-			<span class="kw">return</span> <span class="ident">ChannelStatus::Full</span>
+		<span class="kw">let </span>meta = <span class="kw-2">&amp;</span>channels[index].<span class="number">1</span>;
+		<span class="kw">if </span>meta.msg_count + <span class="number">1 </span>&gt; meta.max_capacity {
+			<span class="comment">// The channel is at its capacity. Skip it for now.
+			</span><span class="kw">return </span>ChannelStatus::Full
 		}
-		<span class="kw">let</span> <span class="ident">max_size_now</span> <span class="op">=</span> <span class="ident">meta</span>.<span class="ident">max_total_size</span> <span class="op">-</span> <span class="ident">meta</span>.<span class="ident">total_size</span>;
-		<span class="kw">let</span> <span class="ident">max_size_ever</span> <span class="op">=</span> <span class="ident">meta</span>.<span class="ident">max_message_size</span>;
-		<span class="ident">ChannelStatus::Ready</span>(<span class="ident">max_size_now</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="ident">max_size_ever</span> <span class="kw">as</span> <span class="ident">usize</span>)
+		<span class="kw">let </span>max_size_now = meta.max_total_size - meta.total_size;
+		<span class="kw">let </span>max_size_ever = meta.max_message_size;
+		ChannelStatus::Ready(max_size_now <span class="kw">as </span>usize, max_size_ever <span class="kw">as </span>usize)
 	}
 
-	<span class="kw">fn</span> <span class="ident">get_channel_max</span>(<span class="ident">id</span>: <span class="ident">ParaId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">channels</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::relevant_messaging_state</span>()<span class="question-mark">?</span>.<span class="ident">egress_channels</span>;
-		<span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">channels</span>.<span class="ident">binary_search_by_key</span>(<span class="kw-2">&amp;</span><span class="ident">id</span>, <span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="number">0</span>).<span class="ident">ok</span>()<span class="question-mark">?</span>;
-		<span class="prelude-val">Some</span>(<span class="ident">channels</span>[<span class="ident">index</span>].<span class="number">1</span>.<span class="ident">max_message_size</span> <span class="kw">as</span> <span class="ident">usize</span>)
+	<span class="kw">fn </span>get_channel_max(id: ParaId) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+		<span class="kw">let </span>channels = <span class="self">Self</span>::relevant_messaging_state()<span class="question-mark">?</span>.egress_channels;
+		<span class="kw">let </span>index = channels.binary_search_by_key(<span class="kw-2">&amp;</span>id, |item| item.<span class="number">0</span>).ok()<span class="question-mark">?</span>;
+		<span class="prelude-val">Some</span>(channels[index].<span class="number">1</span>.max_message_size <span class="kw">as </span>usize)
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// Validate the given [`PersistedValidationData`] against the</span>
-	<span class="doccomment">/// [`ValidationParams`](polkadot_parachain::primitives::ValidationParams).</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This check will only be executed when the block is currently being executed in the context</span>
-	<span class="doccomment">/// of [`validate_block`]. If this is being executed in the context of block building or block</span>
-	<span class="doccomment">/// import, this is a no-op.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// # Panics</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Panics while validating the `PoV` on the relay chain if the [`PersistedValidationData`]</span>
-	<span class="doccomment">/// passed by the block author was incorrect.</span>
-	<span class="kw">fn</span> <span class="ident">validate_validation_data</span>(<span class="ident">validation_data</span>: <span class="kw-2">&amp;</span><span class="ident">PersistedValidationData</span>) {
-		<span class="ident">validate_block::with_validation_params</span>(<span class="op">|</span><span class="ident">params</span><span class="op">|</span> {
+<span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+	<span class="doccomment">/// Validate the given [`PersistedValidationData`] against the
+	/// [`ValidationParams`](polkadot_parachain::primitives::ValidationParams).
+	///
+	/// This check will only be executed when the block is currently being executed in the context
+	/// of [`validate_block`]. If this is being executed in the context of block building or block
+	/// import, this is a no-op.
+	///
+	/// # Panics
+	///
+	/// Panics while validating the `PoV` on the relay chain if the [`PersistedValidationData`]
+	/// passed by the block author was incorrect.
+	</span><span class="kw">fn </span>validate_validation_data(validation_data: <span class="kw-2">&amp;</span>PersistedValidationData) {
+		validate_block::with_validation_params(|params| {
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">params</span>.<span class="ident">parent_head</span>, <span class="ident">validation_data</span>.<span class="ident">parent_head</span>,
-				<span class="string">&quot;Parent head doesn&#39;t match&quot;</span>
-			);
+				params.parent_head, validation_data.parent_head,
+				<span class="string">&quot;Parent head doesn&#39;t match&quot;
+			</span>);
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">params</span>.<span class="ident">relay_parent_number</span>, <span class="ident">validation_data</span>.<span class="ident">relay_parent_number</span>,
+				params.relay_parent_number, validation_data.relay_parent_number,
 				<span class="string">&quot;Relay parent number doesn&#39;t match&quot;</span>,
 			);
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">params</span>.<span class="ident">relay_parent_storage_root</span>, <span class="ident">validation_data</span>.<span class="ident">relay_parent_storage_root</span>,
+				params.relay_parent_storage_root, validation_data.relay_parent_storage_root,
 				<span class="string">&quot;Relay parent storage root doesn&#39;t match&quot;</span>,
 			);
 		});
 	}
 
-	<span class="doccomment">/// Process all inbound downward messages relayed by the collator.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Checks if the sequence of the messages is valid, dispatches them and communicates the</span>
-	<span class="doccomment">/// number of processed messages to the collator via a storage update.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// # Panics</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// If it turns out that after processing all messages the Message Queue Chain</span>
-	<span class="doccomment">/// hash doesn&#39;t match the expected.</span>
-	<span class="kw">fn</span> <span class="ident">process_inbound_downward_messages</span>(
-		<span class="ident">expected_dmq_mqc_head</span>: <span class="ident">relay_chain::Hash</span>,
-		<span class="ident">downward_messages</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundDownwardMessage</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">Weight</span> {
-		<span class="kw">let</span> <span class="ident">dm_count</span> <span class="op">=</span> <span class="ident">downward_messages</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>;
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dmq_head</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">LastDmqMqcHead</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>();
+	<span class="doccomment">/// Process all inbound downward messages relayed by the collator.
+	///
+	/// Checks if the sequence of the messages is valid, dispatches them and communicates the
+	/// number of processed messages to the collator via a storage update.
+	///
+	/// # Panics
+	///
+	/// If it turns out that after processing all messages the Message Queue Chain
+	/// hash doesn&#39;t match the expected.
+	</span><span class="kw">fn </span>process_inbound_downward_messages(
+		expected_dmq_mqc_head: relay_chain::Hash,
+		downward_messages: Vec&lt;InboundDownwardMessage&gt;,
+	) -&gt; Weight {
+		<span class="kw">let </span>dm_count = downward_messages.len() <span class="kw">as </span>u32;
+		<span class="kw">let </span><span class="kw-2">mut </span>dmq_head = &lt;LastDmqMqcHead&lt;T&gt;&gt;::get();
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">Weight::zero</span>();
-		<span class="kw">if</span> <span class="ident">dm_count</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-			<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::DownwardMessagesReceived</span> { <span class="ident">count</span>: <span class="ident">dm_count</span> });
-			<span class="kw">let</span> <span class="ident">max_weight</span> <span class="op">=</span>
-				<span class="op">&lt;</span><span class="ident">ReservedDmpWeightOverride</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">unwrap_or_else</span>(<span class="ident">T::ReservedDmpWeight::get</span>);
+		<span class="kw">let </span><span class="kw-2">mut </span>weight_used = Weight::zero();
+		<span class="kw">if </span>dm_count != <span class="number">0 </span>{
+			<span class="self">Self</span>::deposit_event(Event::DownwardMessagesReceived { count: dm_count });
+			<span class="kw">let </span>max_weight =
+				&lt;ReservedDmpWeightOverride&lt;T&gt;&gt;::get().unwrap_or_else(T::ReservedDmpWeight::get);
 
-			<span class="kw">let</span> <span class="ident">message_iter</span> <span class="op">=</span> <span class="ident">downward_messages</span>
-				.<span class="ident">into_iter</span>()
-				.<span class="ident">inspect</span>(<span class="op">|</span><span class="ident">m</span><span class="op">|</span> {
-					<span class="ident">dmq_head</span>.<span class="ident">extend_downward</span>(<span class="ident">m</span>);
+			<span class="kw">let </span>message_iter = downward_messages
+				.into_iter()
+				.inspect(|m| {
+					dmq_head.extend_downward(m);
 				})
-				.<span class="ident">map</span>(<span class="op">|</span><span class="ident">m</span><span class="op">|</span> (<span class="ident">m</span>.<span class="ident">sent_at</span>, <span class="ident">m</span>.<span class="ident">msg</span>));
-			<span class="ident">weight_used</span> <span class="op">+</span><span class="op">=</span> <span class="ident">T::DmpMessageHandler::handle_dmp_messages</span>(<span class="ident">message_iter</span>, <span class="ident">max_weight</span>);
-			<span class="op">&lt;</span><span class="ident">LastDmqMqcHead</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="kw-2">&amp;</span><span class="ident">dmq_head</span>);
+				.map(|m| (m.sent_at, m.msg));
+			weight_used += T::DmpMessageHandler::handle_dmp_messages(message_iter, max_weight);
+			&lt;LastDmqMqcHead&lt;T&gt;&gt;::put(<span class="kw-2">&amp;</span>dmq_head);
 
-			<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::DownwardMessagesProcessed</span> {
-				<span class="ident">weight_used</span>,
-				<span class="ident">dmq_head</span>: <span class="ident">dmq_head</span>.<span class="ident">head</span>(),
+			<span class="self">Self</span>::deposit_event(Event::DownwardMessagesProcessed {
+				weight_used,
+				dmq_head: dmq_head.head(),
 			});
 		}
 
-		<span class="comment">// After hashing each message in the message queue chain submitted by the collator, we</span>
-		<span class="comment">// should arrive to the MQC head provided by the relay chain.</span>
-		<span class="comment">//</span>
-		<span class="comment">// A mismatch means that at least some of the submitted messages were altered, omitted or</span>
-		<span class="comment">// added improperly.</span>
-		<span class="macro">assert_eq!</span>(<span class="ident">dmq_head</span>.<span class="ident">head</span>(), <span class="ident">expected_dmq_mqc_head</span>);
+		<span class="comment">// After hashing each message in the message queue chain submitted by the collator, we
+		// should arrive to the MQC head provided by the relay chain.
+		//
+		// A mismatch means that at least some of the submitted messages were altered, omitted or
+		// added improperly.
+		</span><span class="macro">assert_eq!</span>(dmq_head.head(), expected_dmq_mqc_head);
 
-		<span class="ident">ProcessedDownwardMessages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">dm_count</span>);
+		ProcessedDownwardMessages::&lt;T&gt;::put(dm_count);
 
-		<span class="ident">weight_used</span>
+		weight_used
 	}
 
-	<span class="doccomment">/// Process all inbound horizontal messages relayed by the collator.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This is similar to [`process_inbound_downward_messages`], but works on multiple inbound</span>
-	<span class="doccomment">/// channels.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// **Panics** if either any of horizontal messages submitted by the collator was sent from</span>
-	<span class="doccomment">///            a para which has no open channel to this parachain or if after processing</span>
-	<span class="doccomment">///            messages across all inbound channels MQCs were obtained which do not</span>
-	<span class="doccomment">///            correspond to the ones found on the relay-chain.</span>
-	<span class="kw">fn</span> <span class="ident">process_inbound_horizontal_messages</span>(
-		<span class="ident">ingress_channels</span>: <span class="kw-2">&amp;</span>[(<span class="ident">ParaId</span>, <span class="ident">cumulus_primitives_core::AbridgedHrmpChannel</span>)],
-		<span class="ident">horizontal_messages</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ParaId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundHrmpMessage</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">relay_parent_number</span>: <span class="ident">relay_chain::v2::BlockNumber</span>,
-	) -&gt; <span class="ident">Weight</span> {
-		<span class="comment">// First, check that all submitted messages are sent from channels that exist. The</span>
-		<span class="comment">// channel exists if its MQC head is present in `vfp.hrmp_mqc_heads`.</span>
-		<span class="kw">for</span> <span class="ident">sender</span> <span class="kw">in</span> <span class="ident">horizontal_messages</span>.<span class="ident">keys</span>() {
-			<span class="comment">// A violation of the assertion below indicates that one of the messages submitted</span>
-			<span class="comment">// by the collator was sent from a sender that doesn&#39;t have a channel opened to</span>
-			<span class="comment">// this parachain, according to the relay-parent state.</span>
-			<span class="macro">assert!</span>(<span class="ident">ingress_channels</span>.<span class="ident">binary_search_by_key</span>(<span class="ident">sender</span>, <span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">s</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">s</span>).<span class="ident">is_ok</span>(),);
+	<span class="doccomment">/// Process all inbound horizontal messages relayed by the collator.
+	///
+	/// This is similar to [`process_inbound_downward_messages`], but works on multiple inbound
+	/// channels.
+	///
+	/// **Panics** if either any of horizontal messages submitted by the collator was sent from
+	///            a para which has no open channel to this parachain or if after processing
+	///            messages across all inbound channels MQCs were obtained which do not
+	///            correspond to the ones found on the relay-chain.
+	</span><span class="kw">fn </span>process_inbound_horizontal_messages(
+		ingress_channels: <span class="kw-2">&amp;</span>[(ParaId, cumulus_primitives_core::AbridgedHrmpChannel)],
+		horizontal_messages: BTreeMap&lt;ParaId, Vec&lt;InboundHrmpMessage&gt;&gt;,
+		relay_parent_number: relay_chain::v2::BlockNumber,
+	) -&gt; Weight {
+		<span class="comment">// First, check that all submitted messages are sent from channels that exist. The
+		// channel exists if its MQC head is present in `vfp.hrmp_mqc_heads`.
+		</span><span class="kw">for </span>sender <span class="kw">in </span>horizontal_messages.keys() {
+			<span class="comment">// A violation of the assertion below indicates that one of the messages submitted
+			// by the collator was sent from a sender that doesn&#39;t have a channel opened to
+			// this parachain, according to the relay-parent state.
+			</span><span class="macro">assert!</span>(ingress_channels.binary_search_by_key(sender, |<span class="kw-2">&amp;</span>(s, <span class="kw">_</span>)| s).is_ok(),);
 		}
 
-		<span class="comment">// Second, prepare horizontal messages for a more convenient processing:</span>
-		<span class="comment">//</span>
-		<span class="comment">// instead of a mapping from a para to a list of inbound HRMP messages, we will have a</span>
-		<span class="comment">// list of tuples `(sender, message)` first ordered by `sent_at` (the relay chain block</span>
-		<span class="comment">// number in which the message hit the relay-chain) and second ordered by para id</span>
-		<span class="comment">// ascending.</span>
-		<span class="comment">//</span>
-		<span class="comment">// The messages will be dispatched in this order.</span>
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">horizontal_messages</span> <span class="op">=</span> <span class="ident">horizontal_messages</span>
-			.<span class="ident">into_iter</span>()
-			.<span class="ident">flat_map</span>(<span class="op">|</span>(<span class="ident">sender</span>, <span class="ident">channel_contents</span>)<span class="op">|</span> {
-				<span class="ident">channel_contents</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">message</span><span class="op">|</span> (<span class="ident">sender</span>, <span class="ident">message</span>))
+		<span class="comment">// Second, prepare horizontal messages for a more convenient processing:
+		//
+		// instead of a mapping from a para to a list of inbound HRMP messages, we will have a
+		// list of tuples `(sender, message)` first ordered by `sent_at` (the relay chain block
+		// number in which the message hit the relay-chain) and second ordered by para id
+		// ascending.
+		//
+		// The messages will be dispatched in this order.
+		</span><span class="kw">let </span><span class="kw-2">mut </span>horizontal_messages = horizontal_messages
+			.into_iter()
+			.flat_map(|(sender, channel_contents)| {
+				channel_contents.into_iter().map(<span class="kw">move </span>|message| (sender, message))
 			})
-			.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-		<span class="ident">horizontal_messages</span>.<span class="ident">sort_by</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> {
-			<span class="comment">// first sort by sent-at and then by the para id</span>
-			<span class="kw">match</span> <span class="ident">a</span>.<span class="number">1</span>.<span class="ident">sent_at</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="number">1</span>.<span class="ident">sent_at</span>) {
-				<span class="ident">cmp::Ordering::Equal</span> =&gt; <span class="ident">a</span>.<span class="number">0</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="number">0</span>),
-				<span class="ident">ord</span> =&gt; <span class="ident">ord</span>,
+			.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+		horizontal_messages.sort_by(|a, b| {
+			<span class="comment">// first sort by sent-at and then by the para id
+			</span><span class="kw">match </span>a.<span class="number">1</span>.sent_at.cmp(<span class="kw-2">&amp;</span>b.<span class="number">1</span>.sent_at) {
+				cmp::Ordering::Equal =&gt; a.<span class="number">0</span>.cmp(<span class="kw-2">&amp;</span>b.<span class="number">0</span>),
+				ord =&gt; ord,
 			}
 		});
 
-		<span class="kw">let</span> <span class="ident">last_mqc_heads</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">LastHrmpMqcHeads</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>();
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">running_mqc_heads</span> <span class="op">=</span> <span class="ident">BTreeMap::new</span>();
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hrmp_watermark</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+		<span class="kw">let </span>last_mqc_heads = &lt;LastHrmpMqcHeads&lt;T&gt;&gt;::get();
+		<span class="kw">let </span><span class="kw-2">mut </span>running_mqc_heads = BTreeMap::new();
+		<span class="kw">let </span><span class="kw-2">mut </span>hrmp_watermark = <span class="prelude-val">None</span>;
 
 		{
-			<span class="kw">for</span> (<span class="ident">sender</span>, <span class="kw-2">ref</span> <span class="ident">horizontal_message</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">horizontal_messages</span> {
-				<span class="kw">if</span> <span class="ident">hrmp_watermark</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">w</span><span class="op">|</span> <span class="ident">w</span> <span class="op">&lt;</span> <span class="ident">horizontal_message</span>.<span class="ident">sent_at</span>).<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>) {
-					<span class="ident">hrmp_watermark</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">horizontal_message</span>.<span class="ident">sent_at</span>);
+			<span class="kw">for </span>(sender, <span class="kw-2">ref </span>horizontal_message) <span class="kw">in </span><span class="kw-2">&amp;</span>horizontal_messages {
+				<span class="kw">if </span>hrmp_watermark.map(|w| w &lt; horizontal_message.sent_at).unwrap_or(<span class="bool-val">true</span>) {
+					hrmp_watermark = <span class="prelude-val">Some</span>(horizontal_message.sent_at);
 				}
 
-				<span class="ident">running_mqc_heads</span>
-					.<span class="ident">entry</span>(<span class="ident">sender</span>)
-					.<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">last_mqc_heads</span>.<span class="ident">get</span>(<span class="ident">sender</span>).<span class="ident">cloned</span>().<span class="ident">unwrap_or_default</span>())
-					.<span class="ident">extend_hrmp</span>(<span class="ident">horizontal_message</span>);
+				running_mqc_heads
+					.entry(sender)
+					.or_insert_with(|| last_mqc_heads.get(sender).cloned().unwrap_or_default())
+					.extend_hrmp(horizontal_message);
 			}
 		}
-		<span class="kw">let</span> <span class="ident">message_iter</span> <span class="op">=</span> <span class="ident">horizontal_messages</span>
-			.<span class="ident">iter</span>()
-			.<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">sender</span>, <span class="kw-2">ref</span> <span class="ident">message</span>)<span class="op">|</span> (<span class="ident">sender</span>, <span class="ident">message</span>.<span class="ident">sent_at</span>, <span class="kw-2">&amp;</span><span class="ident">message</span>.<span class="ident">data</span>[..]));
+		<span class="kw">let </span>message_iter = horizontal_messages
+			.iter()
+			.map(|<span class="kw-2">&amp;</span>(sender, <span class="kw-2">ref </span>message)| (sender, message.sent_at, <span class="kw-2">&amp;</span>message.data[..]));
 
-		<span class="kw">let</span> <span class="ident">max_weight</span> <span class="op">=</span>
-			<span class="op">&lt;</span><span class="ident">ReservedXcmpWeightOverride</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">unwrap_or_else</span>(<span class="ident">T::ReservedXcmpWeight::get</span>);
-		<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">T::XcmpMessageHandler::handle_xcmp_messages</span>(<span class="ident">message_iter</span>, <span class="ident">max_weight</span>);
+		<span class="kw">let </span>max_weight =
+			&lt;ReservedXcmpWeightOverride&lt;T&gt;&gt;::get().unwrap_or_else(T::ReservedXcmpWeight::get);
+		<span class="kw">let </span>weight_used = T::XcmpMessageHandler::handle_xcmp_messages(message_iter, max_weight);
 
-		<span class="comment">// Check that the MQC heads for each channel provided by the relay chain match the MQC</span>
-		<span class="comment">// heads we have after processing all incoming messages.</span>
-		<span class="comment">//</span>
-		<span class="comment">// Along the way we also carry over the relevant entries from the `last_mqc_heads` to</span>
-		<span class="comment">// `running_mqc_heads`. Otherwise, in a block where no messages were sent in a channel</span>
-		<span class="comment">// it won&#39;t get into next block&#39;s `last_mqc_heads` and thus will be all zeros, which</span>
-		<span class="comment">// would corrupt the message queue chain.</span>
-		<span class="kw">for</span> <span class="kw-2">&amp;</span>(<span class="kw-2">ref</span> <span class="ident">sender</span>, <span class="kw-2">ref</span> <span class="ident">channel</span>) <span class="kw">in</span> <span class="ident">ingress_channels</span> {
-			<span class="kw">let</span> <span class="ident">cur_head</span> <span class="op">=</span> <span class="ident">running_mqc_heads</span>
-				.<span class="ident">entry</span>(<span class="ident">sender</span>)
-				.<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">last_mqc_heads</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">sender</span>).<span class="ident">cloned</span>().<span class="ident">unwrap_or_default</span>())
-				.<span class="ident">head</span>();
-			<span class="kw">let</span> <span class="ident">target_head</span> <span class="op">=</span> <span class="ident">channel</span>.<span class="ident">mqc_head</span>.<span class="ident">unwrap_or_default</span>();
+		<span class="comment">// Check that the MQC heads for each channel provided by the relay chain match the MQC
+		// heads we have after processing all incoming messages.
+		//
+		// Along the way we also carry over the relevant entries from the `last_mqc_heads` to
+		// `running_mqc_heads`. Otherwise, in a block where no messages were sent in a channel
+		// it won&#39;t get into next block&#39;s `last_mqc_heads` and thus will be all zeros, which
+		// would corrupt the message queue chain.
+		</span><span class="kw">for </span><span class="kw-2">&amp;</span>(<span class="kw-2">ref </span>sender, <span class="kw-2">ref </span>channel) <span class="kw">in </span>ingress_channels {
+			<span class="kw">let </span>cur_head = running_mqc_heads
+				.entry(sender)
+				.or_insert_with(|| last_mqc_heads.get(<span class="kw-2">&amp;</span>sender).cloned().unwrap_or_default())
+				.head();
+			<span class="kw">let </span>target_head = channel.mqc_head.unwrap_or_default();
 
-			<span class="macro">assert!</span>(<span class="ident">cur_head</span> <span class="op">==</span> <span class="ident">target_head</span>);
+			<span class="macro">assert!</span>(cur_head == target_head);
 		}
 
-		<span class="op">&lt;</span><span class="ident">LastHrmpMqcHeads</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">running_mqc_heads</span>);
+		&lt;LastHrmpMqcHeads&lt;T&gt;&gt;::put(running_mqc_heads);
 
-		<span class="comment">// If we processed at least one message, then advance watermark to that location or if there</span>
-		<span class="comment">// were no messages, set it to the block number of the relay parent.</span>
-		<span class="ident">HrmpWatermark</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">hrmp_watermark</span>.<span class="ident">unwrap_or</span>(<span class="ident">relay_parent_number</span>));
+		<span class="comment">// If we processed at least one message, then advance watermark to that location or if there
+		// were no messages, set it to the block number of the relay parent.
+		</span>HrmpWatermark::&lt;T&gt;::put(hrmp_watermark.unwrap_or(relay_parent_number));
 
-		<span class="ident">weight_used</span>
+		weight_used
 	}
 
-	<span class="doccomment">/// Put a new validation function into a particular location where polkadot</span>
-	<span class="doccomment">/// monitors for updates. Calling this function notifies polkadot that a new</span>
-	<span class="doccomment">/// upgrade has been scheduled.</span>
-	<span class="kw">fn</span> <span class="ident">notify_polkadot_of_pending_upgrade</span>(<span class="ident">code</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) {
-		<span class="ident">NewValidationCode</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">code</span>);
-		<span class="op">&lt;</span><span class="ident">DidSetValidationCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="bool-val">true</span>);
+	<span class="doccomment">/// Put a new validation function into a particular location where polkadot
+	/// monitors for updates. Calling this function notifies polkadot that a new
+	/// upgrade has been scheduled.
+	</span><span class="kw">fn </span>notify_polkadot_of_pending_upgrade(code: <span class="kw-2">&amp;</span>[u8]) {
+		NewValidationCode::&lt;T&gt;::put(code);
+		&lt;DidSetValidationCode&lt;T&gt;&gt;::put(<span class="bool-val">true</span>);
 	}
 
-	<span class="doccomment">/// Put a new validation function into a particular location where this</span>
-	<span class="doccomment">/// parachain will execute it on subsequent blocks.</span>
-	<span class="kw">fn</span> <span class="ident">put_parachain_code</span>(<span class="ident">code</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) {
-		<span class="ident">storage::unhashed::put_raw</span>(<span class="ident">sp_core::storage::well_known_keys::CODE</span>, <span class="ident">code</span>);
+	<span class="doccomment">/// Put a new validation function into a particular location where this
+	/// parachain will execute it on subsequent blocks.
+	</span><span class="kw">fn </span>put_parachain_code(code: <span class="kw-2">&amp;</span>[u8]) {
+		storage::unhashed::put_raw(sp_core::storage::well_known_keys::CODE, code);
 	}
 
-	<span class="doccomment">/// The maximum code size permitted, in bytes.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns `None` if the relay chain parachain host configuration hasn&#39;t been submitted yet.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">max_code_size</span>() -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-		<span class="op">&lt;</span><span class="ident">HostConfiguration</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">cfg</span><span class="op">|</span> <span class="ident">cfg</span>.<span class="ident">max_code_size</span>)
+	<span class="doccomment">/// The maximum code size permitted, in bytes.
+	///
+	/// Returns `None` if the relay chain parachain host configuration hasn&#39;t been submitted yet.
+	</span><span class="kw">pub fn </span>max_code_size() -&gt; <span class="prelude-ty">Option</span>&lt;u32&gt; {
+		&lt;HostConfiguration&lt;T&gt;&gt;::get().map(|cfg| cfg.max_code_size)
 	}
 
-	<span class="doccomment">/// The implementation of the runtime upgrade functionality for parachains.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schedule_code_upgrade</span>(<span class="ident">validation_function</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="ident">DispatchResult</span> {
-		<span class="comment">// Ensure that `ValidationData` exists. We do not care about the validation data per se,</span>
-		<span class="comment">// but we do care about the [`UpgradeRestrictionSignal`] which arrives with the same inherent.</span>
-		<span class="macro">ensure!</span>(<span class="op">&lt;</span><span class="ident">ValidationData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::exists</span>(), <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::ValidationDataNotAvailable</span>,);
-		<span class="macro">ensure!</span>(<span class="op">&lt;</span><span class="ident">UpgradeRestrictionSignal</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">is_none</span>(), <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::ProhibitedByPolkadot</span>);
+	<span class="doccomment">/// The implementation of the runtime upgrade functionality for parachains.
+	</span><span class="kw">pub fn </span>schedule_code_upgrade(validation_function: Vec&lt;u8&gt;) -&gt; DispatchResult {
+		<span class="comment">// Ensure that `ValidationData` exists. We do not care about the validation data per se,
+		// but we do care about the [`UpgradeRestrictionSignal`] which arrives with the same inherent.
+		</span><span class="macro">ensure!</span>(&lt;ValidationData&lt;T&gt;&gt;::exists(), Error::&lt;T&gt;::ValidationDataNotAvailable,);
+		<span class="macro">ensure!</span>(&lt;UpgradeRestrictionSignal&lt;T&gt;&gt;::get().is_none(), Error::&lt;T&gt;::ProhibitedByPolkadot);
 
-		<span class="macro">ensure!</span>(<span class="op">!</span><span class="op">&lt;</span><span class="ident">PendingValidationCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::exists</span>(), <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::OverlappingUpgrades</span>);
-		<span class="kw">let</span> <span class="ident">cfg</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::host_configuration</span>().<span class="ident">ok_or</span>(<span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::HostConfigurationNotAvailable</span>)<span class="question-mark">?</span>;
-		<span class="macro">ensure!</span>(<span class="ident">validation_function</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">cfg</span>.<span class="ident">max_code_size</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::TooBig</span>);
+		<span class="macro">ensure!</span>(!&lt;PendingValidationCode&lt;T&gt;&gt;::exists(), Error::&lt;T&gt;::OverlappingUpgrades);
+		<span class="kw">let </span>cfg = <span class="self">Self</span>::host_configuration().ok_or(Error::&lt;T&gt;::HostConfigurationNotAvailable)<span class="question-mark">?</span>;
+		<span class="macro">ensure!</span>(validation_function.len() &lt;= cfg.max_code_size <span class="kw">as </span>usize, Error::&lt;T&gt;::TooBig);
 
-		<span class="comment">// When a code upgrade is scheduled, it has to be applied in two</span>
-		<span class="comment">// places, synchronized: both polkadot and the individual parachain</span>
-		<span class="comment">// have to upgrade on the same relay chain block.</span>
-		<span class="comment">//</span>
-		<span class="comment">// `notify_polkadot_of_pending_upgrade` notifies polkadot; the `PendingValidationCode`</span>
-		<span class="comment">// storage keeps track locally for the parachain upgrade, which will</span>
-		<span class="comment">// be applied later: when the relay-chain communicates go-ahead signal to us.</span>
-		<span class="ident"><span class="self">Self</span>::notify_polkadot_of_pending_upgrade</span>(<span class="kw-2">&amp;</span><span class="ident">validation_function</span>);
-		<span class="op">&lt;</span><span class="ident">PendingValidationCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">validation_function</span>);
-		<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::ValidationFunctionStored</span>);
+		<span class="comment">// When a code upgrade is scheduled, it has to be applied in two
+		// places, synchronized: both polkadot and the individual parachain
+		// have to upgrade on the same relay chain block.
+		//
+		// `notify_polkadot_of_pending_upgrade` notifies polkadot; the `PendingValidationCode`
+		// storage keeps track locally for the parachain upgrade, which will
+		// be applied later: when the relay-chain communicates go-ahead signal to us.
+		</span><span class="self">Self</span>::notify_polkadot_of_pending_upgrade(<span class="kw-2">&amp;</span>validation_function);
+		&lt;PendingValidationCode&lt;T&gt;&gt;::put(validation_function);
+		<span class="self">Self</span>::deposit_event(Event::ValidationFunctionStored);
 
 		<span class="prelude-val">Ok</span>(())
 	}
 
-	<span class="doccomment">/// Returns the [`CollationInfo`] of the current active block.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The given `header` is the header of the built block we are collecting the collation info for.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This is expected to be used by the</span>
-	<span class="doccomment">/// [`CollectCollationInfo`](cumulus_primitives_core::CollectCollationInfo) runtime api.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">collect_collation_info</span>(<span class="ident">header</span>: <span class="kw-2">&amp;</span><span class="ident">T::Header</span>) -&gt; <span class="ident">CollationInfo</span> {
-		<span class="ident">CollationInfo</span> {
-			<span class="ident">hrmp_watermark</span>: <span class="ident">HrmpWatermark</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>(),
-			<span class="ident">horizontal_messages</span>: <span class="ident">HrmpOutboundMessages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>(),
-			<span class="ident">upward_messages</span>: <span class="ident">UpwardMessages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>(),
-			<span class="ident">processed_downward_messages</span>: <span class="ident">ProcessedDownwardMessages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>(),
-			<span class="ident">new_validation_code</span>: <span class="ident">NewValidationCode</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">map</span>(<span class="ident">Into::into</span>),
-			<span class="comment">// Check if there is a custom header that will also be returned by the validation phase.</span>
-			<span class="comment">// If so, we need to also return it here.</span>
-			<span class="ident">head_data</span>: <span class="ident">CustomValidationHeadData</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>()
-				.<span class="ident">map_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">header</span>.<span class="ident">encode</span>(), <span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>)
-				.<span class="ident">into</span>(),
+	<span class="doccomment">/// Returns the [`CollationInfo`] of the current active block.
+	///
+	/// The given `header` is the header of the built block we are collecting the collation info for.
+	///
+	/// This is expected to be used by the
+	/// [`CollectCollationInfo`](cumulus_primitives_core::CollectCollationInfo) runtime api.
+	</span><span class="kw">pub fn </span>collect_collation_info(header: <span class="kw-2">&amp;</span>T::Header) -&gt; CollationInfo {
+		CollationInfo {
+			hrmp_watermark: HrmpWatermark::&lt;T&gt;::get(),
+			horizontal_messages: HrmpOutboundMessages::&lt;T&gt;::get(),
+			upward_messages: UpwardMessages::&lt;T&gt;::get(),
+			processed_downward_messages: ProcessedDownwardMessages::&lt;T&gt;::get(),
+			new_validation_code: NewValidationCode::&lt;T&gt;::get().map(Into::into),
+			<span class="comment">// Check if there is a custom header that will also be returned by the validation phase.
+			// If so, we need to also return it here.
+			</span>head_data: CustomValidationHeadData::&lt;T&gt;::get()
+				.map_or_else(|| header.encode(), |v| v)
+				.into(),
 		}
 	}
 
-	<span class="doccomment">/// Set a custom head data that should be returned as result of `validate_block`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This will overwrite the head data that is returned as result of `validate_block` while</span>
-	<span class="doccomment">/// validating a `PoV` on the relay chain. Normally the head data that is being returned</span>
-	<span class="doccomment">/// by `validate_block` is the header of the block that is validated, thus it can be</span>
-	<span class="doccomment">/// enacted as the new best block. However, for features like forking it can be useful</span>
-	<span class="doccomment">/// to overwrite the head data with a custom header.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// # Attention</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This should only be used when you are sure what you are doing as this can brick</span>
-	<span class="doccomment">/// your Parachain.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_custom_validation_head_data</span>(<span class="ident">head_data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) {
-		<span class="ident">CustomValidationHeadData</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">head_data</span>);
+	<span class="doccomment">/// Set a custom head data that should be returned as result of `validate_block`.
+	///
+	/// This will overwrite the head data that is returned as result of `validate_block` while
+	/// validating a `PoV` on the relay chain. Normally the head data that is being returned
+	/// by `validate_block` is the header of the block that is validated, thus it can be
+	/// enacted as the new best block. However, for features like forking it can be useful
+	/// to overwrite the head data with a custom header.
+	///
+	/// # Attention
+	///
+	/// This should only be used when you are sure what you are doing as this can brick
+	/// your Parachain.
+	</span><span class="kw">pub fn </span>set_custom_validation_head_data(head_data: Vec&lt;u8&gt;) {
+		CustomValidationHeadData::&lt;T&gt;::put(head_data);
 	}
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ParachainSetCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">sp_std::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
+<span class="kw">pub struct </span>ParachainSetCode&lt;T&gt;(sp_std::marker::PhantomData&lt;T&gt;);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">frame_system::SetCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ParachainSetCode</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">set_code</span>(<span class="ident">code</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="ident">DispatchResult</span> {
-		<span class="ident">Pallet</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::schedule_code_upgrade</span>(<span class="ident">code</span>)
+<span class="kw">impl</span>&lt;T: Config&gt; frame_system::SetCode&lt;T&gt; <span class="kw">for </span>ParachainSetCode&lt;T&gt; {
+	<span class="kw">fn </span>set_code(code: Vec&lt;u8&gt;) -&gt; DispatchResult {
+		Pallet::&lt;T&gt;::schedule_code_upgrade(code)
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">send_upward_message</span>(<span class="ident">message</span>: <span class="ident">UpwardMessage</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">MessageSendError</span><span class="op">&gt;</span> {
-		<span class="comment">// Check if the message fits into the relay-chain constraints.</span>
-		<span class="comment">//</span>
-		<span class="comment">// Note, that we are using `host_configuration` here which may be from the previous</span>
-		<span class="comment">// block, in case this is called from `on_initialize`, i.e. before the inherent with fresh</span>
-		<span class="comment">// data is submitted.</span>
-		<span class="comment">//</span>
-		<span class="comment">// That shouldn&#39;t be a problem since this is a preliminary check and the actual check would</span>
-		<span class="comment">// be performed just before submitting the message from the candidate, and it already can</span>
-		<span class="comment">// happen that during the time the message is buffered for sending the relay-chain setting</span>
-		<span class="comment">// may change so that the message is no longer valid.</span>
-		<span class="comment">//</span>
-		<span class="comment">// However, changing this setting is expected to be rare.</span>
-		<span class="kw">match</span> <span class="ident"><span class="self">Self</span>::host_configuration</span>() {
-			<span class="prelude-val">Some</span>(<span class="ident">cfg</span>) =&gt;
-				<span class="kw">if</span> <span class="ident">message</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">cfg</span>.<span class="ident">max_upward_message_size</span> <span class="kw">as</span> <span class="ident">usize</span> {
-					<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MessageSendError::TooBig</span>)
+<span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+	<span class="kw">pub fn </span>send_upward_message(message: UpwardMessage) -&gt; <span class="prelude-ty">Result</span>&lt;u32, MessageSendError&gt; {
+		<span class="comment">// Check if the message fits into the relay-chain constraints.
+		//
+		// Note, that we are using `host_configuration` here which may be from the previous
+		// block, in case this is called from `on_initialize`, i.e. before the inherent with fresh
+		// data is submitted.
+		//
+		// That shouldn&#39;t be a problem since this is a preliminary check and the actual check would
+		// be performed just before submitting the message from the candidate, and it already can
+		// happen that during the time the message is buffered for sending the relay-chain setting
+		// may change so that the message is no longer valid.
+		//
+		// However, changing this setting is expected to be rare.
+		</span><span class="kw">match </span><span class="self">Self</span>::host_configuration() {
+			<span class="prelude-val">Some</span>(cfg) =&gt;
+				<span class="kw">if </span>message.len() &gt; cfg.max_upward_message_size <span class="kw">as </span>usize {
+					<span class="kw">return </span><span class="prelude-val">Err</span>(MessageSendError::TooBig)
 				},
-			<span class="prelude-val">None</span> =&gt; {
-				<span class="comment">// This storage field should carry over from the previous block. So if it&#39;s None</span>
-				<span class="comment">// then it must be that this is an edge-case where a message is attempted to be</span>
-				<span class="comment">// sent at the first block.</span>
-				<span class="comment">//</span>
-				<span class="comment">// Let&#39;s pass this message through. I think it&#39;s not unreasonable to expect that</span>
-				<span class="comment">// the message is not huge and it comes through, but if it doesn&#39;t it can be</span>
-				<span class="comment">// returned back to the sender.</span>
-				<span class="comment">//</span>
-				<span class="comment">// Thus fall through here.</span>
-			},
+			<span class="prelude-val">None </span>=&gt; {
+				<span class="comment">// This storage field should carry over from the previous block. So if it&#39;s None
+				// then it must be that this is an edge-case where a message is attempted to be
+				// sent at the first block.
+				//
+				// Let&#39;s pass this message through. I think it&#39;s not unreasonable to expect that
+				// the message is not huge and it comes through, but if it doesn&#39;t it can be
+				// returned back to the sender.
+				//
+				// Thus fall through here.
+			</span>},
 		};
-		<span class="op">&lt;</span><span class="ident">PendingUpwardMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::append</span>(<span class="ident">message</span>);
+		&lt;PendingUpwardMessages&lt;T&gt;&gt;::append(message);
 		<span class="prelude-val">Ok</span>(<span class="number">0</span>)
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">UpwardMessageSender</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">send_upward_message</span>(<span class="ident">message</span>: <span class="ident">UpwardMessage</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">MessageSendError</span><span class="op">&gt;</span> {
-		<span class="ident"><span class="self">Self</span>::send_upward_message</span>(<span class="ident">message</span>)
+<span class="kw">impl</span>&lt;T: Config&gt; UpwardMessageSender <span class="kw">for </span>Pallet&lt;T&gt; {
+	<span class="kw">fn </span>send_upward_message(message: UpwardMessage) -&gt; <span class="prelude-ty">Result</span>&lt;u32, MessageSendError&gt; {
+		<span class="self">Self</span>::send_upward_message(message)
 	}
 }
 
-<span class="doccomment">/// Something that can check the inherents of a block.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CheckInherents</span><span class="op">&lt;</span><span class="ident">Block</span>: <span class="ident">BlockT</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// Check all inherents of the block.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This function gets passed all the extrinsics of the block, so it is up to the callee to</span>
-	<span class="doccomment">/// identify the inherents. The `validation_data` can be used to access the</span>
-	<span class="kw">fn</span> <span class="ident">check_inherents</span>(
-		<span class="ident">block</span>: <span class="kw-2">&amp;</span><span class="ident">Block</span>,
-		<span class="ident">validation_data</span>: <span class="kw-2">&amp;</span><span class="ident">RelayChainStateProof</span>,
-	) -&gt; <span class="ident">frame_support::inherent::CheckInherentsResult</span>;
+<span class="doccomment">/// Something that can check the inherents of a block.
+</span><span class="kw">pub trait </span>CheckInherents&lt;Block: BlockT&gt; {
+	<span class="doccomment">/// Check all inherents of the block.
+	///
+	/// This function gets passed all the extrinsics of the block, so it is up to the callee to
+	/// identify the inherents. The `validation_data` can be used to access the
+	</span><span class="kw">fn </span>check_inherents(
+		block: <span class="kw-2">&amp;</span>Block,
+		validation_data: <span class="kw-2">&amp;</span>RelayChainStateProof,
+	) -&gt; frame_support::inherent::CheckInherentsResult;
 }
 
-<span class="doccomment">/// Something that should be informed about system related events.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This includes events like [`on_validation_data`](Self::on_validation_data) that is being</span>
-<span class="doccomment">/// called when the parachain inherent is executed that contains the validation data.</span>
-<span class="doccomment">/// Or like [`on_validation_code_applied`](Self::on_validation_code_applied) that is called</span>
-<span class="doccomment">/// when the new validation is written to the state. This means that</span>
-<span class="doccomment">/// from the next block the runtime is being using this new code.</span>
-<span class="attribute">#[<span class="ident">impl_trait_for_tuples::impl_for_tuples</span>(<span class="number">30</span>)]</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">OnSystemEvent</span> {
-	<span class="doccomment">/// Called in each blocks once when the validation data is set by the inherent.</span>
-	<span class="kw">fn</span> <span class="ident">on_validation_data</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">PersistedValidationData</span>);
-	<span class="doccomment">/// Called when the validation code is being applied, aka from the next block on this is the new runtime.</span>
-	<span class="kw">fn</span> <span class="ident">on_validation_code_applied</span>();
+<span class="doccomment">/// Something that should be informed about system related events.
+///
+/// This includes events like [`on_validation_data`](Self::on_validation_data) that is being
+/// called when the parachain inherent is executed that contains the validation data.
+/// Or like [`on_validation_code_applied`](Self::on_validation_code_applied) that is called
+/// when the new validation is written to the state. This means that
+/// from the next block the runtime is being using this new code.
+</span><span class="attribute">#[impl_trait_for_tuples::impl_for_tuples(<span class="number">30</span>)]
+</span><span class="kw">pub trait </span>OnSystemEvent {
+	<span class="doccomment">/// Called in each blocks once when the validation data is set by the inherent.
+	</span><span class="kw">fn </span>on_validation_data(data: <span class="kw-2">&amp;</span>PersistedValidationData);
+	<span class="doccomment">/// Called when the validation code is being applied, aka from the next block on this is the new runtime.
+	</span><span class="kw">fn </span>on_validation_code_applied();
 }
 
-<span class="doccomment">/// Implements [`BlockNumberProvider`] that returns relay chain block number fetched from</span>
-<span class="doccomment">/// validation data.</span>
-<span class="doccomment">/// NTOE: When validation data is not available (e.g. within on_initialize), 0 will be returned.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RelaychainBlockNumberProvider</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">sp_std::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
+<span class="doccomment">/// Implements [`BlockNumberProvider`] that returns relay chain block number fetched from
+/// validation data.
+/// NTOE: When validation data is not available (e.g. within on_initialize), 0 will be returned.
+</span><span class="kw">pub struct </span>RelaychainBlockNumberProvider&lt;T&gt;(sp_std::marker::PhantomData&lt;T&gt;);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">BlockNumberProvider</span> <span class="kw">for</span> <span class="ident">RelaychainBlockNumberProvider</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">type</span> <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="ident">relay_chain::BlockNumber</span>;
+<span class="kw">impl</span>&lt;T: Config&gt; BlockNumberProvider <span class="kw">for </span>RelaychainBlockNumberProvider&lt;T&gt; {
+	<span class="kw">type </span>BlockNumber = relay_chain::BlockNumber;
 
-	<span class="kw">fn</span> <span class="ident">current_block_number</span>() -&gt; <span class="ident">relay_chain::BlockNumber</span> {
-		<span class="ident">Pallet</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::validation_data</span>()
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>.<span class="ident">relay_parent_number</span>)
-			.<span class="ident">unwrap_or_default</span>()
+	<span class="kw">fn </span>current_block_number() -&gt; relay_chain::BlockNumber {
+		Pallet::&lt;T&gt;::validation_data()
+			.map(|d| d.relay_parent_number)
+			.unwrap_or_default()
 	}
-	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;runtime-benchmarks&quot;</span>)]</span>
-	<span class="kw">fn</span> <span class="ident">set_block_number</span>(<span class="ident">block</span>: <span class="ident"><span class="self">Self</span>::BlockNumber</span>) {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">validation_data</span> <span class="op">=</span> <span class="ident">Pallet</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::validation_data</span>().<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span>
-			<span class="comment">// PersistedValidationData does not impl default in non-std</span>
-			<span class="ident">PersistedValidationData</span> {
-				<span class="ident">parent_head</span>: <span class="macro">vec!</span>[].<span class="ident">into</span>(),
-				<span class="ident">relay_parent_number</span>: <span class="ident">Default::default</span>(),
-				<span class="ident">max_pov_size</span>: <span class="ident">Default::default</span>(),
-				<span class="ident">relay_parent_storage_root</span>: <span class="ident">Default::default</span>(),
+	<span class="attribute">#[cfg(feature = <span class="string">&quot;runtime-benchmarks&quot;</span>)]
+	</span><span class="kw">fn </span>set_block_number(block: <span class="self">Self</span>::BlockNumber) {
+		<span class="kw">let </span><span class="kw-2">mut </span>validation_data = Pallet::&lt;T&gt;::validation_data().unwrap_or_else(||
+			<span class="comment">// PersistedValidationData does not impl default in non-std
+			</span>PersistedValidationData {
+				parent_head: <span class="macro">vec!</span>[].into(),
+				relay_parent_number: Default::default(),
+				max_pov_size: Default::default(),
+				relay_parent_storage_root: Default::default(),
 			});
-		<span class="ident">validation_data</span>.<span class="ident">relay_parent_number</span> <span class="op">=</span> <span class="ident">block</span>;
-		<span class="ident">ValidationData</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">validation_data</span>)
+		validation_data.relay_parent_number = block;
+		ValidationData::&lt;T&gt;::put(validation_data)
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_parachain_system" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_parachain_system" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

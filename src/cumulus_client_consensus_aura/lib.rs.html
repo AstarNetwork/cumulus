@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/aura/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_aura/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_aura/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_aura/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/aura/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_aura/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_aura/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_aura/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -220,251 +220,227 @@
 <span id="220">220</span>
 <span id="221">221</span>
 <span id="222">222</span>
-<span id="223">223</span>
-<span id="224">224</span>
-<span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! The AuRa consensus algorithm for parachains.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This extends the Substrate provided AuRa consensus implementation to make it compatible for</span>
-<span class="doccomment">//! parachains. The main entry points for of this consensus algorithm are [`AuraConsensus::build`]</span>
-<span class="doccomment">//! and [`fn@import_queue`].</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! For more information about AuRa, the Substrate crate should be checked.</span>
+</span><span class="doccomment">//! The AuRa consensus algorithm for parachains.
+//!
+//! This extends the Substrate provided AuRa consensus implementation to make it compatible for
+//! parachains. The main entry points for of this consensus algorithm are [`AuraConsensus::build`]
+//! and [`fn@import_queue`].
+//!
+//! For more information about AuRa, the Substrate crate should be checked.
 
-<span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Decode</span>, <span class="ident">Encode</span>};
-<span class="kw">use</span> <span class="ident">cumulus_client_consensus_common</span>::{
-	<span class="ident">ParachainBlockImport</span>, <span class="ident">ParachainCandidate</span>, <span class="ident">ParachainConsensus</span>,
+</span><span class="kw">use </span>codec::{Decode, Encode};
+<span class="kw">use </span>cumulus_client_consensus_common::{
+	ParachainBlockImport, ParachainCandidate, ParachainConsensus,
 };
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{<span class="ident">relay_chain::v2::Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">PersistedValidationData</span>};
+<span class="kw">use </span>cumulus_primitives_core::{relay_chain::v2::Hash <span class="kw">as </span>PHash, PersistedValidationData};
 
-<span class="kw">use</span> <span class="ident">futures::lock::Mutex</span>;
-<span class="kw">use</span> <span class="ident">sc_client_api</span>::{<span class="ident">backend::AuxStore</span>, <span class="ident">BlockOf</span>};
-<span class="kw">use</span> <span class="ident">sc_consensus::BlockImport</span>;
-<span class="kw">use</span> <span class="ident">sc_consensus_slots</span>::{<span class="ident">BackoffAuthoringBlocksStrategy</span>, <span class="ident">SimpleSlotWorker</span>, <span class="ident">SlotInfo</span>};
-<span class="kw">use</span> <span class="ident">sc_telemetry::TelemetryHandle</span>;
-<span class="kw">use</span> <span class="ident">sp_api::ProvideRuntimeApi</span>;
-<span class="kw">use</span> <span class="ident">sp_application_crypto::AppPublic</span>;
-<span class="kw">use</span> <span class="ident">sp_blockchain::HeaderBackend</span>;
-<span class="kw">use</span> <span class="ident">sp_consensus</span>::{<span class="ident">EnableProofRecording</span>, <span class="ident">Environment</span>, <span class="ident">ProofRecording</span>, <span class="ident">Proposer</span>, <span class="ident">SyncOracle</span>};
-<span class="kw">use</span> <span class="ident">sp_consensus_aura</span>::{<span class="ident">AuraApi</span>, <span class="ident">SlotDuration</span>};
-<span class="kw">use</span> <span class="ident">sp_core::crypto::Pair</span>;
-<span class="kw">use</span> <span class="ident">sp_inherents</span>::{<span class="ident">CreateInherentDataProviders</span>, <span class="ident">InherentData</span>, <span class="ident">InherentDataProvider</span>};
-<span class="kw">use</span> <span class="ident">sp_keystore::SyncCryptoStorePtr</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::traits</span>::{<span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">HeaderT</span>, <span class="ident">Member</span>, <span class="ident">NumberFor</span>};
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">convert::TryFrom</span>, <span class="ident">hash::Hash</span>, <span class="ident">marker::PhantomData</span>, <span class="ident">sync::Arc</span>};
+<span class="kw">use </span>futures::lock::Mutex;
+<span class="kw">use </span>sc_client_api::{backend::AuxStore, BlockOf};
+<span class="kw">use </span>sc_consensus::BlockImport;
+<span class="kw">use </span>sc_consensus_slots::{BackoffAuthoringBlocksStrategy, SimpleSlotWorker, SlotInfo};
+<span class="kw">use </span>sc_telemetry::TelemetryHandle;
+<span class="kw">use </span>sp_api::ProvideRuntimeApi;
+<span class="kw">use </span>sp_application_crypto::AppPublic;
+<span class="kw">use </span>sp_blockchain::HeaderBackend;
+<span class="kw">use </span>sp_consensus::{EnableProofRecording, Environment, ProofRecording, Proposer, SyncOracle};
+<span class="kw">use </span>sp_consensus_aura::{AuraApi, SlotDuration};
+<span class="kw">use </span>sp_core::crypto::Pair;
+<span class="kw">use </span>sp_inherents::CreateInherentDataProviders;
+<span class="kw">use </span>sp_keystore::SyncCryptoStorePtr;
+<span class="kw">use </span>sp_runtime::traits::{Block <span class="kw">as </span>BlockT, Header <span class="kw">as </span>HeaderT, Member, NumberFor};
+<span class="kw">use </span>std::{convert::TryFrom, hash::Hash, marker::PhantomData, sync::Arc};
 
-<span class="kw">mod</span> <span class="ident">import_queue</span>;
+<span class="kw">mod </span>import_queue;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">import_queue</span>::{<span class="ident">build_verifier</span>, <span class="ident">import_queue</span>, <span class="ident">BuildVerifierParams</span>, <span class="ident">ImportQueueParams</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sc_consensus_aura</span>::{<span class="ident">slot_duration</span>, <span class="ident">AuraVerifier</span>, <span class="ident">BuildAuraWorkerParams</span>, <span class="ident">SlotProportion</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sc_consensus_slots::InherentDataProviderExt</span>;
+<span class="kw">pub use </span>import_queue::{build_verifier, import_queue, BuildVerifierParams, ImportQueueParams};
+<span class="kw">pub use </span>sc_consensus_aura::{slot_duration, AuraVerifier, BuildAuraWorkerParams, SlotProportion};
+<span class="kw">pub use </span>sc_consensus_slots::InherentDataProviderExt;
 
-<span class="kw">const</span> <span class="ident">LOG_TARGET</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;aura::cumulus&quot;</span>;
+<span class="kw">const </span>LOG_TARGET: <span class="kw-2">&amp;</span>str = <span class="string">&quot;aura::cumulus&quot;</span>;
 
-<span class="doccomment">/// The implementation of the AURA consensus for parachains.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AuraConsensus</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CIDP</span>, <span class="ident">W</span><span class="op">&gt;</span> {
-	<span class="ident">create_inherent_data_providers</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">CIDP</span><span class="op">&gt;</span>,
-	<span class="ident">aura_worker</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">slot_duration</span>: <span class="ident">SlotDuration</span>,
-	<span class="ident">_phantom</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The implementation of the AURA consensus for parachains.
+</span><span class="kw">pub struct </span>AuraConsensus&lt;B, CIDP, W&gt; {
+	create_inherent_data_providers: Arc&lt;CIDP&gt;,
+	aura_worker: Arc&lt;Mutex&lt;W&gt;&gt;,
+	slot_duration: SlotDuration,
+	_phantom: PhantomData&lt;B&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CIDP</span>, <span class="ident">W</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">AuraConsensus</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CIDP</span>, <span class="ident">W</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> {
-			<span class="ident">create_inherent_data_providers</span>: <span class="self">self</span>.<span class="ident">create_inherent_data_providers</span>.<span class="ident">clone</span>(),
-			<span class="ident">aura_worker</span>: <span class="self">self</span>.<span class="ident">aura_worker</span>.<span class="ident">clone</span>(),
-			<span class="ident">slot_duration</span>: <span class="self">self</span>.<span class="ident">slot_duration</span>,
-			<span class="ident">_phantom</span>: <span class="ident">PhantomData</span>,
+<span class="kw">impl</span>&lt;B, CIDP, W&gt; Clone <span class="kw">for </span>AuraConsensus&lt;B, CIDP, W&gt; {
+	<span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			create_inherent_data_providers: <span class="self">self</span>.create_inherent_data_providers.clone(),
+			aura_worker: <span class="self">self</span>.aura_worker.clone(),
+			slot_duration: <span class="self">self</span>.slot_duration,
+			_phantom: PhantomData,
 		}
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CIDP</span><span class="op">&gt;</span> <span class="ident">AuraConsensus</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CIDP</span>, ()<span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">B</span>: <span class="ident">BlockT</span>,
-	<span class="ident">CIDP</span>: <span class="ident">CreateInherentDataProviders</span><span class="op">&lt;</span><span class="ident">B</span>, (<span class="ident">PHash</span>, <span class="ident">PersistedValidationData</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">CIDP::InherentDataProviders</span>: <span class="ident">InherentDataProviderExt</span>,
+<span class="doccomment">/// Parameters of [`AuraConsensus::build`].
+</span><span class="kw">pub struct </span>BuildAuraConsensusParams&lt;PF, BI, CIDP, Client, BS, SO&gt; {
+	<span class="kw">pub </span>proposer_factory: PF,
+	<span class="kw">pub </span>create_inherent_data_providers: CIDP,
+	<span class="kw">pub </span>block_import: ParachainBlockImport&lt;BI&gt;,
+	<span class="kw">pub </span>para_client: Arc&lt;Client&gt;,
+	<span class="kw">pub </span>backoff_authoring_blocks: <span class="prelude-ty">Option</span>&lt;BS&gt;,
+	<span class="kw">pub </span>sync_oracle: SO,
+	<span class="kw">pub </span>keystore: SyncCryptoStorePtr,
+	<span class="kw">pub </span>force_authoring: bool,
+	<span class="kw">pub </span>slot_duration: SlotDuration,
+	<span class="kw">pub </span>telemetry: <span class="prelude-ty">Option</span>&lt;TelemetryHandle&gt;,
+	<span class="kw">pub </span>block_proposal_slot_portion: SlotProportion,
+	<span class="kw">pub </span>max_block_proposal_slot_portion: <span class="prelude-ty">Option</span>&lt;SlotProportion&gt;,
+}
+
+<span class="kw">impl</span>&lt;B, CIDP&gt; AuraConsensus&lt;B, CIDP, ()&gt;
+<span class="kw">where
+	</span>B: BlockT,
+	CIDP: CreateInherentDataProviders&lt;B, (PHash, PersistedValidationData)&gt; + <span class="lifetime">&#39;static</span>,
+	CIDP::InherentDataProviders: InherentDataProviderExt,
 {
-	<span class="doccomment">/// Create a new boxed instance of AURA consensus.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Client</span>, <span class="ident">BI</span>, <span class="ident">SO</span>, <span class="ident">PF</span>, <span class="ident">BS</span>, <span class="ident">Error</span><span class="op">&gt;</span>(
-		<span class="ident">BuildAuraConsensusParams</span> {
-			<span class="ident">proposer_factory</span>,
-			<span class="ident">create_inherent_data_providers</span>,
-			<span class="ident">block_import</span>,
-			<span class="ident">para_client</span>,
-			<span class="ident">backoff_authoring_blocks</span>,
-			<span class="ident">sync_oracle</span>,
-			<span class="ident">keystore</span>,
-			<span class="ident">force_authoring</span>,
-			<span class="ident">slot_duration</span>,
-			<span class="ident">telemetry</span>,
-			<span class="ident">block_proposal_slot_portion</span>,
-			<span class="ident">max_block_proposal_slot_portion</span>,
-		}: <span class="ident">BuildAuraConsensusParams</span><span class="op">&lt;</span><span class="ident">PF</span>, <span class="ident">BI</span>, <span class="ident">CIDP</span>, <span class="ident">Client</span>, <span class="ident">BS</span>, <span class="ident">SO</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>
-	<span class="kw">where</span>
-		<span class="ident">Client</span>:
-			<span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">BlockOf</span> <span class="op">+</span> <span class="ident">AuxStore</span> <span class="op">+</span> <span class="ident">HeaderBackend</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-		<span class="ident">Client::Api</span>: <span class="ident">AuraApi</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">P::Public</span><span class="op">&gt;</span>,
-		<span class="ident">BI</span>: <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Transaction</span> <span class="op">=</span> <span class="ident">sp_api::TransactionFor</span><span class="op">&lt;</span><span class="ident">Client</span>, <span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-		<span class="ident">SO</span>: <span class="ident">SyncOracle</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-		<span class="ident">BS</span>: <span class="ident">BackoffAuthoringBlocksStrategy</span><span class="op">&lt;</span><span class="ident">NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-		<span class="ident">PF</span>: <span class="ident">Environment</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-		<span class="ident">PF::Proposer</span>: <span class="ident">Proposer</span><span class="op">&lt;</span>
-			<span class="ident">B</span>,
-			<span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>,
-			<span class="ident">Transaction</span> <span class="op">=</span> <span class="ident">sp_api::TransactionFor</span><span class="op">&lt;</span><span class="ident">Client</span>, <span class="ident">B</span><span class="op">&gt;</span>,
-			<span class="ident">ProofRecording</span> <span class="op">=</span> <span class="ident">EnableProofRecording</span>,
-			<span class="ident">Proof</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">EnableProofRecording</span> <span class="kw">as</span> <span class="ident">ProofRecording</span><span class="op">&gt;</span><span class="ident">::Proof</span>,
-		<span class="op">&gt;</span>,
-		<span class="ident">Error</span>: <span class="ident">std::error::Error</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">sp_consensus::Error</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-		<span class="ident">P</span>: <span class="ident">Pair</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>,
-		<span class="ident">P::Public</span>: <span class="ident">AppPublic</span> <span class="op">+</span> <span class="ident">Hash</span> <span class="op">+</span> <span class="ident">Member</span> <span class="op">+</span> <span class="ident">Encode</span> <span class="op">+</span> <span class="ident">Decode</span>,
-		<span class="ident">P::Signature</span>: <span class="ident">TryFrom</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Hash</span> <span class="op">+</span> <span class="ident">Member</span> <span class="op">+</span> <span class="ident">Encode</span> <span class="op">+</span> <span class="ident">Decode</span>,
+	<span class="doccomment">/// Create a new boxed instance of AURA consensus.
+	</span><span class="kw">pub fn </span>build&lt;P, Client, BI, SO, PF, BS, Error&gt;(
+		BuildAuraConsensusParams {
+			proposer_factory,
+			create_inherent_data_providers,
+			block_import,
+			para_client,
+			backoff_authoring_blocks,
+			sync_oracle,
+			keystore,
+			force_authoring,
+			slot_duration,
+			telemetry,
+			block_proposal_slot_portion,
+			max_block_proposal_slot_portion,
+		}: BuildAuraConsensusParams&lt;PF, BI, CIDP, Client, BS, SO&gt;,
+	) -&gt; Box&lt;<span class="kw">dyn </span>ParachainConsensus&lt;B&gt;&gt;
+	<span class="kw">where
+		</span>Client:
+			ProvideRuntimeApi&lt;B&gt; + BlockOf + AuxStore + HeaderBackend&lt;B&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+		Client::Api: AuraApi&lt;B, P::Public&gt;,
+		BI: BlockImport&lt;B, Transaction = sp_api::TransactionFor&lt;Client, B&gt;&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+		SO: SyncOracle + Send + Sync + Clone + <span class="lifetime">&#39;static</span>,
+		BS: BackoffAuthoringBlocksStrategy&lt;NumberFor&lt;B&gt;&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+		PF: Environment&lt;B, Error = Error&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+		PF::Proposer: Proposer&lt;
+			B,
+			Error = Error,
+			Transaction = sp_api::TransactionFor&lt;Client, B&gt;,
+			ProofRecording = EnableProofRecording,
+			Proof = &lt;EnableProofRecording <span class="kw">as </span>ProofRecording&gt;::Proof,
+		&gt;,
+		Error: std::error::Error + Send + From&lt;sp_consensus::Error&gt; + <span class="lifetime">&#39;static</span>,
+		P: Pair + Send + Sync,
+		P::Public: AppPublic + Hash + Member + Encode + Decode,
+		P::Signature: TryFrom&lt;Vec&lt;u8&gt;&gt; + Hash + Member + Encode + Decode,
 	{
-		<span class="kw">let</span> <span class="ident">worker</span> <span class="op">=</span> <span class="ident">sc_consensus_aura::build_aura_worker</span>::<span class="op">&lt;</span><span class="ident">P</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span>(
-			<span class="ident">BuildAuraWorkerParams</span> {
-				<span class="ident">client</span>: <span class="ident">para_client</span>,
-				<span class="ident">block_import</span>: <span class="ident">ParachainBlockImport::new</span>(<span class="ident">block_import</span>),
-				<span class="ident">justification_sync_link</span>: (),
-				<span class="ident">proposer_factory</span>,
-				<span class="ident">sync_oracle</span>,
-				<span class="ident">force_authoring</span>,
-				<span class="ident">backoff_authoring_blocks</span>,
-				<span class="ident">keystore</span>,
-				<span class="ident">telemetry</span>,
-				<span class="ident">block_proposal_slot_portion</span>,
-				<span class="ident">max_block_proposal_slot_portion</span>,
+		<span class="kw">let </span>worker = sc_consensus_aura::build_aura_worker::&lt;P, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
+			BuildAuraWorkerParams {
+				client: para_client,
+				block_import,
+				justification_sync_link: (),
+				proposer_factory,
+				sync_oracle,
+				force_authoring,
+				backoff_authoring_blocks,
+				keystore,
+				telemetry,
+				block_proposal_slot_portion,
+				max_block_proposal_slot_portion,
+				compatibility_mode: sc_consensus_aura::CompatibilityMode::None,
 			},
 		);
 
-		<span class="ident">Box::new</span>(<span class="ident">AuraConsensus</span> {
-			<span class="ident">create_inherent_data_providers</span>: <span class="ident">Arc::new</span>(<span class="ident">create_inherent_data_providers</span>),
-			<span class="ident">aura_worker</span>: <span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(<span class="ident">worker</span>)),
-			<span class="ident">slot_duration</span>,
-			<span class="ident">_phantom</span>: <span class="ident">PhantomData</span>,
+		Box::new(AuraConsensus {
+			create_inherent_data_providers: Arc::new(create_inherent_data_providers),
+			aura_worker: Arc::new(Mutex::new(worker)),
+			slot_duration,
+			_phantom: PhantomData,
 		})
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CIDP</span>, <span class="ident">W</span><span class="op">&gt;</span> <span class="ident">AuraConsensus</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CIDP</span>, <span class="ident">W</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">B</span>: <span class="ident">BlockT</span>,
-	<span class="ident">CIDP</span>: <span class="ident">CreateInherentDataProviders</span><span class="op">&lt;</span><span class="ident">B</span>, (<span class="ident">PHash</span>, <span class="ident">PersistedValidationData</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">CIDP::InherentDataProviders</span>: <span class="ident">InherentDataProviderExt</span>,
+<span class="kw">impl</span>&lt;B, CIDP, W&gt; AuraConsensus&lt;B, CIDP, W&gt;
+<span class="kw">where
+	</span>B: BlockT,
+	CIDP: CreateInherentDataProviders&lt;B, (PHash, PersistedValidationData)&gt; + <span class="lifetime">&#39;static</span>,
+	CIDP::InherentDataProviders: InherentDataProviderExt,
 {
-	<span class="doccomment">/// Create the inherent data.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns the created inherent data and the inherent data providers used.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">inherent_data</span>(
+	<span class="doccomment">/// Create the inherent data.
+	///
+	/// Returns the created inherent data and the inherent data providers used.
+	</span><span class="kw">async fn </span>inherent_data(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">parent</span>: <span class="ident">B::Hash</span>,
-		<span class="ident">validation_data</span>: <span class="kw-2">&amp;</span><span class="ident">PersistedValidationData</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">InherentData</span>, <span class="ident">CIDP::InherentDataProviders</span>)<span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">inherent_data_providers</span> <span class="op">=</span> <span class="self">self</span>
-			.<span class="ident">create_inherent_data_providers</span>
-			.<span class="ident">create_inherent_data_providers</span>(<span class="ident">parent</span>, (<span class="ident">relay_parent</span>, <span class="ident">validation_data</span>.<span class="ident">clone</span>()))
-			.<span class="kw">await</span>
-			.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
+		parent: B::Hash,
+		validation_data: <span class="kw-2">&amp;</span>PersistedValidationData,
+		relay_parent: PHash,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;CIDP::InherentDataProviders&gt; {
+		<span class="self">self</span>.create_inherent_data_providers
+			.create_inherent_data_providers(parent, (relay_parent, validation_data.clone()))
+			.<span class="kw">await
+			</span>.map_err(|e| {
 				<span class="macro">tracing::error!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
+					target: LOG_TARGET,
+					error = <span class="question-mark">?</span>e,
 					<span class="string">&quot;Failed to create inherent data providers.&quot;</span>,
 				)
 			})
-			.<span class="ident">ok</span>()<span class="question-mark">?</span>;
-
-		<span class="ident">inherent_data_providers</span>
-			.<span class="ident">create_inherent_data</span>()
-			.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
-				<span class="macro">tracing::error!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
-					<span class="string">&quot;Failed to create inherent data.&quot;</span>,
-				)
-			})
-			.<span class="ident">ok</span>()
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="ident">d</span>, <span class="ident">inherent_data_providers</span>))
+			.ok()
 	}
 }
 
-<span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CIDP</span>, <span class="ident">W</span><span class="op">&gt;</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AuraConsensus</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">CIDP</span>, <span class="ident">W</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">B</span>: <span class="ident">BlockT</span>,
-	<span class="ident">CIDP</span>: <span class="ident">CreateInherentDataProviders</span><span class="op">&lt;</span><span class="ident">B</span>, (<span class="ident">PHash</span>, <span class="ident">PersistedValidationData</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">CIDP::InherentDataProviders</span>: <span class="ident">InherentDataProviderExt</span> <span class="op">+</span> <span class="ident">Send</span>,
-	<span class="ident">W</span>: <span class="ident">SimpleSlotWorker</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>,
-	<span class="ident">W::Proposer</span>: <span class="ident">Proposer</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">Proof</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">EnableProofRecording</span> <span class="kw">as</span> <span class="ident">ProofRecording</span><span class="op">&gt;</span><span class="ident">::Proof</span><span class="op">&gt;</span>,
+<span class="attribute">#[async_trait::async_trait]
+</span><span class="kw">impl</span>&lt;B, CIDP, W&gt; ParachainConsensus&lt;B&gt; <span class="kw">for </span>AuraConsensus&lt;B, CIDP, W&gt;
+<span class="kw">where
+	</span>B: BlockT,
+	CIDP: CreateInherentDataProviders&lt;B, (PHash, PersistedValidationData)&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+	CIDP::InherentDataProviders: InherentDataProviderExt + Send,
+	W: SimpleSlotWorker&lt;B&gt; + Send + Sync,
+	W::Proposer: Proposer&lt;B, Proof = &lt;EnableProofRecording <span class="kw">as </span>ProofRecording&gt;::Proof&gt;,
 {
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">produce_candidate</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">parent</span>: <span class="kw-2">&amp;</span><span class="ident">B::Header</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">validation_data</span>: <span class="kw-2">&amp;</span><span class="ident">PersistedValidationData</span>,
-	) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParachainCandidate</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> (<span class="ident">inherent_data</span>, <span class="ident">inherent_data_providers</span>) <span class="op">=</span>
-			<span class="self">self</span>.<span class="ident">inherent_data</span>(<span class="ident">parent</span>.<span class="ident">hash</span>(), <span class="ident">validation_data</span>, <span class="ident">relay_parent</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+	<span class="kw">async fn </span>produce_candidate(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		parent: <span class="kw-2">&amp;</span>B::Header,
+		relay_parent: PHash,
+		validation_data: <span class="kw-2">&amp;</span>PersistedValidationData,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;ParachainCandidate&lt;B&gt;&gt; {
+		<span class="kw">let </span>inherent_data_providers =
+			<span class="self">self</span>.inherent_data(parent.hash(), validation_data, relay_parent).<span class="kw">await</span><span class="question-mark">?</span>;
 
-		<span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="ident">SlotInfo::new</span>(
-			<span class="ident">inherent_data_providers</span>.<span class="ident">slot</span>(),
-			<span class="ident">inherent_data</span>,
-			<span class="self">self</span>.<span class="ident">slot_duration</span>.<span class="ident">as_duration</span>(),
-			<span class="ident">parent</span>.<span class="ident">clone</span>(),
-			<span class="comment">// Set the block limit to 50% of the maximum PoV size.</span>
-			<span class="comment">//</span>
-			<span class="comment">// TODO: If we got benchmarking that includes the proof size,</span>
-			<span class="comment">// we should be able to use the maximum pov size.</span>
-			<span class="prelude-val">Some</span>((<span class="ident">validation_data</span>.<span class="ident">max_pov_size</span> <span class="op">/</span> <span class="number">2</span>) <span class="kw">as</span> <span class="ident">usize</span>),
+		<span class="kw">let </span>info = SlotInfo::new(
+			inherent_data_providers.slot(),
+			Box::new(inherent_data_providers),
+			<span class="self">self</span>.slot_duration.as_duration(),
+			parent.clone(),
+			<span class="comment">// Set the block limit to 50% of the maximum PoV size.
+			//
+			// TODO: If we got benchmarking that includes the proof size,
+			// we should be able to use the maximum pov size.
+			</span><span class="prelude-val">Some</span>((validation_data.max_pov_size / <span class="number">2</span>) <span class="kw">as </span>usize),
 		);
 
-		<span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">aura_worker</span>.<span class="ident">lock</span>().<span class="kw">await</span>.<span class="ident">on_slot</span>(<span class="ident">info</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+		<span class="kw">let </span>res = <span class="self">self</span>.aura_worker.lock().<span class="kw">await</span>.on_slot(info).<span class="kw">await</span><span class="question-mark">?</span>;
 
-		<span class="prelude-val">Some</span>(<span class="ident">ParachainCandidate</span> { <span class="ident">block</span>: <span class="ident">res</span>.<span class="ident">block</span>, <span class="ident">proof</span>: <span class="ident">res</span>.<span class="ident">storage_proof</span> })
+		<span class="prelude-val">Some</span>(ParachainCandidate { block: res.block, proof: res.storage_proof })
 	}
 }
-
-<span class="doccomment">/// Parameters of [`AuraConsensus::build`].</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BuildAuraConsensusParams</span><span class="op">&lt;</span><span class="ident">PF</span>, <span class="ident">BI</span>, <span class="ident">CIDP</span>, <span class="ident">Client</span>, <span class="ident">BS</span>, <span class="ident">SO</span><span class="op">&gt;</span> {
-	<span class="kw">pub</span> <span class="ident">proposer_factory</span>: <span class="ident">PF</span>,
-	<span class="kw">pub</span> <span class="ident">create_inherent_data_providers</span>: <span class="ident">CIDP</span>,
-	<span class="kw">pub</span> <span class="ident">block_import</span>: <span class="ident">BI</span>,
-	<span class="kw">pub</span> <span class="ident">para_client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>,
-	<span class="kw">pub</span> <span class="ident">backoff_authoring_blocks</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BS</span><span class="op">&gt;</span>,
-	<span class="kw">pub</span> <span class="ident">sync_oracle</span>: <span class="ident">SO</span>,
-	<span class="kw">pub</span> <span class="ident">keystore</span>: <span class="ident">SyncCryptoStorePtr</span>,
-	<span class="kw">pub</span> <span class="ident">force_authoring</span>: <span class="ident">bool</span>,
-	<span class="kw">pub</span> <span class="ident">slot_duration</span>: <span class="ident">SlotDuration</span>,
-	<span class="kw">pub</span> <span class="ident">telemetry</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryHandle</span><span class="op">&gt;</span>,
-	<span class="kw">pub</span> <span class="ident">block_proposal_slot_portion</span>: <span class="ident">SlotProportion</span>,
-	<span class="kw">pub</span> <span class="ident">max_block_proposal_slot_portion</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SlotProportion</span><span class="op">&gt;</span>,
-}
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_aura" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_aura" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

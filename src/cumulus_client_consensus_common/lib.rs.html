@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/common/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/common/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -112,119 +112,131 @@
 <span id="112">112</span>
 <span id="113">113</span>
 <span id="114">114</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">polkadot_primitives::v2</span>::{<span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">PersistedValidationData</span>};
-<span class="kw">use</span> <span class="ident">sc_consensus::BlockImport</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>;
+</span><span class="kw">use </span>polkadot_primitives::v2::{Hash <span class="kw">as </span>PHash, PersistedValidationData};
+<span class="kw">use </span>sc_consensus::BlockImport;
+<span class="kw">use </span>sp_runtime::traits::Block <span class="kw">as </span>BlockT;
 
-<span class="kw">mod</span> <span class="ident">parachain_consensus</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">parachain_consensus::run_parachain_consensus</span>;
+<span class="kw">mod </span>parachain_consensus;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests;
+<span class="kw">pub use </span>parachain_consensus::run_parachain_consensus;
 
-<span class="doccomment">/// The result of [`ParachainConsensus::produce_candidate`].</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ParachainCandidate</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// The block that was built for this candidate.</span>
-	<span class="kw">pub</span> <span class="ident">block</span>: <span class="ident">B</span>,
-	<span class="doccomment">/// The proof that was recorded while building the block.</span>
-	<span class="kw">pub</span> <span class="ident">proof</span>: <span class="ident">sp_trie::StorageProof</span>,
+<span class="doccomment">/// The result of [`ParachainConsensus::produce_candidate`].
+</span><span class="kw">pub struct </span>ParachainCandidate&lt;B&gt; {
+	<span class="doccomment">/// The block that was built for this candidate.
+	</span><span class="kw">pub </span>block: B,
+	<span class="doccomment">/// The proof that was recorded while building the block.
+	</span><span class="kw">pub </span>proof: sp_trie::StorageProof,
 }
 
-<span class="doccomment">/// A specific parachain consensus implementation that can be used by a collator to produce candidates.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The collator will call [`Self::produce_candidate`] every time there is a free core for the parachain</span>
-<span class="doccomment">/// this collator is collating for. It is the job of the consensus implementation to decide if this</span>
-<span class="doccomment">/// specific collator should build a candidate for the given relay chain block. The consensus</span>
-<span class="doccomment">/// implementation could, for example, check whether this specific collator is part of a staked set.</span>
-<span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">BlockT</span><span class="op">&gt;</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">dyn_clone::DynClone</span> {
-	<span class="doccomment">/// Produce a new candidate at the given parent block and relay-parent blocks.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Should return `None` if the consensus implementation decided that it shouldn&#39;t build a</span>
-	<span class="doccomment">/// candidate or if there occurred any error.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// # NOTE</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// It is expected that the block is already imported when the future resolves.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">produce_candidate</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">parent</span>: <span class="kw-2">&amp;</span><span class="ident">B::Header</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">validation_data</span>: <span class="kw-2">&amp;</span><span class="ident">PersistedValidationData</span>,
-	) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParachainCandidate</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="doccomment">/// A specific parachain consensus implementation that can be used by a collator to produce candidates.
+///
+/// The collator will call [`Self::produce_candidate`] every time there is a free core for the parachain
+/// this collator is collating for. It is the job of the consensus implementation to decide if this
+/// specific collator should build a candidate for the given relay chain block. The consensus
+/// implementation could, for example, check whether this specific collator is part of a staked set.
+</span><span class="attribute">#[async_trait::async_trait]
+</span><span class="kw">pub trait </span>ParachainConsensus&lt;B: BlockT&gt;: Send + Sync + dyn_clone::DynClone {
+	<span class="doccomment">/// Produce a new candidate at the given parent block and relay-parent blocks.
+	///
+	/// Should return `None` if the consensus implementation decided that it shouldn&#39;t build a
+	/// candidate or if there occurred any error.
+	///
+	/// # NOTE
+	///
+	/// It is expected that the block is already imported when the future resolves.
+	</span><span class="kw">async fn </span>produce_candidate(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		parent: <span class="kw-2">&amp;</span>B::Header,
+		relay_parent: PHash,
+		validation_data: <span class="kw-2">&amp;</span>PersistedValidationData,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;ParachainCandidate&lt;B&gt;&gt;;
 }
 
-<span class="macro">dyn_clone::clone_trait_object!</span>(<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">B</span>: <span class="ident">BlockT</span>);
+<span class="macro">dyn_clone::clone_trait_object!</span>(&lt;B&gt; ParachainConsensus&lt;B&gt; <span class="kw">where </span>B: BlockT);
 
-<span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">BlockT</span><span class="op">&gt;</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span> {
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">produce_candidate</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">parent</span>: <span class="kw-2">&amp;</span><span class="ident">B::Header</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">validation_data</span>: <span class="kw-2">&amp;</span><span class="ident">PersistedValidationData</span>,
-	) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParachainCandidate</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">produce_candidate</span>(<span class="ident">parent</span>, <span class="ident">relay_parent</span>, <span class="ident">validation_data</span>).<span class="kw">await</span>
+<span class="attribute">#[async_trait::async_trait]
+</span><span class="kw">impl</span>&lt;B: BlockT&gt; ParachainConsensus&lt;B&gt; <span class="kw">for </span>Box&lt;<span class="kw">dyn </span>ParachainConsensus&lt;B&gt; + Send + Sync&gt; {
+	<span class="kw">async fn </span>produce_candidate(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		parent: <span class="kw-2">&amp;</span>B::Header,
+		relay_parent: PHash,
+		validation_data: <span class="kw-2">&amp;</span>PersistedValidationData,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;ParachainCandidate&lt;B&gt;&gt; {
+		(<span class="kw-2">*</span><span class="self">self</span>).produce_candidate(parent, relay_parent, validation_data).<span class="kw">await
+	</span>}
+}
+
+<span class="doccomment">/// Parachain specific block import.
+///
+/// This is used to set `block_import_params.fork_choice` to `false` as long as the block origin is
+/// not `NetworkInitialSync`. The best block for parachains is determined by the relay chain. Meaning
+/// we will update the best block, as it is included by the relay-chain.
+</span><span class="kw">pub struct </span>ParachainBlockImport&lt;I&gt;(I);
+
+<span class="kw">impl</span>&lt;I&gt; ParachainBlockImport&lt;I&gt; {
+	<span class="doccomment">/// Create a new instance.
+	</span><span class="kw">pub fn </span>new(inner: I) -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>(inner)
 	}
 }
 
-<span class="doccomment">/// Parachain specific block import.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This is used to set `block_import_params.fork_choice` to `false` as long as the block origin is</span>
-<span class="doccomment">/// not `NetworkInitialSync`. The best block for parachains is determined by the relay chain. Meaning</span>
-<span class="doccomment">/// we will update the best block, as it is included by the relay-chain.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ParachainBlockImport</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">I</span>);
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">ParachainBlockImport</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// Create a new instance.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">inner</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span>(<span class="ident">inner</span>)
+<span class="kw">impl</span>&lt;I: Clone&gt; Clone <span class="kw">for </span>ParachainBlockImport&lt;I&gt; {
+	<span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+		ParachainBlockImport(<span class="self">self</span>.<span class="number">0</span>.clone())
 	}
 }
 
-<span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">I</span><span class="op">&gt;</span> <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ParachainBlockImport</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">I</span>: <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span>,
+<span class="attribute">#[async_trait::async_trait]
+</span><span class="kw">impl</span>&lt;Block, I&gt; BlockImport&lt;Block&gt; <span class="kw">for </span>ParachainBlockImport&lt;I&gt;
+<span class="kw">where
+	</span>Block: BlockT,
+	I: BlockImport&lt;Block&gt; + Send,
 {
-	<span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">I::Error</span>;
-	<span class="kw">type</span> <span class="ident">Transaction</span> <span class="op">=</span> <span class="ident">I::Transaction</span>;
+	<span class="kw">type </span>Error = I::Error;
+	<span class="kw">type </span>Transaction = I::Transaction;
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">check_block</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">block</span>: <span class="ident">sc_consensus::BlockCheckParams</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">sc_consensus::ImportResult</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="number">0</span>.<span class="ident">check_block</span>(<span class="ident">block</span>).<span class="kw">await</span>
-	}
+	<span class="kw">async fn </span>check_block(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		block: sc_consensus::BlockCheckParams&lt;Block&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;sc_consensus::ImportResult, <span class="self">Self</span>::Error&gt; {
+		<span class="self">self</span>.<span class="number">0</span>.check_block(block).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">import_block</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="kw-2">mut</span> <span class="ident">block_import_params</span>: <span class="ident">sc_consensus::BlockImportParams</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident"><span class="self">Self</span>::Transaction</span><span class="op">&gt;</span>,
-		<span class="ident">cache</span>: <span class="ident">std::collections::HashMap</span><span class="op">&lt;</span><span class="ident">sp_consensus::CacheKeyId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">sc_consensus::ImportResult</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
-		<span class="comment">// Best block is determined by the relay chain, or if we are doing the initial sync</span>
-		<span class="comment">// we import all blocks as new best.</span>
-		<span class="ident">block_import_params</span>.<span class="ident">fork_choice</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">sc_consensus::ForkChoiceStrategy::Custom</span>(
-			<span class="ident">block_import_params</span>.<span class="ident">origin</span> <span class="op">==</span> <span class="ident">sp_consensus::BlockOrigin::NetworkInitialSync</span>,
+	<span class="kw">async fn </span>import_block(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		<span class="kw-2">mut </span>block_import_params: sc_consensus::BlockImportParams&lt;Block, <span class="self">Self</span>::Transaction&gt;,
+		cache: std::collections::HashMap&lt;sp_consensus::CacheKeyId, Vec&lt;u8&gt;&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;sc_consensus::ImportResult, <span class="self">Self</span>::Error&gt; {
+		<span class="comment">// Best block is determined by the relay chain, or if we are doing the initial sync
+		// we import all blocks as new best.
+		</span>block_import_params.fork_choice = <span class="prelude-val">Some</span>(sc_consensus::ForkChoiceStrategy::Custom(
+			block_import_params.origin == sp_consensus::BlockOrigin::NetworkInitialSync,
 		));
-		<span class="self">self</span>.<span class="number">0</span>.<span class="ident">import_block</span>(<span class="ident">block_import_params</span>, <span class="ident">cache</span>).<span class="kw">await</span>
-	}
+		<span class="self">self</span>.<span class="number">0</span>.import_block(block_import_params, cache).<span class="kw">await
+	</span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/common/src/parachain_consensus.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parachain_consensus.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/common/src/parachain_consensus.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parachain_consensus.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -432,121 +432,121 @@
 <span id="432">432</span>
 <span id="433">433</span>
 <span id="434">434</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">async_trait::async_trait</span>;
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface</span>::{<span class="ident">RelayChainInterface</span>, <span class="ident">RelayChainResult</span>};
-<span class="kw">use</span> <span class="ident">sc_client_api</span>::{
-	<span class="ident">Backend</span>, <span class="ident">BlockBackend</span>, <span class="ident">BlockImportNotification</span>, <span class="ident">BlockchainEvents</span>, <span class="ident">Finalizer</span>, <span class="ident">UsageProvider</span>,
+</span><span class="kw">use </span>async_trait::async_trait;
+<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainInterface, RelayChainResult};
+<span class="kw">use </span>sc_client_api::{
+	Backend, BlockBackend, BlockImportNotification, BlockchainEvents, Finalizer, UsageProvider,
 };
-<span class="kw">use</span> <span class="ident">sc_consensus</span>::{<span class="ident">BlockImport</span>, <span class="ident">BlockImportParams</span>, <span class="ident">ForkChoiceStrategy</span>};
-<span class="kw">use</span> <span class="ident">sp_blockchain::Error</span> <span class="kw">as</span> <span class="ident">ClientError</span>;
-<span class="kw">use</span> <span class="ident">sp_consensus</span>::{<span class="ident">BlockOrigin</span>, <span class="ident">BlockStatus</span>};
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{
-	<span class="ident">generic::BlockId</span>,
-	<span class="ident">traits</span>::{<span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">HeaderT</span>},
+<span class="kw">use </span>sc_consensus::{BlockImport, BlockImportParams, ForkChoiceStrategy};
+<span class="kw">use </span>sp_blockchain::Error <span class="kw">as </span>ClientError;
+<span class="kw">use </span>sp_consensus::{BlockOrigin, BlockStatus};
+<span class="kw">use </span>sp_runtime::{
+	generic::BlockId,
+	traits::{Block <span class="kw">as </span>BlockT, Header <span class="kw">as </span>HeaderT},
 };
 
-<span class="kw">use</span> <span class="ident">polkadot_primitives::v2</span>::{<span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">Id</span> <span class="kw">as</span> <span class="ident">ParaId</span>, <span class="ident">OccupiedCoreAssumption</span>};
+<span class="kw">use </span>polkadot_primitives::v2::{Hash <span class="kw">as </span>PHash, Id <span class="kw">as </span>ParaId, OccupiedCoreAssumption};
 
-<span class="kw">use</span> <span class="ident">codec::Decode</span>;
-<span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">select</span>, <span class="ident">FutureExt</span>, <span class="ident">Stream</span>, <span class="ident">StreamExt</span>};
+<span class="kw">use </span>codec::Decode;
+<span class="kw">use </span>futures::{select, FutureExt, Stream, StreamExt};
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">pin::Pin</span>, <span class="ident">sync::Arc</span>};
+<span class="kw">use </span>std::{pin::Pin, sync::Arc};
 
-<span class="kw">const</span> <span class="ident">LOG_TARGET</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;cumulus-consensus&quot;</span>;
+<span class="kw">const </span>LOG_TARGET: <span class="kw-2">&amp;</span>str = <span class="string">&quot;cumulus-consensus&quot;</span>;
 
-<span class="doccomment">/// Helper for the relay chain client. This is expected to be a lightweight handle like an `Arc`.</span>
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RelaychainClient</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
-	<span class="doccomment">/// The error type for interacting with the Polkadot client.</span>
-	<span class="kw">type</span> <span class="ident">Error</span>: <span class="ident">std::fmt::Debug</span> <span class="op">+</span> <span class="ident">Send</span>;
+<span class="doccomment">/// Helper for the relay chain client. This is expected to be a lightweight handle like an `Arc`.
+</span><span class="attribute">#[async_trait]
+</span><span class="kw">pub trait </span>RelaychainClient: Clone + <span class="lifetime">&#39;static </span>{
+	<span class="doccomment">/// The error type for interacting with the Polkadot client.
+	</span><span class="kw">type </span>Error: std::fmt::Debug + Send;
 
-	<span class="doccomment">/// A stream that yields head-data for a parachain.</span>
-	<span class="kw">type</span> <span class="ident">HeadStream</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Unpin</span>;
+	<span class="doccomment">/// A stream that yields head-data for a parachain.
+	</span><span class="kw">type </span>HeadStream: Stream&lt;Item = Vec&lt;u8&gt;&gt; + Send + Unpin;
 
-	<span class="doccomment">/// Get a stream of new best heads for the given parachain.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">new_best_heads</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">para_id</span>: <span class="ident">ParaId</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::HeadStream</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Get a stream of new best heads for the given parachain.
+	</span><span class="kw">async fn </span>new_best_heads(<span class="kw-2">&amp;</span><span class="self">self</span>, para_id: ParaId) -&gt; RelayChainResult&lt;<span class="self">Self</span>::HeadStream&gt;;
 
-	<span class="doccomment">/// Get a stream of finalized heads for the given parachain.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">finalized_heads</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">para_id</span>: <span class="ident">ParaId</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::HeadStream</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Get a stream of finalized heads for the given parachain.
+	</span><span class="kw">async fn </span>finalized_heads(<span class="kw-2">&amp;</span><span class="self">self</span>, para_id: ParaId) -&gt; RelayChainResult&lt;<span class="self">Self</span>::HeadStream&gt;;
 
-	<span class="doccomment">/// Returns the parachain head for the given `para_id` at the given block id.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_head_at</span>(
+	<span class="doccomment">/// Returns the parachain head for the given `para_id` at the given block id.
+	</span><span class="kw">async fn </span>parachain_head_at(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+		at: PHash,
+		para_id: ParaId,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;&gt;;
 }
 
-<span class="doccomment">/// Follow the finalized head of the given parachain.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// For every finalized block of the relay chain, it will get the included parachain header</span>
-<span class="doccomment">/// corresponding to `para_id` and will finalize it in the parachain.</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">follow_finalized_head</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Block</span>, <span class="ident">B</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">para_id</span>: <span class="ident">ParaId</span>, <span class="ident">parachain</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>, <span class="ident">relay_chain</span>: <span class="ident">R</span>)
-<span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">P</span>: <span class="ident">Finalizer</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">B</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">R</span>: <span class="ident">RelaychainClient</span>,
-	<span class="ident">B</span>: <span class="ident">Backend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Follow the finalized head of the given parachain.
+///
+/// For every finalized block of the relay chain, it will get the included parachain header
+/// corresponding to `para_id` and will finalize it in the parachain.
+</span><span class="kw">async fn </span>follow_finalized_head&lt;P, Block, B, R&gt;(para_id: ParaId, parachain: Arc&lt;P&gt;, relay_chain: R)
+<span class="kw">where
+	</span>Block: BlockT,
+	P: Finalizer&lt;Block, B&gt; + UsageProvider&lt;Block&gt;,
+	R: RelaychainClient,
+	B: Backend&lt;Block&gt;,
 {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">finalized_heads</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">relay_chain</span>.<span class="ident">finalized_heads</span>(<span class="ident">para_id</span>).<span class="kw">await</span> {
-		<span class="prelude-val">Ok</span>(<span class="ident">finalized_heads_stream</span>) =&gt; <span class="ident">finalized_heads_stream</span>,
-		<span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; {
-			<span class="macro">tracing::error!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">err</span>, <span class="string">&quot;Unable to retrieve finalized heads stream.&quot;</span>);
-			<span class="kw">return</span>
-		},
+	<span class="kw">let </span><span class="kw-2">mut </span>finalized_heads = <span class="kw">match </span>relay_chain.finalized_heads(para_id).<span class="kw">await </span>{
+		<span class="prelude-val">Ok</span>(finalized_heads_stream) =&gt; finalized_heads_stream,
+		<span class="prelude-val">Err</span>(err) =&gt; {
+			<span class="macro">tracing::error!</span>(target: LOG_TARGET, error = <span class="question-mark">?</span>err, <span class="string">&quot;Unable to retrieve finalized heads stream.&quot;</span>);
+			<span class="kw">return
+		</span>},
 	};
 
-	<span class="kw">loop</span> {
-		<span class="kw">let</span> <span class="ident">finalized_head</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">h</span>) <span class="op">=</span> <span class="ident">finalized_heads</span>.<span class="ident">next</span>().<span class="kw">await</span> {
-			<span class="ident">h</span>
-		} <span class="kw">else</span> {
-			<span class="macro">tracing::debug!</span>(<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>, <span class="string">&quot;Stopping following finalized head.&quot;</span>);
-			<span class="kw">return</span>
-		};
+	<span class="kw">loop </span>{
+		<span class="kw">let </span>finalized_head = <span class="kw">if let </span><span class="prelude-val">Some</span>(h) = finalized_heads.next().<span class="kw">await </span>{
+			h
+		} <span class="kw">else </span>{
+			<span class="macro">tracing::debug!</span>(target: <span class="string">&quot;cumulus-consensus&quot;</span>, <span class="string">&quot;Stopping following finalized head.&quot;</span>);
+			<span class="kw">return
+		</span>};
 
-		<span class="kw">let</span> <span class="ident">header</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Block::Header::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">finalized_head</span>[..]) {
-			<span class="prelude-val">Ok</span>(<span class="ident">header</span>) =&gt; <span class="ident">header</span>,
-			<span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; {
+		<span class="kw">let </span>header = <span class="kw">match </span>Block::Header::decode(<span class="kw-2">&amp;mut &amp;</span>finalized_head[..]) {
+			<span class="prelude-val">Ok</span>(header) =&gt; header,
+			<span class="prelude-val">Err</span>(err) =&gt; {
 				<span class="macro">tracing::debug!</span>(
-					<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">err</span>,
+					target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+					error = <span class="question-mark">?</span>err,
 					<span class="string">&quot;Could not decode parachain header while following finalized heads.&quot;</span>,
 				);
-				<span class="kw">continue</span>
-			},
+				<span class="kw">continue
+			</span>},
 		};
 
-		<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">header</span>.<span class="ident">hash</span>();
+		<span class="kw">let </span>hash = header.hash();
 
-		<span class="comment">// don&#39;t finalize the same block multiple times.</span>
-		<span class="kw">if</span> <span class="ident">parachain</span>.<span class="ident">usage_info</span>().<span class="ident">chain</span>.<span class="ident">finalized_hash</span> <span class="op">!</span><span class="op">=</span> <span class="ident">hash</span> {
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">parachain</span>.<span class="ident">finalize_block</span>(<span class="ident">BlockId::hash</span>(<span class="ident">hash</span>), <span class="prelude-val">None</span>, <span class="bool-val">true</span>) {
-				<span class="kw">match</span> <span class="ident">e</span> {
-					<span class="ident">ClientError::UnknownBlock</span>(<span class="kw">_</span>) =&gt; <span class="macro">tracing::debug!</span>(
-						<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
-						<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+		<span class="comment">// don&#39;t finalize the same block multiple times.
+		</span><span class="kw">if </span>parachain.usage_info().chain.finalized_hash != hash {
+			<span class="kw">if let </span><span class="prelude-val">Err</span>(e) = parachain.finalize_block(hash, <span class="prelude-val">None</span>, <span class="bool-val">true</span>) {
+				<span class="kw">match </span>e {
+					ClientError::UnknownBlock(<span class="kw">_</span>) =&gt; <span class="macro">tracing::debug!</span>(
+						target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+						block_hash = <span class="question-mark">?</span>hash,
 						<span class="string">&quot;Could not finalize block because it is unknown.&quot;</span>,
 					),
-					<span class="kw">_</span> =&gt; <span class="macro">tracing::warn!</span>(
-						<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
-						<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
-						<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+					<span class="kw">_ </span>=&gt; <span class="macro">tracing::warn!</span>(
+						target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+						error = <span class="question-mark">?</span>e,
+						block_hash = <span class="question-mark">?</span>hash,
 						<span class="string">&quot;Failed to finalize block&quot;</span>,
 					),
 				}
@@ -555,316 +555,316 @@
 	}
 }
 
-<span class="doccomment">/// Run the parachain consensus.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This will follow the given `relay_chain` to act as consensus for the parachain that corresponds</span>
-<span class="doccomment">/// to the given `para_id`. It will set the new best block of the parachain as it gets aware of it.</span>
-<span class="doccomment">/// The same happens for the finalized block.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Note</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This will access the backend of the parachain and thus, this future should be spawned as blocking</span>
-<span class="doccomment">/// task.</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">run_parachain_consensus</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">R</span>, <span class="ident">Block</span>, <span class="ident">B</span><span class="op">&gt;</span>(
-	<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	<span class="ident">parachain</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>,
-	<span class="ident">relay_chain</span>: <span class="ident">R</span>,
-	<span class="ident">announce_block</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">Block::Hash</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>,
-) <span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">P</span>: <span class="ident">Finalizer</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">B</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">Send</span>
-		<span class="op">+</span> <span class="ident">Sync</span>
-		<span class="op">+</span> <span class="ident">BlockBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">BlockchainEvents</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span>: <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">R</span>: <span class="ident">RelaychainClient</span>,
-	<span class="ident">B</span>: <span class="ident">Backend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Run the parachain consensus.
+///
+/// This will follow the given `relay_chain` to act as consensus for the parachain that corresponds
+/// to the given `para_id`. It will set the new best block of the parachain as it gets aware of it.
+/// The same happens for the finalized block.
+///
+/// # Note
+///
+/// This will access the backend of the parachain and thus, this future should be spawned as blocking
+/// task.
+</span><span class="kw">pub async fn </span>run_parachain_consensus&lt;P, R, Block, B&gt;(
+	para_id: ParaId,
+	parachain: Arc&lt;P&gt;,
+	relay_chain: R,
+	announce_block: Arc&lt;<span class="kw">dyn </span>Fn(Block::Hash, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;) + Send + Sync&gt;,
+) <span class="kw">where
+	</span>Block: BlockT,
+	P: Finalizer&lt;Block, B&gt;
+		+ UsageProvider&lt;Block&gt;
+		+ Send
+		+ Sync
+		+ BlockBackend&lt;Block&gt;
+		+ BlockchainEvents&lt;Block&gt;,
+	<span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>P: BlockImport&lt;Block&gt;,
+	R: RelaychainClient,
+	B: Backend&lt;Block&gt;,
 {
-	<span class="kw">let</span> <span class="ident">follow_new_best</span> <span class="op">=</span>
-		<span class="ident">follow_new_best</span>(<span class="ident">para_id</span>, <span class="ident">parachain</span>.<span class="ident">clone</span>(), <span class="ident">relay_chain</span>.<span class="ident">clone</span>(), <span class="ident">announce_block</span>);
-	<span class="kw">let</span> <span class="ident">follow_finalized_head</span> <span class="op">=</span> <span class="ident">follow_finalized_head</span>(<span class="ident">para_id</span>, <span class="ident">parachain</span>, <span class="ident">relay_chain</span>);
-	<span class="macro">select!</span> {
-		<span class="kw">_</span> <span class="op">=</span> <span class="ident">follow_new_best</span>.<span class="ident">fuse</span>() =&gt; {},
-		<span class="kw">_</span> <span class="op">=</span> <span class="ident">follow_finalized_head</span>.<span class="ident">fuse</span>() =&gt; {},
+	<span class="kw">let </span>follow_new_best =
+		follow_new_best(para_id, parachain.clone(), relay_chain.clone(), announce_block);
+	<span class="kw">let </span>follow_finalized_head = follow_finalized_head(para_id, parachain, relay_chain);
+	<span class="macro">select! </span>{
+		<span class="kw">_ </span>= follow_new_best.fuse() =&gt; {},
+		<span class="kw">_ </span>= follow_finalized_head.fuse() =&gt; {},
 	}
 }
 
-<span class="doccomment">/// Follow the relay chain new best head, to update the Parachain new best head.</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">follow_new_best</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">R</span>, <span class="ident">Block</span>, <span class="ident">B</span><span class="op">&gt;</span>(
-	<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	<span class="ident">parachain</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>,
-	<span class="ident">relay_chain</span>: <span class="ident">R</span>,
-	<span class="ident">announce_block</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">Block::Hash</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>,
-) <span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">P</span>: <span class="ident">Finalizer</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">B</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">Send</span>
-		<span class="op">+</span> <span class="ident">Sync</span>
-		<span class="op">+</span> <span class="ident">BlockBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">BlockchainEvents</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span>: <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">R</span>: <span class="ident">RelaychainClient</span>,
-	<span class="ident">B</span>: <span class="ident">Backend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Follow the relay chain new best head, to update the Parachain new best head.
+</span><span class="kw">async fn </span>follow_new_best&lt;P, R, Block, B&gt;(
+	para_id: ParaId,
+	parachain: Arc&lt;P&gt;,
+	relay_chain: R,
+	announce_block: Arc&lt;<span class="kw">dyn </span>Fn(Block::Hash, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;) + Send + Sync&gt;,
+) <span class="kw">where
+	</span>Block: BlockT,
+	P: Finalizer&lt;Block, B&gt;
+		+ UsageProvider&lt;Block&gt;
+		+ Send
+		+ Sync
+		+ BlockBackend&lt;Block&gt;
+		+ BlockchainEvents&lt;Block&gt;,
+	<span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>P: BlockImport&lt;Block&gt;,
+	R: RelaychainClient,
+	B: Backend&lt;Block&gt;,
 {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_best_heads</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">relay_chain</span>.<span class="ident">new_best_heads</span>(<span class="ident">para_id</span>).<span class="kw">await</span> {
-		<span class="prelude-val">Ok</span>(<span class="ident">best_heads_stream</span>) =&gt; <span class="ident">best_heads_stream</span>.<span class="ident">fuse</span>(),
-		<span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; {
-			<span class="macro">tracing::error!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">err</span>, <span class="string">&quot;Unable to retrieve best heads stream.&quot;</span>);
-			<span class="kw">return</span>
-		},
+	<span class="kw">let </span><span class="kw-2">mut </span>new_best_heads = <span class="kw">match </span>relay_chain.new_best_heads(para_id).<span class="kw">await </span>{
+		<span class="prelude-val">Ok</span>(best_heads_stream) =&gt; best_heads_stream.fuse(),
+		<span class="prelude-val">Err</span>(err) =&gt; {
+			<span class="macro">tracing::error!</span>(target: LOG_TARGET, error = <span class="question-mark">?</span>err, <span class="string">&quot;Unable to retrieve best heads stream.&quot;</span>);
+			<span class="kw">return
+		</span>},
 	};
 
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">imported_blocks</span> <span class="op">=</span> <span class="ident">parachain</span>.<span class="ident">import_notification_stream</span>().<span class="ident">fuse</span>();
-	<span class="comment">// The unset best header of the parachain. Will be `Some(_)` when we have imported a relay chain</span>
-	<span class="comment">// block before the parachain block it included. In this case we need to wait for this block to</span>
-	<span class="comment">// be imported to set it as new best.</span>
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">unset_best_header</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+	<span class="kw">let </span><span class="kw-2">mut </span>imported_blocks = parachain.import_notification_stream().fuse();
+	<span class="comment">// The unset best header of the parachain. Will be `Some(_)` when we have imported a relay chain
+	// block before the parachain block it included. In this case we need to wait for this block to
+	// be imported to set it as new best.
+	</span><span class="kw">let </span><span class="kw-2">mut </span>unset_best_header = <span class="prelude-val">None</span>;
 
-	<span class="kw">loop</span> {
-		<span class="macro">select!</span> {
-			<span class="ident">h</span> <span class="op">=</span> <span class="ident">new_best_heads</span>.<span class="ident">next</span>() =&gt; {
-				<span class="kw">match</span> <span class="ident">h</span> {
-					<span class="prelude-val">Some</span>(<span class="ident">h</span>) =&gt; <span class="ident">handle_new_best_parachain_head</span>(
-						<span class="ident">h</span>,
-						<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">parachain</span>,
-						<span class="kw-2">&amp;mut</span> <span class="ident">unset_best_header</span>,
+	<span class="kw">loop </span>{
+		<span class="macro">select! </span>{
+			h = new_best_heads.next() =&gt; {
+				<span class="kw">match </span>h {
+					<span class="prelude-val">Some</span>(h) =&gt; handle_new_best_parachain_head(
+						h,
+						<span class="kw-2">&amp;*</span>parachain,
+						<span class="kw-2">&amp;mut </span>unset_best_header,
 					).<span class="kw">await</span>,
-					<span class="prelude-val">None</span> =&gt; {
+					<span class="prelude-val">None </span>=&gt; {
 						<span class="macro">tracing::debug!</span>(
-							<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
+							target: <span class="string">&quot;cumulus-consensus&quot;</span>,
 							<span class="string">&quot;Stopping following new best.&quot;</span>,
 						);
-						<span class="kw">return</span>
-					}
+						<span class="kw">return
+					</span>}
 				}
 			},
-			<span class="ident">i</span> <span class="op">=</span> <span class="ident">imported_blocks</span>.<span class="ident">next</span>() =&gt; {
-				<span class="kw">match</span> <span class="ident">i</span> {
-					<span class="prelude-val">Some</span>(<span class="ident">i</span>) =&gt; <span class="ident">handle_new_block_imported</span>(
-						<span class="ident">i</span>,
-						<span class="kw-2">&amp;mut</span> <span class="ident">unset_best_header</span>,
-						<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">parachain</span>,
-						<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">announce_block</span>,
+			i = imported_blocks.next() =&gt; {
+				<span class="kw">match </span>i {
+					<span class="prelude-val">Some</span>(i) =&gt; handle_new_block_imported(
+						i,
+						<span class="kw-2">&amp;mut </span>unset_best_header,
+						<span class="kw-2">&amp;*</span>parachain,
+						<span class="kw-2">&amp;*</span>announce_block,
 					).<span class="kw">await</span>,
-					<span class="prelude-val">None</span> =&gt; {
+					<span class="prelude-val">None </span>=&gt; {
 						<span class="macro">tracing::debug!</span>(
-							<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
+							target: <span class="string">&quot;cumulus-consensus&quot;</span>,
 							<span class="string">&quot;Stopping following imported blocks.&quot;</span>,
 						);
-						<span class="kw">return</span>
-					}
+						<span class="kw">return
+					</span>}
 				}
 			},
 		}
 	}
 }
 
-<span class="doccomment">/// Handle a new import block of the parachain.</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">handle_new_block_imported</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">P</span><span class="op">&gt;</span>(
-	<span class="ident">notification</span>: <span class="ident">BlockImportNotification</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">unset_best_header_opt</span>: <span class="kw-2">&amp;mut</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Block::Header</span><span class="op">&gt;</span>,
-	<span class="ident">parachain</span>: <span class="kw-2">&amp;</span><span class="ident">P</span>,
-	<span class="ident">announce_block</span>: <span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">Block::Hash</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>),
-) <span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">P</span>: <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">BlockBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span>: <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Handle a new import block of the parachain.
+</span><span class="kw">async fn </span>handle_new_block_imported&lt;Block, P&gt;(
+	notification: BlockImportNotification&lt;Block&gt;,
+	unset_best_header_opt: <span class="kw-2">&amp;mut </span><span class="prelude-ty">Option</span>&lt;Block::Header&gt;,
+	parachain: <span class="kw-2">&amp;</span>P,
+	announce_block: <span class="kw-2">&amp;</span>(<span class="kw">dyn </span>Fn(Block::Hash, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;) + Send + Sync),
+) <span class="kw">where
+	</span>Block: BlockT,
+	P: UsageProvider&lt;Block&gt; + Send + Sync + BlockBackend&lt;Block&gt;,
+	<span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>P: BlockImport&lt;Block&gt;,
 {
-	<span class="comment">// HACK</span>
-	<span class="comment">//</span>
-	<span class="comment">// Remove after https://github.com/paritytech/substrate/pull/8052 or similar is merged</span>
-	<span class="kw">if</span> <span class="ident">notification</span>.<span class="ident">origin</span> <span class="op">!</span><span class="op">=</span> <span class="ident">BlockOrigin::Own</span> {
-		<span class="ident">announce_block</span>(<span class="ident">notification</span>.<span class="ident">hash</span>, <span class="prelude-val">None</span>);
+	<span class="comment">// HACK
+	//
+	// Remove after https://github.com/paritytech/substrate/pull/8052 or similar is merged
+	</span><span class="kw">if </span>notification.origin != BlockOrigin::Own {
+		announce_block(notification.hash, <span class="prelude-val">None</span>);
 	}
 
-	<span class="kw">let</span> <span class="ident">unset_best_header</span> <span class="op">=</span> <span class="kw">match</span> (<span class="ident">notification</span>.<span class="ident">is_new_best</span>, <span class="kw-2">&amp;</span><span class="ident">unset_best_header_opt</span>) {
-		<span class="comment">// If this is the new best block or we don&#39;t have any unset block, we can end it here.</span>
-		(<span class="bool-val">true</span>, <span class="kw">_</span>) <span class="op">|</span> (<span class="kw">_</span>, <span class="prelude-val">None</span>) =&gt; <span class="kw">return</span>,
-		(<span class="bool-val">false</span>, <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">u</span>)) =&gt; <span class="ident">u</span>,
+	<span class="kw">let </span>unset_best_header = <span class="kw">match </span>(notification.is_new_best, <span class="kw-2">&amp;</span>unset_best_header_opt) {
+		<span class="comment">// If this is the new best block or we don&#39;t have any unset block, we can end it here.
+		</span>(<span class="bool-val">true</span>, <span class="kw">_</span>) | (<span class="kw">_</span>, <span class="prelude-val">None</span>) =&gt; <span class="kw">return</span>,
+		(<span class="bool-val">false</span>, <span class="prelude-val">Some</span>(<span class="kw-2">ref </span>u)) =&gt; u,
 	};
 
-	<span class="kw">let</span> <span class="ident">unset_hash</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">notification</span>.<span class="ident">header</span>.<span class="ident">number</span>() <span class="op">&lt;</span> <span class="ident">unset_best_header</span>.<span class="ident">number</span>() {
-		<span class="kw">return</span>
-	} <span class="kw">else</span> <span class="kw">if</span> <span class="ident">notification</span>.<span class="ident">header</span>.<span class="ident">number</span>() <span class="op">==</span> <span class="ident">unset_best_header</span>.<span class="ident">number</span>() {
-		<span class="kw">let</span> <span class="ident">unset_hash</span> <span class="op">=</span> <span class="ident">unset_best_header</span>.<span class="ident">hash</span>();
+	<span class="kw">let </span>unset_hash = <span class="kw">if </span>notification.header.number() &lt; unset_best_header.number() {
+		<span class="kw">return
+	</span>} <span class="kw">else if </span>notification.header.number() == unset_best_header.number() {
+		<span class="kw">let </span>unset_hash = unset_best_header.hash();
 
-		<span class="kw">if</span> <span class="ident">unset_hash</span> <span class="op">!</span><span class="op">=</span> <span class="ident">notification</span>.<span class="ident">hash</span> {
-			<span class="kw">return</span>
-		} <span class="kw">else</span> {
-			<span class="ident">unset_hash</span>
+		<span class="kw">if </span>unset_hash != notification.hash {
+			<span class="kw">return
+		</span>} <span class="kw">else </span>{
+			unset_hash
 		}
-	} <span class="kw">else</span> {
-		<span class="ident">unset_best_header</span>.<span class="ident">hash</span>()
+	} <span class="kw">else </span>{
+		unset_best_header.hash()
 	};
 
-	<span class="kw">match</span> <span class="ident">parachain</span>.<span class="ident">block_status</span>(<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="ident">unset_hash</span>)) {
-		<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::InChainWithState</span>) =&gt; {
-			<span class="ident">drop</span>(<span class="ident">unset_best_header</span>);
-			<span class="kw">let</span> <span class="ident">unset_best_header</span> <span class="op">=</span> <span class="ident">unset_best_header_opt</span>
-				.<span class="ident">take</span>()
-				.<span class="ident">expect</span>(<span class="string">&quot;We checked above that the value is set; qed&quot;</span>);
+	<span class="kw">match </span>parachain.block_status(<span class="kw-2">&amp;</span>BlockId::Hash(unset_hash)) {
+		<span class="prelude-val">Ok</span>(BlockStatus::InChainWithState) =&gt; {
+			drop(unset_best_header);
+			<span class="kw">let </span>unset_best_header = unset_best_header_opt
+				.take()
+				.expect(<span class="string">&quot;We checked above that the value is set; qed&quot;</span>);
 
-			<span class="ident">import_block_as_new_best</span>(<span class="ident">unset_hash</span>, <span class="ident">unset_best_header</span>, <span class="ident">parachain</span>).<span class="kw">await</span>;
+			import_block_as_new_best(unset_hash, unset_best_header, parachain).<span class="kw">await</span>;
 		},
-		<span class="ident">state</span> =&gt; <span class="macro">tracing::debug!</span>(
-			<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
-			<span class="question-mark">?</span><span class="ident">unset_best_header</span>,
-			<span class="question-mark">?</span><span class="ident">notification</span>.<span class="ident">header</span>,
-			<span class="question-mark">?</span><span class="ident">state</span>,
+		state =&gt; <span class="macro">tracing::debug!</span>(
+			target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+			<span class="question-mark">?</span>unset_best_header,
+			<span class="question-mark">?</span>notification.header,
+			<span class="question-mark">?</span>state,
 			<span class="string">&quot;Unexpected state for unset best header.&quot;</span>,
 		),
 	}
 }
 
-<span class="doccomment">/// Handle the new best parachain head as extracted from the new best relay chain.</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">handle_new_best_parachain_head</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">P</span><span class="op">&gt;</span>(
-	<span class="ident">head</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-	<span class="ident">parachain</span>: <span class="kw-2">&amp;</span><span class="ident">P</span>,
-	<span class="ident">unset_best_header</span>: <span class="kw-2">&amp;mut</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Block::Header</span><span class="op">&gt;</span>,
-) <span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">P</span>: <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">BlockBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span>: <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Handle the new best parachain head as extracted from the new best relay chain.
+</span><span class="kw">async fn </span>handle_new_best_parachain_head&lt;Block, P&gt;(
+	head: Vec&lt;u8&gt;,
+	parachain: <span class="kw-2">&amp;</span>P,
+	unset_best_header: <span class="kw-2">&amp;mut </span><span class="prelude-ty">Option</span>&lt;Block::Header&gt;,
+) <span class="kw">where
+	</span>Block: BlockT,
+	P: UsageProvider&lt;Block&gt; + Send + Sync + BlockBackend&lt;Block&gt;,
+	<span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>P: BlockImport&lt;Block&gt;,
 {
-	<span class="kw">let</span> <span class="ident">parachain_head</span> <span class="op">=</span> <span class="kw">match</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">head</span>[..]) {
-		<span class="prelude-val">Ok</span>(<span class="ident">header</span>) =&gt; <span class="ident">header</span>,
-		<span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; {
+	<span class="kw">let </span>parachain_head = <span class="kw">match </span>&lt;&lt;Block <span class="kw">as </span>BlockT&gt;::Header&gt;::decode(<span class="kw-2">&amp;mut &amp;</span>head[..]) {
+		<span class="prelude-val">Ok</span>(header) =&gt; header,
+		<span class="prelude-val">Err</span>(err) =&gt; {
 			<span class="macro">tracing::debug!</span>(
-				<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
-				<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">err</span>,
+				target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+				error = <span class="question-mark">?</span>err,
 				<span class="string">&quot;Could not decode Parachain header while following best heads.&quot;</span>,
 			);
-			<span class="kw">return</span>
-		},
+			<span class="kw">return
+		</span>},
 	};
 
-	<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">parachain_head</span>.<span class="ident">hash</span>();
+	<span class="kw">let </span>hash = parachain_head.hash();
 
-	<span class="kw">if</span> <span class="ident">parachain</span>.<span class="ident">usage_info</span>().<span class="ident">chain</span>.<span class="ident">best_hash</span> <span class="op">==</span> <span class="ident">hash</span> {
+	<span class="kw">if </span>parachain.usage_info().chain.best_hash == hash {
 		<span class="macro">tracing::debug!</span>(
-			<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
-			<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+			target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+			block_hash = <span class="question-mark">?</span>hash,
 			<span class="string">&quot;Skipping set new best block, because block is already the best.&quot;</span>,
 		)
-	} <span class="kw">else</span> {
-		<span class="comment">// Make sure the block is already known or otherwise we skip setting new best.</span>
-		<span class="kw">match</span> <span class="ident">parachain</span>.<span class="ident">block_status</span>(<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="ident">hash</span>)) {
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::InChainWithState</span>) =&gt; {
-				<span class="ident">unset_best_header</span>.<span class="ident">take</span>();
+	} <span class="kw">else </span>{
+		<span class="comment">// Make sure the block is already known or otherwise we skip setting new best.
+		</span><span class="kw">match </span>parachain.block_status(<span class="kw-2">&amp;</span>BlockId::Hash(hash)) {
+			<span class="prelude-val">Ok</span>(BlockStatus::InChainWithState) =&gt; {
+				unset_best_header.take();
 
-				<span class="ident">import_block_as_new_best</span>(<span class="ident">hash</span>, <span class="ident">parachain_head</span>, <span class="ident">parachain</span>).<span class="kw">await</span>;
+				import_block_as_new_best(hash, parachain_head, parachain).<span class="kw">await</span>;
 			},
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::InChainPruned</span>) =&gt; {
+			<span class="prelude-val">Ok</span>(BlockStatus::InChainPruned) =&gt; {
 				<span class="macro">tracing::error!</span>(
-					<span class="ident">target</span>: <span class="string">&quot;cumulus-collator&quot;</span>,
-					<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+					target: <span class="string">&quot;cumulus-collator&quot;</span>,
+					block_hash = <span class="question-mark">?</span>hash,
 					<span class="string">&quot;Trying to set pruned block as new best!&quot;</span>,
 				);
 			},
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::Unknown</span>) =&gt; {
-				<span class="kw-2">*</span><span class="ident">unset_best_header</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">parachain_head</span>);
+			<span class="prelude-val">Ok</span>(BlockStatus::Unknown) =&gt; {
+				<span class="kw-2">*</span>unset_best_header = <span class="prelude-val">Some</span>(parachain_head);
 
 				<span class="macro">tracing::debug!</span>(
-					<span class="ident">target</span>: <span class="string">&quot;cumulus-collator&quot;</span>,
-					<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+					target: <span class="string">&quot;cumulus-collator&quot;</span>,
+					block_hash = <span class="question-mark">?</span>hash,
 					<span class="string">&quot;Parachain block not yet imported, waiting for import to enact as best block.&quot;</span>,
 				);
 			},
-			<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
+			<span class="prelude-val">Err</span>(e) =&gt; {
 				<span class="macro">tracing::error!</span>(
-					<span class="ident">target</span>: <span class="string">&quot;cumulus-collator&quot;</span>,
-					<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
+					target: <span class="string">&quot;cumulus-collator&quot;</span>,
+					block_hash = <span class="question-mark">?</span>hash,
+					error = <span class="question-mark">?</span>e,
 					<span class="string">&quot;Failed to get block status of block.&quot;</span>,
 				);
 			},
-			<span class="kw">_</span> =&gt; {},
+			<span class="kw">_ </span>=&gt; {},
 		}
 	}
 }
 
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">import_block_as_new_best</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">P</span><span class="op">&gt;</span>(<span class="ident">hash</span>: <span class="ident">Block::Hash</span>, <span class="ident">header</span>: <span class="ident">Block::Header</span>, <span class="ident">parachain</span>: <span class="kw-2">&amp;</span><span class="ident">P</span>)
-<span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">P</span>: <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">BlockBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span>: <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="kw">async fn </span>import_block_as_new_best&lt;Block, P&gt;(hash: Block::Hash, header: Block::Header, parachain: <span class="kw-2">&amp;</span>P)
+<span class="kw">where
+	</span>Block: BlockT,
+	P: UsageProvider&lt;Block&gt; + Send + Sync + BlockBackend&lt;Block&gt;,
+	<span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>P: BlockImport&lt;Block&gt;,
 {
-	<span class="kw">let</span> <span class="ident">best_number</span> <span class="op">=</span> <span class="ident">parachain</span>.<span class="ident">usage_info</span>().<span class="ident">chain</span>.<span class="ident">best_number</span>;
-	<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">header</span>.<span class="ident">number</span>() <span class="op">&lt;</span> <span class="ident">best_number</span> {
+	<span class="kw">let </span>best_number = parachain.usage_info().chain.best_number;
+	<span class="kw">if </span><span class="kw-2">*</span>header.number() &lt; best_number {
 		<span class="macro">tracing::debug!</span>(
-			<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
-			<span class="op">%</span><span class="ident">best_number</span>,
-			<span class="ident">block_number</span> <span class="op">=</span> <span class="op">%</span><span class="ident">header</span>.<span class="ident">number</span>(),
+			target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+			%best_number,
+			block_number = %header.number(),
 			<span class="string">&quot;Skipping importing block as new best block, because there already exists a \
 			 best block with an higher number&quot;</span>,
 		);
-		<span class="kw">return</span>
-	}
+		<span class="kw">return
+	</span>}
 
-	<span class="comment">// Make it the new best block</span>
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">block_import_params</span> <span class="op">=</span> <span class="ident">BlockImportParams::new</span>(<span class="ident">BlockOrigin::ConsensusBroadcast</span>, <span class="ident">header</span>);
-	<span class="ident">block_import_params</span>.<span class="ident">fork_choice</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">ForkChoiceStrategy::Custom</span>(<span class="bool-val">true</span>));
-	<span class="ident">block_import_params</span>.<span class="ident">import_existing</span> <span class="op">=</span> <span class="bool-val">true</span>;
+	<span class="comment">// Make it the new best block
+	</span><span class="kw">let </span><span class="kw-2">mut </span>block_import_params = BlockImportParams::new(BlockOrigin::ConsensusBroadcast, header);
+	block_import_params.fork_choice = <span class="prelude-val">Some</span>(ForkChoiceStrategy::Custom(<span class="bool-val">true</span>));
+	block_import_params.import_existing = <span class="bool-val">true</span>;
 
-	<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> (<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">parachain</span>).<span class="ident">import_block</span>(<span class="ident">block_import_params</span>, <span class="ident">Default::default</span>()).<span class="kw">await</span> {
+	<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = (<span class="kw-2">&amp;*</span>parachain).import_block(block_import_params, Default::default()).<span class="kw">await </span>{
 		<span class="macro">tracing::warn!</span>(
-			<span class="ident">target</span>: <span class="string">&quot;cumulus-consensus&quot;</span>,
-			<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
-			<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">err</span>,
+			target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+			block_hash = <span class="question-mark">?</span>hash,
+			error = <span class="question-mark">?</span>err,
 			<span class="string">&quot;Failed to set new best block.&quot;</span>,
 		);
 	}
 }
 
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">RCInterface</span><span class="op">&gt;</span> <span class="ident">RelaychainClient</span> <span class="kw">for</span> <span class="ident">RCInterface</span>
-<span class="kw">where</span>
-	<span class="ident">RCInterface</span>: <span class="ident">RelayChainInterface</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="attribute">#[async_trait]
+</span><span class="kw">impl</span>&lt;RCInterface&gt; RelaychainClient <span class="kw">for </span>RCInterface
+<span class="kw">where
+	</span>RCInterface: RelayChainInterface + Clone + <span class="lifetime">&#39;static</span>,
 {
-	<span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">ClientError</span>;
+	<span class="kw">type </span>Error = ClientError;
 
-	<span class="kw">type</span> <span class="ident">HeadStream</span> <span class="op">=</span> <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+	<span class="kw">type </span>HeadStream = Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = Vec&lt;u8&gt;&gt; + Send&gt;&gt;;
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">new_best_heads</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">para_id</span>: <span class="ident">ParaId</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::HeadStream</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">relay_chain</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
+	<span class="kw">async fn </span>new_best_heads(<span class="kw-2">&amp;</span><span class="self">self</span>, para_id: ParaId) -&gt; RelayChainResult&lt;<span class="self">Self</span>::HeadStream&gt; {
+		<span class="kw">let </span>relay_chain = <span class="self">self</span>.clone();
 
-		<span class="kw">let</span> <span class="ident">new_best_notification_stream</span> <span class="op">=</span> <span class="self">self</span>
-			.<span class="ident">new_best_notification_stream</span>()
-			.<span class="kw">await</span><span class="question-mark">?</span>
-			.<span class="ident">filter_map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> {
-				<span class="kw">let</span> <span class="ident">relay_chain</span> <span class="op">=</span> <span class="ident">relay_chain</span>.<span class="ident">clone</span>();
-				<span class="kw">async</span> <span class="kw">move</span> { <span class="ident">relay_chain</span>.<span class="ident">parachain_head_at</span>(<span class="ident">n</span>.<span class="ident">hash</span>(), <span class="ident">para_id</span>).<span class="kw">await</span>.<span class="ident">ok</span>().<span class="ident">flatten</span>() }
+		<span class="kw">let </span>new_best_notification_stream = <span class="self">self
+			</span>.new_best_notification_stream()
+			.<span class="kw">await</span><span class="question-mark">?
+			</span>.filter_map(<span class="kw">move </span>|n| {
+				<span class="kw">let </span>relay_chain = relay_chain.clone();
+				<span class="kw">async move </span>{ relay_chain.parachain_head_at(n.hash(), para_id).<span class="kw">await</span>.ok().flatten() }
 			})
-			.<span class="ident">boxed</span>();
-		<span class="prelude-val">Ok</span>(<span class="ident">new_best_notification_stream</span>)
+			.boxed();
+		<span class="prelude-val">Ok</span>(new_best_notification_stream)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">finalized_heads</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">para_id</span>: <span class="ident">ParaId</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::HeadStream</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">relay_chain</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
+	<span class="kw">async fn </span>finalized_heads(<span class="kw-2">&amp;</span><span class="self">self</span>, para_id: ParaId) -&gt; RelayChainResult&lt;<span class="self">Self</span>::HeadStream&gt; {
+		<span class="kw">let </span>relay_chain = <span class="self">self</span>.clone();
 
-		<span class="kw">let</span> <span class="ident">finality_notification_stream</span> <span class="op">=</span> <span class="self">self</span>
-			.<span class="ident">finality_notification_stream</span>()
-			.<span class="kw">await</span><span class="question-mark">?</span>
-			.<span class="ident">filter_map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> {
-				<span class="kw">let</span> <span class="ident">relay_chain</span> <span class="op">=</span> <span class="ident">relay_chain</span>.<span class="ident">clone</span>();
-				<span class="kw">async</span> <span class="kw">move</span> { <span class="ident">relay_chain</span>.<span class="ident">parachain_head_at</span>(<span class="ident">n</span>.<span class="ident">hash</span>(), <span class="ident">para_id</span>).<span class="kw">await</span>.<span class="ident">ok</span>().<span class="ident">flatten</span>() }
+		<span class="kw">let </span>finality_notification_stream = <span class="self">self
+			</span>.finality_notification_stream()
+			.<span class="kw">await</span><span class="question-mark">?
+			</span>.filter_map(<span class="kw">move </span>|n| {
+				<span class="kw">let </span>relay_chain = relay_chain.clone();
+				<span class="kw">async move </span>{ relay_chain.parachain_head_at(n.hash(), para_id).<span class="kw">await</span>.ok().flatten() }
 			})
-			.<span class="ident">boxed</span>();
-		<span class="prelude-val">Ok</span>(<span class="ident">finality_notification_stream</span>)
+			.boxed();
+		<span class="prelude-val">Ok</span>(finality_notification_stream)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_head_at</span>(
+	<span class="kw">async fn </span>parachain_head_at(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">persisted_validation_data</span>(<span class="ident">at</span>, <span class="ident">para_id</span>, <span class="ident">OccupiedCoreAssumption::TimedOut</span>)
-			.<span class="kw">await</span>
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">parent_head</span>.<span class="number">0</span>))
+		at: PHash,
+		para_id: ParaId,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;&gt; {
+		<span class="self">self</span>.persisted_validation_data(at, para_id, OccupiedCoreAssumption::TimedOut)
+			.<span class="kw">await
+			</span>.map(|s| s.map(|s| s.parent_head.<span class="number">0</span>))
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

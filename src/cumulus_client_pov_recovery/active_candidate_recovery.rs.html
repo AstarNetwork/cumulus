@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/pov-recovery/src/active_candidate_recovery.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>active_candidate_recovery.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_pov_recovery/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_pov_recovery/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_pov_recovery/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/pov-recovery/src/active_candidate_recovery.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>active_candidate_recovery.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_pov_recovery/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_pov_recovery/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_pov_recovery/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -109,116 +109,116 @@
 <span id="109">109</span>
 <span id="110">110</span>
 <span id="111">111</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Polkadot.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Polkadot.
 
-<span class="comment">// Polkadot is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Polkadot is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Polkadot is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Polkadot is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Polkadot.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Polkadot.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>;
+</span><span class="kw">use </span>sp_runtime::traits::Block <span class="kw">as </span>BlockT;
 
-<span class="kw">use</span> <span class="ident">polkadot_node_primitives::AvailableData</span>;
-<span class="kw">use</span> <span class="ident">polkadot_node_subsystem::messages::AvailabilityRecoveryMessage</span>;
-<span class="kw">use</span> <span class="ident">polkadot_overseer::Handle</span> <span class="kw">as</span> <span class="ident">OverseerHandle</span>;
+<span class="kw">use </span>polkadot_node_primitives::AvailableData;
+<span class="kw">use </span>polkadot_node_subsystem::messages::AvailabilityRecoveryMessage;
+<span class="kw">use </span>polkadot_overseer::Handle <span class="kw">as </span>OverseerHandle;
 
-<span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">channel::oneshot</span>, <span class="ident">stream::FuturesUnordered</span>, <span class="ident">Future</span>, <span class="ident">FutureExt</span>, <span class="ident">StreamExt</span>};
+<span class="kw">use </span>futures::{channel::oneshot, stream::FuturesUnordered, Future, FutureExt, StreamExt};
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">collections::HashSet</span>, <span class="ident">pin::Pin</span>};
+<span class="kw">use </span>std::{collections::HashSet, pin::Pin};
 
-<span class="doccomment">/// The active candidate recovery.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This handles the candidate recovery and tracks the activate recoveries.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">ActiveCandidateRecovery</span><span class="op">&lt;</span><span class="ident">Block</span>: <span class="ident">BlockT</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// The recoveries that are currently being executed.</span>
-	<span class="ident">recoveries</span>: <span class="ident">FuturesUnordered</span><span class="op">&lt;</span>
-		<span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> (<span class="ident">Block::Hash</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">AvailableData</span><span class="op">&gt;</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="op">&gt;</span>,
-	<span class="doccomment">/// The block hashes of the candidates currently being recovered.</span>
-	<span class="ident">candidates</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Block::Hash</span><span class="op">&gt;</span>,
-	<span class="ident">overseer_handle</span>: <span class="ident">OverseerHandle</span>,
+<span class="doccomment">/// The active candidate recovery.
+///
+/// This handles the candidate recovery and tracks the activate recoveries.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>ActiveCandidateRecovery&lt;Block: BlockT&gt; {
+	<span class="doccomment">/// The recoveries that are currently being executed.
+	</span>recoveries: FuturesUnordered&lt;
+		Pin&lt;Box&lt;<span class="kw">dyn </span>Future&lt;Output = (Block::Hash, <span class="prelude-ty">Option</span>&lt;AvailableData&gt;)&gt; + Send&gt;&gt;,
+	&gt;,
+	<span class="doccomment">/// The block hashes of the candidates currently being recovered.
+	</span>candidates: HashSet&lt;Block::Hash&gt;,
+	overseer_handle: OverseerHandle,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Block</span>: <span class="ident">BlockT</span><span class="op">&gt;</span> <span class="ident">ActiveCandidateRecovery</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> {
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">overseer_handle</span>: <span class="ident">OverseerHandle</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> { <span class="ident">recoveries</span>: <span class="ident">Default::default</span>(), <span class="ident">candidates</span>: <span class="ident">Default::default</span>(), <span class="ident">overseer_handle</span> }
+<span class="kw">impl</span>&lt;Block: BlockT&gt; ActiveCandidateRecovery&lt;Block&gt; {
+	<span class="kw">pub fn </span>new(overseer_handle: OverseerHandle) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ recoveries: Default::default(), candidates: Default::default(), overseer_handle }
 	}
 
-	<span class="doccomment">/// Recover the given `pending_candidate`.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">recover_candidate</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">block_hash</span>: <span class="ident">Block::Hash</span>,
-		<span class="ident">pending_candidate</span>: <span class="ident"><span class="kw">crate</span>::PendingCandidate</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+	<span class="doccomment">/// Recover the given `pending_candidate`.
+	</span><span class="kw">pub async fn </span>recover_candidate(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		block_hash: Block::Hash,
+		pending_candidate: <span class="kw">crate</span>::PendingCandidate&lt;Block&gt;,
 	) {
-		<span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">oneshot::channel</span>();
+		<span class="kw">let </span>(tx, rx) = oneshot::channel();
 
-		<span class="self">self</span>.<span class="ident">overseer_handle</span>
-			.<span class="ident">send_msg</span>(
-				<span class="ident">AvailabilityRecoveryMessage::RecoverAvailableData</span>(
-					<span class="ident">pending_candidate</span>.<span class="ident">receipt</span>,
-					<span class="ident">pending_candidate</span>.<span class="ident">session_index</span>,
+		<span class="self">self</span>.overseer_handle
+			.send_msg(
+				AvailabilityRecoveryMessage::RecoverAvailableData(
+					pending_candidate.receipt,
+					pending_candidate.session_index,
 					<span class="prelude-val">None</span>,
-					<span class="ident">tx</span>,
+					tx,
 				),
 				<span class="string">&quot;ActiveCandidateRecovery&quot;</span>,
 			)
 			.<span class="kw">await</span>;
 
-		<span class="self">self</span>.<span class="ident">candidates</span>.<span class="ident">insert</span>(<span class="ident">block_hash</span>);
+		<span class="self">self</span>.candidates.insert(block_hash);
 
-		<span class="self">self</span>.<span class="ident">recoveries</span>.<span class="ident">push</span>(
-			<span class="kw">async</span> <span class="kw">move</span> {
-				<span class="kw">match</span> <span class="ident">rx</span>.<span class="kw">await</span> {
-					<span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="ident">res</span>)) =&gt; (<span class="ident">block_hash</span>, <span class="prelude-val">Some</span>(<span class="ident">res</span>)),
-					<span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="ident">error</span>)) =&gt; {
+		<span class="self">self</span>.recoveries.push(
+			<span class="kw">async move </span>{
+				<span class="kw">match </span>rx.<span class="kw">await </span>{
+					<span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(res)) =&gt; (block_hash, <span class="prelude-val">Some</span>(res)),
+					<span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(error)) =&gt; {
 						<span class="macro">tracing::debug!</span>(
-							<span class="ident">target</span>: <span class="ident"><span class="kw">crate</span>::LOG_TARGET</span>,
-							<span class="question-mark">?</span><span class="ident">error</span>,
-							<span class="question-mark">?</span><span class="ident">block_hash</span>,
+							target: <span class="kw">crate</span>::LOG_TARGET,
+							<span class="question-mark">?</span>error,
+							<span class="question-mark">?</span>block_hash,
 							<span class="string">&quot;Availability recovery failed&quot;</span>,
 						);
-						(<span class="ident">block_hash</span>, <span class="prelude-val">None</span>)
+						(block_hash, <span class="prelude-val">None</span>)
 					},
 					<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
 						<span class="macro">tracing::debug!</span>(
-							<span class="ident">target</span>: <span class="ident"><span class="kw">crate</span>::LOG_TARGET</span>,
+							target: <span class="kw">crate</span>::LOG_TARGET,
 							<span class="string">&quot;Availability recovery oneshot channel closed&quot;</span>,
 						);
-						(<span class="ident">block_hash</span>, <span class="prelude-val">None</span>)
+						(block_hash, <span class="prelude-val">None</span>)
 					},
 				}
 			}
-			.<span class="ident">boxed</span>(),
+			.boxed(),
 		);
 	}
 
-	<span class="doccomment">/// Returns if the given `candidate` is being recovered.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_being_recovered</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">candidate</span>: <span class="kw-2">&amp;</span><span class="ident">Block::Hash</span>) -&gt; <span class="ident">bool</span> {
-		<span class="self">self</span>.<span class="ident">candidates</span>.<span class="ident">contains</span>(<span class="ident">candidate</span>)
+	<span class="doccomment">/// Returns if the given `candidate` is being recovered.
+	</span><span class="kw">pub fn </span>is_being_recovered(<span class="kw-2">&amp;</span><span class="self">self</span>, candidate: <span class="kw-2">&amp;</span>Block::Hash) -&gt; bool {
+		<span class="self">self</span>.candidates.contains(candidate)
 	}
 
-	<span class="doccomment">/// Waits for the next recovery.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// If the returned [`AvailableData`] is `None`, it means that the recovery failed.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">wait_for_recovery</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; (<span class="ident">Block::Hash</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">AvailableData</span><span class="op">&gt;</span>) {
-		<span class="kw">loop</span> {
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">res</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">recoveries</span>.<span class="ident">next</span>().<span class="kw">await</span> {
-				<span class="self">self</span>.<span class="ident">candidates</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">res</span>.<span class="number">0</span>);
-				<span class="kw">return</span> <span class="ident">res</span>
-			} <span class="kw">else</span> {
+	<span class="doccomment">/// Waits for the next recovery.
+	///
+	/// If the returned [`AvailableData`] is `None`, it means that the recovery failed.
+	</span><span class="kw">pub async fn </span>wait_for_recovery(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; (Block::Hash, <span class="prelude-ty">Option</span>&lt;AvailableData&gt;) {
+		<span class="kw">loop </span>{
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(res) = <span class="self">self</span>.recoveries.next().<span class="kw">await </span>{
+				<span class="self">self</span>.candidates.remove(<span class="kw-2">&amp;</span>res.<span class="number">0</span>);
+				<span class="kw">return </span>res
+			} <span class="kw">else </span>{
 				<span class="macro">futures::pending!</span>()
 			}
 		}
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_pov_recovery" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_pov_recovery" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-interface/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_interface/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-interface/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_interface/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -280,287 +280,287 @@
 <span id="280">280</span>
 <span id="281">281</span>
 <span id="282">282</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">collections::BTreeMap</span>, <span class="ident">pin::Pin</span>, <span class="ident">sync::Arc</span>};
+</span><span class="kw">use </span>std::{collections::BTreeMap, pin::Pin, sync::Arc};
 
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{
-	<span class="ident">relay_chain</span>::{
-		<span class="ident">v2</span>::{<span class="ident">CommittedCandidateReceipt</span>, <span class="ident">OccupiedCoreAssumption</span>, <span class="ident">SessionIndex</span>, <span class="ident">ValidatorId</span>},
-		<span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">PHeader</span>, <span class="ident">InboundHrmpMessage</span>,
+<span class="kw">use </span>cumulus_primitives_core::{
+	relay_chain::{
+		v2::{CommittedCandidateReceipt, OccupiedCoreAssumption, SessionIndex, ValidatorId},
+		Hash <span class="kw">as </span>PHash, Header <span class="kw">as </span>PHeader, InboundHrmpMessage,
 	},
-	<span class="ident">InboundDownwardMessage</span>, <span class="ident">ParaId</span>, <span class="ident">PersistedValidationData</span>,
+	InboundDownwardMessage, ParaId, PersistedValidationData,
 };
-<span class="kw">use</span> <span class="ident">polkadot_overseer</span>::{<span class="ident">prometheus::PrometheusError</span>, <span class="ident">Handle</span> <span class="kw">as</span> <span class="ident">OverseerHandle</span>};
-<span class="kw">use</span> <span class="ident">polkadot_service::SubstrateServiceError</span>;
-<span class="kw">use</span> <span class="ident">sc_client_api::StorageProof</span>;
+<span class="kw">use </span>polkadot_overseer::{prometheus::PrometheusError, Handle <span class="kw">as </span>OverseerHandle};
+<span class="kw">use </span>polkadot_service::SubstrateServiceError;
+<span class="kw">use </span>sc_client_api::StorageProof;
 
-<span class="kw">use</span> <span class="ident">futures::Stream</span>;
+<span class="kw">use </span>futures::Stream;
 
-<span class="kw">use</span> <span class="ident">async_trait::async_trait</span>;
-<span class="kw">use</span> <span class="ident">jsonrpsee_core::Error</span> <span class="kw">as</span> <span class="ident">JsonRpcError</span>;
-<span class="kw">use</span> <span class="ident">parity_scale_codec::Error</span> <span class="kw">as</span> <span class="ident">CodecError</span>;
-<span class="kw">use</span> <span class="ident">sp_api::ApiError</span>;
-<span class="kw">use</span> <span class="ident">sp_state_machine::StorageValue</span>;
+<span class="kw">use </span>async_trait::async_trait;
+<span class="kw">use </span>jsonrpsee_core::Error <span class="kw">as </span>JsonRpcError;
+<span class="kw">use </span>parity_scale_codec::Error <span class="kw">as </span>CodecError;
+<span class="kw">use </span>sp_api::ApiError;
+<span class="kw">use </span>sp_state_machine::StorageValue;
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span>;
+<span class="kw">pub type </span>RelayChainResult&lt;T&gt; = <span class="prelude-ty">Result</span>&lt;T, RelayChainError&gt;;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">thiserror::Error</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">RelayChainError</span> {
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Error occured while calling relay chain runtime: {0}&quot;</span>)]</span>
-	<span class="ident">ApiError</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">ApiError</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Timeout while waiting for relay-chain block `{0}` to be imported.&quot;</span>)]</span>
-	<span class="ident">WaitTimeout</span>(<span class="ident">PHash</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Import listener closed while waiting for relay-chain block `{0}` to be imported.&quot;</span>)]</span>
-	<span class="ident">ImportListenerClosed</span>(<span class="ident">PHash</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Blockchain returned an error while waiting for relay-chain block `{0}` to be imported: {1}&quot;</span>)]</span>
-	<span class="ident">WaitBlockchainError</span>(<span class="ident">PHash</span>, <span class="ident">sp_blockchain::Error</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Blockchain returned an error: {0}&quot;</span>)]</span>
-	<span class="ident">BlockchainError</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">sp_blockchain::Error</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;State machine error occured: {0}&quot;</span>)]</span>
-	<span class="ident">StateMachineError</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">sp_state_machine::Error</span><span class="op">&gt;</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Unable to call RPC method &#39;{0}&#39; due to error: {1}&quot;</span>)]</span>
-	<span class="ident">RpcCallError</span>(<span class="ident">String</span>, <span class="ident">JsonRpcError</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;RPC Error: &#39;{0}&#39;&quot;</span>)]</span>
-	<span class="ident">JsonRpcError</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">JsonRpcError</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Unable to reach RpcStreamWorker: {0}&quot;</span>)]</span>
-	<span class="ident">WorkerCommunicationError</span>(<span class="ident">String</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Scale codec deserialization error: {0}&quot;</span>)]</span>
-	<span class="ident">DeserializationError</span>(<span class="ident">CodecError</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Polkadot service error: {0}&quot;</span>)]</span>
-	<span class="ident">ServiceError</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">polkadot_service::Error</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Substrate service error: {0}&quot;</span>)]</span>
-	<span class="ident">SubServiceError</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">SubstrateServiceError</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Prometheus error: {0}&quot;</span>)]</span>
-	<span class="ident">PrometheusError</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">PrometheusError</span>),
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Unspecified error occured: {0}&quot;</span>)]</span>
-	<span class="ident">GenericError</span>(<span class="ident">String</span>),
+<span class="attribute">#[derive(thiserror::Error, Debug)]
+</span><span class="kw">pub enum </span>RelayChainError {
+	<span class="attribute">#[error(<span class="string">&quot;Error occured while calling relay chain runtime: {0}&quot;</span>)]
+	</span>ApiError(<span class="attribute">#[from] </span>ApiError),
+	<span class="attribute">#[error(<span class="string">&quot;Timeout while waiting for relay-chain block `{0}` to be imported.&quot;</span>)]
+	</span>WaitTimeout(PHash),
+	<span class="attribute">#[error(<span class="string">&quot;Import listener closed while waiting for relay-chain block `{0}` to be imported.&quot;</span>)]
+	</span>ImportListenerClosed(PHash),
+	<span class="attribute">#[error(<span class="string">&quot;Blockchain returned an error while waiting for relay-chain block `{0}` to be imported: {1}&quot;</span>)]
+	</span>WaitBlockchainError(PHash, sp_blockchain::Error),
+	<span class="attribute">#[error(<span class="string">&quot;Blockchain returned an error: {0}&quot;</span>)]
+	</span>BlockchainError(<span class="attribute">#[from] </span>sp_blockchain::Error),
+	<span class="attribute">#[error(<span class="string">&quot;State machine error occured: {0}&quot;</span>)]
+	</span>StateMachineError(Box&lt;<span class="kw">dyn </span>sp_state_machine::Error&gt;),
+	<span class="attribute">#[error(<span class="string">&quot;Unable to call RPC method &#39;{0}&#39; due to error: {1}&quot;</span>)]
+	</span>RpcCallError(String, JsonRpcError),
+	<span class="attribute">#[error(<span class="string">&quot;RPC Error: &#39;{0}&#39;&quot;</span>)]
+	</span>JsonRpcError(<span class="attribute">#[from] </span>JsonRpcError),
+	<span class="attribute">#[error(<span class="string">&quot;Unable to reach RpcStreamWorker: {0}&quot;</span>)]
+	</span>WorkerCommunicationError(String),
+	<span class="attribute">#[error(<span class="string">&quot;Scale codec deserialization error: {0}&quot;</span>)]
+	</span>DeserializationError(CodecError),
+	<span class="attribute">#[error(<span class="string">&quot;Polkadot service error: {0}&quot;</span>)]
+	</span>ServiceError(<span class="attribute">#[from] </span>polkadot_service::Error),
+	<span class="attribute">#[error(<span class="string">&quot;Substrate service error: {0}&quot;</span>)]
+	</span>SubServiceError(<span class="attribute">#[from] </span>SubstrateServiceError),
+	<span class="attribute">#[error(<span class="string">&quot;Prometheus error: {0}&quot;</span>)]
+	</span>PrometheusError(<span class="attribute">#[from] </span>PrometheusError),
+	<span class="attribute">#[error(<span class="string">&quot;Unspecified error occured: {0}&quot;</span>)]
+	</span>GenericError(String),
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RelayChainError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ApiError</span> {
-	<span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RelayChainError</span>) -&gt; <span class="self">Self</span> {
-		<span class="ident">sp_api::ApiError::Application</span>(<span class="ident">Box::new</span>(<span class="ident">r</span>))
+<span class="kw">impl </span>From&lt;RelayChainError&gt; <span class="kw">for </span>ApiError {
+	<span class="kw">fn </span>from(r: RelayChainError) -&gt; <span class="self">Self </span>{
+		sp_api::ApiError::Application(Box::new(r))
 	}
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">CodecError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RelayChainError</span> {
-	<span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">e</span>: <span class="ident">CodecError</span>) -&gt; <span class="self">Self</span> {
-		<span class="ident">RelayChainError::DeserializationError</span>(<span class="ident">e</span>)
+<span class="kw">impl </span>From&lt;CodecError&gt; <span class="kw">for </span>RelayChainError {
+	<span class="kw">fn </span>from(e: CodecError) -&gt; <span class="self">Self </span>{
+		RelayChainError::DeserializationError(e)
 	}
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RelayChainError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">sp_blockchain::Error</span> {
-	<span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RelayChainError</span>) -&gt; <span class="self">Self</span> {
-		<span class="ident">sp_blockchain::Error::Application</span>(<span class="ident">Box::new</span>(<span class="ident">r</span>))
+<span class="kw">impl </span>From&lt;RelayChainError&gt; <span class="kw">for </span>sp_blockchain::Error {
+	<span class="kw">fn </span>from(r: RelayChainError) -&gt; <span class="self">Self </span>{
+		sp_blockchain::Error::Application(Box::new(r))
 	}
 }
 
-<span class="doccomment">/// Trait that provides all necessary methods for interaction between collator and relay chain.</span>
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RelayChainInterface</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> {
-	<span class="doccomment">/// Fetch a storage item by key.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_storage_by_key</span>(
+<span class="doccomment">/// Trait that provides all necessary methods for interaction between collator and relay chain.
+</span><span class="attribute">#[async_trait]
+</span><span class="kw">pub trait </span>RelayChainInterface: Send + Sync {
+	<span class="doccomment">/// Fetch a storage item by key.
+	</span><span class="kw">async fn </span>get_storage_by_key(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">key</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">StorageValue</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+		relay_parent: PHash,
+		key: <span class="kw-2">&amp;</span>[u8],
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;StorageValue&gt;&gt;;
 
-	<span class="doccomment">/// Fetch a vector of current validators.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validators</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">block_id</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ValidatorId</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Fetch a vector of current validators.
+	</span><span class="kw">async fn </span>validators(<span class="kw-2">&amp;</span><span class="self">self</span>, block_id: PHash) -&gt; RelayChainResult&lt;Vec&lt;ValidatorId&gt;&gt;;
 
-	<span class="doccomment">/// Get the hash of the current best block.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">best_block_hash</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Get the hash of the current best block.
+	</span><span class="kw">async fn </span>best_block_hash(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;PHash&gt;;
 
-	<span class="doccomment">/// Returns the whole contents of the downward message queue for the parachain we are collating</span>
-	<span class="doccomment">/// for.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns `None` in case of an error.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retrieve_dmq_contents</span>(
+	<span class="doccomment">/// Returns the whole contents of the downward message queue for the parachain we are collating
+	/// for.
+	///
+	/// Returns `None` in case of an error.
+	</span><span class="kw">async fn </span>retrieve_dmq_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundDownwardMessage</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+		para_id: ParaId,
+		relay_parent: PHash,
+	) -&gt; RelayChainResult&lt;Vec&lt;InboundDownwardMessage&gt;&gt;;
 
-	<span class="doccomment">/// Returns channels contents for each inbound HRMP channel addressed to the parachain we are</span>
-	<span class="doccomment">/// collating for.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Empty channels are also included.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retrieve_all_inbound_hrmp_channel_contents</span>(
+	<span class="doccomment">/// Returns channels contents for each inbound HRMP channel addressed to the parachain we are
+	/// collating for.
+	///
+	/// Empty channels are also included.
+	</span><span class="kw">async fn </span>retrieve_all_inbound_hrmp_channel_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ParaId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundHrmpMessage</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+		para_id: ParaId,
+		relay_parent: PHash,
+	) -&gt; RelayChainResult&lt;BTreeMap&lt;ParaId, Vec&lt;InboundHrmpMessage&gt;&gt;&gt;;
 
-	<span class="doccomment">/// Yields the persisted validation data for the given `ParaId` along with an assumption that</span>
-	<span class="doccomment">/// should be used if the para currently occupies a core.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns `None` if either the para is not registered or the assumption is `Freed`</span>
-	<span class="doccomment">/// and the para already occupies a core.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">persisted_validation_data</span>(
+	<span class="doccomment">/// Yields the persisted validation data for the given `ParaId` along with an assumption that
+	/// should be used if the para currently occupies a core.
+	///
+	/// Returns `None` if either the para is not registered or the assumption is `Freed`
+	/// and the para already occupies a core.
+	</span><span class="kw">async fn </span>persisted_validation_data(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">block_id</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="kw">_</span>: <span class="ident">OccupiedCoreAssumption</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+		block_id: PHash,
+		para_id: ParaId,
+		<span class="kw">_</span>: OccupiedCoreAssumption,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;PersistedValidationData&gt;&gt;;
 
-	<span class="doccomment">/// Get the receipt of a candidate pending availability. This returns `Some` for any paras</span>
-	<span class="doccomment">/// assigned to occupied cores in `availability_cores` and `None` otherwise.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">candidate_pending_availability</span>(
+	<span class="doccomment">/// Get the receipt of a candidate pending availability. This returns `Some` for any paras
+	/// assigned to occupied cores in `availability_cores` and `None` otherwise.
+	</span><span class="kw">async fn </span>candidate_pending_availability(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">block_id</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CommittedCandidateReceipt</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+		block_id: PHash,
+		para_id: ParaId,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;CommittedCandidateReceipt&gt;&gt;;
 
-	<span class="doccomment">/// Returns the session index expected at a child of the block.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">session_index_for_child</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">block_id</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">SessionIndex</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Returns the session index expected at a child of the block.
+	</span><span class="kw">async fn </span>session_index_for_child(<span class="kw-2">&amp;</span><span class="self">self</span>, block_id: PHash) -&gt; RelayChainResult&lt;SessionIndex&gt;;
 
-	<span class="doccomment">/// Get a stream of import block notifications.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">import_notification_stream</span>(
+	<span class="doccomment">/// Get a stream of import block notifications.
+	</span><span class="kw">async fn </span>import_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt;;
 
-	<span class="doccomment">/// Get a stream of new best block notifications.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">new_best_notification_stream</span>(
+	<span class="doccomment">/// Get a stream of new best block notifications.
+	</span><span class="kw">async fn </span>new_best_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt;;
 
-	<span class="doccomment">/// Wait for a block with a given hash in the relay chain.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This method returns immediately on error or if the block is already</span>
-	<span class="doccomment">/// reported to be in chain. Otherwise, it waits for the block to arrive.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">wait_for_block</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hash</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+	<span class="doccomment">/// Wait for a block with a given hash in the relay chain.
+	///
+	/// This method returns immediately on error or if the block is already
+	/// reported to be in chain. Otherwise, it waits for the block to arrive.
+	</span><span class="kw">async fn </span>wait_for_block(<span class="kw-2">&amp;</span><span class="self">self</span>, hash: PHash) -&gt; RelayChainResult&lt;()&gt;;
 
-	<span class="doccomment">/// Get a stream of finality notifications.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">finality_notification_stream</span>(
+	<span class="doccomment">/// Get a stream of finality notifications.
+	</span><span class="kw">async fn </span>finality_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt;;
 
-	<span class="doccomment">/// Whether the synchronization service is undergoing major sync.</span>
-	<span class="doccomment">/// Returns true if so.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">is_major_syncing</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Whether the synchronization service is undergoing major sync.
+	/// Returns true if so.
+	</span><span class="kw">async fn </span>is_major_syncing(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;bool&gt;;
 
-	<span class="doccomment">/// Get a handle to the overseer.</span>
-	<span class="kw">fn</span> <span class="ident">overseer_handle</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">OverseerHandle</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Get a handle to the overseer.
+	</span><span class="kw">fn </span>overseer_handle(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;OverseerHandle&gt;;
 
-	<span class="doccomment">/// Generate a storage read proof.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">prove_read</span>(
+	<span class="doccomment">/// Generate a storage read proof.
+	</span><span class="kw">async fn </span>prove_read(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">relevant_keys</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">StorageProof</span><span class="op">&gt;</span>;
+		relay_parent: PHash,
+		relevant_keys: <span class="kw-2">&amp;</span>Vec&lt;Vec&lt;u8&gt;&gt;,
+	) -&gt; RelayChainResult&lt;StorageProof&gt;;
 }
 
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RelayChainInterface</span> <span class="kw">for</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">T</span>: <span class="ident">RelayChainInterface</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span>,
+<span class="attribute">#[async_trait]
+</span><span class="kw">impl</span>&lt;T&gt; RelayChainInterface <span class="kw">for </span>Arc&lt;T&gt;
+<span class="kw">where
+	</span>T: RelayChainInterface + <span class="question-mark">?</span>Sized,
 {
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retrieve_dmq_contents</span>(
+	<span class="kw">async fn </span>retrieve_dmq_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundDownwardMessage</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">retrieve_dmq_contents</span>(<span class="ident">para_id</span>, <span class="ident">relay_parent</span>).<span class="kw">await</span>
-	}
+		para_id: ParaId,
+		relay_parent: PHash,
+	) -&gt; RelayChainResult&lt;Vec&lt;InboundDownwardMessage&gt;&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).retrieve_dmq_contents(para_id, relay_parent).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retrieve_all_inbound_hrmp_channel_contents</span>(
+	<span class="kw">async fn </span>retrieve_all_inbound_hrmp_channel_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ParaId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundHrmpMessage</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">retrieve_all_inbound_hrmp_channel_contents</span>(<span class="ident">para_id</span>, <span class="ident">relay_parent</span>).<span class="kw">await</span>
-	}
+		para_id: ParaId,
+		relay_parent: PHash,
+	) -&gt; RelayChainResult&lt;BTreeMap&lt;ParaId, Vec&lt;InboundHrmpMessage&gt;&gt;&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).retrieve_all_inbound_hrmp_channel_contents(para_id, relay_parent).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">persisted_validation_data</span>(
+	<span class="kw">async fn </span>persisted_validation_data(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">block_id</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">occupied_core_assumption</span>: <span class="ident">OccupiedCoreAssumption</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>)
-			.<span class="ident">persisted_validation_data</span>(<span class="ident">block_id</span>, <span class="ident">para_id</span>, <span class="ident">occupied_core_assumption</span>)
-			.<span class="kw">await</span>
-	}
+		block_id: PHash,
+		para_id: ParaId,
+		occupied_core_assumption: OccupiedCoreAssumption,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;PersistedValidationData&gt;&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>)
+			.persisted_validation_data(block_id, para_id, occupied_core_assumption)
+			.<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">candidate_pending_availability</span>(
+	<span class="kw">async fn </span>candidate_pending_availability(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">block_id</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CommittedCandidateReceipt</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">candidate_pending_availability</span>(<span class="ident">block_id</span>, <span class="ident">para_id</span>).<span class="kw">await</span>
-	}
+		block_id: PHash,
+		para_id: ParaId,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;CommittedCandidateReceipt&gt;&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).candidate_pending_availability(block_id, para_id).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">session_index_for_child</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">block_id</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">SessionIndex</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">session_index_for_child</span>(<span class="ident">block_id</span>).<span class="kw">await</span>
-	}
+	<span class="kw">async fn </span>session_index_for_child(<span class="kw-2">&amp;</span><span class="self">self</span>, block_id: PHash) -&gt; RelayChainResult&lt;SessionIndex&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).session_index_for_child(block_id).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validators</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">block_id</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ValidatorId</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">validators</span>(<span class="ident">block_id</span>).<span class="kw">await</span>
-	}
+	<span class="kw">async fn </span>validators(<span class="kw-2">&amp;</span><span class="self">self</span>, block_id: PHash) -&gt; RelayChainResult&lt;Vec&lt;ValidatorId&gt;&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).validators(block_id).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">import_notification_stream</span>(
+	<span class="kw">async fn </span>import_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">import_notification_stream</span>().<span class="kw">await</span>
-	}
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).import_notification_stream().<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">finality_notification_stream</span>(
+	<span class="kw">async fn </span>finality_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">finality_notification_stream</span>().<span class="kw">await</span>
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).finality_notification_stream().<span class="kw">await
+	</span>}
+
+	<span class="kw">async fn </span>best_block_hash(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;PHash&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).best_block_hash().<span class="kw">await
+	</span>}
+
+	<span class="kw">async fn </span>is_major_syncing(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;bool&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).is_major_syncing().<span class="kw">await
+	</span>}
+
+	<span class="kw">fn </span>overseer_handle(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;OverseerHandle&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).overseer_handle()
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">best_block_hash</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">best_block_hash</span>().<span class="kw">await</span>
-	}
-
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">is_major_syncing</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">is_major_syncing</span>().<span class="kw">await</span>
-	}
-
-	<span class="kw">fn</span> <span class="ident">overseer_handle</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">OverseerHandle</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">overseer_handle</span>()
-	}
-
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_storage_by_key</span>(
+	<span class="kw">async fn </span>get_storage_by_key(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">key</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">StorageValue</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">get_storage_by_key</span>(<span class="ident">relay_parent</span>, <span class="ident">key</span>).<span class="kw">await</span>
-	}
+		relay_parent: PHash,
+		key: <span class="kw-2">&amp;</span>[u8],
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;StorageValue&gt;&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).get_storage_by_key(relay_parent, key).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">prove_read</span>(
+	<span class="kw">async fn </span>prove_read(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">relevant_keys</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">StorageProof</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">prove_read</span>(<span class="ident">relay_parent</span>, <span class="ident">relevant_keys</span>).<span class="kw">await</span>
-	}
+		relay_parent: PHash,
+		relevant_keys: <span class="kw-2">&amp;</span>Vec&lt;Vec&lt;u8&gt;&gt;,
+	) -&gt; RelayChainResult&lt;StorageProof&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).prove_read(relay_parent, relevant_keys).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">wait_for_block</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hash</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">wait_for_block</span>(<span class="ident">hash</span>).<span class="kw">await</span>
-	}
+	<span class="kw">async fn </span>wait_for_block(<span class="kw-2">&amp;</span><span class="self">self</span>, hash: PHash) -&gt; RelayChainResult&lt;()&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).wait_for_block(hash).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">new_best_notification_stream</span>(
+	<span class="kw">async fn </span>new_best_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		(<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">new_best_notification_stream</span>().<span class="kw">await</span>
-	}
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt; {
+		(<span class="kw-2">**</span><span class="self">self</span>).new_best_notification_stream().<span class="kw">await
+	</span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

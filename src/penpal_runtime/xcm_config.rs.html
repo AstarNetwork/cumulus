@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/runtimes/testing/penpal/src/xcm_config.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>xcm_config.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../penpal_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../penpal_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../penpal_runtime/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/runtimes/testing/penpal/src/xcm_config.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>xcm_config.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../penpal_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../penpal_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../penpal_runtime/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -314,445 +314,321 @@
 <span id="314">314</span>
 <span id="315">315</span>
 <span id="316">316</span>
-<span id="317">317</span>
-<span id="318">318</span>
-<span id="319">319</span>
-<span id="320">320</span>
-<span id="321">321</span>
-<span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
-<span id="326">326</span>
-<span id="327">327</span>
-<span id="328">328</span>
-<span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
-<span id="335">335</span>
-<span id="336">336</span>
-<span id="337">337</span>
-<span id="338">338</span>
-<span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
-<span id="345">345</span>
-<span id="346">346</span>
-<span id="347">347</span>
-<span id="348">348</span>
-<span id="349">349</span>
-<span id="350">350</span>
-<span id="351">351</span>
-<span id="352">352</span>
-<span id="353">353</span>
-<span id="354">354</span>
-<span id="355">355</span>
-<span id="356">356</span>
-<span id="357">357</span>
-<span id="358">358</span>
-<span id="359">359</span>
-<span id="360">360</span>
-<span id="361">361</span>
-<span id="362">362</span>
-<span id="363">363</span>
-<span id="364">364</span>
-<span id="365">365</span>
-<span id="366">366</span>
-<span id="367">367</span>
-<span id="368">368</span>
-<span id="369">369</span>
-<span id="370">370</span>
-<span id="371">371</span>
-<span id="372">372</span>
-<span id="373">373</span>
-<span id="374">374</span>
-<span id="375">375</span>
-<span id="376">376</span>
-<span id="377">377</span>
-<span id="378">378</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! Holds the XCM specific configuration that would otherwise be in lib.rs</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This configuration dictates how the Penpal chain will communicate with other chains.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! One of the main uses of the penpal chain will be to be a benefactor of reserve asset transfers</span>
-<span class="doccomment">//! with statemine as the reserve. At present no derivative tokens are minted on receipt of a</span>
-<span class="doccomment">//! ReserveAssetTransferDeposited message but that will but the intension will be to support this soon.</span>
-<span class="kw">use</span> <span class="kw">super</span>::{
-	<span class="ident">AccountId</span>, <span class="ident">AssetId</span> <span class="kw">as</span> <span class="ident">AssetIdPalletAssets</span>, <span class="ident">Assets</span>, <span class="ident">Balance</span>, <span class="ident">Balances</span>, <span class="ident">ParachainInfo</span>,
-	<span class="ident">ParachainSystem</span>, <span class="ident">PolkadotXcm</span>, <span class="ident">Runtime</span>, <span class="ident">RuntimeCall</span>, <span class="ident">RuntimeEvent</span>, <span class="ident">RuntimeOrigin</span>, <span class="ident">WeightToFee</span>,
-	<span class="ident">XcmpQueue</span>,
+</span><span class="doccomment">//! Holds the XCM specific configuration that would otherwise be in lib.rs
+//!
+//! This configuration dictates how the Penpal chain will communicate with other chains.
+//!
+//! One of the main uses of the penpal chain will be to be a benefactor of reserve asset transfers
+//! with statemine as the reserve. At present no derivative tokens are minted on receipt of a
+//! ReserveAssetTransferDeposited message but that will but the intension will be to support this soon.
+</span><span class="kw">use super</span>::{
+	AccountId, AssetId <span class="kw">as </span>AssetIdPalletAssets, Assets, Balance, Balances, ParachainInfo,
+	ParachainSystem, PolkadotXcm, Runtime, RuntimeCall, RuntimeEvent, RuntimeOrigin, WeightToFee,
+	XcmpQueue,
 };
-<span class="kw">use</span> <span class="ident">core::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">frame_support</span>::{
-	<span class="ident">log</span>, <span class="ident">match_types</span>, <span class="ident">parameter_types</span>,
-	<span class="ident">traits</span>::{
-		<span class="ident">fungibles</span>::{<span class="self">self</span>, <span class="ident">Balanced</span>, <span class="ident">CreditOf</span>},
-		<span class="ident">Contains</span>, <span class="ident">Everything</span>, <span class="ident">Get</span>, <span class="ident">Nothing</span>,
+<span class="kw">use </span>core::marker::PhantomData;
+<span class="kw">use </span>frame_support::{
+	match_types, parameter_types,
+	traits::{
+		fungibles::{<span class="self">self</span>, Balanced, CreditOf},
+		Contains, Everything, Get, Nothing,
 	},
 };
-<span class="kw">use</span> <span class="ident">pallet_asset_tx_payment::HandleCredit</span>;
-<span class="kw">use</span> <span class="ident">pallet_xcm::XcmPassthrough</span>;
-<span class="kw">use</span> <span class="ident">polkadot_parachain::primitives::Sibling</span>;
-<span class="kw">use</span> <span class="ident">polkadot_runtime_common::impls::ToAuthor</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::Zero</span>;
-<span class="kw">use</span> <span class="ident">xcm::latest</span>::{<span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">Weight</span> <span class="kw">as</span> <span class="ident">XCMWeight</span>};
-<span class="kw">use</span> <span class="ident">xcm_builder</span>::{
-	<span class="ident">AccountId32Aliases</span>, <span class="ident">AllowKnownQueryResponses</span>, <span class="ident">AllowSubscriptionsFrom</span>,
-	<span class="ident">AllowTopLevelPaidExecutionFrom</span>, <span class="ident">AllowUnpaidExecutionFrom</span>, <span class="ident">AsPrefixedGeneralIndex</span>,
-	<span class="ident">ConvertedConcreteAssetId</span>, <span class="ident">CurrencyAdapter</span>, <span class="ident">EnsureXcmOrigin</span>, <span class="ident">FixedWeightBounds</span>,
-	<span class="ident">FungiblesAdapter</span>, <span class="ident">IsConcrete</span>, <span class="ident">LocationInverter</span>, <span class="ident">NativeAsset</span>, <span class="ident">ParentIsPreset</span>,
-	<span class="ident">RelayChainAsNative</span>, <span class="ident">SiblingParachainAsNative</span>, <span class="ident">SiblingParachainConvertsVia</span>,
-	<span class="ident">SignedAccountId32AsNative</span>, <span class="ident">SignedToAccountId32</span>, <span class="ident">SovereignSignedViaLocation</span>, <span class="ident">TakeWeightCredit</span>,
-	<span class="ident">UsingComponents</span>,
+<span class="kw">use </span>pallet_asset_tx_payment::HandleCredit;
+<span class="kw">use </span>pallet_xcm::XcmPassthrough;
+<span class="kw">use </span>parachains_common::xcm_config::{DenyReserveTransferToRelayChain, DenyThenTry};
+<span class="kw">use </span>polkadot_parachain::primitives::Sibling;
+<span class="kw">use </span>polkadot_runtime_common::impls::ToAuthor;
+<span class="kw">use </span>sp_runtime::traits::Zero;
+<span class="kw">use </span>xcm::latest::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span>xcm_builder::{
+	AccountId32Aliases, AllowKnownQueryResponses, AllowSubscriptionsFrom,
+	AllowTopLevelPaidExecutionFrom, AllowUnpaidExecutionFrom, AsPrefixedGeneralIndex,
+	ConvertedConcreteAssetId, CurrencyAdapter, EnsureXcmOrigin, FixedWeightBounds,
+	FungiblesAdapter, IsConcrete, LocationInverter, NativeAsset, ParentIsPreset,
+	RelayChainAsNative, SiblingParachainAsNative, SiblingParachainConvertsVia,
+	SignedAccountId32AsNative, SignedToAccountId32, SovereignSignedViaLocation, TakeWeightCredit,
+	UsingComponents,
 };
-<span class="kw">use</span> <span class="ident">xcm_executor</span>::{
-	<span class="ident">traits</span>::{<span class="ident">FilterAssetLocation</span>, <span class="ident">JustTry</span>, <span class="ident">ShouldExecute</span>},
-	<span class="ident">XcmExecutor</span>,
+<span class="kw">use </span>xcm_executor::{
+	traits::{FilterAssetLocation, JustTry},
+	XcmExecutor,
 };
 
-<span class="macro">parameter_types!</span> {
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RelayLocation</span>: <span class="ident">MultiLocation</span> <span class="op">=</span> <span class="ident">MultiLocation::parent</span>();
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RelayNetwork</span>: <span class="ident">NetworkId</span> <span class="op">=</span> <span class="ident">NetworkId::Any</span>;
-	<span class="kw">pub</span> <span class="ident">RelayChainOrigin</span>: <span class="ident">RuntimeOrigin</span> <span class="op">=</span> <span class="ident">cumulus_pallet_xcm::Origin::Relay</span>.<span class="ident">into</span>();
-	<span class="kw">pub</span> <span class="ident">Ancestry</span>: <span class="ident">MultiLocation</span> <span class="op">=</span> <span class="ident">Parachain</span>(<span class="ident">ParachainInfo::parachain_id</span>().<span class="ident">into</span>()).<span class="ident">into</span>();
+<span class="macro">parameter_types! </span>{
+	<span class="kw">pub const </span>RelayLocation: MultiLocation = MultiLocation::parent();
+	<span class="kw">pub const </span>RelayNetwork: NetworkId = NetworkId::Any;
+	<span class="kw">pub </span>RelayChainOrigin: RuntimeOrigin = cumulus_pallet_xcm::Origin::Relay.into();
+	<span class="kw">pub </span>Ancestry: MultiLocation = Parachain(ParachainInfo::parachain_id().into()).into();
 }
 
-<span class="doccomment">/// Type for specifying how a `MultiLocation` can be converted into an `AccountId`. This is used</span>
-<span class="doccomment">/// when determining ownership of accounts for asset transacting and when attempting to use XCM</span>
-<span class="doccomment">/// `Transact` in order to determine the dispatch Origin.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">LocationToAccountId</span> <span class="op">=</span> (
-	<span class="comment">// The parent (Relay-chain) origin converts to the parent `AccountId`.</span>
-	<span class="ident">ParentIsPreset</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>,
-	<span class="comment">// Sibling parachain origins convert to AccountId via the `ParaId::into`.</span>
-	<span class="ident">SiblingParachainConvertsVia</span><span class="op">&lt;</span><span class="ident">Sibling</span>, <span class="ident">AccountId</span><span class="op">&gt;</span>,
-	<span class="comment">// Straight up local `AccountId32` origins just alias directly to `AccountId`.</span>
-	<span class="ident">AccountId32Aliases</span><span class="op">&lt;</span><span class="ident">RelayNetwork</span>, <span class="ident">AccountId</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Type for specifying how a `MultiLocation` can be converted into an `AccountId`. This is used
+/// when determining ownership of accounts for asset transacting and when attempting to use XCM
+/// `Transact` in order to determine the dispatch Origin.
+</span><span class="kw">pub type </span>LocationToAccountId = (
+	<span class="comment">// The parent (Relay-chain) origin converts to the parent `AccountId`.
+	</span>ParentIsPreset&lt;AccountId&gt;,
+	<span class="comment">// Sibling parachain origins convert to AccountId via the `ParaId::into`.
+	</span>SiblingParachainConvertsVia&lt;Sibling, AccountId&gt;,
+	<span class="comment">// Straight up local `AccountId32` origins just alias directly to `AccountId`.
+	</span>AccountId32Aliases&lt;RelayNetwork, AccountId&gt;,
 );
 
-<span class="doccomment">/// Means for transacting assets on this chain.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">CurrencyTransactor</span> <span class="op">=</span> <span class="ident">CurrencyAdapter</span><span class="op">&lt;</span>
-	<span class="comment">// Use this currency:</span>
-	<span class="ident">Balances</span>,
-	<span class="comment">// Use this currency when it is a fungible asset matching the given location or name:</span>
-	<span class="ident">IsConcrete</span><span class="op">&lt;</span><span class="ident">RelayLocation</span><span class="op">&gt;</span>,
-	<span class="comment">// Do a simple punn to convert an AccountId32 MultiLocation into a native chain account ID:</span>
-	<span class="ident">LocationToAccountId</span>,
-	<span class="comment">// Our chain&#39;s account ID type (we can&#39;t get away without mentioning it explicitly):</span>
-	<span class="ident">AccountId</span>,
-	<span class="comment">// We don&#39;t track any teleports.</span>
-	(),
-<span class="op">&gt;</span>;
+<span class="doccomment">/// Means for transacting assets on this chain.
+</span><span class="kw">pub type </span>CurrencyTransactor = CurrencyAdapter&lt;
+	<span class="comment">// Use this currency:
+	</span>Balances,
+	<span class="comment">// Use this currency when it is a fungible asset matching the given location or name:
+	</span>IsConcrete&lt;RelayLocation&gt;,
+	<span class="comment">// Do a simple punn to convert an AccountId32 MultiLocation into a native chain account ID:
+	</span>LocationToAccountId,
+	<span class="comment">// Our chain&#39;s account ID type (we can&#39;t get away without mentioning it explicitly):
+	</span>AccountId,
+	<span class="comment">// We don&#39;t track any teleports.
+	</span>(),
+&gt;;
 
-<span class="doccomment">/// Means for transacting assets besides the native currency on this chain.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FungiblesTransactor</span> <span class="op">=</span> <span class="ident">FungiblesAdapter</span><span class="op">&lt;</span>
-	<span class="comment">// Use this fungibles implementation:</span>
-	<span class="ident">Assets</span>,
-	<span class="comment">// Use this currency when it is a fungible asset matching the given location or name:</span>
-	<span class="ident">ConvertedConcreteAssetId</span><span class="op">&lt;</span>
-		<span class="ident">AssetIdPalletAssets</span>,
-		<span class="ident">Balance</span>,
-		<span class="ident">AsPrefixedGeneralIndex</span><span class="op">&lt;</span><span class="ident">CommonGoodAssetsPalletLocation</span>, <span class="ident">AssetIdPalletAssets</span>, <span class="ident">JustTry</span><span class="op">&gt;</span>,
-		<span class="ident">JustTry</span>,
-	<span class="op">&gt;</span>,
-	<span class="comment">// Convert an XCM MultiLocation into a local account id:</span>
-	<span class="ident">LocationToAccountId</span>,
-	<span class="comment">// Our chain&#39;s account ID type (we can&#39;t get away without mentioning it explicitly):</span>
-	<span class="ident">AccountId</span>,
-	<span class="comment">// We only want to allow teleports of known assets. We use non-zero issuance as an indication</span>
-	<span class="comment">// that this asset is known.</span>
-	<span class="ident">NonZeroIssuance</span><span class="op">&lt;</span><span class="ident">AccountId</span>, <span class="ident">Assets</span><span class="op">&gt;</span>,
-	<span class="comment">// The account to use for tracking teleports.</span>
-	<span class="ident">CheckingAccount</span>,
-<span class="op">&gt;</span>;
+<span class="doccomment">/// Means for transacting assets besides the native currency on this chain.
+</span><span class="kw">pub type </span>FungiblesTransactor = FungiblesAdapter&lt;
+	<span class="comment">// Use this fungibles implementation:
+	</span>Assets,
+	<span class="comment">// Use this currency when it is a fungible asset matching the given location or name:
+	</span>ConvertedConcreteAssetId&lt;
+		AssetIdPalletAssets,
+		Balance,
+		AsPrefixedGeneralIndex&lt;CommonGoodAssetsPalletLocation, AssetIdPalletAssets, JustTry&gt;,
+		JustTry,
+	&gt;,
+	<span class="comment">// Convert an XCM MultiLocation into a local account id:
+	</span>LocationToAccountId,
+	<span class="comment">// Our chain&#39;s account ID type (we can&#39;t get away without mentioning it explicitly):
+	</span>AccountId,
+	<span class="comment">// We only want to allow teleports of known assets. We use non-zero issuance as an indication
+	// that this asset is known.
+	</span>NonZeroIssuance&lt;AccountId, Assets&gt;,
+	<span class="comment">// The account to use for tracking teleports.
+	</span>CheckingAccount,
+&gt;;
 
-<span class="doccomment">/// Means for transacting assets on this chain.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">AssetTransactors</span> <span class="op">=</span> (<span class="ident">CurrencyTransactor</span>, <span class="ident">FungiblesTransactor</span>);
+<span class="doccomment">/// Means for transacting assets on this chain.
+</span><span class="kw">pub type </span>AssetTransactors = (CurrencyTransactor, FungiblesTransactor);
 
-<span class="doccomment">/// This is the type we use to convert an (incoming) XCM origin into a local `Origin` instance,</span>
-<span class="doccomment">/// ready for dispatching a transaction with Xcm&#39;s `Transact`. There is an `OriginKind` which can</span>
-<span class="doccomment">/// biases the kind of local `Origin` it will become.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">XcmOriginToTransactDispatchOrigin</span> <span class="op">=</span> (
-	<span class="comment">// Sovereign account converter; this attempts to derive an `AccountId` from the origin location</span>
-	<span class="comment">// using `LocationToAccountId` and then turn that into the usual `Signed` origin. Useful for</span>
-	<span class="comment">// foreign chains who want to have a local sovereign account on this chain which they control.</span>
-	<span class="ident">SovereignSignedViaLocation</span><span class="op">&lt;</span><span class="ident">LocationToAccountId</span>, <span class="ident">RuntimeOrigin</span><span class="op">&gt;</span>,
-	<span class="comment">// Native converter for Relay-chain (Parent) location; will converts to a `Relay` origin when</span>
-	<span class="comment">// recognized.</span>
-	<span class="ident">RelayChainAsNative</span><span class="op">&lt;</span><span class="ident">RelayChainOrigin</span>, <span class="ident">RuntimeOrigin</span><span class="op">&gt;</span>,
-	<span class="comment">// Native converter for sibling Parachains; will convert to a `SiblingPara` origin when</span>
-	<span class="comment">// recognized.</span>
-	<span class="ident">SiblingParachainAsNative</span><span class="op">&lt;</span><span class="ident">cumulus_pallet_xcm::Origin</span>, <span class="ident">RuntimeOrigin</span><span class="op">&gt;</span>,
-	<span class="comment">// Native signed account converter; this just converts an `AccountId32` origin into a normal</span>
-	<span class="comment">// `RuntimeOrigin::Signed` origin of the same 32-byte value.</span>
-	<span class="ident">SignedAccountId32AsNative</span><span class="op">&lt;</span><span class="ident">RelayNetwork</span>, <span class="ident">RuntimeOrigin</span><span class="op">&gt;</span>,
-	<span class="comment">// Xcm origins can be represented natively under the Xcm pallet&#39;s Xcm origin.</span>
-	<span class="ident">XcmPassthrough</span><span class="op">&lt;</span><span class="ident">RuntimeOrigin</span><span class="op">&gt;</span>,
+<span class="doccomment">/// This is the type we use to convert an (incoming) XCM origin into a local `Origin` instance,
+/// ready for dispatching a transaction with Xcm&#39;s `Transact`. There is an `OriginKind` which can
+/// biases the kind of local `Origin` it will become.
+</span><span class="kw">pub type </span>XcmOriginToTransactDispatchOrigin = (
+	<span class="comment">// Sovereign account converter; this attempts to derive an `AccountId` from the origin location
+	// using `LocationToAccountId` and then turn that into the usual `Signed` origin. Useful for
+	// foreign chains who want to have a local sovereign account on this chain which they control.
+	</span>SovereignSignedViaLocation&lt;LocationToAccountId, RuntimeOrigin&gt;,
+	<span class="comment">// Native converter for Relay-chain (Parent) location; will converts to a `Relay` origin when
+	// recognized.
+	</span>RelayChainAsNative&lt;RelayChainOrigin, RuntimeOrigin&gt;,
+	<span class="comment">// Native converter for sibling Parachains; will convert to a `SiblingPara` origin when
+	// recognized.
+	</span>SiblingParachainAsNative&lt;cumulus_pallet_xcm::Origin, RuntimeOrigin&gt;,
+	<span class="comment">// Native signed account converter; this just converts an `AccountId32` origin into a normal
+	// `RuntimeOrigin::Signed` origin of the same 32-byte value.
+	</span>SignedAccountId32AsNative&lt;RelayNetwork, RuntimeOrigin&gt;,
+	<span class="comment">// Xcm origins can be represented natively under the Xcm pallet&#39;s Xcm origin.
+	</span>XcmPassthrough&lt;RuntimeOrigin&gt;,
 );
 
-<span class="macro">parameter_types!</span> {
-	<span class="comment">// One XCM operation is 1_000_000_000 weight - almost certainly a conservative estimate.</span>
-	<span class="kw">pub</span> <span class="ident">UnitWeightCost</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">1_000_000_000</span>;
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MaxInstructions</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">100</span>;
+<span class="macro">parameter_types! </span>{
+	<span class="comment">// One XCM operation is 1_000_000_000 weight - almost certainly a conservative estimate.
+	</span><span class="kw">pub </span>UnitWeightCost: u64 = <span class="number">1_000_000_000</span>;
+	<span class="kw">pub const </span>MaxInstructions: u32 = <span class="number">100</span>;
 }
 
-<span class="macro">match_types!</span> {
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ParentOrParentsExecutivePlurality</span>: <span class="kw">impl</span> <span class="ident">Contains</span><span class="op">&lt;</span><span class="ident">MultiLocation</span><span class="op">&gt;</span> <span class="op">=</span> {
-		<span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">Here</span> } <span class="op">|</span>
-		<span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">X1</span>(<span class="ident">Plurality</span> { <span class="ident">id</span>: <span class="ident">BodyId::Executive</span>, .. }) }
+<span class="macro">match_types! </span>{
+	<span class="kw">pub type </span>ParentOrParentsExecutivePlurality: <span class="kw">impl </span>Contains&lt;MultiLocation&gt; = {
+		MultiLocation { parents: <span class="number">1</span>, interior: Here } |
+		MultiLocation { parents: <span class="number">1</span>, interior: X1(Plurality { id: BodyId::Executive, .. }) }
 	};
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">CommonGoodAssetsParachain</span>: <span class="kw">impl</span> <span class="ident">Contains</span><span class="op">&lt;</span><span class="ident">MultiLocation</span><span class="op">&gt;</span> <span class="op">=</span> {
-		<span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">X1</span>(<span class="ident">Parachain</span>(<span class="number">1000</span>)) }
+	<span class="kw">pub type </span>CommonGoodAssetsParachain: <span class="kw">impl </span>Contains&lt;MultiLocation&gt; = {
+		MultiLocation { parents: <span class="number">1</span>, interior: X1(Parachain(<span class="number">1000</span>)) }
 	};
 }
 
-<span class="comment">//TODO: move DenyThenTry to polkadot&#39;s xcm module.</span>
-<span class="doccomment">/// Deny executing the xcm message if it matches any of the Deny filter regardless of anything else.</span>
-<span class="doccomment">/// If it passes the Deny, and matches one of the Allow cases then it is let through.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DenyThenTry</span><span class="op">&lt;</span><span class="ident">Deny</span>, <span class="ident">Allow</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Deny</span><span class="op">&gt;</span>, <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Allow</span><span class="op">&gt;</span>)
-<span class="kw">where</span>
-	<span class="ident">Deny</span>: <span class="ident">ShouldExecute</span>,
-	<span class="ident">Allow</span>: <span class="ident">ShouldExecute</span>;
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Deny</span>, <span class="ident">Allow</span><span class="op">&gt;</span> <span class="ident">ShouldExecute</span> <span class="kw">for</span> <span class="ident">DenyThenTry</span><span class="op">&lt;</span><span class="ident">Deny</span>, <span class="ident">Allow</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Deny</span>: <span class="ident">ShouldExecute</span>,
-	<span class="ident">Allow</span>: <span class="ident">ShouldExecute</span>,
-{
-	<span class="kw">fn</span> <span class="ident">should_execute</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>(
-		<span class="ident">origin</span>: <span class="kw-2">&amp;</span><span class="ident">MultiLocation</span>,
-		<span class="ident">message</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Xcm</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>,
-		<span class="ident">max_weight</span>: <span class="ident">XCMWeight</span>,
-		<span class="ident">weight_credit</span>: <span class="kw-2">&amp;mut</span> <span class="ident">XCMWeight</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
-		<span class="ident">Deny::should_execute</span>(<span class="ident">origin</span>, <span class="ident">message</span>, <span class="ident">max_weight</span>, <span class="ident">weight_credit</span>)<span class="question-mark">?</span>;
-		<span class="ident">Allow::should_execute</span>(<span class="ident">origin</span>, <span class="ident">message</span>, <span class="ident">max_weight</span>, <span class="ident">weight_credit</span>)
-	}
-}
-
-<span class="comment">// See issue #5233</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DenyReserveTransferToRelayChain</span>;
-<span class="kw">impl</span> <span class="ident">ShouldExecute</span> <span class="kw">for</span> <span class="ident">DenyReserveTransferToRelayChain</span> {
-	<span class="kw">fn</span> <span class="ident">should_execute</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>(
-		<span class="ident">origin</span>: <span class="kw-2">&amp;</span><span class="ident">MultiLocation</span>,
-		<span class="ident">message</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Xcm</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>,
-		<span class="ident">_max_weight</span>: <span class="ident">XCMWeight</span>,
-		<span class="ident">_weight_credit</span>: <span class="kw-2">&amp;mut</span> <span class="ident">XCMWeight</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
-		<span class="kw">if</span> <span class="ident">message</span>.<span class="number">0</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">inst</span><span class="op">|</span> {
-			<span class="macro">matches!</span>(
-				<span class="ident">inst</span>,
-				<span class="ident">InitiateReserveWithdraw</span> {
-					<span class="ident">reserve</span>: <span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">Here</span> },
-					..
-				} <span class="op">|</span> <span class="ident">DepositReserveAsset</span> { <span class="ident">dest</span>: <span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">Here</span> }, .. } <span class="op">|</span>
-					<span class="ident">TransferReserveAsset</span> {
-						<span class="ident">dest</span>: <span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">Here</span> },
-						..
-					}
-			)
-		}) {
-			<span class="kw">return</span> <span class="prelude-val">Err</span>(()) <span class="comment">// Deny</span>
-		}
-
-		<span class="comment">// allow reserve transfers to arrive from relay chain</span>
-		<span class="kw">if</span> <span class="macro">matches!</span>(<span class="ident">origin</span>, <span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">Here</span> }) <span class="op">&amp;&amp;</span>
-			<span class="ident">message</span>.<span class="number">0</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">inst</span><span class="op">|</span> <span class="macro">matches!</span>(<span class="ident">inst</span>, <span class="ident">ReserveAssetDeposited</span> { .. }))
-		{
-			<span class="macro">log::warn!</span>(
-				<span class="ident">target</span>: <span class="string">&quot;xcm::barriers&quot;</span>,
-				<span class="string">&quot;Unexpected ReserveAssetDeposited from the relay chain&quot;</span>,
-			);
-		}
-		<span class="comment">// Permit everything else</span>
-		<span class="prelude-val">Ok</span>(())
-	}
-}
-
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Barrier</span> <span class="op">=</span> <span class="ident">DenyThenTry</span><span class="op">&lt;</span>
-	<span class="ident">DenyReserveTransferToRelayChain</span>,
+<span class="kw">pub type </span>Barrier = DenyThenTry&lt;
+	DenyReserveTransferToRelayChain,
 	(
-		<span class="ident">TakeWeightCredit</span>,
-		<span class="ident">AllowTopLevelPaidExecutionFrom</span><span class="op">&lt;</span><span class="ident">Everything</span><span class="op">&gt;</span>,
-		<span class="comment">// Parent and its exec plurality get free execution</span>
-		<span class="ident">AllowUnpaidExecutionFrom</span><span class="op">&lt;</span><span class="ident">ParentOrParentsExecutivePlurality</span><span class="op">&gt;</span>,
-		<span class="comment">// Assets Common Good parachain gets free execution</span>
-		<span class="ident">AllowUnpaidExecutionFrom</span><span class="op">&lt;</span><span class="ident">CommonGoodAssetsParachain</span><span class="op">&gt;</span>,
-		<span class="comment">// Expected responses are OK.</span>
-		<span class="ident">AllowKnownQueryResponses</span><span class="op">&lt;</span><span class="ident">PolkadotXcm</span><span class="op">&gt;</span>,
-		<span class="comment">// Subscriptions for version tracking are OK.</span>
-		<span class="ident">AllowSubscriptionsFrom</span><span class="op">&lt;</span><span class="ident">Everything</span><span class="op">&gt;</span>,
+		TakeWeightCredit,
+		AllowTopLevelPaidExecutionFrom&lt;Everything&gt;,
+		<span class="comment">// Parent and its exec plurality get free execution
+		</span>AllowUnpaidExecutionFrom&lt;ParentOrParentsExecutivePlurality&gt;,
+		<span class="comment">// Assets Common Good parachain gets free execution
+		</span>AllowUnpaidExecutionFrom&lt;CommonGoodAssetsParachain&gt;,
+		<span class="comment">// Expected responses are OK.
+		</span>AllowKnownQueryResponses&lt;PolkadotXcm&gt;,
+		<span class="comment">// Subscriptions for version tracking are OK.
+		</span>AllowSubscriptionsFrom&lt;Everything&gt;,
 	),
-<span class="op">&gt;</span>;
+&gt;;
 
-<span class="doccomment">/// Type alias to conveniently refer to `frame_system`&#39;s `Config::AccountId`.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::AccountId</span>;
+<span class="doccomment">/// Type alias to conveniently refer to `frame_system`&#39;s `Config::AccountId`.
+</span><span class="kw">pub type </span>AccountIdOf&lt;R&gt; = &lt;R <span class="kw">as </span>frame_system::Config&gt;::AccountId;
 
-<span class="doccomment">/// Asset filter that allows all assets from a certain location.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AssetsFrom</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Get</span><span class="op">&lt;</span><span class="ident">MultiLocation</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">FilterAssetLocation</span> <span class="kw">for</span> <span class="ident">AssetsFrom</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">filter_asset_location</span>(<span class="ident">asset</span>: <span class="kw-2">&amp;</span><span class="ident">MultiAsset</span>, <span class="ident">origin</span>: <span class="kw-2">&amp;</span><span class="ident">MultiLocation</span>) -&gt; <span class="ident">bool</span> {
-		<span class="kw">let</span> <span class="ident">loc</span> <span class="op">=</span> <span class="ident">T::get</span>();
-		<span class="kw-2">&amp;</span><span class="ident">loc</span> <span class="op">==</span> <span class="ident">origin</span> <span class="op">&amp;&amp;</span>
-			<span class="macro">matches!</span>(<span class="ident">asset</span>, <span class="ident">MultiAsset</span> { <span class="ident">id</span>: <span class="ident">AssetId::Concrete</span>(<span class="ident">asset_loc</span>), <span class="ident">fun</span>: <span class="ident">Fungible</span>(<span class="ident">_a</span>) }
-			<span class="kw">if</span> <span class="ident">asset_loc</span>.<span class="ident">match_and_split</span>(<span class="kw-2">&amp;</span><span class="ident">loc</span>).<span class="ident">is_some</span>())
+<span class="doccomment">/// Asset filter that allows all assets from a certain location.
+</span><span class="kw">pub struct </span>AssetsFrom&lt;T&gt;(PhantomData&lt;T&gt;);
+<span class="kw">impl</span>&lt;T: Get&lt;MultiLocation&gt;&gt; FilterAssetLocation <span class="kw">for </span>AssetsFrom&lt;T&gt; {
+	<span class="kw">fn </span>filter_asset_location(asset: <span class="kw-2">&amp;</span>MultiAsset, origin: <span class="kw-2">&amp;</span>MultiLocation) -&gt; bool {
+		<span class="kw">let </span>loc = T::get();
+		<span class="kw-2">&amp;</span>loc == origin &amp;&amp;
+			<span class="macro">matches!</span>(asset, MultiAsset { id: AssetId::Concrete(asset_loc), fun: Fungible(_a) }
+			<span class="kw">if </span>asset_loc.match_and_split(<span class="kw-2">&amp;</span>loc).is_some())
 	}
 }
 
-<span class="doccomment">/// Allow checking in assets that have issuance &gt; 0.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NonZeroIssuance</span><span class="op">&lt;</span><span class="ident">AccountId</span>, <span class="ident">Assets</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span>(<span class="ident">AccountId</span>, <span class="ident">Assets</span>)<span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">AccountId</span>, <span class="ident">Assets</span><span class="op">&gt;</span> <span class="ident">Contains</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Assets</span> <span class="kw">as</span> <span class="ident">fungibles::Inspect</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::AssetId</span><span class="op">&gt;</span>
-	<span class="kw">for</span> <span class="ident">NonZeroIssuance</span><span class="op">&lt;</span><span class="ident">AccountId</span>, <span class="ident">Assets</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Assets</span>: <span class="ident">fungibles::Inspect</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Allow checking in assets that have issuance &gt; 0.
+</span><span class="kw">pub struct </span>NonZeroIssuance&lt;AccountId, Assets&gt;(PhantomData&lt;(AccountId, Assets)&gt;);
+<span class="kw">impl</span>&lt;AccountId, Assets&gt; Contains&lt;&lt;Assets <span class="kw">as </span>fungibles::Inspect&lt;AccountId&gt;&gt;::AssetId&gt;
+	<span class="kw">for </span>NonZeroIssuance&lt;AccountId, Assets&gt;
+<span class="kw">where
+	</span>Assets: fungibles::Inspect&lt;AccountId&gt;,
 {
-	<span class="kw">fn</span> <span class="ident">contains</span>(<span class="ident">id</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">Assets</span> <span class="kw">as</span> <span class="ident">fungibles::Inspect</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::AssetId</span>) -&gt; <span class="ident">bool</span> {
-		<span class="op">!</span><span class="ident">Assets::total_issuance</span>(<span class="kw-2">*</span><span class="ident">id</span>).<span class="ident">is_zero</span>()
+	<span class="kw">fn </span>contains(id: <span class="kw-2">&amp;</span>&lt;Assets <span class="kw">as </span>fungibles::Inspect&lt;AccountId&gt;&gt;::AssetId) -&gt; bool {
+		!Assets::total_issuance(<span class="kw-2">*</span>id).is_zero()
 	}
 }
 
-<span class="doccomment">/// A `HandleCredit` implementation that naively transfers the fees to the block author.</span>
-<span class="doccomment">/// Will drop and burn the assets in case the transfer fails.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AssetsToBlockAuthor</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">HandleCredit</span><span class="op">&lt;</span><span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>, <span class="ident">pallet_assets::Pallet</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AssetsToBlockAuthor</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">R</span>: <span class="ident">pallet_authorship::Config</span> <span class="op">+</span> <span class="ident">pallet_assets::Config</span>,
-	<span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>:
-		<span class="ident">From</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A `HandleCredit` implementation that naively transfers the fees to the block author.
+/// Will drop and burn the assets in case the transfer fails.
+</span><span class="kw">pub struct </span>AssetsToBlockAuthor&lt;R&gt;(PhantomData&lt;R&gt;);
+<span class="kw">impl</span>&lt;R&gt; HandleCredit&lt;AccountIdOf&lt;R&gt;, pallet_assets::Pallet&lt;R&gt;&gt; <span class="kw">for </span>AssetsToBlockAuthor&lt;R&gt;
+<span class="kw">where
+	</span>R: pallet_authorship::Config + pallet_assets::Config,
+	AccountIdOf&lt;R&gt;:
+		From&lt;polkadot_primitives::v2::AccountId&gt; + Into&lt;polkadot_primitives::v2::AccountId&gt;,
 {
-	<span class="kw">fn</span> <span class="ident">handle_credit</span>(<span class="ident">credit</span>: <span class="ident">CreditOf</span><span class="op">&lt;</span><span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>, <span class="ident">pallet_assets::Pallet</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span>) {
-		<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">author</span>) <span class="op">=</span> <span class="ident">pallet_authorship::Pallet</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="ident">::author</span>() {
-			<span class="comment">// In case of error: Will drop the result triggering the `OnDrop` of the imbalance.</span>
-			<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">pallet_assets::Pallet</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="ident">::resolve</span>(<span class="kw-2">&amp;</span><span class="ident">author</span>, <span class="ident">credit</span>);
+	<span class="kw">fn </span>handle_credit(credit: CreditOf&lt;AccountIdOf&lt;R&gt;, pallet_assets::Pallet&lt;R&gt;&gt;) {
+		<span class="kw">if let </span><span class="prelude-val">Some</span>(author) = pallet_authorship::Pallet::&lt;R&gt;::author() {
+			<span class="comment">// In case of error: Will drop the result triggering the `OnDrop` of the imbalance.
+			</span><span class="kw">let _ </span>= pallet_assets::Pallet::&lt;R&gt;::resolve(<span class="kw-2">&amp;</span>author, credit);
 		}
 	}
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Reserve</span> {
-	<span class="doccomment">/// Returns assets reserve location.</span>
-	<span class="kw">fn</span> <span class="ident">reserve</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">MultiLocation</span><span class="op">&gt;</span>;
+<span class="kw">pub trait </span>Reserve {
+	<span class="doccomment">/// Returns assets reserve location.
+	</span><span class="kw">fn </span>reserve(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;MultiLocation&gt;;
 }
 
-<span class="comment">// Takes the chain part of a MultiAsset</span>
-<span class="kw">impl</span> <span class="ident">Reserve</span> <span class="kw">for</span> <span class="ident">MultiAsset</span> {
-	<span class="kw">fn</span> <span class="ident">reserve</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">MultiLocation</span><span class="op">&gt;</span> {
-		<span class="kw">if</span> <span class="kw">let</span> <span class="ident">AssetId::Concrete</span>(<span class="ident">location</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">id</span>.<span class="ident">clone</span>() {
-			<span class="kw">let</span> <span class="ident">first_interior</span> <span class="op">=</span> <span class="ident">location</span>.<span class="ident">first_interior</span>();
-			<span class="kw">let</span> <span class="ident">parents</span> <span class="op">=</span> <span class="ident">location</span>.<span class="ident">parent_count</span>();
-			<span class="kw">match</span> (<span class="ident">parents</span>, <span class="ident">first_interior</span>.<span class="ident">clone</span>()) {
-				(<span class="number">0</span>, <span class="prelude-val">Some</span>(<span class="ident">Parachain</span>(<span class="ident">id</span>))) =&gt; <span class="prelude-val">Some</span>(<span class="ident">MultiLocation::new</span>(<span class="number">0</span>, <span class="ident">X1</span>(<span class="ident">Parachain</span>(<span class="ident">id</span>.<span class="ident">clone</span>())))),
-				(<span class="number">1</span>, <span class="prelude-val">Some</span>(<span class="ident">Parachain</span>(<span class="ident">id</span>))) =&gt; <span class="prelude-val">Some</span>(<span class="ident">MultiLocation::new</span>(<span class="number">1</span>, <span class="ident">X1</span>(<span class="ident">Parachain</span>(<span class="ident">id</span>.<span class="ident">clone</span>())))),
-				(<span class="number">1</span>, <span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">MultiLocation::parent</span>()),
-				<span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
+<span class="comment">// Takes the chain part of a MultiAsset
+</span><span class="kw">impl </span>Reserve <span class="kw">for </span>MultiAsset {
+	<span class="kw">fn </span>reserve(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;MultiLocation&gt; {
+		<span class="kw">if let </span>AssetId::Concrete(location) = <span class="self">self</span>.id.clone() {
+			<span class="kw">let </span>first_interior = location.first_interior();
+			<span class="kw">let </span>parents = location.parent_count();
+			<span class="kw">match </span>(parents, first_interior.clone()) {
+				(<span class="number">0</span>, <span class="prelude-val">Some</span>(Parachain(id))) =&gt; <span class="prelude-val">Some</span>(MultiLocation::new(<span class="number">0</span>, X1(Parachain(id.clone())))),
+				(<span class="number">1</span>, <span class="prelude-val">Some</span>(Parachain(id))) =&gt; <span class="prelude-val">Some</span>(MultiLocation::new(<span class="number">1</span>, X1(Parachain(id.clone())))),
+				(<span class="number">1</span>, <span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(MultiLocation::parent()),
+				<span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
 			}
-		} <span class="kw">else</span> {
-			<span class="prelude-val">None</span>
-		}
+		} <span class="kw">else </span>{
+			<span class="prelude-val">None
+		</span>}
 	}
 }
 
-<span class="doccomment">/// A `FilterAssetLocation` implementation. Filters multi native assets whose</span>
-<span class="doccomment">/// reserve is same with `origin`.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MultiNativeAsset</span>;
-<span class="kw">impl</span> <span class="ident">FilterAssetLocation</span> <span class="kw">for</span> <span class="ident">MultiNativeAsset</span> {
-	<span class="kw">fn</span> <span class="ident">filter_asset_location</span>(<span class="ident">asset</span>: <span class="kw-2">&amp;</span><span class="ident">MultiAsset</span>, <span class="ident">origin</span>: <span class="kw-2">&amp;</span><span class="ident">MultiLocation</span>) -&gt; <span class="ident">bool</span> {
-		<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">reserve</span>) <span class="op">=</span> <span class="ident">asset</span>.<span class="ident">reserve</span>() {
-			<span class="kw">if</span> <span class="ident">reserve</span> <span class="op">==</span> <span class="ident">origin</span> {
-				<span class="kw">return</span> <span class="bool-val">true</span>
-			}
+<span class="doccomment">/// A `FilterAssetLocation` implementation. Filters multi native assets whose
+/// reserve is same with `origin`.
+</span><span class="kw">pub struct </span>MultiNativeAsset;
+<span class="kw">impl </span>FilterAssetLocation <span class="kw">for </span>MultiNativeAsset {
+	<span class="kw">fn </span>filter_asset_location(asset: <span class="kw-2">&amp;</span>MultiAsset, origin: <span class="kw-2">&amp;</span>MultiLocation) -&gt; bool {
+		<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref </span>reserve) = asset.reserve() {
+			<span class="kw">if </span>reserve == origin {
+				<span class="kw">return </span><span class="bool-val">true
+			</span>}
 		}
-		<span class="bool-val">false</span>
-	}
+		<span class="bool-val">false
+	</span>}
 }
 
-<span class="macro">parameter_types!</span> {
-	<span class="kw">pub</span> <span class="ident">CommonGoodAssetsLocation</span>: <span class="ident">MultiLocation</span> <span class="op">=</span> <span class="ident">MultiLocation::new</span>(<span class="number">1</span>, <span class="ident">X1</span>(<span class="ident">Parachain</span>(<span class="number">1000</span>)));
-	<span class="comment">// ALWAYS ensure that the index in PalletInstance stays up-to-date with</span>
-	<span class="comment">// Statemint&#39;s Assets pallet index</span>
-	<span class="kw">pub</span> <span class="ident">CommonGoodAssetsPalletLocation</span>: <span class="ident">MultiLocation</span> <span class="op">=</span>
-		<span class="ident">MultiLocation::new</span>(<span class="number">1</span>, <span class="ident">X2</span>(<span class="ident">Parachain</span>(<span class="number">1000</span>), <span class="ident">PalletInstance</span>(<span class="number">50</span>)));
-	<span class="kw">pub</span> <span class="ident">CheckingAccount</span>: <span class="ident">AccountId</span> <span class="op">=</span> <span class="ident">PolkadotXcm::check_account</span>();
+<span class="macro">parameter_types! </span>{
+	<span class="kw">pub </span>CommonGoodAssetsLocation: MultiLocation = MultiLocation::new(<span class="number">1</span>, X1(Parachain(<span class="number">1000</span>)));
+	<span class="comment">// ALWAYS ensure that the index in PalletInstance stays up-to-date with
+	// Statemint&#39;s Assets pallet index
+	</span><span class="kw">pub </span>CommonGoodAssetsPalletLocation: MultiLocation =
+		MultiLocation::new(<span class="number">1</span>, X2(Parachain(<span class="number">1000</span>), PalletInstance(<span class="number">50</span>)));
+	<span class="kw">pub </span>CheckingAccount: AccountId = PolkadotXcm::check_account();
 }
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Reserves</span> <span class="op">=</span> (<span class="ident">NativeAsset</span>, <span class="ident">AssetsFrom</span><span class="op">&lt;</span><span class="ident">CommonGoodAssetsLocation</span><span class="op">&gt;</span>);
+<span class="kw">pub type </span>Reserves = (NativeAsset, AssetsFrom&lt;CommonGoodAssetsLocation&gt;);
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">XcmConfig</span>;
-<span class="kw">impl</span> <span class="ident">xcm_executor::Config</span> <span class="kw">for</span> <span class="ident">XcmConfig</span> {
-	<span class="kw">type</span> <span class="ident">RuntimeCall</span> <span class="op">=</span> <span class="ident">RuntimeCall</span>;
-	<span class="kw">type</span> <span class="ident">XcmSender</span> <span class="op">=</span> <span class="ident">XcmRouter</span>;
-	<span class="comment">// How to withdraw and deposit an asset.</span>
-	<span class="kw">type</span> <span class="ident">AssetTransactor</span> <span class="op">=</span> <span class="ident">AssetTransactors</span>;
-	<span class="kw">type</span> <span class="ident">OriginConverter</span> <span class="op">=</span> <span class="ident">XcmOriginToTransactDispatchOrigin</span>;
-	<span class="kw">type</span> <span class="ident">IsReserve</span> <span class="op">=</span> <span class="ident">MultiNativeAsset</span>; <span class="comment">// TODO: maybe needed to be replaced by Reserves</span>
-	<span class="kw">type</span> <span class="ident">IsTeleporter</span> <span class="op">=</span> <span class="ident">NativeAsset</span>;
-	<span class="kw">type</span> <span class="ident">LocationInverter</span> <span class="op">=</span> <span class="ident">LocationInverter</span><span class="op">&lt;</span><span class="ident">Ancestry</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">Barrier</span> <span class="op">=</span> <span class="ident">Barrier</span>;
-	<span class="kw">type</span> <span class="ident">Weigher</span> <span class="op">=</span> <span class="ident">FixedWeightBounds</span><span class="op">&lt;</span><span class="ident">UnitWeightCost</span>, <span class="ident">RuntimeCall</span>, <span class="ident">MaxInstructions</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">Trader</span> <span class="op">=</span>
-		<span class="ident">UsingComponents</span><span class="op">&lt;</span><span class="ident">WeightToFee</span>, <span class="ident">RelayLocation</span>, <span class="ident">AccountId</span>, <span class="ident">Balances</span>, <span class="ident">ToAuthor</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">ResponseHandler</span> <span class="op">=</span> <span class="ident">PolkadotXcm</span>;
-	<span class="kw">type</span> <span class="ident">AssetTrap</span> <span class="op">=</span> <span class="ident">PolkadotXcm</span>;
-	<span class="kw">type</span> <span class="ident">AssetClaims</span> <span class="op">=</span> <span class="ident">PolkadotXcm</span>;
-	<span class="kw">type</span> <span class="ident">SubscriptionService</span> <span class="op">=</span> <span class="ident">PolkadotXcm</span>;
+<span class="kw">pub struct </span>XcmConfig;
+<span class="kw">impl </span>xcm_executor::Config <span class="kw">for </span>XcmConfig {
+	<span class="kw">type </span>RuntimeCall = RuntimeCall;
+	<span class="kw">type </span>XcmSender = XcmRouter;
+	<span class="comment">// How to withdraw and deposit an asset.
+	</span><span class="kw">type </span>AssetTransactor = AssetTransactors;
+	<span class="kw">type </span>OriginConverter = XcmOriginToTransactDispatchOrigin;
+	<span class="kw">type </span>IsReserve = MultiNativeAsset; <span class="comment">// TODO: maybe needed to be replaced by Reserves
+	</span><span class="kw">type </span>IsTeleporter = NativeAsset;
+	<span class="kw">type </span>LocationInverter = LocationInverter&lt;Ancestry&gt;;
+	<span class="kw">type </span>Barrier = Barrier;
+	<span class="kw">type </span>Weigher = FixedWeightBounds&lt;UnitWeightCost, RuntimeCall, MaxInstructions&gt;;
+	<span class="kw">type </span>Trader =
+		UsingComponents&lt;WeightToFee, RelayLocation, AccountId, Balances, ToAuthor&lt;Runtime&gt;&gt;;
+	<span class="kw">type </span>ResponseHandler = PolkadotXcm;
+	<span class="kw">type </span>AssetTrap = PolkadotXcm;
+	<span class="kw">type </span>AssetClaims = PolkadotXcm;
+	<span class="kw">type </span>SubscriptionService = PolkadotXcm;
 }
 
-<span class="doccomment">/// No local origins on this chain are allowed to dispatch XCM sends/executions.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">LocalOriginToLocation</span> <span class="op">=</span> <span class="ident">SignedToAccountId32</span><span class="op">&lt;</span><span class="ident">RuntimeOrigin</span>, <span class="ident">AccountId</span>, <span class="ident">RelayNetwork</span><span class="op">&gt;</span>;
+<span class="doccomment">/// No local origins on this chain are allowed to dispatch XCM sends/executions.
+</span><span class="kw">pub type </span>LocalOriginToLocation = SignedToAccountId32&lt;RuntimeOrigin, AccountId, RelayNetwork&gt;;
 
-<span class="doccomment">/// The means for routing XCM messages which are not for local execution into the right message</span>
-<span class="doccomment">/// queues.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">XcmRouter</span> <span class="op">=</span> (
-	<span class="comment">// Two routers - use UMP to communicate with the relay chain:</span>
-	<span class="ident">cumulus_primitives_utility::ParentAsUmp</span><span class="op">&lt;</span><span class="ident">ParachainSystem</span>, <span class="ident">PolkadotXcm</span><span class="op">&gt;</span>,
-	<span class="comment">// ..and XCMP to communicate with the sibling chains.</span>
-	<span class="ident">XcmpQueue</span>,
+<span class="doccomment">/// The means for routing XCM messages which are not for local execution into the right message
+/// queues.
+</span><span class="kw">pub type </span>XcmRouter = (
+	<span class="comment">// Two routers - use UMP to communicate with the relay chain:
+	</span>cumulus_primitives_utility::ParentAsUmp&lt;ParachainSystem, PolkadotXcm&gt;,
+	<span class="comment">// ..and XCMP to communicate with the sibling chains.
+	</span>XcmpQueue,
 );
 
-<span class="kw">impl</span> <span class="ident">pallet_xcm::Config</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-	<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-	<span class="kw">type</span> <span class="ident">SendXcmOrigin</span> <span class="op">=</span> <span class="ident">EnsureXcmOrigin</span><span class="op">&lt;</span><span class="ident">RuntimeOrigin</span>, <span class="ident">LocalOriginToLocation</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">XcmRouter</span> <span class="op">=</span> <span class="ident">XcmRouter</span>;
-	<span class="kw">type</span> <span class="ident">ExecuteXcmOrigin</span> <span class="op">=</span> <span class="ident">EnsureXcmOrigin</span><span class="op">&lt;</span><span class="ident">RuntimeOrigin</span>, <span class="ident">LocalOriginToLocation</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">XcmExecuteFilter</span> <span class="op">=</span> <span class="ident">Nothing</span>;
-	<span class="comment">// ^ Disable dispatchable execute on the XCM pallet.</span>
-	<span class="comment">// Needs to be `Everything` for local testing.</span>
-	<span class="kw">type</span> <span class="ident">XcmExecutor</span> <span class="op">=</span> <span class="ident">XcmExecutor</span><span class="op">&lt;</span><span class="ident">XcmConfig</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">XcmTeleportFilter</span> <span class="op">=</span> <span class="ident">Everything</span>;
-	<span class="kw">type</span> <span class="ident">XcmReserveTransferFilter</span> <span class="op">=</span> <span class="ident">Everything</span>;
-	<span class="kw">type</span> <span class="ident">Weigher</span> <span class="op">=</span> <span class="ident">FixedWeightBounds</span><span class="op">&lt;</span><span class="ident">UnitWeightCost</span>, <span class="ident">RuntimeCall</span>, <span class="ident">MaxInstructions</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">LocationInverter</span> <span class="op">=</span> <span class="ident">LocationInverter</span><span class="op">&lt;</span><span class="ident">Ancestry</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">RuntimeOrigin</span> <span class="op">=</span> <span class="ident">RuntimeOrigin</span>;
-	<span class="kw">type</span> <span class="ident">RuntimeCall</span> <span class="op">=</span> <span class="ident">RuntimeCall</span>;
+<span class="kw">impl </span>pallet_xcm::Config <span class="kw">for </span>Runtime {
+	<span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+	<span class="kw">type </span>SendXcmOrigin = EnsureXcmOrigin&lt;RuntimeOrigin, LocalOriginToLocation&gt;;
+	<span class="kw">type </span>XcmRouter = XcmRouter;
+	<span class="kw">type </span>ExecuteXcmOrigin = EnsureXcmOrigin&lt;RuntimeOrigin, LocalOriginToLocation&gt;;
+	<span class="kw">type </span>XcmExecuteFilter = Nothing;
+	<span class="comment">// ^ Disable dispatchable execute on the XCM pallet.
+	// Needs to be `Everything` for local testing.
+	</span><span class="kw">type </span>XcmExecutor = XcmExecutor&lt;XcmConfig&gt;;
+	<span class="kw">type </span>XcmTeleportFilter = Everything;
+	<span class="kw">type </span>XcmReserveTransferFilter = Everything;
+	<span class="kw">type </span>Weigher = FixedWeightBounds&lt;UnitWeightCost, RuntimeCall, MaxInstructions&gt;;
+	<span class="kw">type </span>LocationInverter = LocationInverter&lt;Ancestry&gt;;
+	<span class="kw">type </span>RuntimeOrigin = RuntimeOrigin;
+	<span class="kw">type </span>RuntimeCall = RuntimeCall;
 
-	<span class="kw">const</span> <span class="ident">VERSION_DISCOVERY_QUEUE_SIZE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">100</span>;
-	<span class="comment">// ^ Override for AdvertisedXcmVersion default</span>
-	<span class="kw">type</span> <span class="ident">AdvertisedXcmVersion</span> <span class="op">=</span> <span class="ident">pallet_xcm::CurrentXcmVersion</span>;
+	<span class="kw">const </span>VERSION_DISCOVERY_QUEUE_SIZE: u32 = <span class="number">100</span>;
+	<span class="comment">// ^ Override for AdvertisedXcmVersion default
+	</span><span class="kw">type </span>AdvertisedXcmVersion = pallet_xcm::CurrentXcmVersion;
 }
 
-<span class="kw">impl</span> <span class="ident">cumulus_pallet_xcm::Config</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-	<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-	<span class="kw">type</span> <span class="ident">XcmExecutor</span> <span class="op">=</span> <span class="ident">XcmExecutor</span><span class="op">&lt;</span><span class="ident">XcmConfig</span><span class="op">&gt;</span>;
+<span class="kw">impl </span>cumulus_pallet_xcm::Config <span class="kw">for </span>Runtime {
+	<span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+	<span class="kw">type </span>XcmExecutor = XcmExecutor&lt;XcmConfig&gt;;
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="penpal_runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="penpal_runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

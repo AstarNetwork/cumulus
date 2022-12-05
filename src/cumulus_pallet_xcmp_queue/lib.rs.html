@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/xcmp-queue/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_xcmp_queue/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_xcmp_queue/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_xcmp_queue/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/xcmp-queue/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_xcmp_queue/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_xcmp_queue/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_xcmp_queue/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -1145,1152 +1145,1160 @@
 <span id="1145">1145</span>
 <span id="1146">1146</span>
 <span id="1147">1147</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+<span id="1148">1148</span>
+<span id="1149">1149</span>
+<span id="1150">1150</span>
+<span id="1151">1151</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Substrate is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Substrate is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Substrate is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Substrate is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! A pallet which uses the XCMP transport layer to handle both incoming and outgoing XCM message</span>
-<span class="doccomment">//! sending and dispatch, queuing, signalling and backpressure. To do so, it implements:</span>
-<span class="doccomment">//! * `XcmpMessageHandler`</span>
-<span class="doccomment">//! * `XcmpMessageSource`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Also provides an implementation of `SendXcm` which can be placed in a router tuple for relaying</span>
-<span class="doccomment">//! XCM over XCMP if the destination is `Parent/Parachain`. It requires an implementation of</span>
-<span class="doccomment">//! `XcmExecutor` for dispatching incoming XCM messages.</span>
+</span><span class="doccomment">//! A pallet which uses the XCMP transport layer to handle both incoming and outgoing XCM message
+//! sending and dispatch, queuing, signalling and backpressure. To do so, it implements:
+//! * `XcmpMessageHandler`
+//! * `XcmpMessageSource`
+//!
+//! Also provides an implementation of `SendXcm` which can be placed in a router tuple for relaying
+//! XCM over XCMP if the destination is `Parent/Parachain`. It requires an implementation of
+//! `XcmExecutor` for dispatching incoming XCM messages.
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
+</span><span class="attribute">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">migration</span>;
+</span><span class="kw">pub mod </span>migration;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">mock</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>mock;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;runtime-benchmarks&quot;</span>)]</span>
-<span class="kw">mod</span> <span class="ident">benchmarking</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">weights</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">weights::WeightInfo</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;runtime-benchmarks&quot;</span>)]
+</span><span class="kw">mod </span>benchmarking;
+<span class="kw">pub mod </span>weights;
+<span class="kw">pub use </span>weights::WeightInfo;
 
-<span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Decode</span>, <span class="ident">DecodeLimit</span>, <span class="ident">Encode</span>};
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{
-	<span class="ident">relay_chain::BlockNumber</span> <span class="kw">as</span> <span class="ident">RelayBlockNumber</span>, <span class="ident">ChannelStatus</span>, <span class="ident">GetChannelInfo</span>, <span class="ident">MessageSendError</span>,
-	<span class="ident">ParaId</span>, <span class="ident">XcmpMessageFormat</span>, <span class="ident">XcmpMessageHandler</span>, <span class="ident">XcmpMessageSource</span>,
+<span class="kw">use </span>codec::{Decode, DecodeLimit, Encode};
+<span class="kw">use </span>cumulus_primitives_core::{
+	relay_chain::BlockNumber <span class="kw">as </span>RelayBlockNumber, ChannelStatus, GetChannelInfo, MessageSendError,
+	ParaId, XcmpMessageFormat, XcmpMessageHandler, XcmpMessageSource,
 };
-<span class="kw">use</span> <span class="ident">frame_support</span>::{
-	<span class="ident">traits::EnsureOrigin</span>,
-	<span class="ident">weights</span>::{<span class="ident">constants::WEIGHT_PER_MILLIS</span>, <span class="ident">Weight</span>},
+<span class="kw">use </span>frame_support::{
+	traits::EnsureOrigin,
+	weights::{constants::WEIGHT_PER_MILLIS, Weight},
 };
-<span class="kw">use</span> <span class="ident">rand_chacha</span>::{
-	<span class="ident">rand_core</span>::{<span class="ident">RngCore</span>, <span class="ident">SeedableRng</span>},
-	<span class="ident">ChaChaRng</span>,
+<span class="kw">use </span>rand_chacha::{
+	rand_core::{RngCore, SeedableRng},
+	ChaChaRng,
 };
-<span class="kw">use</span> <span class="ident">scale_info::TypeInfo</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{<span class="ident">traits::Hash</span>, <span class="ident">RuntimeDebug</span>};
-<span class="kw">use</span> <span class="ident">sp_std</span>::{<span class="ident">convert::TryFrom</span>, <span class="ident">prelude</span>::<span class="kw-2">*</span>};
-<span class="kw">use</span> <span class="ident">xcm</span>::{
-	<span class="ident">latest</span>::{<span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">Weight</span> <span class="kw">as</span> <span class="ident">XcmWeight</span>},
-	<span class="ident">VersionedXcm</span>, <span class="ident">WrapVersion</span>, <span class="ident">MAX_XCM_DECODE_DEPTH</span>,
+<span class="kw">use </span>scale_info::TypeInfo;
+<span class="kw">use </span>sp_runtime::{traits::Hash, RuntimeDebug};
+<span class="kw">use </span>sp_std::{convert::TryFrom, prelude::<span class="kw-2">*</span>};
+<span class="kw">use </span>xcm::{
+	latest::{prelude::<span class="kw-2">*</span>, Weight <span class="kw">as </span>XcmWeight},
+	VersionedXcm, WrapVersion, MAX_XCM_DECODE_DEPTH,
 };
-<span class="kw">use</span> <span class="ident">xcm_executor::traits::ConvertOrigin</span>;
+<span class="kw">use </span>xcm_executor::traits::ConvertOrigin;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">pallet</span>::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>pallet::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// Index used to identify overweight XCMs.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">OverweightIndex</span> <span class="op">=</span> <span class="ident">u64</span>;
+<span class="doccomment">/// Index used to identify overweight XCMs.
+</span><span class="kw">pub type </span>OverweightIndex = u64;
 
-<span class="kw">const</span> <span class="ident">LOG_TARGET</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;xcmp_queue&quot;</span>;
+<span class="kw">const </span>LOG_TARGET: <span class="kw-2">&amp;</span>str = <span class="string">&quot;xcmp_queue&quot;</span>;
+<span class="kw">const </span>DEFAULT_POV_SIZE: u64 = <span class="number">64 </span>* <span class="number">1024</span>; <span class="comment">// 64 KB
 
-<span class="attribute">#[<span class="ident">frame_support::pallet</span>]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">pallet</span> {
-	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">frame_support::pallet_prelude</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">frame_system::pallet_prelude</span>::<span class="kw-2">*</span>;
+</span><span class="attribute">#[frame_support::pallet]
+</span><span class="kw">pub mod </span>pallet {
+	<span class="kw">use super</span>::<span class="kw-2">*</span>;
+	<span class="kw">use </span>frame_support::pallet_prelude::<span class="kw-2">*</span>;
+	<span class="kw">use </span>frame_system::pallet_prelude::<span class="kw-2">*</span>;
 
-	<span class="attribute">#[<span class="ident">pallet::pallet</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::generate_store</span>(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">trait</span> <span class="ident">Store</span>)]</span>
-	<span class="attribute">#[<span class="ident">pallet::storage_version</span>(<span class="ident">migration::STORAGE_VERSION</span>)]</span>
-	<span class="attribute">#[<span class="ident">pallet::without_storage_info</span>]</span>
-	<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw">_</span>);
+	<span class="attribute">#[pallet::pallet]
+	#[pallet::generate_store(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">trait </span>Store)]
+	#[pallet::storage_version(migration::STORAGE_VERSION)]
+	#[pallet::without_storage_info]
+	</span><span class="kw">pub struct </span>Pallet&lt;T&gt;(<span class="kw">_</span>);
 
-	<span class="attribute">#[<span class="ident">pallet::config</span>]</span>
-	<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Config</span>: <span class="ident">frame_system::Config</span> {
-		<span class="kw">type</span> <span class="ident">RuntimeEvent</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IsType</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::RuntimeEvent</span><span class="op">&gt;</span>;
+	<span class="attribute">#[pallet::config]
+	</span><span class="kw">pub trait </span>Config: frame_system::Config {
+		<span class="kw">type </span>RuntimeEvent: From&lt;Event&lt;<span class="self">Self</span>&gt;&gt; + IsType&lt;&lt;<span class="self">Self </span><span class="kw">as </span>frame_system::Config&gt;::RuntimeEvent&gt;;
 
-		<span class="doccomment">/// Something to execute an XCM message. We need this to service the XCMoXCMP queue.</span>
-		<span class="kw">type</span> <span class="ident">XcmExecutor</span>: <span class="ident">ExecuteXcm</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::RuntimeCall</span><span class="op">&gt;</span>;
+		<span class="doccomment">/// Something to execute an XCM message. We need this to service the XCMoXCMP queue.
+		</span><span class="kw">type </span>XcmExecutor: ExecuteXcm&lt;<span class="self">Self</span>::RuntimeCall&gt;;
 
-		<span class="doccomment">/// Information on the avaialble XCMP channels.</span>
-		<span class="kw">type</span> <span class="ident">ChannelInfo</span>: <span class="ident">GetChannelInfo</span>;
+		<span class="doccomment">/// Information on the avaialble XCMP channels.
+		</span><span class="kw">type </span>ChannelInfo: GetChannelInfo;
 
-		<span class="doccomment">/// Means of converting an `Xcm` into a `VersionedXcm`.</span>
-		<span class="kw">type</span> <span class="ident">VersionWrapper</span>: <span class="ident">WrapVersion</span>;
+		<span class="doccomment">/// Means of converting an `Xcm` into a `VersionedXcm`.
+		</span><span class="kw">type </span>VersionWrapper: WrapVersion;
 
-		<span class="doccomment">/// The origin that is allowed to execute overweight messages.</span>
-		<span class="kw">type</span> <span class="ident">ExecuteOverweightOrigin</span>: <span class="ident">EnsureOrigin</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::RuntimeOrigin</span><span class="op">&gt;</span>;
+		<span class="doccomment">/// The origin that is allowed to execute overweight messages.
+		</span><span class="kw">type </span>ExecuteOverweightOrigin: EnsureOrigin&lt;<span class="self">Self</span>::RuntimeOrigin&gt;;
 
-		<span class="doccomment">/// The origin that is allowed to resume or suspend the XCMP queue.</span>
-		<span class="kw">type</span> <span class="ident">ControllerOrigin</span>: <span class="ident">EnsureOrigin</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::RuntimeOrigin</span><span class="op">&gt;</span>;
+		<span class="doccomment">/// The origin that is allowed to resume or suspend the XCMP queue.
+		</span><span class="kw">type </span>ControllerOrigin: EnsureOrigin&lt;<span class="self">Self</span>::RuntimeOrigin&gt;;
 
-		<span class="doccomment">/// The conversion function used to attempt to convert an XCM `MultiLocation` origin to a</span>
-		<span class="doccomment">/// superuser origin.</span>
-		<span class="kw">type</span> <span class="ident">ControllerOriginConverter</span>: <span class="ident">ConvertOrigin</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::RuntimeOrigin</span><span class="op">&gt;</span>;
+		<span class="doccomment">/// The conversion function used to attempt to convert an XCM `MultiLocation` origin to a
+		/// superuser origin.
+		</span><span class="kw">type </span>ControllerOriginConverter: ConvertOrigin&lt;<span class="self">Self</span>::RuntimeOrigin&gt;;
 
-		<span class="doccomment">/// The weight information of this pallet.</span>
-		<span class="kw">type</span> <span class="ident">WeightInfo</span>: <span class="ident">WeightInfo</span>;
+		<span class="doccomment">/// The weight information of this pallet.
+		</span><span class="kw">type </span>WeightInfo: WeightInfo;
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::hooks</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Hooks</span><span class="op">&lt;</span><span class="ident">BlockNumberFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="kw">fn</span> <span class="ident">on_runtime_upgrade</span>() -&gt; <span class="ident">Weight</span> {
-			<span class="ident">migration::migrate_to_latest</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>()
+	<span class="attribute">#[pallet::hooks]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; <span class="kw">for </span>Pallet&lt;T&gt; {
+		<span class="kw">fn </span>on_runtime_upgrade() -&gt; Weight {
+			migration::migrate_to_latest::&lt;T&gt;()
 		}
 
-		<span class="kw">fn</span> <span class="ident">on_idle</span>(<span class="ident">_now</span>: <span class="ident">T::BlockNumber</span>, <span class="ident">max_weight</span>: <span class="ident">Weight</span>) -&gt; <span class="ident">Weight</span> {
-			<span class="comment">// on_idle processes additional messages with any remaining block weight.</span>
-			<span class="ident"><span class="self">Self</span>::service_xcmp_queue</span>(<span class="ident">max_weight</span>)
+		<span class="kw">fn </span>on_idle(_now: T::BlockNumber, max_weight: Weight) -&gt; Weight {
+			<span class="comment">// on_idle processes additional messages with any remaining block weight.
+			</span><span class="self">Self</span>::service_xcmp_queue(max_weight)
 		}
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::call</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// Services a single overweight XCM.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `ExecuteOverweightOrigin`.</span>
-		<span class="doccomment">/// - `index`: The index of the overweight XCM to service</span>
-		<span class="doccomment">/// - `weight_limit`: The amount of weight that XCM execution may take.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// Errors:</span>
-		<span class="doccomment">/// - `BadOverweightIndex`: XCM under `index` is not found in the `Overweight` storage map.</span>
-		<span class="doccomment">/// - `BadXcm`: XCM under `index` cannot be properly decoded into a valid XCM format.</span>
-		<span class="doccomment">/// - `WeightOverLimit`: XCM execution may use greater `weight_limit`.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// Events:</span>
-		<span class="doccomment">/// - `OverweightServiced`: On success.</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="ident">Weight::from_ref_time</span>(<span class="ident">weight_limit</span>.<span class="ident">saturating_add</span>(<span class="number">1_000_000</span>)), <span class="ident">DispatchClass::Operational</span>,))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">service_overweight</span>(
-			<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-			<span class="ident">index</span>: <span class="ident">OverweightIndex</span>,
-			<span class="ident">weight_limit</span>: <span class="ident">XcmWeight</span>,
-		) -&gt; <span class="ident">DispatchResultWithPostInfo</span> {
-			<span class="ident">T::ExecuteOverweightOrigin::ensure_origin</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
+	<span class="attribute">#[pallet::call]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+		<span class="doccomment">/// Services a single overweight XCM.
+		///
+		/// - `origin`: Must pass `ExecuteOverweightOrigin`.
+		/// - `index`: The index of the overweight XCM to service
+		/// - `weight_limit`: The amount of weight that XCM execution may take.
+		///
+		/// Errors:
+		/// - `BadOverweightIndex`: XCM under `index` is not found in the `Overweight` storage map.
+		/// - `BadXcm`: XCM under `index` cannot be properly decoded into a valid XCM format.
+		/// - `WeightOverLimit`: XCM execution may use greater `weight_limit`.
+		///
+		/// Events:
+		/// - `OverweightServiced`: On success.
+		</span><span class="attribute">#[pallet::weight((Weight::from_ref_time(weight_limit.saturating_add(<span class="number">1_000_000</span>)), DispatchClass::Operational,))]
+		</span><span class="kw">pub fn </span>service_overweight(
+			origin: OriginFor&lt;T&gt;,
+			index: OverweightIndex,
+			weight_limit: XcmWeight,
+		) -&gt; DispatchResultWithPostInfo {
+			T::ExecuteOverweightOrigin::ensure_origin(origin)<span class="question-mark">?</span>;
 
-			<span class="kw">let</span> (<span class="ident">sender</span>, <span class="ident">sent_at</span>, <span class="ident">data</span>) <span class="op">=</span>
-				<span class="ident">Overweight</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>(<span class="ident">index</span>).<span class="ident">ok_or</span>(<span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::BadOverweightIndex</span>)<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="ident">xcm</span> <span class="op">=</span> <span class="ident">VersionedXcm</span>::<span class="op">&lt;</span><span class="ident">T::RuntimeCall</span><span class="op">&gt;</span><span class="ident">::decode_all_with_depth_limit</span>(
-				<span class="ident">MAX_XCM_DECODE_DEPTH</span>,
-				<span class="kw-2">&amp;mut</span> <span class="ident">data</span>.<span class="ident">as_slice</span>(),
+			<span class="kw">let </span>(sender, sent_at, data) =
+				Overweight::&lt;T&gt;::get(index).ok_or(Error::&lt;T&gt;::BadOverweightIndex)<span class="question-mark">?</span>;
+			<span class="kw">let </span>xcm = VersionedXcm::&lt;T::RuntimeCall&gt;::decode_all_with_depth_limit(
+				MAX_XCM_DECODE_DEPTH,
+				<span class="kw-2">&amp;mut </span>data.as_slice(),
 			)
-			.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::BadXcm</span>)<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="ident">used</span> <span class="op">=</span>
-				<span class="ident"><span class="self">Self</span>::handle_xcm_message</span>(<span class="ident">sender</span>, <span class="ident">sent_at</span>, <span class="ident">xcm</span>, <span class="ident">Weight::from_ref_time</span>(<span class="ident">weight_limit</span>))
-					.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::WeightOverLimit</span>)<span class="question-mark">?</span>;
-			<span class="ident">Overweight</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::remove</span>(<span class="ident">index</span>);
-			<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::OverweightServiced</span> { <span class="ident">index</span>, <span class="ident">used</span> });
-			<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">used</span>.<span class="ident">saturating_add</span>(<span class="ident">Weight::from_ref_time</span>(<span class="number">1_000_000</span>))).<span class="ident">into</span>())
+			.map_err(|<span class="kw">_</span>| Error::&lt;T&gt;::BadXcm)<span class="question-mark">?</span>;
+			<span class="kw">let </span>used =
+				<span class="self">Self</span>::handle_xcm_message(sender, sent_at, xcm, Weight::from_ref_time(weight_limit))
+					.map_err(|<span class="kw">_</span>| Error::&lt;T&gt;::WeightOverLimit)<span class="question-mark">?</span>;
+			Overweight::&lt;T&gt;::remove(index);
+			<span class="self">Self</span>::deposit_event(Event::OverweightServiced { index, used });
+			<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(used.saturating_add(Weight::from_ref_time(<span class="number">1_000_000</span>))).into())
 		}
 
-		<span class="doccomment">/// Suspends all XCM executions for the XCMP queue, regardless of the sender&#39;s origin.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `ControllerOrigin`.</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span>), <span class="ident">DispatchClass::Operational</span>,))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">suspend_xcm_execution</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">T::ControllerOrigin::ensure_origin</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
+		<span class="doccomment">/// Suspends all XCM executions for the XCMP queue, regardless of the sender&#39;s origin.
+		///
+		/// - `origin`: Must pass `ControllerOrigin`.
+		</span><span class="attribute">#[pallet::weight((T::DbWeight::get().writes(<span class="number">1</span>), DispatchClass::Operational,))]
+		</span><span class="kw">pub fn </span>suspend_xcm_execution(origin: OriginFor&lt;T&gt;) -&gt; DispatchResult {
+			T::ControllerOrigin::ensure_origin(origin)<span class="question-mark">?</span>;
 
-			<span class="ident">QueueSuspended</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="bool-val">true</span>);
+			QueueSuspended::&lt;T&gt;::put(<span class="bool-val">true</span>);
 
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="doccomment">/// Resumes all XCM executions for the XCMP queue.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// Note that this function doesn&#39;t change the status of the in/out bound channels.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `ControllerOrigin`.</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span>), <span class="ident">DispatchClass::Operational</span>,))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resume_xcm_execution</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">T::ControllerOrigin::ensure_origin</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
+		<span class="doccomment">/// Resumes all XCM executions for the XCMP queue.
+		///
+		/// Note that this function doesn&#39;t change the status of the in/out bound channels.
+		///
+		/// - `origin`: Must pass `ControllerOrigin`.
+		</span><span class="attribute">#[pallet::weight((T::DbWeight::get().writes(<span class="number">1</span>), DispatchClass::Operational,))]
+		</span><span class="kw">pub fn </span>resume_xcm_execution(origin: OriginFor&lt;T&gt;) -&gt; DispatchResult {
+			T::ControllerOrigin::ensure_origin(origin)<span class="question-mark">?</span>;
 
-			<span class="ident">QueueSuspended</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="bool-val">false</span>);
-
-			<span class="prelude-val">Ok</span>(())
-		}
-
-		<span class="doccomment">/// Overwrites the number of pages of messages which must be in the queue for the other side to be told to</span>
-		<span class="doccomment">/// suspend their sending.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `Root`.</span>
-		<span class="doccomment">/// - `new`: Desired value for `QueueConfigData.suspend_value`</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="ident">T::WeightInfo::set_config_with_u32</span>(), <span class="ident">DispatchClass::Operational</span>,))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_suspend_threshold</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">new</span>: <span class="ident">u32</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="ident">QueueConfig</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">data</span><span class="op">|</span> <span class="ident">data</span>.<span class="ident">suspend_threshold</span> <span class="op">=</span> <span class="ident">new</span>);
+			QueueSuspended::&lt;T&gt;::put(<span class="bool-val">false</span>);
 
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="doccomment">/// Overwrites the number of pages of messages which must be in the queue after which we drop any further</span>
-		<span class="doccomment">/// messages from the channel.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `Root`.</span>
-		<span class="doccomment">/// - `new`: Desired value for `QueueConfigData.drop_threshold`</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="ident">T::WeightInfo::set_config_with_u32</span>(),<span class="ident">DispatchClass::Operational</span>,))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_drop_threshold</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">new</span>: <span class="ident">u32</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="ident">QueueConfig</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">data</span><span class="op">|</span> <span class="ident">data</span>.<span class="ident">drop_threshold</span> <span class="op">=</span> <span class="ident">new</span>);
+		<span class="doccomment">/// Overwrites the number of pages of messages which must be in the queue for the other side to be told to
+		/// suspend their sending.
+		///
+		/// - `origin`: Must pass `Root`.
+		/// - `new`: Desired value for `QueueConfigData.suspend_value`
+		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_u32(), DispatchClass::Operational,))]
+		</span><span class="kw">pub fn </span>update_suspend_threshold(origin: OriginFor&lt;T&gt;, new: u32) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			QueueConfig::&lt;T&gt;::mutate(|data| data.suspend_threshold = new);
 
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="doccomment">/// Overwrites the number of pages of messages which the queue must be reduced to before it signals that</span>
-		<span class="doccomment">/// message sending may recommence after it has been suspended.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `Root`.</span>
-		<span class="doccomment">/// - `new`: Desired value for `QueueConfigData.resume_threshold`</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="ident">T::WeightInfo::set_config_with_u32</span>(), <span class="ident">DispatchClass::Operational</span>,))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_resume_threshold</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">new</span>: <span class="ident">u32</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="ident">QueueConfig</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">data</span><span class="op">|</span> <span class="ident">data</span>.<span class="ident">resume_threshold</span> <span class="op">=</span> <span class="ident">new</span>);
+		<span class="doccomment">/// Overwrites the number of pages of messages which must be in the queue after which we drop any further
+		/// messages from the channel.
+		///
+		/// - `origin`: Must pass `Root`.
+		/// - `new`: Desired value for `QueueConfigData.drop_threshold`
+		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_u32(),DispatchClass::Operational,))]
+		</span><span class="kw">pub fn </span>update_drop_threshold(origin: OriginFor&lt;T&gt;, new: u32) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			QueueConfig::&lt;T&gt;::mutate(|data| data.drop_threshold = new);
 
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="doccomment">/// Overwrites the amount of remaining weight under which we stop processing messages.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `Root`.</span>
-		<span class="doccomment">/// - `new`: Desired value for `QueueConfigData.threshold_weight`</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="ident">T::WeightInfo::set_config_with_weight</span>(), <span class="ident">DispatchClass::Operational</span>,))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_threshold_weight</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">new</span>: <span class="ident">XcmWeight</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="ident">QueueConfig</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">data</span><span class="op">|</span> <span class="ident">data</span>.<span class="ident">threshold_weight</span> <span class="op">=</span> <span class="ident">Weight::from_ref_time</span>(<span class="ident">new</span>));
+		<span class="doccomment">/// Overwrites the number of pages of messages which the queue must be reduced to before it signals that
+		/// message sending may recommence after it has been suspended.
+		///
+		/// - `origin`: Must pass `Root`.
+		/// - `new`: Desired value for `QueueConfigData.resume_threshold`
+		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_u32(), DispatchClass::Operational,))]
+		</span><span class="kw">pub fn </span>update_resume_threshold(origin: OriginFor&lt;T&gt;, new: u32) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			QueueConfig::&lt;T&gt;::mutate(|data| data.resume_threshold = new);
 
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="doccomment">/// Overwrites the speed to which the available weight approaches the maximum weight.</span>
-		<span class="doccomment">/// A lower number results in a faster progression. A value of 1 makes the entire weight available initially.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `Root`.</span>
-		<span class="doccomment">/// - `new`: Desired value for `QueueConfigData.weight_restrict_decay`.</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="ident">T::WeightInfo::set_config_with_weight</span>(), <span class="ident">DispatchClass::Operational</span>,))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_weight_restrict_decay</span>(
-			<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-			<span class="ident">new</span>: <span class="ident">XcmWeight</span>,
-		) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="ident">QueueConfig</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">data</span><span class="op">|</span> {
-				<span class="ident">data</span>.<span class="ident">weight_restrict_decay</span> <span class="op">=</span> <span class="ident">Weight::from_ref_time</span>(<span class="ident">new</span>)
+		<span class="doccomment">/// Overwrites the amount of remaining weight under which we stop processing messages.
+		///
+		/// - `origin`: Must pass `Root`.
+		/// - `new`: Desired value for `QueueConfigData.threshold_weight`
+		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_weight(), DispatchClass::Operational,))]
+		</span><span class="kw">pub fn </span>update_threshold_weight(origin: OriginFor&lt;T&gt;, new: XcmWeight) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			QueueConfig::&lt;T&gt;::mutate(|data| data.threshold_weight = Weight::from_ref_time(new));
+
+			<span class="prelude-val">Ok</span>(())
+		}
+
+		<span class="doccomment">/// Overwrites the speed to which the available weight approaches the maximum weight.
+		/// A lower number results in a faster progression. A value of 1 makes the entire weight available initially.
+		///
+		/// - `origin`: Must pass `Root`.
+		/// - `new`: Desired value for `QueueConfigData.weight_restrict_decay`.
+		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_weight(), DispatchClass::Operational,))]
+		</span><span class="kw">pub fn </span>update_weight_restrict_decay(
+			origin: OriginFor&lt;T&gt;,
+			new: XcmWeight,
+		) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			QueueConfig::&lt;T&gt;::mutate(|data| {
+				data.weight_restrict_decay = Weight::from_ref_time(new)
 			});
 
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="doccomment">/// Overwrite the maximum amount of weight any individual message may consume.</span>
-		<span class="doccomment">/// Messages above this weight go into the overweight queue and may only be serviced explicitly.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `Root`.</span>
-		<span class="doccomment">/// - `new`: Desired value for `QueueConfigData.xcmp_max_individual_weight`.</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>((<span class="ident">T::WeightInfo::set_config_with_weight</span>(), <span class="ident">DispatchClass::Operational</span>,))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_xcmp_max_individual_weight</span>(
-			<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-			<span class="ident">new</span>: <span class="ident">XcmWeight</span>,
-		) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="ident">QueueConfig</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">data</span><span class="op">|</span> {
-				<span class="ident">data</span>.<span class="ident">xcmp_max_individual_weight</span> <span class="op">=</span> <span class="ident">Weight::from_ref_time</span>(<span class="ident">new</span>)
+		<span class="doccomment">/// Overwrite the maximum amount of weight any individual message may consume.
+		/// Messages above this weight go into the overweight queue and may only be serviced explicitly.
+		///
+		/// - `origin`: Must pass `Root`.
+		/// - `new`: Desired value for `QueueConfigData.xcmp_max_individual_weight`.
+		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_weight(), DispatchClass::Operational,))]
+		</span><span class="kw">pub fn </span>update_xcmp_max_individual_weight(
+			origin: OriginFor&lt;T&gt;,
+			new: XcmWeight,
+		) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			QueueConfig::&lt;T&gt;::mutate(|data| {
+				data.xcmp_max_individual_weight = Weight::from_ref_time(new)
 			});
 
 			<span class="prelude-val">Ok</span>(())
 		}
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::event</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::generate_deposit</span>(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">deposit_event</span>)]</span>
-	<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// Some XCM was executed ok.</span>
-		<span class="ident">Success</span> { <span class="ident">message_hash</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span>, <span class="ident">weight</span>: <span class="ident">Weight</span> },
-		<span class="doccomment">/// Some XCM failed.</span>
-		<span class="ident">Fail</span> { <span class="ident">message_hash</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span>, <span class="ident">error</span>: <span class="ident">XcmError</span>, <span class="ident">weight</span>: <span class="ident">Weight</span> },
-		<span class="doccomment">/// Bad XCM version used.</span>
-		<span class="ident">BadVersion</span> { <span class="ident">message_hash</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span> },
-		<span class="doccomment">/// Bad XCM format used.</span>
-		<span class="ident">BadFormat</span> { <span class="ident">message_hash</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span> },
-		<span class="doccomment">/// An upward message was sent to the relay chain.</span>
-		<span class="ident">UpwardMessageSent</span> { <span class="ident">message_hash</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span> },
-		<span class="doccomment">/// An HRMP message was sent to a sibling parachain.</span>
-		<span class="ident">XcmpMessageSent</span> { <span class="ident">message_hash</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span> },
-		<span class="doccomment">/// An XCM exceeded the individual message weight budget.</span>
-		<span class="ident">OverweightEnqueued</span> {
-			<span class="ident">sender</span>: <span class="ident">ParaId</span>,
-			<span class="ident">sent_at</span>: <span class="ident">RelayBlockNumber</span>,
-			<span class="ident">index</span>: <span class="ident">OverweightIndex</span>,
-			<span class="ident">required</span>: <span class="ident">Weight</span>,
+	<span class="attribute">#[pallet::event]
+	#[pallet::generate_deposit(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>deposit_event)]
+	</span><span class="kw">pub enum </span>Event&lt;T: Config&gt; {
+		<span class="doccomment">/// Some XCM was executed ok.
+		</span>Success { message_hash: <span class="prelude-ty">Option</span>&lt;T::Hash&gt;, weight: Weight },
+		<span class="doccomment">/// Some XCM failed.
+		</span>Fail { message_hash: <span class="prelude-ty">Option</span>&lt;T::Hash&gt;, error: XcmError, weight: Weight },
+		<span class="doccomment">/// Bad XCM version used.
+		</span>BadVersion { message_hash: <span class="prelude-ty">Option</span>&lt;T::Hash&gt; },
+		<span class="doccomment">/// Bad XCM format used.
+		</span>BadFormat { message_hash: <span class="prelude-ty">Option</span>&lt;T::Hash&gt; },
+		<span class="doccomment">/// An upward message was sent to the relay chain.
+		</span>UpwardMessageSent { message_hash: <span class="prelude-ty">Option</span>&lt;T::Hash&gt; },
+		<span class="doccomment">/// An HRMP message was sent to a sibling parachain.
+		</span>XcmpMessageSent { message_hash: <span class="prelude-ty">Option</span>&lt;T::Hash&gt; },
+		<span class="doccomment">/// An XCM exceeded the individual message weight budget.
+		</span>OverweightEnqueued {
+			sender: ParaId,
+			sent_at: RelayBlockNumber,
+			index: OverweightIndex,
+			required: Weight,
 		},
-		<span class="doccomment">/// An XCM from the overweight queue was executed with the given actual weight used.</span>
-		<span class="ident">OverweightServiced</span> { <span class="ident">index</span>: <span class="ident">OverweightIndex</span>, <span class="ident">used</span>: <span class="ident">Weight</span> },
+		<span class="doccomment">/// An XCM from the overweight queue was executed with the given actual weight used.
+		</span>OverweightServiced { index: OverweightIndex, used: Weight },
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::error</span>]</span>
-	<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Error</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// Failed to send XCM message.</span>
-		<span class="ident">FailedToSend</span>,
-		<span class="doccomment">/// Bad XCM origin.</span>
-		<span class="ident">BadXcmOrigin</span>,
-		<span class="doccomment">/// Bad XCM data.</span>
-		<span class="ident">BadXcm</span>,
-		<span class="doccomment">/// Bad overweight index.</span>
-		<span class="ident">BadOverweightIndex</span>,
-		<span class="doccomment">/// Provided weight is possibly not enough to execute the message.</span>
-		<span class="ident">WeightOverLimit</span>,
+	<span class="attribute">#[pallet::error]
+	</span><span class="kw">pub enum </span>Error&lt;T&gt; {
+		<span class="doccomment">/// Failed to send XCM message.
+		</span>FailedToSend,
+		<span class="doccomment">/// Bad XCM origin.
+		</span>BadXcmOrigin,
+		<span class="doccomment">/// Bad XCM data.
+		</span>BadXcm,
+		<span class="doccomment">/// Bad overweight index.
+		</span>BadOverweightIndex,
+		<span class="doccomment">/// Provided weight is possibly not enough to execute the message.
+		</span>WeightOverLimit,
 	}
 
-	<span class="doccomment">/// Status of the inbound XCMP channels.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">InboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundChannelDetails</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Status of the inbound XCMP channels.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>InboundXcmpStatus&lt;T: Config&gt; =
+		StorageValue&lt;<span class="kw">_</span>, Vec&lt;InboundChannelDetails&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// Inbound aggregate XCMP messages. It can only be one per ParaId/block.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">InboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageDoubleMap</span><span class="op">&lt;</span>
+	<span class="doccomment">/// Inbound aggregate XCMP messages. It can only be one per ParaId/block.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>InboundXcmpMessages&lt;T: Config&gt; = StorageDoubleMap&lt;
 		<span class="kw">_</span>,
-		<span class="ident">Blake2_128Concat</span>,
-		<span class="ident">ParaId</span>,
-		<span class="ident">Twox64Concat</span>,
-		<span class="ident">RelayBlockNumber</span>,
-		<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-		<span class="ident">ValueQuery</span>,
-	<span class="op">&gt;</span>;
+		Blake2_128Concat,
+		ParaId,
+		Twox64Concat,
+		RelayBlockNumber,
+		Vec&lt;u8&gt;,
+		ValueQuery,
+	&gt;;
 
-	<span class="doccomment">/// The non-empty XCMP channels in order of becoming non-empty, and the index of the first</span>
-	<span class="doccomment">/// and last outbound message. If the two indices are equal, then it indicates an empty</span>
-	<span class="doccomment">/// queue and there must be a non-`Ok` `OutboundStatus`. We assume queues grow no greater</span>
-	<span class="doccomment">/// than 65535 items. Queue indices for normal messages begin at one; zero is reserved in</span>
-	<span class="doccomment">/// case of the need to send a high-priority signal message this block.</span>
-	<span class="doccomment">/// The bool is true if there is a signal message waiting to be sent.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">OutboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">OutboundChannelDetails</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The non-empty XCMP channels in order of becoming non-empty, and the index of the first
+	/// and last outbound message. If the two indices are equal, then it indicates an empty
+	/// queue and there must be a non-`Ok` `OutboundStatus`. We assume queues grow no greater
+	/// than 65535 items. Queue indices for normal messages begin at one; zero is reserved in
+	/// case of the need to send a high-priority signal message this block.
+	/// The bool is true if there is a signal message waiting to be sent.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>OutboundXcmpStatus&lt;T: Config&gt; =
+		StorageValue&lt;<span class="kw">_</span>, Vec&lt;OutboundChannelDetails&gt;, ValueQuery&gt;;
 
-	<span class="comment">// The new way of doing it:</span>
-	<span class="doccomment">/// The messages outbound in a given XCMP channel.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">OutboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageDoubleMap</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Blake2_128Concat</span>, <span class="ident">ParaId</span>, <span class="ident">Twox64Concat</span>, <span class="ident">u16</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="comment">// The new way of doing it:
+	</span><span class="doccomment">/// The messages outbound in a given XCMP channel.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>OutboundXcmpMessages&lt;T: Config&gt; =
+		StorageDoubleMap&lt;<span class="kw">_</span>, Blake2_128Concat, ParaId, Twox64Concat, u16, Vec&lt;u8&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// Any signal messages waiting to be sent.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">SignalMessages</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageMap</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Blake2_128Concat</span>, <span class="ident">ParaId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Any signal messages waiting to be sent.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>SignalMessages&lt;T: Config&gt; =
+		StorageMap&lt;<span class="kw">_</span>, Blake2_128Concat, ParaId, Vec&lt;u8&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// The configuration which controls the dynamics of the outbound queue.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">QueueConfig</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">QueueConfigData</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The configuration which controls the dynamics of the outbound queue.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>QueueConfig&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, QueueConfigData, ValueQuery&gt;;
 
-	<span class="doccomment">/// The messages that exceeded max individual message weight budget.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// These message stay in this storage map until they are manually dispatched via</span>
-	<span class="doccomment">/// `service_overweight`.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">Overweight</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageMap</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Twox64Concat</span>, <span class="ident">OverweightIndex</span>, (<span class="ident">ParaId</span>, <span class="ident">RelayBlockNumber</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>)<span class="op">&gt;</span>;
+	<span class="doccomment">/// The messages that exceeded max individual message weight budget.
+	///
+	/// These message stay in this storage map until they are manually dispatched via
+	/// `service_overweight`.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>Overweight&lt;T: Config&gt; =
+		StorageMap&lt;<span class="kw">_</span>, Twox64Concat, OverweightIndex, (ParaId, RelayBlockNumber, Vec&lt;u8&gt;)&gt;;
 
-	<span class="doccomment">/// The number of overweight messages ever recorded in `Overweight`. Also doubles as the next</span>
-	<span class="doccomment">/// available free overweight index.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">OverweightCount</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">OverweightIndex</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The number of overweight messages ever recorded in `Overweight`. Also doubles as the next
+	/// available free overweight index.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>OverweightCount&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, OverweightIndex, ValueQuery&gt;;
 
-	<span class="doccomment">/// Whether or not the XCMP queue is suspended from executing incoming XCMs or not.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">QueueSuspended</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">bool</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// Whether or not the XCMP queue is suspended from executing incoming XCMs or not.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>QueueSuspended&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, bool, ValueQuery&gt;;
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Ord</span>, <span class="ident">PartialOrd</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">RuntimeDebug</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">InboundState</span> {
+<span class="attribute">#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Encode, Decode, RuntimeDebug, TypeInfo)]
+</span><span class="kw">pub enum </span>InboundState {
 	<span class="prelude-val">Ok</span>,
-	<span class="ident">Suspended</span>,
+	Suspended,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">RuntimeDebug</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OutboundState</span> {
+<span class="attribute">#[derive(Copy, Clone, Eq, PartialEq, Encode, Decode, RuntimeDebug, TypeInfo)]
+</span><span class="kw">pub enum </span>OutboundState {
 	<span class="prelude-val">Ok</span>,
-	<span class="ident">Suspended</span>,
+	Suspended,
 }
 
-<span class="doccomment">/// Struct containing detailed information about the inbound channel.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Ord</span>, <span class="ident">PartialOrd</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">InboundChannelDetails</span> {
-	<span class="doccomment">/// The `ParaId` of the parachain that this channel is connected with.</span>
-	<span class="ident">sender</span>: <span class="ident">ParaId</span>,
-	<span class="doccomment">/// The state of the channel.</span>
-	<span class="ident">state</span>: <span class="ident">InboundState</span>,
-	<span class="doccomment">/// The ordered metadata of each inbound message.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Contains info about the relay block number that the message was sent at, and the format</span>
-	<span class="doccomment">/// of the incoming message.</span>
-	<span class="ident">message_metadata</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">RelayBlockNumber</span>, <span class="ident">XcmpMessageFormat</span>)<span class="op">&gt;</span>,
+<span class="doccomment">/// Struct containing detailed information about the inbound channel.
+</span><span class="attribute">#[derive(Clone, Eq, PartialEq, Ord, PartialOrd, Encode, Decode, TypeInfo)]
+</span><span class="kw">pub struct </span>InboundChannelDetails {
+	<span class="doccomment">/// The `ParaId` of the parachain that this channel is connected with.
+	</span>sender: ParaId,
+	<span class="doccomment">/// The state of the channel.
+	</span>state: InboundState,
+	<span class="doccomment">/// The ordered metadata of each inbound message.
+	///
+	/// Contains info about the relay block number that the message was sent at, and the format
+	/// of the incoming message.
+	</span>message_metadata: Vec&lt;(RelayBlockNumber, XcmpMessageFormat)&gt;,
 }
 
-<span class="doccomment">/// Struct containing detailed information about the outbound channel.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OutboundChannelDetails</span> {
-	<span class="doccomment">/// The `ParaId` of the parachain that this channel is connected with.</span>
-	<span class="ident">recipient</span>: <span class="ident">ParaId</span>,
-	<span class="doccomment">/// The state of the channel.</span>
-	<span class="ident">state</span>: <span class="ident">OutboundState</span>,
-	<span class="doccomment">/// Whether or not any signals exist in this channel.</span>
-	<span class="ident">signals_exist</span>: <span class="ident">bool</span>,
-	<span class="doccomment">/// The index of the first outbound message.</span>
-	<span class="ident">first_index</span>: <span class="ident">u16</span>,
-	<span class="doccomment">/// The index of the last outbound message.</span>
-	<span class="ident">last_index</span>: <span class="ident">u16</span>,
+<span class="doccomment">/// Struct containing detailed information about the outbound channel.
+</span><span class="attribute">#[derive(Clone, Eq, PartialEq, Encode, Decode, TypeInfo)]
+</span><span class="kw">pub struct </span>OutboundChannelDetails {
+	<span class="doccomment">/// The `ParaId` of the parachain that this channel is connected with.
+	</span>recipient: ParaId,
+	<span class="doccomment">/// The state of the channel.
+	</span>state: OutboundState,
+	<span class="doccomment">/// Whether or not any signals exist in this channel.
+	</span>signals_exist: bool,
+	<span class="doccomment">/// The index of the first outbound message.
+	</span>first_index: u16,
+	<span class="doccomment">/// The index of the last outbound message.
+	</span>last_index: u16,
 }
 
-<span class="kw">impl</span> <span class="ident">OutboundChannelDetails</span> {
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">recipient</span>: <span class="ident">ParaId</span>) -&gt; <span class="ident">OutboundChannelDetails</span> {
-		<span class="ident">OutboundChannelDetails</span> {
-			<span class="ident">recipient</span>,
-			<span class="ident">state</span>: <span class="ident">OutboundState::Ok</span>,
-			<span class="ident">signals_exist</span>: <span class="bool-val">false</span>,
-			<span class="ident">first_index</span>: <span class="number">0</span>,
-			<span class="ident">last_index</span>: <span class="number">0</span>,
+<span class="kw">impl </span>OutboundChannelDetails {
+	<span class="kw">pub fn </span>new(recipient: ParaId) -&gt; OutboundChannelDetails {
+		OutboundChannelDetails {
+			recipient,
+			state: OutboundState::Ok,
+			signals_exist: <span class="bool-val">false</span>,
+			first_index: <span class="number">0</span>,
+			last_index: <span class="number">0</span>,
 		}
 	}
 
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_signals</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">OutboundChannelDetails</span> {
-		<span class="self">self</span>.<span class="ident">signals_exist</span> <span class="op">=</span> <span class="bool-val">true</span>;
-		<span class="self">self</span>
-	}
+	<span class="kw">pub fn </span>with_signals(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; OutboundChannelDetails {
+		<span class="self">self</span>.signals_exist = <span class="bool-val">true</span>;
+		<span class="self">self
+	</span>}
 
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_suspended_state</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">OutboundChannelDetails</span> {
-		<span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">OutboundState::Suspended</span>;
-		<span class="self">self</span>
-	}
+	<span class="kw">pub fn </span>with_suspended_state(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; OutboundChannelDetails {
+		<span class="self">self</span>.state = OutboundState::Suspended;
+		<span class="self">self
+	</span>}
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">RuntimeDebug</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">QueueConfigData</span> {
-	<span class="doccomment">/// The number of pages of messages which must be in the queue for the other side to be told to</span>
-	<span class="doccomment">/// suspend their sending.</span>
-	<span class="ident">suspend_threshold</span>: <span class="ident">u32</span>,
-	<span class="doccomment">/// The number of pages of messages which must be in the queue after which we drop any further</span>
-	<span class="doccomment">/// messages from the channel.</span>
-	<span class="ident">drop_threshold</span>: <span class="ident">u32</span>,
-	<span class="doccomment">/// The number of pages of messages which the queue must be reduced to before it signals that</span>
-	<span class="doccomment">/// message sending may recommence after it has been suspended.</span>
-	<span class="ident">resume_threshold</span>: <span class="ident">u32</span>,
-	<span class="doccomment">/// The amount of remaining weight under which we stop processing messages.</span>
-	<span class="ident">threshold_weight</span>: <span class="ident">Weight</span>,
-	<span class="doccomment">/// The speed to which the available weight approaches the maximum weight. A lower number</span>
-	<span class="doccomment">/// results in a faster progression. A value of 1 makes the entire weight available initially.</span>
-	<span class="ident">weight_restrict_decay</span>: <span class="ident">Weight</span>,
-	<span class="doccomment">/// The maximum amount of weight any individual message may consume. Messages above this weight</span>
-	<span class="doccomment">/// go into the overweight queue and may only be serviced explicitly.</span>
-	<span class="ident">xcmp_max_individual_weight</span>: <span class="ident">Weight</span>,
+<span class="attribute">#[derive(Copy, Clone, Eq, PartialEq, Encode, Decode, RuntimeDebug, TypeInfo)]
+</span><span class="kw">pub struct </span>QueueConfigData {
+	<span class="doccomment">/// The number of pages of messages which must be in the queue for the other side to be told to
+	/// suspend their sending.
+	</span>suspend_threshold: u32,
+	<span class="doccomment">/// The number of pages of messages which must be in the queue after which we drop any further
+	/// messages from the channel.
+	</span>drop_threshold: u32,
+	<span class="doccomment">/// The number of pages of messages which the queue must be reduced to before it signals that
+	/// message sending may recommence after it has been suspended.
+	</span>resume_threshold: u32,
+	<span class="doccomment">/// The amount of remaining weight under which we stop processing messages.
+	</span>threshold_weight: Weight,
+	<span class="doccomment">/// The speed to which the available weight approaches the maximum weight. A lower number
+	/// results in a faster progression. A value of 1 makes the entire weight available initially.
+	</span>weight_restrict_decay: Weight,
+	<span class="doccomment">/// The maximum amount of weight any individual message may consume. Messages above this weight
+	/// go into the overweight queue and may only be serviced explicitly.
+	</span>xcmp_max_individual_weight: Weight,
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">QueueConfigData</span> {
-	<span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> {
-			<span class="ident">suspend_threshold</span>: <span class="number">2</span>,
-			<span class="ident">drop_threshold</span>: <span class="number">5</span>,
-			<span class="ident">resume_threshold</span>: <span class="number">1</span>,
-			<span class="ident">threshold_weight</span>: <span class="ident">Weight::from_ref_time</span>(<span class="number">100_000</span>),
-			<span class="ident">weight_restrict_decay</span>: <span class="ident">Weight::from_ref_time</span>(<span class="number">2</span>),
-			<span class="ident">xcmp_max_individual_weight</span>: <span class="number">20u64</span> <span class="op">*</span> <span class="ident">WEIGHT_PER_MILLIS</span>,
+<span class="kw">impl </span>Default <span class="kw">for </span>QueueConfigData {
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			suspend_threshold: <span class="number">2</span>,
+			drop_threshold: <span class="number">5</span>,
+			resume_threshold: <span class="number">1</span>,
+			threshold_weight: Weight::from_ref_time(<span class="number">100_000</span>),
+			weight_restrict_decay: Weight::from_ref_time(<span class="number">2</span>),
+			xcmp_max_individual_weight: Weight::from_parts(
+				<span class="number">20u64 </span>* WEIGHT_PER_MILLIS.ref_time(),
+				DEFAULT_POV_SIZE,
+			),
 		}
 	}
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ChannelSignal</span> {
-	<span class="ident">Suspend</span>,
-	<span class="ident">Resume</span>,
+<span class="attribute">#[derive(PartialEq, Eq, Copy, Clone, Encode, Decode, TypeInfo)]
+</span><span class="kw">pub enum </span>ChannelSignal {
+	Suspend,
+	Resume,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// Place a message `fragment` on the outgoing XCMP queue for `recipient`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Format is the type of aggregate message that the `fragment` may be safely encoded and</span>
-	<span class="doccomment">/// appended onto. Whether earlier unused space is used for the fragment at the risk of sending</span>
-	<span class="doccomment">/// it out of order is determined with `qos`. NOTE: For any two messages to be guaranteed to be</span>
-	<span class="doccomment">/// dispatched in order, then both must be sent with `ServiceQuality::Ordered`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// ## Background</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// For our purposes, one HRMP &quot;message&quot; is actually an aggregated block of XCM &quot;messages&quot;.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// For the sake of clarity, we distinguish between them as message AGGREGATEs versus</span>
-	<span class="doccomment">/// message FRAGMENTs.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// So each AGGREGATE is comprised of one or more concatenated SCALE-encoded `Vec&lt;u8&gt;`</span>
-	<span class="doccomment">/// FRAGMENTs. Though each fragment is already probably a SCALE-encoded Xcm, we can&#39;t be</span>
-	<span class="doccomment">/// certain, so we SCALE encode each `Vec&lt;u8&gt;` fragment in order to ensure we have the</span>
-	<span class="doccomment">/// length prefixed and can thus decode each fragment from the aggregate stream. With this,</span>
-	<span class="doccomment">/// we can concatenate them into a single aggregate blob without needing to be concerned</span>
-	<span class="doccomment">/// about encoding fragment boundaries.</span>
-	<span class="kw">fn</span> <span class="ident">send_fragment</span><span class="op">&lt;</span><span class="ident">Fragment</span>: <span class="ident">Encode</span><span class="op">&gt;</span>(
-		<span class="ident">recipient</span>: <span class="ident">ParaId</span>,
-		<span class="ident">format</span>: <span class="ident">XcmpMessageFormat</span>,
-		<span class="ident">fragment</span>: <span class="ident">Fragment</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">MessageSendError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">fragment</span>.<span class="ident">encode</span>();
+<span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+	<span class="doccomment">/// Place a message `fragment` on the outgoing XCMP queue for `recipient`.
+	///
+	/// Format is the type of aggregate message that the `fragment` may be safely encoded and
+	/// appended onto. Whether earlier unused space is used for the fragment at the risk of sending
+	/// it out of order is determined with `qos`. NOTE: For any two messages to be guaranteed to be
+	/// dispatched in order, then both must be sent with `ServiceQuality::Ordered`.
+	///
+	/// ## Background
+	///
+	/// For our purposes, one HRMP &quot;message&quot; is actually an aggregated block of XCM &quot;messages&quot;.
+	///
+	/// For the sake of clarity, we distinguish between them as message AGGREGATEs versus
+	/// message FRAGMENTs.
+	///
+	/// So each AGGREGATE is comprised of one or more concatenated SCALE-encoded `Vec&lt;u8&gt;`
+	/// FRAGMENTs. Though each fragment is already probably a SCALE-encoded Xcm, we can&#39;t be
+	/// certain, so we SCALE encode each `Vec&lt;u8&gt;` fragment in order to ensure we have the
+	/// length prefixed and can thus decode each fragment from the aggregate stream. With this,
+	/// we can concatenate them into a single aggregate blob without needing to be concerned
+	/// about encoding fragment boundaries.
+	</span><span class="kw">fn </span>send_fragment&lt;Fragment: Encode&gt;(
+		recipient: ParaId,
+		format: XcmpMessageFormat,
+		fragment: Fragment,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;u32, MessageSendError&gt; {
+		<span class="kw">let </span>data = fragment.encode();
 
-		<span class="comment">// Optimization note: `max_message_size` could potentially be stored in</span>
-		<span class="comment">// `OutboundXcmpMessages` once known; that way it&#39;s only accessed when a new page is needed.</span>
+		<span class="comment">// Optimization note: `max_message_size` could potentially be stored in
+		// `OutboundXcmpMessages` once known; that way it&#39;s only accessed when a new page is needed.
 
-		<span class="kw">let</span> <span class="ident">max_message_size</span> <span class="op">=</span>
-			<span class="ident">T::ChannelInfo::get_channel_max</span>(<span class="ident">recipient</span>).<span class="ident">ok_or</span>(<span class="ident">MessageSendError::NoChannel</span>)<span class="question-mark">?</span>;
-		<span class="kw">if</span> <span class="ident">data</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">max_message_size</span> {
-			<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MessageSendError::TooBig</span>)
+		</span><span class="kw">let </span>max_message_size =
+			T::ChannelInfo::get_channel_max(recipient).ok_or(MessageSendError::NoChannel)<span class="question-mark">?</span>;
+		<span class="kw">if </span>data.len() &gt; max_message_size {
+			<span class="kw">return </span><span class="prelude-val">Err</span>(MessageSendError::TooBig)
 		}
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">OutboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>();
-		<span class="kw">let</span> <span class="ident">details</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">details</span>) <span class="op">=</span> <span class="ident">s</span>.<span class="ident">iter_mut</span>().<span class="ident">find</span>(<span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="ident">recipient</span> <span class="op">==</span> <span class="ident">recipient</span>) {
-			<span class="ident">details</span>
-		} <span class="kw">else</span> {
-			<span class="ident">s</span>.<span class="ident">push</span>(<span class="ident">OutboundChannelDetails::new</span>(<span class="ident">recipient</span>));
-			<span class="ident">s</span>.<span class="ident">last_mut</span>().<span class="ident">expect</span>(<span class="string">&quot;can&#39;t be empty; a new element was just pushed; qed&quot;</span>)
+		<span class="kw">let </span><span class="kw-2">mut </span>s = &lt;OutboundXcmpStatus&lt;T&gt;&gt;::get();
+		<span class="kw">let </span>details = <span class="kw">if let </span><span class="prelude-val">Some</span>(details) = s.iter_mut().find(|item| item.recipient == recipient) {
+			details
+		} <span class="kw">else </span>{
+			s.push(OutboundChannelDetails::new(recipient));
+			s.last_mut().expect(<span class="string">&quot;can&#39;t be empty; a new element was just pushed; qed&quot;</span>)
 		};
-		<span class="kw">let</span> <span class="ident">have_active</span> <span class="op">=</span> <span class="ident">details</span>.<span class="ident">last_index</span> <span class="op">&gt;</span> <span class="ident">details</span>.<span class="ident">first_index</span>;
-		<span class="kw">let</span> <span class="ident">appended</span> <span class="op">=</span> <span class="ident">have_active</span> <span class="op">&amp;&amp;</span>
-			<span class="op">&lt;</span><span class="ident">OutboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="ident">recipient</span>, <span class="ident">details</span>.<span class="ident">last_index</span> <span class="op">-</span> <span class="number">1</span>, <span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
-				<span class="kw">if</span> <span class="ident">XcmpMessageFormat::decode_with_depth_limit</span>(<span class="ident">MAX_XCM_DECODE_DEPTH</span>, <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">s</span>[..]) <span class="op">!</span><span class="op">=</span>
-					<span class="prelude-val">Ok</span>(<span class="ident">format</span>)
+		<span class="kw">let </span>have_active = details.last_index &gt; details.first_index;
+		<span class="kw">let </span>appended = have_active &amp;&amp;
+			&lt;OutboundXcmpMessages&lt;T&gt;&gt;::mutate(recipient, details.last_index - <span class="number">1</span>, |s| {
+				<span class="kw">if </span>XcmpMessageFormat::decode_with_depth_limit(MAX_XCM_DECODE_DEPTH, <span class="kw-2">&amp;mut &amp;</span>s[..]) !=
+					<span class="prelude-val">Ok</span>(format)
 				{
-					<span class="kw">return</span> <span class="bool-val">false</span>
-				}
-				<span class="kw">if</span> <span class="ident">s</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">data</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">max_message_size</span> {
-					<span class="kw">return</span> <span class="bool-val">false</span>
-				}
-				<span class="ident">s</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>[..]);
-				<span class="kw">return</span> <span class="bool-val">true</span>
-			});
-		<span class="kw">if</span> <span class="ident">appended</span> {
-			<span class="prelude-val">Ok</span>((<span class="ident">details</span>.<span class="ident">last_index</span> <span class="op">-</span> <span class="ident">details</span>.<span class="ident">first_index</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">u32</span>)
-		} <span class="kw">else</span> {
-			<span class="comment">// Need to add a new page.</span>
-			<span class="kw">let</span> <span class="ident">page_index</span> <span class="op">=</span> <span class="ident">details</span>.<span class="ident">last_index</span>;
-			<span class="ident">details</span>.<span class="ident">last_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_page</span> <span class="op">=</span> <span class="ident">format</span>.<span class="ident">encode</span>();
-			<span class="ident">new_page</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>[..]);
-			<span class="op">&lt;</span><span class="ident">OutboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::insert</span>(<span class="ident">recipient</span>, <span class="ident">page_index</span>, <span class="ident">new_page</span>);
-			<span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> (<span class="ident">details</span>.<span class="ident">last_index</span> <span class="op">-</span> <span class="ident">details</span>.<span class="ident">first_index</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">u32</span>;
-			<span class="op">&lt;</span><span class="ident">OutboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">s</span>);
-			<span class="prelude-val">Ok</span>(<span class="ident">r</span>)
+					<span class="kw">return </span><span class="bool-val">false
+				</span>}
+				<span class="kw">if </span>s.len() + data.len() &gt; max_message_size {
+					<span class="kw">return </span><span class="bool-val">false
+				</span>}
+				s.extend_from_slice(<span class="kw-2">&amp;</span>data[..]);
+				<span class="kw">return </span><span class="bool-val">true
+			</span>});
+		<span class="kw">if </span>appended {
+			<span class="prelude-val">Ok</span>((details.last_index - details.first_index - <span class="number">1</span>) <span class="kw">as </span>u32)
+		} <span class="kw">else </span>{
+			<span class="comment">// Need to add a new page.
+			</span><span class="kw">let </span>page_index = details.last_index;
+			details.last_index += <span class="number">1</span>;
+			<span class="kw">let </span><span class="kw-2">mut </span>new_page = format.encode();
+			new_page.extend_from_slice(<span class="kw-2">&amp;</span>data[..]);
+			&lt;OutboundXcmpMessages&lt;T&gt;&gt;::insert(recipient, page_index, new_page);
+			<span class="kw">let </span>r = (details.last_index - details.first_index - <span class="number">1</span>) <span class="kw">as </span>u32;
+			&lt;OutboundXcmpStatus&lt;T&gt;&gt;::put(s);
+			<span class="prelude-val">Ok</span>(r)
 		}
 	}
 
-	<span class="doccomment">/// Sends a signal to the `dest` chain over XCMP. This is guaranteed to be dispatched on this</span>
-	<span class="doccomment">/// block.</span>
-	<span class="kw">fn</span> <span class="ident">send_signal</span>(<span class="ident">dest</span>: <span class="ident">ParaId</span>, <span class="ident">signal</span>: <span class="ident">ChannelSignal</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">OutboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>();
-		<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">details</span>) <span class="op">=</span> <span class="ident">s</span>.<span class="ident">iter_mut</span>().<span class="ident">find</span>(<span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="ident">recipient</span> <span class="op">==</span> <span class="ident">dest</span>) {
-			<span class="ident">details</span>.<span class="ident">signals_exist</span> <span class="op">=</span> <span class="bool-val">true</span>;
-		} <span class="kw">else</span> {
-			<span class="ident">s</span>.<span class="ident">push</span>(<span class="ident">OutboundChannelDetails::new</span>(<span class="ident">dest</span>).<span class="ident">with_signals</span>());
+	<span class="doccomment">/// Sends a signal to the `dest` chain over XCMP. This is guaranteed to be dispatched on this
+	/// block.
+	</span><span class="kw">fn </span>send_signal(dest: ParaId, signal: ChannelSignal) -&gt; <span class="prelude-ty">Result</span>&lt;(), ()&gt; {
+		<span class="kw">let </span><span class="kw-2">mut </span>s = &lt;OutboundXcmpStatus&lt;T&gt;&gt;::get();
+		<span class="kw">if let </span><span class="prelude-val">Some</span>(details) = s.iter_mut().find(|item| item.recipient == dest) {
+			details.signals_exist = <span class="bool-val">true</span>;
+		} <span class="kw">else </span>{
+			s.push(OutboundChannelDetails::new(dest).with_signals());
 		}
-		<span class="op">&lt;</span><span class="ident">SignalMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="ident">dest</span>, <span class="op">|</span><span class="ident">page</span><span class="op">|</span> {
-			<span class="kw">if</span> <span class="ident">page</span>.<span class="ident">is_empty</span>() {
-				<span class="kw-2">*</span><span class="ident">page</span> <span class="op">=</span> (<span class="ident">XcmpMessageFormat::Signals</span>, <span class="ident">signal</span>).<span class="ident">encode</span>();
-			} <span class="kw">else</span> {
-				<span class="ident">signal</span>.<span class="ident">using_encoded</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">page</span>.<span class="ident">extend_from_slice</span>(<span class="ident">s</span>));
+		&lt;SignalMessages&lt;T&gt;&gt;::mutate(dest, |page| {
+			<span class="kw">if </span>page.is_empty() {
+				<span class="kw-2">*</span>page = (XcmpMessageFormat::Signals, signal).encode();
+			} <span class="kw">else </span>{
+				signal.using_encoded(|s| page.extend_from_slice(s));
 			}
 		});
-		<span class="op">&lt;</span><span class="ident">OutboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">s</span>);
+		&lt;OutboundXcmpStatus&lt;T&gt;&gt;::put(s);
 
 		<span class="prelude-val">Ok</span>(())
 	}
 
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">send_blob_message</span>(<span class="ident">recipient</span>: <span class="ident">ParaId</span>, <span class="ident">blob</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">MessageSendError</span><span class="op">&gt;</span> {
-		<span class="ident"><span class="self">Self</span>::send_fragment</span>(<span class="ident">recipient</span>, <span class="ident">XcmpMessageFormat::ConcatenatedEncodedBlob</span>, <span class="ident">blob</span>)
+	<span class="kw">pub fn </span>send_blob_message(recipient: ParaId, blob: Vec&lt;u8&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;u32, MessageSendError&gt; {
+		<span class="self">Self</span>::send_fragment(recipient, XcmpMessageFormat::ConcatenatedEncodedBlob, blob)
 	}
 
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">send_xcm_message</span>(
-		<span class="ident">recipient</span>: <span class="ident">ParaId</span>,
-		<span class="ident">xcm</span>: <span class="ident">VersionedXcm</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">MessageSendError</span><span class="op">&gt;</span> {
-		<span class="ident"><span class="self">Self</span>::send_fragment</span>(<span class="ident">recipient</span>, <span class="ident">XcmpMessageFormat::ConcatenatedVersionedXcm</span>, <span class="ident">xcm</span>)
+	<span class="kw">pub fn </span>send_xcm_message(
+		recipient: ParaId,
+		xcm: VersionedXcm&lt;()&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;u32, MessageSendError&gt; {
+		<span class="self">Self</span>::send_fragment(recipient, XcmpMessageFormat::ConcatenatedVersionedXcm, xcm)
 	}
 
-	<span class="kw">fn</span> <span class="ident">create_shuffle</span>(<span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-		<span class="comment">// Create a shuffled order for use to iterate through.</span>
-		<span class="comment">// Not a great random seed, but good enough for our purposes.</span>
-		<span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> <span class="ident">frame_system::Pallet</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::parent_hash</span>();
-		<span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span>
-			<span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">32</span>]<span class="op">&gt;</span><span class="ident">::decode</span>(<span class="kw-2">&amp;mut</span> <span class="ident">sp_runtime::traits::TrailingZeroInput::new</span>(<span class="ident">seed</span>.<span class="ident">as_ref</span>()))
-				.<span class="ident">expect</span>(<span class="string">&quot;input is padded with zeroes; qed&quot;</span>);
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">ChaChaRng::from_seed</span>(<span class="ident">seed</span>);
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shuffled</span> <span class="op">=</span> (<span class="number">0</span>..<span class="ident">len</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-		<span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">len</span> {
-			<span class="kw">let</span> <span class="ident">j</span> <span class="op">=</span> (<span class="ident">rng</span>.<span class="ident">next_u32</span>() <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">len</span>;
-			<span class="ident">shuffled</span>.<span class="ident">as_mut_slice</span>().<span class="ident">swap</span>(<span class="ident">i</span>, <span class="ident">j</span>);
+	<span class="kw">fn </span>create_shuffle(len: usize) -&gt; Vec&lt;usize&gt; {
+		<span class="comment">// Create a shuffled order for use to iterate through.
+		// Not a great random seed, but good enough for our purposes.
+		</span><span class="kw">let </span>seed = frame_system::Pallet::&lt;T&gt;::parent_hash();
+		<span class="kw">let </span>seed =
+			&lt;[u8; <span class="number">32</span>]&gt;::decode(<span class="kw-2">&amp;mut </span>sp_runtime::traits::TrailingZeroInput::new(seed.as_ref()))
+				.expect(<span class="string">&quot;input is padded with zeroes; qed&quot;</span>);
+		<span class="kw">let </span><span class="kw-2">mut </span>rng = ChaChaRng::from_seed(seed);
+		<span class="kw">let </span><span class="kw-2">mut </span>shuffled = (<span class="number">0</span>..len).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+		<span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..len {
+			<span class="kw">let </span>j = (rng.next_u32() <span class="kw">as </span>usize) % len;
+			shuffled.as_mut_slice().swap(i, j);
 		}
-		<span class="ident">shuffled</span>
+		shuffled
 	}
 
-	<span class="kw">fn</span> <span class="ident">handle_blob_message</span>(
-		<span class="ident">_sender</span>: <span class="ident">ParaId</span>,
-		<span class="ident">_sent_at</span>: <span class="ident">RelayBlockNumber</span>,
-		<span class="ident">_blob</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-		<span class="ident">_weight_limit</span>: <span class="ident">Weight</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Weight</span>, <span class="ident">bool</span><span class="op">&gt;</span> {
+	<span class="kw">fn </span>handle_blob_message(
+		_sender: ParaId,
+		_sent_at: RelayBlockNumber,
+		_blob: Vec&lt;u8&gt;,
+		_weight_limit: Weight,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Weight, bool&gt; {
 		<span class="macro">debug_assert!</span>(<span class="bool-val">false</span>, <span class="string">&quot;Blob messages not handled.&quot;</span>);
 		<span class="prelude-val">Err</span>(<span class="bool-val">false</span>)
 	}
 
-	<span class="kw">fn</span> <span class="ident">handle_xcm_message</span>(
-		<span class="ident">sender</span>: <span class="ident">ParaId</span>,
-		<span class="ident">_sent_at</span>: <span class="ident">RelayBlockNumber</span>,
-		<span class="ident">xcm</span>: <span class="ident">VersionedXcm</span><span class="op">&lt;</span><span class="ident">T::RuntimeCall</span><span class="op">&gt;</span>,
-		<span class="ident">max_weight</span>: <span class="ident">Weight</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Weight</span>, <span class="ident">XcmError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">Encode::using_encoded</span>(<span class="kw-2">&amp;</span><span class="ident">xcm</span>, <span class="ident">T::Hashing::hash</span>);
-		<span class="macro">log::debug!</span>(<span class="string">&quot;Processing XCMP-XCM: {:?}&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">hash</span>);
-		<span class="kw">let</span> (<span class="ident">result</span>, <span class="ident">event</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">Xcm</span>::<span class="op">&lt;</span><span class="ident">T::RuntimeCall</span><span class="op">&gt;</span><span class="ident">::try_from</span>(<span class="ident">xcm</span>) {
-			<span class="prelude-val">Ok</span>(<span class="ident">xcm</span>) =&gt; {
-				<span class="kw">let</span> <span class="ident">location</span> <span class="op">=</span> (<span class="number">1</span>, <span class="ident">Parachain</span>(<span class="ident">sender</span>.<span class="ident">into</span>()));
+	<span class="kw">fn </span>handle_xcm_message(
+		sender: ParaId,
+		_sent_at: RelayBlockNumber,
+		xcm: VersionedXcm&lt;T::RuntimeCall&gt;,
+		max_weight: Weight,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Weight, XcmError&gt; {
+		<span class="kw">let </span>hash = Encode::using_encoded(<span class="kw-2">&amp;</span>xcm, T::Hashing::hash);
+		<span class="macro">log::debug!</span>(<span class="string">&quot;Processing XCMP-XCM: {:?}&quot;</span>, <span class="kw-2">&amp;</span>hash);
+		<span class="kw">let </span>(result, event) = <span class="kw">match </span>Xcm::&lt;T::RuntimeCall&gt;::try_from(xcm) {
+			<span class="prelude-val">Ok</span>(xcm) =&gt; {
+				<span class="kw">let </span>location = (<span class="number">1</span>, Parachain(sender.into()));
 
-				<span class="kw">match</span> <span class="ident">T::XcmExecutor::execute_xcm</span>(<span class="ident">location</span>, <span class="ident">xcm</span>, <span class="ident">max_weight</span>.<span class="ident">ref_time</span>()) {
-					<span class="ident">Outcome::Error</span>(<span class="ident">e</span>) =&gt; (
-						<span class="prelude-val">Err</span>(<span class="ident">e</span>),
-						<span class="ident">Event::Fail</span> { <span class="ident">message_hash</span>: <span class="prelude-val">Some</span>(<span class="ident">hash</span>), <span class="ident">error</span>: <span class="ident">e</span>, <span class="ident">weight</span>: <span class="ident">Weight::zero</span>() },
+				<span class="kw">match </span>T::XcmExecutor::execute_xcm(location, xcm, max_weight.ref_time()) {
+					Outcome::Error(e) =&gt; (
+						<span class="prelude-val">Err</span>(e),
+						Event::Fail { message_hash: <span class="prelude-val">Some</span>(hash), error: e, weight: Weight::zero() },
 					),
-					<span class="ident">Outcome::Complete</span>(<span class="ident">w</span>) =&gt; (
-						<span class="prelude-val">Ok</span>(<span class="ident">Weight::from_ref_time</span>(<span class="ident">w</span>)),
-						<span class="ident">Event::Success</span> {
-							<span class="ident">message_hash</span>: <span class="prelude-val">Some</span>(<span class="ident">hash</span>),
-							<span class="ident">weight</span>: <span class="ident">Weight::from_ref_time</span>(<span class="ident">w</span>),
+					Outcome::Complete(w) =&gt; (
+						<span class="prelude-val">Ok</span>(Weight::from_ref_time(w)),
+						Event::Success {
+							message_hash: <span class="prelude-val">Some</span>(hash),
+							weight: Weight::from_ref_time(w),
 						},
 					),
-					<span class="comment">// As far as the caller is concerned, this was dispatched without error, so</span>
-					<span class="comment">// we just report the weight used.</span>
-					<span class="ident">Outcome::Incomplete</span>(<span class="ident">w</span>, <span class="ident">e</span>) =&gt; (
-						<span class="prelude-val">Ok</span>(<span class="ident">Weight::from_ref_time</span>(<span class="ident">w</span>)),
-						<span class="ident">Event::Fail</span> {
-							<span class="ident">message_hash</span>: <span class="prelude-val">Some</span>(<span class="ident">hash</span>),
-							<span class="ident">error</span>: <span class="ident">e</span>,
-							<span class="ident">weight</span>: <span class="ident">Weight::from_ref_time</span>(<span class="ident">w</span>),
+					<span class="comment">// As far as the caller is concerned, this was dispatched without error, so
+					// we just report the weight used.
+					</span>Outcome::Incomplete(w, e) =&gt; (
+						<span class="prelude-val">Ok</span>(Weight::from_ref_time(w)),
+						Event::Fail {
+							message_hash: <span class="prelude-val">Some</span>(hash),
+							error: e,
+							weight: Weight::from_ref_time(w),
 						},
 					),
 				}
 			},
 			<span class="prelude-val">Err</span>(()) =&gt;
-				(<span class="prelude-val">Err</span>(<span class="ident">XcmError::UnhandledXcmVersion</span>), <span class="ident">Event::BadVersion</span> { <span class="ident">message_hash</span>: <span class="prelude-val">Some</span>(<span class="ident">hash</span>) }),
+				(<span class="prelude-val">Err</span>(XcmError::UnhandledXcmVersion), Event::BadVersion { message_hash: <span class="prelude-val">Some</span>(hash) }),
 		};
-		<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">event</span>);
-		<span class="ident">result</span>
+		<span class="self">Self</span>::deposit_event(event);
+		result
 	}
 
-	<span class="kw">fn</span> <span class="ident">process_xcmp_message</span>(
-		<span class="ident">sender</span>: <span class="ident">ParaId</span>,
-		(<span class="ident">sent_at</span>, <span class="ident">format</span>): (<span class="ident">RelayBlockNumber</span>, <span class="ident">XcmpMessageFormat</span>),
-		<span class="ident">max_weight</span>: <span class="ident">Weight</span>,
-		<span class="ident">max_individual_weight</span>: <span class="ident">Weight</span>,
-	) -&gt; (<span class="ident">Weight</span>, <span class="ident">bool</span>) {
-		<span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">InboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>(<span class="ident">sender</span>, <span class="ident">sent_at</span>);
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_remaining_fragments</span>;
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">remaining_fragments</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">data</span>[..];
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">Weight::zero</span>();
-		<span class="kw">match</span> <span class="ident">format</span> {
-			<span class="ident">XcmpMessageFormat::ConcatenatedVersionedXcm</span> =&gt; {
-				<span class="kw">while</span> <span class="op">!</span><span class="ident">remaining_fragments</span>.<span class="ident">is_empty</span>() {
-					<span class="ident">last_remaining_fragments</span> <span class="op">=</span> <span class="ident">remaining_fragments</span>;
-					<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">xcm</span>) <span class="op">=</span> <span class="ident">VersionedXcm</span>::<span class="op">&lt;</span><span class="ident">T::RuntimeCall</span><span class="op">&gt;</span><span class="ident">::decode_with_depth_limit</span>(
-						<span class="ident">MAX_XCM_DECODE_DEPTH</span>,
-						<span class="kw-2">&amp;mut</span> <span class="ident">remaining_fragments</span>,
+	<span class="kw">fn </span>process_xcmp_message(
+		sender: ParaId,
+		(sent_at, format): (RelayBlockNumber, XcmpMessageFormat),
+		max_weight: Weight,
+		max_individual_weight: Weight,
+	) -&gt; (Weight, bool) {
+		<span class="kw">let </span>data = &lt;InboundXcmpMessages&lt;T&gt;&gt;::get(sender, sent_at);
+		<span class="kw">let </span><span class="kw-2">mut </span>last_remaining_fragments;
+		<span class="kw">let </span><span class="kw-2">mut </span>remaining_fragments = <span class="kw-2">&amp;</span>data[..];
+		<span class="kw">let </span><span class="kw-2">mut </span>weight_used = Weight::zero();
+		<span class="kw">match </span>format {
+			XcmpMessageFormat::ConcatenatedVersionedXcm =&gt; {
+				<span class="kw">while </span>!remaining_fragments.is_empty() {
+					last_remaining_fragments = remaining_fragments;
+					<span class="kw">if let </span><span class="prelude-val">Ok</span>(xcm) = VersionedXcm::&lt;T::RuntimeCall&gt;::decode_with_depth_limit(
+						MAX_XCM_DECODE_DEPTH,
+						<span class="kw-2">&amp;mut </span>remaining_fragments,
 					) {
-						<span class="kw">let</span> <span class="ident">weight</span> <span class="op">=</span> <span class="ident">max_weight</span> <span class="op">-</span> <span class="ident">weight_used</span>;
-						<span class="kw">match</span> <span class="ident"><span class="self">Self</span>::handle_xcm_message</span>(<span class="ident">sender</span>, <span class="ident">sent_at</span>, <span class="ident">xcm</span>, <span class="ident">weight</span>) {
-							<span class="prelude-val">Ok</span>(<span class="ident">used</span>) =&gt; <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">weight_used</span>.<span class="ident">saturating_add</span>(<span class="ident">used</span>),
-							<span class="prelude-val">Err</span>(<span class="ident">XcmError::WeightLimitReached</span>(<span class="ident">required</span>))
-								<span class="kw">if</span> <span class="ident">required</span> <span class="op">&gt;</span> <span class="ident">max_individual_weight</span>.<span class="ident">ref_time</span>() =&gt;
+						<span class="kw">let </span>weight = max_weight - weight_used;
+						<span class="kw">match </span><span class="self">Self</span>::handle_xcm_message(sender, sent_at, xcm, weight) {
+							<span class="prelude-val">Ok</span>(used) =&gt; weight_used = weight_used.saturating_add(used),
+							<span class="prelude-val">Err</span>(XcmError::WeightLimitReached(required))
+								<span class="kw">if </span>required &gt; max_individual_weight.ref_time() =&gt;
 							{
-								<span class="comment">// overweight - add to overweight queue and continue with message</span>
-								<span class="comment">// execution consuming the message.</span>
-								<span class="kw">let</span> <span class="ident">msg_len</span> <span class="op">=</span> <span class="ident">last_remaining_fragments</span>
-									.<span class="ident">len</span>()
-									.<span class="ident">saturating_sub</span>(<span class="ident">remaining_fragments</span>.<span class="ident">len</span>());
-								<span class="kw">let</span> <span class="ident">overweight_xcm</span> <span class="op">=</span> <span class="ident">last_remaining_fragments</span>[..<span class="ident">msg_len</span>].<span class="ident">to_vec</span>();
-								<span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::stash_overweight</span>(<span class="ident">sender</span>, <span class="ident">sent_at</span>, <span class="ident">overweight_xcm</span>);
-								<span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">Event::OverweightEnqueued</span> {
-									<span class="ident">sender</span>,
-									<span class="ident">sent_at</span>,
-									<span class="ident">index</span>,
-									<span class="ident">required</span>: <span class="ident">Weight::from_ref_time</span>(<span class="ident">required</span>),
+								<span class="comment">// overweight - add to overweight queue and continue with message
+								// execution consuming the message.
+								</span><span class="kw">let </span>msg_len = last_remaining_fragments
+									.len()
+									.saturating_sub(remaining_fragments.len());
+								<span class="kw">let </span>overweight_xcm = last_remaining_fragments[..msg_len].to_vec();
+								<span class="kw">let </span>index = <span class="self">Self</span>::stash_overweight(sender, sent_at, overweight_xcm);
+								<span class="kw">let </span>e = Event::OverweightEnqueued {
+									sender,
+									sent_at,
+									index,
+									required: Weight::from_ref_time(required),
 								};
-								<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">e</span>);
+								<span class="self">Self</span>::deposit_event(e);
 							},
-							<span class="prelude-val">Err</span>(<span class="ident">XcmError::WeightLimitReached</span>(<span class="ident">required</span>))
-								<span class="kw">if</span> <span class="ident">required</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">max_weight</span>.<span class="ident">ref_time</span>() =&gt;
+							<span class="prelude-val">Err</span>(XcmError::WeightLimitReached(required))
+								<span class="kw">if </span>required &lt;= max_weight.ref_time() =&gt;
 							{
-								<span class="comment">// That message didn&#39;t get processed this time because of being</span>
-								<span class="comment">// too heavy. We leave it around for next time and bail.</span>
-								<span class="ident">remaining_fragments</span> <span class="op">=</span> <span class="ident">last_remaining_fragments</span>;
-								<span class="kw">break</span>
-							},
-							<span class="prelude-val">Err</span>(<span class="ident">error</span>) =&gt; {
+								<span class="comment">// That message didn&#39;t get processed this time because of being
+								// too heavy. We leave it around for next time and bail.
+								</span>remaining_fragments = last_remaining_fragments;
+								<span class="kw">break
+							</span>},
+							<span class="prelude-val">Err</span>(error) =&gt; {
 								<span class="macro">log::error!</span>(
 									<span class="string">&quot;Failed to process XCMP-XCM message, caused by {:?}&quot;</span>,
-									<span class="ident">error</span>
+									error
 								);
-								<span class="comment">// Message looks invalid; don&#39;t attempt to retry</span>
-							},
+								<span class="comment">// Message looks invalid; don&#39;t attempt to retry
+							</span>},
 						}
-					} <span class="kw">else</span> {
+					} <span class="kw">else </span>{
 						<span class="macro">debug_assert!</span>(<span class="bool-val">false</span>, <span class="string">&quot;Invalid incoming XCMP message data&quot;</span>);
-						<span class="ident">remaining_fragments</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="string">b&quot;&quot;</span>[..];
+						remaining_fragments = <span class="kw-2">&amp;</span><span class="string">b&quot;&quot;</span>[..];
 					}
 				}
 			},
-			<span class="ident">XcmpMessageFormat::ConcatenatedEncodedBlob</span> =&gt; {
-				<span class="kw">while</span> <span class="op">!</span><span class="ident">remaining_fragments</span>.<span class="ident">is_empty</span>() {
-					<span class="ident">last_remaining_fragments</span> <span class="op">=</span> <span class="ident">remaining_fragments</span>;
+			XcmpMessageFormat::ConcatenatedEncodedBlob =&gt; {
+				<span class="kw">while </span>!remaining_fragments.is_empty() {
+					last_remaining_fragments = remaining_fragments;
 
-					<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">blob</span>) <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="kw-2">&amp;mut</span> <span class="ident">remaining_fragments</span>) {
-						<span class="kw">let</span> <span class="ident">weight</span> <span class="op">=</span> <span class="ident">max_weight</span> <span class="op">-</span> <span class="ident">weight_used</span>;
-						<span class="kw">match</span> <span class="ident"><span class="self">Self</span>::handle_blob_message</span>(<span class="ident">sender</span>, <span class="ident">sent_at</span>, <span class="ident">blob</span>, <span class="ident">weight</span>) {
-							<span class="prelude-val">Ok</span>(<span class="ident">used</span>) =&gt; <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">weight_used</span>.<span class="ident">saturating_add</span>(<span class="ident">used</span>),
+					<span class="kw">if let </span><span class="prelude-val">Ok</span>(blob) = &lt;Vec&lt;u8&gt;&gt;::decode(<span class="kw-2">&amp;mut </span>remaining_fragments) {
+						<span class="kw">let </span>weight = max_weight - weight_used;
+						<span class="kw">match </span><span class="self">Self</span>::handle_blob_message(sender, sent_at, blob, weight) {
+							<span class="prelude-val">Ok</span>(used) =&gt; weight_used = weight_used.saturating_add(used),
 							<span class="prelude-val">Err</span>(<span class="bool-val">true</span>) =&gt; {
-								<span class="comment">// That message didn&#39;t get processed this time because of being</span>
-								<span class="comment">// too heavy. We leave it around for next time and bail.</span>
-								<span class="ident">remaining_fragments</span> <span class="op">=</span> <span class="ident">last_remaining_fragments</span>;
-								<span class="kw">break</span>
-							},
+								<span class="comment">// That message didn&#39;t get processed this time because of being
+								// too heavy. We leave it around for next time and bail.
+								</span>remaining_fragments = last_remaining_fragments;
+								<span class="kw">break
+							</span>},
 							<span class="prelude-val">Err</span>(<span class="bool-val">false</span>) =&gt; {
-								<span class="comment">// Message invalid; don&#39;t attempt to retry</span>
-							},
+								<span class="comment">// Message invalid; don&#39;t attempt to retry
+							</span>},
 						}
-					} <span class="kw">else</span> {
+					} <span class="kw">else </span>{
 						<span class="macro">debug_assert!</span>(<span class="bool-val">false</span>, <span class="string">&quot;Invalid incoming blob message data&quot;</span>);
-						<span class="ident">remaining_fragments</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="string">b&quot;&quot;</span>[..];
+						remaining_fragments = <span class="kw-2">&amp;</span><span class="string">b&quot;&quot;</span>[..];
 					}
 				}
 			},
-			<span class="ident">XcmpMessageFormat::Signals</span> =&gt; {
+			XcmpMessageFormat::Signals =&gt; {
 				<span class="macro">debug_assert!</span>(<span class="bool-val">false</span>, <span class="string">&quot;All signals are handled immediately; qed&quot;</span>);
-				<span class="ident">remaining_fragments</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="string">b&quot;&quot;</span>[..];
+				remaining_fragments = <span class="kw-2">&amp;</span><span class="string">b&quot;&quot;</span>[..];
 			},
 		}
-		<span class="kw">let</span> <span class="ident">is_empty</span> <span class="op">=</span> <span class="ident">remaining_fragments</span>.<span class="ident">is_empty</span>();
-		<span class="kw">if</span> <span class="ident">is_empty</span> {
-			<span class="op">&lt;</span><span class="ident">InboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::remove</span>(<span class="ident">sender</span>, <span class="ident">sent_at</span>);
-		} <span class="kw">else</span> {
-			<span class="op">&lt;</span><span class="ident">InboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::insert</span>(<span class="ident">sender</span>, <span class="ident">sent_at</span>, <span class="ident">remaining_fragments</span>);
+		<span class="kw">let </span>is_empty = remaining_fragments.is_empty();
+		<span class="kw">if </span>is_empty {
+			&lt;InboundXcmpMessages&lt;T&gt;&gt;::remove(sender, sent_at);
+		} <span class="kw">else </span>{
+			&lt;InboundXcmpMessages&lt;T&gt;&gt;::insert(sender, sent_at, remaining_fragments);
 		}
-		(<span class="ident">weight_used</span>, <span class="ident">is_empty</span>)
+		(weight_used, is_empty)
 	}
 
-	<span class="doccomment">/// Puts a given XCM into the list of overweight messages, allowing it to be executed later.</span>
-	<span class="kw">fn</span> <span class="ident">stash_overweight</span>(
-		<span class="ident">sender</span>: <span class="ident">ParaId</span>,
-		<span class="ident">sent_at</span>: <span class="ident">RelayBlockNumber</span>,
-		<span class="ident">xcm</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">OverweightIndex</span> {
-		<span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Store</span><span class="op">&gt;</span><span class="ident">::OverweightCount::mutate</span>(<span class="op">|</span><span class="ident">count</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">count</span>;
-			<span class="kw-2">*</span><span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-			<span class="ident">index</span>
+	<span class="doccomment">/// Puts a given XCM into the list of overweight messages, allowing it to be executed later.
+	</span><span class="kw">fn </span>stash_overweight(
+		sender: ParaId,
+		sent_at: RelayBlockNumber,
+		xcm: Vec&lt;u8&gt;,
+	) -&gt; OverweightIndex {
+		<span class="kw">let </span>index = &lt;<span class="self">Self </span><span class="kw">as </span>Store&gt;::OverweightCount::mutate(|count| {
+			<span class="kw">let </span>index = <span class="kw-2">*</span>count;
+			<span class="kw-2">*</span>count += <span class="number">1</span>;
+			index
 		});
 
-		<span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Store</span><span class="op">&gt;</span><span class="ident">::Overweight::insert</span>(<span class="ident">index</span>, (<span class="ident">sender</span>, <span class="ident">sent_at</span>, <span class="ident">xcm</span>));
-		<span class="ident">index</span>
+		&lt;<span class="self">Self </span><span class="kw">as </span>Store&gt;::Overweight::insert(index, (sender, sent_at, xcm));
+		index
 	}
 
-	<span class="doccomment">/// Service the incoming XCMP message queue attempting to execute up to `max_weight` execution</span>
-	<span class="doccomment">/// weight of messages.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Channels are first shuffled and then processed in this random one page at a time, order over</span>
-	<span class="doccomment">/// and over until either `max_weight` is exhausted or no channel has messages that can be</span>
-	<span class="doccomment">/// processed any more.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// There are two obvious &quot;modes&quot; that we could apportion `max_weight`: one would be to attempt</span>
-	<span class="doccomment">/// to spend it all on the first channel&#39;s first page, then use the leftover (if any) for the</span>
-	<span class="doccomment">/// second channel&#39;s first page and so on until finally we cycle back and the process messages</span>
-	<span class="doccomment">/// on the first channel&#39;s second page &amp;c. The other mode would be to apportion only `1/N` of</span>
-	<span class="doccomment">/// `max_weight` for the first page (where `N` could be, perhaps, the number of channels to</span>
-	<span class="doccomment">/// service, using the remainder plus the next `1/N` for the next channel&#39;s page &amp;c.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Both modes have good qualities, the first ensures that a channel with a large message (over</span>
-	<span class="doccomment">/// `1/N` does not get indefinitely blocked if other channels have continuous, light traffic.</span>
-	<span class="doccomment">/// The second is fairer, and ensures that channels with continuous light messages don&#39;t suffer</span>
-	<span class="doccomment">/// high latency.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The following code is a hybrid solution; we have a concept of `weight_available` which</span>
-	<span class="doccomment">/// incrementally approaches `max_weight` as more channels are attempted to be processed. We use</span>
-	<span class="doccomment">/// the parameter `weight_restrict_decay` to control the speed with which `weight_available`</span>
-	<span class="doccomment">/// approaches `max_weight`, with `0` being strictly equivalent to the first aforementioned</span>
-	<span class="doccomment">/// mode, and `N` approximating the second. A reasonable parameter may be `1`, which makes</span>
-	<span class="doccomment">/// half of the `max_weight` available for the first page, then a quarter plus the remainder</span>
-	<span class="doccomment">/// for the second &amp;c. though empirical and or practical factors may give rise to adjusting it</span>
-	<span class="doccomment">/// further.</span>
-	<span class="kw">fn</span> <span class="ident">service_xcmp_queue</span>(<span class="ident">max_weight</span>: <span class="ident">Weight</span>) -&gt; <span class="ident">Weight</span> {
-		<span class="kw">let</span> <span class="ident">suspended</span> <span class="op">=</span> <span class="ident">QueueSuspended</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>();
+	<span class="doccomment">/// Service the incoming XCMP message queue attempting to execute up to `max_weight` execution
+	/// weight of messages.
+	///
+	/// Channels are first shuffled and then processed in this random one page at a time, order over
+	/// and over until either `max_weight` is exhausted or no channel has messages that can be
+	/// processed any more.
+	///
+	/// There are two obvious &quot;modes&quot; that we could apportion `max_weight`: one would be to attempt
+	/// to spend it all on the first channel&#39;s first page, then use the leftover (if any) for the
+	/// second channel&#39;s first page and so on until finally we cycle back and the process messages
+	/// on the first channel&#39;s second page &amp;c. The other mode would be to apportion only `1/N` of
+	/// `max_weight` for the first page (where `N` could be, perhaps, the number of channels to
+	/// service, using the remainder plus the next `1/N` for the next channel&#39;s page &amp;c.
+	///
+	/// Both modes have good qualities, the first ensures that a channel with a large message (over
+	/// `1/N` does not get indefinitely blocked if other channels have continuous, light traffic.
+	/// The second is fairer, and ensures that channels with continuous light messages don&#39;t suffer
+	/// high latency.
+	///
+	/// The following code is a hybrid solution; we have a concept of `weight_available` which
+	/// incrementally approaches `max_weight` as more channels are attempted to be processed. We use
+	/// the parameter `weight_restrict_decay` to control the speed with which `weight_available`
+	/// approaches `max_weight`, with `0` being strictly equivalent to the first aforementioned
+	/// mode, and `N` approximating the second. A reasonable parameter may be `1`, which makes
+	/// half of the `max_weight` available for the first page, then a quarter plus the remainder
+	/// for the second &amp;c. though empirical and or practical factors may give rise to adjusting it
+	/// further.
+	</span><span class="kw">fn </span>service_xcmp_queue(max_weight: Weight) -&gt; Weight {
+		<span class="kw">let </span>suspended = QueueSuspended::&lt;T&gt;::get();
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">status</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">InboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>(); <span class="comment">// &lt;- sorted.</span>
-		<span class="kw">if</span> <span class="ident">status</span>.<span class="ident">is_empty</span>() {
-			<span class="kw">return</span> <span class="ident">Weight::zero</span>()
+		<span class="kw">let </span><span class="kw-2">mut </span>status = &lt;InboundXcmpStatus&lt;T&gt;&gt;::get(); <span class="comment">// &lt;- sorted.
+		</span><span class="kw">if </span>status.is_empty() {
+			<span class="kw">return </span>Weight::zero()
 		}
 
-		<span class="kw">let</span> <span class="ident">QueueConfigData</span> {
-			<span class="ident">resume_threshold</span>,
-			<span class="ident">threshold_weight</span>,
-			<span class="ident">weight_restrict_decay</span>,
-			<span class="ident">xcmp_max_individual_weight</span>,
+		<span class="kw">let </span>QueueConfigData {
+			resume_threshold,
+			threshold_weight,
+			weight_restrict_decay,
+			xcmp_max_individual_weight,
 			..
-		} <span class="op">=</span> <span class="op">&lt;</span><span class="ident">QueueConfig</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>();
+		} = &lt;QueueConfig&lt;T&gt;&gt;::get();
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shuffled</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::create_shuffle</span>(<span class="ident">status</span>.<span class="ident">len</span>());
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">Weight::zero</span>();
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">weight_available</span> <span class="op">=</span> <span class="ident">Weight::zero</span>();
+		<span class="kw">let </span><span class="kw-2">mut </span>shuffled = <span class="self">Self</span>::create_shuffle(status.len());
+		<span class="kw">let </span><span class="kw-2">mut </span>weight_used = Weight::zero();
+		<span class="kw">let </span><span class="kw-2">mut </span>weight_available = Weight::zero();
 
-		<span class="comment">// We don&#39;t want the possibility of a chain sending a series of really heavy messages and</span>
-		<span class="comment">// tying up the block&#39;s execution time from other chains. Therefore we execute any remaining</span>
-		<span class="comment">// messages in a random order.</span>
-		<span class="comment">// Order within a single channel will always be preserved, however this does mean that</span>
-		<span class="comment">// relative order between channels may not. The result is that chains which tend to send</span>
-		<span class="comment">// fewer, lighter messages will generally have a lower latency than chains which tend to</span>
-		<span class="comment">// send more, heavier messages.</span>
+		<span class="comment">// We don&#39;t want the possibility of a chain sending a series of really heavy messages and
+		// tying up the block&#39;s execution time from other chains. Therefore we execute any remaining
+		// messages in a random order.
+		// Order within a single channel will always be preserved, however this does mean that
+		// relative order between channels may not. The result is that chains which tend to send
+		// fewer, lighter messages will generally have a lower latency than chains which tend to
+		// send more, heavier messages.
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shuffle_index</span> <span class="op">=</span> <span class="number">0</span>;
-		<span class="kw">while</span> <span class="ident">shuffle_index</span> <span class="op">&lt;</span> <span class="ident">shuffled</span>.<span class="ident">len</span>() <span class="op">&amp;&amp;</span>
-			<span class="ident">max_weight</span>.<span class="ident">saturating_sub</span>(<span class="ident">weight_used</span>).<span class="ident">all_gte</span>(<span class="ident">threshold_weight</span>)
+		</span><span class="kw">let </span><span class="kw-2">mut </span>shuffle_index = <span class="number">0</span>;
+		<span class="kw">while </span>shuffle_index &lt; shuffled.len() &amp;&amp;
+			max_weight.saturating_sub(weight_used).all_gte(threshold_weight)
 		{
-			<span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">shuffled</span>[<span class="ident">shuffle_index</span>];
-			<span class="kw">let</span> <span class="ident">sender</span> <span class="op">=</span> <span class="ident">status</span>[<span class="ident">index</span>].<span class="ident">sender</span>;
-			<span class="kw">let</span> <span class="ident">sender_origin</span> <span class="op">=</span> <span class="ident">T::ControllerOriginConverter::convert_origin</span>(
-				(<span class="number">1</span>, <span class="ident">Parachain</span>(<span class="ident">sender</span>.<span class="ident">into</span>())),
-				<span class="ident">OriginKind::Superuser</span>,
+			<span class="kw">let </span>index = shuffled[shuffle_index];
+			<span class="kw">let </span>sender = status[index].sender;
+			<span class="kw">let </span>sender_origin = T::ControllerOriginConverter::convert_origin(
+				(<span class="number">1</span>, Parachain(sender.into())),
+				OriginKind::Superuser,
 			);
-			<span class="kw">let</span> <span class="ident">is_controller</span> <span class="op">=</span> <span class="ident">sender_origin</span>
-				.<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">origin</span><span class="op">|</span> <span class="ident">T::ControllerOrigin::try_origin</span>(<span class="ident">origin</span>).<span class="ident">is_ok</span>());
+			<span class="kw">let </span>is_controller = sender_origin
+				.map_or(<span class="bool-val">false</span>, |origin| T::ControllerOrigin::try_origin(origin).is_ok());
 
-			<span class="kw">if</span> <span class="ident">suspended</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">is_controller</span> {
-				<span class="ident">shuffle_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-				<span class="kw">continue</span>
-			}
+			<span class="kw">if </span>suspended &amp;&amp; !is_controller {
+				shuffle_index += <span class="number">1</span>;
+				<span class="kw">continue
+			</span>}
 
-			<span class="kw">if</span> <span class="ident">weight_available</span> <span class="op">!</span><span class="op">=</span> <span class="ident">max_weight</span> {
-				<span class="comment">// Get incrementally closer to freeing up max_weight for message execution over the</span>
-				<span class="comment">// first round. For the second round we unlock all weight. If we come close enough</span>
-				<span class="comment">// on the first round to unlocking everything, then we do so.</span>
-				<span class="kw">if</span> <span class="ident">shuffle_index</span> <span class="op">&lt;</span> <span class="ident">status</span>.<span class="ident">len</span>() {
-					<span class="ident">weight_available</span> <span class="op">+</span><span class="op">=</span>
-						(<span class="ident">max_weight</span> <span class="op">-</span> <span class="ident">weight_available</span>) <span class="op">/</span> (<span class="ident">weight_restrict_decay</span>.<span class="ident">ref_time</span>() <span class="op">+</span> <span class="number">1</span>);
-					<span class="kw">if</span> (<span class="ident">weight_available</span> <span class="op">+</span> <span class="ident">threshold_weight</span>).<span class="ident">any_gt</span>(<span class="ident">max_weight</span>) {
-						<span class="ident">weight_available</span> <span class="op">=</span> <span class="ident">max_weight</span>;
+			<span class="kw">if </span>weight_available != max_weight {
+				<span class="comment">// Get incrementally closer to freeing up max_weight for message execution over the
+				// first round. For the second round we unlock all weight. If we come close enough
+				// on the first round to unlocking everything, then we do so.
+				</span><span class="kw">if </span>shuffle_index &lt; status.len() {
+					weight_available +=
+						(max_weight - weight_available) / (weight_restrict_decay.ref_time() + <span class="number">1</span>);
+					<span class="kw">if </span>(weight_available + threshold_weight).any_gt(max_weight) {
+						weight_available = max_weight;
 					}
-				} <span class="kw">else</span> {
-					<span class="ident">weight_available</span> <span class="op">=</span> <span class="ident">max_weight</span>;
+				} <span class="kw">else </span>{
+					weight_available = max_weight;
 				}
 			}
 
-			<span class="kw">let</span> <span class="ident">weight_processed</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">status</span>[<span class="ident">index</span>].<span class="ident">message_metadata</span>.<span class="ident">is_empty</span>() {
+			<span class="kw">let </span>weight_processed = <span class="kw">if </span>status[index].message_metadata.is_empty() {
 				<span class="macro">debug_assert!</span>(<span class="bool-val">false</span>, <span class="string">&quot;channel exists in status; there must be messages; qed&quot;</span>);
-				<span class="ident">Weight::zero</span>()
-			} <span class="kw">else</span> {
-				<span class="comment">// Process up to one block&#39;s worth for now.</span>
-				<span class="kw">let</span> <span class="ident">weight_remaining</span> <span class="op">=</span> <span class="ident">weight_available</span>.<span class="ident">saturating_sub</span>(<span class="ident">weight_used</span>);
-				<span class="kw">let</span> (<span class="ident">weight_processed</span>, <span class="ident">is_empty</span>) <span class="op">=</span> <span class="ident"><span class="self">Self</span>::process_xcmp_message</span>(
-					<span class="ident">sender</span>,
-					<span class="ident">status</span>[<span class="ident">index</span>].<span class="ident">message_metadata</span>[<span class="number">0</span>],
-					<span class="ident">weight_remaining</span>,
-					<span class="ident">xcmp_max_individual_weight</span>,
+				Weight::zero()
+			} <span class="kw">else </span>{
+				<span class="comment">// Process up to one block&#39;s worth for now.
+				</span><span class="kw">let </span>weight_remaining = weight_available.saturating_sub(weight_used);
+				<span class="kw">let </span>(weight_processed, is_empty) = <span class="self">Self</span>::process_xcmp_message(
+					sender,
+					status[index].message_metadata[<span class="number">0</span>],
+					weight_remaining,
+					xcmp_max_individual_weight,
 				);
-				<span class="kw">if</span> <span class="ident">is_empty</span> {
-					<span class="ident">status</span>[<span class="ident">index</span>].<span class="ident">message_metadata</span>.<span class="ident">remove</span>(<span class="number">0</span>);
+				<span class="kw">if </span>is_empty {
+					status[index].message_metadata.remove(<span class="number">0</span>);
 				}
-				<span class="ident">weight_processed</span>
+				weight_processed
 			};
-			<span class="ident">weight_used</span> <span class="op">+</span><span class="op">=</span> <span class="ident">weight_processed</span>;
+			weight_used += weight_processed;
 
-			<span class="kw">if</span> <span class="ident">status</span>[<span class="ident">index</span>].<span class="ident">message_metadata</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">resume_threshold</span> <span class="op">&amp;&amp;</span>
-				<span class="ident">status</span>[<span class="ident">index</span>].<span class="ident">state</span> <span class="op">==</span> <span class="ident">InboundState::Suspended</span>
+			<span class="kw">if </span>status[index].message_metadata.len() <span class="kw">as </span>u32 &lt;= resume_threshold &amp;&amp;
+				status[index].state == InboundState::Suspended
 			{
-				<span class="comment">// Resume</span>
-				<span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::send_signal</span>(<span class="ident">sender</span>, <span class="ident">ChannelSignal::Resume</span>);
-				<span class="macro">debug_assert!</span>(<span class="ident">r</span>.<span class="ident">is_ok</span>(), <span class="string">&quot;WARNING: Failed sending resume into suspended channel&quot;</span>);
-				<span class="ident">status</span>[<span class="ident">index</span>].<span class="ident">state</span> <span class="op">=</span> <span class="ident">InboundState::Ok</span>;
+				<span class="comment">// Resume
+				</span><span class="kw">let </span>r = <span class="self">Self</span>::send_signal(sender, ChannelSignal::Resume);
+				<span class="macro">debug_assert!</span>(r.is_ok(), <span class="string">&quot;WARNING: Failed sending resume into suspended channel&quot;</span>);
+				status[index].state = InboundState::Ok;
 			}
 
-			<span class="comment">// If there are more and we&#39;re making progress, we process them after we&#39;ve given the</span>
-			<span class="comment">// other channels a look in. If we&#39;ve still not unlocked all weight, then we set them</span>
-			<span class="comment">// up for processing a second time anyway.</span>
-			<span class="kw">if</span> <span class="op">!</span><span class="ident">status</span>[<span class="ident">index</span>].<span class="ident">message_metadata</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span>
-				(<span class="ident">weight_processed</span>.<span class="ident">any_gt</span>(<span class="ident">Weight::zero</span>()) <span class="op">|</span><span class="op">|</span> <span class="ident">weight_available</span> <span class="op">!</span><span class="op">=</span> <span class="ident">max_weight</span>)
+			<span class="comment">// If there are more and we&#39;re making progress, we process them after we&#39;ve given the
+			// other channels a look in. If we&#39;ve still not unlocked all weight, then we set them
+			// up for processing a second time anyway.
+			</span><span class="kw">if </span>!status[index].message_metadata.is_empty() &amp;&amp;
+				(weight_processed.any_gt(Weight::zero()) || weight_available != max_weight)
 			{
-				<span class="kw">if</span> <span class="ident">shuffle_index</span> <span class="op">+</span> <span class="number">1</span> <span class="op">==</span> <span class="ident">shuffled</span>.<span class="ident">len</span>() {
-					<span class="comment">// Only this queue left. Just run around this loop once more.</span>
-					<span class="kw">continue</span>
-				}
-				<span class="ident">shuffled</span>.<span class="ident">push</span>(<span class="ident">index</span>);
+				<span class="kw">if </span>shuffle_index + <span class="number">1 </span>== shuffled.len() {
+					<span class="comment">// Only this queue left. Just run around this loop once more.
+					</span><span class="kw">continue
+				</span>}
+				shuffled.push(index);
 			}
-			<span class="ident">shuffle_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+			shuffle_index += <span class="number">1</span>;
 		}
 
-		<span class="comment">// Only retain the senders that have non-empty queues.</span>
-		<span class="ident">status</span>.<span class="ident">retain</span>(<span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="op">!</span><span class="ident">item</span>.<span class="ident">message_metadata</span>.<span class="ident">is_empty</span>());
+		<span class="comment">// Only retain the senders that have non-empty queues.
+		</span>status.retain(|item| !item.message_metadata.is_empty());
 
-		<span class="op">&lt;</span><span class="ident">InboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">status</span>);
-		<span class="ident">weight_used</span>
+		&lt;InboundXcmpStatus&lt;T&gt;&gt;::put(status);
+		weight_used
 	}
 
-	<span class="kw">fn</span> <span class="ident">suspend_channel</span>(<span class="ident">target</span>: <span class="ident">ParaId</span>) {
-		<span class="op">&lt;</span><span class="ident">OutboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">details</span>) <span class="op">=</span> <span class="ident">s</span>.<span class="ident">iter_mut</span>().<span class="ident">find</span>(<span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="ident">recipient</span> <span class="op">==</span> <span class="ident">target</span>) {
-				<span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">details</span>.<span class="ident">state</span> <span class="op">==</span> <span class="ident">OutboundState::Ok</span>;
-				<span class="macro">debug_assert!</span>(<span class="ident">ok</span>, <span class="string">&quot;WARNING: Attempt to suspend channel that was not Ok.&quot;</span>);
-				<span class="ident">details</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">OutboundState::Suspended</span>;
-			} <span class="kw">else</span> {
-				<span class="ident">s</span>.<span class="ident">push</span>(<span class="ident">OutboundChannelDetails::new</span>(<span class="ident">target</span>).<span class="ident">with_suspended_state</span>());
+	<span class="kw">fn </span>suspend_channel(target: ParaId) {
+		&lt;OutboundXcmpStatus&lt;T&gt;&gt;::mutate(|s| {
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(details) = s.iter_mut().find(|item| item.recipient == target) {
+				<span class="kw">let </span>ok = details.state == OutboundState::Ok;
+				<span class="macro">debug_assert!</span>(ok, <span class="string">&quot;WARNING: Attempt to suspend channel that was not Ok.&quot;</span>);
+				details.state = OutboundState::Suspended;
+			} <span class="kw">else </span>{
+				s.push(OutboundChannelDetails::new(target).with_suspended_state());
 			}
 		});
 	}
 
-	<span class="kw">fn</span> <span class="ident">resume_channel</span>(<span class="ident">target</span>: <span class="ident">ParaId</span>) {
-		<span class="op">&lt;</span><span class="ident">OutboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">s</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="ident">recipient</span> <span class="op">==</span> <span class="ident">target</span>) {
-				<span class="kw">let</span> <span class="ident">suspended</span> <span class="op">=</span> <span class="ident">s</span>[<span class="ident">index</span>].<span class="ident">state</span> <span class="op">==</span> <span class="ident">OutboundState::Suspended</span>;
+	<span class="kw">fn </span>resume_channel(target: ParaId) {
+		&lt;OutboundXcmpStatus&lt;T&gt;&gt;::mutate(|s| {
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(index) = s.iter().position(|item| item.recipient == target) {
+				<span class="kw">let </span>suspended = s[index].state == OutboundState::Suspended;
 				<span class="macro">debug_assert!</span>(
-					<span class="ident">suspended</span>,
-					<span class="string">&quot;WARNING: Attempt to resume channel that was not suspended.&quot;</span>
-				);
-				<span class="kw">if</span> <span class="ident">s</span>[<span class="ident">index</span>].<span class="ident">first_index</span> <span class="op">==</span> <span class="ident">s</span>[<span class="ident">index</span>].<span class="ident">last_index</span> {
-					<span class="ident">s</span>.<span class="ident">remove</span>(<span class="ident">index</span>);
-				} <span class="kw">else</span> {
-					<span class="ident">s</span>[<span class="ident">index</span>].<span class="ident">state</span> <span class="op">=</span> <span class="ident">OutboundState::Ok</span>;
+					suspended,
+					<span class="string">&quot;WARNING: Attempt to resume channel that was not suspended.&quot;
+				</span>);
+				<span class="kw">if </span>s[index].first_index == s[index].last_index {
+					s.remove(index);
+				} <span class="kw">else </span>{
+					s[index].state = OutboundState::Ok;
 				}
-			} <span class="kw">else</span> {
+			} <span class="kw">else </span>{
 				<span class="macro">debug_assert!</span>(<span class="bool-val">false</span>, <span class="string">&quot;WARNING: Attempt to resume channel that was not suspended.&quot;</span>);
 			}
 		});
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">XcmpMessageHandler</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">handle_xcmp_messages</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">ParaId</span>, <span class="ident">RelayBlockNumber</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>])<span class="op">&gt;</span><span class="op">&gt;</span>(
-		<span class="ident">iter</span>: <span class="ident">I</span>,
-		<span class="ident">max_weight</span>: <span class="ident">Weight</span>,
-	) -&gt; <span class="ident">Weight</span> {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">status</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">InboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>();
+<span class="kw">impl</span>&lt;T: Config&gt; XcmpMessageHandler <span class="kw">for </span>Pallet&lt;T&gt; {
+	<span class="kw">fn </span>handle_xcmp_messages&lt;<span class="lifetime">&#39;a</span>, I: Iterator&lt;Item = (ParaId, RelayBlockNumber, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8])&gt;&gt;(
+		iter: I,
+		max_weight: Weight,
+	) -&gt; Weight {
+		<span class="kw">let </span><span class="kw-2">mut </span>status = &lt;InboundXcmpStatus&lt;T&gt;&gt;::get();
 
-		<span class="kw">let</span> <span class="ident">QueueConfigData</span> { <span class="ident">suspend_threshold</span>, <span class="ident">drop_threshold</span>, .. } <span class="op">=</span> <span class="op">&lt;</span><span class="ident">QueueConfig</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>();
+		<span class="kw">let </span>QueueConfigData { suspend_threshold, drop_threshold, .. } = &lt;QueueConfig&lt;T&gt;&gt;::get();
 
-		<span class="kw">for</span> (<span class="ident">sender</span>, <span class="ident">sent_at</span>, <span class="ident">data</span>) <span class="kw">in</span> <span class="ident">iter</span> {
-			<span class="comment">// Figure out the message format.</span>
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data_ref</span> <span class="op">=</span> <span class="ident">data</span>;
-			<span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">XcmpMessageFormat::decode_with_depth_limit</span>(
-				<span class="ident">MAX_XCM_DECODE_DEPTH</span>,
-				<span class="kw-2">&amp;mut</span> <span class="ident">data_ref</span>,
+		<span class="kw">for </span>(sender, sent_at, data) <span class="kw">in </span>iter {
+			<span class="comment">// Figure out the message format.
+			</span><span class="kw">let </span><span class="kw-2">mut </span>data_ref = data;
+			<span class="kw">let </span>format = <span class="kw">match </span>XcmpMessageFormat::decode_with_depth_limit(
+				MAX_XCM_DECODE_DEPTH,
+				<span class="kw-2">&amp;mut </span>data_ref,
 			) {
-				<span class="prelude-val">Ok</span>(<span class="ident">f</span>) =&gt; <span class="ident">f</span>,
+				<span class="prelude-val">Ok</span>(f) =&gt; f,
 				<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
 					<span class="macro">debug_assert!</span>(<span class="bool-val">false</span>, <span class="string">&quot;Unknown XCMP message format. Silently dropping message&quot;</span>);
-					<span class="kw">continue</span>
-				},
+					<span class="kw">continue
+				</span>},
 			};
-			<span class="kw">if</span> <span class="ident">format</span> <span class="op">==</span> <span class="ident">XcmpMessageFormat::Signals</span> {
-				<span class="kw">while</span> <span class="op">!</span><span class="ident">data_ref</span>.<span class="ident">is_empty</span>() {
-					<span class="kw">use</span> <span class="ident">ChannelSignal</span>::<span class="kw-2">*</span>;
-					<span class="kw">match</span> <span class="ident">ChannelSignal::decode</span>(<span class="kw-2">&amp;mut</span> <span class="ident">data_ref</span>) {
-						<span class="prelude-val">Ok</span>(<span class="ident">Suspend</span>) =&gt; <span class="ident"><span class="self">Self</span>::suspend_channel</span>(<span class="ident">sender</span>),
-						<span class="prelude-val">Ok</span>(<span class="ident">Resume</span>) =&gt; <span class="ident"><span class="self">Self</span>::resume_channel</span>(<span class="ident">sender</span>),
+			<span class="kw">if </span>format == XcmpMessageFormat::Signals {
+				<span class="kw">while </span>!data_ref.is_empty() {
+					<span class="kw">use </span>ChannelSignal::<span class="kw-2">*</span>;
+					<span class="kw">match </span>ChannelSignal::decode(<span class="kw-2">&amp;mut </span>data_ref) {
+						<span class="prelude-val">Ok</span>(Suspend) =&gt; <span class="self">Self</span>::suspend_channel(sender),
+						<span class="prelude-val">Ok</span>(Resume) =&gt; <span class="self">Self</span>::resume_channel(sender),
 						<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">break</span>,
 					}
 				}
-			} <span class="kw">else</span> {
-				<span class="comment">// Record the fact we received it.</span>
-				<span class="kw">match</span> <span class="ident">status</span>.<span class="ident">binary_search_by_key</span>(<span class="kw-2">&amp;</span><span class="ident">sender</span>, <span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="ident">sender</span>) {
-					<span class="prelude-val">Ok</span>(<span class="ident">i</span>) =&gt; {
-						<span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">status</span>[<span class="ident">i</span>].<span class="ident">message_metadata</span>.<span class="ident">len</span>();
-						<span class="kw">if</span> <span class="ident">count</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">suspend_threshold</span> <span class="op">&amp;&amp;</span> <span class="ident">status</span>[<span class="ident">i</span>].<span class="ident">state</span> <span class="op">==</span> <span class="ident">InboundState::Ok</span>
+			} <span class="kw">else </span>{
+				<span class="comment">// Record the fact we received it.
+				</span><span class="kw">match </span>status.binary_search_by_key(<span class="kw-2">&amp;</span>sender, |item| item.sender) {
+					<span class="prelude-val">Ok</span>(i) =&gt; {
+						<span class="kw">let </span>count = status[i].message_metadata.len();
+						<span class="kw">if </span>count <span class="kw">as </span>u32 &gt;= suspend_threshold &amp;&amp; status[i].state == InboundState::Ok
 						{
-							<span class="ident">status</span>[<span class="ident">i</span>].<span class="ident">state</span> <span class="op">=</span> <span class="ident">InboundState::Suspended</span>;
-							<span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::send_signal</span>(<span class="ident">sender</span>, <span class="ident">ChannelSignal::Suspend</span>);
-							<span class="kw">if</span> <span class="ident">r</span>.<span class="ident">is_err</span>() {
+							status[i].state = InboundState::Suspended;
+							<span class="kw">let </span>r = <span class="self">Self</span>::send_signal(sender, ChannelSignal::Suspend);
+							<span class="kw">if </span>r.is_err() {
 								<span class="macro">log::warn!</span>(
-									<span class="string">&quot;Attempt to suspend channel failed. Messages may be dropped.&quot;</span>
-								);
+									<span class="string">&quot;Attempt to suspend channel failed. Messages may be dropped.&quot;
+								</span>);
 							}
 						}
-						<span class="kw">if</span> (<span class="ident">count</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span> <span class="ident">drop_threshold</span> {
-							<span class="ident">status</span>[<span class="ident">i</span>].<span class="ident">message_metadata</span>.<span class="ident">push</span>((<span class="ident">sent_at</span>, <span class="ident">format</span>));
-						} <span class="kw">else</span> {
+						<span class="kw">if </span>(count <span class="kw">as </span>u32) &lt; drop_threshold {
+							status[i].message_metadata.push((sent_at, format));
+						} <span class="kw">else </span>{
 							<span class="macro">debug_assert!</span>(
 								<span class="bool-val">false</span>,
-								<span class="string">&quot;XCMP channel queue full. Silently dropping message&quot;</span>
-							);
+								<span class="string">&quot;XCMP channel queue full. Silently dropping message&quot;
+							</span>);
 						}
 					},
-					<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="ident">status</span>.<span class="ident">push</span>(<span class="ident">InboundChannelDetails</span> {
-						<span class="ident">sender</span>,
-						<span class="ident">state</span>: <span class="ident">InboundState::Ok</span>,
-						<span class="ident">message_metadata</span>: <span class="macro">vec!</span>[(<span class="ident">sent_at</span>, <span class="ident">format</span>)],
+					<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; status.push(InboundChannelDetails {
+						sender,
+						state: InboundState::Ok,
+						message_metadata: <span class="macro">vec!</span>[(sent_at, format)],
 					}),
 				}
-				<span class="comment">// Queue the payload for later execution.</span>
-				<span class="op">&lt;</span><span class="ident">InboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::insert</span>(<span class="ident">sender</span>, <span class="ident">sent_at</span>, <span class="ident">data_ref</span>);
+				<span class="comment">// Queue the payload for later execution.
+				</span>&lt;InboundXcmpMessages&lt;T&gt;&gt;::insert(sender, sent_at, data_ref);
 			}
 
-			<span class="comment">// Optimization note; it would make sense to execute messages immediately if</span>
-			<span class="comment">// `status.is_empty()` here.</span>
-		}
-		<span class="ident">status</span>.<span class="ident">sort</span>();
-		<span class="op">&lt;</span><span class="ident">InboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">status</span>);
+			<span class="comment">// Optimization note; it would make sense to execute messages immediately if
+			// `status.is_empty()` here.
+		</span>}
+		status.sort();
+		&lt;InboundXcmpStatus&lt;T&gt;&gt;::put(status);
 
-		<span class="ident"><span class="self">Self</span>::service_xcmp_queue</span>(<span class="ident">max_weight</span>)
+		<span class="self">Self</span>::service_xcmp_queue(max_weight)
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">XcmpMessageSource</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">take_outbound_messages</span>(<span class="ident">maximum_channels</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">ParaId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">statuses</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">OutboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>();
-		<span class="kw">let</span> <span class="ident">old_statuses_len</span> <span class="op">=</span> <span class="ident">statuses</span>.<span class="ident">len</span>();
-		<span class="kw">let</span> <span class="ident">max_message_count</span> <span class="op">=</span> <span class="ident">statuses</span>.<span class="ident">len</span>().<span class="ident">min</span>(<span class="ident">maximum_channels</span>);
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">max_message_count</span>);
+<span class="kw">impl</span>&lt;T: Config&gt; XcmpMessageSource <span class="kw">for </span>Pallet&lt;T&gt; {
+	<span class="kw">fn </span>take_outbound_messages(maximum_channels: usize) -&gt; Vec&lt;(ParaId, Vec&lt;u8&gt;)&gt; {
+		<span class="kw">let </span><span class="kw-2">mut </span>statuses = &lt;OutboundXcmpStatus&lt;T&gt;&gt;::get();
+		<span class="kw">let </span>old_statuses_len = statuses.len();
+		<span class="kw">let </span>max_message_count = statuses.len().min(maximum_channels);
+		<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::with_capacity(max_message_count);
 
-		<span class="kw">for</span> <span class="ident">status</span> <span class="kw">in</span> <span class="ident">statuses</span>.<span class="ident">iter_mut</span>() {
-			<span class="kw">let</span> <span class="ident">OutboundChannelDetails</span> {
-				<span class="ident">recipient</span>: <span class="ident">para_id</span>,
-				<span class="ident">state</span>: <span class="ident">outbound_state</span>,
-				<span class="kw-2">mut</span> <span class="ident">signals_exist</span>,
-				<span class="kw-2">mut</span> <span class="ident">first_index</span>,
-				<span class="kw-2">mut</span> <span class="ident">last_index</span>,
-			} <span class="op">=</span> <span class="kw-2">*</span><span class="ident">status</span>;
+		<span class="kw">for </span>status <span class="kw">in </span>statuses.iter_mut() {
+			<span class="kw">let </span>OutboundChannelDetails {
+				recipient: para_id,
+				state: outbound_state,
+				<span class="kw-2">mut </span>signals_exist,
+				<span class="kw-2">mut </span>first_index,
+				<span class="kw-2">mut </span>last_index,
+			} = <span class="kw-2">*</span>status;
 
-			<span class="kw">if</span> <span class="ident">result</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="ident">max_message_count</span> {
-				<span class="comment">// We check this condition in the beginning of the loop so that we don&#39;t include</span>
-				<span class="comment">// a message where the limit is 0.</span>
-				<span class="kw">break</span>
-			}
-			<span class="kw">if</span> <span class="ident">outbound_state</span> <span class="op">==</span> <span class="ident">OutboundState::Suspended</span> {
-				<span class="kw">continue</span>
-			}
-			<span class="kw">let</span> (<span class="ident">max_size_now</span>, <span class="ident">max_size_ever</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">T::ChannelInfo::get_channel_status</span>(<span class="ident">para_id</span>) {
-				<span class="ident">ChannelStatus::Closed</span> =&gt; {
-					<span class="comment">// This means that there is no such channel anymore. Nothing to be done but</span>
-					<span class="comment">// swallow the messages and discard the status.</span>
-					<span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">first_index</span>..<span class="ident">last_index</span> {
-						<span class="op">&lt;</span><span class="ident">OutboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::remove</span>(<span class="ident">para_id</span>, <span class="ident">i</span>);
+			<span class="kw">if </span>result.len() == max_message_count {
+				<span class="comment">// We check this condition in the beginning of the loop so that we don&#39;t include
+				// a message where the limit is 0.
+				</span><span class="kw">break
+			</span>}
+			<span class="kw">if </span>outbound_state == OutboundState::Suspended {
+				<span class="kw">continue
+			</span>}
+			<span class="kw">let </span>(max_size_now, max_size_ever) = <span class="kw">match </span>T::ChannelInfo::get_channel_status(para_id) {
+				ChannelStatus::Closed =&gt; {
+					<span class="comment">// This means that there is no such channel anymore. Nothing to be done but
+					// swallow the messages and discard the status.
+					</span><span class="kw">for </span>i <span class="kw">in </span>first_index..last_index {
+						&lt;OutboundXcmpMessages&lt;T&gt;&gt;::remove(para_id, i);
 					}
-					<span class="kw">if</span> <span class="ident">signals_exist</span> {
-						<span class="op">&lt;</span><span class="ident">SignalMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::remove</span>(<span class="ident">para_id</span>);
+					<span class="kw">if </span>signals_exist {
+						&lt;SignalMessages&lt;T&gt;&gt;::remove(para_id);
 					}
-					<span class="kw-2">*</span><span class="ident">status</span> <span class="op">=</span> <span class="ident">OutboundChannelDetails::new</span>(<span class="ident">para_id</span>);
-					<span class="kw">continue</span>
-				},
-				<span class="ident">ChannelStatus::Full</span> =&gt; <span class="kw">continue</span>,
-				<span class="ident">ChannelStatus::Ready</span>(<span class="ident">n</span>, <span class="ident">e</span>) =&gt; (<span class="ident">n</span>, <span class="ident">e</span>),
+					<span class="kw-2">*</span>status = OutboundChannelDetails::new(para_id);
+					<span class="kw">continue
+				</span>},
+				ChannelStatus::Full =&gt; <span class="kw">continue</span>,
+				ChannelStatus::Ready(n, e) =&gt; (n, e),
 			};
 
-			<span class="kw">let</span> <span class="ident">page</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">signals_exist</span> {
-				<span class="kw">let</span> <span class="ident">page</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">SignalMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>(<span class="ident">para_id</span>);
-				<span class="kw">if</span> <span class="ident">page</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">max_size_now</span> {
-					<span class="op">&lt;</span><span class="ident">SignalMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::remove</span>(<span class="ident">para_id</span>);
-					<span class="ident">signals_exist</span> <span class="op">=</span> <span class="bool-val">false</span>;
-					<span class="ident">page</span>
-				} <span class="kw">else</span> {
-					<span class="kw">continue</span>
-				}
-			} <span class="kw">else</span> <span class="kw">if</span> <span class="ident">last_index</span> <span class="op">&gt;</span> <span class="ident">first_index</span> {
-				<span class="kw">let</span> <span class="ident">page</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">OutboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::get</span>(<span class="ident">para_id</span>, <span class="ident">first_index</span>);
-				<span class="kw">if</span> <span class="ident">page</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">max_size_now</span> {
-					<span class="op">&lt;</span><span class="ident">OutboundXcmpMessages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::remove</span>(<span class="ident">para_id</span>, <span class="ident">first_index</span>);
-					<span class="ident">first_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-					<span class="ident">page</span>
-				} <span class="kw">else</span> {
-					<span class="kw">continue</span>
-				}
-			} <span class="kw">else</span> {
-				<span class="kw">continue</span>
-			};
-			<span class="kw">if</span> <span class="ident">first_index</span> <span class="op">==</span> <span class="ident">last_index</span> {
-				<span class="ident">first_index</span> <span class="op">=</span> <span class="number">0</span>;
-				<span class="ident">last_index</span> <span class="op">=</span> <span class="number">0</span>;
+			<span class="kw">let </span>page = <span class="kw">if </span>signals_exist {
+				<span class="kw">let </span>page = &lt;SignalMessages&lt;T&gt;&gt;::get(para_id);
+				<span class="kw">if </span>page.len() &lt; max_size_now {
+					&lt;SignalMessages&lt;T&gt;&gt;::remove(para_id);
+					signals_exist = <span class="bool-val">false</span>;
+					page
+				} <span class="kw">else </span>{
+					<span class="kw">continue
+				</span>}
+			} <span class="kw">else if </span>last_index &gt; first_index {
+				<span class="kw">let </span>page = &lt;OutboundXcmpMessages&lt;T&gt;&gt;::get(para_id, first_index);
+				<span class="kw">if </span>page.len() &lt; max_size_now {
+					&lt;OutboundXcmpMessages&lt;T&gt;&gt;::remove(para_id, first_index);
+					first_index += <span class="number">1</span>;
+					page
+				} <span class="kw">else </span>{
+					<span class="kw">continue
+				</span>}
+			} <span class="kw">else </span>{
+				<span class="kw">continue
+			</span>};
+			<span class="kw">if </span>first_index == last_index {
+				first_index = <span class="number">0</span>;
+				last_index = <span class="number">0</span>;
 			}
 
-			<span class="kw">if</span> <span class="ident">page</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">max_size_ever</span> {
-				<span class="comment">// TODO: #274 This means that the channel&#39;s max message size has changed since</span>
-				<span class="comment">//   the message was sent. We should parse it and split into smaller mesasges but</span>
-				<span class="comment">//   since it&#39;s so unlikely then for now we just drop it.</span>
-				<span class="macro">log::warn!</span>(<span class="string">&quot;WARNING: oversize message in queue. silently dropping.&quot;</span>);
-			} <span class="kw">else</span> {
-				<span class="ident">result</span>.<span class="ident">push</span>((<span class="ident">para_id</span>, <span class="ident">page</span>));
+			<span class="kw">if </span>page.len() &gt; max_size_ever {
+				<span class="comment">// TODO: #274 This means that the channel&#39;s max message size has changed since
+				//   the message was sent. We should parse it and split into smaller mesasges but
+				//   since it&#39;s so unlikely then for now we just drop it.
+				</span><span class="macro">log::warn!</span>(<span class="string">&quot;WARNING: oversize message in queue. silently dropping.&quot;</span>);
+			} <span class="kw">else </span>{
+				result.push((para_id, page));
 			}
 
-			<span class="kw-2">*</span><span class="ident">status</span> <span class="op">=</span> <span class="ident">OutboundChannelDetails</span> {
-				<span class="ident">recipient</span>: <span class="ident">para_id</span>,
-				<span class="ident">state</span>: <span class="ident">outbound_state</span>,
-				<span class="ident">signals_exist</span>,
-				<span class="ident">first_index</span>,
-				<span class="ident">last_index</span>,
+			<span class="kw-2">*</span>status = OutboundChannelDetails {
+				recipient: para_id,
+				state: outbound_state,
+				signals_exist,
+				first_index,
+				last_index,
 			};
 		}
 
-		<span class="comment">// Sort the outbound messages by ascending recipient para id to satisfy the acceptance</span>
-		<span class="comment">// criteria requirement.</span>
-		<span class="ident">result</span>.<span class="ident">sort_by_key</span>(<span class="op">|</span><span class="ident">m</span><span class="op">|</span> <span class="ident">m</span>.<span class="number">0</span>);
+		<span class="comment">// Sort the outbound messages by ascending recipient para id to satisfy the acceptance
+		// criteria requirement.
+		</span>result.sort_by_key(|m| m.<span class="number">0</span>);
 
-		<span class="comment">// Prune hrmp channels that became empty. Additionally, because it may so happen that we</span>
-		<span class="comment">// only gave attention to some channels in `non_empty_hrmp_channels` it&#39;s important to</span>
-		<span class="comment">// change the order. Otherwise, the next `on_finalize` we will again give attention</span>
-		<span class="comment">// only to those channels that happen to be in the beginning, until they are emptied.</span>
-		<span class="comment">// This leads to &quot;starvation&quot; of the channels near to the end.</span>
-		<span class="comment">//</span>
-		<span class="comment">// To mitigate this we shift all processed elements towards the end of the vector using</span>
-		<span class="comment">// `rotate_left`. To get intuition how it works see the examples in its rustdoc.</span>
-		<span class="ident">statuses</span>.<span class="ident">retain</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> {
-			<span class="ident">x</span>.<span class="ident">state</span> <span class="op">==</span> <span class="ident">OutboundState::Suspended</span> <span class="op">|</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">signals_exist</span> <span class="op">|</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">first_index</span> <span class="op">&lt;</span> <span class="ident">x</span>.<span class="ident">last_index</span>
+		<span class="comment">// Prune hrmp channels that became empty. Additionally, because it may so happen that we
+		// only gave attention to some channels in `non_empty_hrmp_channels` it&#39;s important to
+		// change the order. Otherwise, the next `on_finalize` we will again give attention
+		// only to those channels that happen to be in the beginning, until they are emptied.
+		// This leads to &quot;starvation&quot; of the channels near to the end.
+		//
+		// To mitigate this we shift all processed elements towards the end of the vector using
+		// `rotate_left`. To get intuition how it works see the examples in its rustdoc.
+		</span>statuses.retain(|x| {
+			x.state == OutboundState::Suspended || x.signals_exist || x.first_index &lt; x.last_index
 		});
 
-		<span class="comment">// old_status_len must be &gt;= status.len() since we never add anything to status.</span>
-		<span class="kw">let</span> <span class="ident">pruned</span> <span class="op">=</span> <span class="ident">old_statuses_len</span> <span class="op">-</span> <span class="ident">statuses</span>.<span class="ident">len</span>();
-		<span class="comment">// removing an item from status implies a message being sent, so the result messages must</span>
-		<span class="comment">// be no less than the pruned channels.</span>
-		<span class="ident">statuses</span>.<span class="ident">rotate_left</span>(<span class="ident">result</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">pruned</span>);
+		<span class="comment">// old_status_len must be &gt;= status.len() since we never add anything to status.
+		</span><span class="kw">let </span>pruned = old_statuses_len - statuses.len();
+		<span class="comment">// removing an item from status implies a message being sent, so the result messages must
+		// be no less than the pruned channels.
+		</span>statuses.rotate_left(result.len() - pruned);
 
-		<span class="op">&lt;</span><span class="ident">OutboundXcmpStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">statuses</span>);
+		&lt;OutboundXcmpStatus&lt;T&gt;&gt;::put(statuses);
 
-		<span class="ident">result</span>
+		result
 	}
 }
 
-<span class="doccomment">/// Xcm sender for sending to a sibling parachain.</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">SendXcm</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">send_xcm</span>(<span class="ident">dest</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">MultiLocation</span><span class="op">&gt;</span>, <span class="ident">msg</span>: <span class="ident">Xcm</span><span class="op">&lt;</span>()<span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">SendError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">dest</span>.<span class="ident">into</span>();
+<span class="doccomment">/// Xcm sender for sending to a sibling parachain.
+</span><span class="kw">impl</span>&lt;T: Config&gt; SendXcm <span class="kw">for </span>Pallet&lt;T&gt; {
+	<span class="kw">fn </span>send_xcm(dest: <span class="kw">impl </span>Into&lt;MultiLocation&gt;, msg: Xcm&lt;()&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), SendError&gt; {
+		<span class="kw">let </span>dest = dest.into();
 
-		<span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">dest</span> {
-			<span class="comment">// An HRMP message for a sibling parachain.</span>
-			<span class="ident">MultiLocation</span> { <span class="ident">parents</span>: <span class="number">1</span>, <span class="ident">interior</span>: <span class="ident">X1</span>(<span class="ident">Parachain</span>(<span class="ident">id</span>)) } =&gt; {
-				<span class="kw">let</span> <span class="ident">versioned_xcm</span> <span class="op">=</span> <span class="ident">T::VersionWrapper::wrap_version</span>(<span class="kw-2">&amp;</span><span class="ident">dest</span>, <span class="ident">msg</span>)
-					.<span class="ident">map_err</span>(<span class="op">|</span>()<span class="op">|</span> <span class="ident">SendError::DestinationUnsupported</span>)<span class="question-mark">?</span>;
-				<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">T::Hashing::hash_of</span>(<span class="kw-2">&amp;</span><span class="ident">versioned_xcm</span>);
-				<span class="ident"><span class="self">Self</span>::send_fragment</span>(
-					(<span class="kw-2">*</span><span class="ident">id</span>).<span class="ident">into</span>(),
-					<span class="ident">XcmpMessageFormat::ConcatenatedVersionedXcm</span>,
-					<span class="ident">versioned_xcm</span>,
+		<span class="kw">match </span><span class="kw-2">&amp;</span>dest {
+			<span class="comment">// An HRMP message for a sibling parachain.
+			</span>MultiLocation { parents: <span class="number">1</span>, interior: X1(Parachain(id)) } =&gt; {
+				<span class="kw">let </span>versioned_xcm = T::VersionWrapper::wrap_version(<span class="kw-2">&amp;</span>dest, msg)
+					.map_err(|()| SendError::DestinationUnsupported)<span class="question-mark">?</span>;
+				<span class="kw">let </span>hash = T::Hashing::hash_of(<span class="kw-2">&amp;</span>versioned_xcm);
+				<span class="self">Self</span>::send_fragment(
+					(<span class="kw-2">*</span>id).into(),
+					XcmpMessageFormat::ConcatenatedVersionedXcm,
+					versioned_xcm,
 				)
-				.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">SendError::Transport</span>(<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">e</span>)))<span class="question-mark">?</span>;
-				<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::XcmpMessageSent</span> { <span class="ident">message_hash</span>: <span class="prelude-val">Some</span>(<span class="ident">hash</span>) });
+				.map_err(|e| SendError::Transport(&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;::from(e)))<span class="question-mark">?</span>;
+				<span class="self">Self</span>::deposit_event(Event::XcmpMessageSent { message_hash: <span class="prelude-val">Some</span>(hash) });
 				<span class="prelude-val">Ok</span>(())
 			},
-			<span class="comment">// Anything else is unhandled. This includes a message this is meant for us.</span>
-			<span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">SendError::CannotReachDestination</span>(<span class="ident">dest</span>, <span class="ident">msg</span>)),
+			<span class="comment">// Anything else is unhandled. This includes a message this is meant for us.
+			</span><span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(SendError::CannotReachDestination(dest, msg)),
 		}
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_xcmp_queue" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_xcmp_queue" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-minimal-node/src/network.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>network.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_minimal_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_minimal_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_minimal_node/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-minimal-node/src/network.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>network.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_minimal_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_minimal_node/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_minimal_node/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -383,552 +383,390 @@
 <span id="383">383</span>
 <span id="384">384</span>
 <span id="385">385</span>
-<span id="386">386</span>
-<span id="387">387</span>
-<span id="388">388</span>
-<span id="389">389</span>
-<span id="390">390</span>
-<span id="391">391</span>
-<span id="392">392</span>
-<span id="393">393</span>
-<span id="394">394</span>
-<span id="395">395</span>
-<span id="396">396</span>
-<span id="397">397</span>
-<span id="398">398</span>
-<span id="399">399</span>
-<span id="400">400</span>
-<span id="401">401</span>
-<span id="402">402</span>
-<span id="403">403</span>
-<span id="404">404</span>
-<span id="405">405</span>
-<span id="406">406</span>
-<span id="407">407</span>
-<span id="408">408</span>
-<span id="409">409</span>
-<span id="410">410</span>
-<span id="411">411</span>
-<span id="412">412</span>
-<span id="413">413</span>
-<span id="414">414</span>
-<span id="415">415</span>
-<span id="416">416</span>
-<span id="417">417</span>
-<span id="418">418</span>
-<span id="419">419</span>
-<span id="420">420</span>
-<span id="421">421</span>
-<span id="422">422</span>
-<span id="423">423</span>
-<span id="424">424</span>
-<span id="425">425</span>
-<span id="426">426</span>
-<span id="427">427</span>
-<span id="428">428</span>
-<span id="429">429</span>
-<span id="430">430</span>
-<span id="431">431</span>
-<span id="432">432</span>
-<span id="433">433</span>
-<span id="434">434</span>
-<span id="435">435</span>
-<span id="436">436</span>
-<span id="437">437</span>
-<span id="438">438</span>
-<span id="439">439</span>
-<span id="440">440</span>
-<span id="441">441</span>
-<span id="442">442</span>
-<span id="443">443</span>
-<span id="444">444</span>
-<span id="445">445</span>
-<span id="446">446</span>
-<span id="447">447</span>
-<span id="448">448</span>
-<span id="449">449</span>
-<span id="450">450</span>
-<span id="451">451</span>
-<span id="452">452</span>
-<span id="453">453</span>
-<span id="454">454</span>
-<span id="455">455</span>
-<span id="456">456</span>
-<span id="457">457</span>
-<span id="458">458</span>
-<span id="459">459</span>
-<span id="460">460</span>
-<span id="461">461</span>
-<span id="462">462</span>
-<span id="463">463</span>
-<span id="464">464</span>
-<span id="465">465</span>
-<span id="466">466</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">polkadot_core_primitives</span>::{<span class="ident">Block</span>, <span class="ident">Hash</span>};
-<span class="kw">use</span> <span class="ident">polkadot_service</span>::{<span class="ident">BlockT</span>, <span class="ident">NumberFor</span>};
+</span><span class="kw">use </span>polkadot_core_primitives::{Block, Hash};
+<span class="kw">use </span>polkadot_service::{BlockT, NumberFor};
 
-<span class="kw">use</span> <span class="ident">polkadot_node_network_protocol::PeerId</span>;
-<span class="kw">use</span> <span class="ident">sc_network</span>::{<span class="ident">NetworkService</span>, <span class="ident">SyncState</span>};
+<span class="kw">use </span>polkadot_node_network_protocol::PeerId;
+<span class="kw">use </span>sc_network::{NetworkService, SyncState};
 
-<span class="kw">use</span> <span class="ident">sc_client_api::HeaderBackend</span>;
-<span class="kw">use</span> <span class="ident">sc_network_common</span>::{
-	<span class="ident">config</span>::{
-		<span class="ident">NonDefaultSetConfig</span>, <span class="ident">NonReservedPeerMode</span>, <span class="ident">NotificationHandshake</span>, <span class="ident">ProtocolId</span>, <span class="ident">SetConfig</span>,
+<span class="kw">use </span>sc_client_api::HeaderBackend;
+<span class="kw">use </span>sc_network_common::{
+	config::{
+		NonDefaultSetConfig, NonReservedPeerMode, NotificationHandshake, ProtocolId, SetConfig,
 	},
-	<span class="ident">protocol::role::Roles</span>,
-	<span class="ident">service::NetworkSyncForkRequest</span>,
-	<span class="ident">sync</span>::{<span class="ident">message::BlockAnnouncesHandshake</span>, <span class="ident">Metrics</span>, <span class="ident">SyncStatus</span>},
+	protocol::role::Roles,
+	service::NetworkSyncForkRequest,
+	sync::{
+		message::{BlockAnnouncesHandshake, BlockRequest},
+		Metrics, SyncStatus,
+	},
 };
-<span class="kw">use</span> <span class="ident">sc_network_light::light_client_requests</span>;
-<span class="kw">use</span> <span class="ident">sc_network_sync</span>::{<span class="ident">block_request_handler</span>, <span class="ident">state_request_handler</span>};
-<span class="kw">use</span> <span class="ident">sc_service</span>::{<span class="ident">error::Error</span>, <span class="ident">Configuration</span>, <span class="ident">NetworkStarter</span>, <span class="ident">SpawnTaskHandle</span>};
-<span class="kw">use</span> <span class="ident">sp_consensus::BlockOrigin</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::Justifications</span>;
+<span class="kw">use </span>sc_service::{error::Error, Configuration, NetworkStarter, SpawnTaskHandle};
+<span class="kw">use </span>sp_consensus::BlockOrigin;
+<span class="kw">use </span>sp_runtime::Justifications;
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">iter</span>, <span class="ident">sync::Arc</span>};
+<span class="kw">use </span>std::{iter, sync::Arc};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::BlockChainRpcClient</span>;
+<span class="kw">use </span><span class="kw">crate</span>::BlockChainRpcClient;
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">BuildCollatorNetworkParams</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// The service configuration.</span>
-	<span class="kw">pub</span> <span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Configuration</span>,
-	<span class="doccomment">/// A shared client returned by `new_full_parts`.</span>
-	<span class="kw">pub</span> <span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">BlockChainRpcClient</span><span class="op">&gt;</span>,
-	<span class="doccomment">/// A handle for spawning tasks.</span>
-	<span class="kw">pub</span> <span class="ident">spawn_handle</span>: <span class="ident">SpawnTaskHandle</span>,
-	<span class="doccomment">/// Genesis hash</span>
-	<span class="kw">pub</span> <span class="ident">genesis_hash</span>: <span class="ident">Hash</span>,
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>BuildCollatorNetworkParams&lt;<span class="lifetime">&#39;a</span>&gt; {
+	<span class="doccomment">/// The service configuration.
+	</span><span class="kw">pub </span>config: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Configuration,
+	<span class="doccomment">/// A shared client returned by `new_full_parts`.
+	</span><span class="kw">pub </span>client: Arc&lt;BlockChainRpcClient&gt;,
+	<span class="doccomment">/// A handle for spawning tasks.
+	</span><span class="kw">pub </span>spawn_handle: SpawnTaskHandle,
+	<span class="doccomment">/// Genesis hash
+	</span><span class="kw">pub </span>genesis_hash: Hash,
 }
 
-<span class="doccomment">/// Build the network service, the network status sinks and an RPC sender.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">build_collator_network</span>(
-	<span class="ident">params</span>: <span class="ident">BuildCollatorNetworkParams</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">NetworkService</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">NetworkStarter</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">BuildCollatorNetworkParams</span> { <span class="ident">config</span>, <span class="ident">client</span>, <span class="ident">spawn_handle</span>, <span class="ident">genesis_hash</span> } <span class="op">=</span> <span class="ident">params</span>;
+<span class="doccomment">/// Build the network service, the network status sinks and an RPC sender.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>build_collator_network(
+	params: BuildCollatorNetworkParams,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(Arc&lt;NetworkService&lt;Block, Hash&gt;&gt;, NetworkStarter), Error&gt; {
+	<span class="kw">let </span>BuildCollatorNetworkParams { config, client, spawn_handle, genesis_hash } = params;
 
-	<span class="kw">let</span> <span class="ident">protocol_id</span> <span class="op">=</span> <span class="ident">config</span>.<span class="ident">protocol_id</span>();
-
-	<span class="kw">let</span> <span class="ident">block_request_protocol_config</span> <span class="op">=</span>
-		<span class="ident">block_request_handler::generate_protocol_config</span>(<span class="kw-2">&amp;</span><span class="ident">protocol_id</span>, <span class="ident">genesis_hash</span>, <span class="prelude-val">None</span>);
-
-	<span class="kw">let</span> <span class="ident">state_request_protocol_config</span> <span class="op">=</span>
-		<span class="ident">state_request_handler::generate_protocol_config</span>(<span class="kw-2">&amp;</span><span class="ident">protocol_id</span>, <span class="ident">genesis_hash</span>, <span class="prelude-val">None</span>);
-
-	<span class="kw">let</span> <span class="ident">light_client_request_protocol_config</span> <span class="op">=</span>
-		<span class="ident">light_client_requests::generate_protocol_config</span>(<span class="kw-2">&amp;</span><span class="ident">protocol_id</span>, <span class="ident">genesis_hash</span>, <span class="prelude-val">None</span>);
-
-	<span class="kw">let</span> <span class="ident">chain_sync</span> <span class="op">=</span> <span class="ident">DummyChainSync</span>;
-	<span class="kw">let</span> <span class="ident">block_announce_config</span> <span class="op">=</span> <span class="ident">chain_sync</span>.<span class="ident">get_block_announce_proto_config</span>::<span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>(
-		<span class="ident">protocol_id</span>.<span class="ident">clone</span>(),
+	<span class="kw">let </span>protocol_id = config.protocol_id();
+	<span class="kw">let </span>chain_sync = DummyChainSync;
+	<span class="kw">let </span>block_announce_config = chain_sync.get_block_announce_proto_config::&lt;Block&gt;(
+		protocol_id.clone(),
 		<span class="kw-2">&amp;</span><span class="prelude-val">None</span>,
-		<span class="ident">Roles::from</span>(<span class="kw-2">&amp;</span><span class="ident">config</span>.<span class="ident">role</span>),
-		<span class="ident">client</span>.<span class="ident">info</span>().<span class="ident">best_number</span>,
-		<span class="ident">client</span>.<span class="ident">info</span>().<span class="ident">best_hash</span>,
-		<span class="ident">genesis_hash</span>,
+		Roles::from(<span class="kw-2">&amp;</span>config.role),
+		client.info().best_number,
+		client.info().best_hash,
+		genesis_hash,
 	);
 
-	<span class="kw">let</span> <span class="ident">network_params</span> <span class="op">=</span> <span class="ident">sc_network::config::Params</span> {
-		<span class="ident">role</span>: <span class="ident">config</span>.<span class="ident">role</span>.<span class="ident">clone</span>(),
-		<span class="ident">executor</span>: {
-			<span class="kw">let</span> <span class="ident">spawn_handle</span> <span class="op">=</span> <span class="ident">Clone::clone</span>(<span class="kw-2">&amp;</span><span class="ident">spawn_handle</span>);
-			<span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">fut</span><span class="op">|</span> {
-				<span class="ident">spawn_handle</span>.<span class="ident">spawn</span>(<span class="string">&quot;libp2p-node&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;networking&quot;</span>), <span class="ident">fut</span>);
-			}))
+	<span class="kw">let </span>network_params = sc_network::config::Params {
+		role: config.role.clone(),
+		executor: {
+			<span class="kw">let </span>spawn_handle = Clone::clone(<span class="kw-2">&amp;</span>spawn_handle);
+			Box::new(<span class="kw">move </span>|fut| {
+				spawn_handle.spawn(<span class="string">&quot;libp2p-node&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;networking&quot;</span>), fut);
+			})
 		},
-		<span class="ident">fork_id</span>: <span class="prelude-val">None</span>,
-		<span class="ident">chain_sync</span>: <span class="ident">Box::new</span>(<span class="ident">chain_sync</span>),
-		<span class="ident">network_config</span>: <span class="ident">config</span>.<span class="ident">network</span>.<span class="ident">clone</span>(),
-		<span class="ident">chain</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-		<span class="ident">import_queue</span>: <span class="ident">Box::new</span>(<span class="ident">DummyImportQueue</span>),
-		<span class="ident">protocol_id</span>,
-		<span class="ident">metrics_registry</span>: <span class="ident">config</span>.<span class="ident">prometheus_config</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">config</span><span class="op">|</span> <span class="ident">config</span>.<span class="ident">registry</span>.<span class="ident">clone</span>()),
-		<span class="ident">block_announce_config</span>,
-		<span class="ident">chain_sync_service</span>: <span class="ident">Box::new</span>(<span class="ident">DummyChainSyncService</span>::<span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>(<span class="ident">Default::default</span>())),
-		<span class="ident">block_request_protocol_config</span>,
-		<span class="ident">state_request_protocol_config</span>,
-		<span class="ident">warp_sync_protocol_config</span>: <span class="prelude-val">None</span>,
-		<span class="ident">light_client_request_protocol_config</span>,
-		<span class="ident">request_response_protocol_configs</span>: <span class="ident">Vec::new</span>(),
+		fork_id: <span class="prelude-val">None</span>,
+		chain_sync: Box::new(chain_sync),
+		network_config: config.network.clone(),
+		chain: client.clone(),
+		import_queue: Box::new(DummyImportQueue),
+		protocol_id,
+		metrics_registry: config.prometheus_config.as_ref().map(|config| config.registry.clone()),
+		block_announce_config,
+		chain_sync_service: Box::new(DummyChainSyncService::&lt;Block&gt;(Default::default())),
+		request_response_protocol_configs: Vec::new(),
 	};
 
-	<span class="kw">let</span> <span class="ident">network_worker</span> <span class="op">=</span> <span class="ident">sc_network::NetworkWorker::new</span>(<span class="ident">network_params</span>)<span class="question-mark">?</span>;
-	<span class="kw">let</span> <span class="ident">network_service</span> <span class="op">=</span> <span class="ident">network_worker</span>.<span class="ident">service</span>().<span class="ident">clone</span>();
+	<span class="kw">let </span>network_worker = sc_network::NetworkWorker::new(network_params)<span class="question-mark">?</span>;
+	<span class="kw">let </span>network_service = network_worker.service().clone();
 
-	<span class="kw">let</span> (<span class="ident">network_start_tx</span>, <span class="ident">network_start_rx</span>) <span class="op">=</span> <span class="ident">futures::channel::oneshot::channel</span>();
+	<span class="kw">let </span>(network_start_tx, network_start_rx) = futures::channel::oneshot::channel();
 
-	<span class="comment">// The network worker is responsible for gathering all network messages and processing</span>
-	<span class="comment">// them. This is quite a heavy task, and at the time of the writing of this comment it</span>
-	<span class="comment">// frequently happens that this future takes several seconds or in some situations</span>
-	<span class="comment">// even more than a minute until it has processed its entire queue. This is clearly an</span>
-	<span class="comment">// issue, and ideally we would like to fix the network future to take as little time as</span>
-	<span class="comment">// possible, but we also take the extra harm-prevention measure to execute the networking</span>
-	<span class="comment">// future using `spawn_blocking`.</span>
-	<span class="ident">spawn_handle</span>.<span class="ident">spawn_blocking</span>(<span class="string">&quot;network-worker&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;networking&quot;</span>), <span class="kw">async</span> <span class="kw">move</span> {
-		<span class="kw">if</span> <span class="ident">network_start_rx</span>.<span class="kw">await</span>.<span class="ident">is_err</span>() {
+	<span class="comment">// The network worker is responsible for gathering all network messages and processing
+	// them. This is quite a heavy task, and at the time of the writing of this comment it
+	// frequently happens that this future takes several seconds or in some situations
+	// even more than a minute until it has processed its entire queue. This is clearly an
+	// issue, and ideally we would like to fix the network future to take as little time as
+	// possible, but we also take the extra harm-prevention measure to execute the networking
+	// future using `spawn_blocking`.
+	</span>spawn_handle.spawn_blocking(<span class="string">&quot;network-worker&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;networking&quot;</span>), <span class="kw">async move </span>{
+		<span class="kw">if </span>network_start_rx.<span class="kw">await</span>.is_err() {
 			<span class="macro">tracing::warn!</span>(
-				<span class="string">&quot;The NetworkStart returned as part of `build_network` has been silently dropped&quot;</span>
-			);
-			<span class="comment">// This `return` might seem unnecessary, but we don&#39;t want to make it look like</span>
-			<span class="comment">// everything is working as normal even though the user is clearly misusing the API.</span>
-			<span class="kw">return</span>
-		}
+				<span class="string">&quot;The NetworkStart returned as part of `build_network` has been silently dropped&quot;
+			</span>);
+			<span class="comment">// This `return` might seem unnecessary, but we don&#39;t want to make it look like
+			// everything is working as normal even though the user is clearly misusing the API.
+			</span><span class="kw">return
+		</span>}
 
-		<span class="ident">network_worker</span>.<span class="kw">await</span>
-	});
+		network_worker.<span class="kw">await
+	</span>});
 
-	<span class="kw">let</span> <span class="ident">network_starter</span> <span class="op">=</span> <span class="ident">NetworkStarter::new</span>(<span class="ident">network_start_tx</span>);
+	<span class="kw">let </span>network_starter = NetworkStarter::new(network_start_tx);
 
-	<span class="prelude-val">Ok</span>((<span class="ident">network_service</span>, <span class="ident">network_starter</span>))
+	<span class="prelude-val">Ok</span>((network_service, network_starter))
 }
 
-<span class="doccomment">/// Empty ChainSync shell. Syncing code is not necessary for</span>
-<span class="doccomment">/// the minimal node, but network currently requires it. So</span>
-<span class="doccomment">/// we provide a noop implementation.</span>
-<span class="kw">struct</span> <span class="ident">DummyChainSync</span>;
+<span class="doccomment">/// Empty ChainSync shell. Syncing code is not necessary for
+/// the minimal node, but network currently requires it. So
+/// we provide a noop implementation.
+</span><span class="kw">struct </span>DummyChainSync;
 
-<span class="kw">impl</span> <span class="ident">DummyChainSync</span> {
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_block_announce_proto_config</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">BlockT</span><span class="op">&gt;</span>(
+<span class="kw">impl </span>DummyChainSync {
+	<span class="kw">pub fn </span>get_block_announce_proto_config&lt;B: BlockT&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">protocol_id</span>: <span class="ident">ProtocolId</span>,
-		<span class="ident">fork_id</span>: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-		<span class="ident">roles</span>: <span class="ident">Roles</span>,
-		<span class="ident">best_number</span>: <span class="ident">NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
-		<span class="ident">best_hash</span>: <span class="ident">B::Hash</span>,
-		<span class="ident">genesis_hash</span>: <span class="ident">B::Hash</span>,
-	) -&gt; <span class="ident">NonDefaultSetConfig</span> {
-		<span class="kw">let</span> <span class="ident">block_announces_protocol</span> <span class="op">=</span> {
-			<span class="kw">let</span> <span class="ident">genesis_hash</span> <span class="op">=</span> <span class="ident">genesis_hash</span>.<span class="ident">as_ref</span>();
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">fork_id</span>) <span class="op">=</span> <span class="ident">fork_id</span> {
+		protocol_id: ProtocolId,
+		fork_id: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;String&gt;,
+		roles: Roles,
+		best_number: NumberFor&lt;B&gt;,
+		best_hash: B::Hash,
+		genesis_hash: B::Hash,
+	) -&gt; NonDefaultSetConfig {
+		<span class="kw">let </span>block_announces_protocol = {
+			<span class="kw">let </span>genesis_hash = genesis_hash.as_ref();
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref </span>fork_id) = fork_id {
 				<span class="macro">format!</span>(
 					<span class="string">&quot;/{}/{}/block-announces/1&quot;</span>,
-					<span class="ident">array_bytes::bytes2hex</span>(<span class="string">&quot;&quot;</span>, <span class="ident">genesis_hash</span>),
-					<span class="ident">fork_id</span>
+					array_bytes::bytes2hex(<span class="string">&quot;&quot;</span>, genesis_hash),
+					fork_id
 				)
-			} <span class="kw">else</span> {
-				<span class="macro">format!</span>(<span class="string">&quot;/{}/block-announces/1&quot;</span>, <span class="ident">array_bytes::bytes2hex</span>(<span class="string">&quot;&quot;</span>, <span class="ident">genesis_hash</span>))
+			} <span class="kw">else </span>{
+				<span class="macro">format!</span>(<span class="string">&quot;/{}/block-announces/1&quot;</span>, array_bytes::bytes2hex(<span class="string">&quot;&quot;</span>, genesis_hash))
 			}
 		};
 
-		<span class="ident">NonDefaultSetConfig</span> {
-			<span class="ident">notifications_protocol</span>: <span class="ident">block_announces_protocol</span>.<span class="ident">into</span>(),
-			<span class="ident">fallback_names</span>: <span class="ident">iter::once</span>(
-				<span class="macro">format!</span>(<span class="string">&quot;/{}/block-announces/1&quot;</span>, <span class="ident">protocol_id</span>.<span class="ident">as_ref</span>()).<span class="ident">into</span>(),
+		NonDefaultSetConfig {
+			notifications_protocol: block_announces_protocol.into(),
+			fallback_names: iter::once(
+				<span class="macro">format!</span>(<span class="string">&quot;/{}/block-announces/1&quot;</span>, protocol_id.as_ref()).into(),
 			)
-			.<span class="ident">collect</span>(),
-			<span class="ident">max_notification_size</span>: <span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span>,
-			<span class="ident">handshake</span>: <span class="prelude-val">Some</span>(<span class="ident">NotificationHandshake::new</span>(<span class="ident">BlockAnnouncesHandshake</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="ident">::build</span>(
-				<span class="ident">roles</span>,
-				<span class="ident">best_number</span>,
-				<span class="ident">best_hash</span>,
-				<span class="ident">genesis_hash</span>,
+			.collect(),
+			max_notification_size: <span class="number">1024 </span>* <span class="number">1024</span>,
+			handshake: <span class="prelude-val">Some</span>(NotificationHandshake::new(BlockAnnouncesHandshake::&lt;B&gt;::build(
+				roles,
+				best_number,
+				best_hash,
+				genesis_hash,
 			))),
-			<span class="comment">// NOTE: `set_config` will be ignored by `protocol.rs` as the block announcement</span>
-			<span class="comment">// protocol is still hardcoded into the peerset.</span>
-			<span class="ident">set_config</span>: <span class="ident">SetConfig</span> {
-				<span class="ident">in_peers</span>: <span class="number">0</span>,
-				<span class="ident">out_peers</span>: <span class="number">0</span>,
-				<span class="ident">reserved_nodes</span>: <span class="ident">Vec::new</span>(),
-				<span class="ident">non_reserved_mode</span>: <span class="ident">NonReservedPeerMode::Deny</span>,
+			<span class="comment">// NOTE: `set_config` will be ignored by `protocol.rs` as the block announcement
+			// protocol is still hardcoded into the peerset.
+			</span>set_config: SetConfig {
+				in_peers: <span class="number">0</span>,
+				out_peers: <span class="number">0</span>,
+				reserved_nodes: Vec::new(),
+				non_reserved_mode: NonReservedPeerMode::Deny,
 			},
 		}
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">BlockT</span><span class="op">&gt;</span> <span class="ident">sc_network_common::sync::ChainSync</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DummyChainSync</span> {
-	<span class="kw">fn</span> <span class="ident">peer_info</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_who</span>: <span class="kw-2">&amp;</span><span class="ident">PeerId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::PeerInfo</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">None</span>
-	}
+<span class="kw">impl</span>&lt;B: BlockT&gt; sc_network_common::sync::ChainSync&lt;B&gt; <span class="kw">for </span>DummyChainSync {
+	<span class="kw">fn </span>peer_info(<span class="kw-2">&amp;</span><span class="self">self</span>, _who: <span class="kw-2">&amp;</span>PeerId) -&gt; <span class="prelude-ty">Option</span>&lt;sc_network_common::sync::PeerInfo&lt;B&gt;&gt; {
+		<span class="prelude-val">None
+	</span>}
 
-	<span class="kw">fn</span> <span class="ident">status</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">sc_network_common::sync::SyncStatus</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-		<span class="ident">SyncStatus</span> {
-			<span class="ident">state</span>: <span class="ident">SyncState::Idle</span>,
-			<span class="ident">best_seen_block</span>: <span class="prelude-val">None</span>,
-			<span class="ident">num_peers</span>: <span class="number">0</span>,
-			<span class="ident">queued_blocks</span>: <span class="number">0</span>,
-			<span class="ident">state_sync</span>: <span class="prelude-val">None</span>,
-			<span class="ident">warp_sync</span>: <span class="prelude-val">None</span>,
+	<span class="kw">fn </span>status(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; sc_network_common::sync::SyncStatus&lt;B&gt; {
+		SyncStatus {
+			state: SyncState::Idle,
+			best_seen_block: <span class="prelude-val">None</span>,
+			num_peers: <span class="number">0</span>,
+			queued_blocks: <span class="number">0</span>,
+			state_sync: <span class="prelude-val">None</span>,
+			warp_sync: <span class="prelude-val">None</span>,
 		}
 	}
 
-	<span class="kw">fn</span> <span class="ident">num_sync_requests</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-		<span class="number">0</span>
-	}
+	<span class="kw">fn </span>num_sync_requests(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+		<span class="number">0
+	</span>}
 
-	<span class="kw">fn</span> <span class="ident">num_downloaded_blocks</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-		<span class="number">0</span>
-	}
+	<span class="kw">fn </span>num_downloaded_blocks(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+		<span class="number">0
+	</span>}
 
-	<span class="kw">fn</span> <span class="ident">num_peers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-		<span class="number">0</span>
-	}
+	<span class="kw">fn </span>num_peers(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+		<span class="number">0
+	</span>}
 
-	<span class="kw">fn</span> <span class="ident">new_peer</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_who</span>: <span class="ident">PeerId</span>,
-		<span class="ident">_best_hash</span>: <span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-		<span class="ident">_best_number</span>: <span class="ident">polkadot_service::NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-		<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::message::BlockRequest</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">sc_network_common::sync::BadPeer</span>,
-	<span class="op">&gt;</span> {
+	<span class="kw">fn </span>new_peer(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_who: PeerId,
+		_best_hash: &lt;B <span class="kw">as </span>BlockT&gt;::Hash,
+		_best_number: polkadot_service::NumberFor&lt;B&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;
+		<span class="prelude-ty">Option</span>&lt;sc_network_common::sync::message::BlockRequest&lt;B&gt;&gt;,
+		sc_network_common::sync::BadPeer,
+	&gt; {
 		<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
 	}
 
-	<span class="kw">fn</span> <span class="ident">update_chain_info</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_best_hash</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-		<span class="ident">_best_number</span>: <span class="ident">polkadot_service::NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
+	<span class="kw">fn </span>update_chain_info(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_best_hash: <span class="kw-2">&amp;</span>&lt;B <span class="kw">as </span>BlockT&gt;::Hash,
+		_best_number: polkadot_service::NumberFor&lt;B&gt;,
 	) {
 	}
 
-	<span class="kw">fn</span> <span class="ident">request_justification</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_hash</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-		<span class="ident">_number</span>: <span class="ident">polkadot_service::NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
+	<span class="kw">fn </span>request_justification(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_hash: <span class="kw-2">&amp;</span>&lt;B <span class="kw">as </span>BlockT&gt;::Hash,
+		_number: polkadot_service::NumberFor&lt;B&gt;,
 	) {
 	}
 
-	<span class="kw">fn</span> <span class="ident">clear_justification_requests</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {}
+	<span class="kw">fn </span>clear_justification_requests(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {}
 
-	<span class="kw">fn</span> <span class="ident">set_sync_fork_request</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_peers</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PeerId</span><span class="op">&gt;</span>,
-		<span class="ident">_hash</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-		<span class="ident">_number</span>: <span class="ident">polkadot_service::NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
+	<span class="kw">fn </span>set_sync_fork_request(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_peers: Vec&lt;PeerId&gt;,
+		_hash: <span class="kw-2">&amp;</span>&lt;B <span class="kw">as </span>BlockT&gt;::Hash,
+		_number: polkadot_service::NumberFor&lt;B&gt;,
 	) {
 	}
 
-	<span class="kw">fn</span> <span class="ident">justification_requests</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-	) -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">PeerId</span>, <span class="ident">sc_network_common::sync::message::BlockRequest</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;_</span><span class="op">&gt;</span>
-	{
-		<span class="ident">Box::new</span>(<span class="ident">std::iter::empty</span>())
-	}
-
-	<span class="kw">fn</span> <span class="ident">block_requests</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-	) -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">PeerId</span>, <span class="ident">sc_network_common::sync::message::BlockRequest</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;_</span><span class="op">&gt;</span>
-	{
-		<span class="ident">Box::new</span>(<span class="ident">std::iter::empty</span>())
-	}
-
-	<span class="kw">fn</span> <span class="ident">state_request</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">PeerId</span>, <span class="ident">sc_network_common::sync::OpaqueStateRequest</span>)<span class="op">&gt;</span> {
-		<span class="prelude-val">None</span>
-	}
-
-	<span class="kw">fn</span> <span class="ident">warp_sync_request</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-	) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">PeerId</span>, <span class="ident">sc_network_common::sync::warp::WarpProofRequest</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
-		<span class="prelude-val">None</span>
-	}
-
-	<span class="kw">fn</span> <span class="ident">on_block_data</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_who</span>: <span class="kw-2">&amp;</span><span class="ident">PeerId</span>,
-		<span class="ident">_request</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::message::BlockRequest</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">_response</span>: <span class="ident">sc_network_common::sync::message::BlockResponse</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::OnBlockData</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>, <span class="ident">sc_network_common::sync::BadPeer</span><span class="op">&gt;</span> {
+	<span class="kw">fn </span>on_block_data(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_who: <span class="kw-2">&amp;</span>PeerId,
+		_request: <span class="prelude-ty">Option</span>&lt;sc_network_common::sync::message::BlockRequest&lt;B&gt;&gt;,
+		_response: sc_network_common::sync::message::BlockResponse&lt;B&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;sc_network_common::sync::OnBlockData&lt;B&gt;, sc_network_common::sync::BadPeer&gt; {
 		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
 	}
 
-	<span class="kw">fn</span> <span class="ident">on_state_data</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_who</span>: <span class="kw-2">&amp;</span><span class="ident">PeerId</span>,
-		<span class="ident">_response</span>: <span class="ident">sc_network_common::sync::OpaqueStateResponse</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::OnStateData</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>, <span class="ident">sc_network_common::sync::BadPeer</span><span class="op">&gt;</span> {
-		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
-	}
-
-	<span class="kw">fn</span> <span class="ident">on_warp_sync_data</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_who</span>: <span class="kw-2">&amp;</span><span class="ident">PeerId</span>,
-		<span class="ident">_response</span>: <span class="ident">sc_network_common::sync::warp::EncodedProof</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">sc_network_common::sync::BadPeer</span><span class="op">&gt;</span> {
-		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
-	}
-
-	<span class="kw">fn</span> <span class="ident">on_block_justification</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_who</span>: <span class="ident">PeerId</span>,
-		<span class="ident">_response</span>: <span class="ident">sc_network_common::sync::message::BlockResponse</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::OnBlockJustification</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>, <span class="ident">sc_network_common::sync::BadPeer</span><span class="op">&gt;</span>
+	<span class="kw">fn </span>on_block_justification(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_who: PeerId,
+		_response: sc_network_common::sync::message::BlockResponse&lt;B&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;sc_network_common::sync::OnBlockJustification&lt;B&gt;, sc_network_common::sync::BadPeer&gt;
 	{
 		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
 	}
 
-	<span class="kw">fn</span> <span class="ident">on_blocks_processed</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_imported</span>: <span class="ident">usize</span>,
-		<span class="ident">_count</span>: <span class="ident">usize</span>,
-		<span class="ident">_results</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(
-			<span class="prelude-ty">Result</span><span class="op">&lt;</span>
-				<span class="ident">sc_consensus::BlockImportStatus</span><span class="op">&lt;</span><span class="ident">polkadot_service::NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-				<span class="ident">sc_consensus::BlockImportError</span>,
-			<span class="op">&gt;</span>,
-			<span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-		)<span class="op">&gt;</span>,
-	) -&gt; <span class="ident">Box</span><span class="op">&lt;</span>
-		<span class="kw">dyn</span> <span class="ident">Iterator</span><span class="op">&lt;</span>
-			<span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-				(<span class="ident">PeerId</span>, <span class="ident">sc_network_common::sync::message::BlockRequest</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>),
-				<span class="ident">sc_network_common::sync::BadPeer</span>,
-			<span class="op">&gt;</span>,
-		<span class="op">&gt;</span>,
-	<span class="op">&gt;</span> {
-		<span class="ident">Box::new</span>(<span class="ident">std::iter::empty</span>())
+	<span class="kw">fn </span>on_blocks_processed(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_imported: usize,
+		_count: usize,
+		_results: Vec&lt;(
+			<span class="prelude-ty">Result</span>&lt;
+				sc_consensus::BlockImportStatus&lt;polkadot_service::NumberFor&lt;B&gt;&gt;,
+				sc_consensus::BlockImportError,
+			&gt;,
+			&lt;B <span class="kw">as </span>BlockT&gt;::Hash,
+		)&gt;,
+	) -&gt; Box&lt;
+		<span class="kw">dyn </span>Iterator&lt;
+			Item = <span class="prelude-ty">Result</span>&lt;
+				(PeerId, sc_network_common::sync::message::BlockRequest&lt;B&gt;),
+				sc_network_common::sync::BadPeer,
+			&gt;,
+		&gt;,
+	&gt; {
+		Box::new(std::iter::empty())
 	}
 
-	<span class="kw">fn</span> <span class="ident">on_justification_import</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_hash</span>: <span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-		<span class="ident">_number</span>: <span class="ident">polkadot_service::NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
-		<span class="ident">_success</span>: <span class="ident">bool</span>,
+	<span class="kw">fn </span>on_justification_import(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_hash: &lt;B <span class="kw">as </span>BlockT&gt;::Hash,
+		_number: polkadot_service::NumberFor&lt;B&gt;,
+		_success: bool,
 	) {
 	}
 
-	<span class="kw">fn</span> <span class="ident">on_block_finalized</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_hash</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-		<span class="ident">_number</span>: <span class="ident">polkadot_service::NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
+	<span class="kw">fn </span>on_block_finalized(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_hash: <span class="kw-2">&amp;</span>&lt;B <span class="kw">as </span>BlockT&gt;::Hash,
+		_number: polkadot_service::NumberFor&lt;B&gt;,
 	) {
 	}
 
-	<span class="kw">fn</span> <span class="ident">push_block_announce_validation</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_who</span>: <span class="ident">PeerId</span>,
-		<span class="ident">_hash</span>: <span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-		<span class="ident">_announce</span>: <span class="ident">sc_network_common::sync::message::BlockAnnounce</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span><span class="op">&gt;</span>,
-		<span class="ident">_is_best</span>: <span class="ident">bool</span>,
+	<span class="kw">fn </span>push_block_announce_validation(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_who: PeerId,
+		_hash: &lt;B <span class="kw">as </span>BlockT&gt;::Hash,
+		_announce: sc_network_common::sync::message::BlockAnnounce&lt;&lt;B <span class="kw">as </span>BlockT&gt;::Header&gt;,
+		_is_best: bool,
 	) {
 	}
 
-	<span class="kw">fn</span> <span class="ident">poll_block_announce_validation</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_cx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">std::task::Context</span>,
-	) -&gt; <span class="ident">std::task::Poll</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::PollBlockAnnounceValidation</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span><span class="op">&gt;</span><span class="op">&gt;</span>
+	<span class="kw">fn </span>poll_block_announce_validation(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_cx: <span class="kw-2">&amp;mut </span>std::task::Context,
+	) -&gt; std::task::Poll&lt;sc_network_common::sync::PollBlockAnnounceValidation&lt;&lt;B <span class="kw">as </span>BlockT&gt;::Header&gt;&gt;
 	{
-		<span class="ident">std::task::Poll::Pending</span>
+		std::task::Poll::Pending
 	}
 
-	<span class="kw">fn</span> <span class="ident">peer_disconnected</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_who</span>: <span class="kw-2">&amp;</span><span class="ident">PeerId</span>,
-	) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::OnBlockData</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">None</span>
-	}
+	<span class="kw">fn </span>peer_disconnected(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_who: <span class="kw-2">&amp;</span>PeerId,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;sc_network_common::sync::OnBlockData&lt;B&gt;&gt; {
+		<span class="prelude-val">None
+	</span>}
 
-	<span class="kw">fn</span> <span class="ident">metrics</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">sc_network_common::sync::Metrics</span> {
-		<span class="ident">Metrics</span> {
-			<span class="ident">queued_blocks</span>: <span class="number">0</span>,
-			<span class="ident">fork_targets</span>: <span class="number">0</span>,
-			<span class="ident">justifications</span>: <span class="ident">sc_network_common::sync::metrics::Metrics</span> {
-				<span class="ident">pending_requests</span>: <span class="number">0</span>,
-				<span class="ident">active_requests</span>: <span class="number">0</span>,
-				<span class="ident">importing_requests</span>: <span class="number">0</span>,
-				<span class="ident">failed_requests</span>: <span class="number">0</span>,
+	<span class="kw">fn </span>metrics(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; sc_network_common::sync::Metrics {
+		Metrics {
+			queued_blocks: <span class="number">0</span>,
+			fork_targets: <span class="number">0</span>,
+			justifications: sc_network_common::sync::metrics::Metrics {
+				pending_requests: <span class="number">0</span>,
+				active_requests: <span class="number">0</span>,
+				importing_requests: <span class="number">0</span>,
+				failed_requests: <span class="number">0</span>,
 			},
 		}
 	}
 
-	<span class="kw">fn</span> <span class="ident">create_opaque_block_request</span>(
+	<span class="kw">fn </span>block_response_into_blocks(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">_request</span>: <span class="kw-2">&amp;</span><span class="ident">sc_network_common::sync::message::BlockRequest</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">sc_network_common::sync::OpaqueBlockRequest</span> {
+		_request: <span class="kw-2">&amp;</span>sc_network_common::sync::message::BlockRequest&lt;B&gt;,
+		_response: sc_network_common::sync::OpaqueBlockResponse,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;sc_network_common::sync::message::BlockData&lt;B&gt;&gt;, String&gt; {
 		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
 	}
 
-	<span class="kw">fn</span> <span class="ident">encode_block_request</span>(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">_request</span>: <span class="kw-2">&amp;</span><span class="ident">sc_network_common::sync::OpaqueBlockRequest</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">String</span><span class="op">&gt;</span> {
+	<span class="kw">fn </span>poll(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_cx: <span class="kw-2">&amp;mut </span>std::task::Context,
+	) -&gt; std::task::Poll&lt;sc_network_common::sync::PollResult&lt;B&gt;&gt; {
+		std::task::Poll::Pending
+	}
+
+	<span class="kw">fn </span>send_block_request(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _who: PeerId, _request: BlockRequest&lt;B&gt;) {
 		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
 	}
 
-	<span class="kw">fn</span> <span class="ident">decode_block_response</span>(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">_response</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::OpaqueBlockResponse</span>, <span class="ident">String</span><span class="op">&gt;</span> {
-		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
-	}
-
-	<span class="kw">fn</span> <span class="ident">block_response_into_blocks</span>(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">_request</span>: <span class="kw-2">&amp;</span><span class="ident">sc_network_common::sync::message::BlockRequest</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
-		<span class="ident">_response</span>: <span class="ident">sc_network_common::sync::OpaqueBlockResponse</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::message::BlockData</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">String</span><span class="op">&gt;</span> {
-		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
-	}
-
-	<span class="kw">fn</span> <span class="ident">encode_state_request</span>(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">_request</span>: <span class="kw-2">&amp;</span><span class="ident">sc_network_common::sync::OpaqueStateRequest</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">String</span><span class="op">&gt;</span> {
-		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
-	}
-
-	<span class="kw">fn</span> <span class="ident">decode_state_response</span>(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">_response</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::OpaqueStateResponse</span>, <span class="ident">String</span><span class="op">&gt;</span> {
-		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
-	}
-
-	<span class="kw">fn</span> <span class="ident">poll</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_cx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">std::task::Context</span>,
-	) -&gt; <span class="ident">std::task::Poll</span><span class="op">&lt;</span><span class="ident">sc_network_common::sync::PollBlockAnnounceValidation</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">B</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span><span class="op">&gt;</span><span class="op">&gt;</span>
-	{
-		<span class="ident">std::task::Poll::Pending</span>
-	}
+	<span class="kw">fn </span>num_active_peers(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+		<span class="number">0
+	</span>}
 }
 
-<span class="kw">struct</span> <span class="ident">DummyImportQueue</span>;
+<span class="kw">struct </span>DummyImportQueue;
 
-<span class="kw">impl</span> <span class="ident">sc_service::ImportQueue</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DummyImportQueue</span> {
-	<span class="kw">fn</span> <span class="ident">import_blocks</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_origin</span>: <span class="ident">BlockOrigin</span>,
-		<span class="ident">_blocks</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">sc_consensus::IncomingBlock</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="kw">impl </span>sc_service::ImportQueue&lt;Block&gt; <span class="kw">for </span>DummyImportQueue {
+	<span class="kw">fn </span>import_blocks(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_origin: BlockOrigin,
+		_blocks: Vec&lt;sc_consensus::IncomingBlock&lt;Block&gt;&gt;,
 	) {
 	}
 
-	<span class="kw">fn</span> <span class="ident">import_justifications</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_who</span>: <span class="ident">PeerId</span>,
-		<span class="ident">_hash</span>: <span class="ident">Hash</span>,
-		<span class="ident">_number</span>: <span class="ident">NumberFor</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-		<span class="ident">_justifications</span>: <span class="ident">Justifications</span>,
+	<span class="kw">fn </span>import_justifications(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_who: PeerId,
+		_hash: Hash,
+		_number: NumberFor&lt;Block&gt;,
+		_justifications: Justifications,
 	) {
 	}
 
-	<span class="kw">fn</span> <span class="ident">poll_actions</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">_cx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">futures::task::Context</span>,
-		<span class="ident">_link</span>: <span class="kw-2">&amp;mut</span> <span class="kw">dyn</span> <span class="ident">sc_consensus::import_queue::Link</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+	<span class="kw">fn </span>poll_actions(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_cx: <span class="kw-2">&amp;mut </span>futures::task::Context,
+		_link: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>sc_consensus::import_queue::Link&lt;Block&gt;,
 	) {
 	}
 }
 
-<span class="kw">struct</span> <span class="ident">DummyChainSyncService</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>(<span class="ident">std::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>);
+<span class="kw">struct </span>DummyChainSyncService&lt;B&gt;(std::marker::PhantomData&lt;B&gt;);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">BlockT</span><span class="op">&gt;</span> <span class="ident">NetworkSyncForkRequest</span><span class="op">&lt;</span><span class="ident">B::Hash</span>, <span class="ident">NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DummyChainSyncService</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">set_sync_fork_request</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_peers</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PeerId</span><span class="op">&gt;</span>, <span class="ident">_hash</span>: <span class="ident">B::Hash</span>, <span class="ident">_number</span>: <span class="ident">NumberFor</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>) {}
+<span class="kw">impl</span>&lt;B: BlockT&gt; NetworkSyncForkRequest&lt;B::Hash, NumberFor&lt;B&gt;&gt; <span class="kw">for </span>DummyChainSyncService&lt;B&gt; {
+	<span class="kw">fn </span>set_sync_fork_request(<span class="kw-2">&amp;</span><span class="self">self</span>, _peers: Vec&lt;PeerId&gt;, _hash: B::Hash, _number: NumberFor&lt;B&gt;) {}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_minimal_node" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_minimal_node" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

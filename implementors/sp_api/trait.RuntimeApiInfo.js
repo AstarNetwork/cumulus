@@ -1,4 +1,4 @@
-(function() {var implementors = {};
-implementors["cumulus_primitives_core"] = [{"text":"impl&lt;Block:&nbsp;BlockT&gt; RuntimeApiInfo for dyn <a class=\"trait\" href=\"cumulus_primitives_core/trait.CollectCollationInfo.html\" title=\"trait cumulus_primitives_core::CollectCollationInfo\">CollectCollationInfo</a>&lt;Block&gt;","synthetic":false,"types":[]}];
-implementors["cumulus_test_runtime"] = [{"text":"impl&lt;Block:&nbsp;BlockT&gt; RuntimeApiInfo for dyn <a class=\"trait\" href=\"cumulus_test_runtime/trait.GetLastTimestamp.html\" title=\"trait cumulus_test_runtime::GetLastTimestamp\">GetLastTimestamp</a>&lt;Block&gt;","synthetic":false,"types":[]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
+(function() {var implementors = {
+"cumulus_primitives_core":[["impl&lt;Block:&nbsp;BlockT&gt; RuntimeApiInfo for dyn <a class=\"trait\" href=\"cumulus_primitives_core/trait.CollectCollationInfo.html\" title=\"trait cumulus_primitives_core::CollectCollationInfo\">CollectCollationInfo</a>&lt;Block&gt;"]],
+"cumulus_test_runtime":[["impl&lt;Block:&nbsp;BlockT&gt; RuntimeApiInfo for dyn <a class=\"trait\" href=\"cumulus_test_runtime/trait.GetLastTimestamp.html\" title=\"trait cumulus_test_runtime::GetLastTimestamp\">GetLastTimestamp</a>&lt;Block&gt;"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

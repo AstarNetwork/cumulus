@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/client/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_test_client/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_test_client/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_test_client/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/client/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_test_client/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_test_client/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_test_client/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -200,207 +200,207 @@
 <span id="200">200</span>
 <span id="201">201</span>
 <span id="202">202</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! A Cumulus test client.</span>
+</span><span class="doccomment">//! A Cumulus test client.
 
-<span class="kw">mod</span> <span class="ident">block_builder</span>;
-<span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Decode</span>, <span class="ident">Encode</span>};
-<span class="kw">use</span> <span class="ident">runtime</span>::{
-	<span class="ident">Balance</span>, <span class="ident">Block</span>, <span class="ident">BlockHashCount</span>, <span class="ident">GenesisConfig</span>, <span class="ident">Runtime</span>, <span class="ident">RuntimeCall</span>, <span class="ident">Signature</span>, <span class="ident">SignedExtra</span>,
-	<span class="ident">SignedPayload</span>, <span class="ident">UncheckedExtrinsic</span>, <span class="ident">VERSION</span>,
+</span><span class="kw">mod </span>block_builder;
+<span class="kw">use </span>codec::{Decode, Encode};
+<span class="kw">use </span>runtime::{
+	Balance, Block, BlockHashCount, GenesisConfig, Runtime, RuntimeCall, Signature, SignedExtra,
+	SignedPayload, UncheckedExtrinsic, VERSION,
 };
-<span class="kw">use</span> <span class="ident">sc_executor</span>::{<span class="ident">WasmExecutionMethod</span>, <span class="ident">WasmExecutor</span>};
-<span class="kw">use</span> <span class="ident">sc_executor_common::runtime_blob::RuntimeBlob</span>;
-<span class="kw">use</span> <span class="ident">sc_service::client</span>;
-<span class="kw">use</span> <span class="ident">sp_blockchain::HeaderBackend</span>;
-<span class="kw">use</span> <span class="ident">sp_core::storage::Storage</span>;
-<span class="kw">use</span> <span class="ident">sp_io::TestExternalities</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{<span class="ident">generic::Era</span>, <span class="ident">BuildStorage</span>, <span class="ident">SaturatedConversion</span>};
+<span class="kw">use </span>sc_executor::{WasmExecutionMethod, WasmExecutor};
+<span class="kw">use </span>sc_executor_common::runtime_blob::RuntimeBlob;
+<span class="kw">use </span>sc_service::client;
+<span class="kw">use </span>sp_blockchain::HeaderBackend;
+<span class="kw">use </span>sp_core::storage::Storage;
+<span class="kw">use </span>sp_io::TestExternalities;
+<span class="kw">use </span>sp_runtime::{generic::Era, BuildStorage, SaturatedConversion};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">block_builder</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cumulus_test_runtime</span> <span class="kw">as</span> <span class="ident">runtime</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">polkadot_parachain::primitives</span>::{<span class="ident">BlockData</span>, <span class="ident">HeadData</span>, <span class="ident">ValidationParams</span>, <span class="ident">ValidationResult</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sc_executor::error::Result</span> <span class="kw">as</span> <span class="ident">ExecutorResult</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">substrate_test_client</span>::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>block_builder::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>cumulus_test_runtime <span class="kw">as </span>runtime;
+<span class="kw">pub use </span>polkadot_parachain::primitives::{BlockData, HeadData, ValidationParams, ValidationResult};
+<span class="kw">pub use </span>sc_executor::error::Result <span class="kw">as </span>ExecutorResult;
+<span class="kw">pub use </span>substrate_test_client::<span class="kw-2">*</span>;
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ParachainBlockData</span> <span class="op">=</span> <span class="ident">cumulus_primitives_core::ParachainBlockData</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>;
+<span class="kw">pub type </span>ParachainBlockData = cumulus_primitives_core::ParachainBlockData&lt;Block&gt;;
 
-<span class="kw">mod</span> <span class="ident">local_executor</span> {
-	<span class="doccomment">/// Native executor instance.</span>
-	<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LocalExecutor</span>;
+<span class="kw">mod </span>local_executor {
+	<span class="doccomment">/// Native executor instance.
+	</span><span class="kw">pub struct </span>LocalExecutor;
 
-	<span class="kw">impl</span> <span class="ident">sc_executor::NativeExecutionDispatch</span> <span class="kw">for</span> <span class="ident">LocalExecutor</span> {
-		<span class="kw">type</span> <span class="ident">ExtendHostFunctions</span> <span class="op">=</span> ();
+	<span class="kw">impl </span>sc_executor::NativeExecutionDispatch <span class="kw">for </span>LocalExecutor {
+		<span class="kw">type </span>ExtendHostFunctions = ();
 
-		<span class="kw">fn</span> <span class="ident">dispatch</span>(<span class="ident">method</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-			<span class="ident">cumulus_test_runtime::api::dispatch</span>(<span class="ident">method</span>, <span class="ident">data</span>)
+		<span class="kw">fn </span>dispatch(method: <span class="kw-2">&amp;</span>str, data: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt; {
+			cumulus_test_runtime::api::dispatch(method, data)
 		}
 
-		<span class="kw">fn</span> <span class="ident">native_version</span>() -&gt; <span class="ident">sc_executor::NativeVersion</span> {
-			<span class="ident">cumulus_test_runtime::native_version</span>()
+		<span class="kw">fn </span>native_version() -&gt; sc_executor::NativeVersion {
+			cumulus_test_runtime::native_version()
 		}
 	}
 }
 
-<span class="doccomment">/// Native executor used for tests.</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">local_executor::LocalExecutor</span>;
+<span class="doccomment">/// Native executor used for tests.
+</span><span class="kw">pub use </span>local_executor::LocalExecutor;
 
-<span class="doccomment">/// Test client database backend.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Backend</span> <span class="op">=</span> <span class="ident">substrate_test_client::Backend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Test client database backend.
+</span><span class="kw">pub type </span>Backend = substrate_test_client::Backend&lt;Block&gt;;
 
-<span class="doccomment">/// Test client executor.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Executor</span> <span class="op">=</span>
-	<span class="ident">client::LocalCallExecutor</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Backend</span>, <span class="ident">sc_executor::NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">LocalExecutor</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Test client executor.
+</span><span class="kw">pub type </span>Executor =
+	client::LocalCallExecutor&lt;Block, Backend, sc_executor::NativeElseWasmExecutor&lt;LocalExecutor&gt;&gt;;
 
-<span class="doccomment">/// Test client builder for Cumulus</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">TestClientBuilder</span> <span class="op">=</span>
-	<span class="ident">substrate_test_client::TestClientBuilder</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Executor</span>, <span class="ident">Backend</span>, <span class="ident">GenesisParameters</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Test client builder for Cumulus
+</span><span class="kw">pub type </span>TestClientBuilder =
+	substrate_test_client::TestClientBuilder&lt;Block, Executor, Backend, GenesisParameters&gt;;
 
-<span class="doccomment">/// LongestChain type for the test runtime/client.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">LongestChain</span> <span class="op">=</span> <span class="ident">sc_consensus::LongestChain</span><span class="op">&lt;</span><span class="ident">Backend</span>, <span class="ident">Block</span><span class="op">&gt;</span>;
+<span class="doccomment">/// LongestChain type for the test runtime/client.
+</span><span class="kw">pub type </span>LongestChain = sc_consensus::LongestChain&lt;Backend, Block&gt;;
 
-<span class="doccomment">/// Test client type with `LocalExecutor` and generic Backend.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Client</span> <span class="op">=</span> <span class="ident">client::Client</span><span class="op">&lt;</span><span class="ident">Backend</span>, <span class="ident">Executor</span>, <span class="ident">Block</span>, <span class="ident">runtime::RuntimeApi</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Test client type with `LocalExecutor` and generic Backend.
+</span><span class="kw">pub type </span>Client = client::Client&lt;Backend, Executor, Block, runtime::RuntimeApi&gt;;
 
-<span class="doccomment">/// Parameters of test-client builder with test-runtime.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GenesisParameters</span>;
+<span class="doccomment">/// Parameters of test-client builder with test-runtime.
+</span><span class="attribute">#[derive(Default)]
+</span><span class="kw">pub struct </span>GenesisParameters;
 
-<span class="kw">impl</span> <span class="ident">substrate_test_client::GenesisInit</span> <span class="kw">for</span> <span class="ident">GenesisParameters</span> {
-	<span class="kw">fn</span> <span class="ident">genesis_storage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Storage</span> {
-		<span class="ident">genesis_config</span>().<span class="ident">build_storage</span>().<span class="ident">unwrap</span>()
+<span class="kw">impl </span>substrate_test_client::GenesisInit <span class="kw">for </span>GenesisParameters {
+	<span class="kw">fn </span>genesis_storage(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Storage {
+		genesis_config().build_storage().unwrap()
 	}
 }
 
-<span class="doccomment">/// A `test-runtime` extensions to `TestClientBuilder`.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TestClientBuilderExt</span>: <span class="ident">Sized</span> {
-	<span class="doccomment">/// Build the test client.</span>
-	<span class="kw">fn</span> <span class="ident">build</span>(<span class="self">self</span>) -&gt; <span class="ident">Client</span> {
-		<span class="self">self</span>.<span class="ident">build_with_longest_chain</span>().<span class="number">0</span>
-	}
+<span class="doccomment">/// A `test-runtime` extensions to `TestClientBuilder`.
+</span><span class="kw">pub trait </span>TestClientBuilderExt: Sized {
+	<span class="doccomment">/// Build the test client.
+	</span><span class="kw">fn </span>build(<span class="self">self</span>) -&gt; Client {
+		<span class="self">self</span>.build_with_longest_chain().<span class="number">0
+	</span>}
 
-	<span class="doccomment">/// Build the test client and longest chain selector.</span>
-	<span class="kw">fn</span> <span class="ident">build_with_longest_chain</span>(<span class="self">self</span>) -&gt; (<span class="ident">Client</span>, <span class="ident">LongestChain</span>);
+	<span class="doccomment">/// Build the test client and longest chain selector.
+	</span><span class="kw">fn </span>build_with_longest_chain(<span class="self">self</span>) -&gt; (Client, LongestChain);
 }
 
-<span class="kw">impl</span> <span class="ident">TestClientBuilderExt</span> <span class="kw">for</span> <span class="ident">TestClientBuilder</span> {
-	<span class="kw">fn</span> <span class="ident">build_with_longest_chain</span>(<span class="self">self</span>) -&gt; (<span class="ident">Client</span>, <span class="ident">LongestChain</span>) {
-		<span class="self">self</span>.<span class="ident">build_with_native_executor</span>(<span class="prelude-val">None</span>)
-	}
-}
-
-<span class="doccomment">/// A `TestClientBuilder` with default backend and executor.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">DefaultTestClientBuilderExt</span>: <span class="ident">Sized</span> {
-	<span class="doccomment">/// Create new `TestClientBuilder`</span>
-	<span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span>;
-}
-
-<span class="kw">impl</span> <span class="ident">DefaultTestClientBuilderExt</span> <span class="kw">for</span> <span class="ident">TestClientBuilder</span> {
-	<span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-		<span class="ident"><span class="self">Self</span>::with_default_backend</span>()
+<span class="kw">impl </span>TestClientBuilderExt <span class="kw">for </span>TestClientBuilder {
+	<span class="kw">fn </span>build_with_longest_chain(<span class="self">self</span>) -&gt; (Client, LongestChain) {
+		<span class="self">self</span>.build_with_native_executor(<span class="prelude-val">None</span>)
 	}
 }
 
-<span class="kw">fn</span> <span class="ident">genesis_config</span>() -&gt; <span class="ident">GenesisConfig</span> {
-	<span class="ident">cumulus_test_service::local_testnet_genesis</span>()
+<span class="doccomment">/// A `TestClientBuilder` with default backend and executor.
+</span><span class="kw">pub trait </span>DefaultTestClientBuilderExt: Sized {
+	<span class="doccomment">/// Create new `TestClientBuilder`
+	</span><span class="kw">fn </span>new() -&gt; <span class="self">Self</span>;
 }
 
-<span class="doccomment">/// Generate an extrinsic from the provided function call, origin and [`Client`].</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_extrinsic</span>(
-	<span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="ident">Client</span>,
-	<span class="ident">origin</span>: <span class="ident">sp_keyring::AccountKeyring</span>,
-	<span class="ident">function</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>,
-) -&gt; <span class="ident">UncheckedExtrinsic</span> {
-	<span class="kw">let</span> <span class="ident">current_block_hash</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">info</span>().<span class="ident">best_hash</span>;
-	<span class="kw">let</span> <span class="ident">current_block</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">info</span>().<span class="ident">best_number</span>.<span class="ident">saturated_into</span>();
-	<span class="kw">let</span> <span class="ident">genesis_block</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">hash</span>(<span class="number">0</span>).<span class="ident">unwrap</span>().<span class="ident">unwrap</span>();
-	<span class="kw">let</span> <span class="ident">nonce</span> <span class="op">=</span> <span class="number">0</span>;
-	<span class="kw">let</span> <span class="ident">period</span> <span class="op">=</span>
-		<span class="ident">BlockHashCount::get</span>().<span class="ident">checked_next_power_of_two</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span> <span class="op">/</span> <span class="number">2</span>).<span class="ident">unwrap_or</span>(<span class="number">2</span>) <span class="kw">as</span> <span class="ident">u64</span>;
-	<span class="kw">let</span> <span class="ident">tip</span> <span class="op">=</span> <span class="number">0</span>;
-	<span class="kw">let</span> <span class="ident">extra</span>: <span class="ident">SignedExtra</span> <span class="op">=</span> (
-		<span class="ident">frame_system::CheckNonZeroSender</span>::<span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="ident">::new</span>(),
-		<span class="ident">frame_system::CheckSpecVersion</span>::<span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="ident">::new</span>(),
-		<span class="ident">frame_system::CheckGenesis</span>::<span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="ident">::new</span>(),
-		<span class="ident">frame_system::CheckEra</span>::<span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">Era::mortal</span>(<span class="ident">period</span>, <span class="ident">current_block</span>)),
-		<span class="ident">frame_system::CheckNonce</span>::<span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">nonce</span>),
-		<span class="ident">frame_system::CheckWeight</span>::<span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="ident">::new</span>(),
-		<span class="ident">pallet_transaction_payment::ChargeTransactionPayment</span>::<span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">tip</span>),
+<span class="kw">impl </span>DefaultTestClientBuilderExt <span class="kw">for </span>TestClientBuilder {
+	<span class="kw">fn </span>new() -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>::with_default_backend()
+	}
+}
+
+<span class="kw">fn </span>genesis_config() -&gt; GenesisConfig {
+	cumulus_test_service::local_testnet_genesis()
+}
+
+<span class="doccomment">/// Generate an extrinsic from the provided function call, origin and [`Client`].
+</span><span class="kw">pub fn </span>generate_extrinsic(
+	client: <span class="kw-2">&amp;</span>Client,
+	origin: sp_keyring::AccountKeyring,
+	function: <span class="kw">impl </span>Into&lt;RuntimeCall&gt;,
+) -&gt; UncheckedExtrinsic {
+	<span class="kw">let </span>current_block_hash = client.info().best_hash;
+	<span class="kw">let </span>current_block = client.info().best_number.saturated_into();
+	<span class="kw">let </span>genesis_block = client.hash(<span class="number">0</span>).unwrap().unwrap();
+	<span class="kw">let </span>nonce = <span class="number">0</span>;
+	<span class="kw">let </span>period =
+		BlockHashCount::get().checked_next_power_of_two().map(|c| c / <span class="number">2</span>).unwrap_or(<span class="number">2</span>) <span class="kw">as </span>u64;
+	<span class="kw">let </span>tip = <span class="number">0</span>;
+	<span class="kw">let </span>extra: SignedExtra = (
+		frame_system::CheckNonZeroSender::&lt;Runtime&gt;::new(),
+		frame_system::CheckSpecVersion::&lt;Runtime&gt;::new(),
+		frame_system::CheckGenesis::&lt;Runtime&gt;::new(),
+		frame_system::CheckEra::&lt;Runtime&gt;::from(Era::mortal(period, current_block)),
+		frame_system::CheckNonce::&lt;Runtime&gt;::from(nonce),
+		frame_system::CheckWeight::&lt;Runtime&gt;::new(),
+		pallet_transaction_payment::ChargeTransactionPayment::&lt;Runtime&gt;::from(tip),
 	);
 
-	<span class="kw">let</span> <span class="ident">function</span> <span class="op">=</span> <span class="ident">function</span>.<span class="ident">into</span>();
+	<span class="kw">let </span>function = function.into();
 
-	<span class="kw">let</span> <span class="ident">raw_payload</span> <span class="op">=</span> <span class="ident">SignedPayload::from_raw</span>(
-		<span class="ident">function</span>.<span class="ident">clone</span>(),
-		<span class="ident">extra</span>.<span class="ident">clone</span>(),
-		((), <span class="ident">VERSION</span>.<span class="ident">spec_version</span>, <span class="ident">genesis_block</span>, <span class="ident">current_block_hash</span>, (), (), ()),
+	<span class="kw">let </span>raw_payload = SignedPayload::from_raw(
+		function.clone(),
+		extra.clone(),
+		((), VERSION.spec_version, genesis_block, current_block_hash, (), (), ()),
 	);
-	<span class="kw">let</span> <span class="ident">signature</span> <span class="op">=</span> <span class="ident">raw_payload</span>.<span class="ident">using_encoded</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">origin</span>.<span class="ident">sign</span>(<span class="ident">e</span>));
+	<span class="kw">let </span>signature = raw_payload.using_encoded(|e| origin.sign(e));
 
-	<span class="ident">UncheckedExtrinsic::new_signed</span>(
-		<span class="ident">function</span>,
-		<span class="ident">origin</span>.<span class="ident">public</span>().<span class="ident">into</span>(),
-		<span class="ident">Signature::Sr25519</span>(<span class="ident">signature</span>),
-		<span class="ident">extra</span>,
+	UncheckedExtrinsic::new_signed(
+		function,
+		origin.public().into(),
+		Signature::Sr25519(signature),
+		extra,
 	)
 }
 
-<span class="doccomment">/// Transfer some token from one account to another using a provided test [`Client`].</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transfer</span>(
-	<span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="ident">Client</span>,
-	<span class="ident">origin</span>: <span class="ident">sp_keyring::AccountKeyring</span>,
-	<span class="ident">dest</span>: <span class="ident">sp_keyring::AccountKeyring</span>,
-	<span class="ident">value</span>: <span class="ident">Balance</span>,
-) -&gt; <span class="ident">UncheckedExtrinsic</span> {
-	<span class="kw">let</span> <span class="ident">function</span> <span class="op">=</span> <span class="ident">RuntimeCall::Balances</span>(<span class="ident">pallet_balances::Call::transfer</span> {
-		<span class="ident">dest</span>: <span class="ident">dest</span>.<span class="ident">public</span>().<span class="ident">into</span>(),
-		<span class="ident">value</span>,
+<span class="doccomment">/// Transfer some token from one account to another using a provided test [`Client`].
+</span><span class="kw">pub fn </span>transfer(
+	client: <span class="kw-2">&amp;</span>Client,
+	origin: sp_keyring::AccountKeyring,
+	dest: sp_keyring::AccountKeyring,
+	value: Balance,
+) -&gt; UncheckedExtrinsic {
+	<span class="kw">let </span>function = RuntimeCall::Balances(pallet_balances::Call::transfer {
+		dest: dest.public().into(),
+		value,
 	});
 
-	<span class="ident">generate_extrinsic</span>(<span class="ident">client</span>, <span class="ident">origin</span>, <span class="ident">function</span>)
+	generate_extrinsic(client, origin, function)
 }
 
-<span class="doccomment">/// Call `validate_block` in the given `wasm_blob`.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">validate_block</span>(
-	<span class="ident">validation_params</span>: <span class="ident">ValidationParams</span>,
-	<span class="ident">wasm_blob</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-) -&gt; <span class="ident">ExecutorResult</span><span class="op">&lt;</span><span class="ident">ValidationResult</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ext</span> <span class="op">=</span> <span class="ident">TestExternalities::default</span>();
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ext_ext</span> <span class="op">=</span> <span class="ident">ext</span>.<span class="ident">ext</span>();
+<span class="doccomment">/// Call `validate_block` in the given `wasm_blob`.
+</span><span class="kw">pub fn </span>validate_block(
+	validation_params: ValidationParams,
+	wasm_blob: <span class="kw-2">&amp;</span>[u8],
+) -&gt; ExecutorResult&lt;ValidationResult&gt; {
+	<span class="kw">let </span><span class="kw-2">mut </span>ext = TestExternalities::default();
+	<span class="kw">let </span><span class="kw-2">mut </span>ext_ext = ext.ext();
 
-	<span class="kw">let</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">WasmExecutor</span>::<span class="op">&lt;</span><span class="ident">sp_io::SubstrateHostFunctions</span><span class="op">&gt;</span><span class="ident">::new</span>(
-		<span class="ident">WasmExecutionMethod::Interpreted</span>,
+	<span class="kw">let </span>executor = WasmExecutor::&lt;sp_io::SubstrateHostFunctions&gt;::new(
+		WasmExecutionMethod::Interpreted,
 		<span class="prelude-val">Some</span>(<span class="number">1024</span>),
 		<span class="number">1</span>,
 		<span class="prelude-val">None</span>,
 		<span class="number">2</span>,
 	);
 
-	<span class="ident">executor</span>
-		.<span class="ident">uncached_call</span>(
-			<span class="ident">RuntimeBlob::uncompress_if_needed</span>(<span class="ident">wasm_blob</span>).<span class="ident">expect</span>(<span class="string">&quot;RuntimeBlob uncompress &amp; parse&quot;</span>),
-			<span class="kw-2">&amp;mut</span> <span class="ident">ext_ext</span>,
+	executor
+		.uncached_call(
+			RuntimeBlob::uncompress_if_needed(wasm_blob).expect(<span class="string">&quot;RuntimeBlob uncompress &amp; parse&quot;</span>),
+			<span class="kw-2">&amp;mut </span>ext_ext,
 			<span class="bool-val">false</span>,
 			<span class="string">&quot;validate_block&quot;</span>,
-			<span class="kw-2">&amp;</span><span class="ident">validation_params</span>.<span class="ident">encode</span>(),
+			<span class="kw-2">&amp;</span>validation_params.encode(),
 		)
-		.<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">ValidationResult::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">v</span>[..]).<span class="ident">expect</span>(<span class="string">&quot;Decode `ValidationResult`.&quot;</span>))
-		.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="ident">err</span>.<span class="ident">into</span>())
+		.map(|v| ValidationResult::decode(<span class="kw-2">&amp;mut &amp;</span>v[..]).expect(<span class="string">&quot;Decode `ValidationResult`.&quot;</span>))
+		.map_err(|err| err.into())
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_test_client" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_test_client" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-rpc-interface/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_rpc_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_rpc_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_rpc_interface/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-rpc-interface/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_rpc_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_rpc_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_rpc_interface/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -196,203 +196,203 @@
 <span id="196">196</span>
 <span id="197">197</span>
 <span id="198">198</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">async_trait::async_trait</span>;
-<span class="kw">use</span> <span class="ident">core::time::Duration</span>;
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{
-	<span class="ident">relay_chain</span>::{
-		<span class="ident">v2</span>::{<span class="ident">CommittedCandidateReceipt</span>, <span class="ident">OccupiedCoreAssumption</span>, <span class="ident">SessionIndex</span>, <span class="ident">ValidatorId</span>},
-		<span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">PHeader</span>, <span class="ident">InboundHrmpMessage</span>,
+</span><span class="kw">use </span>async_trait::async_trait;
+<span class="kw">use </span>core::time::Duration;
+<span class="kw">use </span>cumulus_primitives_core::{
+	relay_chain::{
+		v2::{CommittedCandidateReceipt, OccupiedCoreAssumption, SessionIndex, ValidatorId},
+		Hash <span class="kw">as </span>PHash, Header <span class="kw">as </span>PHeader, InboundHrmpMessage,
 	},
-	<span class="ident">InboundDownwardMessage</span>, <span class="ident">ParaId</span>, <span class="ident">PersistedValidationData</span>,
+	InboundDownwardMessage, ParaId, PersistedValidationData,
 };
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface</span>::{<span class="ident">RelayChainError</span>, <span class="ident">RelayChainInterface</span>, <span class="ident">RelayChainResult</span>};
-<span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">FutureExt</span>, <span class="ident">Stream</span>, <span class="ident">StreamExt</span>};
-<span class="kw">use</span> <span class="ident">polkadot_service::Handle</span>;
-<span class="kw">use</span> <span class="ident">sc_client_api::StorageProof</span>;
-<span class="kw">use</span> <span class="ident">sp_core::sp_std::collections::btree_map::BTreeMap</span>;
-<span class="kw">use</span> <span class="ident">sp_state_machine::StorageValue</span>;
-<span class="kw">use</span> <span class="ident">sp_storage::StorageKey</span>;
-<span class="kw">use</span> <span class="ident">std::pin::Pin</span>;
+<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainError, RelayChainInterface, RelayChainResult};
+<span class="kw">use </span>futures::{FutureExt, Stream, StreamExt};
+<span class="kw">use </span>polkadot_service::Handle;
+<span class="kw">use </span>sc_client_api::StorageProof;
+<span class="kw">use </span>sp_core::sp_std::collections::btree_map::BTreeMap;
+<span class="kw">use </span>sp_state_machine::StorageValue;
+<span class="kw">use </span>sp_storage::StorageKey;
+<span class="kw">use </span>std::pin::Pin;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">url::Url</span>;
+<span class="kw">pub use </span>url::Url;
 
-<span class="kw">mod</span> <span class="ident">rpc_client</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">rpc_client</span>::{<span class="ident">create_client_and_start_worker</span>, <span class="ident">RelayChainRpcClient</span>};
+<span class="kw">mod </span>rpc_client;
+<span class="kw">pub use </span>rpc_client::{create_client_and_start_worker, RelayChainRpcClient};
 
-<span class="kw">const</span> <span class="ident">TIMEOUT_IN_SECONDS</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">6</span>;
+<span class="kw">const </span>TIMEOUT_IN_SECONDS: u64 = <span class="number">6</span>;
 
-<span class="doccomment">/// RelayChainRpcInterface is used to interact with a full node that is running locally</span>
-<span class="doccomment">/// in the same process.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RelayChainRpcInterface</span> {
-	<span class="ident">rpc_client</span>: <span class="ident">RelayChainRpcClient</span>,
-	<span class="ident">overseer_handle</span>: <span class="ident">Handle</span>,
+<span class="doccomment">/// RelayChainRpcInterface is used to interact with a full node that is running locally
+/// in the same process.
+</span><span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>RelayChainRpcInterface {
+	rpc_client: RelayChainRpcClient,
+	overseer_handle: Handle,
 }
 
-<span class="kw">impl</span> <span class="ident">RelayChainRpcInterface</span> {
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">rpc_client</span>: <span class="ident">RelayChainRpcClient</span>, <span class="ident">overseer_handle</span>: <span class="ident">Handle</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> { <span class="ident">rpc_client</span>, <span class="ident">overseer_handle</span> }
+<span class="kw">impl </span>RelayChainRpcInterface {
+	<span class="kw">pub fn </span>new(rpc_client: RelayChainRpcClient, overseer_handle: Handle) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ rpc_client, overseer_handle }
 	}
 }
 
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">impl</span> <span class="ident">RelayChainInterface</span> <span class="kw">for</span> <span class="ident">RelayChainRpcInterface</span> {
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retrieve_dmq_contents</span>(
+<span class="attribute">#[async_trait]
+</span><span class="kw">impl </span>RelayChainInterface <span class="kw">for </span>RelayChainRpcInterface {
+	<span class="kw">async fn </span>retrieve_dmq_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundDownwardMessage</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_dmq_contents</span>(<span class="ident">para_id</span>, <span class="ident">relay_parent</span>).<span class="kw">await</span>
-	}
+		para_id: ParaId,
+		relay_parent: PHash,
+	) -&gt; RelayChainResult&lt;Vec&lt;InboundDownwardMessage&gt;&gt; {
+		<span class="self">self</span>.rpc_client.parachain_host_dmq_contents(para_id, relay_parent).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retrieve_all_inbound_hrmp_channel_contents</span>(
+	<span class="kw">async fn </span>retrieve_all_inbound_hrmp_channel_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ParaId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundHrmpMessage</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_inbound_hrmp_channels_contents</span>(<span class="ident">para_id</span>, <span class="ident">relay_parent</span>)
-			.<span class="kw">await</span>
-	}
+		para_id: ParaId,
+		relay_parent: PHash,
+	) -&gt; RelayChainResult&lt;BTreeMap&lt;ParaId, Vec&lt;InboundHrmpMessage&gt;&gt;&gt; {
+		<span class="self">self</span>.rpc_client
+			.parachain_host_inbound_hrmp_channels_contents(para_id, relay_parent)
+			.<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">persisted_validation_data</span>(
+	<span class="kw">async fn </span>persisted_validation_data(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">hash</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">occupied_core_assumption</span>: <span class="ident">OccupiedCoreAssumption</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_persisted_validation_data</span>(<span class="ident">hash</span>, <span class="ident">para_id</span>, <span class="ident">occupied_core_assumption</span>)
-			.<span class="kw">await</span>
-	}
+		hash: PHash,
+		para_id: ParaId,
+		occupied_core_assumption: OccupiedCoreAssumption,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;PersistedValidationData&gt;&gt; {
+		<span class="self">self</span>.rpc_client
+			.parachain_host_persisted_validation_data(hash, para_id, occupied_core_assumption)
+			.<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">candidate_pending_availability</span>(
+	<span class="kw">async fn </span>candidate_pending_availability(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">hash</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CommittedCandidateReceipt</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>
-			.<span class="ident">parachain_host_candidate_pending_availability</span>(<span class="ident">hash</span>, <span class="ident">para_id</span>)
-			.<span class="kw">await</span>
-	}
+		hash: PHash,
+		para_id: ParaId,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;CommittedCandidateReceipt&gt;&gt; {
+		<span class="self">self</span>.rpc_client
+			.parachain_host_candidate_pending_availability(hash, para_id)
+			.<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">session_index_for_child</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hash</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">SessionIndex</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_session_index_for_child</span>(<span class="ident">hash</span>).<span class="kw">await</span>
-	}
+	<span class="kw">async fn </span>session_index_for_child(<span class="kw-2">&amp;</span><span class="self">self</span>, hash: PHash) -&gt; RelayChainResult&lt;SessionIndex&gt; {
+		<span class="self">self</span>.rpc_client.parachain_host_session_index_for_child(hash).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validators</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">block_id</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ValidatorId</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">parachain_host_validators</span>(<span class="ident">block_id</span>).<span class="kw">await</span>
-	}
+	<span class="kw">async fn </span>validators(<span class="kw-2">&amp;</span><span class="self">self</span>, block_id: PHash) -&gt; RelayChainResult&lt;Vec&lt;ValidatorId&gt;&gt; {
+		<span class="self">self</span>.rpc_client.parachain_host_validators(block_id).<span class="kw">await
+	</span>}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">import_notification_stream</span>(
+	<span class="kw">async fn </span>import_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">imported_headers_stream</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">get_imported_heads_stream</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt; {
+		<span class="kw">let </span>imported_headers_stream = <span class="self">self</span>.rpc_client.get_imported_heads_stream().<span class="kw">await</span><span class="question-mark">?</span>;
 
-		<span class="prelude-val">Ok</span>(<span class="ident">imported_headers_stream</span>.<span class="ident">boxed</span>())
+		<span class="prelude-val">Ok</span>(imported_headers_stream.boxed())
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">finality_notification_stream</span>(
+	<span class="kw">async fn </span>finality_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">imported_headers_stream</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">get_finalized_heads_stream</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt; {
+		<span class="kw">let </span>imported_headers_stream = <span class="self">self</span>.rpc_client.get_finalized_heads_stream().<span class="kw">await</span><span class="question-mark">?</span>;
 
-		<span class="prelude-val">Ok</span>(<span class="ident">imported_headers_stream</span>.<span class="ident">boxed</span>())
+		<span class="prelude-val">Ok</span>(imported_headers_stream.boxed())
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">best_block_hash</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_head</span>(<span class="prelude-val">None</span>).<span class="kw">await</span>
+	<span class="kw">async fn </span>best_block_hash(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;PHash&gt; {
+		<span class="self">self</span>.rpc_client.chain_get_head(<span class="prelude-val">None</span>).<span class="kw">await
+	</span>}
+
+	<span class="kw">async fn </span>is_major_syncing(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;bool&gt; {
+		<span class="self">self</span>.rpc_client.system_health().<span class="kw">await</span>.map(|h| h.is_syncing)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">is_major_syncing</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">system_health</span>().<span class="kw">await</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> <span class="ident">h</span>.<span class="ident">is_syncing</span>)
+	<span class="kw">fn </span>overseer_handle(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;Handle&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.overseer_handle.clone())
 	}
 
-	<span class="kw">fn</span> <span class="ident">overseer_handle</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Handle</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">overseer_handle</span>.<span class="ident">clone</span>())
-	}
-
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_storage_by_key</span>(
+	<span class="kw">async fn </span>get_storage_by_key(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">key</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">StorageValue</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">storage_key</span> <span class="op">=</span> <span class="ident">StorageKey</span>(<span class="ident">key</span>.<span class="ident">to_vec</span>());
-		<span class="self">self</span>.<span class="ident">rpc_client</span>
-			.<span class="ident">state_get_storage</span>(<span class="ident">storage_key</span>, <span class="prelude-val">Some</span>(<span class="ident">relay_parent</span>))
-			.<span class="kw">await</span>
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">storage_data</span><span class="op">|</span> <span class="ident">storage_data</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">sv</span><span class="op">|</span> <span class="ident">sv</span>.<span class="number">0</span>))
+		relay_parent: PHash,
+		key: <span class="kw-2">&amp;</span>[u8],
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;StorageValue&gt;&gt; {
+		<span class="kw">let </span>storage_key = StorageKey(key.to_vec());
+		<span class="self">self</span>.rpc_client
+			.state_get_storage(storage_key, <span class="prelude-val">Some</span>(relay_parent))
+			.<span class="kw">await
+			</span>.map(|storage_data| storage_data.map(|sv| sv.<span class="number">0</span>))
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">prove_read</span>(
+	<span class="kw">async fn </span>prove_read(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">relevant_keys</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">StorageProof</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">cloned</span> <span class="op">=</span> <span class="ident">relevant_keys</span>.<span class="ident">clone</span>();
-		<span class="kw">let</span> <span class="ident">storage_keys</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">StorageKey</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">cloned</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="ident">StorageKey</span>).<span class="ident">collect</span>();
+		relay_parent: PHash,
+		relevant_keys: <span class="kw-2">&amp;</span>Vec&lt;Vec&lt;u8&gt;&gt;,
+	) -&gt; RelayChainResult&lt;StorageProof&gt; {
+		<span class="kw">let </span>cloned = relevant_keys.clone();
+		<span class="kw">let </span>storage_keys: Vec&lt;StorageKey&gt; = cloned.into_iter().map(StorageKey).collect();
 
-		<span class="self">self</span>.<span class="ident">rpc_client</span>
-			.<span class="ident">state_get_read_proof</span>(<span class="ident">storage_keys</span>, <span class="prelude-val">Some</span>(<span class="ident">relay_parent</span>))
-			.<span class="kw">await</span>
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">read_proof</span><span class="op">|</span> {
-				<span class="ident">StorageProof::new</span>(<span class="ident">read_proof</span>.<span class="ident">proof</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">bytes</span><span class="op">|</span> <span class="ident">bytes</span>.<span class="ident">to_vec</span>()))
+		<span class="self">self</span>.rpc_client
+			.state_get_read_proof(storage_keys, <span class="prelude-val">Some</span>(relay_parent))
+			.<span class="kw">await
+			</span>.map(|read_proof| {
+				StorageProof::new(read_proof.proof.into_iter().map(|bytes| bytes.to_vec()))
 			})
 	}
 
-	<span class="doccomment">/// Wait for a given relay chain block</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The hash of the block to wait for is passed. We wait for the block to arrive or return after a timeout.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Implementation:</span>
-	<span class="doccomment">/// 1. Register a listener to all new blocks.</span>
-	<span class="doccomment">/// 2. Check if the block is already in chain. If yes, succeed early.</span>
-	<span class="doccomment">/// 3. Wait for the block to be imported via subscription.</span>
-	<span class="doccomment">/// 4. If timeout is reached, we return an error.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">wait_for_block</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">wait_for_hash</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">head_stream</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">get_imported_heads_stream</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+	<span class="doccomment">/// Wait for a given relay chain block
+	///
+	/// The hash of the block to wait for is passed. We wait for the block to arrive or return after a timeout.
+	///
+	/// Implementation:
+	/// 1. Register a listener to all new blocks.
+	/// 2. Check if the block is already in chain. If yes, succeed early.
+	/// 3. Wait for the block to be imported via subscription.
+	/// 4. If timeout is reached, we return an error.
+	</span><span class="kw">async fn </span>wait_for_block(<span class="kw-2">&amp;</span><span class="self">self</span>, wait_for_hash: PHash) -&gt; RelayChainResult&lt;()&gt; {
+		<span class="kw">let </span><span class="kw-2">mut </span>head_stream = <span class="self">self</span>.rpc_client.get_imported_heads_stream().<span class="kw">await</span><span class="question-mark">?</span>;
 
-		<span class="kw">if</span> <span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">chain_get_header</span>(<span class="prelude-val">Some</span>(<span class="ident">wait_for_hash</span>)).<span class="kw">await</span><span class="question-mark">?</span>.<span class="ident">is_some</span>() {
-			<span class="kw">return</span> <span class="prelude-val">Ok</span>(())
+		<span class="kw">if </span><span class="self">self</span>.rpc_client.chain_get_header(<span class="prelude-val">Some</span>(wait_for_hash)).<span class="kw">await</span><span class="question-mark">?</span>.is_some() {
+			<span class="kw">return </span><span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">timeout</span> <span class="op">=</span> <span class="ident">futures_timer::Delay::new</span>(<span class="ident">Duration::from_secs</span>(<span class="ident">TIMEOUT_IN_SECONDS</span>)).<span class="ident">fuse</span>();
+		<span class="kw">let </span><span class="kw-2">mut </span>timeout = futures_timer::Delay::new(Duration::from_secs(TIMEOUT_IN_SECONDS)).fuse();
 
-		<span class="kw">loop</span> {
-			<span class="macro">futures::select!</span> {
-				<span class="kw">_</span> <span class="op">=</span> <span class="ident">timeout</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RelayChainError::WaitTimeout</span>(<span class="ident">wait_for_hash</span>)),
-				<span class="ident">evt</span> <span class="op">=</span> <span class="ident">head_stream</span>.<span class="ident">next</span>().<span class="ident">fuse</span>() =&gt; <span class="kw">match</span> <span class="ident">evt</span> {
-					<span class="prelude-val">Some</span>(<span class="ident">evt</span>) <span class="kw">if</span> <span class="ident">evt</span>.<span class="ident">hash</span>() <span class="op">==</span> <span class="ident">wait_for_hash</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
-					<span class="comment">// Not the event we waited on.</span>
-					<span class="prelude-val">Some</span>(<span class="kw">_</span>) =&gt; <span class="kw">continue</span>,
-					<span class="prelude-val">None</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RelayChainError::ImportListenerClosed</span>(<span class="ident">wait_for_hash</span>)),
+		<span class="kw">loop </span>{
+			<span class="macro">futures::select! </span>{
+				<span class="kw">_ </span>= timeout =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(RelayChainError::WaitTimeout(wait_for_hash)),
+				evt = head_stream.next().fuse() =&gt; <span class="kw">match </span>evt {
+					<span class="prelude-val">Some</span>(evt) <span class="kw">if </span>evt.hash() == wait_for_hash =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
+					<span class="comment">// Not the event we waited on.
+					</span><span class="prelude-val">Some</span>(<span class="kw">_</span>) =&gt; <span class="kw">continue</span>,
+					<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(RelayChainError::ImportListenerClosed(wait_for_hash)),
 				}
 			}
 		}
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">new_best_notification_stream</span>(
+	<span class="kw">async fn </span>new_best_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">imported_headers_stream</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rpc_client</span>.<span class="ident">get_best_heads_stream</span>().<span class="kw">await</span><span class="question-mark">?</span>;
-		<span class="prelude-val">Ok</span>(<span class="ident">imported_headers_stream</span>.<span class="ident">boxed</span>())
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt; {
+		<span class="kw">let </span>imported_headers_stream = <span class="self">self</span>.rpc_client.get_best_heads_stream().<span class="kw">await</span><span class="question-mark">?</span>;
+		<span class="prelude-val">Ok</span>(imported_headers_stream.boxed())
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_rpc_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_rpc_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

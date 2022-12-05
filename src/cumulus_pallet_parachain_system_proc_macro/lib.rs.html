@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/parachain-system/proc-macro/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system_proc_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system_proc_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_parachain_system_proc_macro/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/parachain-system/proc-macro/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system_proc_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system_proc_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_parachain_system_proc_macro/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -136,143 +136,143 @@
 <span id="136">136</span>
 <span id="137">137</span>
 <span id="138">138</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Span</span>, <span class="ident">TokenStream</span>};
-<span class="kw">use</span> <span class="ident">proc_macro_crate</span>::{<span class="ident">crate_name</span>, <span class="ident">FoundCrate</span>};
-<span class="kw">use</span> <span class="ident">syn</span>::{
-	<span class="ident">parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>},
-	<span class="ident">spanned::Spanned</span>,
-	<span class="ident">token</span>, <span class="ident">Error</span>, <span class="ident">Ident</span>, <span class="ident">Path</span>,
+</span><span class="kw">use </span>proc_macro2::{Span, TokenStream};
+<span class="kw">use </span>proc_macro_crate::{crate_name, FoundCrate};
+<span class="kw">use </span>syn::{
+	parse::{Parse, ParseStream},
+	spanned::Spanned,
+	token, Error, Ident, Path,
 };
 
-<span class="kw">mod</span> <span class="ident">keywords</span> {
-	<span class="macro">syn::custom_keyword!</span>(<span class="ident">Runtime</span>);
-	<span class="macro">syn::custom_keyword!</span>(<span class="ident">BlockExecutor</span>);
-	<span class="macro">syn::custom_keyword!</span>(<span class="ident">CheckInherents</span>);
+<span class="kw">mod </span>keywords {
+	<span class="macro">syn::custom_keyword!</span>(Runtime);
+	<span class="macro">syn::custom_keyword!</span>(BlockExecutor);
+	<span class="macro">syn::custom_keyword!</span>(CheckInherents);
 }
 
-<span class="kw">struct</span> <span class="ident">Input</span> {
-	<span class="ident">runtime</span>: <span class="ident">Path</span>,
-	<span class="ident">block_executor</span>: <span class="ident">Path</span>,
-	<span class="ident">check_inherents</span>: <span class="ident">Path</span>,
+<span class="kw">struct </span>Input {
+	runtime: Path,
+	block_executor: Path,
+	check_inherents: Path,
 }
 
-<span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">Input</span> {
-	<span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">runtime</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">block_executor</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">check_inherents</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+<span class="kw">impl </span>Parse <span class="kw">for </span>Input {
+	<span class="kw">fn </span>parse(input: ParseStream) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt; {
+		<span class="kw">let </span><span class="kw-2">mut </span>runtime = <span class="prelude-val">None</span>;
+		<span class="kw">let </span><span class="kw-2">mut </span>block_executor = <span class="prelude-val">None</span>;
+		<span class="kw">let </span><span class="kw-2">mut </span>check_inherents = <span class="prelude-val">None</span>;
 
-		<span class="kw">fn</span> <span class="ident">parse_inner</span><span class="op">&lt;</span><span class="ident">KW</span>: <span class="ident">Parse</span> <span class="op">+</span> <span class="ident">Spanned</span><span class="op">&gt;</span>(
-			<span class="ident">input</span>: <span class="ident">ParseStream</span>,
-			<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
-		) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-			<span class="kw">let</span> <span class="ident">kw</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">KW</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
+		<span class="kw">fn </span>parse_inner&lt;KW: Parse + Spanned&gt;(
+			input: ParseStream,
+			result: <span class="kw-2">&amp;mut </span><span class="prelude-ty">Option</span>&lt;Path&gt;,
+		) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+			<span class="kw">let </span>kw = input.parse::&lt;KW&gt;()<span class="question-mark">?</span>;
 
-			<span class="kw">if</span> <span class="ident">result</span>.<span class="ident">is_none</span>() {
-				<span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">token::Eq</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-				<span class="kw-2">*</span><span class="ident">result</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>()<span class="question-mark">?</span>);
-				<span class="kw">if</span> <span class="ident">input</span>.<span class="ident">peek</span>(<span class="ident">token::Comma</span>) {
-					<span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">token::Comma</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
+			<span class="kw">if </span>result.is_none() {
+				input.parse::&lt;token::Eq&gt;()<span class="question-mark">?</span>;
+				<span class="kw-2">*</span>result = <span class="prelude-val">Some</span>(input.parse::&lt;Path&gt;()<span class="question-mark">?</span>);
+				<span class="kw">if </span>input.peek(token::Comma) {
+					input.parse::&lt;token::Comma&gt;()<span class="question-mark">?</span>;
 				}
 
 				<span class="prelude-val">Ok</span>(())
-			} <span class="kw">else</span> {
-				<span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">kw</span>.<span class="ident">span</span>(), <span class="string">&quot;Is only allowed to be passed once&quot;</span>))
+			} <span class="kw">else </span>{
+				<span class="prelude-val">Err</span>(Error::new(kw.span(), <span class="string">&quot;Is only allowed to be passed once&quot;</span>))
 			}
 		}
 
-		<span class="kw">while</span> <span class="ident">runtime</span>.<span class="ident">is_none</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">block_executor</span>.<span class="ident">is_none</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">check_inherents</span>.<span class="ident">is_none</span>() {
-			<span class="kw">let</span> <span class="ident">lookahead</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">lookahead1</span>();
+		<span class="kw">while </span>runtime.is_none() || block_executor.is_none() || check_inherents.is_none() {
+			<span class="kw">let </span>lookahead = input.lookahead1();
 
-			<span class="kw">if</span> <span class="ident">lookahead</span>.<span class="ident">peek</span>(<span class="ident">keywords::Runtime</span>) {
-				<span class="ident">parse_inner</span>::<span class="op">&lt;</span><span class="ident">keywords::Runtime</span><span class="op">&gt;</span>(<span class="ident">input</span>, <span class="kw-2">&amp;mut</span> <span class="ident">runtime</span>)<span class="question-mark">?</span>;
-			} <span class="kw">else</span> <span class="kw">if</span> <span class="ident">lookahead</span>.<span class="ident">peek</span>(<span class="ident">keywords::BlockExecutor</span>) {
-				<span class="ident">parse_inner</span>::<span class="op">&lt;</span><span class="ident">keywords::BlockExecutor</span><span class="op">&gt;</span>(<span class="ident">input</span>, <span class="kw-2">&amp;mut</span> <span class="ident">block_executor</span>)<span class="question-mark">?</span>;
-			} <span class="kw">else</span> <span class="kw">if</span> <span class="ident">lookahead</span>.<span class="ident">peek</span>(<span class="ident">keywords::CheckInherents</span>) {
-				<span class="ident">parse_inner</span>::<span class="op">&lt;</span><span class="ident">keywords::CheckInherents</span><span class="op">&gt;</span>(<span class="ident">input</span>, <span class="kw-2">&amp;mut</span> <span class="ident">check_inherents</span>)<span class="question-mark">?</span>;
-			} <span class="kw">else</span> {
-				<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">lookahead</span>.<span class="ident">error</span>())
+			<span class="kw">if </span>lookahead.peek(keywords::Runtime) {
+				parse_inner::&lt;keywords::Runtime&gt;(input, <span class="kw-2">&amp;mut </span>runtime)<span class="question-mark">?</span>;
+			} <span class="kw">else if </span>lookahead.peek(keywords::BlockExecutor) {
+				parse_inner::&lt;keywords::BlockExecutor&gt;(input, <span class="kw-2">&amp;mut </span>block_executor)<span class="question-mark">?</span>;
+			} <span class="kw">else if </span>lookahead.peek(keywords::CheckInherents) {
+				parse_inner::&lt;keywords::CheckInherents&gt;(input, <span class="kw-2">&amp;mut </span>check_inherents)<span class="question-mark">?</span>;
+			} <span class="kw">else </span>{
+				<span class="kw">return </span><span class="prelude-val">Err</span>(lookahead.error())
 			}
 		}
 
-		<span class="kw">let</span> <span class="ident">rest</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-		<span class="kw">if</span> <span class="op">!</span><span class="ident">rest</span>.<span class="ident">is_empty</span>() {
-			<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">rest</span>.<span class="ident">span</span>(), <span class="string">&quot;Unexpected input data&quot;</span>))
+		<span class="kw">let </span>rest = input.parse::&lt;TokenStream&gt;()<span class="question-mark">?</span>;
+		<span class="kw">if </span>!rest.is_empty() {
+			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(rest.span(), <span class="string">&quot;Unexpected input data&quot;</span>))
 		}
 
-		<span class="prelude-val">Ok</span>(<span class="self">Self</span> {
-			<span class="ident">runtime</span>: <span class="ident">runtime</span>.<span class="ident">expect</span>(<span class="string">&quot;Everything is parsed before; qed&quot;</span>),
-			<span class="ident">block_executor</span>: <span class="ident">block_executor</span>.<span class="ident">expect</span>(<span class="string">&quot;Everything is parsed before; qed&quot;</span>),
-			<span class="ident">check_inherents</span>: <span class="ident">check_inherents</span>.<span class="ident">expect</span>(<span class="string">&quot;Everything is parsed before; qed&quot;</span>),
+		<span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+			runtime: runtime.expect(<span class="string">&quot;Everything is parsed before; qed&quot;</span>),
+			block_executor: block_executor.expect(<span class="string">&quot;Everything is parsed before; qed&quot;</span>),
+			check_inherents: check_inherents.expect(<span class="string">&quot;Everything is parsed before; qed&quot;</span>),
 		})
 	}
 }
 
-<span class="kw">fn</span> <span class="ident">crate_</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ident</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-	<span class="kw">match</span> <span class="ident">crate_name</span>(<span class="string">&quot;cumulus-pallet-parachain-system&quot;</span>) {
-		<span class="prelude-val">Ok</span>(<span class="ident">FoundCrate::Itself</span>) =&gt;
-			<span class="prelude-val">Ok</span>(<span class="ident">syn::Ident::new</span>(<span class="string">&quot;cumulus_pallet_parachain_system&quot;</span>, <span class="ident">Span::call_site</span>())),
-		<span class="prelude-val">Ok</span>(<span class="ident">FoundCrate::Name</span>(<span class="ident">name</span>)) =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Ident::new</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>, <span class="ident">Span::call_site</span>())),
-		<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">Span::call_site</span>(), <span class="ident">e</span>)),
+<span class="kw">fn </span>crate_() -&gt; <span class="prelude-ty">Result</span>&lt;Ident, Error&gt; {
+	<span class="kw">match </span>crate_name(<span class="string">&quot;cumulus-pallet-parachain-system&quot;</span>) {
+		<span class="prelude-val">Ok</span>(FoundCrate::Itself) =&gt;
+			<span class="prelude-val">Ok</span>(syn::Ident::new(<span class="string">&quot;cumulus_pallet_parachain_system&quot;</span>, Span::call_site())),
+		<span class="prelude-val">Ok</span>(FoundCrate::Name(name)) =&gt; <span class="prelude-val">Ok</span>(Ident::new(<span class="kw-2">&amp;</span>name, Span::call_site())),
+		<span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(Error::new(Span::call_site(), e)),
 	}
 }
 
-<span class="attribute">#[<span class="ident">proc_macro</span>]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register_validate_block</span>(<span class="ident">input</span>: <span class="ident">proc_macro::TokenStream</span>) -&gt; <span class="ident">proc_macro::TokenStream</span> {
-	<span class="kw">let</span> <span class="ident">Input</span> { <span class="ident">runtime</span>, <span class="ident">check_inherents</span>, <span class="ident">block_executor</span> } <span class="op">=</span> <span class="kw">match</span> <span class="ident">syn::parse</span>(<span class="ident">input</span>) {
-		<span class="prelude-val">Ok</span>(<span class="ident">t</span>) =&gt; <span class="ident">t</span>,
-		<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="kw">return</span> <span class="ident">e</span>.<span class="ident">into_compile_error</span>().<span class="ident">into</span>(),
+<span class="attribute">#[proc_macro]
+</span><span class="kw">pub fn </span>register_validate_block(input: proc_macro::TokenStream) -&gt; proc_macro::TokenStream {
+	<span class="kw">let </span>Input { runtime, check_inherents, block_executor } = <span class="kw">match </span>syn::parse(input) {
+		<span class="prelude-val">Ok</span>(t) =&gt; t,
+		<span class="prelude-val">Err</span>(e) =&gt; <span class="kw">return </span>e.into_compile_error().into(),
 	};
 
-	<span class="kw">let</span> <span class="ident">crate_</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">crate_</span>() {
-		<span class="prelude-val">Ok</span>(<span class="ident">c</span>) =&gt; <span class="ident">c</span>,
-		<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="kw">return</span> <span class="ident">e</span>.<span class="ident">into_compile_error</span>().<span class="ident">into</span>(),
+	<span class="kw">let </span>crate_ = <span class="kw">match </span>crate_() {
+		<span class="prelude-val">Ok</span>(c) =&gt; c,
+		<span class="prelude-val">Err</span>(e) =&gt; <span class="kw">return </span>e.into_compile_error().into(),
 	};
 
-	<span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)) {
-		<span class="macro">quote::quote!</span> {
-			<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-			<span class="kw">mod</span> <span class="ident">parachain_validate_block</span> {
-				<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+	<span class="kw">if </span><span class="macro">cfg!</span>(not(feature = <span class="string">&quot;std&quot;</span>)) {
+		<span class="macro">quote::quote! </span>{
+			<span class="attribute">#[doc(hidden)]
+			</span><span class="kw">mod </span>parachain_validate_block {
+				<span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-				<span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-				<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">validate_block</span>(<span class="ident">arguments</span>: <span class="kw-2">*const</span> <span class="ident">u8</span>, <span class="ident">arguments_len</span>: <span class="ident">usize</span>) -&gt; <span class="ident">u64</span> {
-					<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> #<span class="ident">crate_::validate_block::polkadot_parachain::load_params</span>(
-						<span class="ident">arguments</span>,
-						<span class="ident">arguments_len</span>,
+				<span class="attribute">#[no_mangle]
+				</span><span class="kw">unsafe fn </span>validate_block(arguments: <span class="kw-2">*const </span>u8, arguments_len: usize) -&gt; u64 {
+					<span class="kw">let </span>params = #crate_::validate_block::polkadot_parachain::load_params(
+						arguments,
+						arguments_len,
 					);
 
-					<span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> #<span class="ident">crate_::validate_block::implementation::validate_block</span>::<span class="op">&lt;</span>
-						<span class="op">&lt;</span>#<span class="ident">runtime</span> <span class="kw">as</span> #<span class="ident">crate_::validate_block::GetRuntimeBlockType</span><span class="op">&gt;</span><span class="ident">::RuntimeBlock</span>,
-						#<span class="ident">block_executor</span>,
-						#<span class="ident">runtime</span>,
-						#<span class="ident">check_inherents</span>,
-					<span class="op">&gt;</span>(<span class="ident">params</span>);
+					<span class="kw">let </span>res = #crate_::validate_block::implementation::validate_block::&lt;
+						&lt;#runtime <span class="kw">as </span>#crate_::validate_block::GetRuntimeBlockType&gt;::RuntimeBlock,
+						#block_executor,
+						#runtime,
+						#check_inherents,
+					&gt;(params);
 
-					#<span class="ident">crate_::validate_block::polkadot_parachain::write_result</span>(<span class="kw-2">&amp;</span><span class="ident">res</span>)
+					#crate_::validate_block::polkadot_parachain::write_result(<span class="kw-2">&amp;</span>res)
 				}
 			}
 		}
-	} <span class="kw">else</span> {
+	} <span class="kw">else </span>{
 		<span class="macro">quote::quote!</span>()
 	}
-	.<span class="ident">into</span>()
+	.into()
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_parachain_system_proc_macro" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_parachain_system_proc_macro" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

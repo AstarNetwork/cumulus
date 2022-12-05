@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/pov-recovery/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_pov_recovery/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_pov_recovery/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_pov_recovery/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/pov-recovery/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_pov_recovery/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_pov_recovery/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_pov_recovery/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -484,491 +484,491 @@
 <span id="484">484</span>
 <span id="485">485</span>
 <span id="486">486</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Polkadot is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Polkadot is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! Parachain PoV recovery</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! A parachain needs to build PoVs that are send to the relay chain to progress. These PoVs are</span>
-<span class="doccomment">//! erasure encoded and one piece of it is stored by each relay chain validator. As the relay chain</span>
-<span class="doccomment">//! decides on which PoV per parachain to include and thus, to progess the parachain it can happen</span>
-<span class="doccomment">//! that the block corresponding to this PoV isn&#39;t propagated in the parachain network. This can have</span>
-<span class="doccomment">//! several reasons, either a malicious collator that managed to include its own PoV and doesn&#39;t want</span>
-<span class="doccomment">//! to share it with the rest of the network or maybe a collator went down before it could distribute</span>
-<span class="doccomment">//! the block in the network. When something like this happens we can use the PoV recovery algorithm</span>
-<span class="doccomment">//! implemented in this crate to recover a PoV and to propagate it with the rest of the network.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! It works in the following way:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! 1. For every included relay chain block we note the backed candidate of our parachain. If the</span>
-<span class="doccomment">//!    block belonging to the PoV is already known, we do nothing. Otherwise we start</span>
-<span class="doccomment">//!    a timer that waits a random time between 0..relay_chain_slot_length before starting to recover</span>
-<span class="doccomment">//!    the PoV.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! 2. If between starting and firing the timer the block is imported, we skip the recovery of the</span>
-<span class="doccomment">//!    PoV.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! 3. If the timer fired we recover the PoV using the relay chain PoV recovery protocol. After it</span>
-<span class="doccomment">//!    is recovered, we restore the block and import it.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If we need to recover multiple PoV blocks (which should hopefully not happen in real life), we</span>
-<span class="doccomment">//! make sure that the blocks are imported in the correct order.</span>
+</span><span class="doccomment">//! Parachain PoV recovery
+//!
+//! A parachain needs to build PoVs that are send to the relay chain to progress. These PoVs are
+//! erasure encoded and one piece of it is stored by each relay chain validator. As the relay chain
+//! decides on which PoV per parachain to include and thus, to progess the parachain it can happen
+//! that the block corresponding to this PoV isn&#39;t propagated in the parachain network. This can have
+//! several reasons, either a malicious collator that managed to include its own PoV and doesn&#39;t want
+//! to share it with the rest of the network or maybe a collator went down before it could distribute
+//! the block in the network. When something like this happens we can use the PoV recovery algorithm
+//! implemented in this crate to recover a PoV and to propagate it with the rest of the network.
+//!
+//! It works in the following way:
+//!
+//! 1. For every included relay chain block we note the backed candidate of our parachain. If the
+//!    block belonging to the PoV is already known, we do nothing. Otherwise we start
+//!    a timer that waits a random time between 0..relay_chain_slot_length before starting to recover
+//!    the PoV.
+//!
+//! 2. If between starting and firing the timer the block is imported, we skip the recovery of the
+//!    PoV.
+//!
+//! 3. If the timer fired we recover the PoV using the relay chain PoV recovery protocol. After it
+//!    is recovered, we restore the block and import it.
+//!
+//! If we need to recover multiple PoV blocks (which should hopefully not happen in real life), we
+//! make sure that the blocks are imported in the correct order.
 
-<span class="kw">use</span> <span class="ident">sc_client_api</span>::{<span class="ident">BlockBackend</span>, <span class="ident">BlockchainEvents</span>, <span class="ident">UsageProvider</span>};
-<span class="kw">use</span> <span class="ident">sc_consensus::import_queue</span>::{<span class="ident">ImportQueue</span>, <span class="ident">IncomingBlock</span>};
-<span class="kw">use</span> <span class="ident">sp_consensus</span>::{<span class="ident">BlockOrigin</span>, <span class="ident">BlockStatus</span>};
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{
-	<span class="ident">generic::BlockId</span>,
-	<span class="ident">traits</span>::{<span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">HeaderT</span>, <span class="ident">NumberFor</span>},
+</span><span class="kw">use </span>sc_client_api::{BlockBackend, BlockchainEvents, UsageProvider};
+<span class="kw">use </span>sc_consensus::import_queue::{ImportQueue, IncomingBlock};
+<span class="kw">use </span>sp_consensus::{BlockOrigin, BlockStatus};
+<span class="kw">use </span>sp_runtime::{
+	generic::BlockId,
+	traits::{Block <span class="kw">as </span>BlockT, Header <span class="kw">as </span>HeaderT, NumberFor},
 };
 
-<span class="kw">use</span> <span class="ident">polkadot_node_primitives</span>::{<span class="ident">AvailableData</span>, <span class="ident">POV_BOMB_LIMIT</span>};
-<span class="kw">use</span> <span class="ident">polkadot_overseer::Handle</span> <span class="kw">as</span> <span class="ident">OverseerHandle</span>;
-<span class="kw">use</span> <span class="ident">polkadot_primitives::v2</span>::{
-	<span class="ident">CandidateReceipt</span>, <span class="ident">CommittedCandidateReceipt</span>, <span class="ident">Id</span> <span class="kw">as</span> <span class="ident">ParaId</span>, <span class="ident">SessionIndex</span>,
+<span class="kw">use </span>polkadot_node_primitives::{AvailableData, POV_BOMB_LIMIT};
+<span class="kw">use </span>polkadot_overseer::Handle <span class="kw">as </span>OverseerHandle;
+<span class="kw">use </span>polkadot_primitives::v2::{
+	CandidateReceipt, CommittedCandidateReceipt, Id <span class="kw">as </span>ParaId, SessionIndex,
 };
 
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core::ParachainBlockData</span>;
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface</span>::{<span class="ident">RelayChainInterface</span>, <span class="ident">RelayChainResult</span>};
+<span class="kw">use </span>cumulus_primitives_core::ParachainBlockData;
+<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainInterface, RelayChainResult};
 
-<span class="kw">use</span> <span class="ident">codec::Decode</span>;
-<span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">select</span>, <span class="ident">stream::FuturesUnordered</span>, <span class="ident">Future</span>, <span class="ident">FutureExt</span>, <span class="ident">Stream</span>, <span class="ident">StreamExt</span>};
-<span class="kw">use</span> <span class="ident">futures_timer::Delay</span>;
-<span class="kw">use</span> <span class="ident">rand</span>::{<span class="ident">thread_rng</span>, <span class="ident">Rng</span>};
+<span class="kw">use </span>codec::Decode;
+<span class="kw">use </span>futures::{select, stream::FuturesUnordered, Future, FutureExt, Stream, StreamExt};
+<span class="kw">use </span>futures_timer::Delay;
+<span class="kw">use </span>rand::{thread_rng, Rng};
 
-<span class="kw">use</span> <span class="ident">std</span>::{
-	<span class="ident">collections</span>::{<span class="ident">HashMap</span>, <span class="ident">VecDeque</span>},
-	<span class="ident">pin::Pin</span>,
-	<span class="ident">sync::Arc</span>,
-	<span class="ident">time::Duration</span>,
+<span class="kw">use </span>std::{
+	collections::{HashMap, VecDeque},
+	pin::Pin,
+	sync::Arc,
+	time::Duration,
 };
 
-<span class="kw">mod</span> <span class="ident">active_candidate_recovery</span>;
-<span class="kw">use</span> <span class="ident">active_candidate_recovery::ActiveCandidateRecovery</span>;
+<span class="kw">mod </span>active_candidate_recovery;
+<span class="kw">use </span>active_candidate_recovery::ActiveCandidateRecovery;
 
-<span class="kw">const</span> <span class="ident">LOG_TARGET</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;cumulus-pov-recovery&quot;</span>;
+<span class="kw">const </span>LOG_TARGET: <span class="kw-2">&amp;</span>str = <span class="string">&quot;cumulus-pov-recovery&quot;</span>;
 
-<span class="doccomment">/// Represents a pending candidate.</span>
-<span class="kw">struct</span> <span class="ident">PendingCandidate</span><span class="op">&lt;</span><span class="ident">Block</span>: <span class="ident">BlockT</span><span class="op">&gt;</span> {
-	<span class="ident">receipt</span>: <span class="ident">CandidateReceipt</span>,
-	<span class="ident">session_index</span>: <span class="ident">SessionIndex</span>,
-	<span class="ident">block_number</span>: <span class="ident">NumberFor</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Represents a pending candidate.
+</span><span class="kw">struct </span>PendingCandidate&lt;Block: BlockT&gt; {
+	receipt: CandidateReceipt,
+	session_index: SessionIndex,
+	block_number: NumberFor&lt;Block&gt;,
 }
 
-<span class="doccomment">/// The delay between observing an unknown block and recovering this block.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">RecoveryDelay</span> {
-	<span class="doccomment">/// Start recovering the block in maximum of the given delay.</span>
-	<span class="ident">WithMax</span> { <span class="ident">max</span>: <span class="ident">Duration</span> },
-	<span class="doccomment">/// Start recovering the block after at least `min` delay and in maximum `max` delay.</span>
-	<span class="ident">WithMinAndMax</span> { <span class="ident">min</span>: <span class="ident">Duration</span>, <span class="ident">max</span>: <span class="ident">Duration</span> },
+<span class="doccomment">/// The delay between observing an unknown block and recovering this block.
+</span><span class="attribute">#[derive(Clone, Copy)]
+</span><span class="kw">pub enum </span>RecoveryDelay {
+	<span class="doccomment">/// Start recovering the block in maximum of the given delay.
+	</span>WithMax { max: Duration },
+	<span class="doccomment">/// Start recovering the block after at least `min` delay and in maximum `max` delay.
+	</span>WithMinAndMax { min: Duration, max: Duration },
 }
 
-<span class="kw">impl</span> <span class="ident">RecoveryDelay</span> {
-	<span class="doccomment">/// Return as [`Delay`].</span>
-	<span class="kw">fn</span> <span class="ident">as_delay</span>(<span class="self">self</span>) -&gt; <span class="ident">Delay</span> {
-		<span class="kw">match</span> <span class="self">self</span> {
-			<span class="ident"><span class="self">Self</span>::WithMax</span> { <span class="ident">max</span> } =&gt; <span class="ident">Delay::new</span>(<span class="ident">max</span>.<span class="ident">mul_f64</span>(<span class="ident">thread_rng</span>().<span class="ident">gen</span>())),
-			<span class="ident"><span class="self">Self</span>::WithMinAndMax</span> { <span class="ident">min</span>, <span class="ident">max</span> } =&gt;
-				<span class="ident">Delay::new</span>(<span class="ident">min</span> <span class="op">+</span> <span class="ident">max</span>.<span class="ident">saturating_sub</span>(<span class="ident">min</span>).<span class="ident">mul_f64</span>(<span class="ident">thread_rng</span>().<span class="ident">gen</span>())),
+<span class="kw">impl </span>RecoveryDelay {
+	<span class="doccomment">/// Return as [`Delay`].
+	</span><span class="kw">fn </span>as_delay(<span class="self">self</span>) -&gt; Delay {
+		<span class="kw">match </span><span class="self">self </span>{
+			<span class="self">Self</span>::WithMax { max } =&gt; Delay::new(max.mul_f64(thread_rng().gen())),
+			<span class="self">Self</span>::WithMinAndMax { min, max } =&gt;
+				Delay::new(min + max.saturating_sub(min).mul_f64(thread_rng().gen())),
 		}
 	}
 }
 
-<span class="doccomment">/// Encapsulates the logic of the pov recovery.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PoVRecovery</span><span class="op">&lt;</span><span class="ident">Block</span>: <span class="ident">BlockT</span>, <span class="ident">PC</span>, <span class="ident">IQ</span>, <span class="ident">RC</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// All the pending candidates that we are waiting for to be imported or that need to be</span>
-	<span class="doccomment">/// recovered when `next_candidate_to_recover` tells us to do so.</span>
-	<span class="ident">pending_candidates</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Block::Hash</span>, <span class="ident">PendingCandidate</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="doccomment">/// A stream of futures that resolve to hashes of candidates that need to be recovered.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The candidates to the hashes are stored in `pending_candidates`. If a candidate is not</span>
-	<span class="doccomment">/// available anymore in this map, it means that it was already imported.</span>
-	<span class="ident">next_candidate_to_recover</span>: <span class="ident">FuturesUnordered</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">Block::Hash</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">active_candidate_recovery</span>: <span class="ident">ActiveCandidateRecovery</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="doccomment">/// Blocks that wait that the parent is imported.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Uses parent -&gt; blocks mapping.</span>
-	<span class="ident">waiting_for_parent</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Block::Hash</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">recovery_delay</span>: <span class="ident">RecoveryDelay</span>,
-	<span class="ident">parachain_client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">PC</span><span class="op">&gt;</span>,
-	<span class="ident">parachain_import_queue</span>: <span class="ident">IQ</span>,
-	<span class="ident">relay_chain_interface</span>: <span class="ident">RC</span>,
-	<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
+<span class="doccomment">/// Encapsulates the logic of the pov recovery.
+</span><span class="kw">pub struct </span>PoVRecovery&lt;Block: BlockT, PC, IQ, RC&gt; {
+	<span class="doccomment">/// All the pending candidates that we are waiting for to be imported or that need to be
+	/// recovered when `next_candidate_to_recover` tells us to do so.
+	</span>pending_candidates: HashMap&lt;Block::Hash, PendingCandidate&lt;Block&gt;&gt;,
+	<span class="doccomment">/// A stream of futures that resolve to hashes of candidates that need to be recovered.
+	///
+	/// The candidates to the hashes are stored in `pending_candidates`. If a candidate is not
+	/// available anymore in this map, it means that it was already imported.
+	</span>next_candidate_to_recover: FuturesUnordered&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Future&lt;Output = Block::Hash&gt; + Send&gt;&gt;&gt;,
+	active_candidate_recovery: ActiveCandidateRecovery&lt;Block&gt;,
+	<span class="doccomment">/// Blocks that wait that the parent is imported.
+	///
+	/// Uses parent -&gt; blocks mapping.
+	</span>waiting_for_parent: HashMap&lt;Block::Hash, Vec&lt;Block&gt;&gt;,
+	recovery_delay: RecoveryDelay,
+	parachain_client: Arc&lt;PC&gt;,
+	parachain_import_queue: IQ,
+	relay_chain_interface: RC,
+	para_id: ParaId,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Block</span>: <span class="ident">BlockT</span>, <span class="ident">PC</span>, <span class="ident">IQ</span>, <span class="ident">RCInterface</span><span class="op">&gt;</span> <span class="ident">PoVRecovery</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">PC</span>, <span class="ident">IQ</span>, <span class="ident">RCInterface</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">PC</span>: <span class="ident">BlockBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">BlockchainEvents</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">RCInterface</span>: <span class="ident">RelayChainInterface</span> <span class="op">+</span> <span class="ident">Clone</span>,
-	<span class="ident">IQ</span>: <span class="ident">ImportQueue</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;Block: BlockT, PC, IQ, RCInterface&gt; PoVRecovery&lt;Block, PC, IQ, RCInterface&gt;
+<span class="kw">where
+	</span>PC: BlockBackend&lt;Block&gt; + BlockchainEvents&lt;Block&gt; + UsageProvider&lt;Block&gt;,
+	RCInterface: RelayChainInterface + Clone,
+	IQ: ImportQueue&lt;Block&gt;,
 {
-	<span class="doccomment">/// Create a new instance.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-		<span class="ident">overseer_handle</span>: <span class="ident">OverseerHandle</span>,
-		<span class="ident">recovery_delay</span>: <span class="ident">RecoveryDelay</span>,
-		<span class="ident">parachain_client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">PC</span><span class="op">&gt;</span>,
-		<span class="ident">parachain_import_queue</span>: <span class="ident">IQ</span>,
-		<span class="ident">relay_chain_interface</span>: <span class="ident">RCInterface</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> {
-			<span class="ident">pending_candidates</span>: <span class="ident">HashMap::new</span>(),
-			<span class="ident">next_candidate_to_recover</span>: <span class="ident">Default::default</span>(),
-			<span class="ident">active_candidate_recovery</span>: <span class="ident">ActiveCandidateRecovery::new</span>(<span class="ident">overseer_handle</span>),
-			<span class="ident">recovery_delay</span>,
-			<span class="ident">waiting_for_parent</span>: <span class="ident">HashMap::new</span>(),
-			<span class="ident">parachain_client</span>,
-			<span class="ident">parachain_import_queue</span>,
-			<span class="ident">relay_chain_interface</span>,
-			<span class="ident">para_id</span>,
+	<span class="doccomment">/// Create a new instance.
+	</span><span class="kw">pub fn </span>new(
+		overseer_handle: OverseerHandle,
+		recovery_delay: RecoveryDelay,
+		parachain_client: Arc&lt;PC&gt;,
+		parachain_import_queue: IQ,
+		relay_chain_interface: RCInterface,
+		para_id: ParaId,
+	) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			pending_candidates: HashMap::new(),
+			next_candidate_to_recover: Default::default(),
+			active_candidate_recovery: ActiveCandidateRecovery::new(overseer_handle),
+			recovery_delay,
+			waiting_for_parent: HashMap::new(),
+			parachain_client,
+			parachain_import_queue,
+			relay_chain_interface,
+			para_id,
 		}
 	}
 
-	<span class="doccomment">/// Handle a new pending candidate.</span>
-	<span class="kw">fn</span> <span class="ident">handle_pending_candidate</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">receipt</span>: <span class="ident">CommittedCandidateReceipt</span>,
-		<span class="ident">session_index</span>: <span class="ident">SessionIndex</span>,
+	<span class="doccomment">/// Handle a new pending candidate.
+	</span><span class="kw">fn </span>handle_pending_candidate(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		receipt: CommittedCandidateReceipt,
+		session_index: SessionIndex,
 	) {
-		<span class="kw">let</span> <span class="ident">header</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Block::Header::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">receipt</span>.<span class="ident">commitments</span>.<span class="ident">head_data</span>.<span class="number">0</span>[..]) {
-			<span class="prelude-val">Ok</span>(<span class="ident">header</span>) =&gt; <span class="ident">header</span>,
-			<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
+		<span class="kw">let </span>header = <span class="kw">match </span>Block::Header::decode(<span class="kw-2">&amp;mut &amp;</span>receipt.commitments.head_data.<span class="number">0</span>[..]) {
+			<span class="prelude-val">Ok</span>(header) =&gt; header,
+			<span class="prelude-val">Err</span>(e) =&gt; {
 				<span class="macro">tracing::warn!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
+					target: LOG_TARGET,
+					error = <span class="question-mark">?</span>e,
 					<span class="string">&quot;Failed to decode parachain header from pending candidate&quot;</span>,
 				);
-				<span class="kw">return</span>
-			},
+				<span class="kw">return
+			</span>},
 		};
 
-		<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">header</span>.<span class="ident">number</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">parachain_client</span>.<span class="ident">usage_info</span>().<span class="ident">chain</span>.<span class="ident">finalized_number</span> {
-			<span class="kw">return</span>
-		}
+		<span class="kw">if </span><span class="kw-2">*</span>header.number() &lt;= <span class="self">self</span>.parachain_client.usage_info().chain.finalized_number {
+			<span class="kw">return
+		</span>}
 
-		<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">header</span>.<span class="ident">hash</span>();
-		<span class="kw">match</span> <span class="self">self</span>.<span class="ident">parachain_client</span>.<span class="ident">block_status</span>(<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="ident">hash</span>)) {
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::Unknown</span>) =&gt; (),
-			<span class="comment">// Any other state means, we should ignore it.</span>
-			<span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="kw">return</span>,
-			<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
+		<span class="kw">let </span>hash = header.hash();
+		<span class="kw">match </span><span class="self">self</span>.parachain_client.block_status(<span class="kw-2">&amp;</span>BlockId::Hash(hash)) {
+			<span class="prelude-val">Ok</span>(BlockStatus::Unknown) =&gt; (),
+			<span class="comment">// Any other state means, we should ignore it.
+			</span><span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="kw">return</span>,
+			<span class="prelude-val">Err</span>(e) =&gt; {
 				<span class="macro">tracing::debug!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
-					<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+					target: LOG_TARGET,
+					error = <span class="question-mark">?</span>e,
+					block_hash = <span class="question-mark">?</span>hash,
 					<span class="string">&quot;Failed to get block status&quot;</span>,
 				);
-				<span class="kw">return</span>
-			},
+				<span class="kw">return
+			</span>},
 		}
 
-		<span class="macro">tracing::debug!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="question-mark">?</span><span class="ident">hash</span>, <span class="string">&quot;Adding pending candidate&quot;</span>);
-		<span class="kw">if</span> <span class="self">self</span>
-			.<span class="ident">pending_candidates</span>
-			.<span class="ident">insert</span>(
-				<span class="ident">hash</span>,
-				<span class="ident">PendingCandidate</span> {
-					<span class="ident">block_number</span>: <span class="kw-2">*</span><span class="ident">header</span>.<span class="ident">number</span>(),
-					<span class="ident">receipt</span>: <span class="ident">receipt</span>.<span class="ident">to_plain</span>(),
-					<span class="ident">session_index</span>,
+		<span class="macro">tracing::debug!</span>(target: LOG_TARGET, <span class="question-mark">?</span>hash, <span class="string">&quot;Adding pending candidate&quot;</span>);
+		<span class="kw">if </span><span class="self">self
+			</span>.pending_candidates
+			.insert(
+				hash,
+				PendingCandidate {
+					block_number: <span class="kw-2">*</span>header.number(),
+					receipt: receipt.to_plain(),
+					session_index,
 				},
 			)
-			.<span class="ident">is_some</span>()
+			.is_some()
 		{
-			<span class="kw">return</span>
-		}
+			<span class="kw">return
+		</span>}
 
-		<span class="comment">// Delay the recovery by some random time to not spam the relay chain.</span>
-		<span class="kw">let</span> <span class="ident">delay</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">recovery_delay</span>.<span class="ident">as_delay</span>();
-		<span class="self">self</span>.<span class="ident">next_candidate_to_recover</span>.<span class="ident">push</span>(
-			<span class="kw">async</span> <span class="kw">move</span> {
-				<span class="ident">delay</span>.<span class="kw">await</span>;
-				<span class="ident">hash</span>
+		<span class="comment">// Delay the recovery by some random time to not spam the relay chain.
+		</span><span class="kw">let </span>delay = <span class="self">self</span>.recovery_delay.as_delay();
+		<span class="self">self</span>.next_candidate_to_recover.push(
+			<span class="kw">async move </span>{
+				delay.<span class="kw">await</span>;
+				hash
 			}
-			.<span class="ident">boxed</span>(),
+			.boxed(),
 		);
 	}
 
-	<span class="doccomment">/// Handle an imported block.</span>
-	<span class="kw">fn</span> <span class="ident">handle_block_imported</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">hash</span>: <span class="kw-2">&amp;</span><span class="ident">Block::Hash</span>) {
-		<span class="self">self</span>.<span class="ident">pending_candidates</span>.<span class="ident">remove</span>(<span class="ident">hash</span>);
+	<span class="doccomment">/// Handle an imported block.
+	</span><span class="kw">fn </span>handle_block_imported(<span class="kw-2">&amp;mut </span><span class="self">self</span>, hash: <span class="kw-2">&amp;</span>Block::Hash) {
+		<span class="self">self</span>.pending_candidates.remove(hash);
 	}
 
-	<span class="doccomment">/// Handle a finalized block with the given `block_number`.</span>
-	<span class="kw">fn</span> <span class="ident">handle_block_finalized</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">block_number</span>: <span class="ident">NumberFor</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>) {
-		<span class="self">self</span>.<span class="ident">pending_candidates</span>.<span class="ident">retain</span>(<span class="op">|</span><span class="kw">_</span>, <span class="ident">pc</span><span class="op">|</span> <span class="ident">pc</span>.<span class="ident">block_number</span> <span class="op">&gt;</span> <span class="ident">block_number</span>);
+	<span class="doccomment">/// Handle a finalized block with the given `block_number`.
+	</span><span class="kw">fn </span>handle_block_finalized(<span class="kw-2">&amp;mut </span><span class="self">self</span>, block_number: NumberFor&lt;Block&gt;) {
+		<span class="self">self</span>.pending_candidates.retain(|<span class="kw">_</span>, pc| pc.block_number &gt; block_number);
 	}
 
-	<span class="doccomment">/// Recover the candidate for the given `block_hash`.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">recover_candidate</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">block_hash</span>: <span class="ident">Block::Hash</span>) {
-		<span class="kw">let</span> <span class="ident">pending_candidate</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">pending_candidates</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">block_hash</span>) {
-			<span class="prelude-val">Some</span>(<span class="ident">pending_candidate</span>) =&gt; <span class="ident">pending_candidate</span>,
-			<span class="prelude-val">None</span> =&gt; <span class="kw">return</span>,
+	<span class="doccomment">/// Recover the candidate for the given `block_hash`.
+	</span><span class="kw">async fn </span>recover_candidate(<span class="kw-2">&amp;mut </span><span class="self">self</span>, block_hash: Block::Hash) {
+		<span class="kw">let </span>pending_candidate = <span class="kw">match </span><span class="self">self</span>.pending_candidates.remove(<span class="kw-2">&amp;</span>block_hash) {
+			<span class="prelude-val">Some</span>(pending_candidate) =&gt; pending_candidate,
+			<span class="prelude-val">None </span>=&gt; <span class="kw">return</span>,
 		};
 
-		<span class="macro">tracing::debug!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="question-mark">?</span><span class="ident">block_hash</span>, <span class="string">&quot;Issuing recovery request&quot;</span>);
-		<span class="self">self</span>.<span class="ident">active_candidate_recovery</span>
-			.<span class="ident">recover_candidate</span>(<span class="ident">block_hash</span>, <span class="ident">pending_candidate</span>)
+		<span class="macro">tracing::debug!</span>(target: LOG_TARGET, <span class="question-mark">?</span>block_hash, <span class="string">&quot;Issuing recovery request&quot;</span>);
+		<span class="self">self</span>.active_candidate_recovery
+			.recover_candidate(block_hash, pending_candidate)
 			.<span class="kw">await</span>;
 	}
 
-	<span class="doccomment">/// Clear `waiting_for_parent` from the given `hash` and do this recursively for all child</span>
-	<span class="doccomment">/// blocks.</span>
-	<span class="kw">fn</span> <span class="ident">clear_waiting_for_parent</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">hash</span>: <span class="ident">Block::Hash</span>) {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blocks_to_delete</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">hash</span>];
+	<span class="doccomment">/// Clear `waiting_for_parent` from the given `hash` and do this recursively for all child
+	/// blocks.
+	</span><span class="kw">fn </span>clear_waiting_for_parent(<span class="kw-2">&amp;mut </span><span class="self">self</span>, hash: Block::Hash) {
+		<span class="kw">let </span><span class="kw-2">mut </span>blocks_to_delete = <span class="macro">vec!</span>[hash];
 
-		<span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">delete</span>) <span class="op">=</span> <span class="ident">blocks_to_delete</span>.<span class="ident">pop</span>() {
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">childs</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">waiting_for_parent</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">delete</span>) {
-				<span class="ident">blocks_to_delete</span>.<span class="ident">extend</span>(<span class="ident">childs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">BlockT::hash</span>));
+		<span class="kw">while let </span><span class="prelude-val">Some</span>(delete) = blocks_to_delete.pop() {
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(childs) = <span class="self">self</span>.waiting_for_parent.remove(<span class="kw-2">&amp;</span>delete) {
+				blocks_to_delete.extend(childs.iter().map(BlockT::hash));
 			}
 		}
 	}
 
-	<span class="doccomment">/// Handle a recovered candidate.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">handle_candidate_recovered</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="ident">block_hash</span>: <span class="ident">Block::Hash</span>,
-		<span class="ident">available_data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">AvailableData</span><span class="op">&gt;</span>,
+	<span class="doccomment">/// Handle a recovered candidate.
+	</span><span class="kw">async fn </span>handle_candidate_recovered(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		block_hash: Block::Hash,
+		available_data: <span class="prelude-ty">Option</span>&lt;AvailableData&gt;,
 	) {
-		<span class="kw">let</span> <span class="ident">available_data</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">available_data</span> {
-			<span class="prelude-val">Some</span>(<span class="ident">data</span>) =&gt; <span class="ident">data</span>,
-			<span class="prelude-val">None</span> =&gt; {
-				<span class="self">self</span>.<span class="ident">clear_waiting_for_parent</span>(<span class="ident">block_hash</span>);
-				<span class="kw">return</span>
-			},
+		<span class="kw">let </span>available_data = <span class="kw">match </span>available_data {
+			<span class="prelude-val">Some</span>(data) =&gt; data,
+			<span class="prelude-val">None </span>=&gt; {
+				<span class="self">self</span>.clear_waiting_for_parent(block_hash);
+				<span class="kw">return
+			</span>},
 		};
 
-		<span class="kw">let</span> <span class="ident">raw_block_data</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">sp_maybe_compressed_blob::decompress</span>(
-			<span class="kw-2">&amp;</span><span class="ident">available_data</span>.<span class="ident">pov</span>.<span class="ident">block_data</span>.<span class="number">0</span>,
-			<span class="ident">POV_BOMB_LIMIT</span>,
+		<span class="kw">let </span>raw_block_data = <span class="kw">match </span>sp_maybe_compressed_blob::decompress(
+			<span class="kw-2">&amp;</span>available_data.pov.block_data.<span class="number">0</span>,
+			POV_BOMB_LIMIT,
 		) {
-			<span class="prelude-val">Ok</span>(<span class="ident">r</span>) =&gt; <span class="ident">r</span>,
-			<span class="prelude-val">Err</span>(<span class="ident">error</span>) =&gt; {
-				<span class="macro">tracing::debug!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="question-mark">?</span><span class="ident">error</span>, <span class="string">&quot;Failed to decompress PoV&quot;</span>);
+			<span class="prelude-val">Ok</span>(r) =&gt; r,
+			<span class="prelude-val">Err</span>(error) =&gt; {
+				<span class="macro">tracing::debug!</span>(target: LOG_TARGET, <span class="question-mark">?</span>error, <span class="string">&quot;Failed to decompress PoV&quot;</span>);
 
-				<span class="self">self</span>.<span class="ident">clear_waiting_for_parent</span>(<span class="ident">block_hash</span>);
+				<span class="self">self</span>.clear_waiting_for_parent(block_hash);
 
-				<span class="kw">return</span>
-			},
+				<span class="kw">return
+			</span>},
 		};
 
-		<span class="kw">let</span> <span class="ident">block_data</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ParachainBlockData</span>::<span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">raw_block_data</span>[..]) {
-			<span class="prelude-val">Ok</span>(<span class="ident">d</span>) =&gt; <span class="ident">d</span>,
-			<span class="prelude-val">Err</span>(<span class="ident">error</span>) =&gt; {
+		<span class="kw">let </span>block_data = <span class="kw">match </span>ParachainBlockData::&lt;Block&gt;::decode(<span class="kw-2">&amp;mut &amp;</span>raw_block_data[..]) {
+			<span class="prelude-val">Ok</span>(d) =&gt; d,
+			<span class="prelude-val">Err</span>(error) =&gt; {
 				<span class="macro">tracing::warn!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="question-mark">?</span><span class="ident">error</span>,
+					target: LOG_TARGET,
+					<span class="question-mark">?</span>error,
 					<span class="string">&quot;Failed to decode parachain block data from recovered PoV&quot;</span>,
 				);
 
-				<span class="self">self</span>.<span class="ident">clear_waiting_for_parent</span>(<span class="ident">block_hash</span>);
+				<span class="self">self</span>.clear_waiting_for_parent(block_hash);
 
-				<span class="kw">return</span>
-			},
+				<span class="kw">return
+			</span>},
 		};
 
-		<span class="kw">let</span> <span class="ident">block</span> <span class="op">=</span> <span class="ident">block_data</span>.<span class="ident">into_block</span>();
+		<span class="kw">let </span>block = block_data.into_block();
 
-		<span class="kw">let</span> <span class="ident">parent</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">block</span>.<span class="ident">header</span>().<span class="ident">parent_hash</span>();
+		<span class="kw">let </span>parent = <span class="kw-2">*</span>block.header().parent_hash();
 
-		<span class="kw">match</span> <span class="self">self</span>.<span class="ident">parachain_client</span>.<span class="ident">block_status</span>(<span class="kw-2">&amp;</span><span class="ident">BlockId::hash</span>(<span class="ident">parent</span>)) {
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::Unknown</span>) =&gt; {
-				<span class="kw">if</span> <span class="self">self</span>.<span class="ident">active_candidate_recovery</span>.<span class="ident">is_being_recovered</span>(<span class="kw-2">&amp;</span><span class="ident">parent</span>) {
+		<span class="kw">match </span><span class="self">self</span>.parachain_client.block_status(<span class="kw-2">&amp;</span>BlockId::hash(parent)) {
+			<span class="prelude-val">Ok</span>(BlockStatus::Unknown) =&gt; {
+				<span class="kw">if </span><span class="self">self</span>.active_candidate_recovery.is_being_recovered(<span class="kw-2">&amp;</span>parent) {
 					<span class="macro">tracing::debug!</span>(
-						<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-						<span class="question-mark">?</span><span class="ident">block_hash</span>,
-						<span class="ident">parent_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">parent</span>,
+						target: LOG_TARGET,
+						<span class="question-mark">?</span>block_hash,
+						parent_hash = <span class="question-mark">?</span>parent,
 						<span class="string">&quot;Parent is still being recovered, waiting.&quot;</span>,
 					);
 
-					<span class="self">self</span>.<span class="ident">waiting_for_parent</span>.<span class="ident">entry</span>(<span class="ident">parent</span>).<span class="ident">or_default</span>().<span class="ident">push</span>(<span class="ident">block</span>);
-					<span class="kw">return</span>
-				} <span class="kw">else</span> {
+					<span class="self">self</span>.waiting_for_parent.entry(parent).or_default().push(block);
+					<span class="kw">return
+				</span>} <span class="kw">else </span>{
 					<span class="macro">tracing::debug!</span>(
-						<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-						<span class="question-mark">?</span><span class="ident">block_hash</span>,
-						<span class="ident">parent_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">parent</span>,
+						target: LOG_TARGET,
+						<span class="question-mark">?</span>block_hash,
+						parent_hash = <span class="question-mark">?</span>parent,
 						<span class="string">&quot;Parent not found while trying to import recovered block.&quot;</span>,
 					);
 
-					<span class="self">self</span>.<span class="ident">clear_waiting_for_parent</span>(<span class="ident">block_hash</span>);
+					<span class="self">self</span>.clear_waiting_for_parent(block_hash);
 
-					<span class="kw">return</span>
-				}
+					<span class="kw">return
+				</span>}
 			},
-			<span class="prelude-val">Err</span>(<span class="ident">error</span>) =&gt; {
+			<span class="prelude-val">Err</span>(error) =&gt; {
 				<span class="macro">tracing::debug!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">parent</span>,
-					<span class="question-mark">?</span><span class="ident">error</span>,
+					target: LOG_TARGET,
+					block_hash = <span class="question-mark">?</span>parent,
+					<span class="question-mark">?</span>error,
 					<span class="string">&quot;Error while checking block status&quot;</span>,
 				);
 
-				<span class="self">self</span>.<span class="ident">clear_waiting_for_parent</span>(<span class="ident">block_hash</span>);
+				<span class="self">self</span>.clear_waiting_for_parent(block_hash);
 
-				<span class="kw">return</span>
-			},
-			<span class="comment">// Any other status is fine to &quot;ignore/accept&quot;</span>
-			<span class="kw">_</span> =&gt; (),
+				<span class="kw">return
+			</span>},
+			<span class="comment">// Any other status is fine to &quot;ignore/accept&quot;
+			</span><span class="kw">_ </span>=&gt; (),
 		}
 
-		<span class="self">self</span>.<span class="ident">import_block</span>(<span class="ident">block</span>).<span class="kw">await</span>;
+		<span class="self">self</span>.import_block(block).<span class="kw">await</span>;
 	}
 
-	<span class="doccomment">/// Import the given `block`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This will also recursivley drain `waiting_for_parent` and import them as well.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">import_block</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">block</span>: <span class="ident">Block</span>) {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blocks</span> <span class="op">=</span> <span class="ident">VecDeque::new</span>();
+	<span class="doccomment">/// Import the given `block`.
+	///
+	/// This will also recursivley drain `waiting_for_parent` and import them as well.
+	</span><span class="kw">async fn </span>import_block(<span class="kw-2">&amp;mut </span><span class="self">self</span>, block: Block) {
+		<span class="kw">let </span><span class="kw-2">mut </span>blocks = VecDeque::new();
 
-		<span class="macro">tracing::debug!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="ident">hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">block</span>.<span class="ident">hash</span>(), <span class="string">&quot;Importing block retrieved using pov_recovery&quot;</span>);
-		<span class="ident">blocks</span>.<span class="ident">push_back</span>(<span class="ident">block</span>);
+		<span class="macro">tracing::debug!</span>(target: LOG_TARGET, hash = <span class="question-mark">?</span>block.hash(), <span class="string">&quot;Importing block retrieved using pov_recovery&quot;</span>);
+		blocks.push_back(block);
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">incoming_blocks</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+		<span class="kw">let </span><span class="kw-2">mut </span>incoming_blocks = Vec::new();
 
-		<span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">block</span>) <span class="op">=</span> <span class="ident">blocks</span>.<span class="ident">pop_front</span>() {
-			<span class="kw">let</span> <span class="ident">block_hash</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">hash</span>();
-			<span class="kw">let</span> (<span class="ident">header</span>, <span class="ident">body</span>) <span class="op">=</span> <span class="ident">block</span>.<span class="ident">deconstruct</span>();
+		<span class="kw">while let </span><span class="prelude-val">Some</span>(block) = blocks.pop_front() {
+			<span class="kw">let </span>block_hash = block.hash();
+			<span class="kw">let </span>(header, body) = block.deconstruct();
 
-			<span class="ident">incoming_blocks</span>.<span class="ident">push</span>(<span class="ident">IncomingBlock</span> {
-				<span class="ident">hash</span>: <span class="ident">block_hash</span>,
-				<span class="ident">header</span>: <span class="prelude-val">Some</span>(<span class="ident">header</span>),
-				<span class="ident">body</span>: <span class="prelude-val">Some</span>(<span class="ident">body</span>),
-				<span class="ident">import_existing</span>: <span class="bool-val">false</span>,
-				<span class="ident">allow_missing_state</span>: <span class="bool-val">false</span>,
-				<span class="ident">justifications</span>: <span class="prelude-val">None</span>,
-				<span class="ident">origin</span>: <span class="prelude-val">None</span>,
-				<span class="ident">skip_execution</span>: <span class="bool-val">false</span>,
-				<span class="ident">state</span>: <span class="prelude-val">None</span>,
-				<span class="ident">indexed_body</span>: <span class="prelude-val">None</span>,
+			incoming_blocks.push(IncomingBlock {
+				hash: block_hash,
+				header: <span class="prelude-val">Some</span>(header),
+				body: <span class="prelude-val">Some</span>(body),
+				import_existing: <span class="bool-val">false</span>,
+				allow_missing_state: <span class="bool-val">false</span>,
+				justifications: <span class="prelude-val">None</span>,
+				origin: <span class="prelude-val">None</span>,
+				skip_execution: <span class="bool-val">false</span>,
+				state: <span class="prelude-val">None</span>,
+				indexed_body: <span class="prelude-val">None</span>,
 			});
 
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">waiting</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">waiting_for_parent</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">block_hash</span>) {
-				<span class="ident">blocks</span>.<span class="ident">extend</span>(<span class="ident">waiting</span>);
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(waiting) = <span class="self">self</span>.waiting_for_parent.remove(<span class="kw-2">&amp;</span>block_hash) {
+				blocks.extend(waiting);
 			}
 		}
 
-		<span class="self">self</span>.<span class="ident">parachain_import_queue</span>
-			.<span class="ident">import_blocks</span>(<span class="ident">BlockOrigin::ConsensusBroadcast</span>, <span class="ident">incoming_blocks</span>);
+		<span class="self">self</span>.parachain_import_queue
+			.import_blocks(BlockOrigin::ConsensusBroadcast, incoming_blocks);
 	}
 
-	<span class="doccomment">/// Run the pov-recovery.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">run</span>(<span class="kw-2">mut</span> <span class="self">self</span>) {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">imported_blocks</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">parachain_client</span>.<span class="ident">import_notification_stream</span>().<span class="ident">fuse</span>();
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">finalized_blocks</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">parachain_client</span>.<span class="ident">finality_notification_stream</span>().<span class="ident">fuse</span>();
-		<span class="kw">let</span> <span class="ident">pending_candidates</span> <span class="op">=</span>
-			<span class="kw">match</span> <span class="ident">pending_candidates</span>(<span class="self">self</span>.<span class="ident">relay_chain_interface</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">para_id</span>).<span class="kw">await</span> {
-				<span class="prelude-val">Ok</span>(<span class="ident">pending_candidate_stream</span>) =&gt; <span class="ident">pending_candidate_stream</span>.<span class="ident">fuse</span>(),
-				<span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; {
-					<span class="macro">tracing::error!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">err</span>, <span class="string">&quot;Unable to retrieve pending candidate stream.&quot;</span>);
-					<span class="kw">return</span>
-				},
+	<span class="doccomment">/// Run the pov-recovery.
+	</span><span class="kw">pub async fn </span>run(<span class="kw-2">mut </span><span class="self">self</span>) {
+		<span class="kw">let </span><span class="kw-2">mut </span>imported_blocks = <span class="self">self</span>.parachain_client.import_notification_stream().fuse();
+		<span class="kw">let </span><span class="kw-2">mut </span>finalized_blocks = <span class="self">self</span>.parachain_client.finality_notification_stream().fuse();
+		<span class="kw">let </span>pending_candidates =
+			<span class="kw">match </span>pending_candidates(<span class="self">self</span>.relay_chain_interface.clone(), <span class="self">self</span>.para_id).<span class="kw">await </span>{
+				<span class="prelude-val">Ok</span>(pending_candidate_stream) =&gt; pending_candidate_stream.fuse(),
+				<span class="prelude-val">Err</span>(err) =&gt; {
+					<span class="macro">tracing::error!</span>(target: LOG_TARGET, error = <span class="question-mark">?</span>err, <span class="string">&quot;Unable to retrieve pending candidate stream.&quot;</span>);
+					<span class="kw">return
+				</span>},
 			};
 
-		<span class="macro">futures::pin_mut!</span>(<span class="ident">pending_candidates</span>);
+		<span class="macro">futures::pin_mut!</span>(pending_candidates);
 
-		<span class="kw">loop</span> {
-			<span class="macro">select!</span> {
-				<span class="ident">pending_candidate</span> <span class="op">=</span> <span class="ident">pending_candidates</span>.<span class="ident">next</span>() =&gt; {
-					<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">receipt</span>, <span class="ident">session_index</span>)) <span class="op">=</span> <span class="ident">pending_candidate</span> {
-						<span class="self">self</span>.<span class="ident">handle_pending_candidate</span>(<span class="ident">receipt</span>, <span class="ident">session_index</span>);
-					} <span class="kw">else</span> {
+		<span class="kw">loop </span>{
+			<span class="macro">select! </span>{
+				pending_candidate = pending_candidates.next() =&gt; {
+					<span class="kw">if let </span><span class="prelude-val">Some</span>((receipt, session_index)) = pending_candidate {
+						<span class="self">self</span>.handle_pending_candidate(receipt, session_index);
+					} <span class="kw">else </span>{
 						<span class="macro">tracing::debug!</span>(
-							<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
+							target: LOG_TARGET,
 							<span class="string">&quot;Pending candidates stream ended&quot;</span>,
 						);
 						<span class="kw">return</span>;
 					}
 				},
-				<span class="ident">imported</span> <span class="op">=</span> <span class="ident">imported_blocks</span>.<span class="ident">next</span>() =&gt; {
-					<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">imported</span>) <span class="op">=</span> <span class="ident">imported</span> {
-						<span class="self">self</span>.<span class="ident">handle_block_imported</span>(<span class="kw-2">&amp;</span><span class="ident">imported</span>.<span class="ident">hash</span>);
-					} <span class="kw">else</span> {
+				imported = imported_blocks.next() =&gt; {
+					<span class="kw">if let </span><span class="prelude-val">Some</span>(imported) = imported {
+						<span class="self">self</span>.handle_block_imported(<span class="kw-2">&amp;</span>imported.hash);
+					} <span class="kw">else </span>{
 						<span class="macro">tracing::debug!</span>(
-							<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
+							target: LOG_TARGET,
 							<span class="string">&quot;Imported blocks stream ended&quot;</span>,
 						);
 						<span class="kw">return</span>;
 					}
 				},
-				<span class="ident">finalized</span> <span class="op">=</span> <span class="ident">finalized_blocks</span>.<span class="ident">next</span>() =&gt; {
-					<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">finalized</span>) <span class="op">=</span> <span class="ident">finalized</span> {
-						<span class="self">self</span>.<span class="ident">handle_block_finalized</span>(<span class="kw-2">*</span><span class="ident">finalized</span>.<span class="ident">header</span>.<span class="ident">number</span>());
-					} <span class="kw">else</span> {
+				finalized = finalized_blocks.next() =&gt; {
+					<span class="kw">if let </span><span class="prelude-val">Some</span>(finalized) = finalized {
+						<span class="self">self</span>.handle_block_finalized(<span class="kw-2">*</span>finalized.header.number());
+					} <span class="kw">else </span>{
 						<span class="macro">tracing::debug!</span>(
-							<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
+							target: LOG_TARGET,
 							<span class="string">&quot;Finalized blocks stream ended&quot;</span>,
 						);
 						<span class="kw">return</span>;
 					}
 				},
-				<span class="ident">next_to_recover</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_candidate_to_recover</span>.<span class="ident">next</span>() =&gt; {
-					<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">block_hash</span>) <span class="op">=</span> <span class="ident">next_to_recover</span> {
-						<span class="self">self</span>.<span class="ident">recover_candidate</span>(<span class="ident">block_hash</span>).<span class="kw">await</span>;
+				next_to_recover = <span class="self">self</span>.next_candidate_to_recover.next() =&gt; {
+					<span class="kw">if let </span><span class="prelude-val">Some</span>(block_hash) = next_to_recover {
+						<span class="self">self</span>.recover_candidate(block_hash).<span class="kw">await</span>;
 					}
 				},
-				(<span class="ident">block_hash</span>, <span class="ident">available_data</span>) <span class="op">=</span>
-					<span class="self">self</span>.<span class="ident">active_candidate_recovery</span>.<span class="ident">wait_for_recovery</span>().<span class="ident">fuse</span>() =&gt;
+				(block_hash, available_data) =
+					<span class="self">self</span>.active_candidate_recovery.wait_for_recovery().fuse() =&gt;
 				{
-					<span class="self">self</span>.<span class="ident">handle_candidate_recovered</span>(<span class="ident">block_hash</span>, <span class="ident">available_data</span>).<span class="kw">await</span>;
+					<span class="self">self</span>.handle_candidate_recovered(block_hash, available_data).<span class="kw">await</span>;
 				},
 			}
 		}
 	}
 }
 
-<span class="doccomment">/// Returns a stream over pending candidates for the parachain corresponding to `para_id`.</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">pending_candidates</span>(
-	<span class="ident">relay_chain_client</span>: <span class="kw">impl</span> <span class="ident">RelayChainInterface</span> <span class="op">+</span> <span class="ident">Clone</span>,
-	<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">CommittedCandidateReceipt</span>, <span class="ident">SessionIndex</span>)<span class="op">&gt;</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">import_notification_stream</span> <span class="op">=</span> <span class="ident">relay_chain_client</span>.<span class="ident">import_notification_stream</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+<span class="doccomment">/// Returns a stream over pending candidates for the parachain corresponding to `para_id`.
+</span><span class="kw">async fn </span>pending_candidates(
+	relay_chain_client: <span class="kw">impl </span>RelayChainInterface + Clone,
+	para_id: ParaId,
+) -&gt; RelayChainResult&lt;<span class="kw">impl </span>Stream&lt;Item = (CommittedCandidateReceipt, SessionIndex)&gt;&gt; {
+	<span class="kw">let </span>import_notification_stream = relay_chain_client.import_notification_stream().<span class="kw">await</span><span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">filtered_stream</span> <span class="op">=</span> <span class="ident">import_notification_stream</span>.<span class="ident">filter_map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> {
-		<span class="kw">let</span> <span class="ident">client_for_closure</span> <span class="op">=</span> <span class="ident">relay_chain_client</span>.<span class="ident">clone</span>();
-		<span class="kw">async</span> <span class="kw">move</span> {
-			<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">n</span>.<span class="ident">hash</span>();
-			<span class="kw">let</span> <span class="ident">pending_availability_result</span> <span class="op">=</span> <span class="ident">client_for_closure</span>
-				.<span class="ident">candidate_pending_availability</span>(<span class="ident">hash</span>, <span class="ident">para_id</span>)
-				.<span class="kw">await</span>
-				.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
+	<span class="kw">let </span>filtered_stream = import_notification_stream.filter_map(<span class="kw">move </span>|n| {
+		<span class="kw">let </span>client_for_closure = relay_chain_client.clone();
+		<span class="kw">async move </span>{
+			<span class="kw">let </span>hash = n.hash();
+			<span class="kw">let </span>pending_availability_result = client_for_closure
+				.candidate_pending_availability(hash, para_id)
+				.<span class="kw">await
+				</span>.map_err(|e| {
 					<span class="macro">tracing::error!</span>(
-						<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-						<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
+						target: LOG_TARGET,
+						error = <span class="question-mark">?</span>e,
 						<span class="string">&quot;Failed to fetch pending candidates.&quot;</span>,
 					)
 				});
-			<span class="kw">let</span> <span class="ident">session_index_result</span> <span class="op">=</span>
-				<span class="ident">client_for_closure</span>.<span class="ident">session_index_for_child</span>(<span class="ident">hash</span>).<span class="kw">await</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
+			<span class="kw">let </span>session_index_result =
+				client_for_closure.session_index_for_child(hash).<span class="kw">await</span>.map_err(|e| {
 					<span class="macro">tracing::error!</span>(
-						<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-						<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
+						target: LOG_TARGET,
+						error = <span class="question-mark">?</span>e,
 						<span class="string">&quot;Failed to fetch session index.&quot;</span>,
 					)
 				});
 
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">candidate</span>)) <span class="op">=</span> <span class="ident">pending_availability_result</span> {
-				<span class="ident">session_index_result</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">session_index</span><span class="op">|</span> (<span class="ident">candidate</span>, <span class="ident">session_index</span>)).<span class="ident">ok</span>()
-			} <span class="kw">else</span> {
-				<span class="prelude-val">None</span>
-			}
+			<span class="kw">if let </span><span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(candidate)) = pending_availability_result {
+				session_index_result.map(|session_index| (candidate, session_index)).ok()
+			} <span class="kw">else </span>{
+				<span class="prelude-val">None
+			</span>}
 		}
 	});
-	<span class="prelude-val">Ok</span>(<span class="ident">filtered_stream</span>)
+	<span class="prelude-val">Ok</span>(filtered_stream)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_pov_recovery" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_pov_recovery" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/dmp-queue/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_dmp_queue/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_dmp_queue/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_dmp_queue/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/dmp-queue/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_dmp_queue/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_dmp_queue/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_dmp_queue/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -809,267 +809,277 @@
 <span id="809">809</span>
 <span id="810">810</span>
 <span id="811">811</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! Pallet implementing a message queue for downward messages from the relay-chain.</span>
-<span class="doccomment">//! Executes downward messages if there is enough weight available and schedules the rest for later</span>
-<span class="doccomment">//! execution (by `on_idle` or another `handle_dmp_messages` call). Individual overweight messages</span>
-<span class="doccomment">//! are scheduled into a separate queue that is only serviced by explicit extrinsic calls.</span>
+</span><span class="doccomment">//! Pallet implementing a message queue for downward messages from the relay-chain.
+//! Executes downward messages if there is enough weight available and schedules the rest for later
+//! execution (by `on_idle` or another `handle_dmp_messages` call). Individual overweight messages
+//! are scheduled into a separate queue that is only serviced by explicit extrinsic calls.
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
+</span><span class="attribute">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">migration</span>;
+</span><span class="kw">pub mod </span>migration;
 
-<span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Decode</span>, <span class="ident">DecodeLimit</span>, <span class="ident">Encode</span>};
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{<span class="ident">relay_chain::BlockNumber</span> <span class="kw">as</span> <span class="ident">RelayBlockNumber</span>, <span class="ident">DmpMessageHandler</span>};
-<span class="kw">use</span> <span class="ident">frame_support</span>::{
-	<span class="ident">traits::EnsureOrigin</span>,
-	<span class="ident">weights</span>::{<span class="ident">constants::WEIGHT_PER_MILLIS</span>, <span class="ident">Weight</span>},
+<span class="kw">use </span>codec::{Decode, DecodeLimit, Encode};
+<span class="kw">use </span>cumulus_primitives_core::{relay_chain::BlockNumber <span class="kw">as </span>RelayBlockNumber, DmpMessageHandler};
+<span class="kw">use </span>frame_support::{
+	traits::EnsureOrigin,
+	weights::{constants::WEIGHT_PER_MILLIS, Weight},
 };
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">pallet</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">scale_info::TypeInfo</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::RuntimeDebug</span>;
-<span class="kw">use</span> <span class="ident">sp_std</span>::{<span class="ident">convert::TryFrom</span>, <span class="ident">prelude</span>::<span class="kw-2">*</span>};
-<span class="kw">use</span> <span class="ident">xcm</span>::{
-	<span class="ident">latest</span>::{<span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">Weight</span> <span class="kw">as</span> <span class="ident">XcmWeight</span>},
-	<span class="ident">VersionedXcm</span>, <span class="ident">MAX_XCM_DECODE_DEPTH</span>,
+<span class="kw">pub use </span>pallet::<span class="kw-2">*</span>;
+<span class="kw">use </span>scale_info::TypeInfo;
+<span class="kw">use </span>sp_runtime::RuntimeDebug;
+<span class="kw">use </span>sp_std::{convert::TryFrom, prelude::<span class="kw-2">*</span>};
+<span class="kw">use </span>xcm::{
+	latest::{prelude::<span class="kw-2">*</span>, Weight <span class="kw">as </span>XcmWeight},
+	VersionedXcm, MAX_XCM_DECODE_DEPTH,
 };
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">RuntimeDebug</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ConfigData</span> {
-	<span class="doccomment">/// The maximum amount of weight any individual message may consume. Messages above this weight</span>
-	<span class="doccomment">/// go into the overweight queue and may only be serviced explicitly by the</span>
-	<span class="doccomment">/// `ExecuteOverweightOrigin`.</span>
-	<span class="ident">max_individual</span>: <span class="ident">Weight</span>,
+<span class="kw">const </span>DEFAULT_POV_SIZE: u64 = <span class="number">64 </span>* <span class="number">1024</span>; <span class="comment">// 64 KB
+
+</span><span class="attribute">#[derive(Copy, Clone, Eq, PartialEq, Encode, Decode, RuntimeDebug, TypeInfo)]
+</span><span class="kw">pub struct </span>ConfigData {
+	<span class="doccomment">/// The maximum amount of weight any individual message may consume. Messages above this weight
+	/// go into the overweight queue and may only be serviced explicitly by the
+	/// `ExecuteOverweightOrigin`.
+	</span>max_individual: Weight,
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">ConfigData</span> {
-	<span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> {
-			<span class="ident">max_individual</span>: <span class="number">10u64</span> <span class="op">*</span> <span class="ident">WEIGHT_PER_MILLIS</span>, <span class="comment">// 10 ms of execution time maximum by default</span>
+<span class="kw">impl </span>Default <span class="kw">for </span>ConfigData {
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			max_individual: Weight::from_parts(
+				<span class="number">10u64 </span>* WEIGHT_PER_MILLIS.ref_time(), <span class="comment">// 10 ms of execution time maximum by default
+				</span>DEFAULT_POV_SIZE,                     <span class="comment">// 64 KB of proof size by default
+			</span>),
 		}
 	}
 }
 
-<span class="doccomment">/// Information concerning our message pages.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Default</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">RuntimeDebug</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PageIndexData</span> {
-	<span class="doccomment">/// The lowest used page index.</span>
-	<span class="ident">begin_used</span>: <span class="ident">PageCounter</span>,
-	<span class="doccomment">/// The lowest unused page index.</span>
-	<span class="ident">end_used</span>: <span class="ident">PageCounter</span>,
-	<span class="doccomment">/// The number of overweight messages ever recorded (and thus the lowest free index).</span>
-	<span class="ident">overweight_count</span>: <span class="ident">OverweightIndex</span>,
+<span class="doccomment">/// Information concerning our message pages.
+</span><span class="attribute">#[derive(Copy, Clone, Eq, PartialEq, Default, Encode, Decode, RuntimeDebug, TypeInfo)]
+</span><span class="kw">pub struct </span>PageIndexData {
+	<span class="doccomment">/// The lowest used page index.
+	</span>begin_used: PageCounter,
+	<span class="doccomment">/// The lowest unused page index.
+	</span>end_used: PageCounter,
+	<span class="doccomment">/// The number of overweight messages ever recorded (and thus the lowest free index).
+	</span>overweight_count: OverweightIndex,
 }
 
-<span class="doccomment">/// Simple type used to identify messages for the purpose of reporting events. Secure if and only</span>
-<span class="doccomment">/// if the message content is unique.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">MessageId</span> <span class="op">=</span> [<span class="ident">u8</span>; <span class="number">32</span>];
+<span class="doccomment">/// Simple type used to identify messages for the purpose of reporting events. Secure if and only
+/// if the message content is unique.
+</span><span class="kw">pub type </span>MessageId = [u8; <span class="number">32</span>];
 
-<span class="doccomment">/// Index used to identify overweight messages.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">OverweightIndex</span> <span class="op">=</span> <span class="ident">u64</span>;
+<span class="doccomment">/// Index used to identify overweight messages.
+</span><span class="kw">pub type </span>OverweightIndex = u64;
 
-<span class="doccomment">/// Index used to identify normal pages.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PageCounter</span> <span class="op">=</span> <span class="ident">u32</span>;
+<span class="doccomment">/// Index used to identify normal pages.
+</span><span class="kw">pub type </span>PageCounter = u32;
 
-<span class="attribute">#[<span class="ident">frame_support::pallet</span>]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">pallet</span> {
-	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">frame_support::pallet_prelude</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">frame_system::pallet_prelude</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[frame_support::pallet]
+</span><span class="kw">pub mod </span>pallet {
+	<span class="kw">use super</span>::<span class="kw-2">*</span>;
+	<span class="kw">use </span>frame_support::pallet_prelude::<span class="kw-2">*</span>;
+	<span class="kw">use </span>frame_system::pallet_prelude::<span class="kw-2">*</span>;
 
-	<span class="attribute">#[<span class="ident">pallet::pallet</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::generate_store</span>(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">trait</span> <span class="ident">Store</span>)]</span>
-	<span class="attribute">#[<span class="ident">pallet::storage_version</span>(<span class="ident">migration::STORAGE_VERSION</span>)]</span>
-	<span class="attribute">#[<span class="ident">pallet::without_storage_info</span>]</span>
-	<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw">_</span>);
+	<span class="attribute">#[pallet::pallet]
+	#[pallet::generate_store(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">trait </span>Store)]
+	#[pallet::storage_version(migration::STORAGE_VERSION)]
+	#[pallet::without_storage_info]
+	</span><span class="kw">pub struct </span>Pallet&lt;T&gt;(<span class="kw">_</span>);
 
-	<span class="doccomment">/// The module configuration trait.</span>
-	<span class="attribute">#[<span class="ident">pallet::config</span>]</span>
-	<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Config</span>: <span class="ident">frame_system::Config</span> {
-		<span class="doccomment">/// The overarching event type.</span>
-		<span class="kw">type</span> <span class="ident">RuntimeEvent</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IsType</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::RuntimeEvent</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The module configuration trait.
+	</span><span class="attribute">#[pallet::config]
+	</span><span class="kw">pub trait </span>Config: frame_system::Config {
+		<span class="doccomment">/// The overarching event type.
+		</span><span class="kw">type </span>RuntimeEvent: From&lt;Event&lt;<span class="self">Self</span>&gt;&gt; + IsType&lt;&lt;<span class="self">Self </span><span class="kw">as </span>frame_system::Config&gt;::RuntimeEvent&gt;;
 
-		<span class="kw">type</span> <span class="ident">XcmExecutor</span>: <span class="ident">ExecuteXcm</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::RuntimeCall</span><span class="op">&gt;</span>;
+		<span class="kw">type </span>XcmExecutor: ExecuteXcm&lt;<span class="self">Self</span>::RuntimeCall&gt;;
 
-		<span class="doccomment">/// Origin which is allowed to execute overweight messages.</span>
-		<span class="kw">type</span> <span class="ident">ExecuteOverweightOrigin</span>: <span class="ident">EnsureOrigin</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::RuntimeOrigin</span><span class="op">&gt;</span>;
+		<span class="doccomment">/// Origin which is allowed to execute overweight messages.
+		</span><span class="kw">type </span>ExecuteOverweightOrigin: EnsureOrigin&lt;<span class="self">Self</span>::RuntimeOrigin&gt;;
 	}
 
-	<span class="doccomment">/// The configuration.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">Configuration</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">ConfigData</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The configuration.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>Configuration&lt;T&gt; = StorageValue&lt;<span class="kw">_</span>, ConfigData, ValueQuery&gt;;
 
-	<span class="doccomment">/// The page index.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">PageIndex</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">PageIndexData</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The page index.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>PageIndex&lt;T&gt; = StorageValue&lt;<span class="kw">_</span>, PageIndexData, ValueQuery&gt;;
 
-	<span class="doccomment">/// The queue pages.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">Pages</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageMap</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Blake2_128Concat</span>, <span class="ident">PageCounter</span>, <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">RelayBlockNumber</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>)<span class="op">&gt;</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The queue pages.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>Pages&lt;T&gt; =
+		StorageMap&lt;<span class="kw">_</span>, Blake2_128Concat, PageCounter, Vec&lt;(RelayBlockNumber, Vec&lt;u8&gt;)&gt;, ValueQuery&gt;;
 
-	<span class="doccomment">/// The overweight messages.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">Overweight</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageMap</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Blake2_128Concat</span>, <span class="ident">OverweightIndex</span>, (<span class="ident">RelayBlockNumber</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>), <span class="ident">OptionQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The overweight messages.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>Overweight&lt;T&gt; =
+		StorageMap&lt;<span class="kw">_</span>, Blake2_128Concat, OverweightIndex, (RelayBlockNumber, Vec&lt;u8&gt;), OptionQuery&gt;;
 
-	<span class="attribute">#[<span class="ident">pallet::error</span>]</span>
-	<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Error</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// The message index given is unknown.</span>
-		<span class="ident">Unknown</span>,
-		<span class="doccomment">/// The amount of weight given is possibly not enough for executing the message.</span>
-		<span class="ident">OverLimit</span>,
+	<span class="attribute">#[pallet::error]
+	</span><span class="kw">pub enum </span>Error&lt;T&gt; {
+		<span class="doccomment">/// The message index given is unknown.
+		</span>Unknown,
+		<span class="doccomment">/// The amount of weight given is possibly not enough for executing the message.
+		</span>OverLimit,
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::hooks</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Hooks</span><span class="op">&lt;</span><span class="ident">BlockNumberFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="kw">fn</span> <span class="ident">on_runtime_upgrade</span>() -&gt; <span class="ident">Weight</span> {
-			<span class="ident">migration::migrate_to_latest</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>()
+	<span class="attribute">#[pallet::hooks]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; <span class="kw">for </span>Pallet&lt;T&gt; {
+		<span class="kw">fn </span>on_runtime_upgrade() -&gt; Weight {
+			migration::migrate_to_latest::&lt;T&gt;()
 		}
 
-		<span class="kw">fn</span> <span class="ident">on_idle</span>(<span class="ident">_now</span>: <span class="ident">T::BlockNumber</span>, <span class="ident">max_weight</span>: <span class="ident">Weight</span>) -&gt; <span class="ident">Weight</span> {
-			<span class="comment">// on_idle processes additional messages with any remaining block weight.</span>
-			<span class="ident"><span class="self">Self</span>::service_queue</span>(<span class="ident">max_weight</span>)
-		}
-	}
-
-	<span class="attribute">#[<span class="ident">pallet::call</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// Service a single overweight message.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// - `origin`: Must pass `ExecuteOverweightOrigin`.</span>
-		<span class="doccomment">/// - `index`: The index of the overweight message to service.</span>
-		<span class="doccomment">/// - `weight_limit`: The amount of weight that message execution may take.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// Errors:</span>
-		<span class="doccomment">/// - `Unknown`: Message of `index` is unknown.</span>
-		<span class="doccomment">/// - `OverLimit`: Message execution may use greater than `weight_limit`.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// Events:</span>
-		<span class="doccomment">/// - `OverweightServiced`: On success.</span>
-		<span class="attribute">#[<span class="ident">pallet::weight</span>(<span class="ident">Weight::from_ref_time</span>(<span class="ident">weight_limit</span>.<span class="ident">saturating_add</span>(<span class="number">1_000_000</span>)))]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">service_overweight</span>(
-			<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-			<span class="ident">index</span>: <span class="ident">OverweightIndex</span>,
-			<span class="ident">weight_limit</span>: <span class="ident">XcmWeight</span>,
-		) -&gt; <span class="ident">DispatchResultWithPostInfo</span> {
-			<span class="ident">T::ExecuteOverweightOrigin::ensure_origin</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-
-			<span class="kw">let</span> (<span class="ident">sent_at</span>, <span class="ident">data</span>) <span class="op">=</span> <span class="ident">Overweight</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>(<span class="ident">index</span>).<span class="ident">ok_or</span>(<span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::Unknown</span>)<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span>
-				<span class="ident"><span class="self">Self</span>::try_service_message</span>(<span class="ident">Weight::from_ref_time</span>(<span class="ident">weight_limit</span>), <span class="ident">sent_at</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>[..])
-					.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::OverLimit</span>)<span class="question-mark">?</span>;
-			<span class="ident">Overweight</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::remove</span>(<span class="ident">index</span>);
-			<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::OverweightServiced</span> { <span class="ident">overweight_index</span>: <span class="ident">index</span>, <span class="ident">weight_used</span> });
-			<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">weight_used</span>.<span class="ident">saturating_add</span>(<span class="ident">Weight::from_ref_time</span>(<span class="number">1_000_000</span>))).<span class="ident">into</span>())
+		<span class="kw">fn </span>on_idle(_now: T::BlockNumber, max_weight: Weight) -&gt; Weight {
+			<span class="comment">// on_idle processes additional messages with any remaining block weight.
+			</span><span class="self">Self</span>::service_queue(max_weight)
 		}
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::event</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::generate_deposit</span>(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">deposit_event</span>)]</span>
-	<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// Downward message is invalid XCM.</span>
-		<span class="ident">InvalidFormat</span> { <span class="ident">message_id</span>: <span class="ident">MessageId</span> },
-		<span class="doccomment">/// Downward message is unsupported version of XCM.</span>
-		<span class="ident">UnsupportedVersion</span> { <span class="ident">message_id</span>: <span class="ident">MessageId</span> },
-		<span class="doccomment">/// Downward message executed with the given outcome.</span>
-		<span class="ident">ExecutedDownward</span> { <span class="ident">message_id</span>: <span class="ident">MessageId</span>, <span class="ident">outcome</span>: <span class="ident">Outcome</span> },
-		<span class="doccomment">/// The weight limit for handling downward messages was reached.</span>
-		<span class="ident">WeightExhausted</span> { <span class="ident">message_id</span>: <span class="ident">MessageId</span>, <span class="ident">remaining_weight</span>: <span class="ident">Weight</span>, <span class="ident">required_weight</span>: <span class="ident">Weight</span> },
-		<span class="doccomment">/// Downward message is overweight and was placed in the overweight queue.</span>
-		<span class="ident">OverweightEnqueued</span> {
-			<span class="ident">message_id</span>: <span class="ident">MessageId</span>,
-			<span class="ident">overweight_index</span>: <span class="ident">OverweightIndex</span>,
-			<span class="ident">required_weight</span>: <span class="ident">Weight</span>,
+	<span class="attribute">#[pallet::call]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+		<span class="doccomment">/// Service a single overweight message.
+		///
+		/// - `origin`: Must pass `ExecuteOverweightOrigin`.
+		/// - `index`: The index of the overweight message to service.
+		/// - `weight_limit`: The amount of weight that message execution may take.
+		///
+		/// Errors:
+		/// - `Unknown`: Message of `index` is unknown.
+		/// - `OverLimit`: Message execution may use greater than `weight_limit`.
+		///
+		/// Events:
+		/// - `OverweightServiced`: On success.
+		</span><span class="attribute">#[pallet::weight(Weight::from_ref_time(weight_limit.saturating_add(<span class="number">1_000_000</span>)))]
+		</span><span class="kw">pub fn </span>service_overweight(
+			origin: OriginFor&lt;T&gt;,
+			index: OverweightIndex,
+			weight_limit: XcmWeight,
+		) -&gt; DispatchResultWithPostInfo {
+			T::ExecuteOverweightOrigin::ensure_origin(origin)<span class="question-mark">?</span>;
+
+			<span class="kw">let </span>(sent_at, data) = Overweight::&lt;T&gt;::get(index).ok_or(Error::&lt;T&gt;::Unknown)<span class="question-mark">?</span>;
+			<span class="kw">let </span>weight_used =
+				<span class="self">Self</span>::try_service_message(Weight::from_ref_time(weight_limit), sent_at, <span class="kw-2">&amp;</span>data[..])
+					.map_err(|<span class="kw">_</span>| Error::&lt;T&gt;::OverLimit)<span class="question-mark">?</span>;
+			Overweight::&lt;T&gt;::remove(index);
+			<span class="self">Self</span>::deposit_event(Event::OverweightServiced { overweight_index: index, weight_used });
+			<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(weight_used.saturating_add(Weight::from_ref_time(<span class="number">1_000_000</span>))).into())
+		}
+	}
+
+	<span class="attribute">#[pallet::event]
+	#[pallet::generate_deposit(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>deposit_event)]
+	</span><span class="kw">pub enum </span>Event&lt;T: Config&gt; {
+		<span class="doccomment">/// Downward message is invalid XCM.
+		</span>InvalidFormat { message_id: MessageId },
+		<span class="doccomment">/// Downward message is unsupported version of XCM.
+		</span>UnsupportedVersion { message_id: MessageId },
+		<span class="doccomment">/// Downward message executed with the given outcome.
+		</span>ExecutedDownward { message_id: MessageId, outcome: Outcome },
+		<span class="doccomment">/// The weight limit for handling downward messages was reached.
+		</span>WeightExhausted { message_id: MessageId, remaining_weight: Weight, required_weight: Weight },
+		<span class="doccomment">/// Downward message is overweight and was placed in the overweight queue.
+		</span>OverweightEnqueued {
+			message_id: MessageId,
+			overweight_index: OverweightIndex,
+			required_weight: Weight,
 		},
-		<span class="doccomment">/// Downward message from the overweight queue was executed.</span>
-		<span class="ident">OverweightServiced</span> { <span class="ident">overweight_index</span>: <span class="ident">OverweightIndex</span>, <span class="ident">weight_used</span>: <span class="ident">Weight</span> },
+		<span class="doccomment">/// Downward message from the overweight queue was executed.
+		</span>OverweightServiced { overweight_index: OverweightIndex, weight_used: Weight },
 	}
 
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// Service the message queue up to some given weight `limit`.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// Returns the weight consumed by executing messages in the queue.</span>
-		<span class="kw">fn</span> <span class="ident">service_queue</span>(<span class="ident">limit</span>: <span class="ident">Weight</span>) -&gt; <span class="ident">Weight</span> {
-			<span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">page_index</span><span class="op">|</span> <span class="ident"><span class="self">Self</span>::do_service_queue</span>(<span class="ident">limit</span>, <span class="ident">page_index</span>))
+	<span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+		<span class="doccomment">/// Service the message queue up to some given weight `limit`.
+		///
+		/// Returns the weight consumed by executing messages in the queue.
+		</span><span class="kw">fn </span>service_queue(limit: Weight) -&gt; Weight {
+			PageIndex::&lt;T&gt;::mutate(|page_index| <span class="self">Self</span>::do_service_queue(limit, page_index))
 		}
 
-		<span class="doccomment">/// Exactly equivalent to `service_queue` but expects a mutable `page_index` to be passed</span>
-		<span class="doccomment">/// in and any changes stored.</span>
-		<span class="kw">fn</span> <span class="ident">do_service_queue</span>(<span class="ident">limit</span>: <span class="ident">Weight</span>, <span class="ident">page_index</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PageIndexData</span>) -&gt; <span class="ident">Weight</span> {
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">used</span> <span class="op">=</span> <span class="ident">Weight::zero</span>();
-			<span class="kw">while</span> <span class="ident">page_index</span>.<span class="ident">begin_used</span> <span class="op">&lt;</span> <span class="ident">page_index</span>.<span class="ident">end_used</span> {
-				<span class="kw">let</span> <span class="ident">page</span> <span class="op">=</span> <span class="ident">Pages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::take</span>(<span class="ident">page_index</span>.<span class="ident">begin_used</span>);
-				<span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span>(<span class="ident">sent_at</span>, <span class="kw-2">ref</span> <span class="ident">data</span>)) <span class="kw">in</span> <span class="ident">page</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-					<span class="kw">match</span> <span class="ident"><span class="self">Self</span>::try_service_message</span>(<span class="ident">limit</span>.<span class="ident">saturating_sub</span>(<span class="ident">used</span>), <span class="ident">sent_at</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>[..])
+		<span class="doccomment">/// Exactly equivalent to `service_queue` but expects a mutable `page_index` to be passed
+		/// in and any changes stored.
+		</span><span class="kw">fn </span>do_service_queue(limit: Weight, page_index: <span class="kw-2">&amp;mut </span>PageIndexData) -&gt; Weight {
+			<span class="kw">let </span><span class="kw-2">mut </span>used = Weight::zero();
+			<span class="kw">while </span>page_index.begin_used &lt; page_index.end_used {
+				<span class="kw">let </span>page = Pages::&lt;T&gt;::take(page_index.begin_used);
+				<span class="kw">for </span>(i, <span class="kw-2">&amp;</span>(sent_at, <span class="kw-2">ref </span>data)) <span class="kw">in </span>page.iter().enumerate() {
+					<span class="kw">match </span><span class="self">Self</span>::try_service_message(limit.saturating_sub(used), sent_at, <span class="kw-2">&amp;</span>data[..])
 					{
-						<span class="prelude-val">Ok</span>(<span class="ident">w</span>) =&gt; <span class="ident">used</span> <span class="op">+</span><span class="op">=</span> <span class="ident">w</span>,
+						<span class="prelude-val">Ok</span>(w) =&gt; used += w,
 						<span class="prelude-val">Err</span>(..) =&gt; {
-							<span class="comment">// Too much weight needed - put the remaining messages back and bail</span>
-							<span class="ident">Pages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::insert</span>(<span class="ident">page_index</span>.<span class="ident">begin_used</span>, <span class="kw-2">&amp;</span><span class="ident">page</span>[<span class="ident">i</span>..]);
-							<span class="kw">return</span> <span class="ident">used</span>
+							<span class="comment">// Too much weight needed - put the remaining messages back and bail
+							</span>Pages::&lt;T&gt;::insert(page_index.begin_used, <span class="kw-2">&amp;</span>page[i..]);
+							<span class="kw">return </span>used
 						},
 					}
 				}
-				<span class="ident">page_index</span>.<span class="ident">begin_used</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+				page_index.begin_used += <span class="number">1</span>;
 			}
-			<span class="kw">if</span> <span class="ident">page_index</span>.<span class="ident">begin_used</span> <span class="op">==</span> <span class="ident">page_index</span>.<span class="ident">end_used</span> {
-				<span class="comment">// Reset if there&#39;s no pages left.</span>
-				<span class="ident">page_index</span>.<span class="ident">begin_used</span> <span class="op">=</span> <span class="number">0</span>;
-				<span class="ident">page_index</span>.<span class="ident">end_used</span> <span class="op">=</span> <span class="number">0</span>;
+			<span class="kw">if </span>page_index.begin_used == page_index.end_used {
+				<span class="comment">// Reset if there&#39;s no pages left.
+				</span>page_index.begin_used = <span class="number">0</span>;
+				page_index.end_used = <span class="number">0</span>;
 			}
-			<span class="ident">used</span>
+			used
 		}
 
-		<span class="doccomment">/// Attempt to service an individual message. Will return `Ok` with the execution weight</span>
-		<span class="doccomment">/// consumed unless the message was found to need more weight than `limit`.</span>
-		<span class="doccomment">///</span>
-		<span class="doccomment">/// NOTE: This will return `Ok` in the case of an error decoding, weighing or executing</span>
-		<span class="doccomment">/// the message. This is why it&#39;s called message &quot;servicing&quot; rather than &quot;execution&quot;.</span>
-		<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">try_service_message</span>(
-			<span class="ident">limit</span>: <span class="ident">Weight</span>,
-			<span class="ident">_sent_at</span>: <span class="ident">RelayBlockNumber</span>,
-			<span class="kw-2">mut</span> <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-		) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Weight</span>, (<span class="ident">MessageId</span>, <span class="ident">Weight</span>)<span class="op">&gt;</span> {
-			<span class="kw">let</span> <span class="ident">message_id</span> <span class="op">=</span> <span class="ident">sp_io::hashing::blake2_256</span>(<span class="ident">data</span>);
-			<span class="kw">let</span> <span class="ident">maybe_msg</span> <span class="op">=</span> <span class="ident">VersionedXcm</span>::<span class="op">&lt;</span><span class="ident">T::RuntimeCall</span><span class="op">&gt;</span><span class="ident">::decode_all_with_depth_limit</span>(
-				<span class="ident">MAX_XCM_DECODE_DEPTH</span>,
-				<span class="kw-2">&amp;mut</span> <span class="ident">data</span>,
+		<span class="doccomment">/// Attempt to service an individual message. Will return `Ok` with the execution weight
+		/// consumed unless the message was found to need more weight than `limit`.
+		///
+		/// NOTE: This will return `Ok` in the case of an error decoding, weighing or executing
+		/// the message. This is why it&#39;s called message &quot;servicing&quot; rather than &quot;execution&quot;.
+		</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>try_service_message(
+			limit: Weight,
+			_sent_at: RelayBlockNumber,
+			<span class="kw-2">mut </span>data: <span class="kw-2">&amp;</span>[u8],
+		) -&gt; <span class="prelude-ty">Result</span>&lt;Weight, (MessageId, Weight)&gt; {
+			<span class="kw">let </span>message_id = sp_io::hashing::blake2_256(data);
+			<span class="kw">let </span>maybe_msg = VersionedXcm::&lt;T::RuntimeCall&gt;::decode_all_with_depth_limit(
+				MAX_XCM_DECODE_DEPTH,
+				<span class="kw-2">&amp;mut </span>data,
 			)
-			.<span class="ident">map</span>(<span class="ident">Xcm</span>::<span class="op">&lt;</span><span class="ident">T::RuntimeCall</span><span class="op">&gt;</span><span class="ident">::try_from</span>);
-			<span class="kw">match</span> <span class="ident">maybe_msg</span> {
+			.map(Xcm::&lt;T::RuntimeCall&gt;::try_from);
+			<span class="kw">match </span>maybe_msg {
 				<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
-					<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::InvalidFormat</span> { <span class="ident">message_id</span> });
-					<span class="prelude-val">Ok</span>(<span class="ident">Weight::zero</span>())
+					<span class="self">Self</span>::deposit_event(Event::InvalidFormat { message_id });
+					<span class="prelude-val">Ok</span>(Weight::zero())
 				},
 				<span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(())) =&gt; {
-					<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::UnsupportedVersion</span> { <span class="ident">message_id</span> });
-					<span class="prelude-val">Ok</span>(<span class="ident">Weight::zero</span>())
+					<span class="self">Self</span>::deposit_event(Event::UnsupportedVersion { message_id });
+					<span class="prelude-val">Ok</span>(Weight::zero())
 				},
-				<span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="ident">x</span>)) =&gt; {
-					<span class="kw">let</span> <span class="ident">outcome</span> <span class="op">=</span> <span class="ident">T::XcmExecutor::execute_xcm</span>(<span class="ident">Parent</span>, <span class="ident">x</span>, <span class="ident">limit</span>.<span class="ident">ref_time</span>());
-					<span class="kw">match</span> <span class="ident">outcome</span> {
-						<span class="ident">Outcome::Error</span>(<span class="ident">XcmError::WeightLimitReached</span>(<span class="ident">required</span>)) =&gt;
-							<span class="prelude-val">Err</span>((<span class="ident">message_id</span>, <span class="ident">Weight::from_ref_time</span>(<span class="ident">required</span>))),
-						<span class="ident">outcome</span> =&gt; {
-							<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">Weight::from_ref_time</span>(<span class="ident">outcome</span>.<span class="ident">weight_used</span>());
-							<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::ExecutedDownward</span> { <span class="ident">message_id</span>, <span class="ident">outcome</span> });
-							<span class="prelude-val">Ok</span>(<span class="ident">weight_used</span>)
+				<span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(x)) =&gt; {
+					<span class="kw">let </span>outcome = T::XcmExecutor::execute_xcm(Parent, x, limit.ref_time());
+					<span class="kw">match </span>outcome {
+						Outcome::Error(XcmError::WeightLimitReached(required)) =&gt;
+							<span class="prelude-val">Err</span>((message_id, Weight::from_ref_time(required))),
+						outcome =&gt; {
+							<span class="kw">let </span>weight_used = Weight::from_ref_time(outcome.weight_used());
+							<span class="self">Self</span>::deposit_event(Event::ExecutedDownward { message_id, outcome });
+							<span class="prelude-val">Ok</span>(weight_used)
 						},
 					}
 				},
@@ -1077,548 +1087,548 @@
 		}
 	}
 
-	<span class="doccomment">/// For an incoming downward message, this just adapts an XCM executor and executes DMP messages</span>
-	<span class="doccomment">/// immediately up until some `MaxWeight` at which point it errors. Their origin is asserted to be</span>
-	<span class="doccomment">/// the `Parent` location.</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">DmpMessageHandler</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="kw">fn</span> <span class="ident">handle_dmp_messages</span>(
-			<span class="ident">iter</span>: <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">RelayBlockNumber</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>)<span class="op">&gt;</span>,
-			<span class="ident">limit</span>: <span class="ident">Weight</span>,
-		) -&gt; <span class="ident">Weight</span> {
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">page_index</span> <span class="op">=</span> <span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>();
-			<span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">Configuration</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>();
+	<span class="doccomment">/// For an incoming downward message, this just adapts an XCM executor and executes DMP messages
+	/// immediately up until some `MaxWeight` at which point it errors. Their origin is asserted to be
+	/// the `Parent` location.
+	</span><span class="kw">impl</span>&lt;T: Config&gt; DmpMessageHandler <span class="kw">for </span>Pallet&lt;T&gt; {
+		<span class="kw">fn </span>handle_dmp_messages(
+			iter: <span class="kw">impl </span>Iterator&lt;Item = (RelayBlockNumber, Vec&lt;u8&gt;)&gt;,
+			limit: Weight,
+		) -&gt; Weight {
+			<span class="kw">let </span><span class="kw-2">mut </span>page_index = PageIndex::&lt;T&gt;::get();
+			<span class="kw">let </span>config = Configuration::&lt;T&gt;::get();
 
-			<span class="comment">// First try to use `max_weight` to service the current queue.</span>
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">used</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::do_service_queue</span>(<span class="ident">limit</span>, <span class="kw-2">&amp;mut</span> <span class="ident">page_index</span>);
+			<span class="comment">// First try to use `max_weight` to service the current queue.
+			</span><span class="kw">let </span><span class="kw-2">mut </span>used = <span class="self">Self</span>::do_service_queue(limit, <span class="kw-2">&amp;mut </span>page_index);
 
-			<span class="comment">// Then if the queue is empty, use the weight remaining to service the incoming messages</span>
-			<span class="comment">// and once we run out of weight, place them in the queue.</span>
-			<span class="kw">let</span> <span class="ident">item_count</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">size_hint</span>().<span class="number">0</span>;
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">maybe_enqueue_page</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">page_index</span>.<span class="ident">end_used</span> <span class="op">&gt;</span> <span class="ident">page_index</span>.<span class="ident">begin_used</span> {
-				<span class="comment">// queue is already non-empty - start a fresh page.</span>
-				<span class="prelude-val">Some</span>(<span class="ident">Vec::with_capacity</span>(<span class="ident">item_count</span>))
-			} <span class="kw">else</span> {
-				<span class="prelude-val">None</span>
-			};
+			<span class="comment">// Then if the queue is empty, use the weight remaining to service the incoming messages
+			// and once we run out of weight, place them in the queue.
+			</span><span class="kw">let </span>item_count = iter.size_hint().<span class="number">0</span>;
+			<span class="kw">let </span><span class="kw-2">mut </span>maybe_enqueue_page = <span class="kw">if </span>page_index.end_used &gt; page_index.begin_used {
+				<span class="comment">// queue is already non-empty - start a fresh page.
+				</span><span class="prelude-val">Some</span>(Vec::with_capacity(item_count))
+			} <span class="kw">else </span>{
+				<span class="prelude-val">None
+			</span>};
 
-			<span class="kw">for</span> (<span class="ident">i</span>, (<span class="ident">sent_at</span>, <span class="ident">data</span>)) <span class="kw">in</span> <span class="ident">iter</span>.<span class="ident">enumerate</span>() {
-				<span class="kw">if</span> <span class="ident">maybe_enqueue_page</span>.<span class="ident">is_none</span>() {
-					<span class="comment">// We&#39;re not currently enqueuing - try to execute inline.</span>
-					<span class="kw">let</span> <span class="ident">remaining_weight</span> <span class="op">=</span> <span class="ident">limit</span>.<span class="ident">saturating_sub</span>(<span class="ident">used</span>);
-					<span class="kw">match</span> <span class="ident"><span class="self">Self</span>::try_service_message</span>(<span class="ident">remaining_weight</span>, <span class="ident">sent_at</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>[..]) {
-						<span class="prelude-val">Ok</span>(<span class="ident">consumed</span>) =&gt; <span class="ident">used</span> <span class="op">+</span><span class="op">=</span> <span class="ident">consumed</span>,
-						<span class="prelude-val">Err</span>((<span class="ident">message_id</span>, <span class="ident">required_weight</span>)) =&gt;
-						<span class="comment">// Too much weight required right now.</span>
-						{
-							<span class="kw">if</span> <span class="ident">required_weight</span>.<span class="ident">any_gt</span>(<span class="ident">config</span>.<span class="ident">max_individual</span>) {
-								<span class="comment">// overweight - add to overweight queue and continue with</span>
-								<span class="comment">// message execution.</span>
-								<span class="kw">let</span> <span class="ident">overweight_index</span> <span class="op">=</span> <span class="ident">page_index</span>.<span class="ident">overweight_count</span>;
-								<span class="ident">Overweight</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::insert</span>(<span class="ident">overweight_index</span>, (<span class="ident">sent_at</span>, <span class="ident">data</span>));
-								<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::OverweightEnqueued</span> {
-									<span class="ident">message_id</span>,
-									<span class="ident">overweight_index</span>,
-									<span class="ident">required_weight</span>,
+			<span class="kw">for </span>(i, (sent_at, data)) <span class="kw">in </span>iter.enumerate() {
+				<span class="kw">if </span>maybe_enqueue_page.is_none() {
+					<span class="comment">// We&#39;re not currently enqueuing - try to execute inline.
+					</span><span class="kw">let </span>remaining_weight = limit.saturating_sub(used);
+					<span class="kw">match </span><span class="self">Self</span>::try_service_message(remaining_weight, sent_at, <span class="kw-2">&amp;</span>data[..]) {
+						<span class="prelude-val">Ok</span>(consumed) =&gt; used += consumed,
+						<span class="prelude-val">Err</span>((message_id, required_weight)) =&gt;
+						<span class="comment">// Too much weight required right now.
+						</span>{
+							<span class="kw">if </span>required_weight.any_gt(config.max_individual) {
+								<span class="comment">// overweight - add to overweight queue and continue with
+								// message execution.
+								</span><span class="kw">let </span>overweight_index = page_index.overweight_count;
+								Overweight::&lt;T&gt;::insert(overweight_index, (sent_at, data));
+								<span class="self">Self</span>::deposit_event(Event::OverweightEnqueued {
+									message_id,
+									overweight_index,
+									required_weight,
 								});
-								<span class="ident">page_index</span>.<span class="ident">overweight_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-								<span class="comment">// Not needed for control flow, but only to ensure that the compiler</span>
-								<span class="comment">// understands that we won&#39;t attempt to re-use `data` later.</span>
-								<span class="kw">continue</span>
-							} <span class="kw">else</span> {
-								<span class="comment">// not overweight. stop executing inline and enqueue normally</span>
-								<span class="comment">// from here on.</span>
-								<span class="kw">let</span> <span class="ident">item_count_left</span> <span class="op">=</span> <span class="ident">item_count</span>.<span class="ident">saturating_sub</span>(<span class="ident">i</span>);
-								<span class="ident">maybe_enqueue_page</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Vec::with_capacity</span>(<span class="ident">item_count_left</span>));
-								<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::WeightExhausted</span> {
-									<span class="ident">message_id</span>,
-									<span class="ident">remaining_weight</span>,
-									<span class="ident">required_weight</span>,
+								page_index.overweight_count += <span class="number">1</span>;
+								<span class="comment">// Not needed for control flow, but only to ensure that the compiler
+								// understands that we won&#39;t attempt to re-use `data` later.
+								</span><span class="kw">continue
+							</span>} <span class="kw">else </span>{
+								<span class="comment">// not overweight. stop executing inline and enqueue normally
+								// from here on.
+								</span><span class="kw">let </span>item_count_left = item_count.saturating_sub(i);
+								maybe_enqueue_page = <span class="prelude-val">Some</span>(Vec::with_capacity(item_count_left));
+								<span class="self">Self</span>::deposit_event(Event::WeightExhausted {
+									message_id,
+									remaining_weight,
+									required_weight,
 								});
 							}
 						},
 					}
 				}
-				<span class="comment">// Cannot be an `else` here since the `maybe_enqueue_page` may have changed.</span>
-				<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">enqueue_page</span>) <span class="op">=</span> <span class="ident">maybe_enqueue_page</span> {
-					<span class="ident">enqueue_page</span>.<span class="ident">push</span>((<span class="ident">sent_at</span>, <span class="ident">data</span>));
+				<span class="comment">// Cannot be an `else` here since the `maybe_enqueue_page` may have changed.
+				</span><span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref mut </span>enqueue_page) = maybe_enqueue_page {
+					enqueue_page.push((sent_at, data));
 				}
 			}
 
-			<span class="comment">// Deposit the enqueued page if any and save the index.</span>
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">enqueue_page</span>) <span class="op">=</span> <span class="ident">maybe_enqueue_page</span> {
-				<span class="ident">Pages</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::insert</span>(<span class="ident">page_index</span>.<span class="ident">end_used</span>, <span class="ident">enqueue_page</span>);
-				<span class="ident">page_index</span>.<span class="ident">end_used</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+			<span class="comment">// Deposit the enqueued page if any and save the index.
+			</span><span class="kw">if let </span><span class="prelude-val">Some</span>(enqueue_page) = maybe_enqueue_page {
+				Pages::&lt;T&gt;::insert(page_index.end_used, enqueue_page);
+				page_index.end_used += <span class="number">1</span>;
 			}
-			<span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">page_index</span>);
+			PageIndex::&lt;T&gt;::put(page_index);
 
-			<span class="ident">used</span>
+			used
 		}
 	}
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="kw">crate</span> <span class="kw">as</span> <span class="ident">dmp_queue</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+	<span class="kw">use super</span>::<span class="kw-2">*</span>;
+	<span class="kw">use crate as </span>dmp_queue;
 
-	<span class="kw">use</span> <span class="ident">codec::Encode</span>;
-	<span class="kw">use</span> <span class="ident">cumulus_primitives_core::ParaId</span>;
-	<span class="kw">use</span> <span class="ident">frame_support</span>::{<span class="ident">assert_noop</span>, <span class="ident">parameter_types</span>, <span class="ident">traits::OnIdle</span>};
-	<span class="kw">use</span> <span class="ident">sp_core::H256</span>;
-	<span class="kw">use</span> <span class="ident">sp_runtime</span>::{
-		<span class="ident">testing::Header</span>,
-		<span class="ident">traits</span>::{<span class="ident">BlakeTwo256</span>, <span class="ident">IdentityLookup</span>},
-		<span class="ident">DispatchError::BadOrigin</span>,
+	<span class="kw">use </span>codec::Encode;
+	<span class="kw">use </span>cumulus_primitives_core::ParaId;
+	<span class="kw">use </span>frame_support::{assert_noop, parameter_types, traits::OnIdle};
+	<span class="kw">use </span>sp_core::H256;
+	<span class="kw">use </span>sp_runtime::{
+		testing::Header,
+		traits::{BlakeTwo256, IdentityLookup},
+		DispatchError::BadOrigin,
 	};
-	<span class="kw">use</span> <span class="ident">sp_version::RuntimeVersion</span>;
-	<span class="kw">use</span> <span class="ident">std::cell::RefCell</span>;
-	<span class="kw">use</span> <span class="ident">xcm::latest</span>::{<span class="ident">MultiLocation</span>, <span class="ident">OriginKind</span>, <span class="ident">Weight</span> <span class="kw">as</span> <span class="ident">XCMWeight</span>};
+	<span class="kw">use </span>sp_version::RuntimeVersion;
+	<span class="kw">use </span>std::cell::RefCell;
+	<span class="kw">use </span>xcm::latest::{MultiLocation, OriginKind, Weight <span class="kw">as </span>XCMWeight};
 
-	<span class="kw">type</span> <span class="ident">UncheckedExtrinsic</span> <span class="op">=</span> <span class="ident">frame_system::mocking::MockUncheckedExtrinsic</span><span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">Block</span> <span class="op">=</span> <span class="ident">frame_system::mocking::MockBlock</span><span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">Xcm</span> <span class="op">=</span> <span class="ident">xcm::latest::Xcm</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span>;
+	<span class="kw">type </span>UncheckedExtrinsic = frame_system::mocking::MockUncheckedExtrinsic&lt;Test&gt;;
+	<span class="kw">type </span>Block = frame_system::mocking::MockBlock&lt;Test&gt;;
+	<span class="kw">type </span>Xcm = xcm::latest::Xcm&lt;RuntimeCall&gt;;
 
 	<span class="macro">frame_support::construct_runtime!</span>(
-		<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Test</span> <span class="kw">where</span>
-			<span class="ident">Block</span> <span class="op">=</span> <span class="ident">Block</span>,
-			<span class="ident">NodeBlock</span> <span class="op">=</span> <span class="ident">Block</span>,
-			<span class="ident">UncheckedExtrinsic</span> <span class="op">=</span> <span class="ident">UncheckedExtrinsic</span>,
+		<span class="kw">pub enum </span>Test <span class="kw">where
+			</span>Block = Block,
+			NodeBlock = Block,
+			UncheckedExtrinsic = UncheckedExtrinsic,
 		{
-			<span class="ident">System</span>: <span class="ident">frame_system</span>::{<span class="ident">Pallet</span>, <span class="ident">Call</span>, <span class="ident">Config</span>, <span class="ident">Storage</span>, <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>},
-			<span class="ident">DmpQueue</span>: <span class="ident">dmp_queue</span>::{<span class="ident">Pallet</span>, <span class="ident">Call</span>, <span class="ident">Storage</span>, <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>},
+			System: frame_system::{Pallet, Call, Config, Storage, Event&lt;T&gt;},
+			DmpQueue: dmp_queue::{Pallet, Call, Storage, Event&lt;T&gt;},
 		}
 	);
 
-	<span class="macro">parameter_types!</span> {
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlockHashCount</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">250</span>;
-		<span class="kw">pub</span> <span class="ident">Version</span>: <span class="ident">RuntimeVersion</span> <span class="op">=</span> <span class="ident">RuntimeVersion</span> {
-			<span class="ident">spec_name</span>: <span class="macro">sp_version::create_runtime_str!</span>(<span class="string">&quot;test&quot;</span>),
-			<span class="ident">impl_name</span>: <span class="macro">sp_version::create_runtime_str!</span>(<span class="string">&quot;system-test&quot;</span>),
-			<span class="ident">authoring_version</span>: <span class="number">1</span>,
-			<span class="ident">spec_version</span>: <span class="number">1</span>,
-			<span class="ident">impl_version</span>: <span class="number">1</span>,
-			<span class="ident">apis</span>: <span class="macro">sp_version::create_apis_vec!</span>([]),
-			<span class="ident">transaction_version</span>: <span class="number">1</span>,
-			<span class="ident">state_version</span>: <span class="number">1</span>,
+	<span class="macro">parameter_types! </span>{
+		<span class="kw">pub const </span>BlockHashCount: u64 = <span class="number">250</span>;
+		<span class="kw">pub </span>Version: RuntimeVersion = RuntimeVersion {
+			spec_name: <span class="macro">sp_version::create_runtime_str!</span>(<span class="string">&quot;test&quot;</span>),
+			impl_name: <span class="macro">sp_version::create_runtime_str!</span>(<span class="string">&quot;system-test&quot;</span>),
+			authoring_version: <span class="number">1</span>,
+			spec_version: <span class="number">1</span>,
+			impl_version: <span class="number">1</span>,
+			apis: <span class="macro">sp_version::create_apis_vec!</span>([]),
+			transaction_version: <span class="number">1</span>,
+			state_version: <span class="number">1</span>,
 		};
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ParachainId</span>: <span class="ident">ParaId</span> <span class="op">=</span> <span class="ident">ParaId::new</span>(<span class="number">200</span>);
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ReservedXcmpWeight</span>: <span class="ident">Weight</span> <span class="op">=</span> <span class="ident">Weight::zero</span>();
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ReservedDmpWeight</span>: <span class="ident">Weight</span> <span class="op">=</span> <span class="ident">Weight::zero</span>();
+		<span class="kw">pub const </span>ParachainId: ParaId = ParaId::new(<span class="number">200</span>);
+		<span class="kw">pub const </span>ReservedXcmpWeight: Weight = Weight::zero();
+		<span class="kw">pub const </span>ReservedDmpWeight: Weight = Weight::zero();
 	}
 
-	<span class="kw">type</span> <span class="ident">AccountId</span> <span class="op">=</span> <span class="ident">u64</span>;
+	<span class="kw">type </span>AccountId = u64;
 
-	<span class="kw">impl</span> <span class="ident">frame_system::Config</span> <span class="kw">for</span> <span class="ident">Test</span> {
-		<span class="kw">type</span> <span class="ident">RuntimeOrigin</span> <span class="op">=</span> <span class="ident">RuntimeOrigin</span>;
-		<span class="kw">type</span> <span class="ident">RuntimeCall</span> <span class="op">=</span> <span class="ident">RuntimeCall</span>;
-		<span class="kw">type</span> <span class="ident">Index</span> <span class="op">=</span> <span class="ident">u64</span>;
-		<span class="kw">type</span> <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="ident">u64</span>;
-		<span class="kw">type</span> <span class="ident">Hash</span> <span class="op">=</span> <span class="ident">H256</span>;
-		<span class="kw">type</span> <span class="ident">Hashing</span> <span class="op">=</span> <span class="ident">BlakeTwo256</span>;
-		<span class="kw">type</span> <span class="ident">AccountId</span> <span class="op">=</span> <span class="ident">AccountId</span>;
-		<span class="kw">type</span> <span class="ident">Lookup</span> <span class="op">=</span> <span class="ident">IdentityLookup</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::AccountId</span><span class="op">&gt;</span>;
-		<span class="kw">type</span> <span class="ident">Header</span> <span class="op">=</span> <span class="ident">Header</span>;
-		<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-		<span class="kw">type</span> <span class="ident">BlockHashCount</span> <span class="op">=</span> <span class="ident">BlockHashCount</span>;
-		<span class="kw">type</span> <span class="ident">BlockLength</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">BlockWeights</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">Version</span> <span class="op">=</span> <span class="ident">Version</span>;
-		<span class="kw">type</span> <span class="ident">PalletInfo</span> <span class="op">=</span> <span class="ident">PalletInfo</span>;
-		<span class="kw">type</span> <span class="ident">AccountData</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">OnNewAccount</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">OnKilledAccount</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">DbWeight</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">BaseCallFilter</span> <span class="op">=</span> <span class="ident">frame_support::traits::Everything</span>;
-		<span class="kw">type</span> <span class="ident">SystemWeightInfo</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">SS58Prefix</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">OnSetCode</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">MaxConsumers</span> <span class="op">=</span> <span class="ident">frame_support::traits::ConstU32</span><span class="op">&lt;</span><span class="number">16</span><span class="op">&gt;</span>;
+	<span class="kw">impl </span>frame_system::Config <span class="kw">for </span>Test {
+		<span class="kw">type </span>RuntimeOrigin = RuntimeOrigin;
+		<span class="kw">type </span>RuntimeCall = RuntimeCall;
+		<span class="kw">type </span>Index = u64;
+		<span class="kw">type </span>BlockNumber = u64;
+		<span class="kw">type </span>Hash = H256;
+		<span class="kw">type </span>Hashing = BlakeTwo256;
+		<span class="kw">type </span>AccountId = AccountId;
+		<span class="kw">type </span>Lookup = IdentityLookup&lt;<span class="self">Self</span>::AccountId&gt;;
+		<span class="kw">type </span>Header = Header;
+		<span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+		<span class="kw">type </span>BlockHashCount = BlockHashCount;
+		<span class="kw">type </span>BlockLength = ();
+		<span class="kw">type </span>BlockWeights = ();
+		<span class="kw">type </span>Version = Version;
+		<span class="kw">type </span>PalletInfo = PalletInfo;
+		<span class="kw">type </span>AccountData = ();
+		<span class="kw">type </span>OnNewAccount = ();
+		<span class="kw">type </span>OnKilledAccount = ();
+		<span class="kw">type </span>DbWeight = ();
+		<span class="kw">type </span>BaseCallFilter = frame_support::traits::Everything;
+		<span class="kw">type </span>SystemWeightInfo = ();
+		<span class="kw">type </span>SS58Prefix = ();
+		<span class="kw">type </span>OnSetCode = ();
+		<span class="kw">type </span>MaxConsumers = frame_support::traits::ConstU32&lt;<span class="number">16</span>&gt;;
 	}
 
-	<span class="macro">thread_local!</span> {
-		<span class="kw">pub</span> <span class="kw">static</span> <span class="ident">TRACE</span>: <span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Xcm</span>, <span class="ident">Outcome</span>)<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">RefCell::new</span>(<span class="ident">Vec::new</span>());
+	<span class="macro">thread_local! </span>{
+		<span class="kw">pub static </span>TRACE: RefCell&lt;Vec&lt;(Xcm, Outcome)&gt;&gt; = RefCell::new(Vec::new());
 	}
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">take_trace</span>() -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Xcm</span>, <span class="ident">Outcome</span>)<span class="op">&gt;</span> {
-		<span class="ident">TRACE</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">q</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">q</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">q</span>.<span class="ident">borrow_mut</span>();
-			<span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">q</span>.<span class="ident">clone</span>();
-			<span class="ident">q</span>.<span class="ident">clear</span>();
-			<span class="ident">r</span>
+	<span class="kw">pub fn </span>take_trace() -&gt; Vec&lt;(Xcm, Outcome)&gt; {
+		TRACE.with(|q| {
+			<span class="kw">let </span>q = <span class="kw-2">&amp;mut *</span>q.borrow_mut();
+			<span class="kw">let </span>r = q.clone();
+			q.clear();
+			r
 		})
 	}
 
-	<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MockExec</span>;
-	<span class="kw">impl</span> <span class="ident">ExecuteXcm</span><span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MockExec</span> {
-		<span class="kw">fn</span> <span class="ident">execute_xcm_in_credit</span>(
-			<span class="ident">_origin</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">MultiLocation</span><span class="op">&gt;</span>,
-			<span class="ident">message</span>: <span class="ident">Xcm</span>,
-			<span class="ident">weight_limit</span>: <span class="ident">XCMWeight</span>,
-			<span class="ident">_credit</span>: <span class="ident">XCMWeight</span>,
-		) -&gt; <span class="ident">Outcome</span> {
-			<span class="kw">let</span> <span class="ident">o</span> <span class="op">=</span> <span class="kw">match</span> (<span class="ident">message</span>.<span class="number">0</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">message</span>.<span class="number">0</span>.<span class="ident">first</span>()) {
-				(<span class="number">1</span>, <span class="prelude-val">Some</span>(<span class="ident">Transact</span> { <span class="ident">require_weight_at_most</span>, .. })) =&gt; {
-					<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">require_weight_at_most</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">weight_limit</span> {
-						<span class="ident">Outcome::Complete</span>(<span class="kw-2">*</span><span class="ident">require_weight_at_most</span>)
-					} <span class="kw">else</span> {
-						<span class="ident">Outcome::Error</span>(<span class="ident">XcmError::WeightLimitReached</span>(<span class="kw-2">*</span><span class="ident">require_weight_at_most</span>))
+	<span class="kw">pub struct </span>MockExec;
+	<span class="kw">impl </span>ExecuteXcm&lt;RuntimeCall&gt; <span class="kw">for </span>MockExec {
+		<span class="kw">fn </span>execute_xcm_in_credit(
+			_origin: <span class="kw">impl </span>Into&lt;MultiLocation&gt;,
+			message: Xcm,
+			weight_limit: XCMWeight,
+			_credit: XCMWeight,
+		) -&gt; Outcome {
+			<span class="kw">let </span>o = <span class="kw">match </span>(message.<span class="number">0</span>.len(), <span class="kw-2">&amp;</span>message.<span class="number">0</span>.first()) {
+				(<span class="number">1</span>, <span class="prelude-val">Some</span>(Transact { require_weight_at_most, .. })) =&gt; {
+					<span class="kw">if </span><span class="kw-2">*</span>require_weight_at_most &lt;= weight_limit {
+						Outcome::Complete(<span class="kw-2">*</span>require_weight_at_most)
+					} <span class="kw">else </span>{
+						Outcome::Error(XcmError::WeightLimitReached(<span class="kw-2">*</span>require_weight_at_most))
 					}
 				},
-				<span class="comment">// use 1000 to decide that it&#39;s not supported.</span>
-				<span class="kw">_</span> =&gt; <span class="ident">Outcome::Incomplete</span>(<span class="number">1000</span>.<span class="ident">min</span>(<span class="ident">weight_limit</span>), <span class="ident">XcmError::Unimplemented</span>),
+				<span class="comment">// use 1000 to decide that it&#39;s not supported.
+				</span><span class="kw">_ </span>=&gt; Outcome::Incomplete(<span class="number">1000</span>.min(weight_limit), XcmError::Unimplemented),
 			};
-			<span class="ident">TRACE</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">q</span><span class="op">|</span> <span class="ident">q</span>.<span class="ident">borrow_mut</span>().<span class="ident">push</span>((<span class="ident">message</span>, <span class="ident">o</span>.<span class="ident">clone</span>())));
-			<span class="ident">o</span>
+			TRACE.with(|q| q.borrow_mut().push((message, o.clone())));
+			o
 		}
 	}
 
-	<span class="kw">impl</span> <span class="ident">Config</span> <span class="kw">for</span> <span class="ident">Test</span> {
-		<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-		<span class="kw">type</span> <span class="ident">XcmExecutor</span> <span class="op">=</span> <span class="ident">MockExec</span>;
-		<span class="kw">type</span> <span class="ident">ExecuteOverweightOrigin</span> <span class="op">=</span> <span class="ident">frame_system::EnsureRoot</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>;
+	<span class="kw">impl </span>Config <span class="kw">for </span>Test {
+		<span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+		<span class="kw">type </span>XcmExecutor = MockExec;
+		<span class="kw">type </span>ExecuteOverweightOrigin = frame_system::EnsureRoot&lt;AccountId&gt;;
 	}
 
-	<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new_test_ext</span>() -&gt; <span class="ident">sp_io::TestExternalities</span> {
-		<span class="ident">frame_system::GenesisConfig::default</span>().<span class="ident">build_storage</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>().<span class="ident">into</span>()
+	<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>new_test_ext() -&gt; sp_io::TestExternalities {
+		frame_system::GenesisConfig::default().build_storage::&lt;Test&gt;().unwrap().into()
 	}
 
-	<span class="kw">fn</span> <span class="ident">enqueue</span>(<span class="ident">enqueued</span>: <span class="kw-2">&amp;</span>[<span class="ident">Xcm</span>]) {
-		<span class="kw">if</span> <span class="op">!</span><span class="ident">enqueued</span>.<span class="ident">is_empty</span>() {
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>();
-			<span class="ident">Pages</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::insert</span>(
-				<span class="ident">index</span>.<span class="ident">end_used</span>,
-				<span class="ident">enqueued</span>
-					.<span class="ident">iter</span>()
-					.<span class="ident">map</span>(<span class="op">|</span><span class="ident">m</span><span class="op">|</span> (<span class="number">0</span>, <span class="ident">VersionedXcm</span>::<span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">m</span>.<span class="ident">clone</span>()).<span class="ident">encode</span>()))
-					.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
+	<span class="kw">fn </span>enqueue(enqueued: <span class="kw-2">&amp;</span>[Xcm]) {
+		<span class="kw">if </span>!enqueued.is_empty() {
+			<span class="kw">let </span><span class="kw-2">mut </span>index = PageIndex::&lt;Test&gt;::get();
+			Pages::&lt;Test&gt;::insert(
+				index.end_used,
+				enqueued
+					.iter()
+					.map(|m| (<span class="number">0</span>, VersionedXcm::&lt;RuntimeCall&gt;::from(m.clone()).encode()))
+					.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
 			);
-			<span class="ident">index</span>.<span class="ident">end_used</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-			<span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">index</span>);
+			index.end_used += <span class="number">1</span>;
+			PageIndex::&lt;Test&gt;::put(index);
 		}
 	}
 
-	<span class="kw">fn</span> <span class="ident">handle_messages</span>(<span class="ident">incoming</span>: <span class="kw-2">&amp;</span>[<span class="ident">Xcm</span>], <span class="ident">limit</span>: <span class="ident">Weight</span>) -&gt; <span class="ident">Weight</span> {
-		<span class="kw">let</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">incoming</span>
-			.<span class="ident">iter</span>()
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">m</span><span class="op">|</span> (<span class="number">0</span>, <span class="ident">VersionedXcm</span>::<span class="op">&lt;</span><span class="ident">RuntimeCall</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">m</span>.<span class="ident">clone</span>()).<span class="ident">encode</span>()));
-		<span class="ident">DmpQueue::handle_dmp_messages</span>(<span class="ident">iter</span>, <span class="ident">limit</span>)
+	<span class="kw">fn </span>handle_messages(incoming: <span class="kw-2">&amp;</span>[Xcm], limit: Weight) -&gt; Weight {
+		<span class="kw">let </span>iter = incoming
+			.iter()
+			.map(|m| (<span class="number">0</span>, VersionedXcm::&lt;RuntimeCall&gt;::from(m.clone()).encode()));
+		DmpQueue::handle_dmp_messages(iter, limit)
 	}
 
-	<span class="kw">fn</span> <span class="ident">msg</span>(<span class="ident">weight</span>: <span class="ident">XCMWeight</span>) -&gt; <span class="ident">Xcm</span> {
-		<span class="ident">Xcm</span>(<span class="macro">vec!</span>[<span class="ident">Transact</span> {
-			<span class="ident">origin_type</span>: <span class="ident">OriginKind::Native</span>,
-			<span class="ident">require_weight_at_most</span>: <span class="ident">weight</span>,
-			<span class="ident">call</span>: <span class="ident">Vec::new</span>().<span class="ident">into</span>(),
+	<span class="kw">fn </span>msg(weight: XCMWeight) -&gt; Xcm {
+		Xcm(<span class="macro">vec!</span>[Transact {
+			origin_type: OriginKind::Native,
+			require_weight_at_most: weight,
+			call: Vec::new().into(),
 		}])
 	}
 
-	<span class="kw">fn</span> <span class="ident">msg_complete</span>(<span class="ident">weight</span>: <span class="ident">XCMWeight</span>) -&gt; (<span class="ident">Xcm</span>, <span class="ident">Outcome</span>) {
-		(<span class="ident">msg</span>(<span class="ident">weight</span>), <span class="ident">Outcome::Complete</span>(<span class="ident">weight</span>))
+	<span class="kw">fn </span>msg_complete(weight: XCMWeight) -&gt; (Xcm, Outcome) {
+		(msg(weight), Outcome::Complete(weight))
 	}
 
-	<span class="kw">fn</span> <span class="ident">msg_limit_reached</span>(<span class="ident">weight</span>: <span class="ident">XCMWeight</span>) -&gt; (<span class="ident">Xcm</span>, <span class="ident">Outcome</span>) {
-		(<span class="ident">msg</span>(<span class="ident">weight</span>), <span class="ident">Outcome::Error</span>(<span class="ident">XcmError::WeightLimitReached</span>(<span class="ident">weight</span>)))
+	<span class="kw">fn </span>msg_limit_reached(weight: XCMWeight) -&gt; (Xcm, Outcome) {
+		(msg(weight), Outcome::Error(XcmError::WeightLimitReached(weight)))
 	}
 
-	<span class="kw">fn</span> <span class="ident">pages_queued</span>() -&gt; <span class="ident">PageCounter</span> {
-		<span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">end_used</span> <span class="op">-</span> <span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">begin_used</span>
+	<span class="kw">fn </span>pages_queued() -&gt; PageCounter {
+		PageIndex::&lt;Test&gt;::get().end_used - PageIndex::&lt;Test&gt;::get().begin_used
 	}
 
-	<span class="kw">fn</span> <span class="ident">queue_is_empty</span>() -&gt; <span class="ident">bool</span> {
-		<span class="ident">pages_queued</span>() <span class="op">==</span> <span class="number">0</span>
+	<span class="kw">fn </span>queue_is_empty() -&gt; bool {
+		pages_queued() == <span class="number">0
+	</span>}
+
+	<span class="kw">fn </span>overweights() -&gt; Vec&lt;OverweightIndex&gt; {
+		(<span class="number">0</span>..PageIndex::&lt;Test&gt;::get().overweight_count)
+			.filter(|i| Overweight::&lt;Test&gt;::contains_key(i))
+			.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;()
 	}
 
-	<span class="kw">fn</span> <span class="ident">overweights</span>() -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">OverweightIndex</span><span class="op">&gt;</span> {
-		(<span class="number">0</span>..<span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">overweight_count</span>)
-			.<span class="ident">filter</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">Overweight</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::contains_key</span>(<span class="ident">i</span>))
-			.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()
-	}
-
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">basic_setup_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span>[], <span class="ident">Weight::from_ref_time</span>(<span class="number">1000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::zero</span>());
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="ident">Vec::new</span>());
-			<span class="macro">assert!</span>(<span class="ident">queue_is_empty</span>());
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>basic_setup_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>[], Weight::from_ref_time(<span class="number">1000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::zero());
+			<span class="macro">assert_eq!</span>(take_trace(), Vec::new());
+			<span class="macro">assert!</span>(queue_is_empty());
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">service_inline_complete_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">incoming</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">1001</span>)];
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="ident">incoming</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">2500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">2001</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1000</span>), <span class="ident">msg_complete</span>(<span class="number">1001</span>)]);
-			<span class="macro">assert!</span>(<span class="ident">queue_is_empty</span>());
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>service_inline_complete_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>incoming = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">1001</span>)];
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>incoming, Weight::from_ref_time(<span class="number">2500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">2001</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">1000</span>), msg_complete(<span class="number">1001</span>)]);
+			<span class="macro">assert!</span>(queue_is_empty());
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">service_enqueued_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">enqueued</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">1001</span>), <span class="ident">msg</span>(<span class="number">1002</span>)];
-			<span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="ident">enqueued</span>);
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span>[], <span class="ident">Weight::from_ref_time</span>(<span class="number">2500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">2001</span>));
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>service_enqueued_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>enqueued = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">1001</span>), msg(<span class="number">1002</span>)];
+			enqueue(<span class="kw-2">&amp;</span>enqueued);
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>[], Weight::from_ref_time(<span class="number">2500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">2001</span>));
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">take_trace</span>(),
-				<span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1000</span>), <span class="ident">msg_complete</span>(<span class="number">1001</span>), <span class="ident">msg_limit_reached</span>(<span class="number">1002</span>),]
+				take_trace(),
+				<span class="macro">vec!</span>[msg_complete(<span class="number">1000</span>), msg_complete(<span class="number">1001</span>), msg_limit_reached(<span class="number">1002</span>),]
 			);
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">enqueue_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">incoming</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">1001</span>), <span class="ident">msg</span>(<span class="number">1002</span>)];
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="ident">incoming</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">999</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::zero</span>());
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>enqueue_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>incoming = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">1001</span>), msg(<span class="number">1002</span>)];
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>incoming, Weight::from_ref_time(<span class="number">999</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::zero());
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>(),
-				<span class="ident">PageIndexData</span> { <span class="ident">begin_used</span>: <span class="number">0</span>, <span class="ident">end_used</span>: <span class="number">1</span>, <span class="ident">overweight_count</span>: <span class="number">0</span> }
+				PageIndex::&lt;Test&gt;::get(),
+				PageIndexData { begin_used: <span class="number">0</span>, end_used: <span class="number">1</span>, overweight_count: <span class="number">0 </span>}
 			);
-			<span class="macro">assert_eq!</span>(<span class="ident">Pages</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>(<span class="number">0</span>).<span class="ident">len</span>(), <span class="number">3</span>);
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_limit_reached</span>(<span class="number">1000</span>)]);
+			<span class="macro">assert_eq!</span>(Pages::&lt;Test&gt;::get(<span class="number">0</span>).len(), <span class="number">3</span>);
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_limit_reached(<span class="number">1000</span>)]);
 
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span>[], <span class="ident">Weight::from_ref_time</span>(<span class="number">2500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">2001</span>));
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>[], Weight::from_ref_time(<span class="number">2500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">2001</span>));
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">take_trace</span>(),
-				<span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1000</span>), <span class="ident">msg_complete</span>(<span class="number">1001</span>), <span class="ident">msg_limit_reached</span>(<span class="number">1002</span>),]
+				take_trace(),
+				<span class="macro">vec!</span>[msg_complete(<span class="number">1000</span>), msg_complete(<span class="number">1001</span>), msg_limit_reached(<span class="number">1002</span>),]
 			);
 
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span>[], <span class="ident">Weight::from_ref_time</span>(<span class="number">2500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">1002</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1002</span>),]);
-			<span class="macro">assert!</span>(<span class="ident">queue_is_empty</span>());
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>[], Weight::from_ref_time(<span class="number">2500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">1002</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">1002</span>),]);
+			<span class="macro">assert!</span>(queue_is_empty());
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">service_inline_then_enqueue_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">incoming</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">1001</span>), <span class="ident">msg</span>(<span class="number">1002</span>)];
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="ident">incoming</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">1500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">1000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">pages_queued</span>(), <span class="number">1</span>);
-			<span class="macro">assert_eq!</span>(<span class="ident">Pages</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>(<span class="number">0</span>).<span class="ident">len</span>(), <span class="number">2</span>);
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1000</span>), <span class="ident">msg_limit_reached</span>(<span class="number">1001</span>),]);
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>service_inline_then_enqueue_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>incoming = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">1001</span>), msg(<span class="number">1002</span>)];
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>incoming, Weight::from_ref_time(<span class="number">1500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">1000</span>));
+			<span class="macro">assert_eq!</span>(pages_queued(), <span class="number">1</span>);
+			<span class="macro">assert_eq!</span>(Pages::&lt;Test&gt;::get(<span class="number">0</span>).len(), <span class="number">2</span>);
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">1000</span>), msg_limit_reached(<span class="number">1001</span>),]);
 
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span>[], <span class="ident">Weight::from_ref_time</span>(<span class="number">2500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">2003</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1001</span>), <span class="ident">msg_complete</span>(<span class="number">1002</span>),]);
-			<span class="macro">assert!</span>(<span class="ident">queue_is_empty</span>());
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>[], Weight::from_ref_time(<span class="number">2500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">2003</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">1001</span>), msg_complete(<span class="number">1002</span>),]);
+			<span class="macro">assert!</span>(queue_is_empty());
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">service_enqueued_and_inline_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">enqueued</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">1001</span>)];
-			<span class="kw">let</span> <span class="ident">incoming</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1002</span>), <span class="ident">msg</span>(<span class="number">1003</span>)];
-			<span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="ident">enqueued</span>);
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="ident">incoming</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">5000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">4006</span>));
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>service_enqueued_and_inline_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>enqueued = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">1001</span>)];
+			<span class="kw">let </span>incoming = <span class="macro">vec!</span>[msg(<span class="number">1002</span>), msg(<span class="number">1003</span>)];
+			enqueue(<span class="kw-2">&amp;</span>enqueued);
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>incoming, Weight::from_ref_time(<span class="number">5000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">4006</span>));
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">take_trace</span>(),
+				take_trace(),
 				<span class="macro">vec!</span>[
-					<span class="ident">msg_complete</span>(<span class="number">1000</span>),
-					<span class="ident">msg_complete</span>(<span class="number">1001</span>),
-					<span class="ident">msg_complete</span>(<span class="number">1002</span>),
-					<span class="ident">msg_complete</span>(<span class="number">1003</span>),
+					msg_complete(<span class="number">1000</span>),
+					msg_complete(<span class="number">1001</span>),
+					msg_complete(<span class="number">1002</span>),
+					msg_complete(<span class="number">1003</span>),
 				]
 			);
-			<span class="macro">assert!</span>(<span class="ident">queue_is_empty</span>());
+			<span class="macro">assert!</span>(queue_is_empty());
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">service_enqueued_partially_and_then_enqueue_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">enqueued</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">10001</span>)];
-			<span class="kw">let</span> <span class="ident">incoming</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1002</span>), <span class="ident">msg</span>(<span class="number">1003</span>)];
-			<span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="ident">enqueued</span>);
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="ident">incoming</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">5000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">1000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1000</span>), <span class="ident">msg_limit_reached</span>(<span class="number">10001</span>),]);
-			<span class="macro">assert_eq!</span>(<span class="ident">pages_queued</span>(), <span class="number">2</span>);
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>service_enqueued_partially_and_then_enqueue_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>enqueued = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">10001</span>)];
+			<span class="kw">let </span>incoming = <span class="macro">vec!</span>[msg(<span class="number">1002</span>), msg(<span class="number">1003</span>)];
+			enqueue(<span class="kw-2">&amp;</span>enqueued);
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>incoming, Weight::from_ref_time(<span class="number">5000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">1000</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">1000</span>), msg_limit_reached(<span class="number">10001</span>),]);
+			<span class="macro">assert_eq!</span>(pages_queued(), <span class="number">2</span>);
 
-			<span class="comment">// 5000 is not enough to process the 10001 blocker, so nothing happens.</span>
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span>[], <span class="ident">Weight::from_ref_time</span>(<span class="number">5000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::zero</span>());
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_limit_reached</span>(<span class="number">10001</span>),]);
+			<span class="comment">// 5000 is not enough to process the 10001 blocker, so nothing happens.
+			</span><span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>[], Weight::from_ref_time(<span class="number">5000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::zero());
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_limit_reached(<span class="number">10001</span>),]);
 
-			<span class="comment">// 20000 is now enough to process everything.</span>
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span>[], <span class="ident">Weight::from_ref_time</span>(<span class="number">20000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">12006</span>));
+			<span class="comment">// 20000 is now enough to process everything.
+			</span><span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>[], Weight::from_ref_time(<span class="number">20000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">12006</span>));
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">take_trace</span>(),
-				<span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">10001</span>), <span class="ident">msg_complete</span>(<span class="number">1002</span>), <span class="ident">msg_complete</span>(<span class="number">1003</span>),]
+				take_trace(),
+				<span class="macro">vec!</span>[msg_complete(<span class="number">10001</span>), msg_complete(<span class="number">1002</span>), msg_complete(<span class="number">1003</span>),]
 			);
-			<span class="macro">assert!</span>(<span class="ident">queue_is_empty</span>());
+			<span class="macro">assert!</span>(queue_is_empty());
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">service_enqueued_completely_and_then_enqueue_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">enqueued</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">1001</span>)];
-			<span class="kw">let</span> <span class="ident">incoming</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">10002</span>), <span class="ident">msg</span>(<span class="number">1003</span>)];
-			<span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="ident">enqueued</span>);
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="ident">incoming</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">5000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">2001</span>));
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>service_enqueued_completely_and_then_enqueue_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>enqueued = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">1001</span>)];
+			<span class="kw">let </span>incoming = <span class="macro">vec!</span>[msg(<span class="number">10002</span>), msg(<span class="number">1003</span>)];
+			enqueue(<span class="kw-2">&amp;</span>enqueued);
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>incoming, Weight::from_ref_time(<span class="number">5000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">2001</span>));
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">take_trace</span>(),
-				<span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1000</span>), <span class="ident">msg_complete</span>(<span class="number">1001</span>), <span class="ident">msg_limit_reached</span>(<span class="number">10002</span>),]
+				take_trace(),
+				<span class="macro">vec!</span>[msg_complete(<span class="number">1000</span>), msg_complete(<span class="number">1001</span>), msg_limit_reached(<span class="number">10002</span>),]
 			);
-			<span class="macro">assert_eq!</span>(<span class="ident">pages_queued</span>(), <span class="number">1</span>);
+			<span class="macro">assert_eq!</span>(pages_queued(), <span class="number">1</span>);
 
-			<span class="comment">// 20000 is now enough to process everything.</span>
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span>[], <span class="ident">Weight::from_ref_time</span>(<span class="number">20000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">11005</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">10002</span>), <span class="ident">msg_complete</span>(<span class="number">1003</span>),]);
-			<span class="macro">assert!</span>(<span class="ident">queue_is_empty</span>());
+			<span class="comment">// 20000 is now enough to process everything.
+			</span><span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>[], Weight::from_ref_time(<span class="number">20000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">11005</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">10002</span>), msg_complete(<span class="number">1003</span>),]);
+			<span class="macro">assert!</span>(queue_is_empty());
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">service_enqueued_then_inline_then_enqueue_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">enqueued</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">1001</span>)];
-			<span class="kw">let</span> <span class="ident">incoming</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1002</span>), <span class="ident">msg</span>(<span class="number">10003</span>)];
-			<span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="ident">enqueued</span>);
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="ident">incoming</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">5000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">3003</span>));
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>service_enqueued_then_inline_then_enqueue_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>enqueued = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">1001</span>)];
+			<span class="kw">let </span>incoming = <span class="macro">vec!</span>[msg(<span class="number">1002</span>), msg(<span class="number">10003</span>)];
+			enqueue(<span class="kw-2">&amp;</span>enqueued);
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>incoming, Weight::from_ref_time(<span class="number">5000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">3003</span>));
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">take_trace</span>(),
+				take_trace(),
 				<span class="macro">vec!</span>[
-					<span class="ident">msg_complete</span>(<span class="number">1000</span>),
-					<span class="ident">msg_complete</span>(<span class="number">1001</span>),
-					<span class="ident">msg_complete</span>(<span class="number">1002</span>),
-					<span class="ident">msg_limit_reached</span>(<span class="number">10003</span>),
+					msg_complete(<span class="number">1000</span>),
+					msg_complete(<span class="number">1001</span>),
+					msg_complete(<span class="number">1002</span>),
+					msg_limit_reached(<span class="number">10003</span>),
 				]
 			);
-			<span class="macro">assert_eq!</span>(<span class="ident">pages_queued</span>(), <span class="number">1</span>);
+			<span class="macro">assert_eq!</span>(pages_queued(), <span class="number">1</span>);
 
-			<span class="comment">// 20000 is now enough to process everything.</span>
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span>[], <span class="ident">Weight::from_ref_time</span>(<span class="number">20000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">10003</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">10003</span>),]);
-			<span class="macro">assert!</span>(<span class="ident">queue_is_empty</span>());
+			<span class="comment">// 20000 is now enough to process everything.
+			</span><span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>[], Weight::from_ref_time(<span class="number">20000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">10003</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">10003</span>),]);
+			<span class="macro">assert!</span>(queue_is_empty());
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">page_crawling_works</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">enqueued</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">1001</span>)];
-			<span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="ident">enqueued</span>);
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1002</span>)], <span class="ident">Weight::from_ref_time</span>(<span class="number">1500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">1000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1000</span>), <span class="ident">msg_limit_reached</span>(<span class="number">1001</span>),]);
-			<span class="macro">assert_eq!</span>(<span class="ident">pages_queued</span>(), <span class="number">2</span>);
-			<span class="macro">assert_eq!</span>(<span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">begin_used</span>, <span class="number">0</span>);
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>page_crawling_works() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>enqueued = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">1001</span>)];
+			enqueue(<span class="kw-2">&amp;</span>enqueued);
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[msg(<span class="number">1002</span>)], Weight::from_ref_time(<span class="number">1500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">1000</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">1000</span>), msg_limit_reached(<span class="number">1001</span>),]);
+			<span class="macro">assert_eq!</span>(pages_queued(), <span class="number">2</span>);
+			<span class="macro">assert_eq!</span>(PageIndex::&lt;Test&gt;::get().begin_used, <span class="number">0</span>);
 
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1003</span>)], <span class="ident">Weight::from_ref_time</span>(<span class="number">1500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">1001</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1001</span>), <span class="ident">msg_limit_reached</span>(<span class="number">1002</span>),]);
-			<span class="macro">assert_eq!</span>(<span class="ident">pages_queued</span>(), <span class="number">2</span>);
-			<span class="macro">assert_eq!</span>(<span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">begin_used</span>, <span class="number">1</span>);
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[msg(<span class="number">1003</span>)], Weight::from_ref_time(<span class="number">1500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">1001</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">1001</span>), msg_limit_reached(<span class="number">1002</span>),]);
+			<span class="macro">assert_eq!</span>(pages_queued(), <span class="number">2</span>);
+			<span class="macro">assert_eq!</span>(PageIndex::&lt;Test&gt;::get().begin_used, <span class="number">1</span>);
 
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1004</span>)], <span class="ident">Weight::from_ref_time</span>(<span class="number">1500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">1002</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1002</span>), <span class="ident">msg_limit_reached</span>(<span class="number">1003</span>),]);
-			<span class="macro">assert_eq!</span>(<span class="ident">pages_queued</span>(), <span class="number">2</span>);
-			<span class="macro">assert_eq!</span>(<span class="ident">PageIndex</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">begin_used</span>, <span class="number">2</span>);
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[msg(<span class="number">1004</span>)], Weight::from_ref_time(<span class="number">1500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">1002</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">1002</span>), msg_limit_reached(<span class="number">1003</span>),]);
+			<span class="macro">assert_eq!</span>(pages_queued(), <span class="number">2</span>);
+			<span class="macro">assert_eq!</span>(PageIndex::&lt;Test&gt;::get().begin_used, <span class="number">2</span>);
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">overweight_should_not_block_queue</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="comment">// Set the overweight threshold to 9999.</span>
-			<span class="ident">Configuration</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">ConfigData</span> { <span class="ident">max_individual</span>: <span class="ident">Weight::from_ref_time</span>(<span class="number">9999</span>) });
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>overweight_should_not_block_queue() {
+		new_test_ext().execute_with(|| {
+			<span class="comment">// Set the overweight threshold to 9999.
+			</span>Configuration::&lt;Test&gt;::put(ConfigData { max_individual: Weight::from_ref_time(<span class="number">9999</span>) });
 
-			<span class="kw">let</span> <span class="ident">incoming</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">10001</span>), <span class="ident">msg</span>(<span class="number">1002</span>)];
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="ident">incoming</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">2500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">2002</span>));
-			<span class="macro">assert!</span>(<span class="ident">queue_is_empty</span>());
+			<span class="kw">let </span>incoming = <span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">10001</span>), msg(<span class="number">1002</span>)];
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>incoming, Weight::from_ref_time(<span class="number">2500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">2002</span>));
+			<span class="macro">assert!</span>(queue_is_empty());
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">take_trace</span>(),
-				<span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">1000</span>), <span class="ident">msg_limit_reached</span>(<span class="number">10001</span>), <span class="ident">msg_complete</span>(<span class="number">1002</span>),]
+				take_trace(),
+				<span class="macro">vec!</span>[msg_complete(<span class="number">1000</span>), msg_limit_reached(<span class="number">10001</span>), msg_complete(<span class="number">1002</span>),]
 			);
 
-			<span class="macro">assert_eq!</span>(<span class="ident">overweights</span>(), <span class="macro">vec!</span>[<span class="number">0</span>]);
+			<span class="macro">assert_eq!</span>(overweights(), <span class="macro">vec!</span>[<span class="number">0</span>]);
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">overweights_should_be_manually_executable</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="comment">// Set the overweight threshold to 9999.</span>
-			<span class="ident">Configuration</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::put</span>(<span class="ident">ConfigData</span> { <span class="ident">max_individual</span>: <span class="ident">Weight::from_ref_time</span>(<span class="number">9999</span>) });
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>overweights_should_be_manually_executable() {
+		new_test_ext().execute_with(|| {
+			<span class="comment">// Set the overweight threshold to 9999.
+			</span>Configuration::&lt;Test&gt;::put(ConfigData { max_individual: Weight::from_ref_time(<span class="number">9999</span>) });
 
-			<span class="kw">let</span> <span class="ident">incoming</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">10000</span>)];
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">handle_messages</span>(<span class="kw-2">&amp;</span><span class="ident">incoming</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">2500</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::zero</span>());
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_limit_reached</span>(<span class="number">10000</span>)]);
-			<span class="macro">assert_eq!</span>(<span class="ident">overweights</span>(), <span class="macro">vec!</span>[<span class="number">0</span>]);
+			<span class="kw">let </span>incoming = <span class="macro">vec!</span>[msg(<span class="number">10000</span>)];
+			<span class="kw">let </span>weight_used = handle_messages(<span class="kw-2">&amp;</span>incoming, Weight::from_ref_time(<span class="number">2500</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::zero());
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_limit_reached(<span class="number">10000</span>)]);
+			<span class="macro">assert_eq!</span>(overweights(), <span class="macro">vec!</span>[<span class="number">0</span>]);
 
 			<span class="macro">assert_noop!</span>(
-				<span class="ident">DmpQueue::service_overweight</span>(<span class="ident">RuntimeOrigin::signed</span>(<span class="number">1</span>), <span class="number">0</span>, <span class="number">20000</span>),
-				<span class="ident">BadOrigin</span>
+				DmpQueue::service_overweight(RuntimeOrigin::signed(<span class="number">1</span>), <span class="number">0</span>, <span class="number">20000</span>),
+				BadOrigin
 			);
 			<span class="macro">assert_noop!</span>(
-				<span class="ident">DmpQueue::service_overweight</span>(<span class="ident">RuntimeOrigin::root</span>(), <span class="number">1</span>, <span class="number">20000</span>),
-				<span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::Unknown</span>
+				DmpQueue::service_overweight(RuntimeOrigin::root(), <span class="number">1</span>, <span class="number">20000</span>),
+				Error::&lt;Test&gt;::Unknown
 			);
 			<span class="macro">assert_noop!</span>(
-				<span class="ident">DmpQueue::service_overweight</span>(<span class="ident">RuntimeOrigin::root</span>(), <span class="number">0</span>, <span class="number">9999</span>),
-				<span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::OverLimit</span>
+				DmpQueue::service_overweight(RuntimeOrigin::root(), <span class="number">0</span>, <span class="number">9999</span>),
+				Error::&lt;Test&gt;::OverLimit
 			);
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_limit_reached</span>(<span class="number">10000</span>)]);
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_limit_reached(<span class="number">10000</span>)]);
 
-			<span class="kw">let</span> <span class="ident">base_weight</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::Call</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::service_overweight</span> { <span class="ident">index</span>: <span class="number">0</span>, <span class="ident">weight_limit</span>: <span class="number">0</span> }
-				.<span class="ident">get_dispatch_info</span>()
-				.<span class="ident">weight</span>;
-			<span class="kw">use</span> <span class="ident">frame_support::dispatch::GetDispatchInfo</span>;
-			<span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="ident">DmpQueue::service_overweight</span>(<span class="ident">RuntimeOrigin::root</span>(), <span class="number">0</span>, <span class="number">20000</span>).<span class="ident">unwrap</span>();
-			<span class="kw">let</span> <span class="ident">actual_weight</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">actual_weight</span>.<span class="ident">unwrap</span>();
-			<span class="macro">assert_eq!</span>(<span class="ident">actual_weight</span>, <span class="ident">base_weight</span> <span class="op">+</span> <span class="ident">Weight::from_ref_time</span>(<span class="number">10000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">take_trace</span>(), <span class="macro">vec!</span>[<span class="ident">msg_complete</span>(<span class="number">10000</span>)]);
-			<span class="macro">assert!</span>(<span class="ident">overweights</span>().<span class="ident">is_empty</span>());
+			<span class="kw">let </span>base_weight = <span class="kw">super</span>::Call::&lt;Test&gt;::service_overweight { index: <span class="number">0</span>, weight_limit: <span class="number">0 </span>}
+				.get_dispatch_info()
+				.weight;
+			<span class="kw">use </span>frame_support::dispatch::GetDispatchInfo;
+			<span class="kw">let </span>info = DmpQueue::service_overweight(RuntimeOrigin::root(), <span class="number">0</span>, <span class="number">20000</span>).unwrap();
+			<span class="kw">let </span>actual_weight = info.actual_weight.unwrap();
+			<span class="macro">assert_eq!</span>(actual_weight, base_weight + Weight::from_ref_time(<span class="number">10000</span>));
+			<span class="macro">assert_eq!</span>(take_trace(), <span class="macro">vec!</span>[msg_complete(<span class="number">10000</span>)]);
+			<span class="macro">assert!</span>(overweights().is_empty());
 
 			<span class="macro">assert_noop!</span>(
-				<span class="ident">DmpQueue::service_overweight</span>(<span class="ident">RuntimeOrigin::root</span>(), <span class="number">0</span>, <span class="number">20000</span>),
-				<span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::Unknown</span>
+				DmpQueue::service_overweight(RuntimeOrigin::root(), <span class="number">0</span>, <span class="number">20000</span>),
+				Error::&lt;Test&gt;::Unknown
 			);
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">on_idle_should_service_queue</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1000</span>), <span class="ident">msg</span>(<span class="number">1001</span>)]);
-			<span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1002</span>), <span class="ident">msg</span>(<span class="number">1003</span>)]);
-			<span class="ident">enqueue</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">msg</span>(<span class="number">1004</span>), <span class="ident">msg</span>(<span class="number">1005</span>)]);
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>on_idle_should_service_queue() {
+		new_test_ext().execute_with(|| {
+			enqueue(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[msg(<span class="number">1000</span>), msg(<span class="number">1001</span>)]);
+			enqueue(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[msg(<span class="number">1002</span>), msg(<span class="number">1003</span>)]);
+			enqueue(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[msg(<span class="number">1004</span>), msg(<span class="number">1005</span>)]);
 
-			<span class="kw">let</span> <span class="ident">weight_used</span> <span class="op">=</span> <span class="ident">DmpQueue::on_idle</span>(<span class="number">1</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">6000</span>));
-			<span class="macro">assert_eq!</span>(<span class="ident">weight_used</span>, <span class="ident">Weight::from_ref_time</span>(<span class="number">5010</span>));
+			<span class="kw">let </span>weight_used = DmpQueue::on_idle(<span class="number">1</span>, Weight::from_ref_time(<span class="number">6000</span>));
+			<span class="macro">assert_eq!</span>(weight_used, Weight::from_ref_time(<span class="number">5010</span>));
 			<span class="macro">assert_eq!</span>(
-				<span class="ident">take_trace</span>(),
+				take_trace(),
 				<span class="macro">vec!</span>[
-					<span class="ident">msg_complete</span>(<span class="number">1000</span>),
-					<span class="ident">msg_complete</span>(<span class="number">1001</span>),
-					<span class="ident">msg_complete</span>(<span class="number">1002</span>),
-					<span class="ident">msg_complete</span>(<span class="number">1003</span>),
-					<span class="ident">msg_complete</span>(<span class="number">1004</span>),
-					<span class="ident">msg_limit_reached</span>(<span class="number">1005</span>),
+					msg_complete(<span class="number">1000</span>),
+					msg_complete(<span class="number">1001</span>),
+					msg_complete(<span class="number">1002</span>),
+					msg_complete(<span class="number">1003</span>),
+					msg_complete(<span class="number">1004</span>),
+					msg_limit_reached(<span class="number">1005</span>),
 				]
 			);
-			<span class="macro">assert_eq!</span>(<span class="ident">pages_queued</span>(), <span class="number">1</span>);
+			<span class="macro">assert_eq!</span>(pages_queued(), <span class="number">1</span>);
 		});
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_dmp_queue" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_dmp_queue" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

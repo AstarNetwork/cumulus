@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/runtimes/assets/statemint/src/weights/pallet_assets.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>pallet_assets.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../statemint_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../statemint_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../statemint_runtime/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/runtimes/assets/statemint/src/weights/pallet_assets.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>pallet_assets.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../statemint_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../statemint_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../statemint_runtime/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -233,240 +233,314 @@
 <span id="233">233</span>
 <span id="234">234</span>
 <span id="235">235</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! Autogenerated weights for `pallet_assets`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! THIS FILE WAS AUTO-GENERATED USING THE SUBSTRATE BENCHMARK CLI VERSION 4.0.0-dev</span>
-<span class="doccomment">//! DATE: 2022-09-21, STEPS: `50`, REPEAT: 20, LOW RANGE: `[]`, HIGH RANGE: `[]`</span>
-<span class="doccomment">//! HOSTNAME: `bm6`, CPU: `Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz`</span>
-<span class="doccomment">//! EXECUTION: Some(Wasm), WASM-EXECUTION: Compiled, CHAIN: Some(&quot;statemint-dev&quot;), DB CACHE: 1024</span>
+</span><span class="doccomment">//! Autogenerated weights for `pallet_assets`
+//!
+//! THIS FILE WAS AUTO-GENERATED USING THE SUBSTRATE BENCHMARK CLI VERSION 4.0.0-dev
+//! DATE: 2022-11-10, STEPS: `50`, REPEAT: 20, LOW RANGE: `[]`, HIGH RANGE: `[]`
+//! HOSTNAME: `bm6`, CPU: `Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz`
+//! EXECUTION: Some(Wasm), WASM-EXECUTION: Compiled, CHAIN: Some(&quot;statemint-dev&quot;), DB CACHE: 1024
 
-<span class="comment">// Executed Command:</span>
-<span class="comment">// ./artifacts/polkadot-parachain</span>
-<span class="comment">// benchmark</span>
-<span class="comment">// pallet</span>
-<span class="comment">// --chain=statemint-dev</span>
-<span class="comment">// --execution=wasm</span>
-<span class="comment">// --wasm-execution=compiled</span>
-<span class="comment">// --pallet=pallet_assets</span>
-<span class="comment">// --extrinsic=*</span>
-<span class="comment">// --steps=50</span>
-<span class="comment">// --repeat=20</span>
-<span class="comment">// --json</span>
-<span class="comment">// --header=./file_header.txt</span>
-<span class="comment">// --output=./parachains/runtimes/assets/statemint/src/weights/pallet_assets.rs</span>
+</span><span class="comment">// Executed Command:
+// ./artifacts/polkadot-parachain
+// benchmark
+// pallet
+// --chain=statemint-dev
+// --execution=wasm
+// --wasm-execution=compiled
+// --pallet=pallet_assets
+// --extrinsic=*
+// --steps=50
+// --repeat=20
+// --json
+// --header=./file_header.txt
+// --output=./parachains/runtimes/assets/statemint/src/weights/pallet_assets.rs
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">rustfmt</span>, <span class="ident">rustfmt_skip</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_parens</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
+</span><span class="attribute">#![cfg_attr(rustfmt, rustfmt_skip)]
+#![allow(unused_parens)]
+#![allow(unused_imports)]
 
-<span class="kw">use</span> <span class="ident">frame_support</span>::{<span class="ident">traits::Get</span>, <span class="ident">weights</span>::{<span class="ident">Weight</span>}};
-<span class="kw">use</span> <span class="ident">sp_std::marker::PhantomData</span>;
+</span><span class="kw">use </span>frame_support::{traits::Get, weights::Weight};
+<span class="kw">use </span>sp_std::marker::PhantomData;
 
-<span class="doccomment">/// Weight functions for `pallet_assets`.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WeightInfo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">frame_system::Config</span><span class="op">&gt;</span> <span class="ident">pallet_assets::WeightInfo</span> <span class="kw">for</span> <span class="ident">WeightInfo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">create</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">30_406_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+<span class="doccomment">/// Weight functions for `pallet_assets`.
+</span><span class="kw">pub struct </span>WeightInfo&lt;T&gt;(PhantomData&lt;T&gt;);
+<span class="kw">impl</span>&lt;T: frame_system::Config&gt; pallet_assets::WeightInfo <span class="kw">for </span>WeightInfo&lt;T&gt; {
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	</span><span class="kw">fn </span>create() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 32_921 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">33_633_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">1 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">force_create</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">18_225_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	</span><span class="kw">fn </span>force_create() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 19_787 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">20_249_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">1 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Account (r:5002 w:5001)</span>
-	<span class="comment">// Storage: System Account (r:5000 w:5000)</span>
-	<span class="comment">// Storage: Assets Metadata (r:1 w:0)</span>
-	<span class="comment">// Storage: Assets Approvals (r:501 w:500)</span>
-	<span class="doccomment">/// The range of component `c` is `[0, 5000]`.</span>
-	<span class="doccomment">/// The range of component `s` is `[0, 5000]`.</span>
-	<span class="doccomment">/// The range of component `a` is `[0, 500]`.</span>
-	<span class="kw">fn</span> <span class="ident">destroy</span>(<span class="ident">c</span>: <span class="ident">u32</span>, <span class="ident">s</span>: <span class="ident">u32</span>, <span class="ident">a</span>: <span class="ident">u32</span>, ) -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">0</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			<span class="comment">// Standard Error: 96_000</span>
-			.<span class="ident">saturating_add</span>(<span class="ident">Weight::from_ref_time</span>(<span class="number">15_834_000</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			<span class="comment">// Standard Error: 96_000</span>
-			.<span class="ident">saturating_add</span>(<span class="ident">Weight::from_ref_time</span>(<span class="number">17_275_000</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">s</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			<span class="comment">// Standard Error: 966_000</span>
-			.<span class="ident">saturating_add</span>(<span class="ident">Weight::from_ref_time</span>(<span class="number">35_635_000</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">a</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">5</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>((<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u64</span>)))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>((<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">s</span> <span class="kw">as</span> <span class="ident">u64</span>)))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>((<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">a</span> <span class="kw">as</span> <span class="ident">u64</span>)))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>((<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u64</span>)))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>((<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">s</span> <span class="kw">as</span> <span class="ident">u64</span>)))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>((<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">a</span> <span class="kw">as</span> <span class="ident">u64</span>)))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Metadata (r:1 w:0)
+	</span><span class="kw">fn </span>start_destroy() -&gt; Weight {
+		Weight::from_ref_time(<span class="number">33_000_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Account (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">mint</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">36_535_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Accounts (r:1 w:0)
+	</span><span class="doccomment">/// The range of component `a` is `[0, 1000]`.
+	</span><span class="kw">fn </span>destroy_accounts(a: u32, ) -&gt; Weight {
+		Weight::from_ref_time(<span class="number">39_000_000 </span><span class="kw">as </span>u64)
+			<span class="comment">// Standard Error: 14_298
+			</span>.saturating_add(Weight::from_ref_time(<span class="number">27_632_144 </span><span class="kw">as </span>u64).saturating_mul(a <span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().reads((<span class="number">1 </span><span class="kw">as </span>u64).saturating_mul(a <span class="kw">as </span>u64)))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes((<span class="number">1 </span><span class="kw">as </span>u64).saturating_mul(a <span class="kw">as </span>u64)))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Account (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">burn</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">39_821_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Approvals (r:1 w:0)
+	</span><span class="doccomment">/// The range of component `a` is `[0, 1000]`.
+	</span><span class="kw">fn </span>destroy_approvals(a: u32, ) -&gt; Weight {
+		Weight::from_ref_time(<span class="number">39_000_000 </span><span class="kw">as </span>u64)
+			<span class="comment">// Standard Error: 14_298
+			</span>.saturating_add(Weight::from_ref_time(<span class="number">27_632_144 </span><span class="kw">as </span>u64).saturating_mul(a <span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().reads((<span class="number">1 </span><span class="kw">as </span>u64).saturating_mul(a <span class="kw">as </span>u64)))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes((<span class="number">1 </span><span class="kw">as </span>u64).saturating_mul(a <span class="kw">as </span>u64)))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Account (r:2 w:2)</span>
-	<span class="comment">// Storage: System Account (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">transfer</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">52_287_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">4</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">4</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Metadata (r:1 w:0)
+	</span><span class="kw">fn </span>finish_destroy() -&gt; Weight {
+		Weight::from_ref_time(<span class="number">33_000_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Account (r:2 w:2)</span>
-	<span class="comment">// Storage: System Account (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">transfer_keep_alive</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">45_347_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">4</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">4</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Account (r:1 w:1)
+	</span><span class="kw">fn </span>mint() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 37_940 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">38_473_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">2 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Account (r:2 w:2)</span>
-	<span class="comment">// Storage: System Account (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">force_transfer</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">52_369_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">4</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">4</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Account (r:1 w:1)
+	</span><span class="kw">fn </span>burn() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 41_145 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">41_670_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">2 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:0)</span>
-	<span class="comment">// Storage: Assets Account (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">freeze</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">25_896_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Account (r:2 w:2)
+	// Storage: System Account (r:1 w:1)
+	</span><span class="kw">fn </span>transfer() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 53_947 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">54_412_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">4 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">4 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:0)</span>
-	<span class="comment">// Storage: Assets Account (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">thaw</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">25_630_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Account (r:2 w:2)
+	// Storage: System Account (r:1 w:1)
+	</span><span class="kw">fn </span>transfer_keep_alive() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 47_048 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">47_946_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">4 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">4 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">freeze_asset</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">22_340_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Account (r:2 w:2)
+	// Storage: System Account (r:1 w:1)
+	</span><span class="kw">fn </span>force_transfer() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 55_147 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">55_548_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">4 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">4 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">thaw_asset</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">22_204_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:0)
+	// Storage: Assets Account (r:1 w:1)
+	</span><span class="kw">fn </span>freeze() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 25_841 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">26_506_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Metadata (r:1 w:0)</span>
-	<span class="kw">fn</span> <span class="ident">transfer_ownership</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">24_971_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:0)
+	// Storage: Assets Account (r:1 w:1)
+	</span><span class="kw">fn </span>thaw() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 26_639 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">27_081_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">set_team</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">24_079_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	</span><span class="kw">fn </span>freeze_asset() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 22_413 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">23_213_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">1 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:0)</span>
-	<span class="comment">// Storage: Assets Metadata (r:1 w:1)</span>
-	<span class="doccomment">/// The range of component `n` is `[0, 50]`.</span>
-	<span class="doccomment">/// The range of component `s` is `[0, 50]`.</span>
-	<span class="kw">fn</span> <span class="ident">set_metadata</span>(<span class="ident">_n</span>: <span class="ident">u32</span>, <span class="ident">s</span>: <span class="ident">u32</span>, ) -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">36_505_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			<span class="comment">// Standard Error: 1_000</span>
-			.<span class="ident">saturating_add</span>(<span class="ident">Weight::from_ref_time</span>(<span class="number">4_000</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">s</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	</span><span class="kw">fn </span>thaw_asset() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 21_963 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">22_479_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">1 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:0)</span>
-	<span class="comment">// Storage: Assets Metadata (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">clear_metadata</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">38_931_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Metadata (r:1 w:0)
+	</span><span class="kw">fn </span>transfer_ownership() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 25_533 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">25_979_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:0)</span>
-	<span class="comment">// Storage: Assets Metadata (r:1 w:1)</span>
-	<span class="doccomment">/// The range of component `n` is `[0, 50]`.</span>
-	<span class="doccomment">/// The range of component `s` is `[0, 50]`.</span>
-	<span class="kw">fn</span> <span class="ident">force_set_metadata</span>(<span class="ident">_n</span>: <span class="ident">u32</span>, <span class="ident">s</span>: <span class="ident">u32</span>, ) -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">25_165_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			<span class="comment">// Standard Error: 5_000</span>
-			.<span class="ident">saturating_add</span>(<span class="ident">Weight::from_ref_time</span>(<span class="number">9_000</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">saturating_mul</span>(<span class="ident">s</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	</span><span class="kw">fn </span>set_team() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 23_829 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">24_876_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">1 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:0)</span>
-	<span class="comment">// Storage: Assets Metadata (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">force_clear_metadata</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">40_301_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:0)
+	// Storage: Assets Metadata (r:1 w:1)
+	</span><span class="doccomment">/// The range of component `n` is `[0, 50]`.
+	/// The range of component `s` is `[0, 50]`.
+	</span><span class="kw">fn </span>set_metadata(_n: u32, s: u32, ) -&gt; Weight {
+		<span class="comment">// Minimum execution time: 36_438 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">38_367_681 </span><span class="kw">as </span>u64)
+			<span class="comment">// Standard Error: 1_203
+			</span>.saturating_add(Weight::from_ref_time(<span class="number">7_334 </span><span class="kw">as </span>u64).saturating_mul(s <span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">force_asset_status</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">23_393_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:0)
+	// Storage: Assets Metadata (r:1 w:1)
+	</span><span class="kw">fn </span>clear_metadata() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 40_670 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">41_049_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Approvals (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">approve_transfer</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">39_465_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:0)
+	// Storage: Assets Metadata (r:1 w:1)
+	</span><span class="doccomment">/// The range of component `n` is `[0, 50]`.
+	/// The range of component `s` is `[0, 50]`.
+	</span><span class="kw">fn </span>force_set_metadata(n: u32, s: u32, ) -&gt; Weight {
+		<span class="comment">// Minimum execution time: 24_647 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">25_823_064 </span><span class="kw">as </span>u64)
+			<span class="comment">// Standard Error: 623
+			</span>.saturating_add(Weight::from_ref_time(<span class="number">1_109 </span><span class="kw">as </span>u64).saturating_mul(n <span class="kw">as </span>u64))
+			<span class="comment">// Standard Error: 623
+			</span>.saturating_add(Weight::from_ref_time(<span class="number">1_174 </span><span class="kw">as </span>u64).saturating_mul(s <span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Approvals (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Account (r:2 w:2)</span>
-	<span class="comment">// Storage: System Account (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">transfer_approved</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">69_070_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">5</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">5</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:0)
+	// Storage: Assets Metadata (r:1 w:1)
+	</span><span class="kw">fn </span>force_clear_metadata() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 41_329 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">41_824_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Approvals (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">cancel_approval</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">40_461_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	</span><span class="kw">fn </span>force_asset_status() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 23_806 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">24_275_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">1 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">1 </span><span class="kw">as </span>u64))
 	}
-	<span class="comment">// Storage: Assets Asset (r:1 w:1)</span>
-	<span class="comment">// Storage: Assets Approvals (r:1 w:1)</span>
-	<span class="kw">fn</span> <span class="ident">force_cancel_approval</span>() -&gt; <span class="ident">Weight</span> {
-		<span class="ident">Weight::from_ref_time</span>(<span class="number">41_788_000</span> <span class="kw">as</span> <span class="ident">u64</span>)
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">reads</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
-			.<span class="ident">saturating_add</span>(<span class="ident">T::DbWeight::get</span>().<span class="ident">writes</span>(<span class="number">2</span> <span class="kw">as</span> <span class="ident">u64</span>))
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Approvals (r:1 w:1)
+	</span><span class="kw">fn </span>approve_transfer() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 40_971 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">41_749_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">2 </span><span class="kw">as </span>u64))
+	}
+	<span class="comment">// Storage: Assets Approvals (r:1 w:1)
+	// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Account (r:2 w:2)
+	// Storage: System Account (r:1 w:1)
+	</span><span class="kw">fn </span>transfer_approved() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 70_934 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">71_774_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">5 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">5 </span><span class="kw">as </span>u64))
+	}
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Approvals (r:1 w:1)
+	</span><span class="kw">fn </span>cancel_approval() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 43_221 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">43_660_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">2 </span><span class="kw">as </span>u64))
+	}
+	<span class="comment">// Storage: Assets Asset (r:1 w:1)
+	// Storage: Assets Approvals (r:1 w:1)
+	</span><span class="kw">fn </span>force_cancel_approval() -&gt; Weight {
+		<span class="comment">// Minimum execution time: 43_115 nanoseconds.
+		</span>Weight::from_ref_time(<span class="number">43_577_000 </span><span class="kw">as </span>u64)
+			.saturating_add(T::DbWeight::get().reads(<span class="number">2 </span><span class="kw">as </span>u64))
+			.saturating_add(T::DbWeight::get().writes(<span class="number">2 </span><span class="kw">as </span>u64))
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="statemint_runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="statemint_runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

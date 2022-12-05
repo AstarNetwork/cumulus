@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/parachain-system/src/relay_state_snapshot.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>relay_state_snapshot.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_parachain_system/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pallets/parachain-system/src/relay_state_snapshot.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>relay_state_snapshot.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_pallet_parachain_system/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_pallet_parachain_system/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -302,309 +302,309 @@
 <span id="302">302</span>
 <span id="303">303</span>
 <span id="304">304</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Decode</span>, <span class="ident">Encode</span>};
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{
-	<span class="ident">relay_chain</span>, <span class="ident">AbridgedHostConfiguration</span>, <span class="ident">AbridgedHrmpChannel</span>, <span class="ident">ParaId</span>,
+</span><span class="kw">use </span>codec::{Decode, Encode};
+<span class="kw">use </span>cumulus_primitives_core::{
+	relay_chain, AbridgedHostConfiguration, AbridgedHrmpChannel, ParaId,
 };
-<span class="kw">use</span> <span class="ident">scale_info::TypeInfo</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::HashFor</span>;
-<span class="kw">use</span> <span class="ident">sp_state_machine</span>::{<span class="ident">Backend</span>, <span class="ident">TrieBackend</span>, <span class="ident">TrieBackendBuilder</span>};
-<span class="kw">use</span> <span class="ident">sp_std::vec::Vec</span>;
-<span class="kw">use</span> <span class="ident">sp_trie</span>::{<span class="ident">HashDBT</span>, <span class="ident">MemoryDB</span>, <span class="ident">StorageProof</span>, <span class="ident">EMPTY_PREFIX</span>};
+<span class="kw">use </span>scale_info::TypeInfo;
+<span class="kw">use </span>sp_runtime::traits::HashFor;
+<span class="kw">use </span>sp_state_machine::{Backend, TrieBackend, TrieBackendBuilder};
+<span class="kw">use </span>sp_std::vec::Vec;
+<span class="kw">use </span>sp_trie::{HashDBT, MemoryDB, StorageProof, EMPTY_PREFIX};
 
-<span class="doccomment">/// A snapshot of some messaging related state of relay chain pertaining to the current parachain.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This data is essential for making sure that the parachain is aware of current resource use on</span>
-<span class="doccomment">/// the relay chain and that the candidates produced for this parachain do not exceed any of these</span>
-<span class="doccomment">/// limits.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MessagingStateSnapshot</span> {
-	<span class="doccomment">/// The current message queue chain head for downward message queue.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// If the value is absent on the relay chain this will be set to all zeros.</span>
-	<span class="kw">pub</span> <span class="ident">dmq_mqc_head</span>: <span class="ident">relay_chain::Hash</span>,
+<span class="doccomment">/// A snapshot of some messaging related state of relay chain pertaining to the current parachain.
+///
+/// This data is essential for making sure that the parachain is aware of current resource use on
+/// the relay chain and that the candidates produced for this parachain do not exceed any of these
+/// limits.
+</span><span class="attribute">#[derive(Clone, Encode, Decode, TypeInfo)]
+</span><span class="kw">pub struct </span>MessagingStateSnapshot {
+	<span class="doccomment">/// The current message queue chain head for downward message queue.
+	///
+	/// If the value is absent on the relay chain this will be set to all zeros.
+	</span><span class="kw">pub </span>dmq_mqc_head: relay_chain::Hash,
 
-	<span class="doccomment">/// The current capacity of the upward message queue of the current parachain on the relay chain.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The capacity is represented by a tuple that consist of the `count` of the messages and the</span>
-	<span class="doccomment">/// `total_size` expressed as the sum of byte sizes of all messages in the queue.</span>
-	<span class="kw">pub</span> <span class="ident">relay_dispatch_queue_size</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>),
+	<span class="doccomment">/// The current capacity of the upward message queue of the current parachain on the relay chain.
+	///
+	/// The capacity is represented by a tuple that consist of the `count` of the messages and the
+	/// `total_size` expressed as the sum of byte sizes of all messages in the queue.
+	</span><span class="kw">pub </span>relay_dispatch_queue_size: (u32, u32),
 
-	<span class="doccomment">/// Information about all the inbound HRMP channels.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// These are structured as a list of tuples. The para id in the tuple specifies the sender</span>
-	<span class="doccomment">/// of the channel. Obviously, the recipient is the current parachain.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The channels are sorted by the sender para id ascension.</span>
-	<span class="kw">pub</span> <span class="ident">ingress_channels</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">ParaId</span>, <span class="ident">AbridgedHrmpChannel</span>)<span class="op">&gt;</span>,
+	<span class="doccomment">/// Information about all the inbound HRMP channels.
+	///
+	/// These are structured as a list of tuples. The para id in the tuple specifies the sender
+	/// of the channel. Obviously, the recipient is the current parachain.
+	///
+	/// The channels are sorted by the sender para id ascension.
+	</span><span class="kw">pub </span>ingress_channels: Vec&lt;(ParaId, AbridgedHrmpChannel)&gt;,
 
-	<span class="doccomment">/// Information about all the outbound HRMP channels.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// These are structured as a list of tuples. The para id in the tuple specifies the recipient</span>
-	<span class="doccomment">/// of the channel. Obviously, the sender is the current parachain.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The channels are sorted by the recipient para id ascension.</span>
-	<span class="kw">pub</span> <span class="ident">egress_channels</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">ParaId</span>, <span class="ident">AbridgedHrmpChannel</span>)<span class="op">&gt;</span>,
+	<span class="doccomment">/// Information about all the outbound HRMP channels.
+	///
+	/// These are structured as a list of tuples. The para id in the tuple specifies the recipient
+	/// of the channel. Obviously, the sender is the current parachain.
+	///
+	/// The channels are sorted by the recipient para id ascension.
+	</span><span class="kw">pub </span>egress_channels: Vec&lt;(ParaId, AbridgedHrmpChannel)&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Error</span> {
-	<span class="doccomment">/// The provided proof was created against unexpected storage root.</span>
-	<span class="ident">RootMismatch</span>,
-	<span class="doccomment">/// The entry cannot be read.</span>
-	<span class="ident">ReadEntry</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// The optional entry cannot be read.</span>
-	<span class="ident">ReadOptionalEntry</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// The slot cannot be extracted.</span>
-	<span class="ident">Slot</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// The upgrade go-ahead signal cannot be read.</span>
-	<span class="ident">UpgradeGoAhead</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// The upgrade restriction signal cannot be read.</span>
-	<span class="ident">UpgradeRestriction</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// The host configuration cannot be extracted.</span>
-	<span class="ident">Config</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// The DMQ MQC head cannot be extracted.</span>
-	<span class="ident">DmqMqcHead</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// Relay dispatch queue cannot be extracted.</span>
-	<span class="ident">RelayDispatchQueueSize</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// The hrmp inress channel index cannot be extracted.</span>
-	<span class="ident">HrmpIngressChannelIndex</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// The hrmp egress channel index cannot be extracted.</span>
-	<span class="ident">HrmpEgressChannelIndex</span>(<span class="ident">ReadEntryErr</span>),
-	<span class="doccomment">/// The channel identified by the sender and receiver cannot be extracted.</span>
-	<span class="ident">HrmpChannel</span>(<span class="ident">ParaId</span>, <span class="ident">ParaId</span>, <span class="ident">ReadEntryErr</span>),
+<span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub enum </span>Error {
+	<span class="doccomment">/// The provided proof was created against unexpected storage root.
+	</span>RootMismatch,
+	<span class="doccomment">/// The entry cannot be read.
+	</span>ReadEntry(ReadEntryErr),
+	<span class="doccomment">/// The optional entry cannot be read.
+	</span>ReadOptionalEntry(ReadEntryErr),
+	<span class="doccomment">/// The slot cannot be extracted.
+	</span>Slot(ReadEntryErr),
+	<span class="doccomment">/// The upgrade go-ahead signal cannot be read.
+	</span>UpgradeGoAhead(ReadEntryErr),
+	<span class="doccomment">/// The upgrade restriction signal cannot be read.
+	</span>UpgradeRestriction(ReadEntryErr),
+	<span class="doccomment">/// The host configuration cannot be extracted.
+	</span>Config(ReadEntryErr),
+	<span class="doccomment">/// The DMQ MQC head cannot be extracted.
+	</span>DmqMqcHead(ReadEntryErr),
+	<span class="doccomment">/// Relay dispatch queue cannot be extracted.
+	</span>RelayDispatchQueueSize(ReadEntryErr),
+	<span class="doccomment">/// The hrmp inress channel index cannot be extracted.
+	</span>HrmpIngressChannelIndex(ReadEntryErr),
+	<span class="doccomment">/// The hrmp egress channel index cannot be extracted.
+	</span>HrmpEgressChannelIndex(ReadEntryErr),
+	<span class="doccomment">/// The channel identified by the sender and receiver cannot be extracted.
+	</span>HrmpChannel(ParaId, ParaId, ReadEntryErr),
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ReadEntryErr</span> {
-	<span class="doccomment">/// The value cannot be extracted from the proof.</span>
-	<span class="ident">Proof</span>,
-	<span class="doccomment">/// The value cannot be decoded.</span>
-	<span class="ident">Decode</span>,
-	<span class="doccomment">/// The value is expected to be present on the relay chain, but it doesn&#39;t exist.</span>
-	<span class="ident">Absent</span>,
+<span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub enum </span>ReadEntryErr {
+	<span class="doccomment">/// The value cannot be extracted from the proof.
+	</span>Proof,
+	<span class="doccomment">/// The value cannot be decoded.
+	</span>Decode,
+	<span class="doccomment">/// The value is expected to be present on the relay chain, but it doesn&#39;t exist.
+	</span>Absent,
 }
 
-<span class="doccomment">/// Read an entry given by the key and try to decode it. If the value specified by the key according</span>
-<span class="doccomment">/// to the proof is empty, the `fallback` value will be returned.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Returns `Err` in case the backend can&#39;t return the value under the specific key (likely due to</span>
-<span class="doccomment">/// a malformed proof), in case the decoding fails, or in case where the value is empty in the relay</span>
-<span class="doccomment">/// chain state and no fallback was provided.</span>
-<span class="kw">fn</span> <span class="ident">read_entry</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">B</span><span class="op">&gt;</span>(<span class="ident">backend</span>: <span class="kw-2">&amp;</span><span class="ident">B</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">fallback</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ReadEntryErr</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">T</span>: <span class="ident">Decode</span>,
-	<span class="ident">B</span>: <span class="ident">Backend</span><span class="op">&lt;</span><span class="ident">HashFor</span><span class="op">&lt;</span><span class="ident">relay_chain::Block</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Read an entry given by the key and try to decode it. If the value specified by the key according
+/// to the proof is empty, the `fallback` value will be returned.
+///
+/// Returns `Err` in case the backend can&#39;t return the value under the specific key (likely due to
+/// a malformed proof), in case the decoding fails, or in case where the value is empty in the relay
+/// chain state and no fallback was provided.
+</span><span class="kw">fn </span>read_entry&lt;T, B&gt;(backend: <span class="kw-2">&amp;</span>B, key: <span class="kw-2">&amp;</span>[u8], fallback: <span class="prelude-ty">Option</span>&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;T, ReadEntryErr&gt;
+<span class="kw">where
+	</span>T: Decode,
+	B: Backend&lt;HashFor&lt;relay_chain::Block&gt;&gt;,
 {
-	<span class="ident">backend</span>
-		.<span class="ident">storage</span>(<span class="ident">key</span>)
-		.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ReadEntryErr::Proof</span>)<span class="question-mark">?</span>
-		.<span class="ident">map</span>(<span class="op">|</span><span class="ident">raw_entry</span><span class="op">|</span> <span class="ident">T::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">raw_entry</span>[..]).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ReadEntryErr::Decode</span>))
-		.<span class="ident">transpose</span>()<span class="question-mark">?</span>
-		.<span class="ident">or</span>(<span class="ident">fallback</span>)
-		.<span class="ident">ok_or</span>(<span class="ident">ReadEntryErr::Absent</span>)
+	backend
+		.storage(key)
+		.map_err(|<span class="kw">_</span>| ReadEntryErr::Proof)<span class="question-mark">?
+		</span>.map(|raw_entry| T::decode(<span class="kw-2">&amp;mut &amp;</span>raw_entry[..]).map_err(|<span class="kw">_</span>| ReadEntryErr::Decode))
+		.transpose()<span class="question-mark">?
+		</span>.or(fallback)
+		.ok_or(ReadEntryErr::Absent)
 }
 
-<span class="doccomment">/// Read an optional entry given by the key and try to decode it.</span>
-<span class="doccomment">/// Returns `None` if the value specified by the key according to the proof is empty.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Returns `Err` in case the backend can&#39;t return the value under the specific key (likely due to</span>
-<span class="doccomment">/// a malformed proof) or if the value couldn&#39;t be decoded.</span>
-<span class="kw">fn</span> <span class="ident">read_optional_entry</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">B</span><span class="op">&gt;</span>(<span class="ident">backend</span>: <span class="kw-2">&amp;</span><span class="ident">B</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">ReadEntryErr</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">T</span>: <span class="ident">Decode</span>,
-	<span class="ident">B</span>: <span class="ident">Backend</span><span class="op">&lt;</span><span class="ident">HashFor</span><span class="op">&lt;</span><span class="ident">relay_chain::Block</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Read an optional entry given by the key and try to decode it.
+/// Returns `None` if the value specified by the key according to the proof is empty.
+///
+/// Returns `Err` in case the backend can&#39;t return the value under the specific key (likely due to
+/// a malformed proof) or if the value couldn&#39;t be decoded.
+</span><span class="kw">fn </span>read_optional_entry&lt;T, B&gt;(backend: <span class="kw-2">&amp;</span>B, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;T&gt;, ReadEntryErr&gt;
+<span class="kw">where
+	</span>T: Decode,
+	B: Backend&lt;HashFor&lt;relay_chain::Block&gt;&gt;,
 {
-	<span class="kw">match</span> <span class="ident">read_entry</span>(<span class="ident">backend</span>, <span class="ident">key</span>, <span class="prelude-val">None</span>) {
-		<span class="prelude-val">Ok</span>(<span class="ident">v</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">v</span>)),
-		<span class="prelude-val">Err</span>(<span class="ident">ReadEntryErr::Absent</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
-		<span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; <span class="prelude-val">Err</span>(<span class="ident">err</span>),
+	<span class="kw">match </span>read_entry(backend, key, <span class="prelude-val">None</span>) {
+		<span class="prelude-val">Ok</span>(v) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(v)),
+		<span class="prelude-val">Err</span>(ReadEntryErr::Absent) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+		<span class="prelude-val">Err</span>(err) =&gt; <span class="prelude-val">Err</span>(err),
 	}
 }
 
-<span class="doccomment">/// A state proof extracted from the relay chain.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This state proof is extracted from the relay chain block we are building on top of.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RelayChainStateProof</span> {
-	<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	<span class="ident">trie_backend</span>: <span class="ident">TrieBackend</span><span class="op">&lt;</span><span class="ident">MemoryDB</span><span class="op">&lt;</span><span class="ident">HashFor</span><span class="op">&lt;</span><span class="ident">relay_chain::Block</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">HashFor</span><span class="op">&lt;</span><span class="ident">relay_chain::Block</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A state proof extracted from the relay chain.
+///
+/// This state proof is extracted from the relay chain block we are building on top of.
+</span><span class="kw">pub struct </span>RelayChainStateProof {
+	para_id: ParaId,
+	trie_backend: TrieBackend&lt;MemoryDB&lt;HashFor&lt;relay_chain::Block&gt;&gt;, HashFor&lt;relay_chain::Block&gt;&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">RelayChainStateProof</span> {
-	<span class="doccomment">/// Create a new instance of `Self`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns an error if the given `relay_parent_storage_root` is not the root of the given</span>
-	<span class="doccomment">/// `proof`.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">relay_parent_storage_root</span>: <span class="ident">relay_chain::v2::Hash</span>,
-		<span class="ident">proof</span>: <span class="ident">StorageProof</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">db</span> <span class="op">=</span> <span class="ident">proof</span>.<span class="ident">into_memory_db</span>::<span class="op">&lt;</span><span class="ident">HashFor</span><span class="op">&lt;</span><span class="ident">relay_chain::Block</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-		<span class="kw">if</span> <span class="op">!</span><span class="ident">db</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">relay_parent_storage_root</span>, <span class="ident">EMPTY_PREFIX</span>) {
-			<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::RootMismatch</span>)
+<span class="kw">impl </span>RelayChainStateProof {
+	<span class="doccomment">/// Create a new instance of `Self`.
+	///
+	/// Returns an error if the given `relay_parent_storage_root` is not the root of the given
+	/// `proof`.
+	</span><span class="kw">pub fn </span>new(
+		para_id: ParaId,
+		relay_parent_storage_root: relay_chain::v2::Hash,
+		proof: StorageProof,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt; {
+		<span class="kw">let </span>db = proof.into_memory_db::&lt;HashFor&lt;relay_chain::Block&gt;&gt;();
+		<span class="kw">if </span>!db.contains(<span class="kw-2">&amp;</span>relay_parent_storage_root, EMPTY_PREFIX) {
+			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::RootMismatch)
 		}
-		<span class="kw">let</span> <span class="ident">trie_backend</span> <span class="op">=</span> <span class="ident">TrieBackendBuilder::new</span>(<span class="ident">db</span>, <span class="ident">relay_parent_storage_root</span>).<span class="ident">build</span>();
+		<span class="kw">let </span>trie_backend = TrieBackendBuilder::new(db, relay_parent_storage_root).build();
 
-		<span class="prelude-val">Ok</span>(<span class="self">Self</span> { <span class="ident">para_id</span>, <span class="ident">trie_backend</span> })
+		<span class="prelude-val">Ok</span>(<span class="self">Self </span>{ para_id, trie_backend })
 	}
 
-	<span class="doccomment">/// Read the [`MessagingStateSnapshot`] from the relay chain state proof.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns an error if anything failed at reading or decoding.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_messaging_state_snapshot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">MessagingStateSnapshot</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">dmq_mqc_head</span>: <span class="ident">relay_chain::Hash</span> <span class="op">=</span> <span class="ident">read_entry</span>(
-			<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>,
-			<span class="kw-2">&amp;</span><span class="ident">relay_chain::well_known_keys::dmq_mqc_head</span>(<span class="self">self</span>.<span class="ident">para_id</span>),
-			<span class="prelude-val">Some</span>(<span class="ident">Default::default</span>()),
+	<span class="doccomment">/// Read the [`MessagingStateSnapshot`] from the relay chain state proof.
+	///
+	/// Returns an error if anything failed at reading or decoding.
+	</span><span class="kw">pub fn </span>read_messaging_state_snapshot(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;MessagingStateSnapshot, Error&gt; {
+		<span class="kw">let </span>dmq_mqc_head: relay_chain::Hash = read_entry(
+			<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend,
+			<span class="kw-2">&amp;</span>relay_chain::well_known_keys::dmq_mqc_head(<span class="self">self</span>.para_id),
+			<span class="prelude-val">Some</span>(Default::default()),
 		)
-		.<span class="ident">map_err</span>(<span class="ident">Error::DmqMqcHead</span>)<span class="question-mark">?</span>;
+		.map_err(Error::DmqMqcHead)<span class="question-mark">?</span>;
 
-		<span class="kw">let</span> <span class="ident">relay_dispatch_queue_size</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>) <span class="op">=</span> <span class="ident">read_entry</span>(
-			<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>,
-			<span class="kw-2">&amp;</span><span class="ident">relay_chain::well_known_keys::relay_dispatch_queue_size</span>(<span class="self">self</span>.<span class="ident">para_id</span>),
+		<span class="kw">let </span>relay_dispatch_queue_size: (u32, u32) = read_entry(
+			<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend,
+			<span class="kw-2">&amp;</span>relay_chain::well_known_keys::relay_dispatch_queue_size(<span class="self">self</span>.para_id),
 			<span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="number">0</span>)),
 		)
-		.<span class="ident">map_err</span>(<span class="ident">Error::RelayDispatchQueueSize</span>)<span class="question-mark">?</span>;
+		.map_err(Error::RelayDispatchQueueSize)<span class="question-mark">?</span>;
 
-		<span class="kw">let</span> <span class="ident">ingress_channel_index</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ParaId</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">read_entry</span>(
-			<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>,
-			<span class="kw-2">&amp;</span><span class="ident">relay_chain::well_known_keys::hrmp_ingress_channel_index</span>(<span class="self">self</span>.<span class="ident">para_id</span>),
-			<span class="prelude-val">Some</span>(<span class="ident">Vec::new</span>()),
+		<span class="kw">let </span>ingress_channel_index: Vec&lt;ParaId&gt; = read_entry(
+			<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend,
+			<span class="kw-2">&amp;</span>relay_chain::well_known_keys::hrmp_ingress_channel_index(<span class="self">self</span>.para_id),
+			<span class="prelude-val">Some</span>(Vec::new()),
 		)
-		.<span class="ident">map_err</span>(<span class="ident">Error::HrmpIngressChannelIndex</span>)<span class="question-mark">?</span>;
+		.map_err(Error::HrmpIngressChannelIndex)<span class="question-mark">?</span>;
 
-		<span class="kw">let</span> <span class="ident">egress_channel_index</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ParaId</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">read_entry</span>(
-			<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>,
-			<span class="kw-2">&amp;</span><span class="ident">relay_chain::well_known_keys::hrmp_egress_channel_index</span>(<span class="self">self</span>.<span class="ident">para_id</span>),
-			<span class="prelude-val">Some</span>(<span class="ident">Vec::new</span>()),
+		<span class="kw">let </span>egress_channel_index: Vec&lt;ParaId&gt; = read_entry(
+			<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend,
+			<span class="kw-2">&amp;</span>relay_chain::well_known_keys::hrmp_egress_channel_index(<span class="self">self</span>.para_id),
+			<span class="prelude-val">Some</span>(Vec::new()),
 		)
-		.<span class="ident">map_err</span>(<span class="ident">Error::HrmpEgressChannelIndex</span>)<span class="question-mark">?</span>;
+		.map_err(Error::HrmpEgressChannelIndex)<span class="question-mark">?</span>;
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ingress_channels</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">ingress_channel_index</span>.<span class="ident">len</span>());
-		<span class="kw">for</span> <span class="ident">sender</span> <span class="kw">in</span> <span class="ident">ingress_channel_index</span> {
-			<span class="kw">let</span> <span class="ident">channel_id</span> <span class="op">=</span> <span class="ident">relay_chain::v2::HrmpChannelId</span> { <span class="ident">sender</span>, <span class="ident">recipient</span>: <span class="self">self</span>.<span class="ident">para_id</span> };
-			<span class="kw">let</span> <span class="ident">hrmp_channel</span>: <span class="ident">AbridgedHrmpChannel</span> <span class="op">=</span> <span class="ident">read_entry</span>(
-				<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>,
-				<span class="kw-2">&amp;</span><span class="ident">relay_chain::well_known_keys::hrmp_channels</span>(<span class="ident">channel_id</span>),
+		<span class="kw">let </span><span class="kw-2">mut </span>ingress_channels = Vec::with_capacity(ingress_channel_index.len());
+		<span class="kw">for </span>sender <span class="kw">in </span>ingress_channel_index {
+			<span class="kw">let </span>channel_id = relay_chain::v2::HrmpChannelId { sender, recipient: <span class="self">self</span>.para_id };
+			<span class="kw">let </span>hrmp_channel: AbridgedHrmpChannel = read_entry(
+				<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend,
+				<span class="kw-2">&amp;</span>relay_chain::well_known_keys::hrmp_channels(channel_id),
 				<span class="prelude-val">None</span>,
 			)
-			.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">read_err</span><span class="op">|</span> <span class="ident">Error::HrmpChannel</span>(<span class="ident">sender</span>, <span class="self">self</span>.<span class="ident">para_id</span>, <span class="ident">read_err</span>))<span class="question-mark">?</span>;
-			<span class="ident">ingress_channels</span>.<span class="ident">push</span>((<span class="ident">sender</span>, <span class="ident">hrmp_channel</span>));
+			.map_err(|read_err| Error::HrmpChannel(sender, <span class="self">self</span>.para_id, read_err))<span class="question-mark">?</span>;
+			ingress_channels.push((sender, hrmp_channel));
 		}
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">egress_channels</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">egress_channel_index</span>.<span class="ident">len</span>());
-		<span class="kw">for</span> <span class="ident">recipient</span> <span class="kw">in</span> <span class="ident">egress_channel_index</span> {
-			<span class="kw">let</span> <span class="ident">channel_id</span> <span class="op">=</span> <span class="ident">relay_chain::v2::HrmpChannelId</span> { <span class="ident">sender</span>: <span class="self">self</span>.<span class="ident">para_id</span>, <span class="ident">recipient</span> };
-			<span class="kw">let</span> <span class="ident">hrmp_channel</span>: <span class="ident">AbridgedHrmpChannel</span> <span class="op">=</span> <span class="ident">read_entry</span>(
-				<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>,
-				<span class="kw-2">&amp;</span><span class="ident">relay_chain::well_known_keys::hrmp_channels</span>(<span class="ident">channel_id</span>),
+		<span class="kw">let </span><span class="kw-2">mut </span>egress_channels = Vec::with_capacity(egress_channel_index.len());
+		<span class="kw">for </span>recipient <span class="kw">in </span>egress_channel_index {
+			<span class="kw">let </span>channel_id = relay_chain::v2::HrmpChannelId { sender: <span class="self">self</span>.para_id, recipient };
+			<span class="kw">let </span>hrmp_channel: AbridgedHrmpChannel = read_entry(
+				<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend,
+				<span class="kw-2">&amp;</span>relay_chain::well_known_keys::hrmp_channels(channel_id),
 				<span class="prelude-val">None</span>,
 			)
-			.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">read_err</span><span class="op">|</span> <span class="ident">Error::HrmpChannel</span>(<span class="self">self</span>.<span class="ident">para_id</span>, <span class="ident">recipient</span>, <span class="ident">read_err</span>))<span class="question-mark">?</span>;
-			<span class="ident">egress_channels</span>.<span class="ident">push</span>((<span class="ident">recipient</span>, <span class="ident">hrmp_channel</span>));
+			.map_err(|read_err| Error::HrmpChannel(<span class="self">self</span>.para_id, recipient, read_err))<span class="question-mark">?</span>;
+			egress_channels.push((recipient, hrmp_channel));
 		}
 
-		<span class="comment">// NOTE that ingress_channels and egress_channels promise to be sorted. We satisfy this property</span>
-		<span class="comment">// by relying on the fact that `ingress_channel_index` and `egress_channel_index` are themselves sorted.</span>
-		<span class="prelude-val">Ok</span>(<span class="ident">MessagingStateSnapshot</span> {
-			<span class="ident">dmq_mqc_head</span>,
-			<span class="ident">relay_dispatch_queue_size</span>,
-			<span class="ident">ingress_channels</span>,
-			<span class="ident">egress_channels</span>,
+		<span class="comment">// NOTE that ingress_channels and egress_channels promise to be sorted. We satisfy this property
+		// by relying on the fact that `ingress_channel_index` and `egress_channel_index` are themselves sorted.
+		</span><span class="prelude-val">Ok</span>(MessagingStateSnapshot {
+			dmq_mqc_head,
+			relay_dispatch_queue_size,
+			ingress_channels,
+			egress_channels,
 		})
 	}
 
-	<span class="doccomment">/// Read the [`AbridgedHostConfiguration`] from the relay chain state proof.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns an error if anything failed at reading or decoding.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_abridged_host_configuration</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">AbridgedHostConfiguration</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-		<span class="ident">read_entry</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>, <span class="ident">relay_chain::well_known_keys::ACTIVE_CONFIG</span>, <span class="prelude-val">None</span>)
-			.<span class="ident">map_err</span>(<span class="ident">Error::Config</span>)
+	<span class="doccomment">/// Read the [`AbridgedHostConfiguration`] from the relay chain state proof.
+	///
+	/// Returns an error if anything failed at reading or decoding.
+	</span><span class="kw">pub fn </span>read_abridged_host_configuration(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;AbridgedHostConfiguration, Error&gt; {
+		read_entry(<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend, relay_chain::well_known_keys::ACTIVE_CONFIG, <span class="prelude-val">None</span>)
+			.map_err(Error::Config)
 	}
 
-	<span class="doccomment">/// Read the [`Slot`](relay_chain::v2::Slot) from the relay chain state proof.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The slot is slot of the relay chain block this state proof was extracted from.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns an error if anything failed at reading or decoding.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">relay_chain::v2::Slot</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-		<span class="ident">read_entry</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>, <span class="ident">relay_chain::well_known_keys::CURRENT_SLOT</span>, <span class="prelude-val">None</span>)
-			.<span class="ident">map_err</span>(<span class="ident">Error::Slot</span>)
+	<span class="doccomment">/// Read the [`Slot`](relay_chain::v2::Slot) from the relay chain state proof.
+	///
+	/// The slot is slot of the relay chain block this state proof was extracted from.
+	///
+	/// Returns an error if anything failed at reading or decoding.
+	</span><span class="kw">pub fn </span>read_slot(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;relay_chain::v2::Slot, Error&gt; {
+		read_entry(<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend, relay_chain::well_known_keys::CURRENT_SLOT, <span class="prelude-val">None</span>)
+			.map_err(Error::Slot)
 	}
 
-	<span class="doccomment">/// Read the go-ahead signal for the upgrade from the relay chain state proof.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The go-ahead specifies whether the parachain can apply the upgrade or should abort it. If</span>
-	<span class="doccomment">/// the value is absent then there is either no judgment by the relay chain yet or no upgrade</span>
-	<span class="doccomment">/// is pending.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns an error if anything failed at reading or decoding.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_upgrade_go_ahead_signal</span>(
+	<span class="doccomment">/// Read the go-ahead signal for the upgrade from the relay chain state proof.
+	///
+	/// The go-ahead specifies whether the parachain can apply the upgrade or should abort it. If
+	/// the value is absent then there is either no judgment by the relay chain yet or no upgrade
+	/// is pending.
+	///
+	/// Returns an error if anything failed at reading or decoding.
+	</span><span class="kw">pub fn </span>read_upgrade_go_ahead_signal(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">relay_chain::v2::UpgradeGoAhead</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-		<span class="ident">read_optional_entry</span>(
-			<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>,
-			<span class="kw-2">&amp;</span><span class="ident">relay_chain::well_known_keys::upgrade_go_ahead_signal</span>(<span class="self">self</span>.<span class="ident">para_id</span>),
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;relay_chain::v2::UpgradeGoAhead&gt;, Error&gt; {
+		read_optional_entry(
+			<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend,
+			<span class="kw-2">&amp;</span>relay_chain::well_known_keys::upgrade_go_ahead_signal(<span class="self">self</span>.para_id),
 		)
-		.<span class="ident">map_err</span>(<span class="ident">Error::UpgradeGoAhead</span>)
+		.map_err(Error::UpgradeGoAhead)
 	}
 
-	<span class="doccomment">/// Read the upgrade restriction signal for the upgrade from the relay chain state proof.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// If the upgrade restriction is not `None`, then the parachain cannot signal an upgrade at</span>
-	<span class="doccomment">/// this block.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns an error if anything failed at reading or decoding.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_upgrade_restriction_signal</span>(
+	<span class="doccomment">/// Read the upgrade restriction signal for the upgrade from the relay chain state proof.
+	///
+	/// If the upgrade restriction is not `None`, then the parachain cannot signal an upgrade at
+	/// this block.
+	///
+	/// Returns an error if anything failed at reading or decoding.
+	</span><span class="kw">pub fn </span>read_upgrade_restriction_signal(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">relay_chain::v2::UpgradeRestriction</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-		<span class="ident">read_optional_entry</span>(
-			<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>,
-			<span class="kw-2">&amp;</span><span class="ident">relay_chain::well_known_keys::upgrade_restriction_signal</span>(<span class="self">self</span>.<span class="ident">para_id</span>),
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;relay_chain::v2::UpgradeRestriction&gt;, Error&gt; {
+		read_optional_entry(
+			<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend,
+			<span class="kw-2">&amp;</span>relay_chain::well_known_keys::upgrade_restriction_signal(<span class="self">self</span>.para_id),
 		)
-		.<span class="ident">map_err</span>(<span class="ident">Error::UpgradeRestriction</span>)
+		.map_err(Error::UpgradeRestriction)
 	}
 
-	<span class="doccomment">/// Read an entry given by the key and try to decode it. If the value specified by the key according</span>
-	<span class="doccomment">/// to the proof is empty, the `fallback` value will be returned.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns `Err` in case the backend can&#39;t return the value under the specific key (likely due to</span>
-	<span class="doccomment">/// a malformed proof), in case the decoding fails, or in case where the value is empty in the relay</span>
-	<span class="doccomment">/// chain state and no fallback was provided.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_entry</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">fallback</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Error</span><span class="op">&gt;</span>
-	<span class="kw">where</span>
-		<span class="ident">T</span>: <span class="ident">Decode</span>,
+	<span class="doccomment">/// Read an entry given by the key and try to decode it. If the value specified by the key according
+	/// to the proof is empty, the `fallback` value will be returned.
+	///
+	/// Returns `Err` in case the backend can&#39;t return the value under the specific key (likely due to
+	/// a malformed proof), in case the decoding fails, or in case where the value is empty in the relay
+	/// chain state and no fallback was provided.
+	</span><span class="kw">pub fn </span>read_entry&lt;T&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8], fallback: <span class="prelude-ty">Option</span>&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;T, Error&gt;
+	<span class="kw">where
+		</span>T: Decode,
 	{
-		<span class="ident">read_entry</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>, <span class="ident">key</span>, <span class="ident">fallback</span>).<span class="ident">map_err</span>(<span class="ident">Error::ReadEntry</span>)
+		read_entry(<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend, key, fallback).map_err(Error::ReadEntry)
 	}
 
-	<span class="doccomment">/// Read an optional entry given by the key and try to decode it.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns `Err` in case the backend can&#39;t return the value under the specific key (likely due to</span>
-	<span class="doccomment">/// a malformed proof) or if the value couldn&#39;t be decoded.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_optional_entry</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
-	<span class="kw">where</span>
-		<span class="ident">T</span>: <span class="ident">Decode</span>,
+	<span class="doccomment">/// Read an optional entry given by the key and try to decode it.
+	///
+	/// Returns `Err` in case the backend can&#39;t return the value under the specific key (likely due to
+	/// a malformed proof) or if the value couldn&#39;t be decoded.
+	</span><span class="kw">pub fn </span>read_optional_entry&lt;T&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;T&gt;, Error&gt;
+	<span class="kw">where
+		</span>T: Decode,
 	{
-		<span class="ident">read_optional_entry</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trie_backend</span>, <span class="ident">key</span>).<span class="ident">map_err</span>(<span class="ident">Error::ReadOptionalEntry</span>)
+		read_optional_entry(<span class="kw-2">&amp;</span><span class="self">self</span>.trie_backend, key).map_err(Error::ReadOptionalEntry)
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_parachain_system" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_pallet_parachain_system" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

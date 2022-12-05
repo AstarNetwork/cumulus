@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/service/src/main.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>main.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../test_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../test_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../test_parachain/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/service/src/main.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>main.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../test_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../test_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../test_parachain/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -154,161 +154,161 @@
 <span id="154">154</span>
 <span id="155">155</span>
 <span id="156">156</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">mod</span> <span class="ident">cli</span>;
+</span><span class="kw">mod </span>cli;
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">io::Write</span>, <span class="ident">sync::Arc</span>};
+<span class="kw">use </span>std::{io::Write, sync::Arc};
 
-<span class="kw">use</span> <span class="ident">cli</span>::{<span class="ident">RelayChainCli</span>, <span class="ident">Subcommand</span>, <span class="ident">TestCollatorCli</span>};
-<span class="kw">use</span> <span class="ident">cumulus_client_cli::generate_genesis_block</span>;
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{<span class="ident">relay_chain::v2::CollatorPair</span>, <span class="ident">ParaId</span>};
-<span class="kw">use</span> <span class="ident">cumulus_test_service::AnnounceBlockFn</span>;
-<span class="kw">use</span> <span class="ident">polkadot_service::runtime_traits::AccountIdConversion</span>;
-<span class="kw">use</span> <span class="ident">sc_cli</span>::{<span class="ident">CliConfiguration</span>, <span class="ident">SubstrateCli</span>};
-<span class="kw">use</span> <span class="ident">sp_core</span>::{<span class="ident">hexdisplay::HexDisplay</span>, <span class="ident">Encode</span>, <span class="ident">Pair</span>};
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::Block</span>;
+<span class="kw">use </span>cli::{RelayChainCli, Subcommand, TestCollatorCli};
+<span class="kw">use </span>cumulus_client_cli::generate_genesis_block;
+<span class="kw">use </span>cumulus_primitives_core::{relay_chain::v2::CollatorPair, ParaId};
+<span class="kw">use </span>cumulus_test_service::AnnounceBlockFn;
+<span class="kw">use </span>polkadot_service::runtime_traits::AccountIdConversion;
+<span class="kw">use </span>sc_cli::{CliConfiguration, SubstrateCli};
+<span class="kw">use </span>sp_core::{hexdisplay::HexDisplay, Encode, Pair};
+<span class="kw">use </span>sp_runtime::traits::Block;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wrap_announce_block</span>() -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">FnOnce</span>(<span class="ident">AnnounceBlockFn</span>) -&gt; <span class="ident">AnnounceBlockFn</span><span class="op">&gt;</span> {
+<span class="kw">pub fn </span>wrap_announce_block() -&gt; Box&lt;<span class="kw">dyn </span>FnOnce(AnnounceBlockFn) -&gt; AnnounceBlockFn&gt; {
 	<span class="macro">tracing::info!</span>(<span class="string">&quot;Block announcements disabled.&quot;</span>);
-	<span class="ident">Box::new</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
-		<span class="comment">// Never announce any block</span>
-		<span class="ident">Arc::new</span>(<span class="op">|</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">|</span> {})
+	Box::new(|<span class="kw">_</span>| {
+		<span class="comment">// Never announce any block
+		</span>Arc::new(|<span class="kw">_</span>, <span class="kw">_</span>| {})
 	})
 }
 
-<span class="kw">fn</span> <span class="ident">main</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">sc_cli::Error</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">cli</span> <span class="op">=</span> <span class="ident">TestCollatorCli::from_args</span>();
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), sc_cli::Error&gt; {
+	<span class="kw">let </span>cli = TestCollatorCli::from_args();
 
-	<span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">cli</span>.<span class="ident">subcommand</span> {
-		<span class="prelude-val">Some</span>(<span class="ident">Subcommand::BuildSpec</span>(<span class="ident">cmd</span>)) =&gt; {
-			<span class="kw">let</span> <span class="ident">runner</span> <span class="op">=</span> <span class="ident">cli</span>.<span class="ident">create_runner</span>(<span class="ident">cmd</span>)<span class="question-mark">?</span>;
-			<span class="ident">runner</span>.<span class="ident">sync_run</span>(<span class="op">|</span><span class="ident">config</span><span class="op">|</span> <span class="ident">cmd</span>.<span class="ident">run</span>(<span class="ident">config</span>.<span class="ident">chain_spec</span>, <span class="ident">config</span>.<span class="ident">network</span>))
+	<span class="kw">match </span><span class="kw-2">&amp;</span>cli.subcommand {
+		<span class="prelude-val">Some</span>(Subcommand::BuildSpec(cmd)) =&gt; {
+			<span class="kw">let </span>runner = cli.create_runner(cmd)<span class="question-mark">?</span>;
+			runner.sync_run(|config| cmd.run(config.chain_spec, config.network))
 		},
 
-		<span class="prelude-val">Some</span>(<span class="ident">Subcommand::ExportGenesisState</span>(<span class="ident">params</span>)) =&gt; {
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">sc_cli::LoggerBuilder::new</span>(<span class="string">&quot;&quot;</span>);
-			<span class="ident">builder</span>.<span class="ident">with_profiling</span>(<span class="ident">sc_tracing::TracingReceiver::Log</span>, <span class="string">&quot;&quot;</span>);
-			<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">init</span>();
+		<span class="prelude-val">Some</span>(Subcommand::ExportGenesisState(params)) =&gt; {
+			<span class="kw">let </span><span class="kw-2">mut </span>builder = sc_cli::LoggerBuilder::new(<span class="string">&quot;&quot;</span>);
+			builder.with_profiling(sc_tracing::TracingReceiver::Log, <span class="string">&quot;&quot;</span>);
+			<span class="kw">let _ </span>= builder.init();
 
-			<span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span>
-				<span class="ident">cli</span>.<span class="ident">load_spec</span>(<span class="kw-2">&amp;</span><span class="ident">params</span>.<span class="ident">base</span>.<span class="ident">shared_params</span>.<span class="ident">chain</span>.<span class="ident">clone</span>().<span class="ident">unwrap_or_default</span>())<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="ident">state_version</span> <span class="op">=</span> <span class="ident">cumulus_test_service::runtime::VERSION</span>.<span class="ident">state_version</span>();
+			<span class="kw">let </span>spec =
+				cli.load_spec(<span class="kw-2">&amp;</span>params.base.shared_params.chain.clone().unwrap_or_default())<span class="question-mark">?</span>;
+			<span class="kw">let </span>state_version = cumulus_test_service::runtime::VERSION.state_version();
 
-			<span class="kw">let</span> <span class="ident">block</span>: <span class="ident">parachains_common::Block</span> <span class="op">=</span> <span class="ident">generate_genesis_block</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">spec</span>, <span class="ident">state_version</span>)<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="ident">raw_header</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">header</span>().<span class="ident">encode</span>();
-			<span class="kw">let</span> <span class="ident">output_buf</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">params</span>.<span class="ident">base</span>.<span class="ident">raw</span> {
-				<span class="ident">raw_header</span>
-			} <span class="kw">else</span> {
-				<span class="macro">format!</span>(<span class="string">&quot;0x{:?}&quot;</span>, <span class="ident">HexDisplay::from</span>(<span class="kw-2">&amp;</span><span class="ident">block</span>.<span class="ident">header</span>().<span class="ident">encode</span>())).<span class="ident">into_bytes</span>()
+			<span class="kw">let </span>block: parachains_common::Block = generate_genesis_block(<span class="kw-2">&amp;*</span>spec, state_version)<span class="question-mark">?</span>;
+			<span class="kw">let </span>raw_header = block.header().encode();
+			<span class="kw">let </span>output_buf = <span class="kw">if </span>params.base.raw {
+				raw_header
+			} <span class="kw">else </span>{
+				<span class="macro">format!</span>(<span class="string">&quot;0x{:?}&quot;</span>, HexDisplay::from(<span class="kw-2">&amp;</span>block.header().encode())).into_bytes()
 			};
 
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">output</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">params</span>.<span class="ident">base</span>.<span class="ident">output</span> {
-				<span class="ident">std::fs::write</span>(<span class="ident">output</span>, <span class="ident">output_buf</span>)<span class="question-mark">?</span>;
-			} <span class="kw">else</span> {
-				<span class="ident">std::io::stdout</span>().<span class="ident">write_all</span>(<span class="kw-2">&amp;</span><span class="ident">output_buf</span>)<span class="question-mark">?</span>;
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(output) = <span class="kw-2">&amp;</span>params.base.output {
+				std::fs::write(output, output_buf)<span class="question-mark">?</span>;
+			} <span class="kw">else </span>{
+				std::io::stdout().write_all(<span class="kw-2">&amp;</span>output_buf)<span class="question-mark">?</span>;
 			}
 
 			<span class="prelude-val">Ok</span>(())
 		},
-		<span class="prelude-val">Some</span>(<span class="ident">Subcommand::ExportGenesisWasm</span>(<span class="ident">cmd</span>)) =&gt; {
-			<span class="kw">let</span> <span class="ident">runner</span> <span class="op">=</span> <span class="ident">cli</span>.<span class="ident">create_runner</span>(<span class="ident">cmd</span>)<span class="question-mark">?</span>;
-			<span class="ident">runner</span>.<span class="ident">sync_run</span>(<span class="op">|</span><span class="ident">_config</span><span class="op">|</span> {
-				<span class="kw">let</span> <span class="ident">parachain_id</span> <span class="op">=</span> <span class="ident">ParaId::from</span>(<span class="ident">cmd</span>.<span class="ident">parachain_id</span>);
-				<span class="kw">let</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">cumulus_test_service::get_chain_spec</span>(<span class="ident">parachain_id</span>);
-				<span class="ident">cmd</span>.<span class="ident">base</span>.<span class="ident">run</span>(<span class="kw-2">&amp;</span><span class="ident">spec</span>)
+		<span class="prelude-val">Some</span>(Subcommand::ExportGenesisWasm(cmd)) =&gt; {
+			<span class="kw">let </span>runner = cli.create_runner(cmd)<span class="question-mark">?</span>;
+			runner.sync_run(|_config| {
+				<span class="kw">let </span>parachain_id = ParaId::from(cmd.parachain_id);
+				<span class="kw">let </span>spec = cumulus_test_service::get_chain_spec(parachain_id);
+				cmd.base.run(<span class="kw-2">&amp;</span>spec)
 			})
 		},
-		<span class="prelude-val">None</span> =&gt; {
-			<span class="kw">let</span> <span class="ident">log_filters</span> <span class="op">=</span> <span class="ident">cli</span>.<span class="ident">run</span>.<span class="ident">normalize</span>().<span class="ident">log_filters</span>();
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">sc_cli::LoggerBuilder::new</span>(<span class="ident">log_filters</span>.<span class="ident">unwrap_or_default</span>());
-			<span class="ident">builder</span>.<span class="ident">with_colors</span>(<span class="bool-val">true</span>);
-			<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">init</span>();
+		<span class="prelude-val">None </span>=&gt; {
+			<span class="kw">let </span>log_filters = cli.run.normalize().log_filters();
+			<span class="kw">let </span><span class="kw-2">mut </span>builder = sc_cli::LoggerBuilder::new(log_filters.unwrap_or_default());
+			builder.with_colors(<span class="bool-val">true</span>);
+			<span class="kw">let _ </span>= builder.init();
 
-			<span class="kw">let</span> <span class="ident">collator_options</span> <span class="op">=</span> <span class="ident">cli</span>.<span class="ident">run</span>.<span class="ident">collator_options</span>();
-			<span class="kw">let</span> <span class="ident">tokio_runtime</span> <span class="op">=</span> <span class="ident">sc_cli::build_runtime</span>()<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="ident">tokio_handle</span> <span class="op">=</span> <span class="ident">tokio_runtime</span>.<span class="ident">handle</span>();
-			<span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">cli</span>
-				.<span class="ident">run</span>
-				.<span class="ident">normalize</span>()
-				.<span class="ident">create_configuration</span>(<span class="kw-2">&amp;</span><span class="ident">cli</span>, <span class="ident">tokio_handle</span>.<span class="ident">clone</span>())
-				.<span class="ident">expect</span>(<span class="string">&quot;Should be able to generate config&quot;</span>);
+			<span class="kw">let </span>collator_options = cli.run.collator_options();
+			<span class="kw">let </span>tokio_runtime = sc_cli::build_runtime()<span class="question-mark">?</span>;
+			<span class="kw">let </span>tokio_handle = tokio_runtime.handle();
+			<span class="kw">let </span>config = cli
+				.run
+				.normalize()
+				.create_configuration(<span class="kw-2">&amp;</span>cli, tokio_handle.clone())
+				.expect(<span class="string">&quot;Should be able to generate config&quot;</span>);
 
-			<span class="kw">let</span> <span class="ident">parachain_id</span> <span class="op">=</span> <span class="ident">ParaId::from</span>(<span class="ident">cli</span>.<span class="ident">parachain_id</span>);
-			<span class="kw">let</span> <span class="ident">polkadot_cli</span> <span class="op">=</span> <span class="ident">RelayChainCli::new</span>(
-				<span class="kw-2">&amp;</span><span class="ident">config</span>,
-				[<span class="ident">RelayChainCli::executable_name</span>()].<span class="ident">iter</span>().<span class="ident">chain</span>(<span class="ident">cli</span>.<span class="ident">relaychain_args</span>.<span class="ident">iter</span>()),
+			<span class="kw">let </span>parachain_id = ParaId::from(cli.parachain_id);
+			<span class="kw">let </span>polkadot_cli = RelayChainCli::new(
+				<span class="kw-2">&amp;</span>config,
+				[RelayChainCli::executable_name()].iter().chain(cli.relaychain_args.iter()),
 			);
 
-			<span class="kw">let</span> <span class="ident">parachain_account</span> <span class="op">=</span>
-				<span class="ident">AccountIdConversion</span>::<span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span><span class="ident">::into_account_truncating</span>(
-					<span class="kw-2">&amp;</span><span class="ident">parachain_id</span>,
+			<span class="kw">let </span>parachain_account =
+				AccountIdConversion::&lt;polkadot_primitives::v2::AccountId&gt;::into_account_truncating(
+					<span class="kw-2">&amp;</span>parachain_id,
 				);
 
-			<span class="kw">let</span> <span class="ident">state_version</span> <span class="op">=</span>
-				<span class="ident">RelayChainCli::native_runtime_version</span>(<span class="kw-2">&amp;</span><span class="ident">config</span>.<span class="ident">chain_spec</span>).<span class="ident">state_version</span>();
+			<span class="kw">let </span>state_version =
+				RelayChainCli::native_runtime_version(<span class="kw-2">&amp;</span>config.chain_spec).state_version();
 
-			<span class="kw">let</span> <span class="ident">block</span>: <span class="ident">parachains_common::Block</span> <span class="op">=</span>
-				<span class="ident">generate_genesis_block</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">config</span>.<span class="ident">chain_spec</span>, <span class="ident">state_version</span>)
-					.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="ident">genesis_state</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;0x{:?}&quot;</span>, <span class="ident">HexDisplay::from</span>(<span class="kw-2">&amp;</span><span class="ident">block</span>.<span class="ident">header</span>().<span class="ident">encode</span>()));
+			<span class="kw">let </span>block: parachains_common::Block =
+				generate_genesis_block(<span class="kw-2">&amp;*</span>config.chain_spec, state_version)
+					.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, e))<span class="question-mark">?</span>;
+			<span class="kw">let </span>genesis_state = <span class="macro">format!</span>(<span class="string">&quot;0x{:?}&quot;</span>, HexDisplay::from(<span class="kw-2">&amp;</span>block.header().encode()));
 
-			<span class="kw">let</span> <span class="ident">tokio_handle</span> <span class="op">=</span> <span class="ident">config</span>.<span class="ident">tokio_handle</span>.<span class="ident">clone</span>();
-			<span class="kw">let</span> <span class="ident">polkadot_config</span> <span class="op">=</span>
-				<span class="ident">SubstrateCli::create_configuration</span>(<span class="kw-2">&amp;</span><span class="ident">polkadot_cli</span>, <span class="kw-2">&amp;</span><span class="ident">polkadot_cli</span>, <span class="ident">tokio_handle</span>)
-					.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Relay chain argument error: {}&quot;</span>, <span class="ident">err</span>))<span class="question-mark">?</span>;
+			<span class="kw">let </span>tokio_handle = config.tokio_handle.clone();
+			<span class="kw">let </span>polkadot_config =
+				SubstrateCli::create_configuration(<span class="kw-2">&amp;</span>polkadot_cli, <span class="kw-2">&amp;</span>polkadot_cli, tokio_handle)
+					.map_err(|err| <span class="macro">format!</span>(<span class="string">&quot;Relay chain argument error: {}&quot;</span>, err))<span class="question-mark">?</span>;
 
-			<span class="macro">tracing::info!</span>(<span class="string">&quot;Parachain id: {:?}&quot;</span>, <span class="ident">parachain_id</span>);
-			<span class="macro">tracing::info!</span>(<span class="string">&quot;Parachain Account: {}&quot;</span>, <span class="ident">parachain_account</span>);
-			<span class="macro">tracing::info!</span>(<span class="string">&quot;Parachain genesis state: {}&quot;</span>, <span class="ident">genesis_state</span>);
+			<span class="macro">tracing::info!</span>(<span class="string">&quot;Parachain id: {:?}&quot;</span>, parachain_id);
+			<span class="macro">tracing::info!</span>(<span class="string">&quot;Parachain Account: {}&quot;</span>, parachain_account);
+			<span class="macro">tracing::info!</span>(<span class="string">&quot;Parachain genesis state: {}&quot;</span>, genesis_state);
 			<span class="macro">tracing::info!</span>(
 				<span class="string">&quot;Is collating: {}&quot;</span>,
-				<span class="kw">if</span> <span class="ident">config</span>.<span class="ident">role</span>.<span class="ident">is_authority</span>() { <span class="string">&quot;yes&quot;</span> } <span class="kw">else</span> { <span class="string">&quot;no&quot;</span> }
+				<span class="kw">if </span>config.role.is_authority() { <span class="string">&quot;yes&quot; </span>} <span class="kw">else </span>{ <span class="string">&quot;no&quot; </span>}
 			);
 
-			<span class="kw">let</span> <span class="ident">collator_key</span> <span class="op">=</span> <span class="ident">config</span>.<span class="ident">role</span>.<span class="ident">is_authority</span>().<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">CollatorPair::generate</span>().<span class="number">0</span>);
+			<span class="kw">let </span>collator_key = config.role.is_authority().then(|| CollatorPair::generate().<span class="number">0</span>);
 
-			<span class="kw">let</span> <span class="ident">consensus</span> <span class="op">=</span> <span class="ident">cli</span>
-				.<span class="ident">use_null_consensus</span>
-				.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> {
+			<span class="kw">let </span>consensus = cli
+				.use_null_consensus
+				.then(|| {
 					<span class="macro">tracing::info!</span>(<span class="string">&quot;Using null consensus.&quot;</span>);
-					<span class="ident">cumulus_test_service::Consensus::Null</span>
+					cumulus_test_service::Consensus::Null
 				})
-				.<span class="ident">unwrap_or</span>(<span class="ident">cumulus_test_service::Consensus::RelayChain</span>);
+				.unwrap_or(cumulus_test_service::Consensus::RelayChain);
 
-			<span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">task_manager</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">tokio_runtime</span>
-				.<span class="ident">block_on</span>(<span class="ident">cumulus_test_service::start_node_impl</span>(
-					<span class="ident">config</span>,
-					<span class="ident">collator_key</span>,
-					<span class="ident">polkadot_config</span>,
-					<span class="ident">parachain_id</span>,
-					<span class="ident">cli</span>.<span class="ident">disable_block_announcements</span>.<span class="ident">then</span>(<span class="ident">wrap_announce_block</span>),
-					<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="ident">jsonrpsee::RpcModule::new</span>(())),
-					<span class="ident">consensus</span>,
-					<span class="ident">collator_options</span>,
+			<span class="kw">let </span>(<span class="kw-2">mut </span>task_manager, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>) = tokio_runtime
+				.block_on(cumulus_test_service::start_node_impl(
+					config,
+					collator_key,
+					polkadot_config,
+					parachain_id,
+					cli.disable_block_announcements.then(wrap_announce_block),
+					|<span class="kw">_</span>| <span class="prelude-val">Ok</span>(jsonrpsee::RpcModule::new(())),
+					consensus,
+					collator_options,
 				))
-				.<span class="ident">expect</span>(<span class="string">&quot;could not create Cumulus test service&quot;</span>);
+				.expect(<span class="string">&quot;could not create Cumulus test service&quot;</span>);
 
-			<span class="ident">tokio_runtime</span>
-				.<span class="ident">block_on</span>(<span class="ident">task_manager</span>.<span class="ident">future</span>())
-				.<span class="ident">expect</span>(<span class="string">&quot;Could not run service to completion&quot;</span>);
+			tokio_runtime
+				.block_on(task_manager.future())
+				.expect(<span class="string">&quot;Could not run service to completion&quot;</span>);
 			<span class="prelude-val">Ok</span>(())
 		},
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="test_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="test_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

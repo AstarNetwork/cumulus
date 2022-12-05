@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/collator/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_collator/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_collator/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_collator/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/collator/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_collator/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_collator/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_collator/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -491,498 +491,498 @@
 <span id="491">491</span>
 <span id="492">492</span>
 <span id="493">493</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Substrate is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Substrate is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Substrate is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Substrate is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! Cumulus Collator implementation for Substrate.</span>
+</span><span class="doccomment">//! Cumulus Collator implementation for Substrate.
 
-<span class="kw">use</span> <span class="ident">cumulus_client_network::WaitToAnnounce</span>;
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{
-	<span class="ident">relay_chain::Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">CollationInfo</span>, <span class="ident">CollectCollationInfo</span>, <span class="ident">ParachainBlockData</span>,
-	<span class="ident">PersistedValidationData</span>,
+</span><span class="kw">use </span>cumulus_client_network::WaitToAnnounce;
+<span class="kw">use </span>cumulus_primitives_core::{
+	relay_chain::Hash <span class="kw">as </span>PHash, CollationInfo, CollectCollationInfo, ParachainBlockData,
+	PersistedValidationData,
 };
 
-<span class="kw">use</span> <span class="ident">sc_client_api::BlockBackend</span>;
-<span class="kw">use</span> <span class="ident">sp_api</span>::{<span class="ident">ApiExt</span>, <span class="ident">ProvideRuntimeApi</span>};
-<span class="kw">use</span> <span class="ident">sp_consensus::BlockStatus</span>;
-<span class="kw">use</span> <span class="ident">sp_core::traits::SpawnNamed</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{
-	<span class="ident">generic::BlockId</span>,
-	<span class="ident">traits</span>::{<span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>, <span class="ident">HashFor</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">HeaderT</span>, <span class="ident">Zero</span>},
+<span class="kw">use </span>sc_client_api::BlockBackend;
+<span class="kw">use </span>sp_api::{ApiExt, ProvideRuntimeApi};
+<span class="kw">use </span>sp_consensus::BlockStatus;
+<span class="kw">use </span>sp_core::traits::SpawnNamed;
+<span class="kw">use </span>sp_runtime::{
+	generic::BlockId,
+	traits::{Block <span class="kw">as </span>BlockT, HashFor, Header <span class="kw">as </span>HeaderT, Zero},
 };
 
-<span class="kw">use</span> <span class="ident">cumulus_client_consensus_common::ParachainConsensus</span>;
-<span class="kw">use</span> <span class="ident">polkadot_node_primitives</span>::{
-	<span class="ident">BlockData</span>, <span class="ident">Collation</span>, <span class="ident">CollationGenerationConfig</span>, <span class="ident">CollationResult</span>, <span class="ident">MaybeCompressedPoV</span>, <span class="ident">PoV</span>,
+<span class="kw">use </span>cumulus_client_consensus_common::ParachainConsensus;
+<span class="kw">use </span>polkadot_node_primitives::{
+	BlockData, Collation, CollationGenerationConfig, CollationResult, MaybeCompressedPoV, PoV,
 };
-<span class="kw">use</span> <span class="ident">polkadot_node_subsystem::messages</span>::{<span class="ident">CollationGenerationMessage</span>, <span class="ident">CollatorProtocolMessage</span>};
-<span class="kw">use</span> <span class="ident">polkadot_overseer::Handle</span> <span class="kw">as</span> <span class="ident">OverseerHandle</span>;
-<span class="kw">use</span> <span class="ident">polkadot_primitives::v2</span>::{<span class="ident">CollatorPair</span>, <span class="ident">Id</span> <span class="kw">as</span> <span class="ident">ParaId</span>};
+<span class="kw">use </span>polkadot_node_subsystem::messages::{CollationGenerationMessage, CollatorProtocolMessage};
+<span class="kw">use </span>polkadot_overseer::Handle <span class="kw">as </span>OverseerHandle;
+<span class="kw">use </span>polkadot_primitives::v2::{CollatorPair, Id <span class="kw">as </span>ParaId};
 
-<span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Decode</span>, <span class="ident">Encode</span>};
-<span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">channel::oneshot</span>, <span class="ident">FutureExt</span>};
-<span class="kw">use</span> <span class="ident">parking_lot::Mutex</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
-<span class="kw">use</span> <span class="ident">tracing::Instrument</span>;
+<span class="kw">use </span>codec::{Decode, Encode};
+<span class="kw">use </span>futures::{channel::oneshot, FutureExt};
+<span class="kw">use </span>parking_lot::Mutex;
+<span class="kw">use </span>std::sync::Arc;
+<span class="kw">use </span>tracing::Instrument;
 
-<span class="doccomment">/// The logging target.</span>
-<span class="kw">const</span> <span class="ident">LOG_TARGET</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;cumulus-collator&quot;</span>;
+<span class="doccomment">/// The logging target.
+</span><span class="kw">const </span>LOG_TARGET: <span class="kw-2">&amp;</span>str = <span class="string">&quot;cumulus-collator&quot;</span>;
 
-<span class="doccomment">/// The implementation of the Cumulus `Collator`.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Collator</span><span class="op">&lt;</span><span class="ident">Block</span>: <span class="ident">BlockT</span>, <span class="ident">BS</span>, <span class="ident">RA</span><span class="op">&gt;</span> {
-	<span class="ident">block_status</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">BS</span><span class="op">&gt;</span>,
-	<span class="ident">parachain_consensus</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">wait_to_announce</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">WaitToAnnounce</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">runtime_api</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RA</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The implementation of the Cumulus `Collator`.
+</span><span class="kw">pub struct </span>Collator&lt;Block: BlockT, BS, RA&gt; {
+	block_status: Arc&lt;BS&gt;,
+	parachain_consensus: Box&lt;<span class="kw">dyn </span>ParachainConsensus&lt;Block&gt;&gt;,
+	wait_to_announce: Arc&lt;Mutex&lt;WaitToAnnounce&lt;Block&gt;&gt;&gt;,
+	runtime_api: Arc&lt;RA&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Block</span>: <span class="ident">BlockT</span>, <span class="ident">BS</span>, <span class="ident">RA</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Collator</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">BS</span>, <span class="ident">RA</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> {
-			<span class="ident">block_status</span>: <span class="self">self</span>.<span class="ident">block_status</span>.<span class="ident">clone</span>(),
-			<span class="ident">wait_to_announce</span>: <span class="self">self</span>.<span class="ident">wait_to_announce</span>.<span class="ident">clone</span>(),
-			<span class="ident">parachain_consensus</span>: <span class="self">self</span>.<span class="ident">parachain_consensus</span>.<span class="ident">clone</span>(),
-			<span class="ident">runtime_api</span>: <span class="self">self</span>.<span class="ident">runtime_api</span>.<span class="ident">clone</span>(),
+<span class="kw">impl</span>&lt;Block: BlockT, BS, RA&gt; Clone <span class="kw">for </span>Collator&lt;Block, BS, RA&gt; {
+	<span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			block_status: <span class="self">self</span>.block_status.clone(),
+			wait_to_announce: <span class="self">self</span>.wait_to_announce.clone(),
+			parachain_consensus: <span class="self">self</span>.parachain_consensus.clone(),
+			runtime_api: <span class="self">self</span>.runtime_api.clone(),
 		}
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">BS</span>, <span class="ident">RA</span><span class="op">&gt;</span> <span class="ident">Collator</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">BS</span>, <span class="ident">RA</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">BS</span>: <span class="ident">BlockBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">RA</span>: <span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">RA::Api</span>: <span class="ident">CollectCollationInfo</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;Block, BS, RA&gt; Collator&lt;Block, BS, RA&gt;
+<span class="kw">where
+	</span>Block: BlockT,
+	BS: BlockBackend&lt;Block&gt;,
+	RA: ProvideRuntimeApi&lt;Block&gt;,
+	RA::Api: CollectCollationInfo&lt;Block&gt;,
 {
-	<span class="doccomment">/// Create a new instance.</span>
-	<span class="kw">fn</span> <span class="ident">new</span>(
-		<span class="ident">block_status</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">BS</span><span class="op">&gt;</span>,
-		<span class="ident">spawner</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">SpawnNamed</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>,
-		<span class="ident">announce_block</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">Block::Hash</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>,
-		<span class="ident">runtime_api</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RA</span><span class="op">&gt;</span>,
-		<span class="ident">parachain_consensus</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	) -&gt; <span class="self">Self</span> {
-		<span class="kw">let</span> <span class="ident">wait_to_announce</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">Mutex::new</span>(<span class="ident">WaitToAnnounce::new</span>(<span class="ident">spawner</span>, <span class="ident">announce_block</span>)));
+	<span class="doccomment">/// Create a new instance.
+	</span><span class="kw">fn </span>new(
+		block_status: Arc&lt;BS&gt;,
+		spawner: Arc&lt;<span class="kw">dyn </span>SpawnNamed + Send + Sync&gt;,
+		announce_block: Arc&lt;<span class="kw">dyn </span>Fn(Block::Hash, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;) + Send + Sync&gt;,
+		runtime_api: Arc&lt;RA&gt;,
+		parachain_consensus: Box&lt;<span class="kw">dyn </span>ParachainConsensus&lt;Block&gt;&gt;,
+	) -&gt; <span class="self">Self </span>{
+		<span class="kw">let </span>wait_to_announce = Arc::new(Mutex::new(WaitToAnnounce::new(spawner, announce_block)));
 
-		<span class="self">Self</span> { <span class="ident">block_status</span>, <span class="ident">wait_to_announce</span>, <span class="ident">runtime_api</span>, <span class="ident">parachain_consensus</span> }
+		<span class="self">Self </span>{ block_status, wait_to_announce, runtime_api, parachain_consensus }
 	}
 
-	<span class="doccomment">/// Checks the status of the given block hash in the Parachain.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns `true` if the block could be found and is good to be build on.</span>
-	<span class="kw">fn</span> <span class="ident">check_block_status</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hash</span>: <span class="ident">Block::Hash</span>, <span class="ident">header</span>: <span class="kw-2">&amp;</span><span class="ident">Block::Header</span>) -&gt; <span class="ident">bool</span> {
-		<span class="kw">match</span> <span class="self">self</span>.<span class="ident">block_status</span>.<span class="ident">block_status</span>(<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="ident">hash</span>)) {
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::Queued</span>) =&gt; {
+	<span class="doccomment">/// Checks the status of the given block hash in the Parachain.
+	///
+	/// Returns `true` if the block could be found and is good to be build on.
+	</span><span class="kw">fn </span>check_block_status(<span class="kw-2">&amp;</span><span class="self">self</span>, hash: Block::Hash, header: <span class="kw-2">&amp;</span>Block::Header) -&gt; bool {
+		<span class="kw">match </span><span class="self">self</span>.block_status.block_status(<span class="kw-2">&amp;</span>BlockId::Hash(hash)) {
+			<span class="prelude-val">Ok</span>(BlockStatus::Queued) =&gt; {
 				<span class="macro">tracing::debug!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+					target: LOG_TARGET,
+					block_hash = <span class="question-mark">?</span>hash,
 					<span class="string">&quot;Skipping candidate production, because block is still queued for import.&quot;</span>,
 				);
-				<span class="bool-val">false</span>
-			},
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::InChainWithState</span>) =&gt; <span class="bool-val">true</span>,
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::InChainPruned</span>) =&gt; {
+				<span class="bool-val">false
+			</span>},
+			<span class="prelude-val">Ok</span>(BlockStatus::InChainWithState) =&gt; <span class="bool-val">true</span>,
+			<span class="prelude-val">Ok</span>(BlockStatus::InChainPruned) =&gt; {
 				<span class="macro">tracing::error!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
+					target: LOG_TARGET,
 					<span class="string">&quot;Skipping candidate production, because block `{:?}` is already pruned!&quot;</span>,
-					<span class="ident">hash</span>,
+					hash,
 				);
-				<span class="bool-val">false</span>
-			},
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::KnownBad</span>) =&gt; {
+				<span class="bool-val">false
+			</span>},
+			<span class="prelude-val">Ok</span>(BlockStatus::KnownBad) =&gt; {
 				<span class="macro">tracing::error!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+					target: LOG_TARGET,
+					block_hash = <span class="question-mark">?</span>hash,
 					<span class="string">&quot;Block is tagged as known bad and is included in the relay chain! Skipping candidate production!&quot;</span>,
 				);
-				<span class="bool-val">false</span>
-			},
-			<span class="prelude-val">Ok</span>(<span class="ident">BlockStatus::Unknown</span>) =&gt; {
-				<span class="kw">if</span> <span class="ident">header</span>.<span class="ident">number</span>().<span class="ident">is_zero</span>() {
+				<span class="bool-val">false
+			</span>},
+			<span class="prelude-val">Ok</span>(BlockStatus::Unknown) =&gt; {
+				<span class="kw">if </span>header.number().is_zero() {
 					<span class="macro">tracing::error!</span>(
-						<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-						<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+						target: LOG_TARGET,
+						block_hash = <span class="question-mark">?</span>hash,
 						<span class="string">&quot;Could not find the header of the genesis block in the database!&quot;</span>,
 					);
-				} <span class="kw">else</span> {
+				} <span class="kw">else </span>{
 					<span class="macro">tracing::debug!</span>(
-						<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-						<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
+						target: LOG_TARGET,
+						block_hash = <span class="question-mark">?</span>hash,
 						<span class="string">&quot;Skipping candidate production, because block is unknown.&quot;</span>,
 					);
 				}
-				<span class="bool-val">false</span>
-			},
-			<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
+				<span class="bool-val">false
+			</span>},
+			<span class="prelude-val">Err</span>(e) =&gt; {
 				<span class="macro">tracing::error!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">block_hash</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">hash</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
+					target: LOG_TARGET,
+					block_hash = <span class="question-mark">?</span>hash,
+					error = <span class="question-mark">?</span>e,
 					<span class="string">&quot;Failed to get block status.&quot;</span>,
 				);
-				<span class="bool-val">false</span>
-			},
+				<span class="bool-val">false
+			</span>},
 		}
 	}
 
-	<span class="doccomment">/// Fetch the collation info from the runtime.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns `Ok(Some(_))` on success, `Err(_)` on error or `Ok(None)` if the runtime api isn&#39;t implemented by the runtime.</span>
-	<span class="kw">fn</span> <span class="ident">fetch_collation_info</span>(
+	<span class="doccomment">/// Fetch the collation info from the runtime.
+	///
+	/// Returns `Ok(Some(_))` on success, `Err(_)` on error or `Ok(None)` if the runtime api isn&#39;t implemented by the runtime.
+	</span><span class="kw">fn </span>fetch_collation_info(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">block_hash</span>: <span class="ident">Block::Hash</span>,
-		<span class="ident">header</span>: <span class="kw-2">&amp;</span><span class="ident">Block::Header</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CollationInfo</span><span class="op">&gt;</span>, <span class="ident">sp_api::ApiError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">runtime_api</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">runtime_api</span>.<span class="ident">runtime_api</span>();
-		<span class="kw">let</span> <span class="ident">block_id</span> <span class="op">=</span> <span class="ident">BlockId::Hash</span>(<span class="ident">block_hash</span>);
+		block_hash: Block::Hash,
+		header: <span class="kw-2">&amp;</span>Block::Header,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;CollationInfo&gt;, sp_api::ApiError&gt; {
+		<span class="kw">let </span>runtime_api = <span class="self">self</span>.runtime_api.runtime_api();
+		<span class="kw">let </span>block_id = BlockId::Hash(block_hash);
 
-		<span class="kw">let</span> <span class="ident">api_version</span> <span class="op">=</span>
-			<span class="kw">match</span> <span class="ident">runtime_api</span>.<span class="ident">api_version</span>::<span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">CollectCollationInfo</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">block_id</span>)<span class="question-mark">?</span> {
-				<span class="prelude-val">Some</span>(<span class="ident">version</span>) =&gt; <span class="ident">version</span>,
-				<span class="prelude-val">None</span> =&gt; {
+		<span class="kw">let </span>api_version =
+			<span class="kw">match </span>runtime_api.api_version::&lt;<span class="kw">dyn </span>CollectCollationInfo&lt;Block&gt;&gt;(<span class="kw-2">&amp;</span>block_id)<span class="question-mark">? </span>{
+				<span class="prelude-val">Some</span>(version) =&gt; version,
+				<span class="prelude-val">None </span>=&gt; {
 					<span class="macro">tracing::error!</span>(
-						<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-						<span class="string">&quot;Could not fetch `CollectCollationInfo` runtime api version.&quot;</span>
-					);
-					<span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
+						target: LOG_TARGET,
+						<span class="string">&quot;Could not fetch `CollectCollationInfo` runtime api version.&quot;
+					</span>);
+					<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
 				},
 			};
 
-		<span class="kw">let</span> <span class="ident">collation_info</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">api_version</span> <span class="op">&lt;</span> <span class="number">2</span> {
-			<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
-			<span class="ident">runtime_api</span>
-				.<span class="ident">collect_collation_info_before_version_2</span>(<span class="kw-2">&amp;</span><span class="ident">block_id</span>)<span class="question-mark">?</span>
-				.<span class="ident">into_latest</span>(<span class="ident">header</span>.<span class="ident">encode</span>().<span class="ident">into</span>())
-		} <span class="kw">else</span> {
-			<span class="ident">runtime_api</span>.<span class="ident">collect_collation_info</span>(<span class="kw-2">&amp;</span><span class="ident">block_id</span>, <span class="ident">header</span>)<span class="question-mark">?</span>
-		};
+		<span class="kw">let </span>collation_info = <span class="kw">if </span>api_version &lt; <span class="number">2 </span>{
+			<span class="attribute">#[allow(deprecated)]
+			</span>runtime_api
+				.collect_collation_info_before_version_2(<span class="kw-2">&amp;</span>block_id)<span class="question-mark">?
+				</span>.into_latest(header.encode().into())
+		} <span class="kw">else </span>{
+			runtime_api.collect_collation_info(<span class="kw-2">&amp;</span>block_id, header)<span class="question-mark">?
+		</span>};
 
-		<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">collation_info</span>))
+		<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(collation_info))
 	}
 
-	<span class="kw">fn</span> <span class="ident">build_collation</span>(
+	<span class="kw">fn </span>build_collation(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">block</span>: <span class="ident">ParachainBlockData</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-		<span class="ident">block_hash</span>: <span class="ident">Block::Hash</span>,
-		<span class="ident">pov</span>: <span class="ident">PoV</span>,
-	) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Collation</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">collation_info</span> <span class="op">=</span> <span class="self">self</span>
-			.<span class="ident">fetch_collation_info</span>(<span class="ident">block_hash</span>, <span class="ident">block</span>.<span class="ident">header</span>())
-			.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
+		block: ParachainBlockData&lt;Block&gt;,
+		block_hash: Block::Hash,
+		pov: PoV,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;Collation&gt; {
+		<span class="kw">let </span>collation_info = <span class="self">self
+			</span>.fetch_collation_info(block_hash, block.header())
+			.map_err(|e| {
 				<span class="macro">tracing::error!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
+					target: LOG_TARGET,
+					error = <span class="question-mark">?</span>e,
 					<span class="string">&quot;Failed to collect collation info.&quot;</span>,
 				)
 			})
-			.<span class="ident">ok</span>()
-			.<span class="ident">flatten</span>()<span class="question-mark">?</span>;
+			.ok()
+			.flatten()<span class="question-mark">?</span>;
 
-		<span class="prelude-val">Some</span>(<span class="ident">Collation</span> {
-			<span class="ident">upward_messages</span>: <span class="ident">collation_info</span>.<span class="ident">upward_messages</span>,
-			<span class="ident">new_validation_code</span>: <span class="ident">collation_info</span>.<span class="ident">new_validation_code</span>,
-			<span class="ident">processed_downward_messages</span>: <span class="ident">collation_info</span>.<span class="ident">processed_downward_messages</span>,
-			<span class="ident">horizontal_messages</span>: <span class="ident">collation_info</span>.<span class="ident">horizontal_messages</span>,
-			<span class="ident">hrmp_watermark</span>: <span class="ident">collation_info</span>.<span class="ident">hrmp_watermark</span>,
-			<span class="ident">head_data</span>: <span class="ident">collation_info</span>.<span class="ident">head_data</span>,
-			<span class="ident">proof_of_validity</span>: <span class="ident">MaybeCompressedPoV::Compressed</span>(<span class="ident">pov</span>),
+		<span class="prelude-val">Some</span>(Collation {
+			upward_messages: collation_info.upward_messages,
+			new_validation_code: collation_info.new_validation_code,
+			processed_downward_messages: collation_info.processed_downward_messages,
+			horizontal_messages: collation_info.horizontal_messages,
+			hrmp_watermark: collation_info.hrmp_watermark,
+			head_data: collation_info.head_data,
+			proof_of_validity: MaybeCompressedPoV::Compressed(pov),
 		})
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">produce_candidate</span>(
-		<span class="kw-2">mut</span> <span class="self">self</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">validation_data</span>: <span class="ident">PersistedValidationData</span>,
-	) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CollationResult</span><span class="op">&gt;</span> {
+	<span class="kw">async fn </span>produce_candidate(
+		<span class="kw-2">mut </span><span class="self">self</span>,
+		relay_parent: PHash,
+		validation_data: PersistedValidationData,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;CollationResult&gt; {
 		<span class="macro">tracing::trace!</span>(
-			<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-			<span class="ident">relay_parent</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">relay_parent</span>,
+			target: LOG_TARGET,
+			relay_parent = <span class="question-mark">?</span>relay_parent,
 			<span class="string">&quot;Producing candidate&quot;</span>,
 		);
 
-		<span class="kw">let</span> <span class="ident">last_head</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">Block::Header::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">validation_data</span>.<span class="ident">parent_head</span>.<span class="number">0</span>[..]) {
-			<span class="prelude-val">Ok</span>(<span class="ident">x</span>) =&gt; <span class="ident">x</span>,
-			<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
+		<span class="kw">let </span>last_head = <span class="kw">match </span>Block::Header::decode(<span class="kw-2">&amp;mut &amp;</span>validation_data.parent_head.<span class="number">0</span>[..]) {
+			<span class="prelude-val">Ok</span>(x) =&gt; x,
+			<span class="prelude-val">Err</span>(e) =&gt; {
 				<span class="macro">tracing::error!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">e</span>,
-					<span class="string">&quot;Could not decode the head data.&quot;</span>
-				);
-				<span class="kw">return</span> <span class="prelude-val">None</span>
-			},
+					target: LOG_TARGET,
+					error = <span class="question-mark">?</span>e,
+					<span class="string">&quot;Could not decode the head data.&quot;
+				</span>);
+				<span class="kw">return </span><span class="prelude-val">None
+			</span>},
 		};
 
-		<span class="kw">let</span> <span class="ident">last_head_hash</span> <span class="op">=</span> <span class="ident">last_head</span>.<span class="ident">hash</span>();
-		<span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">check_block_status</span>(<span class="ident">last_head_hash</span>, <span class="kw-2">&amp;</span><span class="ident">last_head</span>) {
-			<span class="kw">return</span> <span class="prelude-val">None</span>
-		}
+		<span class="kw">let </span>last_head_hash = last_head.hash();
+		<span class="kw">if </span>!<span class="self">self</span>.check_block_status(last_head_hash, <span class="kw-2">&amp;</span>last_head) {
+			<span class="kw">return </span><span class="prelude-val">None
+		</span>}
 
 		<span class="macro">tracing::info!</span>(
-			<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-			<span class="ident">relay_parent</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">relay_parent</span>,
-			<span class="ident">at</span> <span class="op">=</span> <span class="question-mark">?</span><span class="ident">last_head_hash</span>,
+			target: LOG_TARGET,
+			relay_parent = <span class="question-mark">?</span>relay_parent,
+			at = <span class="question-mark">?</span>last_head_hash,
 			<span class="string">&quot;Starting collation.&quot;</span>,
 		);
 
-		<span class="kw">let</span> <span class="ident">candidate</span> <span class="op">=</span> <span class="self">self</span>
-			.<span class="ident">parachain_consensus</span>
-			.<span class="ident">produce_candidate</span>(<span class="kw-2">&amp;</span><span class="ident">last_head</span>, <span class="ident">relay_parent</span>, <span class="kw-2">&amp;</span><span class="ident">validation_data</span>)
+		<span class="kw">let </span>candidate = <span class="self">self
+			</span>.parachain_consensus
+			.produce_candidate(<span class="kw-2">&amp;</span>last_head, relay_parent, <span class="kw-2">&amp;</span>validation_data)
 			.<span class="kw">await</span><span class="question-mark">?</span>;
 
-		<span class="kw">let</span> (<span class="ident">header</span>, <span class="ident">extrinsics</span>) <span class="op">=</span> <span class="ident">candidate</span>.<span class="ident">block</span>.<span class="ident">deconstruct</span>();
+		<span class="kw">let </span>(header, extrinsics) = candidate.block.deconstruct();
 
-		<span class="kw">let</span> <span class="ident">compact_proof</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">candidate</span>
-			.<span class="ident">proof</span>
-			.<span class="ident">into_compact_proof</span>::<span class="op">&lt;</span><span class="ident">HashFor</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">last_head</span>.<span class="ident">state_root</span>().<span class="ident">clone</span>())
+		<span class="kw">let </span>compact_proof = <span class="kw">match </span>candidate
+			.proof
+			.into_compact_proof::&lt;HashFor&lt;Block&gt;&gt;(last_head.state_root().clone())
 		{
-			<span class="prelude-val">Ok</span>(<span class="ident">proof</span>) =&gt; <span class="ident">proof</span>,
-			<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-				<span class="macro">tracing::error!</span>(<span class="ident">target</span>: <span class="string">&quot;cumulus-collator&quot;</span>, <span class="string">&quot;Failed to compact proof: {:?}&quot;</span>, <span class="ident">e</span>);
-				<span class="kw">return</span> <span class="prelude-val">None</span>
-			},
+			<span class="prelude-val">Ok</span>(proof) =&gt; proof,
+			<span class="prelude-val">Err</span>(e) =&gt; {
+				<span class="macro">tracing::error!</span>(target: <span class="string">&quot;cumulus-collator&quot;</span>, <span class="string">&quot;Failed to compact proof: {:?}&quot;</span>, e);
+				<span class="kw">return </span><span class="prelude-val">None
+			</span>},
 		};
 
-		<span class="comment">// Create the parachain block data for the validators.</span>
-		<span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">ParachainBlockData</span>::<span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="ident">header</span>, <span class="ident">extrinsics</span>, <span class="ident">compact_proof</span>);
+		<span class="comment">// Create the parachain block data for the validators.
+		</span><span class="kw">let </span>b = ParachainBlockData::&lt;Block&gt;::new(header, extrinsics, compact_proof);
 
 		<span class="macro">tracing::info!</span>(
-			<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
+			target: LOG_TARGET,
 			<span class="string">&quot;PoV size {{ header: {}kb, extrinsics: {}kb, storage_proof: {}kb }}&quot;</span>,
-			<span class="ident">b</span>.<span class="ident">header</span>().<span class="ident">encode</span>().<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> <span class="number">1024f64</span>,
-			<span class="ident">b</span>.<span class="ident">extrinsics</span>().<span class="ident">encode</span>().<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> <span class="number">1024f64</span>,
-			<span class="ident">b</span>.<span class="ident">storage_proof</span>().<span class="ident">encode</span>().<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> <span class="number">1024f64</span>,
+			b.header().encode().len() <span class="kw">as </span>f64 / <span class="number">1024f64</span>,
+			b.extrinsics().encode().len() <span class="kw">as </span>f64 / <span class="number">1024f64</span>,
+			b.storage_proof().encode().len() <span class="kw">as </span>f64 / <span class="number">1024f64</span>,
 		);
 
-		<span class="kw">let</span> <span class="ident">pov</span> <span class="op">=</span>
-			<span class="ident">polkadot_node_primitives::maybe_compress_pov</span>(<span class="ident">PoV</span> { <span class="ident">block_data</span>: <span class="ident">BlockData</span>(<span class="ident">b</span>.<span class="ident">encode</span>()) });
+		<span class="kw">let </span>pov =
+			polkadot_node_primitives::maybe_compress_pov(PoV { block_data: BlockData(b.encode()) });
 
 		<span class="macro">tracing::info!</span>(
-			<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
+			target: LOG_TARGET,
 			<span class="string">&quot;Compressed PoV size: {}kb&quot;</span>,
-			<span class="ident">pov</span>.<span class="ident">block_data</span>.<span class="number">0</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> <span class="number">1024f64</span>,
+			pov.block_data.<span class="number">0</span>.len() <span class="kw">as </span>f64 / <span class="number">1024f64</span>,
 		);
 
-		<span class="kw">let</span> <span class="ident">block_hash</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">header</span>().<span class="ident">hash</span>();
-		<span class="kw">let</span> <span class="ident">collation</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">build_collation</span>(<span class="ident">b</span>, <span class="ident">block_hash</span>, <span class="ident">pov</span>)<span class="question-mark">?</span>;
+		<span class="kw">let </span>block_hash = b.header().hash();
+		<span class="kw">let </span>collation = <span class="self">self</span>.build_collation(b, block_hash, pov)<span class="question-mark">?</span>;
 
-		<span class="kw">let</span> (<span class="ident">result_sender</span>, <span class="ident">signed_stmt_recv</span>) <span class="op">=</span> <span class="ident">oneshot::channel</span>();
+		<span class="kw">let </span>(result_sender, signed_stmt_recv) = oneshot::channel();
 
-		<span class="self">self</span>.<span class="ident">wait_to_announce</span>.<span class="ident">lock</span>().<span class="ident">wait_to_announce</span>(<span class="ident">block_hash</span>, <span class="ident">signed_stmt_recv</span>);
+		<span class="self">self</span>.wait_to_announce.lock().wait_to_announce(block_hash, signed_stmt_recv);
 
-		<span class="macro">tracing::info!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="question-mark">?</span><span class="ident">block_hash</span>, <span class="string">&quot;Produced proof-of-validity candidate.&quot;</span>,);
+		<span class="macro">tracing::info!</span>(target: LOG_TARGET, <span class="question-mark">?</span>block_hash, <span class="string">&quot;Produced proof-of-validity candidate.&quot;</span>,);
 
-		<span class="prelude-val">Some</span>(<span class="ident">CollationResult</span> { <span class="ident">collation</span>, <span class="ident">result_sender</span>: <span class="prelude-val">Some</span>(<span class="ident">result_sender</span>) })
+		<span class="prelude-val">Some</span>(CollationResult { collation, result_sender: <span class="prelude-val">Some</span>(result_sender) })
 	}
 }
 
-<span class="doccomment">/// Parameters for [`start_collator`].</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StartCollatorParams</span><span class="op">&lt;</span><span class="ident">Block</span>: <span class="ident">BlockT</span>, <span class="ident">RA</span>, <span class="ident">BS</span>, <span class="ident">Spawner</span><span class="op">&gt;</span> {
-	<span class="kw">pub</span> <span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	<span class="kw">pub</span> <span class="ident">runtime_api</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RA</span><span class="op">&gt;</span>,
-	<span class="kw">pub</span> <span class="ident">block_status</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">BS</span><span class="op">&gt;</span>,
-	<span class="kw">pub</span> <span class="ident">announce_block</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">Block::Hash</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>,
-	<span class="kw">pub</span> <span class="ident">overseer_handle</span>: <span class="ident">OverseerHandle</span>,
-	<span class="kw">pub</span> <span class="ident">spawner</span>: <span class="ident">Spawner</span>,
-	<span class="kw">pub</span> <span class="ident">key</span>: <span class="ident">CollatorPair</span>,
-	<span class="kw">pub</span> <span class="ident">parachain_consensus</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Parameters for [`start_collator`].
+</span><span class="kw">pub struct </span>StartCollatorParams&lt;Block: BlockT, RA, BS, Spawner&gt; {
+	<span class="kw">pub </span>para_id: ParaId,
+	<span class="kw">pub </span>runtime_api: Arc&lt;RA&gt;,
+	<span class="kw">pub </span>block_status: Arc&lt;BS&gt;,
+	<span class="kw">pub </span>announce_block: Arc&lt;<span class="kw">dyn </span>Fn(Block::Hash, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;) + Send + Sync&gt;,
+	<span class="kw">pub </span>overseer_handle: OverseerHandle,
+	<span class="kw">pub </span>spawner: Spawner,
+	<span class="kw">pub </span>key: CollatorPair,
+	<span class="kw">pub </span>parachain_consensus: Box&lt;<span class="kw">dyn </span>ParachainConsensus&lt;Block&gt;&gt;,
 }
 
-<span class="doccomment">/// Start the collator.</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">start_collator</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RA</span>, <span class="ident">BS</span>, <span class="ident">Spawner</span><span class="op">&gt;</span>(
-	<span class="ident">StartCollatorParams</span> {
-		<span class="ident">para_id</span>,
-		<span class="ident">block_status</span>,
-		<span class="ident">announce_block</span>,
-		<span class="kw-2">mut</span> <span class="ident">overseer_handle</span>,
-		<span class="ident">spawner</span>,
-		<span class="ident">key</span>,
-		<span class="ident">parachain_consensus</span>,
-		<span class="ident">runtime_api</span>,
-	}: <span class="ident">StartCollatorParams</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RA</span>, <span class="ident">BS</span>, <span class="ident">Spawner</span><span class="op">&gt;</span>,
-) <span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">BS</span>: <span class="ident">BlockBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">Spawner</span>: <span class="ident">SpawnNamed</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">RA</span>: <span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">RA::Api</span>: <span class="ident">CollectCollationInfo</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Start the collator.
+</span><span class="kw">pub async fn </span>start_collator&lt;Block, RA, BS, Spawner&gt;(
+	StartCollatorParams {
+		para_id,
+		block_status,
+		announce_block,
+		<span class="kw-2">mut </span>overseer_handle,
+		spawner,
+		key,
+		parachain_consensus,
+		runtime_api,
+	}: StartCollatorParams&lt;Block, RA, BS, Spawner&gt;,
+) <span class="kw">where
+	</span>Block: BlockT,
+	BS: BlockBackend&lt;Block&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+	Spawner: SpawnNamed + Clone + Send + Sync + <span class="lifetime">&#39;static</span>,
+	RA: ProvideRuntimeApi&lt;Block&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+	RA::Api: CollectCollationInfo&lt;Block&gt;,
 {
-	<span class="kw">let</span> <span class="ident">collator</span> <span class="op">=</span> <span class="ident">Collator::new</span>(
-		<span class="ident">block_status</span>,
-		<span class="ident">Arc::new</span>(<span class="ident">spawner</span>),
-		<span class="ident">announce_block</span>,
-		<span class="ident">runtime_api</span>,
-		<span class="ident">parachain_consensus</span>,
+	<span class="kw">let </span>collator = Collator::new(
+		block_status,
+		Arc::new(spawner),
+		announce_block,
+		runtime_api,
+		parachain_consensus,
 	);
 
-	<span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">tracing::Span::current</span>();
-	<span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">CollationGenerationConfig</span> {
-		<span class="ident">key</span>,
-		<span class="ident">para_id</span>,
-		<span class="ident">collator</span>: <span class="ident">Box::new</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">relay_parent</span>, <span class="ident">validation_data</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">collator</span> <span class="op">=</span> <span class="ident">collator</span>.<span class="ident">clone</span>();
-			<span class="ident">collator</span>
-				.<span class="ident">produce_candidate</span>(<span class="ident">relay_parent</span>, <span class="ident">validation_data</span>.<span class="ident">clone</span>())
-				.<span class="ident">instrument</span>(<span class="ident">span</span>.<span class="ident">clone</span>())
-				.<span class="ident">boxed</span>()
+	<span class="kw">let </span>span = tracing::Span::current();
+	<span class="kw">let </span>config = CollationGenerationConfig {
+		key,
+		para_id,
+		collator: Box::new(<span class="kw">move </span>|relay_parent, validation_data| {
+			<span class="kw">let </span>collator = collator.clone();
+			collator
+				.produce_candidate(relay_parent, validation_data.clone())
+				.instrument(span.clone())
+				.boxed()
 		}),
 	};
 
-	<span class="ident">overseer_handle</span>
-		.<span class="ident">send_msg</span>(<span class="ident">CollationGenerationMessage::Initialize</span>(<span class="ident">config</span>), <span class="string">&quot;StartCollator&quot;</span>)
+	overseer_handle
+		.send_msg(CollationGenerationMessage::Initialize(config), <span class="string">&quot;StartCollator&quot;</span>)
 		.<span class="kw">await</span>;
 
-	<span class="ident">overseer_handle</span>
-		.<span class="ident">send_msg</span>(<span class="ident">CollatorProtocolMessage::CollateOn</span>(<span class="ident">para_id</span>), <span class="string">&quot;StartCollator&quot;</span>)
+	overseer_handle
+		.send_msg(CollatorProtocolMessage::CollateOn(para_id), <span class="string">&quot;StartCollator&quot;</span>)
 		.<span class="kw">await</span>;
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">async_trait::async_trait</span>;
-	<span class="kw">use</span> <span class="ident">cumulus_client_consensus_common::ParachainCandidate</span>;
-	<span class="kw">use</span> <span class="ident">cumulus_test_client</span>::{
-		<span class="ident">Client</span>, <span class="ident">ClientBlockImportExt</span>, <span class="ident">DefaultTestClientBuilderExt</span>, <span class="ident">InitBlockBuilder</span>,
-		<span class="ident">TestClientBuilder</span>, <span class="ident">TestClientBuilderExt</span>,
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+	<span class="kw">use super</span>::<span class="kw-2">*</span>;
+	<span class="kw">use </span>async_trait::async_trait;
+	<span class="kw">use </span>cumulus_client_consensus_common::ParachainCandidate;
+	<span class="kw">use </span>cumulus_test_client::{
+		Client, ClientBlockImportExt, DefaultTestClientBuilderExt, InitBlockBuilder,
+		TestClientBuilder, TestClientBuilderExt,
 	};
-	<span class="kw">use</span> <span class="ident">cumulus_test_runtime</span>::{<span class="ident">Block</span>, <span class="ident">Header</span>};
-	<span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">channel::mpsc</span>, <span class="ident">executor::block_on</span>, <span class="ident">StreamExt</span>};
-	<span class="kw">use</span> <span class="ident">polkadot_node_subsystem_test_helpers::ForwardSubsystem</span>;
-	<span class="kw">use</span> <span class="ident">polkadot_overseer</span>::{<span class="ident">dummy::dummy_overseer_builder</span>, <span class="ident">HeadSupportsParachains</span>};
-	<span class="kw">use</span> <span class="ident">sp_consensus::BlockOrigin</span>;
-	<span class="kw">use</span> <span class="ident">sp_core</span>::{<span class="ident">testing::TaskExecutor</span>, <span class="ident">Pair</span>};
-	<span class="kw">use</span> <span class="ident">sp_runtime::traits::BlakeTwo256</span>;
-	<span class="kw">use</span> <span class="ident">sp_state_machine::Backend</span>;
+	<span class="kw">use </span>cumulus_test_runtime::{Block, Header};
+	<span class="kw">use </span>futures::{channel::mpsc, executor::block_on, StreamExt};
+	<span class="kw">use </span>polkadot_node_subsystem_test_helpers::ForwardSubsystem;
+	<span class="kw">use </span>polkadot_overseer::{dummy::dummy_overseer_builder, HeadSupportsParachains};
+	<span class="kw">use </span>sp_consensus::BlockOrigin;
+	<span class="kw">use </span>sp_core::{testing::TaskExecutor, Pair};
+	<span class="kw">use </span>sp_runtime::traits::BlakeTwo256;
+	<span class="kw">use </span>sp_state_machine::Backend;
 
-	<span class="kw">struct</span> <span class="ident">AlwaysSupportsParachains</span>;
+	<span class="kw">struct </span>AlwaysSupportsParachains;
 
-	<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-	<span class="kw">impl</span> <span class="ident">HeadSupportsParachains</span> <span class="kw">for</span> <span class="ident">AlwaysSupportsParachains</span> {
-		<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">head_supports_parachains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_head</span>: <span class="kw-2">&amp;</span><span class="ident">PHash</span>) -&gt; <span class="ident">bool</span> {
-			<span class="bool-val">true</span>
-		}
+	<span class="attribute">#[async_trait]
+	</span><span class="kw">impl </span>HeadSupportsParachains <span class="kw">for </span>AlwaysSupportsParachains {
+		<span class="kw">async fn </span>head_supports_parachains(<span class="kw-2">&amp;</span><span class="self">self</span>, _head: <span class="kw-2">&amp;</span>PHash) -&gt; bool {
+			<span class="bool-val">true
+		</span>}
 	}
 
-	<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-	<span class="kw">struct</span> <span class="ident">DummyParachainConsensus</span> {
-		<span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>,
+	<span class="attribute">#[derive(Clone)]
+	</span><span class="kw">struct </span>DummyParachainConsensus {
+		client: Arc&lt;Client&gt;,
 	}
 
-	<span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
-	<span class="kw">impl</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DummyParachainConsensus</span> {
-		<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">produce_candidate</span>(
-			<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-			<span class="ident">parent</span>: <span class="kw-2">&amp;</span><span class="ident">Header</span>,
-			<span class="kw">_</span>: <span class="ident">PHash</span>,
-			<span class="ident">validation_data</span>: <span class="kw-2">&amp;</span><span class="ident">PersistedValidationData</span>,
-		) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParachainCandidate</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-			<span class="kw">let</span> <span class="ident">block_id</span> <span class="op">=</span> <span class="ident">BlockId::Hash</span>(<span class="ident">parent</span>.<span class="ident">hash</span>());
-			<span class="kw">let</span> <span class="ident">builder</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">init_block_builder_at</span>(
-				<span class="kw-2">&amp;</span><span class="ident">block_id</span>,
-				<span class="prelude-val">Some</span>(<span class="ident">validation_data</span>.<span class="ident">clone</span>()),
-				<span class="ident">Default::default</span>(),
+	<span class="attribute">#[async_trait::async_trait]
+	</span><span class="kw">impl </span>ParachainConsensus&lt;Block&gt; <span class="kw">for </span>DummyParachainConsensus {
+		<span class="kw">async fn </span>produce_candidate(
+			<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+			parent: <span class="kw-2">&amp;</span>Header,
+			<span class="kw">_</span>: PHash,
+			validation_data: <span class="kw-2">&amp;</span>PersistedValidationData,
+		) -&gt; <span class="prelude-ty">Option</span>&lt;ParachainCandidate&lt;Block&gt;&gt; {
+			<span class="kw">let </span>block_id = BlockId::Hash(parent.hash());
+			<span class="kw">let </span>builder = <span class="self">self</span>.client.init_block_builder_at(
+				<span class="kw-2">&amp;</span>block_id,
+				<span class="prelude-val">Some</span>(validation_data.clone()),
+				Default::default(),
 			);
 
-			<span class="kw">let</span> (<span class="ident">block</span>, <span class="kw">_</span>, <span class="ident">proof</span>) <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">build</span>().<span class="ident">expect</span>(<span class="string">&quot;Creates block&quot;</span>).<span class="ident">into_inner</span>();
+			<span class="kw">let </span>(block, <span class="kw">_</span>, proof) = builder.build().expect(<span class="string">&quot;Creates block&quot;</span>).into_inner();
 
-			<span class="self">self</span>.<span class="ident">client</span>
-				.<span class="ident">import</span>(<span class="ident">BlockOrigin::Own</span>, <span class="ident">block</span>.<span class="ident">clone</span>())
-				.<span class="kw">await</span>
-				.<span class="ident">expect</span>(<span class="string">&quot;Imports the block&quot;</span>);
+			<span class="self">self</span>.client
+				.import(BlockOrigin::Own, block.clone())
+				.<span class="kw">await
+				</span>.expect(<span class="string">&quot;Imports the block&quot;</span>);
 
-			<span class="prelude-val">Some</span>(<span class="ident">ParachainCandidate</span> { <span class="ident">block</span>, <span class="ident">proof</span>: <span class="ident">proof</span>.<span class="ident">expect</span>(<span class="string">&quot;Proof is returned&quot;</span>) })
+			<span class="prelude-val">Some</span>(ParachainCandidate { block, proof: proof.expect(<span class="string">&quot;Proof is returned&quot;</span>) })
 		}
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">collates_produces_a_block_and_storage_proof_does_not_contains_code</span>() {
-		<span class="ident">sp_tracing::try_init_simple</span>();
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>collates_produces_a_block_and_storage_proof_does_not_contains_code() {
+		sp_tracing::try_init_simple();
 
-		<span class="kw">let</span> <span class="ident">spawner</span> <span class="op">=</span> <span class="ident">TaskExecutor::new</span>();
-		<span class="kw">let</span> <span class="ident">para_id</span> <span class="op">=</span> <span class="ident">ParaId::from</span>(<span class="number">100</span>);
-		<span class="kw">let</span> <span class="ident">announce_block</span> <span class="op">=</span> <span class="op">|</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">|</span> ();
-		<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">TestClientBuilder::new</span>().<span class="ident">build</span>());
-		<span class="kw">let</span> <span class="ident">header</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">header</span>(<span class="kw-2">&amp;</span><span class="ident">BlockId::Number</span>(<span class="number">0</span>)).<span class="ident">unwrap</span>().<span class="ident">unwrap</span>();
+		<span class="kw">let </span>spawner = TaskExecutor::new();
+		<span class="kw">let </span>para_id = ParaId::from(<span class="number">100</span>);
+		<span class="kw">let </span>announce_block = |<span class="kw">_</span>, <span class="kw">_</span>| ();
+		<span class="kw">let </span>client = Arc::new(TestClientBuilder::new().build());
+		<span class="kw">let </span>header = client.header(<span class="kw-2">&amp;</span>BlockId::Number(<span class="number">0</span>)).unwrap().unwrap();
 
-		<span class="kw">let</span> (<span class="ident">sub_tx</span>, <span class="ident">sub_rx</span>) <span class="op">=</span> <span class="ident">mpsc::channel</span>(<span class="number">64</span>);
+		<span class="kw">let </span>(sub_tx, sub_rx) = mpsc::channel(<span class="number">64</span>);
 
-		<span class="kw">let</span> (<span class="ident">overseer</span>, <span class="ident">handle</span>) <span class="op">=</span>
-			<span class="ident">dummy_overseer_builder</span>(<span class="ident">spawner</span>.<span class="ident">clone</span>(), <span class="ident">AlwaysSupportsParachains</span>, <span class="prelude-val">None</span>)
-				.<span class="ident">expect</span>(<span class="string">&quot;Creates overseer builder&quot;</span>)
-				.<span class="ident">replace_collation_generation</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ForwardSubsystem</span>(<span class="ident">sub_tx</span>))
-				.<span class="ident">build</span>()
-				.<span class="ident">expect</span>(<span class="string">&quot;Builds overseer&quot;</span>);
+		<span class="kw">let </span>(overseer, handle) =
+			dummy_overseer_builder(spawner.clone(), AlwaysSupportsParachains, <span class="prelude-val">None</span>)
+				.expect(<span class="string">&quot;Creates overseer builder&quot;</span>)
+				.replace_collation_generation(|<span class="kw">_</span>| ForwardSubsystem(sub_tx))
+				.build()
+				.expect(<span class="string">&quot;Builds overseer&quot;</span>);
 
-		<span class="ident">spawner</span>.<span class="ident">spawn</span>(<span class="string">&quot;overseer&quot;</span>, <span class="prelude-val">None</span>, <span class="ident">overseer</span>.<span class="ident">run</span>().<span class="ident">then</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="kw">async</span> { () }).<span class="ident">boxed</span>());
+		spawner.spawn(<span class="string">&quot;overseer&quot;</span>, <span class="prelude-val">None</span>, overseer.run().then(|<span class="kw">_</span>| <span class="kw">async </span>{ () }).boxed());
 
-		<span class="kw">let</span> <span class="ident">collator_start</span> <span class="op">=</span> <span class="ident">start_collator</span>(<span class="ident">StartCollatorParams</span> {
-			<span class="ident">runtime_api</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-			<span class="ident">block_status</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-			<span class="ident">announce_block</span>: <span class="ident">Arc::new</span>(<span class="ident">announce_block</span>),
-			<span class="ident">overseer_handle</span>: <span class="ident">OverseerHandle::new</span>(<span class="ident">handle</span>),
-			<span class="ident">spawner</span>,
-			<span class="ident">para_id</span>,
-			<span class="ident">key</span>: <span class="ident">CollatorPair::generate</span>().<span class="number">0</span>,
-			<span class="ident">parachain_consensus</span>: <span class="ident">Box::new</span>(<span class="ident">DummyParachainConsensus</span> { <span class="ident">client</span>: <span class="ident">client</span>.<span class="ident">clone</span>() }),
+		<span class="kw">let </span>collator_start = start_collator(StartCollatorParams {
+			runtime_api: client.clone(),
+			block_status: client.clone(),
+			announce_block: Arc::new(announce_block),
+			overseer_handle: OverseerHandle::new(handle),
+			spawner,
+			para_id,
+			key: CollatorPair::generate().<span class="number">0</span>,
+			parachain_consensus: Box::new(DummyParachainConsensus { client: client.clone() }),
 		});
-		<span class="ident">block_on</span>(<span class="ident">collator_start</span>);
+		block_on(collator_start);
 
-		<span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">block_on</span>(<span class="ident">sub_rx</span>.<span class="ident">into_future</span>())
-			.<span class="number">0</span>
-			.<span class="ident">expect</span>(<span class="string">&quot;message should be send by `start_collator` above.&quot;</span>);
+		<span class="kw">let </span>msg = block_on(sub_rx.into_future())
+			.<span class="number">0
+			</span>.expect(<span class="string">&quot;message should be send by `start_collator` above.&quot;</span>);
 
-		<span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">msg</span> {
-			<span class="ident">CollationGenerationMessage::Initialize</span>(<span class="ident">config</span>) =&gt; <span class="ident">config</span>,
+		<span class="kw">let </span>config = <span class="kw">match </span>msg {
+			CollationGenerationMessage::Initialize(config) =&gt; config,
 		};
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">validation_data</span> <span class="op">=</span> <span class="ident">PersistedValidationData::default</span>();
-		<span class="ident">validation_data</span>.<span class="ident">parent_head</span> <span class="op">=</span> <span class="ident">header</span>.<span class="ident">encode</span>().<span class="ident">into</span>();
-		<span class="kw">let</span> <span class="ident">relay_parent</span> <span class="op">=</span> <span class="ident">Default::default</span>();
+		<span class="kw">let </span><span class="kw-2">mut </span>validation_data = PersistedValidationData::default();
+		validation_data.parent_head = header.encode().into();
+		<span class="kw">let </span>relay_parent = Default::default();
 
-		<span class="kw">let</span> <span class="ident">collation</span> <span class="op">=</span> <span class="ident">block_on</span>((<span class="ident">config</span>.<span class="ident">collator</span>)(<span class="ident">relay_parent</span>, <span class="kw-2">&amp;</span><span class="ident">validation_data</span>))
-			.<span class="ident">expect</span>(<span class="string">&quot;Collation is build&quot;</span>)
-			.<span class="ident">collation</span>;
+		<span class="kw">let </span>collation = block_on((config.collator)(relay_parent, <span class="kw-2">&amp;</span>validation_data))
+			.expect(<span class="string">&quot;Collation is build&quot;</span>)
+			.collation;
 
-		<span class="kw">let</span> <span class="ident">pov</span> <span class="op">=</span> <span class="ident">collation</span>.<span class="ident">proof_of_validity</span>.<span class="ident">into_compressed</span>();
+		<span class="kw">let </span>pov = collation.proof_of_validity.into_compressed();
 
-		<span class="kw">let</span> <span class="ident">decompressed</span> <span class="op">=</span>
-			<span class="ident">sp_maybe_compressed_blob::decompress</span>(<span class="kw-2">&amp;</span><span class="ident">pov</span>.<span class="ident">block_data</span>.<span class="number">0</span>, <span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span> <span class="op">*</span> <span class="number">10</span>).<span class="ident">unwrap</span>();
+		<span class="kw">let </span>decompressed =
+			sp_maybe_compressed_blob::decompress(<span class="kw-2">&amp;</span>pov.block_data.<span class="number">0</span>, <span class="number">1024 </span>* <span class="number">1024 </span>* <span class="number">10</span>).unwrap();
 
-		<span class="kw">let</span> <span class="ident">block</span> <span class="op">=</span>
-			<span class="ident">ParachainBlockData</span>::<span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">decompressed</span>[..]).<span class="ident">expect</span>(<span class="string">&quot;Is a valid block&quot;</span>);
+		<span class="kw">let </span>block =
+			ParachainBlockData::&lt;Block&gt;::decode(<span class="kw-2">&amp;mut &amp;</span>decompressed[..]).expect(<span class="string">&quot;Is a valid block&quot;</span>);
 
-		<span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="kw-2">*</span><span class="ident">block</span>.<span class="ident">header</span>().<span class="ident">number</span>());
+		<span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="kw-2">*</span>block.header().number());
 
-		<span class="comment">// Ensure that we did not include `:code` in the proof.</span>
-		<span class="kw">let</span> <span class="ident">proof</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">storage_proof</span>();
-		<span class="kw">let</span> <span class="ident">db</span> <span class="op">=</span> <span class="ident">proof</span>
-			.<span class="ident">to_storage_proof</span>::<span class="op">&lt;</span><span class="ident">BlakeTwo256</span><span class="op">&gt;</span>(<span class="prelude-val">Some</span>(<span class="ident">header</span>.<span class="ident">state_root</span>()))
-			.<span class="ident">unwrap</span>()
-			.<span class="number">0</span>
-			.<span class="ident">into_memory_db</span>();
+		<span class="comment">// Ensure that we did not include `:code` in the proof.
+		</span><span class="kw">let </span>proof = block.storage_proof();
+		<span class="kw">let </span>db = proof
+			.to_storage_proof::&lt;BlakeTwo256&gt;(<span class="prelude-val">Some</span>(header.state_root()))
+			.unwrap()
+			.<span class="number">0
+			</span>.into_memory_db();
 
-		<span class="kw">let</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">sp_state_machine::new_in_mem_hash_key</span>::<span class="op">&lt;</span><span class="ident">BlakeTwo256</span><span class="op">&gt;</span>()
-			.<span class="ident">update_backend</span>(<span class="kw-2">*</span><span class="ident">header</span>.<span class="ident">state_root</span>(), <span class="ident">db</span>);
+		<span class="kw">let </span>backend = sp_state_machine::new_in_mem_hash_key::&lt;BlakeTwo256&gt;()
+			.update_backend(<span class="kw-2">*</span>header.state_root(), db);
 
-		<span class="comment">// Should return an error, as it was not included while building the proof.</span>
-		<span class="macro">assert!</span>(<span class="ident">backend</span>
-			.<span class="ident">storage</span>(<span class="ident">sp_core::storage::well_known_keys::CODE</span>)
-			.<span class="ident">unwrap_err</span>()
-			.<span class="ident">contains</span>(<span class="string">&quot;Trie lookup error: Database missing expected key&quot;</span>));
+		<span class="comment">// Should return an error, as it was not included while building the proof.
+		</span><span class="macro">assert!</span>(backend
+			.storage(sp_core::storage::well_known_keys::CODE)
+			.unwrap_err()
+			.contains(<span class="string">&quot;Trie lookup error: Database missing expected key&quot;</span>));
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_collator" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_collator" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/aura/src/import_queue.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>import_queue.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_aura/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_aura/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_aura/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/aura/src/import_queue.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>import_queue.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_aura/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_aura/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_aura/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -118,125 +118,131 @@
 <span id="118">118</span>
 <span id="119">119</span>
 <span id="120">120</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! Parachain specific wrapper for the AuRa import queue.</span>
+</span><span class="doccomment">//! Parachain specific wrapper for the AuRa import queue.
 
-<span class="kw">use</span> <span class="ident">codec::Codec</span>;
-<span class="kw">use</span> <span class="ident">sc_client_api</span>::{<span class="ident">backend::AuxStore</span>, <span class="ident">BlockOf</span>, <span class="ident">UsageProvider</span>};
-<span class="kw">use</span> <span class="ident">sc_consensus</span>::{<span class="ident">import_queue::DefaultImportQueue</span>, <span class="ident">BlockImport</span>};
-<span class="kw">use</span> <span class="ident">sc_consensus_aura::AuraVerifier</span>;
-<span class="kw">use</span> <span class="ident">sc_consensus_slots::InherentDataProviderExt</span>;
-<span class="kw">use</span> <span class="ident">sc_telemetry::TelemetryHandle</span>;
-<span class="kw">use</span> <span class="ident">sp_api</span>::{<span class="ident">ApiExt</span>, <span class="ident">ProvideRuntimeApi</span>};
-<span class="kw">use</span> <span class="ident">sp_block_builder::BlockBuilder</span> <span class="kw">as</span> <span class="ident">BlockBuilderApi</span>;
-<span class="kw">use</span> <span class="ident">sp_blockchain::HeaderBackend</span>;
-<span class="kw">use</span> <span class="ident">sp_consensus::Error</span> <span class="kw">as</span> <span class="ident">ConsensusError</span>;
-<span class="kw">use</span> <span class="ident">sp_consensus_aura::AuraApi</span>;
-<span class="kw">use</span> <span class="ident">sp_core::crypto::Pair</span>;
-<span class="kw">use</span> <span class="ident">sp_inherents::CreateInherentDataProviders</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>;
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fmt::Debug</span>, <span class="ident">hash::Hash</span>, <span class="ident">sync::Arc</span>};
-<span class="kw">use</span> <span class="ident">substrate_prometheus_endpoint::Registry</span>;
+</span><span class="kw">use </span>codec::Codec;
+<span class="kw">use </span>cumulus_client_consensus_common::ParachainBlockImport;
+<span class="kw">use </span>sc_client_api::{backend::AuxStore, BlockOf, UsageProvider};
+<span class="kw">use </span>sc_consensus::{import_queue::DefaultImportQueue, BlockImport};
+<span class="kw">use </span>sc_consensus_aura::{AuraVerifier, CompatibilityMode};
+<span class="kw">use </span>sc_consensus_slots::InherentDataProviderExt;
+<span class="kw">use </span>sc_telemetry::TelemetryHandle;
+<span class="kw">use </span>sp_api::{ApiExt, ProvideRuntimeApi};
+<span class="kw">use </span>sp_block_builder::BlockBuilder <span class="kw">as </span>BlockBuilderApi;
+<span class="kw">use </span>sp_blockchain::HeaderBackend;
+<span class="kw">use </span>sp_consensus::Error <span class="kw">as </span>ConsensusError;
+<span class="kw">use </span>sp_consensus_aura::AuraApi;
+<span class="kw">use </span>sp_core::crypto::Pair;
+<span class="kw">use </span>sp_inherents::CreateInherentDataProviders;
+<span class="kw">use </span>sp_runtime::traits::Block <span class="kw">as </span>BlockT;
+<span class="kw">use </span>std::{fmt::Debug, hash::Hash, sync::Arc};
+<span class="kw">use </span>substrate_prometheus_endpoint::Registry;
 
-<span class="doccomment">/// Parameters of [`import_queue`].</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ImportQueueParams</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span>, <span class="ident">C</span>, <span class="ident">CIDP</span>, <span class="ident">S</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// The block import to use.</span>
-	<span class="kw">pub</span> <span class="ident">block_import</span>: <span class="ident">I</span>,
-	<span class="doccomment">/// The client to interact with the chain.</span>
-	<span class="kw">pub</span> <span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>,
-	<span class="doccomment">/// The inherent data providers, to create the inherent data.</span>
-	<span class="kw">pub</span> <span class="ident">create_inherent_data_providers</span>: <span class="ident">CIDP</span>,
-	<span class="doccomment">/// The spawner to spawn background tasks.</span>
-	<span class="kw">pub</span> <span class="ident">spawner</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">S</span>,
-	<span class="doccomment">/// The prometheus registry.</span>
-	<span class="kw">pub</span> <span class="ident">registry</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Registry</span><span class="op">&gt;</span>,
-	<span class="doccomment">/// The telemetry handle.</span>
-	<span class="kw">pub</span> <span class="ident">telemetry</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryHandle</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Parameters for [`import_queue`].
+</span><span class="kw">pub struct </span>ImportQueueParams&lt;<span class="lifetime">&#39;a</span>, I, C, CIDP, S&gt; {
+	<span class="doccomment">/// The block import to use.
+	</span><span class="kw">pub </span>block_import: ParachainBlockImport&lt;I&gt;,
+	<span class="doccomment">/// The client to interact with the chain.
+	</span><span class="kw">pub </span>client: Arc&lt;C&gt;,
+	<span class="doccomment">/// The inherent data providers, to create the inherent data.
+	</span><span class="kw">pub </span>create_inherent_data_providers: CIDP,
+	<span class="doccomment">/// The spawner to spawn background tasks.
+	</span><span class="kw">pub </span>spawner: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>S,
+	<span class="doccomment">/// The prometheus registry.
+	</span><span class="kw">pub </span>registry: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Registry&gt;,
+	<span class="doccomment">/// The telemetry handle.
+	</span><span class="kw">pub </span>telemetry: <span class="prelude-ty">Option</span>&lt;TelemetryHandle&gt;,
 }
 
-<span class="doccomment">/// Start an import queue for the Aura consensus algorithm.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">import_queue</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span>, <span class="ident">Block</span>, <span class="ident">I</span>, <span class="ident">C</span>, <span class="ident">S</span>, <span class="ident">CIDP</span><span class="op">&gt;</span>(
-	<span class="ident">ImportQueueParams</span> {
-		<span class="ident">block_import</span>,
-		<span class="ident">client</span>,
-		<span class="ident">create_inherent_data_providers</span>,
-		<span class="ident">spawner</span>,
-		<span class="ident">registry</span>,
-		<span class="ident">telemetry</span>,
-	}: <span class="ident">ImportQueueParams</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span>, <span class="ident">C</span>, <span class="ident">CIDP</span>, <span class="ident">S</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">DefaultImportQueue</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">C</span><span class="op">&gt;</span>, <span class="ident">sp_consensus::Error</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">C::Api</span>: <span class="ident">BlockBuilderApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">AuraApi</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">P::Public</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ApiExt</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">C</span>: <span class="lifetime">&#39;static</span>
-		<span class="op">+</span> <span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">BlockOf</span>
-		<span class="op">+</span> <span class="ident">Send</span>
-		<span class="op">+</span> <span class="ident">Sync</span>
-		<span class="op">+</span> <span class="ident">AuxStore</span>
-		<span class="op">+</span> <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">HeaderBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">I</span>: <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="ident">ConsensusError</span>, <span class="ident">Transaction</span> <span class="op">=</span> <span class="ident">sp_api::TransactionFor</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">Send</span>
-		<span class="op">+</span> <span class="ident">Sync</span>
-		<span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">P</span>: <span class="ident">Pair</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">P::Public</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">Hash</span> <span class="op">+</span> <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">Codec</span>,
-	<span class="ident">P::Signature</span>: <span class="ident">Codec</span>,
-	<span class="ident">S</span>: <span class="ident">sp_core::traits::SpawnEssentialNamed</span>,
-	<span class="ident">CIDP</span>: <span class="ident">CreateInherentDataProviders</span><span class="op">&lt;</span><span class="ident">Block</span>, ()<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">CIDP::InherentDataProviders</span>: <span class="ident">InherentDataProviderExt</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>,
+<span class="doccomment">/// Start an import queue for the Aura consensus algorithm.
+</span><span class="kw">pub fn </span>import_queue&lt;<span class="lifetime">&#39;a</span>, P, Block, I, C, S, CIDP&gt;(
+	ImportQueueParams {
+		block_import,
+		client,
+		create_inherent_data_providers,
+		spawner,
+		registry,
+		telemetry,
+	}: ImportQueueParams&lt;<span class="lifetime">&#39;a</span>, I, C, CIDP, S&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;DefaultImportQueue&lt;Block, C&gt;, sp_consensus::Error&gt;
+<span class="kw">where
+	</span>Block: BlockT,
+	C::Api: BlockBuilderApi&lt;Block&gt; + AuraApi&lt;Block, P::Public&gt; + ApiExt&lt;Block&gt;,
+	C: <span class="lifetime">&#39;static
+		</span>+ ProvideRuntimeApi&lt;Block&gt;
+		+ BlockOf
+		+ Send
+		+ Sync
+		+ AuxStore
+		+ UsageProvider&lt;Block&gt;
+		+ HeaderBackend&lt;Block&gt;,
+	I: BlockImport&lt;Block, Error = ConsensusError, Transaction = sp_api::TransactionFor&lt;C, Block&gt;&gt;
+		+ Send
+		+ Sync
+		+ <span class="lifetime">&#39;static</span>,
+	P: Pair + Send + Sync + <span class="lifetime">&#39;static</span>,
+	P::Public: Clone + Eq + Send + Sync + Hash + Debug + Codec,
+	P::Signature: Codec,
+	S: sp_core::traits::SpawnEssentialNamed,
+	CIDP: CreateInherentDataProviders&lt;Block, ()&gt; + Sync + Send + <span class="lifetime">&#39;static</span>,
+	CIDP::InherentDataProviders: InherentDataProviderExt + Send + Sync,
 {
-	<span class="ident">sc_consensus_aura::import_queue</span>::<span class="op">&lt;</span><span class="ident">P</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">sc_consensus_aura::ImportQueueParams</span> {
-		<span class="ident">block_import</span>: <span class="ident">cumulus_client_consensus_common::ParachainBlockImport::new</span>(<span class="ident">block_import</span>),
-		<span class="ident">justification_import</span>: <span class="prelude-val">None</span>,
-		<span class="ident">client</span>,
-		<span class="ident">create_inherent_data_providers</span>,
-		<span class="ident">spawner</span>,
-		<span class="ident">registry</span>,
-		<span class="ident">check_for_equivocation</span>: <span class="ident">sc_consensus_aura::CheckForEquivocation::No</span>,
-		<span class="ident">telemetry</span>,
+	sc_consensus_aura::import_queue::&lt;P, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(sc_consensus_aura::ImportQueueParams {
+		block_import,
+		justification_import: <span class="prelude-val">None</span>,
+		client,
+		create_inherent_data_providers,
+		spawner,
+		registry,
+		check_for_equivocation: sc_consensus_aura::CheckForEquivocation::No,
+		telemetry,
+		compatibility_mode: CompatibilityMode::None,
 	})
 }
 
-<span class="doccomment">/// Parameters of [`build_verifier`].</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BuildVerifierParams</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">CIDP</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// The client to interact with the chain.</span>
-	<span class="kw">pub</span> <span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>,
-	<span class="doccomment">/// The inherent data providers, to create the inherent data.</span>
-	<span class="kw">pub</span> <span class="ident">create_inherent_data_providers</span>: <span class="ident">CIDP</span>,
-	<span class="doccomment">/// The telemetry handle.</span>
-	<span class="kw">pub</span> <span class="ident">telemetry</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryHandle</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Parameters of [`build_verifier`].
+</span><span class="kw">pub struct </span>BuildVerifierParams&lt;C, CIDP&gt; {
+	<span class="doccomment">/// The client to interact with the chain.
+	</span><span class="kw">pub </span>client: Arc&lt;C&gt;,
+	<span class="doccomment">/// The inherent data providers, to create the inherent data.
+	</span><span class="kw">pub </span>create_inherent_data_providers: CIDP,
+	<span class="doccomment">/// The telemetry handle.
+	</span><span class="kw">pub </span>telemetry: <span class="prelude-ty">Option</span>&lt;TelemetryHandle&gt;,
 }
 
-<span class="doccomment">/// Build the [`AuraVerifier`].</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_verifier</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">C</span>, <span class="ident">CIDP</span><span class="op">&gt;</span>(
-	<span class="ident">BuildVerifierParams</span> { <span class="ident">client</span>, <span class="ident">create_inherent_data_providers</span>, <span class="ident">telemetry</span> }: <span class="ident">BuildVerifierParams</span><span class="op">&lt;</span>
-		<span class="ident">C</span>,
-		<span class="ident">CIDP</span>,
-	<span class="op">&gt;</span>,
-) -&gt; <span class="ident">AuraVerifier</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">P</span>, <span class="ident">CIDP</span><span class="op">&gt;</span> {
-	<span class="ident">sc_consensus_aura::build_verifier</span>(<span class="ident">sc_consensus_aura::BuildVerifierParams</span> {
-		<span class="ident">client</span>,
-		<span class="ident">create_inherent_data_providers</span>,
-		<span class="ident">telemetry</span>,
-		<span class="ident">check_for_equivocation</span>: <span class="ident">sc_consensus_aura::CheckForEquivocation::No</span>,
+<span class="doccomment">/// Build the [`AuraVerifier`].
+</span><span class="kw">pub fn </span>build_verifier&lt;P, C, CIDP, N&gt;(
+	BuildVerifierParams { client, create_inherent_data_providers, telemetry }: BuildVerifierParams&lt;
+		C,
+		CIDP,
+	&gt;,
+) -&gt; AuraVerifier&lt;C, P, CIDP, N&gt; {
+	sc_consensus_aura::build_verifier(sc_consensus_aura::BuildVerifierParams {
+		client,
+		create_inherent_data_providers,
+		telemetry,
+		check_for_equivocation: sc_consensus_aura::CheckForEquivocation::No,
+		compatibility_mode: CompatibilityMode::None,
 	})
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_aura" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_aura" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-rpc-interface/src/rpc_client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rpc_client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_rpc_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_rpc_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_rpc_interface/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-rpc-interface/src/rpc_client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rpc_client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_rpc_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_rpc_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_rpc_interface/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -708,217 +708,217 @@
 <span id="708">708</span>
 <span id="709">709</span>
 <span id="710">710</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">backoff</span>::{<span class="ident">future::retry_notify</span>, <span class="ident">ExponentialBackoff</span>};
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{
-	<span class="ident">relay_chain</span>::{
-		<span class="ident">v2</span>::{
-			<span class="ident">CandidateCommitments</span>, <span class="ident">CandidateEvent</span>, <span class="ident">CommittedCandidateReceipt</span>, <span class="ident">CoreState</span>,
-			<span class="ident">DisputeState</span>, <span class="ident">GroupRotationInfo</span>, <span class="ident">OccupiedCoreAssumption</span>, <span class="ident">OldV1SessionInfo</span>,
-			<span class="ident">PvfCheckStatement</span>, <span class="ident">ScrapedOnChainVotes</span>, <span class="ident">SessionIndex</span>, <span class="ident">SessionInfo</span>, <span class="ident">ValidationCode</span>,
-			<span class="ident">ValidationCodeHash</span>, <span class="ident">ValidatorId</span>, <span class="ident">ValidatorIndex</span>, <span class="ident">ValidatorSignature</span>,
+</span><span class="kw">use </span>backoff::{future::retry_notify, ExponentialBackoff};
+<span class="kw">use </span>cumulus_primitives_core::{
+	relay_chain::{
+		v2::{
+			CandidateCommitments, CandidateEvent, CommittedCandidateReceipt, CoreState,
+			DisputeState, GroupRotationInfo, OccupiedCoreAssumption, OldV1SessionInfo,
+			PvfCheckStatement, ScrapedOnChainVotes, SessionIndex, SessionInfo, ValidationCode,
+			ValidationCodeHash, ValidatorId, ValidatorIndex, ValidatorSignature,
 		},
-		<span class="ident">CandidateHash</span>, <span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">PHeader</span>, <span class="ident">InboundHrmpMessage</span>,
+		CandidateHash, Hash <span class="kw">as </span>PHash, Header <span class="kw">as </span>PHeader, InboundHrmpMessage,
 	},
-	<span class="ident">InboundDownwardMessage</span>, <span class="ident">ParaId</span>, <span class="ident">PersistedValidationData</span>,
+	InboundDownwardMessage, ParaId, PersistedValidationData,
 };
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface</span>::{<span class="ident">RelayChainError</span>, <span class="ident">RelayChainResult</span>};
-<span class="kw">use</span> <span class="ident">futures</span>::{
-	<span class="ident">channel::mpsc</span>::{<span class="ident">Receiver</span>, <span class="ident">Sender</span>},
-	<span class="ident">StreamExt</span>,
+<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainError, RelayChainResult};
+<span class="kw">use </span>futures::{
+	channel::mpsc::{Receiver, Sender},
+	StreamExt,
 };
-<span class="kw">use</span> <span class="ident">jsonrpsee</span>::{
-	<span class="ident">core</span>::{
-		<span class="ident">client</span>::{<span class="ident">Client</span> <span class="kw">as</span> <span class="ident">JsonRpcClient</span>, <span class="ident">ClientT</span>, <span class="ident">Subscription</span>, <span class="ident">SubscriptionClientT</span>},
-		<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">JsonRpseeError</span>,
+<span class="kw">use </span>jsonrpsee::{
+	core::{
+		client::{Client <span class="kw">as </span>JsonRpcClient, ClientT, Subscription, SubscriptionClientT},
+		Error <span class="kw">as </span>JsonRpseeError,
 	},
-	<span class="ident">rpc_params</span>,
-	<span class="ident">types::ParamsSer</span>,
-	<span class="ident">ws_client::WsClientBuilder</span>,
+	rpc_params,
+	types::ParamsSer,
+	ws_client::WsClientBuilder,
 };
-<span class="kw">use</span> <span class="ident">parity_scale_codec</span>::{<span class="ident">Decode</span>, <span class="ident">Encode</span>};
-<span class="kw">use</span> <span class="ident">polkadot_service</span>::{<span class="ident">BlockNumber</span>, <span class="ident">TaskManager</span>};
-<span class="kw">use</span> <span class="ident">sc_client_api::StorageData</span>;
-<span class="kw">use</span> <span class="ident">sc_rpc_api</span>::{<span class="ident">state::ReadProof</span>, <span class="ident">system::Health</span>};
-<span class="kw">use</span> <span class="ident">sp_api::RuntimeVersion</span>;
-<span class="kw">use</span> <span class="ident">sp_consensus_babe::Epoch</span>;
-<span class="kw">use</span> <span class="ident">sp_core::sp_std::collections::btree_map::BTreeMap</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::DeserializeOwned</span>;
-<span class="kw">use</span> <span class="ident">sp_storage::StorageKey</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
-<span class="kw">use</span> <span class="ident">tokio::sync::mpsc</span>::{
-	<span class="ident">channel</span> <span class="kw">as</span> <span class="ident">tokio_channel</span>, <span class="ident">Receiver</span> <span class="kw">as</span> <span class="ident">TokioReceiver</span>, <span class="ident">Sender</span> <span class="kw">as</span> <span class="ident">TokioSender</span>,
+<span class="kw">use </span>parity_scale_codec::{Decode, Encode};
+<span class="kw">use </span>polkadot_service::{BlockNumber, TaskManager};
+<span class="kw">use </span>sc_client_api::StorageData;
+<span class="kw">use </span>sc_rpc_api::{state::ReadProof, system::Health};
+<span class="kw">use </span>sp_api::RuntimeVersion;
+<span class="kw">use </span>sp_consensus_babe::Epoch;
+<span class="kw">use </span>sp_core::sp_std::collections::btree_map::BTreeMap;
+<span class="kw">use </span>sp_runtime::DeserializeOwned;
+<span class="kw">use </span>sp_storage::StorageKey;
+<span class="kw">use </span>std::sync::Arc;
+<span class="kw">use </span>tokio::sync::mpsc::{
+	channel <span class="kw">as </span>tokio_channel, Receiver <span class="kw">as </span>TokioReceiver, Sender <span class="kw">as </span>TokioSender,
 };
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">url::Url</span>;
+<span class="kw">pub use </span>url::Url;
 
-<span class="kw">const</span> <span class="ident">LOG_TARGET</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;relay-chain-rpc-client&quot;</span>;
+<span class="kw">const </span>LOG_TARGET: <span class="kw-2">&amp;</span>str = <span class="string">&quot;relay-chain-rpc-client&quot;</span>;
 
-<span class="kw">const</span> <span class="ident">NOTIFICATION_CHANNEL_SIZE_LIMIT</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">20</span>;
+<span class="kw">const </span>NOTIFICATION_CHANNEL_SIZE_LIMIT: usize = <span class="number">20</span>;
 
-<span class="doccomment">/// Client that maps RPC methods and deserializes results</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RelayChainRpcClient</span> {
-	<span class="doccomment">/// Websocket client to make calls</span>
-	<span class="ident">ws_client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">JsonRpcClient</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Client that maps RPC methods and deserializes results
+</span><span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>RelayChainRpcClient {
+	<span class="doccomment">/// Websocket client to make calls
+	</span>ws_client: Arc&lt;JsonRpcClient&gt;,
 
-	<span class="doccomment">/// Retry strategy that should be used for requests and subscriptions</span>
-	<span class="ident">retry_strategy</span>: <span class="ident">ExponentialBackoff</span>,
+	<span class="doccomment">/// Retry strategy that should be used for requests and subscriptions
+	</span>retry_strategy: ExponentialBackoff,
 
-	<span class="doccomment">/// Channel to communicate with the RPC worker</span>
-	<span class="ident">to_worker_channel</span>: <span class="ident">TokioSender</span><span class="op">&lt;</span><span class="ident">NotificationRegisterMessage</span><span class="op">&gt;</span>,
+	<span class="doccomment">/// Channel to communicate with the RPC worker
+	</span>to_worker_channel: TokioSender&lt;NotificationRegisterMessage&gt;,
 }
 
-<span class="doccomment">/// Worker messages to register new notification listeners</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">NotificationRegisterMessage</span> {
-	<span class="ident">RegisterBestHeadListener</span>(<span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>),
-	<span class="ident">RegisterImportListener</span>(<span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>),
-	<span class="ident">RegisterFinalizationListener</span>(<span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>),
+<span class="doccomment">/// Worker messages to register new notification listeners
+</span><span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub enum </span>NotificationRegisterMessage {
+	RegisterBestHeadListener(Sender&lt;PHeader&gt;),
+	RegisterImportListener(Sender&lt;PHeader&gt;),
+	RegisterFinalizationListener(Sender&lt;PHeader&gt;),
 }
 
-<span class="doccomment">/// Worker that should be used in combination with [`RelayChainRpcClient`]. Must be polled to distribute header notifications to listeners.</span>
-<span class="kw">struct</span> <span class="ident">RpcStreamWorker</span> {
-	<span class="comment">// Communication channel with the RPC client</span>
-	<span class="ident">client_receiver</span>: <span class="ident">TokioReceiver</span><span class="op">&lt;</span><span class="ident">NotificationRegisterMessage</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Worker that should be used in combination with [`RelayChainRpcClient`]. Must be polled to distribute header notifications to listeners.
+</span><span class="kw">struct </span>RpcStreamWorker {
+	<span class="comment">// Communication channel with the RPC client
+	</span>client_receiver: TokioReceiver&lt;NotificationRegisterMessage&gt;,
 
-	<span class="comment">// Senders to distribute incoming header notifications to</span>
-	<span class="ident">imported_header_listeners</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">finalized_header_listeners</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">best_header_listeners</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+	<span class="comment">// Senders to distribute incoming header notifications to
+	</span>imported_header_listeners: Vec&lt;Sender&lt;PHeader&gt;&gt;,
+	finalized_header_listeners: Vec&lt;Sender&lt;PHeader&gt;&gt;,
+	best_header_listeners: Vec&lt;Sender&lt;PHeader&gt;&gt;,
 
-	<span class="comment">// Incoming notification subscriptions</span>
-	<span class="ident">rpc_imported_header_subscription</span>: <span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>,
-	<span class="ident">rpc_finalized_header_subscription</span>: <span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>,
-	<span class="ident">rpc_best_header_subscription</span>: <span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>,
+	<span class="comment">// Incoming notification subscriptions
+	</span>rpc_imported_header_subscription: Subscription&lt;PHeader&gt;,
+	rpc_finalized_header_subscription: Subscription&lt;PHeader&gt;,
+	rpc_best_header_subscription: Subscription&lt;PHeader&gt;,
 }
 
-<span class="doccomment">/// Entry point to create [`RelayChainRpcClient`] and start a worker that distributes notifications.</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">create_client_and_start_worker</span>(
-	<span class="ident">url</span>: <span class="ident">Url</span>,
-	<span class="ident">task_manager</span>: <span class="kw-2">&amp;mut</span> <span class="ident">TaskManager</span>,
-) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">RelayChainRpcClient</span><span class="op">&gt;</span> {
-	<span class="macro">tracing::info!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="ident">url</span> <span class="op">=</span> <span class="op">%</span><span class="ident">url</span>.<span class="ident">to_string</span>(), <span class="string">&quot;Initializing RPC Client&quot;</span>);
-	<span class="kw">let</span> <span class="ident">ws_client</span> <span class="op">=</span> <span class="ident">WsClientBuilder::default</span>().<span class="ident">build</span>(<span class="ident">url</span>.<span class="ident">as_str</span>()).<span class="kw">await</span><span class="question-mark">?</span>;
+<span class="doccomment">/// Entry point to create [`RelayChainRpcClient`] and start a worker that distributes notifications.
+</span><span class="kw">pub async fn </span>create_client_and_start_worker(
+	url: Url,
+	task_manager: <span class="kw-2">&amp;mut </span>TaskManager,
+) -&gt; RelayChainResult&lt;RelayChainRpcClient&gt; {
+	<span class="macro">tracing::info!</span>(target: LOG_TARGET, url = %url.to_string(), <span class="string">&quot;Initializing RPC Client&quot;</span>);
+	<span class="kw">let </span>ws_client = WsClientBuilder::default().build(url.as_str()).<span class="kw">await</span><span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">best_head_stream</span> <span class="op">=</span> <span class="ident">RelayChainRpcClient::subscribe_new_best_heads</span>(<span class="kw-2">&amp;</span><span class="ident">ws_client</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-	<span class="kw">let</span> <span class="ident">finalized_head_stream</span> <span class="op">=</span> <span class="ident">RelayChainRpcClient::subscribe_finalized_heads</span>(<span class="kw-2">&amp;</span><span class="ident">ws_client</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-	<span class="kw">let</span> <span class="ident">imported_head_stream</span> <span class="op">=</span> <span class="ident">RelayChainRpcClient::subscribe_imported_heads</span>(<span class="kw-2">&amp;</span><span class="ident">ws_client</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+	<span class="kw">let </span>best_head_stream = RelayChainRpcClient::subscribe_new_best_heads(<span class="kw-2">&amp;</span>ws_client).<span class="kw">await</span><span class="question-mark">?</span>;
+	<span class="kw">let </span>finalized_head_stream = RelayChainRpcClient::subscribe_finalized_heads(<span class="kw-2">&amp;</span>ws_client).<span class="kw">await</span><span class="question-mark">?</span>;
+	<span class="kw">let </span>imported_head_stream = RelayChainRpcClient::subscribe_imported_heads(<span class="kw-2">&amp;</span>ws_client).<span class="kw">await</span><span class="question-mark">?</span>;
 
-	<span class="kw">let</span> (<span class="ident">worker</span>, <span class="ident">sender</span>) <span class="op">=</span>
-		<span class="ident">RpcStreamWorker::new</span>(<span class="ident">imported_head_stream</span>, <span class="ident">best_head_stream</span>, <span class="ident">finalized_head_stream</span>);
-	<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">RelayChainRpcClient::new</span>(<span class="ident">ws_client</span>, <span class="ident">sender</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+	<span class="kw">let </span>(worker, sender) =
+		RpcStreamWorker::new(imported_head_stream, best_head_stream, finalized_head_stream);
+	<span class="kw">let </span>client = RelayChainRpcClient::new(ws_client, sender).<span class="kw">await</span><span class="question-mark">?</span>;
 
-	<span class="ident">task_manager</span>
-		.<span class="ident">spawn_essential_handle</span>()
-		.<span class="ident">spawn</span>(<span class="string">&quot;relay-chain-rpc-worker&quot;</span>, <span class="prelude-val">None</span>, <span class="ident">worker</span>.<span class="ident">run</span>());
+	task_manager
+		.spawn_essential_handle()
+		.spawn(<span class="string">&quot;relay-chain-rpc-worker&quot;</span>, <span class="prelude-val">None</span>, worker.run());
 
-	<span class="prelude-val">Ok</span>(<span class="ident">client</span>)
+	<span class="prelude-val">Ok</span>(client)
 }
 
-<span class="kw">fn</span> <span class="ident">handle_event_distribution</span>(
-	<span class="ident">event</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PHeader</span>, <span class="ident">JsonRpseeError</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">senders</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">String</span><span class="op">&gt;</span> {
-	<span class="kw">match</span> <span class="ident">event</span> {
-		<span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">header</span>)) =&gt; {
-			<span class="ident">senders</span>.<span class="ident">retain_mut</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
-				<span class="kw">match</span> <span class="ident">e</span>.<span class="ident">try_send</span>(<span class="ident">header</span>.<span class="ident">clone</span>()) {
-					<span class="comment">// Receiver has been dropped, remove Sender from list.</span>
-					<span class="prelude-val">Err</span>(<span class="ident">error</span>) <span class="kw">if</span> <span class="ident">error</span>.<span class="ident">is_disconnected</span>() =&gt; <span class="bool-val">false</span>,
-					<span class="comment">// Channel is full. This should not happen.</span>
-					<span class="comment">// TODO: Improve error handling here</span>
-					<span class="comment">// https://github.com/paritytech/cumulus/issues/1482</span>
-					<span class="prelude-val">Err</span>(<span class="ident">error</span>) =&gt; {
-						<span class="macro">tracing::error!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="question-mark">?</span><span class="ident">error</span>, <span class="string">&quot;Event distribution channel has reached its limit. This can lead to missed notifications.&quot;</span>);
-						<span class="bool-val">true</span>
-					},
-					<span class="kw">_</span> =&gt; <span class="bool-val">true</span>,
+<span class="kw">fn </span>handle_event_distribution(
+	event: <span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Result</span>&lt;PHeader, JsonRpseeError&gt;&gt;,
+	senders: <span class="kw-2">&amp;mut </span>Vec&lt;Sender&lt;PHeader&gt;&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), String&gt; {
+	<span class="kw">match </span>event {
+		<span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(header)) =&gt; {
+			senders.retain_mut(|e| {
+				<span class="kw">match </span>e.try_send(header.clone()) {
+					<span class="comment">// Receiver has been dropped, remove Sender from list.
+					</span><span class="prelude-val">Err</span>(error) <span class="kw">if </span>error.is_disconnected() =&gt; <span class="bool-val">false</span>,
+					<span class="comment">// Channel is full. This should not happen.
+					// TODO: Improve error handling here
+					// https://github.com/paritytech/cumulus/issues/1482
+					</span><span class="prelude-val">Err</span>(error) =&gt; {
+						<span class="macro">tracing::error!</span>(target: LOG_TARGET, <span class="question-mark">?</span>error, <span class="string">&quot;Event distribution channel has reached its limit. This can lead to missed notifications.&quot;</span>);
+						<span class="bool-val">true
+					</span>},
+					<span class="kw">_ </span>=&gt; <span class="bool-val">true</span>,
 				}
 			});
 			<span class="prelude-val">Ok</span>(())
 		},
-		<span class="prelude-val">None</span> =&gt; <span class="prelude-val">Err</span>(<span class="string">&quot;RPC Subscription closed.&quot;</span>.<span class="ident">to_string</span>()),
-		<span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">err</span>)) =&gt; <span class="prelude-val">Err</span>(<span class="macro">format!</span>(<span class="string">&quot;Error in RPC subscription: {}&quot;</span>, <span class="ident">err</span>)),
+		<span class="prelude-val">None </span>=&gt; <span class="prelude-val">Err</span>(<span class="string">&quot;RPC Subscription closed.&quot;</span>.to_string()),
+		<span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(err)) =&gt; <span class="prelude-val">Err</span>(<span class="macro">format!</span>(<span class="string">&quot;Error in RPC subscription: {}&quot;</span>, err)),
 	}
 }
 
-<span class="kw">impl</span> <span class="ident">RpcStreamWorker</span> {
-	<span class="doccomment">/// Create new worker. Returns the worker and a channel to register new listeners.</span>
-	<span class="kw">fn</span> <span class="ident">new</span>(
-		<span class="ident">import_sub</span>: <span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>,
-		<span class="ident">best_sub</span>: <span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>,
-		<span class="ident">finalized_sub</span>: <span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>,
-	) -&gt; (<span class="ident">RpcStreamWorker</span>, <span class="ident">TokioSender</span><span class="op">&lt;</span><span class="ident">NotificationRegisterMessage</span><span class="op">&gt;</span>) {
-		<span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">tokio_channel</span>(<span class="number">100</span>);
-		<span class="kw">let</span> <span class="ident">worker</span> <span class="op">=</span> <span class="ident">RpcStreamWorker</span> {
-			<span class="ident">client_receiver</span>: <span class="ident">rx</span>,
-			<span class="ident">imported_header_listeners</span>: <span class="ident">Vec::new</span>(),
-			<span class="ident">finalized_header_listeners</span>: <span class="ident">Vec::new</span>(),
-			<span class="ident">best_header_listeners</span>: <span class="ident">Vec::new</span>(),
-			<span class="ident">rpc_imported_header_subscription</span>: <span class="ident">import_sub</span>,
-			<span class="ident">rpc_best_header_subscription</span>: <span class="ident">best_sub</span>,
-			<span class="ident">rpc_finalized_header_subscription</span>: <span class="ident">finalized_sub</span>,
+<span class="kw">impl </span>RpcStreamWorker {
+	<span class="doccomment">/// Create new worker. Returns the worker and a channel to register new listeners.
+	</span><span class="kw">fn </span>new(
+		import_sub: Subscription&lt;PHeader&gt;,
+		best_sub: Subscription&lt;PHeader&gt;,
+		finalized_sub: Subscription&lt;PHeader&gt;,
+	) -&gt; (RpcStreamWorker, TokioSender&lt;NotificationRegisterMessage&gt;) {
+		<span class="kw">let </span>(tx, rx) = tokio_channel(<span class="number">100</span>);
+		<span class="kw">let </span>worker = RpcStreamWorker {
+			client_receiver: rx,
+			imported_header_listeners: Vec::new(),
+			finalized_header_listeners: Vec::new(),
+			best_header_listeners: Vec::new(),
+			rpc_imported_header_subscription: import_sub,
+			rpc_best_header_subscription: best_sub,
+			rpc_finalized_header_subscription: finalized_sub,
 		};
-		(<span class="ident">worker</span>, <span class="ident">tx</span>)
+		(worker, tx)
 	}
 
-	<span class="doccomment">/// Run this worker to drive notification streams.</span>
-	<span class="doccomment">/// The worker does two things:</span>
-	<span class="doccomment">/// 1. Listen for `NotificationRegisterMessage` and register new listeners for the notification streams</span>
-	<span class="doccomment">/// 2. Distribute incoming import, best head and finalization notifications to registered listeners.</span>
-	<span class="doccomment">///    If an error occurs during sending, the receiver has been closed and we remove the sender from the list.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">run</span>(<span class="kw-2">mut</span> <span class="self">self</span>) {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">import_sub</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rpc_imported_header_subscription</span>.<span class="ident">fuse</span>();
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">best_head_sub</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rpc_best_header_subscription</span>.<span class="ident">fuse</span>();
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">finalized_sub</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rpc_finalized_header_subscription</span>.<span class="ident">fuse</span>();
-		<span class="kw">loop</span> {
-			<span class="macro">tokio::select!</span> {
-				<span class="ident">evt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client_receiver</span>.<span class="ident">recv</span>() =&gt; <span class="kw">match</span> <span class="ident">evt</span> {
-					<span class="prelude-val">Some</span>(<span class="ident">NotificationRegisterMessage::RegisterBestHeadListener</span>(<span class="ident">tx</span>)) =&gt; {
-						<span class="self">self</span>.<span class="ident">best_header_listeners</span>.<span class="ident">push</span>(<span class="ident">tx</span>);
+	<span class="doccomment">/// Run this worker to drive notification streams.
+	/// The worker does two things:
+	/// 1. Listen for `NotificationRegisterMessage` and register new listeners for the notification streams
+	/// 2. Distribute incoming import, best head and finalization notifications to registered listeners.
+	///    If an error occurs during sending, the receiver has been closed and we remove the sender from the list.
+	</span><span class="kw">pub async fn </span>run(<span class="kw-2">mut </span><span class="self">self</span>) {
+		<span class="kw">let </span><span class="kw-2">mut </span>import_sub = <span class="self">self</span>.rpc_imported_header_subscription.fuse();
+		<span class="kw">let </span><span class="kw-2">mut </span>best_head_sub = <span class="self">self</span>.rpc_best_header_subscription.fuse();
+		<span class="kw">let </span><span class="kw-2">mut </span>finalized_sub = <span class="self">self</span>.rpc_finalized_header_subscription.fuse();
+		<span class="kw">loop </span>{
+			<span class="macro">tokio::select! </span>{
+				evt = <span class="self">self</span>.client_receiver.recv() =&gt; <span class="kw">match </span>evt {
+					<span class="prelude-val">Some</span>(NotificationRegisterMessage::RegisterBestHeadListener(tx)) =&gt; {
+						<span class="self">self</span>.best_header_listeners.push(tx);
 					},
-					<span class="prelude-val">Some</span>(<span class="ident">NotificationRegisterMessage::RegisterImportListener</span>(<span class="ident">tx</span>)) =&gt; {
-						<span class="self">self</span>.<span class="ident">imported_header_listeners</span>.<span class="ident">push</span>(<span class="ident">tx</span>)
+					<span class="prelude-val">Some</span>(NotificationRegisterMessage::RegisterImportListener(tx)) =&gt; {
+						<span class="self">self</span>.imported_header_listeners.push(tx)
 					},
-					<span class="prelude-val">Some</span>(<span class="ident">NotificationRegisterMessage::RegisterFinalizationListener</span>(<span class="ident">tx</span>)) =&gt; {
-						<span class="self">self</span>.<span class="ident">finalized_header_listeners</span>.<span class="ident">push</span>(<span class="ident">tx</span>)
+					<span class="prelude-val">Some</span>(NotificationRegisterMessage::RegisterFinalizationListener(tx)) =&gt; {
+						<span class="self">self</span>.finalized_header_listeners.push(tx)
 					},
-					<span class="prelude-val">None</span> =&gt; {
-						<span class="macro">tracing::error!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="string">&quot;RPC client receiver closed. Stopping RPC Worker.&quot;</span>);
+					<span class="prelude-val">None </span>=&gt; {
+						<span class="macro">tracing::error!</span>(target: LOG_TARGET, <span class="string">&quot;RPC client receiver closed. Stopping RPC Worker.&quot;</span>);
 						<span class="kw">return</span>;
 					}
 				},
-				<span class="ident">import_event</span> <span class="op">=</span> <span class="ident">import_sub</span>.<span class="ident">next</span>() =&gt; {
-					<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">handle_event_distribution</span>(<span class="ident">import_event</span>, <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">imported_header_listeners</span>) {
-						<span class="macro">tracing::error!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="ident">err</span>, <span class="string">&quot;Encountered error while processing imported header notification. Stopping RPC Worker.&quot;</span>);
+				import_event = import_sub.next() =&gt; {
+					<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = handle_event_distribution(import_event, <span class="kw-2">&amp;mut </span><span class="self">self</span>.imported_header_listeners) {
+						<span class="macro">tracing::error!</span>(target: LOG_TARGET, err, <span class="string">&quot;Encountered error while processing imported header notification. Stopping RPC Worker.&quot;</span>);
 						<span class="kw">return</span>;
 					}
 				},
-				<span class="ident">best_header_event</span> <span class="op">=</span> <span class="ident">best_head_sub</span>.<span class="ident">next</span>() =&gt; {
-					<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">handle_event_distribution</span>(<span class="ident">best_header_event</span>, <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">best_header_listeners</span>) {
-						<span class="macro">tracing::error!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="ident">err</span>, <span class="string">&quot;Encountered error while processing best header notification. Stopping RPC Worker.&quot;</span>);
+				best_header_event = best_head_sub.next() =&gt; {
+					<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = handle_event_distribution(best_header_event, <span class="kw-2">&amp;mut </span><span class="self">self</span>.best_header_listeners) {
+						<span class="macro">tracing::error!</span>(target: LOG_TARGET, err, <span class="string">&quot;Encountered error while processing best header notification. Stopping RPC Worker.&quot;</span>);
 						<span class="kw">return</span>;
 					}
 				}
-				<span class="ident">finalized_event</span> <span class="op">=</span> <span class="ident">finalized_sub</span>.<span class="ident">next</span>() =&gt; {
-					<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">handle_event_distribution</span>(<span class="ident">finalized_event</span>, <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">finalized_header_listeners</span>) {
-						<span class="macro">tracing::error!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="ident">err</span>, <span class="string">&quot;Encountered error while processing finalized header notification. Stopping RPC Worker.&quot;</span>);
+				finalized_event = finalized_sub.next() =&gt; {
+					<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = handle_event_distribution(finalized_event, <span class="kw-2">&amp;mut </span><span class="self">self</span>.finalized_header_listeners) {
+						<span class="macro">tracing::error!</span>(target: LOG_TARGET, err, <span class="string">&quot;Encountered error while processing finalized header notification. Stopping RPC Worker.&quot;</span>);
 						<span class="kw">return</span>;
 					}
 				}
@@ -927,478 +927,478 @@
 	}
 }
 
-<span class="kw">impl</span> <span class="ident">RelayChainRpcClient</span> {
-	<span class="doccomment">/// Initialize new RPC Client.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">new</span>(
-		<span class="ident">ws_client</span>: <span class="ident">JsonRpcClient</span>,
-		<span class="ident">sender</span>: <span class="ident">TokioSender</span><span class="op">&lt;</span><span class="ident">NotificationRegisterMessage</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">RelayChainRpcClient</span> {
-			<span class="ident">to_worker_channel</span>: <span class="ident">sender</span>,
-			<span class="ident">ws_client</span>: <span class="ident">Arc::new</span>(<span class="ident">ws_client</span>),
-			<span class="ident">retry_strategy</span>: <span class="ident">ExponentialBackoff::default</span>(),
+<span class="kw">impl </span>RelayChainRpcClient {
+	<span class="doccomment">/// Initialize new RPC Client.
+	</span><span class="kw">async fn </span>new(
+		ws_client: JsonRpcClient,
+		sender: TokioSender&lt;NotificationRegisterMessage&gt;,
+	) -&gt; RelayChainResult&lt;<span class="self">Self</span>&gt; {
+		<span class="kw">let </span>client = RelayChainRpcClient {
+			to_worker_channel: sender,
+			ws_client: Arc::new(ws_client),
+			retry_strategy: ExponentialBackoff::default(),
 		};
 
-		<span class="prelude-val">Ok</span>(<span class="ident">client</span>)
+		<span class="prelude-val">Ok</span>(client)
 	}
 
-	<span class="doccomment">/// Call a call to `state_call` rpc method.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">call_remote_runtime_function</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Decode</span><span class="op">&gt;</span>(
+	<span class="doccomment">/// Call a call to `state_call` rpc method.
+	</span><span class="kw">pub async fn </span>call_remote_runtime_function&lt;R: Decode&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">method_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-		<span class="ident">hash</span>: <span class="ident">PHash</span>,
-		<span class="ident">payload</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Encode</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">payload_bytes</span> <span class="op">=</span>
-			<span class="ident">payload</span>.<span class="ident">map_or</span>(<span class="ident">sp_core::Bytes</span>(<span class="ident">Vec::new</span>()), <span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">sp_core::Bytes</span>(<span class="ident">v</span>.<span class="ident">encode</span>()));
-		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="macro">rpc_params!</span> {
-			<span class="ident">method_name</span>,
-			<span class="ident">payload_bytes</span>,
-			<span class="ident">hash</span>
+		method_name: <span class="kw-2">&amp;</span>str,
+		hash: PHash,
+		payload: <span class="prelude-ty">Option</span>&lt;<span class="kw">impl </span>Encode&gt;,
+	) -&gt; RelayChainResult&lt;R&gt; {
+		<span class="kw">let </span>payload_bytes =
+			payload.map_or(sp_core::Bytes(Vec::new()), |v| sp_core::Bytes(v.encode()));
+		<span class="kw">let </span>params = <span class="macro">rpc_params! </span>{
+			method_name,
+			payload_bytes,
+			hash
 		};
-		<span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="self">self</span>
-			.<span class="ident">request_tracing</span>::<span class="op">&lt;</span><span class="ident">sp_core::Bytes</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="string">&quot;state_call&quot;</span>, <span class="ident">params</span>, <span class="op">|</span><span class="ident">err</span><span class="op">|</span> {
+		<span class="kw">let </span>res = <span class="self">self
+			</span>.request_tracing::&lt;sp_core::Bytes, <span class="kw">_</span>&gt;(<span class="string">&quot;state_call&quot;</span>, params, |err| {
 				<span class="macro">tracing::trace!</span>(
-					<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>,
-					<span class="op">%</span><span class="ident">method_name</span>,
-					<span class="op">%</span><span class="ident">hash</span>,
-					<span class="ident">error</span> <span class="op">=</span> <span class="op">%</span><span class="ident">err</span>,
+					target: LOG_TARGET,
+					%method_name,
+					%hash,
+					error = %err,
 					<span class="string">&quot;Error during call to &#39;state_call&#39;.&quot;</span>,
 				);
 			})
 			.<span class="kw">await</span><span class="question-mark">?</span>;
-		<span class="ident">Decode::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">res</span>.<span class="number">0</span>).<span class="ident">map_err</span>(<span class="ident">Into::into</span>)
+		Decode::decode(<span class="kw-2">&amp;mut &amp;*</span>res.<span class="number">0</span>).map_err(Into::into)
 	}
 
-	<span class="doccomment">/// Perform RPC request</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">request</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span>(
+	<span class="doccomment">/// Perform RPC request
+	</span><span class="kw">async fn </span>request&lt;<span class="lifetime">&#39;a</span>, R&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">method</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>,
-		<span class="ident">params</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParamsSer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span>
-	<span class="kw">where</span>
-		<span class="ident">R</span>: <span class="ident">DeserializeOwned</span> <span class="op">+</span> <span class="ident">std::fmt::Debug</span>,
+		method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
+		params: <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;R, RelayChainError&gt;
+	<span class="kw">where
+		</span>R: DeserializeOwned + std::fmt::Debug,
 	{
-		<span class="self">self</span>.<span class="ident">request_tracing</span>(
-			<span class="ident">method</span>,
-			<span class="ident">params</span>,
-			<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">tracing::trace!</span>(<span class="ident">target</span>:<span class="ident">LOG_TARGET</span>, <span class="ident">error</span> <span class="op">=</span> <span class="op">%</span><span class="ident">e</span>, <span class="op">%</span><span class="ident">method</span>, <span class="string">&quot;Unable to complete RPC request&quot;</span>),
+		<span class="self">self</span>.request_tracing(
+			method,
+			params,
+			|e| <span class="macro">tracing::trace!</span>(target:LOG_TARGET, error = %e, %method, <span class="string">&quot;Unable to complete RPC request&quot;</span>),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Perform RPC request</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">request_tracing</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>, <span class="ident">OR</span><span class="op">&gt;</span>(
+	<span class="doccomment">/// Perform RPC request
+	</span><span class="kw">async fn </span>request_tracing&lt;<span class="lifetime">&#39;a</span>, R, OR&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">method</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>,
-		<span class="ident">params</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParamsSer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">trace_error</span>: <span class="ident">OR</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span>
-	<span class="kw">where</span>
-		<span class="ident">R</span>: <span class="ident">DeserializeOwned</span> <span class="op">+</span> <span class="ident">std::fmt::Debug</span>,
-		<span class="ident">OR</span>: <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">jsonrpsee::core::Error</span>),
+		method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
+		params: <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+		trace_error: OR,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;R, RelayChainError&gt;
+	<span class="kw">where
+		</span>R: DeserializeOwned + std::fmt::Debug,
+		OR: Fn(<span class="kw-2">&amp;</span>jsonrpsee::core::Error),
 	{
-		<span class="ident">retry_notify</span>(
-			<span class="self">self</span>.<span class="ident">retry_strategy</span>.<span class="ident">clone</span>(),
-			<span class="op">|</span><span class="op">|</span> <span class="kw">async</span> {
-				<span class="self">self</span>.<span class="ident">ws_client</span>.<span class="ident">request</span>(<span class="ident">method</span>, <span class="ident">params</span>.<span class="ident">clone</span>()).<span class="kw">await</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">err</span> {
-					<span class="ident">JsonRpseeError::Transport</span>(<span class="kw">_</span>) =&gt;
-						<span class="ident">backoff::Error::Transient</span> { <span class="ident">err</span>, <span class="ident">retry_after</span>: <span class="prelude-val">None</span> },
-					<span class="kw">_</span> =&gt; <span class="ident">backoff::Error::Permanent</span>(<span class="ident">err</span>),
+		retry_notify(
+			<span class="self">self</span>.retry_strategy.clone(),
+			|| <span class="kw">async </span>{
+				<span class="self">self</span>.ws_client.request(method, params.clone()).<span class="kw">await</span>.map_err(|err| <span class="kw">match </span>err {
+					JsonRpseeError::Transport(<span class="kw">_</span>) =&gt;
+						backoff::Error::Transient { err, retry_after: <span class="prelude-val">None </span>},
+					<span class="kw">_ </span>=&gt; backoff::Error::Permanent(err),
 				})
 			},
-			<span class="op">|</span><span class="ident">error</span>, <span class="ident">dur</span><span class="op">|</span> <span class="macro">tracing::trace!</span>(<span class="ident">target</span>: <span class="ident">LOG_TARGET</span>, <span class="op">%</span><span class="ident">error</span>, <span class="question-mark">?</span><span class="ident">dur</span>, <span class="string">&quot;Encountered transport error, retrying.&quot;</span>),
+			|error, dur| <span class="macro">tracing::trace!</span>(target: LOG_TARGET, %error, <span class="question-mark">?</span>dur, <span class="string">&quot;Encountered transport error, retrying.&quot;</span>),
 		)
-		.<span class="kw">await</span>
-		.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> {
-			<span class="ident">trace_error</span>(<span class="kw-2">&amp;</span><span class="ident">err</span>);
-			<span class="ident">RelayChainError::RpcCallError</span>(<span class="ident">method</span>.<span class="ident">to_string</span>(), <span class="ident">err</span>)})
+		.<span class="kw">await
+		</span>.map_err(|err| {
+			trace_error(<span class="kw-2">&amp;</span>err);
+			RelayChainError::RpcCallError(method.to_string(), err)})
 	}
 
-	<span class="doccomment">/// Returns information regarding the current epoch.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">babe_api_current_epoch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">PHash</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Epoch</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;BabeApi_current_epoch&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>).<span class="kw">await</span>
-	}
+	<span class="doccomment">/// Returns information regarding the current epoch.
+	</span><span class="kw">pub async fn </span>babe_api_current_epoch(<span class="kw-2">&amp;</span><span class="self">self</span>, at: PHash) -&gt; <span class="prelude-ty">Result</span>&lt;Epoch, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;BabeApi_current_epoch&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Old method to fetch v1 session info.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_session_info_before_version_2</span>(
+	<span class="doccomment">/// Old method to fetch v1 session info.
+	</span><span class="kw">pub async fn </span>parachain_host_session_info_before_version_2(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">index</span>: <span class="ident">SessionIndex</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">OldV1SessionInfo</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		at: PHash,
+		index: SessionIndex,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;OldV1SessionInfo&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_session_info_before_version_2&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>(<span class="ident">index</span>),
+			at,
+			<span class="prelude-val">Some</span>(index),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Scrape dispute relevant from on-chain, backing votes and resolved disputes.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_on_chain_votes</span>(
+	<span class="doccomment">/// Scrape dispute relevant from on-chain, backing votes and resolved disputes.
+	</span><span class="kw">pub async fn </span>parachain_host_on_chain_votes(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ScrapedOnChainVotes</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_on_chain_votes&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>)
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;ScrapedOnChainVotes&lt;PHash&gt;&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_on_chain_votes&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;)
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Returns code hashes of PVFs that require pre-checking by validators in the active set.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_pvfs_require_precheck</span>(
+	<span class="doccomment">/// Returns code hashes of PVFs that require pre-checking by validators in the active set.
+	</span><span class="kw">pub async fn </span>parachain_host_pvfs_require_precheck(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ValidationCodeHash</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_pvfs_require_precheck&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>)
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;ValidationCodeHash&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_pvfs_require_precheck&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;)
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Submits a PVF pre-checking statement into the transaction pool.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_submit_pvf_check_statement</span>(
+	<span class="doccomment">/// Submits a PVF pre-checking statement into the transaction pool.
+	</span><span class="kw">pub async fn </span>parachain_host_submit_pvf_check_statement(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">stmt</span>: <span class="ident">PvfCheckStatement</span>,
-		<span class="ident">signature</span>: <span class="ident">ValidatorSignature</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		at: PHash,
+		stmt: PvfCheckStatement,
+		signature: ValidatorSignature,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(), RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_submit_pvf_check_statement&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>((<span class="ident">stmt</span>, <span class="ident">signature</span>)),
+			at,
+			<span class="prelude-val">Some</span>((stmt, signature)),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get local listen address of the node</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">system_local_listen_addresses</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">request</span>(<span class="string">&quot;system_localListenAddresses&quot;</span>, <span class="prelude-val">None</span>).<span class="kw">await</span>
-	}
+	<span class="doccomment">/// Get local listen address of the node
+	</span><span class="kw">pub async fn </span>system_local_listen_addresses(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;String&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.request(<span class="string">&quot;system_localListenAddresses&quot;</span>, <span class="prelude-val">None</span>).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get system health information</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">system_health</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Health</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">request</span>(<span class="string">&quot;system_health&quot;</span>, <span class="prelude-val">None</span>).<span class="kw">await</span>
-	}
+	<span class="doccomment">/// Get system health information
+	</span><span class="kw">pub async fn </span>system_health(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Health, RelayChainError&gt; {
+		<span class="self">self</span>.request(<span class="string">&quot;system_health&quot;</span>, <span class="prelude-val">None</span>).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get read proof for `storage_keys`</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">state_get_read_proof</span>(
+	<span class="doccomment">/// Get read proof for `storage_keys`
+	</span><span class="kw">pub async fn </span>state_get_read_proof(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">storage_keys</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">StorageKey</span><span class="op">&gt;</span>,
-		<span class="ident">at</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ReadProof</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="macro">rpc_params!</span>(<span class="ident">storage_keys</span>, <span class="ident">at</span>);
-		<span class="self">self</span>.<span class="ident">request</span>(<span class="string">&quot;state_getReadProof&quot;</span>, <span class="ident">params</span>).<span class="kw">await</span>
-	}
+		storage_keys: Vec&lt;StorageKey&gt;,
+		at: <span class="prelude-ty">Option</span>&lt;PHash&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;ReadProof&lt;PHash&gt;, RelayChainError&gt; {
+		<span class="kw">let </span>params = <span class="macro">rpc_params!</span>(storage_keys, at);
+		<span class="self">self</span>.request(<span class="string">&quot;state_getReadProof&quot;</span>, params).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Retrieve storage item at `storage_key`</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">state_get_storage</span>(
+	<span class="doccomment">/// Retrieve storage item at `storage_key`
+	</span><span class="kw">pub async fn </span>state_get_storage(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">storage_key</span>: <span class="ident">StorageKey</span>,
-		<span class="ident">at</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">StorageData</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="macro">rpc_params!</span>(<span class="ident">storage_key</span>, <span class="ident">at</span>);
-		<span class="self">self</span>.<span class="ident">request</span>(<span class="string">&quot;state_getStorage&quot;</span>, <span class="ident">params</span>).<span class="kw">await</span>
-	}
+		storage_key: StorageKey,
+		at: <span class="prelude-ty">Option</span>&lt;PHash&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;StorageData&gt;, RelayChainError&gt; {
+		<span class="kw">let </span>params = <span class="macro">rpc_params!</span>(storage_key, at);
+		<span class="self">self</span>.request(<span class="string">&quot;state_getStorage&quot;</span>, params).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get hash of the n-th block in the canon chain.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// By default returns latest block hash.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">chain_get_head</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="macro">rpc_params!</span>(<span class="ident">at</span>);
-		<span class="self">self</span>.<span class="ident">request</span>(<span class="string">&quot;chain_getHead&quot;</span>, <span class="ident">params</span>).<span class="kw">await</span>
-	}
+	<span class="doccomment">/// Get hash of the n-th block in the canon chain.
+	///
+	/// By default returns latest block hash.
+	</span><span class="kw">pub async fn </span>chain_get_head(<span class="kw-2">&amp;</span><span class="self">self</span>, at: <span class="prelude-ty">Option</span>&lt;u64&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;PHash, RelayChainError&gt; {
+		<span class="kw">let </span>params = <span class="macro">rpc_params!</span>(at);
+		<span class="self">self</span>.request(<span class="string">&quot;chain_getHead&quot;</span>, params).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Returns the validator groups and rotation info localized based on the hypothetical child</span>
-	<span class="doccomment">///  of a block whose state  this is invoked on. Note that `now` in the `GroupRotationInfo`</span>
-	<span class="doccomment">/// should be the successor of the number of the block.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_validator_groups</span>(
+	<span class="doccomment">/// Returns the validator groups and rotation info localized based on the hypothetical child
+	///  of a block whose state  this is invoked on. Note that `now` in the `GroupRotationInfo`
+	/// should be the successor of the number of the block.
+	</span><span class="kw">pub async fn </span>parachain_host_validator_groups(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ValidatorIndex</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">GroupRotationInfo</span>), <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_validator_groups&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>)
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;Vec&lt;ValidatorIndex&gt;&gt;, GroupRotationInfo), RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_validator_groups&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;)
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get a vector of events concerning candidates that occurred within a block.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_candidate_events</span>(
+	<span class="doccomment">/// Get a vector of events concerning candidates that occurred within a block.
+	</span><span class="kw">pub async fn </span>parachain_host_candidate_events(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CandidateEvent</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_candidate_events&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>)
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;CandidateEvent&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_candidate_events&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;)
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Checks if the given validation outputs pass the acceptance criteria.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_check_validation_outputs</span>(
+	<span class="doccomment">/// Checks if the given validation outputs pass the acceptance criteria.
+	</span><span class="kw">pub async fn </span>parachain_host_check_validation_outputs(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">outputs</span>: <span class="ident">CandidateCommitments</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		at: PHash,
+		para_id: ParaId,
+		outputs: CandidateCommitments,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;bool, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_check_validation_outputs&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>((<span class="ident">para_id</span>, <span class="ident">outputs</span>)),
+			at,
+			<span class="prelude-val">Some</span>((para_id, outputs)),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Returns the persisted validation data for the given `ParaId` along with the corresponding</span>
-	<span class="doccomment">/// validation code hash. Instead of accepting assumption about the para, matches the validation</span>
-	<span class="doccomment">/// data hash against an expected one and yields `None` if they&#39;re not equal.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_assumed_validation_data</span>(
+	<span class="doccomment">/// Returns the persisted validation data for the given `ParaId` along with the corresponding
+	/// validation code hash. Instead of accepting assumption about the para, matches the validation
+	/// data hash against an expected one and yields `None` if they&#39;re not equal.
+	</span><span class="kw">pub async fn </span>parachain_host_assumed_validation_data(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">expected_hash</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">PersistedValidationData</span>, <span class="ident">ValidationCodeHash</span>)<span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		at: PHash,
+		para_id: ParaId,
+		expected_hash: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;(PersistedValidationData, ValidationCodeHash)&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_persisted_assumed_validation_data&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>((<span class="ident">para_id</span>, <span class="ident">expected_hash</span>)),
+			at,
+			<span class="prelude-val">Some</span>((para_id, expected_hash)),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get hash of last finalized block.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">chain_get_finalized_head</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">request</span>(<span class="string">&quot;chain_getFinalizedHead&quot;</span>, <span class="prelude-val">None</span>).<span class="kw">await</span>
-	}
+	<span class="doccomment">/// Get hash of last finalized block.
+	</span><span class="kw">pub async fn </span>chain_get_finalized_head(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;PHash, RelayChainError&gt; {
+		<span class="self">self</span>.request(<span class="string">&quot;chain_getFinalizedHead&quot;</span>, <span class="prelude-val">None</span>).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get hash of n-th block.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">chain_get_block_hash</span>(
+	<span class="doccomment">/// Get hash of n-th block.
+	</span><span class="kw">pub async fn </span>chain_get_block_hash(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">block_number</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">polkadot_service::BlockNumber</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="macro">rpc_params!</span>(<span class="ident">block_number</span>);
-		<span class="self">self</span>.<span class="ident">request</span>(<span class="string">&quot;chain_getBlockHash&quot;</span>, <span class="ident">params</span>).<span class="kw">await</span>
-	}
+		block_number: <span class="prelude-ty">Option</span>&lt;polkadot_service::BlockNumber&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;PHash&gt;, RelayChainError&gt; {
+		<span class="kw">let </span>params = <span class="macro">rpc_params!</span>(block_number);
+		<span class="self">self</span>.request(<span class="string">&quot;chain_getBlockHash&quot;</span>, params).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Yields the persisted validation data for the given `ParaId` along with an assumption that</span>
-	<span class="doccomment">/// should be used if the para currently occupies a core.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns `None` if either the para is not registered or the assumption is `Freed`</span>
-	<span class="doccomment">/// and the para already occupies a core.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_persisted_validation_data</span>(
+	<span class="doccomment">/// Yields the persisted validation data for the given `ParaId` along with an assumption that
+	/// should be used if the para currently occupies a core.
+	///
+	/// Returns `None` if either the para is not registered or the assumption is `Freed`
+	/// and the para already occupies a core.
+	</span><span class="kw">pub async fn </span>parachain_host_persisted_validation_data(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">occupied_core_assumption</span>: <span class="ident">OccupiedCoreAssumption</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		at: PHash,
+		para_id: ParaId,
+		occupied_core_assumption: OccupiedCoreAssumption,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;PersistedValidationData&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_persisted_validation_data&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>((<span class="ident">para_id</span>, <span class="ident">occupied_core_assumption</span>)),
+			at,
+			<span class="prelude-val">Some</span>((para_id, occupied_core_assumption)),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get the validation code from its hash.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_validation_code_by_hash</span>(
+	<span class="doccomment">/// Get the validation code from its hash.
+	</span><span class="kw">pub async fn </span>parachain_host_validation_code_by_hash(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">validation_code_hash</span>: <span class="ident">ValidationCodeHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ValidationCode</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		at: PHash,
+		validation_code_hash: ValidationCodeHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;ValidationCode&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_validation_code_by_hash&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>(<span class="ident">validation_code_hash</span>),
+			at,
+			<span class="prelude-val">Some</span>(validation_code_hash),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Yields information on all availability cores as relevant to the child block.</span>
-	<span class="doccomment">/// Cores are either free or occupied. Free cores can have paras assigned to them.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_availability_cores</span>(
+	<span class="doccomment">/// Yields information on all availability cores as relevant to the child block.
+	/// Cores are either free or occupied. Free cores can have paras assigned to them.
+	</span><span class="kw">pub async fn </span>parachain_host_availability_cores(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CoreState</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">BlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_availability_cores&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>)
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;CoreState&lt;PHash, BlockNumber&gt;&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_availability_cores&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;)
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get runtime version</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">runtime_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">PHash</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RuntimeVersion</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="macro">rpc_params!</span>(<span class="ident">at</span>);
-		<span class="self">self</span>.<span class="ident">request</span>(<span class="string">&quot;state_getRuntimeVersion&quot;</span>, <span class="ident">params</span>).<span class="kw">await</span>
-	}
+	<span class="doccomment">/// Get runtime version
+	</span><span class="kw">pub async fn </span>runtime_version(<span class="kw-2">&amp;</span><span class="self">self</span>, at: PHash) -&gt; <span class="prelude-ty">Result</span>&lt;RuntimeVersion, RelayChainError&gt; {
+		<span class="kw">let </span>params = <span class="macro">rpc_params!</span>(at);
+		<span class="self">self</span>.request(<span class="string">&quot;state_getRuntimeVersion&quot;</span>, params).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Returns all onchain disputes.</span>
-	<span class="doccomment">/// This is a staging method! Do not use on production runtimes!</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_staging_get_disputes</span>(
+	<span class="doccomment">/// Returns all onchain disputes.
+	/// This is a staging method! Do not use on production runtimes!
+	</span><span class="kw">pub async fn </span>parachain_host_staging_get_disputes(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">SessionIndex</span>, <span class="ident">CandidateHash</span>, <span class="ident">DisputeState</span><span class="op">&lt;</span><span class="ident">BlockNumber</span><span class="op">&gt;</span>)<span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_staging_get_disputes&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>)
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;(SessionIndex, CandidateHash, DisputeState&lt;BlockNumber&gt;)&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_staging_get_disputes&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;)
+			.<span class="kw">await
+	</span>}
 
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">authority_discovery_authorities</span>(
+	<span class="kw">pub async fn </span>authority_discovery_authorities(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">sp_authority_discovery::AuthorityId</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;AuthorityDiscoveryApi_authorities&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>)
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;sp_authority_discovery::AuthorityId&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;AuthorityDiscoveryApi_authorities&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;)
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Fetch the validation code used by a para, making the given `OccupiedCoreAssumption`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Returns `None` if either the para is not registered or the assumption is `Freed`</span>
-	<span class="doccomment">/// and the para already occupies a core.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_validation_code</span>(
+	<span class="doccomment">/// Fetch the validation code used by a para, making the given `OccupiedCoreAssumption`.
+	///
+	/// Returns `None` if either the para is not registered or the assumption is `Freed`
+	/// and the para already occupies a core.
+	</span><span class="kw">pub async fn </span>parachain_host_validation_code(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">occupied_core_assumption</span>: <span class="ident">OccupiedCoreAssumption</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ValidationCode</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		at: PHash,
+		para_id: ParaId,
+		occupied_core_assumption: OccupiedCoreAssumption,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;ValidationCode&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_validation_code&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>((<span class="ident">para_id</span>, <span class="ident">occupied_core_assumption</span>)),
+			at,
+			<span class="prelude-val">Some</span>((para_id, occupied_core_assumption)),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Fetch the hash of the validation code used by a para, making the given `OccupiedCoreAssumption`.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_validation_code_hash</span>(
+	<span class="doccomment">/// Fetch the hash of the validation code used by a para, making the given `OccupiedCoreAssumption`.
+	</span><span class="kw">pub async fn </span>parachain_host_validation_code_hash(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">occupied_core_assumption</span>: <span class="ident">OccupiedCoreAssumption</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ValidationCodeHash</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		at: PHash,
+		para_id: ParaId,
+		occupied_core_assumption: OccupiedCoreAssumption,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;ValidationCodeHash&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_validation_code_hash&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>((<span class="ident">para_id</span>, <span class="ident">occupied_core_assumption</span>)),
+			at,
+			<span class="prelude-val">Some</span>((para_id, occupied_core_assumption)),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get the session info for the given session, if stored.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_session_info</span>(
+	<span class="doccomment">/// Get the session info for the given session, if stored.
+	</span><span class="kw">pub async fn </span>parachain_host_session_info(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">index</span>: <span class="ident">SessionIndex</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SessionInfo</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_session_info&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">Some</span>(<span class="ident">index</span>))
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+		index: SessionIndex,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;SessionInfo&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_session_info&quot;</span>, at, <span class="prelude-val">Some</span>(index))
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get header at specified hash</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">chain_get_header</span>(
+	<span class="doccomment">/// Get header at specified hash
+	</span><span class="kw">pub async fn </span>chain_get_header(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">hash</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="macro">rpc_params!</span>(<span class="ident">hash</span>);
-		<span class="self">self</span>.<span class="ident">request</span>(<span class="string">&quot;chain_getHeader&quot;</span>, <span class="ident">params</span>).<span class="kw">await</span>
-	}
+		hash: <span class="prelude-ty">Option</span>&lt;PHash&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;PHeader&gt;, RelayChainError&gt; {
+		<span class="kw">let </span>params = <span class="macro">rpc_params!</span>(hash);
+		<span class="self">self</span>.request(<span class="string">&quot;chain_getHeader&quot;</span>, params).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get the receipt of a candidate pending availability. This returns `Some` for any paras</span>
-	<span class="doccomment">/// assigned to occupied cores in `availability_cores` and `None` otherwise.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_candidate_pending_availability</span>(
+	<span class="doccomment">/// Get the receipt of a candidate pending availability. This returns `Some` for any paras
+	/// assigned to occupied cores in `availability_cores` and `None` otherwise.
+	</span><span class="kw">pub async fn </span>parachain_host_candidate_pending_availability(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CommittedCandidateReceipt</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		at: PHash,
+		para_id: ParaId,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;CommittedCandidateReceipt&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_candidate_pending_availability&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>(<span class="ident">para_id</span>),
+			at,
+			<span class="prelude-val">Some</span>(para_id),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Returns the session index expected at a child of the block.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This can be used to instantiate a `SigningContext`.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_session_index_for_child</span>(
+	<span class="doccomment">/// Returns the session index expected at a child of the block.
+	///
+	/// This can be used to instantiate a `SigningContext`.
+	</span><span class="kw">pub async fn </span>parachain_host_session_index_for_child(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SessionIndex</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_session_index_for_child&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>)
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;SessionIndex, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_session_index_for_child&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;)
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get the current validators.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_validators</span>(
+	<span class="doccomment">/// Get the current validators.
+	</span><span class="kw">pub async fn </span>parachain_host_validators(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ValidatorId</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_validators&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>)
-			.<span class="kw">await</span>
-	}
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;ValidatorId&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_validators&quot;</span>, at, <span class="prelude-val">None</span>::&lt;()&gt;)
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get the contents of all channels addressed to the given recipient. Channels that have no</span>
-	<span class="doccomment">/// messages in them are also included.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_inbound_hrmp_channels_contents</span>(
+	<span class="doccomment">/// Get the contents of all channels addressed to the given recipient. Channels that have no
+	/// messages in them are also included.
+	</span><span class="kw">pub async fn </span>parachain_host_inbound_hrmp_channels_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ParaId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundHrmpMessage</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(
+		para_id: ParaId,
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;BTreeMap&lt;ParaId, Vec&lt;InboundHrmpMessage&gt;&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(
 			<span class="string">&quot;ParachainHost_inbound_hrmp_channels_contents&quot;</span>,
-			<span class="ident">at</span>,
-			<span class="prelude-val">Some</span>(<span class="ident">para_id</span>),
+			at,
+			<span class="prelude-val">Some</span>(para_id),
 		)
-		.<span class="kw">await</span>
-	}
+		.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get all the pending inbound messages in the downward message queue for a para.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parachain_host_dmq_contents</span>(
+	<span class="doccomment">/// Get all the pending inbound messages in the downward message queue for a para.
+	</span><span class="kw">pub async fn </span>parachain_host_dmq_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">at</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundDownwardMessage</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">call_remote_runtime_function</span>(<span class="string">&quot;ParachainHost_dmq_contents&quot;</span>, <span class="ident">at</span>, <span class="prelude-val">Some</span>(<span class="ident">para_id</span>))
-			.<span class="kw">await</span>
-	}
+		para_id: ParaId,
+		at: PHash,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;InboundDownwardMessage&gt;, RelayChainError&gt; {
+		<span class="self">self</span>.call_remote_runtime_function(<span class="string">&quot;ParachainHost_dmq_contents&quot;</span>, at, <span class="prelude-val">Some</span>(para_id))
+			.<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Get a stream of all imported relay chain headers</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_imported_heads_stream</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">futures::channel::mpsc::channel</span>::<span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>(<span class="ident">NOTIFICATION_CHANNEL_SIZE_LIMIT</span>);
-		<span class="self">self</span>.<span class="ident">send_register_message_to_worker</span>(<span class="ident">NotificationRegisterMessage::RegisterImportListener</span>(
-			<span class="ident">tx</span>,
+	<span class="doccomment">/// Get a stream of all imported relay chain headers
+	</span><span class="kw">pub async fn </span>get_imported_heads_stream(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Receiver&lt;PHeader&gt;, RelayChainError&gt; {
+		<span class="kw">let </span>(tx, rx) = futures::channel::mpsc::channel::&lt;PHeader&gt;(NOTIFICATION_CHANNEL_SIZE_LIMIT);
+		<span class="self">self</span>.send_register_message_to_worker(NotificationRegisterMessage::RegisterImportListener(
+			tx,
 		))<span class="question-mark">?</span>;
-		<span class="prelude-val">Ok</span>(<span class="ident">rx</span>)
+		<span class="prelude-val">Ok</span>(rx)
 	}
 
-	<span class="doccomment">/// Get a stream of new best relay chain headers</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_best_heads_stream</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">futures::channel::mpsc::channel</span>::<span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>(<span class="ident">NOTIFICATION_CHANNEL_SIZE_LIMIT</span>);
-		<span class="self">self</span>.<span class="ident">send_register_message_to_worker</span>(
-			<span class="ident">NotificationRegisterMessage::RegisterBestHeadListener</span>(<span class="ident">tx</span>),
+	<span class="doccomment">/// Get a stream of new best relay chain headers
+	</span><span class="kw">pub async fn </span>get_best_heads_stream(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Receiver&lt;PHeader&gt;, RelayChainError&gt; {
+		<span class="kw">let </span>(tx, rx) = futures::channel::mpsc::channel::&lt;PHeader&gt;(NOTIFICATION_CHANNEL_SIZE_LIMIT);
+		<span class="self">self</span>.send_register_message_to_worker(
+			NotificationRegisterMessage::RegisterBestHeadListener(tx),
 		)<span class="question-mark">?</span>;
-		<span class="prelude-val">Ok</span>(<span class="ident">rx</span>)
+		<span class="prelude-val">Ok</span>(rx)
 	}
 
-	<span class="doccomment">/// Get a stream of finalized relay chain headers</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_finalized_heads_stream</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Receiver</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">futures::channel::mpsc::channel</span>::<span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>(<span class="ident">NOTIFICATION_CHANNEL_SIZE_LIMIT</span>);
-		<span class="self">self</span>.<span class="ident">send_register_message_to_worker</span>(
-			<span class="ident">NotificationRegisterMessage::RegisterFinalizationListener</span>(<span class="ident">tx</span>),
+	<span class="doccomment">/// Get a stream of finalized relay chain headers
+	</span><span class="kw">pub async fn </span>get_finalized_heads_stream(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Receiver&lt;PHeader&gt;, RelayChainError&gt; {
+		<span class="kw">let </span>(tx, rx) = futures::channel::mpsc::channel::&lt;PHeader&gt;(NOTIFICATION_CHANNEL_SIZE_LIMIT);
+		<span class="self">self</span>.send_register_message_to_worker(
+			NotificationRegisterMessage::RegisterFinalizationListener(tx),
 		)<span class="question-mark">?</span>;
-		<span class="prelude-val">Ok</span>(<span class="ident">rx</span>)
+		<span class="prelude-val">Ok</span>(rx)
 	}
 
-	<span class="kw">fn</span> <span class="ident">send_register_message_to_worker</span>(
+	<span class="kw">fn </span>send_register_message_to_worker(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">message</span>: <span class="ident">NotificationRegisterMessage</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">to_worker_channel</span>
-			.<span class="ident">try_send</span>(<span class="ident">message</span>)
-			.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">RelayChainError::WorkerCommunicationError</span>(<span class="ident">e</span>.<span class="ident">to_string</span>()))
+		message: NotificationRegisterMessage,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(), RelayChainError&gt; {
+		<span class="self">self</span>.to_worker_channel
+			.try_send(message)
+			.map_err(|e| RelayChainError::WorkerCommunicationError(e.to_string()))
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">subscribe_imported_heads</span>(
-		<span class="ident">ws_client</span>: <span class="kw-2">&amp;</span><span class="ident">JsonRpcClient</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="ident">ws_client</span>
-			.<span class="ident">subscribe</span>::<span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>(<span class="string">&quot;chain_subscribeAllHeads&quot;</span>, <span class="prelude-val">None</span>, <span class="string">&quot;chain_unsubscribeAllHeads&quot;</span>)
+	<span class="kw">async fn </span>subscribe_imported_heads(
+		ws_client: <span class="kw-2">&amp;</span>JsonRpcClient,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Subscription&lt;PHeader&gt;, RelayChainError&gt; {
+		<span class="prelude-val">Ok</span>(ws_client
+			.subscribe::&lt;PHeader&gt;(<span class="string">&quot;chain_subscribeAllHeads&quot;</span>, <span class="prelude-val">None</span>, <span class="string">&quot;chain_unsubscribeAllHeads&quot;</span>)
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">subscribe_finalized_heads</span>(
-		<span class="ident">ws_client</span>: <span class="kw-2">&amp;</span><span class="ident">JsonRpcClient</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="ident">ws_client</span>
-			.<span class="ident">subscribe</span>::<span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>(
+	<span class="kw">async fn </span>subscribe_finalized_heads(
+		ws_client: <span class="kw-2">&amp;</span>JsonRpcClient,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Subscription&lt;PHeader&gt;, RelayChainError&gt; {
+		<span class="prelude-val">Ok</span>(ws_client
+			.subscribe::&lt;PHeader&gt;(
 				<span class="string">&quot;chain_subscribeFinalizedHeads&quot;</span>,
 				<span class="prelude-val">None</span>,
 				<span class="string">&quot;chain_unsubscribeFinalizedHeads&quot;</span>,
@@ -1406,11 +1406,11 @@
 			.<span class="kw">await</span><span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">subscribe_new_best_heads</span>(
-		<span class="ident">ws_client</span>: <span class="kw-2">&amp;</span><span class="ident">JsonRpcClient</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>, <span class="ident">RelayChainError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="ident">ws_client</span>
-			.<span class="ident">subscribe</span>::<span class="op">&lt;</span><span class="ident">PHeader</span><span class="op">&gt;</span>(
+	<span class="kw">async fn </span>subscribe_new_best_heads(
+		ws_client: <span class="kw-2">&amp;</span>JsonRpcClient,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Subscription&lt;PHeader&gt;, RelayChainError&gt; {
+		<span class="prelude-val">Ok</span>(ws_client
+			.subscribe::&lt;PHeader&gt;(
 				<span class="string">&quot;chain_subscribeNewHeads&quot;</span>,
 				<span class="prelude-val">None</span>,
 				<span class="string">&quot;chain_unsubscribeFinalizedHeads&quot;</span>,
@@ -1419,4 +1419,4 @@
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_rpc_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_rpc_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

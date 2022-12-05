@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot-parachain/src/chain_spec/penpal.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>penpal.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../polkadot_parachain/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot-parachain/src/chain_spec/penpal.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>penpal.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../polkadot_parachain/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -135,142 +135,142 @@
 <span id="135">135</span>
 <span id="136">136</span>
 <span id="137">137</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::chain_spec</span>::{
-	<span class="ident">get_account_id_from_seed</span>, <span class="ident">get_collator_keys_from_seed</span>, <span class="ident">Extensions</span>, <span class="ident">SAFE_XCM_VERSION</span>,
+</span><span class="kw">use </span><span class="kw">crate</span>::chain_spec::{
+	get_account_id_from_seed, get_collator_keys_from_seed, Extensions, SAFE_XCM_VERSION,
 };
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core::ParaId</span>;
-<span class="kw">use</span> <span class="ident">parachains_common</span>::{<span class="ident">AccountId</span>, <span class="ident">AuraId</span>};
-<span class="kw">use</span> <span class="ident">sc_service::ChainType</span>;
-<span class="kw">use</span> <span class="ident">sp_core::sr25519</span>;
-<span class="doccomment">/// Specialized `ChainSpec` for the normal parachain runtime.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PenpalChainSpec</span> <span class="op">=</span> <span class="ident">sc_service::GenericChainSpec</span><span class="op">&lt;</span><span class="ident">penpal_runtime::GenesisConfig</span>, <span class="ident">Extensions</span><span class="op">&gt;</span>;
+<span class="kw">use </span>cumulus_primitives_core::ParaId;
+<span class="kw">use </span>parachains_common::{AccountId, AuraId};
+<span class="kw">use </span>sc_service::ChainType;
+<span class="kw">use </span>sp_core::sr25519;
+<span class="doccomment">/// Specialized `ChainSpec` for the normal parachain runtime.
+</span><span class="kw">pub type </span>PenpalChainSpec = sc_service::GenericChainSpec&lt;penpal_runtime::GenesisConfig, Extensions&gt;;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_penpal_chain_spec</span>(<span class="ident">id</span>: <span class="ident">ParaId</span>, <span class="ident">relay_chain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">PenpalChainSpec</span> {
-	<span class="comment">// Give your base currency a unit name and decimal places</span>
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;UNIT&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12u32</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;ss58Format&quot;</span>.<span class="ident">into</span>(), <span class="number">42u32</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>get_penpal_chain_spec(id: ParaId, relay_chain: <span class="kw-2">&amp;</span>str) -&gt; PenpalChainSpec {
+	<span class="comment">// Give your base currency a unit name and decimal places
+	</span><span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;UNIT&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12u32</span>.into());
+	properties.insert(<span class="string">&quot;ss58Format&quot;</span>.into(), <span class="number">42u32</span>.into());
 
-	<span class="ident">PenpalChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Penpal Parachain&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;penpal-{}&quot;</span>, <span class="ident">relay_chain</span>.<span class="ident">replace</span>(<span class="string">&quot;-local&quot;</span>, <span class="string">&quot;&quot;</span>)),
-		<span class="ident">ChainType::Development</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">penpal_testnet_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[
+	PenpalChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Penpal Parachain&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;penpal-{}&quot;</span>, relay_chain.replace(<span class="string">&quot;-local&quot;</span>, <span class="string">&quot;&quot;</span>)),
+		ChainType::Development,
+		<span class="kw">move </span>|| {
+			penpal_testnet_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+						get_collator_keys_from_seed::&lt;AuraId&gt;(<span class="string">&quot;Alice&quot;</span>),
 					),
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+						get_collator_keys_from_seed::&lt;AuraId&gt;(<span class="string">&quot;Bob&quot;</span>),
 					),
 				],
 				<span class="macro">vec!</span>[
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie//stash&quot;</span>),
 				],
-				<span class="ident">id</span>,
+				id,
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="ident">Extensions</span> {
-			<span class="ident">relay_chain</span>: <span class="ident">relay_chain</span>.<span class="ident">into</span>(), <span class="comment">// You MUST set this to the correct network!</span>
-			<span class="ident">para_id</span>: <span class="ident">id</span>.<span class="ident">into</span>(),
+		Extensions {
+			relay_chain: relay_chain.into(), <span class="comment">// You MUST set this to the correct network!
+			</span>para_id: id.into(),
 		},
 	)
 }
 
-<span class="kw">fn</span> <span class="ident">penpal_testnet_genesis</span>(
-	<span class="ident">invulnerables</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">AccountId</span>, <span class="ident">AuraId</span>)<span class="op">&gt;</span>,
-	<span class="ident">endowed_accounts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>,
-	<span class="ident">id</span>: <span class="ident">ParaId</span>,
-) -&gt; <span class="ident">penpal_runtime::GenesisConfig</span> {
-	<span class="ident">penpal_runtime::GenesisConfig</span> {
-		<span class="ident">system</span>: <span class="ident">penpal_runtime::SystemConfig</span> {
-			<span class="ident">code</span>: <span class="ident">penpal_runtime::WASM_BINARY</span>
-				.<span class="ident">expect</span>(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
-				.<span class="ident">to_vec</span>(),
+<span class="kw">fn </span>penpal_testnet_genesis(
+	invulnerables: Vec&lt;(AccountId, AuraId)&gt;,
+	endowed_accounts: Vec&lt;AccountId&gt;,
+	id: ParaId,
+) -&gt; penpal_runtime::GenesisConfig {
+	penpal_runtime::GenesisConfig {
+		system: penpal_runtime::SystemConfig {
+			code: penpal_runtime::WASM_BINARY
+				.expect(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
+				.to_vec(),
 		},
-		<span class="ident">balances</span>: <span class="ident">penpal_runtime::BalancesConfig</span> {
-			<span class="ident">balances</span>: <span class="ident">endowed_accounts</span>
-				.<span class="ident">iter</span>()
-				.<span class="ident">cloned</span>()
-				.<span class="ident">map</span>(<span class="op">|</span><span class="ident">k</span><span class="op">|</span> (<span class="ident">k</span>, <span class="ident">penpal_runtime::EXISTENTIAL_DEPOSIT</span> <span class="op">*</span> <span class="number">4096</span>))
-				.<span class="ident">collect</span>(),
+		balances: penpal_runtime::BalancesConfig {
+			balances: endowed_accounts
+				.iter()
+				.cloned()
+				.map(|k| (k, penpal_runtime::EXISTENTIAL_DEPOSIT * <span class="number">4096</span>))
+				.collect(),
 		},
-		<span class="ident">parachain_info</span>: <span class="ident">penpal_runtime::ParachainInfoConfig</span> { <span class="ident">parachain_id</span>: <span class="ident">id</span> },
-		<span class="ident">collator_selection</span>: <span class="ident">penpal_runtime::CollatorSelectionConfig</span> {
-			<span class="ident">invulnerables</span>: <span class="ident">invulnerables</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">acc</span>).<span class="ident">collect</span>(),
-			<span class="ident">candidacy_bond</span>: <span class="ident">penpal_runtime::EXISTENTIAL_DEPOSIT</span> <span class="op">*</span> <span class="number">16</span>,
-			..<span class="ident">Default::default</span>()
+		parachain_info: penpal_runtime::ParachainInfoConfig { parachain_id: id },
+		collator_selection: penpal_runtime::CollatorSelectionConfig {
+			invulnerables: invulnerables.iter().cloned().map(|(acc, <span class="kw">_</span>)| acc).collect(),
+			candidacy_bond: penpal_runtime::EXISTENTIAL_DEPOSIT * <span class="number">16</span>,
+			..Default::default()
 		},
-		<span class="ident">session</span>: <span class="ident">penpal_runtime::SessionConfig</span> {
-			<span class="ident">keys</span>: <span class="ident">invulnerables</span>
-				.<span class="ident">into_iter</span>()
-				.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="ident">aura</span>)<span class="op">|</span> {
+		session: penpal_runtime::SessionConfig {
+			keys: invulnerables
+				.into_iter()
+				.map(|(acc, aura)| {
 					(
-						<span class="ident">acc</span>.<span class="ident">clone</span>(),               <span class="comment">// account id</span>
-						<span class="ident">acc</span>,                       <span class="comment">// validator id</span>
-						<span class="ident">penpal_session_keys</span>(<span class="ident">aura</span>), <span class="comment">// session keys</span>
-					)
+						acc.clone(),               <span class="comment">// account id
+						</span>acc,                       <span class="comment">// validator id
+						</span>penpal_session_keys(aura), <span class="comment">// session keys
+					</span>)
 				})
-				.<span class="ident">collect</span>(),
+				.collect(),
 		},
-		<span class="comment">// no need to pass anything to aura, in fact it will panic if we do. Session will take care</span>
-		<span class="comment">// of this.</span>
-		<span class="ident">aura</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">aura_ext</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">parachain_system</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">polkadot_xcm</span>: <span class="ident">penpal_runtime::PolkadotXcmConfig</span> {
-			<span class="ident">safe_xcm_version</span>: <span class="prelude-val">Some</span>(<span class="ident">SAFE_XCM_VERSION</span>),
+		<span class="comment">// no need to pass anything to aura, in fact it will panic if we do. Session will take care
+		// of this.
+		</span>aura: Default::default(),
+		aura_ext: Default::default(),
+		parachain_system: Default::default(),
+		polkadot_xcm: penpal_runtime::PolkadotXcmConfig {
+			safe_xcm_version: <span class="prelude-val">Some</span>(SAFE_XCM_VERSION),
 		},
-		<span class="ident">sudo</span>: <span class="ident">penpal_runtime::SudoConfig</span> {
-			<span class="ident">key</span>: <span class="prelude-val">Some</span>(<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>)),
+		sudo: penpal_runtime::SudoConfig {
+			key: <span class="prelude-val">Some</span>(get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>)),
 		},
 	}
 }
 
-<span class="doccomment">/// Generate the session keys from individual elements.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The input must be a tuple of individual keys (a single arg for now since we have just one key).</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">penpal_session_keys</span>(<span class="ident">keys</span>: <span class="ident">AuraId</span>) -&gt; <span class="ident">penpal_runtime::SessionKeys</span> {
-	<span class="ident">penpal_runtime::SessionKeys</span> { <span class="ident">aura</span>: <span class="ident">keys</span> }
+<span class="doccomment">/// Generate the session keys from individual elements.
+///
+/// The input must be a tuple of individual keys (a single arg for now since we have just one key).
+</span><span class="kw">pub fn </span>penpal_session_keys(keys: AuraId) -&gt; penpal_runtime::SessionKeys {
+	penpal_runtime::SessionKeys { aura: keys }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="polkadot_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="polkadot_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

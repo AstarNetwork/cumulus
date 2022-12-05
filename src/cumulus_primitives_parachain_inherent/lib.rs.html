@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `primitives/parachain-inherent/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_primitives_parachain_inherent/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_primitives_parachain_inherent/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_primitives_parachain_inherent/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `primitives/parachain-inherent/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_primitives_parachain_inherent/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_primitives_parachain_inherent/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_primitives_parachain_inherent/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -116,123 +116,123 @@
 <span id="116">116</span>
 <span id="117">117</span>
 <span id="118">118</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Substrate is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Substrate is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Substrate is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Substrate is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! Cumulus parachain inherent</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The [`ParachainInherentData`] is the data that is passed by the collator to the parachain runtime.</span>
-<span class="doccomment">//! The runtime will use this data to execute messages from other parachains/the relay chain or to</span>
-<span class="doccomment">//! read data from the relay chain state. When the parachain is validated by a parachain validator on</span>
-<span class="doccomment">//! the relay chain, this data is checked for correctnes. If the data passed by the collator to the</span>
-<span class="doccomment">//! runtime isn&#39;t correct, the parachain candidate is considered invalid.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Use [`ParachainInherentData::create_at`] to create the [`ParachainInherentData`] at a given</span>
-<span class="doccomment">//! relay chain block to include it in a parachain block.</span>
+</span><span class="doccomment">//! Cumulus parachain inherent
+//!
+//! The [`ParachainInherentData`] is the data that is passed by the collator to the parachain runtime.
+//! The runtime will use this data to execute messages from other parachains/the relay chain or to
+//! read data from the relay chain state. When the parachain is validated by a parachain validator on
+//! the relay chain, this data is checked for correctnes. If the data passed by the collator to the
+//! runtime isn&#39;t correct, the parachain candidate is considered invalid.
+//!
+//! Use [`ParachainInherentData::create_at`] to create the [`ParachainInherentData`] at a given
+//! relay chain block to include it in a parachain block.
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
+</span><span class="attribute">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
 
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{
-	<span class="ident">relay_chain</span>::{<span class="ident">BlakeTwo256</span>, <span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">RelayHash</span>, <span class="ident">HashT</span> <span class="kw">as</span> <span class="kw">_</span>},
-	<span class="ident">InboundDownwardMessage</span>, <span class="ident">InboundHrmpMessage</span>, <span class="ident">ParaId</span>, <span class="ident">PersistedValidationData</span>,
+</span><span class="kw">use </span>cumulus_primitives_core::{
+	relay_chain::{BlakeTwo256, Hash <span class="kw">as </span>RelayHash, HashT <span class="kw">as _</span>},
+	InboundDownwardMessage, InboundHrmpMessage, ParaId, PersistedValidationData,
 };
 
-<span class="kw">use</span> <span class="ident">scale_info::TypeInfo</span>;
-<span class="kw">use</span> <span class="ident">sp_inherents::InherentIdentifier</span>;
-<span class="kw">use</span> <span class="ident">sp_std</span>::{<span class="ident">collections::btree_map::BTreeMap</span>, <span class="ident">vec::Vec</span>};
+<span class="kw">use </span>scale_info::TypeInfo;
+<span class="kw">use </span>sp_inherents::InherentIdentifier;
+<span class="kw">use </span>sp_std::{collections::btree_map::BTreeMap, vec::Vec};
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">mod</span> <span class="ident">client_side</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">client_side</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">mod</span> <span class="ident">mock</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">mock</span>::{<span class="ident">MockValidationDataInherentDataProvider</span>, <span class="ident">MockXcmConfig</span>};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">mod </span>client_side;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">pub use </span>client_side::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">mod </span>mock;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">pub use </span>mock::{MockValidationDataInherentDataProvider, MockXcmConfig};
 
-<span class="doccomment">/// The identifier for the parachain inherent.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INHERENT_IDENTIFIER</span>: <span class="ident">InherentIdentifier</span> <span class="op">=</span> <span class="kw-2">*</span><span class="string">b&quot;sysi1337&quot;</span>;
+<span class="doccomment">/// The identifier for the parachain inherent.
+</span><span class="kw">pub const </span>INHERENT_IDENTIFIER: InherentIdentifier = <span class="kw-2">*</span><span class="string">b&quot;sysi1337&quot;</span>;
 
-<span class="doccomment">/// The inherent data that is passed by the collator to the parachain runtime.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">codec::Encode</span>, <span class="ident">codec::Decode</span>, <span class="ident">sp_core::RuntimeDebug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ParachainInherentData</span> {
-	<span class="kw">pub</span> <span class="ident">validation_data</span>: <span class="ident">PersistedValidationData</span>,
-	<span class="doccomment">/// A storage proof of a predefined set of keys from the relay-chain.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Specifically this witness contains the data for:</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// - the current slot number at the given relay parent</span>
-	<span class="doccomment">/// - active host configuration as per the relay parent,</span>
-	<span class="doccomment">/// - the relay dispatch queue sizes</span>
-	<span class="doccomment">/// - the list of egress HRMP channels (in the list of recipients form)</span>
-	<span class="doccomment">/// - the metadata for the egress HRMP channels</span>
-	<span class="kw">pub</span> <span class="ident">relay_chain_state</span>: <span class="ident">sp_trie::StorageProof</span>,
-	<span class="doccomment">/// Downward messages in the order they were sent.</span>
-	<span class="kw">pub</span> <span class="ident">downward_messages</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundDownwardMessage</span><span class="op">&gt;</span>,
-	<span class="doccomment">/// HRMP messages grouped by channels. The messages in the inner vec must be in order they</span>
-	<span class="doccomment">/// were sent. In combination with the rule of no more than one message in a channel per block,</span>
-	<span class="doccomment">/// this means `sent_at` is **strictly** greater than the previous one (if any).</span>
-	<span class="kw">pub</span> <span class="ident">horizontal_messages</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ParaId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundHrmpMessage</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// The inherent data that is passed by the collator to the parachain runtime.
+</span><span class="attribute">#[derive(codec::Encode, codec::Decode, sp_core::RuntimeDebug, Clone, PartialEq, TypeInfo)]
+</span><span class="kw">pub struct </span>ParachainInherentData {
+	<span class="kw">pub </span>validation_data: PersistedValidationData,
+	<span class="doccomment">/// A storage proof of a predefined set of keys from the relay-chain.
+	///
+	/// Specifically this witness contains the data for:
+	///
+	/// - the current slot number at the given relay parent
+	/// - active host configuration as per the relay parent,
+	/// - the relay dispatch queue sizes
+	/// - the list of egress HRMP channels (in the list of recipients form)
+	/// - the metadata for the egress HRMP channels
+	</span><span class="kw">pub </span>relay_chain_state: sp_trie::StorageProof,
+	<span class="doccomment">/// Downward messages in the order they were sent.
+	</span><span class="kw">pub </span>downward_messages: Vec&lt;InboundDownwardMessage&gt;,
+	<span class="doccomment">/// HRMP messages grouped by channels. The messages in the inner vec must be in order they
+	/// were sent. In combination with the rule of no more than one message in a channel per block,
+	/// this means `sent_at` is **strictly** greater than the previous one (if any).
+	</span><span class="kw">pub </span>horizontal_messages: BTreeMap&lt;ParaId, Vec&lt;InboundHrmpMessage&gt;&gt;,
 }
 
-<span class="doccomment">/// This struct provides ability to extend a message queue chain (MQC) and compute a new head.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// MQC is an instance of a [hash chain] applied to a message queue. Using a hash chain it&#39;s</span>
-<span class="doccomment">/// possible to represent a sequence of messages using only a single hash.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// A head for an empty chain is agreed to be a zero hash.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// An instance is used to track either DMP from the relay chain or HRMP across a channel.</span>
-<span class="doccomment">/// But a given instance is never used to track both. Therefore, you should call either</span>
-<span class="doccomment">/// `extend_downward` or `extend_hrmp`, but not both methods on a single instance.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [hash chain]: https://en.wikipedia.org/wiki/Hash_chain</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">codec::Encode</span>, <span class="ident">codec::Decode</span>, <span class="ident">scale_info::TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MessageQueueChain</span>(<span class="ident">RelayHash</span>);
+<span class="doccomment">/// This struct provides ability to extend a message queue chain (MQC) and compute a new head.
+///
+/// MQC is an instance of a [hash chain] applied to a message queue. Using a hash chain it&#39;s
+/// possible to represent a sequence of messages using only a single hash.
+///
+/// A head for an empty chain is agreed to be a zero hash.
+///
+/// An instance is used to track either DMP from the relay chain or HRMP across a channel.
+/// But a given instance is never used to track both. Therefore, you should call either
+/// `extend_downward` or `extend_hrmp`, but not both methods on a single instance.
+///
+/// [hash chain]: https://en.wikipedia.org/wiki/Hash_chain
+</span><span class="attribute">#[derive(Default, Clone, codec::Encode, codec::Decode, scale_info::TypeInfo)]
+</span><span class="kw">pub struct </span>MessageQueueChain(RelayHash);
 
-<span class="kw">impl</span> <span class="ident">MessageQueueChain</span> {
-	<span class="doccomment">/// Extend the hash chain with an HRMP message. This method should be used only when</span>
-	<span class="doccomment">/// this chain is tracking HRMP.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extend_hrmp</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">horizontal_message</span>: <span class="kw-2">&amp;</span><span class="ident">InboundHrmpMessage</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-		<span class="kw">let</span> <span class="ident">prev_head</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>;
-		<span class="self">self</span>.<span class="number">0</span> <span class="op">=</span> <span class="ident">BlakeTwo256::hash_of</span>(<span class="kw-2">&amp;</span>(
-			<span class="ident">prev_head</span>,
-			<span class="ident">horizontal_message</span>.<span class="ident">sent_at</span>,
-			<span class="ident">BlakeTwo256::hash_of</span>(<span class="kw-2">&amp;</span><span class="ident">horizontal_message</span>.<span class="ident">data</span>),
+<span class="kw">impl </span>MessageQueueChain {
+	<span class="doccomment">/// Extend the hash chain with an HRMP message. This method should be used only when
+	/// this chain is tracking HRMP.
+	</span><span class="kw">pub fn </span>extend_hrmp(<span class="kw-2">&amp;mut </span><span class="self">self</span>, horizontal_message: <span class="kw-2">&amp;</span>InboundHrmpMessage) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+		<span class="kw">let </span>prev_head = <span class="self">self</span>.<span class="number">0</span>;
+		<span class="self">self</span>.<span class="number">0 </span>= BlakeTwo256::hash_of(<span class="kw-2">&amp;</span>(
+			prev_head,
+			horizontal_message.sent_at,
+			BlakeTwo256::hash_of(<span class="kw-2">&amp;</span>horizontal_message.data),
 		));
-		<span class="self">self</span>
-	}
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Extend the hash chain with a downward message. This method should be used only when</span>
-	<span class="doccomment">/// this chain is tracking DMP.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extend_downward</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">downward_message</span>: <span class="kw-2">&amp;</span><span class="ident">InboundDownwardMessage</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-		<span class="kw">let</span> <span class="ident">prev_head</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>;
-		<span class="self">self</span>.<span class="number">0</span> <span class="op">=</span> <span class="ident">BlakeTwo256::hash_of</span>(<span class="kw-2">&amp;</span>(
-			<span class="ident">prev_head</span>,
-			<span class="ident">downward_message</span>.<span class="ident">sent_at</span>,
-			<span class="ident">BlakeTwo256::hash_of</span>(<span class="kw-2">&amp;</span><span class="ident">downward_message</span>.<span class="ident">msg</span>),
+	<span class="doccomment">/// Extend the hash chain with a downward message. This method should be used only when
+	/// this chain is tracking DMP.
+	</span><span class="kw">pub fn </span>extend_downward(<span class="kw-2">&amp;mut </span><span class="self">self</span>, downward_message: <span class="kw-2">&amp;</span>InboundDownwardMessage) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+		<span class="kw">let </span>prev_head = <span class="self">self</span>.<span class="number">0</span>;
+		<span class="self">self</span>.<span class="number">0 </span>= BlakeTwo256::hash_of(<span class="kw-2">&amp;</span>(
+			prev_head,
+			downward_message.sent_at,
+			BlakeTwo256::hash_of(<span class="kw-2">&amp;</span>downward_message.msg),
 		));
-		<span class="self">self</span>
-	}
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Return the current mead of the message queue hash chain.</span>
-	<span class="doccomment">/// This is agreed to be the zero hash for an empty chain.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">head</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayHash</span> {
-		<span class="self">self</span>.<span class="number">0</span>
-	}
+	<span class="doccomment">/// Return the current mead of the message queue hash chain.
+	/// This is agreed to be the zero hash for an empty chain.
+	</span><span class="kw">pub fn </span>head(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayHash {
+		<span class="self">self</span>.<span class="number">0
+	</span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_primitives_parachain_inherent" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_primitives_parachain_inherent" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

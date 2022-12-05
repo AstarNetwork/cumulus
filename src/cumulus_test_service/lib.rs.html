@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/service/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_test_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_test_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_test_service/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/service/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_test_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_test_service/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_test_service/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -814,821 +814,835 @@
 <span id="814">814</span>
 <span id="815">815</span>
 <span id="816">816</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! Crate used for testing with Cumulus.</span>
+</span><span class="doccomment">//! Crate used for testing with Cumulus.
 
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
+</span><span class="attribute">#![warn(missing_docs)]
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">chain_spec</span>;
-<span class="kw">mod</span> <span class="ident">genesis</span>;
+</span><span class="kw">pub mod </span>chain_spec;
+<span class="kw">mod </span>genesis;
 
-<span class="kw">use</span> <span class="ident">std</span>::{
-	<span class="ident">future::Future</span>,
-	<span class="ident">net</span>::{<span class="ident">IpAddr</span>, <span class="ident">Ipv4Addr</span>, <span class="ident">SocketAddr</span>},
-	<span class="ident">time::Duration</span>,
+<span class="kw">use </span>std::{
+	future::Future,
+	net::{IpAddr, Ipv4Addr, SocketAddr},
+	time::Duration,
 };
-<span class="kw">use</span> <span class="ident">url::Url</span>;
+<span class="kw">use </span>url::Url;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::runtime::Weight</span>;
-<span class="kw">use</span> <span class="ident">cumulus_client_cli::CollatorOptions</span>;
-<span class="kw">use</span> <span class="ident">cumulus_client_consensus_common</span>::{<span class="ident">ParachainCandidate</span>, <span class="ident">ParachainConsensus</span>};
-<span class="kw">use</span> <span class="ident">cumulus_client_network::BlockAnnounceValidator</span>;
-<span class="kw">use</span> <span class="ident">cumulus_client_service</span>::{
-	<span class="ident">prepare_node_config</span>, <span class="ident">start_collator</span>, <span class="ident">start_full_node</span>, <span class="ident">StartCollatorParams</span>, <span class="ident">StartFullNodeParams</span>,
+<span class="kw">use </span><span class="kw">crate</span>::runtime::Weight;
+<span class="kw">use </span>cumulus_client_cli::CollatorOptions;
+<span class="kw">use </span>cumulus_client_consensus_common::{
+	ParachainBlockImport <span class="kw">as </span>TParachainBlockImport, ParachainCandidate, ParachainConsensus,
 };
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core::ParaId</span>;
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_inprocess_interface::RelayChainInProcessInterface</span>;
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface</span>::{<span class="ident">RelayChainError</span>, <span class="ident">RelayChainInterface</span>, <span class="ident">RelayChainResult</span>};
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_minimal_node::build_minimal_relay_chain_node</span>;
+<span class="kw">use </span>cumulus_client_network::BlockAnnounceValidator;
+<span class="kw">use </span>cumulus_client_service::{
+	prepare_node_config, start_collator, start_full_node, StartCollatorParams, StartFullNodeParams,
+};
+<span class="kw">use </span>cumulus_primitives_core::ParaId;
+<span class="kw">use </span>cumulus_relay_chain_inprocess_interface::RelayChainInProcessInterface;
+<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainError, RelayChainInterface, RelayChainResult};
+<span class="kw">use </span>cumulus_relay_chain_minimal_node::build_minimal_relay_chain_node;
 
-<span class="kw">use</span> <span class="ident">cumulus_test_runtime</span>::{<span class="ident">Hash</span>, <span class="ident">Header</span>, <span class="ident">NodeBlock</span> <span class="kw">as</span> <span class="ident">Block</span>, <span class="ident">RuntimeApi</span>};
+<span class="kw">use </span>cumulus_test_runtime::{Hash, Header, NodeBlock <span class="kw">as </span>Block, RuntimeApi};
 
-<span class="kw">use</span> <span class="ident">frame_system_rpc_runtime_api::AccountNonceApi</span>;
-<span class="kw">use</span> <span class="ident">polkadot_primitives::v2</span>::{<span class="ident">CollatorPair</span>, <span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">PersistedValidationData</span>};
-<span class="kw">use</span> <span class="ident">polkadot_service::ProvideRuntimeApi</span>;
-<span class="kw">use</span> <span class="ident">sc_client_api::execution_extensions::ExecutionStrategies</span>;
-<span class="kw">use</span> <span class="ident">sc_network</span>::{<span class="ident">multiaddr</span>, <span class="ident">NetworkBlock</span>, <span class="ident">NetworkService</span>};
-<span class="kw">use</span> <span class="ident">sc_network_common</span>::{<span class="ident">config::TransportConfig</span>, <span class="ident">service::NetworkStateInfo</span>};
-<span class="kw">use</span> <span class="ident">sc_service</span>::{
-	<span class="ident">config</span>::{
-		<span class="ident">BlocksPruning</span>, <span class="ident">DatabaseSource</span>, <span class="ident">KeystoreConfig</span>, <span class="ident">MultiaddrWithPeerId</span>, <span class="ident">NetworkConfiguration</span>,
-		<span class="ident">OffchainWorkerConfig</span>, <span class="ident">PruningMode</span>, <span class="ident">WasmExecutionMethod</span>,
+<span class="kw">use </span>frame_system_rpc_runtime_api::AccountNonceApi;
+<span class="kw">use </span>polkadot_primitives::v2::{CollatorPair, Hash <span class="kw">as </span>PHash, PersistedValidationData};
+<span class="kw">use </span>polkadot_service::ProvideRuntimeApi;
+<span class="kw">use </span>sc_client_api::execution_extensions::ExecutionStrategies;
+<span class="kw">use </span>sc_network::{multiaddr, NetworkBlock, NetworkService};
+<span class="kw">use </span>sc_network_common::{config::TransportConfig, service::NetworkStateInfo};
+<span class="kw">use </span>sc_service::{
+	config::{
+		BlocksPruning, DatabaseSource, KeystoreConfig, MultiaddrWithPeerId, NetworkConfiguration,
+		OffchainWorkerConfig, PruningMode, WasmExecutionMethod,
 	},
-	<span class="ident">BasePath</span>, <span class="ident">ChainSpec</span>, <span class="ident">Configuration</span>, <span class="ident">Error</span> <span class="kw">as</span> <span class="ident">ServiceError</span>, <span class="ident">PartialComponents</span>, <span class="ident">Role</span>,
-	<span class="ident">RpcHandlers</span>, <span class="ident">TFullBackend</span>, <span class="ident">TFullClient</span>, <span class="ident">TaskManager</span>,
+	BasePath, ChainSpec, Configuration, Error <span class="kw">as </span>ServiceError, PartialComponents, Role,
+	RpcHandlers, TFullBackend, TFullClient, TaskManager,
 };
-<span class="kw">use</span> <span class="ident">sp_arithmetic::traits::SaturatedConversion</span>;
-<span class="kw">use</span> <span class="ident">sp_blockchain::HeaderBackend</span>;
-<span class="kw">use</span> <span class="ident">sp_core</span>::{<span class="ident">Pair</span>, <span class="ident">H256</span>};
-<span class="kw">use</span> <span class="ident">sp_keyring::Sr25519Keyring</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{<span class="ident">codec::Encode</span>, <span class="ident">generic</span>, <span class="ident">traits::BlakeTwo256</span>};
-<span class="kw">use</span> <span class="ident">sp_state_machine::BasicExternalities</span>;
-<span class="kw">use</span> <span class="ident">sp_trie::PrefixedMemoryDB</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
-<span class="kw">use</span> <span class="ident">substrate_test_client</span>::{
-	<span class="ident">BlockchainEventsExt</span>, <span class="ident">RpcHandlersExt</span>, <span class="ident">RpcTransactionError</span>, <span class="ident">RpcTransactionOutput</span>,
+<span class="kw">use </span>sp_arithmetic::traits::SaturatedConversion;
+<span class="kw">use </span>sp_blockchain::HeaderBackend;
+<span class="kw">use </span>sp_core::{Pair, H256};
+<span class="kw">use </span>sp_keyring::Sr25519Keyring;
+<span class="kw">use </span>sp_runtime::{codec::Encode, generic, traits::BlakeTwo256};
+<span class="kw">use </span>sp_state_machine::BasicExternalities;
+<span class="kw">use </span>sp_trie::PrefixedMemoryDB;
+<span class="kw">use </span>std::sync::Arc;
+<span class="kw">use </span>substrate_test_client::{
+	BlockchainEventsExt, RpcHandlersExt, RpcTransactionError, RpcTransactionOutput,
 };
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">chain_spec</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">cumulus_test_runtime</span> <span class="kw">as</span> <span class="ident">runtime</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">genesis</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_keyring::Sr25519Keyring</span> <span class="kw">as</span> <span class="ident">Keyring</span>;
+<span class="kw">pub use </span>chain_spec::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>cumulus_test_runtime <span class="kw">as </span>runtime;
+<span class="kw">pub use </span>genesis::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>sp_keyring::Sr25519Keyring <span class="kw">as </span>Keyring;
 
-<span class="doccomment">/// A consensus that will never produce any block.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">NullConsensus</span>;
+<span class="doccomment">/// A consensus that will never produce any block.
+</span><span class="attribute">#[derive(Clone)]
+</span><span class="kw">struct </span>NullConsensus;
 
-<span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
-<span class="kw">impl</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">NullConsensus</span> {
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">produce_candidate</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Header</span>,
-		<span class="kw">_</span>: <span class="ident">PHash</span>,
-		<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">PersistedValidationData</span>,
-	) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParachainCandidate</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">None</span>
+<span class="attribute">#[async_trait::async_trait]
+</span><span class="kw">impl </span>ParachainConsensus&lt;Block&gt; <span class="kw">for </span>NullConsensus {
+	<span class="kw">async fn </span>produce_candidate(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		<span class="kw">_</span>: <span class="kw-2">&amp;</span>Header,
+		<span class="kw">_</span>: PHash,
+		<span class="kw">_</span>: <span class="kw-2">&amp;</span>PersistedValidationData,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;ParachainCandidate&lt;Block&gt;&gt; {
+		<span class="prelude-val">None
+	</span>}
+}
+
+<span class="doccomment">/// The signature of the announce block fn.
+</span><span class="kw">pub type </span>AnnounceBlockFn = Arc&lt;<span class="kw">dyn </span>Fn(Hash, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;) + Send + Sync&gt;;
+
+<span class="doccomment">/// Native executor instance.
+</span><span class="kw">pub struct </span>RuntimeExecutor;
+
+<span class="kw">impl </span>sc_executor::NativeExecutionDispatch <span class="kw">for </span>RuntimeExecutor {
+	<span class="kw">type </span>ExtendHostFunctions = ();
+
+	<span class="kw">fn </span>dispatch(method: <span class="kw-2">&amp;</span>str, data: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt; {
+		cumulus_test_runtime::api::dispatch(method, data)
+	}
+
+	<span class="kw">fn </span>native_version() -&gt; sc_executor::NativeVersion {
+		cumulus_test_runtime::native_version()
 	}
 }
 
-<span class="doccomment">/// The signature of the announce block fn.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">AnnounceBlockFn</span> <span class="op">=</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">Hash</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>;
+<span class="doccomment">/// The client type being used by the test service.
+</span><span class="kw">pub type </span>Client = TFullClient&lt;
+	runtime::NodeBlock,
+	runtime::RuntimeApi,
+	sc_executor::NativeElseWasmExecutor&lt;RuntimeExecutor&gt;,
+&gt;;
 
-<span class="doccomment">/// Native executor instance.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RuntimeExecutor</span>;
+<span class="doccomment">/// Transaction pool type used by the test service
+</span><span class="kw">pub type </span>TransactionPool = Arc&lt;sc_transaction_pool::FullPool&lt;Block, Client&gt;&gt;;
 
-<span class="kw">impl</span> <span class="ident">sc_executor::NativeExecutionDispatch</span> <span class="kw">for</span> <span class="ident">RuntimeExecutor</span> {
-	<span class="kw">type</span> <span class="ident">ExtendHostFunctions</span> <span class="op">=</span> ();
+<span class="kw">type </span>ParachainBlockImport = TParachainBlockImport&lt;Arc&lt;Client&gt;&gt;;
 
-	<span class="kw">fn</span> <span class="ident">dispatch</span>(<span class="ident">method</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="ident">cumulus_test_runtime::api::dispatch</span>(<span class="ident">method</span>, <span class="ident">data</span>)
-	}
-
-	<span class="kw">fn</span> <span class="ident">native_version</span>() -&gt; <span class="ident">sc_executor::NativeVersion</span> {
-		<span class="ident">cumulus_test_runtime::native_version</span>()
-	}
-}
-
-<span class="doccomment">/// The client type being used by the test service.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Client</span> <span class="op">=</span> <span class="ident">TFullClient</span><span class="op">&lt;</span>
-	<span class="ident">runtime::NodeBlock</span>,
-	<span class="ident">runtime::RuntimeApi</span>,
-	<span class="ident">sc_executor::NativeElseWasmExecutor</span><span class="op">&lt;</span><span class="ident">RuntimeExecutor</span><span class="op">&gt;</span>,
-<span class="op">&gt;</span>;
-
-<span class="doccomment">/// Transaction pool type used by the test service</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">TransactionPool</span> <span class="op">=</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">sc_transaction_pool::FullPool</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Client</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-
-<span class="doccomment">/// Starts a `ServiceBuilder` for a full service.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Use this macro if you don&#39;t actually need the full service, but just the builder in order to</span>
-<span class="doccomment">/// be able to perform chain operations.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_partial</span>(
-	<span class="ident">config</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Configuration</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
-	<span class="ident">PartialComponents</span><span class="op">&lt;</span>
-		<span class="ident">Client</span>,
-		<span class="ident">TFullBackend</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Starts a `ServiceBuilder` for a full service.
+///
+/// Use this macro if you don&#39;t actually need the full service, but just the builder in order to
+/// be able to perform chain operations.
+</span><span class="kw">pub fn </span>new_partial(
+	config: <span class="kw-2">&amp;mut </span>Configuration,
+) -&gt; <span class="prelude-ty">Result</span>&lt;
+	PartialComponents&lt;
+		Client,
+		TFullBackend&lt;Block&gt;,
 		(),
-		<span class="ident">sc_consensus::import_queue::BasicQueue</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">PrefixedMemoryDB</span><span class="op">&lt;</span><span class="ident">BlakeTwo256</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">sc_transaction_pool::FullPool</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Client</span><span class="op">&gt;</span>,
-		(),
-	<span class="op">&gt;</span>,
-	<span class="ident">sc_service::Error</span>,
-<span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">sc_executor::NativeElseWasmExecutor</span>::<span class="op">&lt;</span><span class="ident">RuntimeExecutor</span><span class="op">&gt;</span><span class="ident">::new</span>(
-		<span class="ident">config</span>.<span class="ident">wasm_method</span>,
-		<span class="ident">config</span>.<span class="ident">default_heap_pages</span>,
-		<span class="ident">config</span>.<span class="ident">max_runtime_instances</span>,
-		<span class="ident">config</span>.<span class="ident">runtime_cache_size</span>,
+		sc_consensus::import_queue::BasicQueue&lt;Block, PrefixedMemoryDB&lt;BlakeTwo256&gt;&gt;,
+		sc_transaction_pool::FullPool&lt;Block, Client&gt;,
+		ParachainBlockImport,
+	&gt;,
+	sc_service::Error,
+&gt; {
+	<span class="kw">let </span>executor = sc_executor::NativeElseWasmExecutor::&lt;RuntimeExecutor&gt;::new(
+		config.wasm_method,
+		config.default_heap_pages,
+		config.max_runtime_instances,
+		config.runtime_cache_size,
 	);
 
-	<span class="kw">let</span> (<span class="ident">client</span>, <span class="ident">backend</span>, <span class="ident">keystore_container</span>, <span class="ident">task_manager</span>) <span class="op">=</span>
-		<span class="ident">sc_service::new_full_parts</span>::<span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">RuntimeApi</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">config</span>, <span class="prelude-val">None</span>, <span class="ident">executor</span>)<span class="question-mark">?</span>;
-	<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">client</span>);
+	<span class="kw">let </span>(client, backend, keystore_container, task_manager) =
+		sc_service::new_full_parts::&lt;Block, RuntimeApi, <span class="kw">_</span>&gt;(config, <span class="prelude-val">None</span>, executor)<span class="question-mark">?</span>;
+	<span class="kw">let </span>client = Arc::new(client);
 
-	<span class="kw">let</span> <span class="ident">registry</span> <span class="op">=</span> <span class="ident">config</span>.<span class="ident">prometheus_registry</span>();
+	<span class="kw">let </span>block_import = ParachainBlockImport::new(client.clone());
 
-	<span class="kw">let</span> <span class="ident">transaction_pool</span> <span class="op">=</span> <span class="ident">sc_transaction_pool::BasicPool::new_full</span>(
-		<span class="ident">config</span>.<span class="ident">transaction_pool</span>.<span class="ident">clone</span>(),
-		<span class="ident">config</span>.<span class="ident">role</span>.<span class="ident">is_authority</span>().<span class="ident">into</span>(),
-		<span class="ident">config</span>.<span class="ident">prometheus_registry</span>(),
-		<span class="ident">task_manager</span>.<span class="ident">spawn_essential_handle</span>(),
-		<span class="ident">client</span>.<span class="ident">clone</span>(),
+	<span class="kw">let </span>registry = config.prometheus_registry();
+
+	<span class="kw">let </span>transaction_pool = sc_transaction_pool::BasicPool::new_full(
+		config.transaction_pool.clone(),
+		config.role.is_authority().into(),
+		config.prometheus_registry(),
+		task_manager.spawn_essential_handle(),
+		client.clone(),
 	);
 
-	<span class="kw">let</span> <span class="ident">import_queue</span> <span class="op">=</span> <span class="ident">cumulus_client_consensus_relay_chain::import_queue</span>(
-		<span class="ident">client</span>.<span class="ident">clone</span>(),
-		<span class="ident">client</span>.<span class="ident">clone</span>(),
-		<span class="op">|</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">|</span> <span class="kw">async</span> { <span class="prelude-val">Ok</span>(<span class="ident">sp_timestamp::InherentDataProvider::from_system_time</span>()) },
-		<span class="kw-2">&amp;</span><span class="ident">task_manager</span>.<span class="ident">spawn_essential_handle</span>(),
-		<span class="ident">registry</span>,
+	<span class="kw">let </span>import_queue = cumulus_client_consensus_relay_chain::import_queue(
+		client.clone(),
+		block_import.clone(),
+		|<span class="kw">_</span>, <span class="kw">_</span>| <span class="kw">async </span>{ <span class="prelude-val">Ok</span>(sp_timestamp::InherentDataProvider::from_system_time()) },
+		<span class="kw-2">&amp;</span>task_manager.spawn_essential_handle(),
+		registry,
 	)<span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="ident">PartialComponents</span> {
-		<span class="ident">backend</span>,
-		<span class="ident">client</span>,
-		<span class="ident">import_queue</span>,
-		<span class="ident">keystore_container</span>,
-		<span class="ident">task_manager</span>,
-		<span class="ident">transaction_pool</span>,
-		<span class="ident">select_chain</span>: (),
-		<span class="ident">other</span>: (),
+	<span class="kw">let </span>params = PartialComponents {
+		backend,
+		client,
+		import_queue,
+		keystore_container,
+		task_manager,
+		transaction_pool,
+		select_chain: (),
+		other: block_import,
 	};
 
-	<span class="prelude-val">Ok</span>(<span class="ident">params</span>)
+	<span class="prelude-val">Ok</span>(params)
 }
 
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">build_relay_chain_interface</span>(
-	<span class="ident">relay_chain_config</span>: <span class="ident">Configuration</span>,
-	<span class="ident">collator_key</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CollatorPair</span><span class="op">&gt;</span>,
-	<span class="ident">collator_options</span>: <span class="ident">CollatorOptions</span>,
-	<span class="ident">task_manager</span>: <span class="kw-2">&amp;mut</span> <span class="ident">TaskManager</span>,
-) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RelayChainInterface</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-	<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">relay_chain_url</span>) <span class="op">=</span> <span class="ident">collator_options</span>.<span class="ident">relay_chain_rpc_url</span> {
-		<span class="kw">return</span> <span class="ident">build_minimal_relay_chain_node</span>(<span class="ident">relay_chain_config</span>, <span class="ident">task_manager</span>, <span class="ident">relay_chain_url</span>)
-			.<span class="kw">await</span>
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">r</span>.<span class="number">0</span>)
+<span class="kw">async fn </span>build_relay_chain_interface(
+	relay_chain_config: Configuration,
+	collator_key: <span class="prelude-ty">Option</span>&lt;CollatorPair&gt;,
+	collator_options: CollatorOptions,
+	task_manager: <span class="kw-2">&amp;mut </span>TaskManager,
+) -&gt; RelayChainResult&lt;Arc&lt;<span class="kw">dyn </span>RelayChainInterface + <span class="lifetime">&#39;static</span>&gt;&gt; {
+	<span class="kw">if let </span><span class="prelude-val">Some</span>(relay_chain_url) = collator_options.relay_chain_rpc_url {
+		<span class="kw">return </span>build_minimal_relay_chain_node(relay_chain_config, task_manager, relay_chain_url)
+			.<span class="kw">await
+			</span>.map(|r| r.<span class="number">0</span>)
 	}
 
-	<span class="kw">let</span> <span class="ident">relay_chain_full_node</span> <span class="op">=</span> <span class="ident">polkadot_test_service::new_full</span>(
-		<span class="ident">relay_chain_config</span>,
-		<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">key</span>) <span class="op">=</span> <span class="ident">collator_key</span> {
-			<span class="ident">polkadot_service::IsCollator::Yes</span>(<span class="ident">key</span>.<span class="ident">clone</span>())
-		} <span class="kw">else</span> {
-			<span class="ident">polkadot_service::IsCollator::Yes</span>(<span class="ident">CollatorPair::generate</span>().<span class="number">0</span>)
+	<span class="kw">let </span>relay_chain_full_node = polkadot_test_service::new_full(
+		relay_chain_config,
+		<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref </span>key) = collator_key {
+			polkadot_service::IsCollator::Yes(key.clone())
+		} <span class="kw">else </span>{
+			polkadot_service::IsCollator::Yes(CollatorPair::generate().<span class="number">0</span>)
 		},
 		<span class="prelude-val">None</span>,
 	)<span class="question-mark">?</span>;
 
-	<span class="ident">task_manager</span>.<span class="ident">add_child</span>(<span class="ident">relay_chain_full_node</span>.<span class="ident">task_manager</span>);
+	task_manager.add_child(relay_chain_full_node.task_manager);
 	<span class="macro">tracing::info!</span>(<span class="string">&quot;Using inprocess node.&quot;</span>);
-	<span class="prelude-val">Ok</span>(<span class="ident">Arc::new</span>(<span class="ident">RelayChainInProcessInterface::new</span>(
-		<span class="ident">relay_chain_full_node</span>.<span class="ident">client</span>.<span class="ident">clone</span>(),
-		<span class="ident">relay_chain_full_node</span>.<span class="ident">backend</span>.<span class="ident">clone</span>(),
-		<span class="ident">Arc::new</span>(<span class="ident">relay_chain_full_node</span>.<span class="ident">network</span>.<span class="ident">clone</span>()),
-		<span class="ident">relay_chain_full_node</span>.<span class="ident">overseer_handle</span>.<span class="ident">ok_or</span>(<span class="ident">RelayChainError::GenericError</span>(
-			<span class="string">&quot;Overseer should be running in full node.&quot;</span>.<span class="ident">to_string</span>(),
+	<span class="prelude-val">Ok</span>(Arc::new(RelayChainInProcessInterface::new(
+		relay_chain_full_node.client.clone(),
+		relay_chain_full_node.backend.clone(),
+		Arc::new(relay_chain_full_node.network.clone()),
+		relay_chain_full_node.overseer_handle.ok_or(RelayChainError::GenericError(
+			<span class="string">&quot;Overseer should be running in full node.&quot;</span>.to_string(),
 		))<span class="question-mark">?</span>,
 	)))
 }
 
-<span class="doccomment">/// Start a node with the given parachain `Configuration` and relay chain `Configuration`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This is the actual implementation that is abstract over the executor and the runtime api.</span>
-<span class="attribute">#[<span class="ident">sc_tracing::logging::prefix_logs_with</span>(<span class="ident">parachain_config</span>.<span class="ident">network</span>.<span class="ident">node_name</span>.<span class="ident">as_str</span>())]</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">start_node_impl</span><span class="op">&lt;</span><span class="ident">RB</span><span class="op">&gt;</span>(
-	<span class="ident">parachain_config</span>: <span class="ident">Configuration</span>,
-	<span class="ident">collator_key</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CollatorPair</span><span class="op">&gt;</span>,
-	<span class="ident">relay_chain_config</span>: <span class="ident">Configuration</span>,
-	<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	<span class="ident">wrap_announce_block</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">FnOnce</span>(<span class="ident">AnnounceBlockFn</span>) -&gt; <span class="ident">AnnounceBlockFn</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">rpc_ext_builder</span>: <span class="ident">RB</span>,
-	<span class="ident">consensus</span>: <span class="ident">Consensus</span>,
-	<span class="ident">collator_options</span>: <span class="ident">CollatorOptions</span>,
-) -&gt; <span class="ident">sc_service::error::Result</span><span class="op">&lt;</span>(
-	<span class="ident">TaskManager</span>,
-	<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>,
-	<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">NetworkService</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">H256</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">RpcHandlers</span>,
-	<span class="ident">TransactionPool</span>,
-)<span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">RB</span>: <span class="ident">Fn</span>(<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">jsonrpsee::RpcModule</span><span class="op">&lt;</span>()<span class="op">&gt;</span>, <span class="ident">sc_service::Error</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="doccomment">/// Start a node with the given parachain `Configuration` and relay chain `Configuration`.
+///
+/// This is the actual implementation that is abstract over the executor and the runtime api.
+</span><span class="attribute">#[sc_tracing::logging::prefix_logs_with(parachain_config.network.node_name.as_str())]
+</span><span class="kw">pub async fn </span>start_node_impl&lt;RB&gt;(
+	parachain_config: Configuration,
+	collator_key: <span class="prelude-ty">Option</span>&lt;CollatorPair&gt;,
+	relay_chain_config: Configuration,
+	para_id: ParaId,
+	wrap_announce_block: <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>FnOnce(AnnounceBlockFn) -&gt; AnnounceBlockFn&gt;&gt;,
+	rpc_ext_builder: RB,
+	consensus: Consensus,
+	collator_options: CollatorOptions,
+) -&gt; sc_service::error::Result&lt;(
+	TaskManager,
+	Arc&lt;Client&gt;,
+	Arc&lt;NetworkService&lt;Block, H256&gt;&gt;,
+	RpcHandlers,
+	TransactionPool,
+)&gt;
+<span class="kw">where
+	</span>RB: Fn(Arc&lt;Client&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;jsonrpsee::RpcModule&lt;()&gt;, sc_service::Error&gt; + Send + <span class="lifetime">&#39;static</span>,
 {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">parachain_config</span> <span class="op">=</span> <span class="ident">prepare_node_config</span>(<span class="ident">parachain_config</span>);
+	<span class="kw">let </span><span class="kw-2">mut </span>parachain_config = prepare_node_config(parachain_config);
 
-	<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="ident">new_partial</span>(<span class="kw-2">&amp;mut</span> <span class="ident">parachain_config</span>)<span class="question-mark">?</span>;
+	<span class="kw">let </span>params = new_partial(<span class="kw-2">&amp;mut </span>parachain_config)<span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">transaction_pool</span> <span class="op">=</span> <span class="ident">params</span>.<span class="ident">transaction_pool</span>.<span class="ident">clone</span>();
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">task_manager</span> <span class="op">=</span> <span class="ident">params</span>.<span class="ident">task_manager</span>;
+	<span class="kw">let </span>transaction_pool = params.transaction_pool.clone();
+	<span class="kw">let </span><span class="kw-2">mut </span>task_manager = params.task_manager;
 
-	<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">params</span>.<span class="ident">client</span>.<span class="ident">clone</span>();
-	<span class="kw">let</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">params</span>.<span class="ident">backend</span>.<span class="ident">clone</span>();
+	<span class="kw">let </span>client = params.client.clone();
+	<span class="kw">let </span>backend = params.backend.clone();
 
-	<span class="kw">let</span> <span class="ident">relay_chain_interface</span> <span class="op">=</span> <span class="ident">build_relay_chain_interface</span>(
-		<span class="ident">relay_chain_config</span>,
-		<span class="ident">collator_key</span>.<span class="ident">clone</span>(),
-		<span class="ident">collator_options</span>.<span class="ident">clone</span>(),
-		<span class="kw-2">&amp;mut</span> <span class="ident">task_manager</span>,
+	<span class="kw">let </span>block_import = params.other;
+
+	<span class="kw">let </span>relay_chain_interface = build_relay_chain_interface(
+		relay_chain_config,
+		collator_key.clone(),
+		collator_options.clone(),
+		<span class="kw-2">&amp;mut </span>task_manager,
 	)
-	.<span class="kw">await</span>
-	.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">e</span> {
-		<span class="ident">RelayChainError::ServiceError</span>(<span class="ident">polkadot_service::Error::Sub</span>(<span class="ident">x</span>)) =&gt; <span class="ident">x</span>,
-		<span class="ident">s</span> =&gt; <span class="ident">s</span>.<span class="ident">to_string</span>().<span class="ident">into</span>(),
+	.<span class="kw">await
+	</span>.map_err(|e| <span class="kw">match </span>e {
+		RelayChainError::ServiceError(polkadot_service::Error::Sub(x)) =&gt; x,
+		s =&gt; s.to_string().into(),
 	})<span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">block_announce_validator</span> <span class="op">=</span>
-		<span class="ident">BlockAnnounceValidator::new</span>(<span class="ident">relay_chain_interface</span>.<span class="ident">clone</span>(), <span class="ident">para_id</span>);
-	<span class="kw">let</span> <span class="ident">block_announce_validator_builder</span> <span class="op">=</span> <span class="kw">move</span> <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Box::new</span>(<span class="ident">block_announce_validator</span>) <span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>;
+	<span class="kw">let </span>block_announce_validator =
+		BlockAnnounceValidator::new(relay_chain_interface.clone(), para_id);
+	<span class="kw">let </span>block_announce_validator_builder = <span class="kw">move </span>|<span class="kw">_</span>| Box::new(block_announce_validator) <span class="kw">as </span>Box&lt;<span class="kw">_</span>&gt;;
 
-	<span class="kw">let</span> <span class="ident">prometheus_registry</span> <span class="op">=</span> <span class="ident">parachain_config</span>.<span class="ident">prometheus_registry</span>().<span class="ident">cloned</span>();
-	<span class="kw">let</span> <span class="ident">import_queue</span> <span class="op">=</span> <span class="ident">cumulus_client_service::SharedImportQueue::new</span>(<span class="ident">params</span>.<span class="ident">import_queue</span>);
-	<span class="kw">let</span> (<span class="ident">network</span>, <span class="ident">system_rpc_tx</span>, <span class="ident">tx_handler_controller</span>, <span class="ident">start_network</span>) <span class="op">=</span>
-		<span class="ident">sc_service::build_network</span>(<span class="ident">sc_service::BuildNetworkParams</span> {
-			<span class="ident">config</span>: <span class="kw-2">&amp;</span><span class="ident">parachain_config</span>,
-			<span class="ident">client</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-			<span class="ident">transaction_pool</span>: <span class="ident">transaction_pool</span>.<span class="ident">clone</span>(),
-			<span class="ident">spawn_handle</span>: <span class="ident">task_manager</span>.<span class="ident">spawn_handle</span>(),
-			<span class="ident">import_queue</span>: <span class="ident">import_queue</span>.<span class="ident">clone</span>(),
-			<span class="ident">block_announce_validator_builder</span>: <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">block_announce_validator_builder</span>)),
-			<span class="ident">warp_sync</span>: <span class="prelude-val">None</span>,
+	<span class="kw">let </span>prometheus_registry = parachain_config.prometheus_registry().cloned();
+	<span class="kw">let </span>import_queue = cumulus_client_service::SharedImportQueue::new(params.import_queue);
+	<span class="kw">let </span>(network, system_rpc_tx, tx_handler_controller, start_network) =
+		sc_service::build_network(sc_service::BuildNetworkParams {
+			config: <span class="kw-2">&amp;</span>parachain_config,
+			client: client.clone(),
+			transaction_pool: transaction_pool.clone(),
+			spawn_handle: task_manager.spawn_handle(),
+			import_queue: import_queue.clone(),
+			block_announce_validator_builder: <span class="prelude-val">Some</span>(Box::new(block_announce_validator_builder)),
+			warp_sync: <span class="prelude-val">None</span>,
 		})<span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">rpc_builder</span> <span class="op">=</span> {
-		<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">clone</span>();
-
-		<span class="ident">Box::new</span>(<span class="kw">move</span> <span class="op">|</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">|</span> <span class="ident">rpc_ext_builder</span>(<span class="ident">client</span>.<span class="ident">clone</span>()))
+	<span class="kw">let </span>rpc_builder = {
+		<span class="kw">let </span>client = client.clone();
+		Box::new(<span class="kw">move </span>|<span class="kw">_</span>, <span class="kw">_</span>| rpc_ext_builder(client.clone()))
 	};
 
-	<span class="kw">let</span> <span class="ident">rpc_handlers</span> <span class="op">=</span> <span class="ident">sc_service::spawn_tasks</span>(<span class="ident">sc_service::SpawnTasksParams</span> {
-		<span class="ident">rpc_builder</span>,
-		<span class="ident">client</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-		<span class="ident">transaction_pool</span>: <span class="ident">transaction_pool</span>.<span class="ident">clone</span>(),
-		<span class="ident">task_manager</span>: <span class="kw-2">&amp;mut</span> <span class="ident">task_manager</span>,
-		<span class="ident">config</span>: <span class="ident">parachain_config</span>,
-		<span class="ident">keystore</span>: <span class="ident">params</span>.<span class="ident">keystore_container</span>.<span class="ident">sync_keystore</span>(),
-		<span class="ident">backend</span>,
-		<span class="ident">network</span>: <span class="ident">network</span>.<span class="ident">clone</span>(),
-		<span class="ident">system_rpc_tx</span>,
-		<span class="ident">tx_handler_controller</span>,
-		<span class="ident">telemetry</span>: <span class="prelude-val">None</span>,
+	<span class="kw">let </span>rpc_handlers = sc_service::spawn_tasks(sc_service::SpawnTasksParams {
+		rpc_builder,
+		client: client.clone(),
+		transaction_pool: transaction_pool.clone(),
+		task_manager: <span class="kw-2">&amp;mut </span>task_manager,
+		config: parachain_config,
+		keystore: params.keystore_container.sync_keystore(),
+		backend,
+		network: network.clone(),
+		system_rpc_tx,
+		tx_handler_controller,
+		telemetry: <span class="prelude-val">None</span>,
 	})<span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">announce_block</span> <span class="op">=</span> {
-		<span class="kw">let</span> <span class="ident">network</span> <span class="op">=</span> <span class="ident">network</span>.<span class="ident">clone</span>();
-		<span class="ident">Arc::new</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">hash</span>, <span class="ident">data</span><span class="op">|</span> <span class="ident">network</span>.<span class="ident">announce_block</span>(<span class="ident">hash</span>, <span class="ident">data</span>))
+	<span class="kw">let </span>announce_block = {
+		<span class="kw">let </span>network = network.clone();
+		Arc::new(<span class="kw">move </span>|hash, data| network.announce_block(hash, data))
 	};
 
-	<span class="kw">let</span> <span class="ident">announce_block</span> <span class="op">=</span> <span class="ident">wrap_announce_block</span>
-		.<span class="ident">map</span>(<span class="op">|</span><span class="ident">w</span><span class="op">|</span> (<span class="ident">w</span>)(<span class="ident">announce_block</span>.<span class="ident">clone</span>()))
-		.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">announce_block</span>);
+	<span class="kw">let </span>announce_block = wrap_announce_block
+		.map(|w| (w)(announce_block.clone()))
+		.unwrap_or_else(|| announce_block);
 
-	<span class="kw">let</span> <span class="ident">relay_chain_interface_for_closure</span> <span class="op">=</span> <span class="ident">relay_chain_interface</span>.<span class="ident">clone</span>();
-	<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">collator_key</span>) <span class="op">=</span> <span class="ident">collator_key</span> {
-		<span class="kw">let</span> <span class="ident">parachain_consensus</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ParachainConsensus</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">consensus</span> {
-			<span class="ident">Consensus::RelayChain</span> =&gt; {
-				<span class="kw">let</span> <span class="ident">proposer_factory</span> <span class="op">=</span> <span class="ident">sc_basic_authorship::ProposerFactory::with_proof_recording</span>(
-					<span class="ident">task_manager</span>.<span class="ident">spawn_handle</span>(),
-					<span class="ident">client</span>.<span class="ident">clone</span>(),
-					<span class="ident">transaction_pool</span>.<span class="ident">clone</span>(),
-					<span class="ident">prometheus_registry</span>.<span class="ident">as_ref</span>(),
+	<span class="kw">let </span>relay_chain_interface_for_closure = relay_chain_interface.clone();
+	<span class="kw">if let </span><span class="prelude-val">Some</span>(collator_key) = collator_key {
+		<span class="kw">let </span>parachain_consensus: Box&lt;<span class="kw">dyn </span>ParachainConsensus&lt;Block&gt;&gt; = <span class="kw">match </span>consensus {
+			Consensus::RelayChain =&gt; {
+				<span class="kw">let </span>proposer_factory = sc_basic_authorship::ProposerFactory::with_proof_recording(
+					task_manager.spawn_handle(),
+					client.clone(),
+					transaction_pool.clone(),
+					prometheus_registry.as_ref(),
 					<span class="prelude-val">None</span>,
 				);
-				<span class="kw">let</span> <span class="ident">relay_chain_interface2</span> <span class="op">=</span> <span class="ident">relay_chain_interface_for_closure</span>.<span class="ident">clone</span>();
-				<span class="ident">Box::new</span>(<span class="ident">cumulus_client_consensus_relay_chain::RelayChainConsensus::new</span>(
-					<span class="ident">para_id</span>,
-					<span class="ident">proposer_factory</span>,
-					<span class="kw">move</span> <span class="op">|</span><span class="kw">_</span>, (<span class="ident">relay_parent</span>, <span class="ident">validation_data</span>)<span class="op">|</span> {
-						<span class="kw">let</span> <span class="ident">relay_chain_interface</span> <span class="op">=</span> <span class="ident">relay_chain_interface_for_closure</span>.<span class="ident">clone</span>();
-						<span class="kw">async</span> <span class="kw">move</span> {
-							<span class="kw">let</span> <span class="ident">parachain_inherent</span> <span class="op">=</span>
-							<span class="ident">cumulus_primitives_parachain_inherent::ParachainInherentData::create_at</span>(
-								<span class="ident">relay_parent</span>,
-								<span class="kw-2">&amp;</span><span class="ident">relay_chain_interface</span>,
-								<span class="kw-2">&amp;</span><span class="ident">validation_data</span>,
-								<span class="ident">para_id</span>,
+				<span class="kw">let </span>relay_chain_interface2 = relay_chain_interface_for_closure.clone();
+				Box::new(cumulus_client_consensus_relay_chain::RelayChainConsensus::new(
+					para_id,
+					proposer_factory,
+					<span class="kw">move </span>|<span class="kw">_</span>, (relay_parent, validation_data)| {
+						<span class="kw">let </span>relay_chain_interface = relay_chain_interface_for_closure.clone();
+						<span class="kw">async move </span>{
+							<span class="kw">let </span>parachain_inherent =
+							cumulus_primitives_parachain_inherent::ParachainInherentData::create_at(
+								relay_parent,
+								<span class="kw-2">&amp;</span>relay_chain_interface,
+								<span class="kw-2">&amp;</span>validation_data,
+								para_id,
 							).<span class="kw">await</span>;
 
-							<span class="kw">let</span> <span class="ident">time</span> <span class="op">=</span> <span class="ident">sp_timestamp::InherentDataProvider::from_system_time</span>();
+							<span class="kw">let </span>time = sp_timestamp::InherentDataProvider::from_system_time();
 
-							<span class="kw">let</span> <span class="ident">parachain_inherent</span> <span class="op">=</span> <span class="ident">parachain_inherent</span>.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
-								<span class="ident">Box</span>::<span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">std::error::Error</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">String::from</span>(
+							<span class="kw">let </span>parachain_inherent = parachain_inherent.ok_or_else(|| {
+								Box::&lt;<span class="kw">dyn </span>std::error::Error + Send + Sync&gt;::from(String::from(
 									<span class="string">&quot;error&quot;</span>,
 								))
 							})<span class="question-mark">?</span>;
-							<span class="prelude-val">Ok</span>((<span class="ident">time</span>, <span class="ident">parachain_inherent</span>))
+							<span class="prelude-val">Ok</span>((time, parachain_inherent))
 						}
 					},
-					<span class="ident">client</span>.<span class="ident">clone</span>(),
-					<span class="ident">relay_chain_interface2</span>,
+					block_import,
+					relay_chain_interface2,
 				))
 			},
-			<span class="ident">Consensus::Null</span> =&gt; <span class="ident">Box::new</span>(<span class="ident">NullConsensus</span>),
+			Consensus::Null =&gt; Box::new(NullConsensus),
 		};
 
-		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="ident">StartCollatorParams</span> {
-			<span class="ident">block_status</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-			<span class="ident">announce_block</span>,
-			<span class="ident">client</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-			<span class="ident">spawner</span>: <span class="ident">task_manager</span>.<span class="ident">spawn_handle</span>(),
-			<span class="ident">task_manager</span>: <span class="kw-2">&amp;mut</span> <span class="ident">task_manager</span>,
-			<span class="ident">para_id</span>,
-			<span class="ident">parachain_consensus</span>,
-			<span class="ident">relay_chain_interface</span>,
-			<span class="ident">collator_key</span>,
-			<span class="ident">import_queue</span>,
-			<span class="ident">relay_chain_slot_duration</span>: <span class="ident">Duration::from_secs</span>(<span class="number">6</span>),
+		<span class="kw">let </span>params = StartCollatorParams {
+			block_status: client.clone(),
+			announce_block,
+			client: client.clone(),
+			spawner: task_manager.spawn_handle(),
+			task_manager: <span class="kw-2">&amp;mut </span>task_manager,
+			para_id,
+			parachain_consensus,
+			relay_chain_interface,
+			collator_key,
+			import_queue,
+			relay_chain_slot_duration: Duration::from_secs(<span class="number">6</span>),
 		};
 
-		<span class="ident">start_collator</span>(<span class="ident">params</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-	} <span class="kw">else</span> {
-		<span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="ident">StartFullNodeParams</span> {
-			<span class="ident">client</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-			<span class="ident">announce_block</span>,
-			<span class="ident">task_manager</span>: <span class="kw-2">&amp;mut</span> <span class="ident">task_manager</span>,
-			<span class="ident">para_id</span>,
-			<span class="ident">relay_chain_interface</span>,
-			<span class="ident">import_queue</span>,
-			<span class="comment">// The slot duration is currently used internally only to configure</span>
-			<span class="comment">// the recovery delay of pov-recovery. We don&#39;t want to wait for too</span>
-			<span class="comment">// long on the full node to recover, so we reduce this time here.</span>
-			<span class="ident">relay_chain_slot_duration</span>: <span class="ident">Duration::from_millis</span>(<span class="number">6</span>),
+		start_collator(params).<span class="kw">await</span><span class="question-mark">?</span>;
+	} <span class="kw">else </span>{
+		<span class="kw">let </span>params = StartFullNodeParams {
+			client: client.clone(),
+			announce_block,
+			task_manager: <span class="kw-2">&amp;mut </span>task_manager,
+			para_id,
+			relay_chain_interface,
+			import_queue,
+			<span class="comment">// The slot duration is currently used internally only to configure
+			// the recovery delay of pov-recovery. We don&#39;t want to wait for too
+			// long on the full node to recover, so we reduce this time here.
+			</span>relay_chain_slot_duration: Duration::from_millis(<span class="number">6</span>),
 		};
 
-		<span class="ident">start_full_node</span>(<span class="ident">params</span>)<span class="question-mark">?</span>;
+		start_full_node(params)<span class="question-mark">?</span>;
 	}
 
-	<span class="ident">start_network</span>.<span class="ident">start_network</span>();
+	start_network.start_network();
 
-	<span class="prelude-val">Ok</span>((<span class="ident">task_manager</span>, <span class="ident">client</span>, <span class="ident">network</span>, <span class="ident">rpc_handlers</span>, <span class="ident">transaction_pool</span>))
+	<span class="prelude-val">Ok</span>((task_manager, client, network, rpc_handlers, transaction_pool))
 }
 
-<span class="doccomment">/// A Cumulus test node instance used for testing.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TestNode</span> {
-	<span class="doccomment">/// TaskManager&#39;s instance.</span>
-	<span class="kw">pub</span> <span class="ident">task_manager</span>: <span class="ident">TaskManager</span>,
-	<span class="doccomment">/// Client&#39;s instance.</span>
-	<span class="kw">pub</span> <span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>,
-	<span class="doccomment">/// Node&#39;s network.</span>
-	<span class="kw">pub</span> <span class="ident">network</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">NetworkService</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">H256</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="doccomment">/// The `MultiaddrWithPeerId` to this node. This is useful if you want to pass it as &quot;boot node&quot;</span>
-	<span class="doccomment">/// to other nodes.</span>
-	<span class="kw">pub</span> <span class="ident">addr</span>: <span class="ident">MultiaddrWithPeerId</span>,
-	<span class="doccomment">/// RPCHandlers to make RPC queries.</span>
-	<span class="kw">pub</span> <span class="ident">rpc_handlers</span>: <span class="ident">RpcHandlers</span>,
-	<span class="doccomment">/// Node&#39;s transaction pool</span>
-	<span class="kw">pub</span> <span class="ident">transaction_pool</span>: <span class="ident">TransactionPool</span>,
+<span class="doccomment">/// A Cumulus test node instance used for testing.
+</span><span class="kw">pub struct </span>TestNode {
+	<span class="doccomment">/// TaskManager&#39;s instance.
+	</span><span class="kw">pub </span>task_manager: TaskManager,
+	<span class="doccomment">/// Client&#39;s instance.
+	</span><span class="kw">pub </span>client: Arc&lt;Client&gt;,
+	<span class="doccomment">/// Node&#39;s network.
+	</span><span class="kw">pub </span>network: Arc&lt;NetworkService&lt;Block, H256&gt;&gt;,
+	<span class="doccomment">/// The `MultiaddrWithPeerId` to this node. This is useful if you want to pass it as &quot;boot node&quot;
+	/// to other nodes.
+	</span><span class="kw">pub </span>addr: MultiaddrWithPeerId,
+	<span class="doccomment">/// RPCHandlers to make RPC queries.
+	</span><span class="kw">pub </span>rpc_handlers: RpcHandlers,
+	<span class="doccomment">/// Node&#39;s transaction pool
+	</span><span class="kw">pub </span>transaction_pool: TransactionPool,
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Consensus</span> {
-	<span class="doccomment">/// Use the relay-chain provided consensus.</span>
-	<span class="ident">RelayChain</span>,
-	<span class="doccomment">/// Use the null consensus that will never produce any block.</span>
-	<span class="ident">Null</span>,
+<span class="attribute">#[allow(missing_docs)]
+</span><span class="kw">pub enum </span>Consensus {
+	<span class="doccomment">/// Use the relay-chain provided consensus.
+	</span>RelayChain,
+	<span class="doccomment">/// Use the null consensus that will never produce any block.
+	</span>Null,
 }
 
-<span class="doccomment">/// A builder to create a [`TestNode`].</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TestNodeBuilder</span> {
-	<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	<span class="ident">tokio_handle</span>: <span class="ident">tokio::runtime::Handle</span>,
-	<span class="ident">key</span>: <span class="ident">Sr25519Keyring</span>,
-	<span class="ident">collator_key</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CollatorPair</span><span class="op">&gt;</span>,
-	<span class="ident">parachain_nodes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MultiaddrWithPeerId</span><span class="op">&gt;</span>,
-	<span class="ident">parachain_nodes_exclusive</span>: <span class="ident">bool</span>,
-	<span class="ident">relay_chain_nodes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MultiaddrWithPeerId</span><span class="op">&gt;</span>,
-	<span class="ident">wrap_announce_block</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">FnOnce</span>(<span class="ident">AnnounceBlockFn</span>) -&gt; <span class="ident">AnnounceBlockFn</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">storage_update_func_parachain</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>()<span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">storage_update_func_relay_chain</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>()<span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">consensus</span>: <span class="ident">Consensus</span>,
-	<span class="ident">relay_chain_full_node_url</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Url</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A builder to create a [`TestNode`].
+</span><span class="kw">pub struct </span>TestNodeBuilder {
+	para_id: ParaId,
+	tokio_handle: tokio::runtime::Handle,
+	key: Sr25519Keyring,
+	collator_key: <span class="prelude-ty">Option</span>&lt;CollatorPair&gt;,
+	parachain_nodes: Vec&lt;MultiaddrWithPeerId&gt;,
+	parachain_nodes_exclusive: bool,
+	relay_chain_nodes: Vec&lt;MultiaddrWithPeerId&gt;,
+	wrap_announce_block: <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>FnOnce(AnnounceBlockFn) -&gt; AnnounceBlockFn&gt;&gt;,
+	storage_update_func_parachain: <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Fn()&gt;&gt;,
+	storage_update_func_relay_chain: <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Fn()&gt;&gt;,
+	consensus: Consensus,
+	relay_chain_full_node_url: <span class="prelude-ty">Option</span>&lt;Url&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">TestNodeBuilder</span> {
-	<span class="doccomment">/// Create a new instance of `Self`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// `para_id` - The parachain id this node is running for.</span>
-	<span class="doccomment">/// `tokio_handle` - The tokio handler to use.</span>
-	<span class="doccomment">/// `key` - The key that will be used to generate the name and that will be passed as `dev_seed`.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">para_id</span>: <span class="ident">ParaId</span>, <span class="ident">tokio_handle</span>: <span class="ident">tokio::runtime::Handle</span>, <span class="ident">key</span>: <span class="ident">Sr25519Keyring</span>) -&gt; <span class="self">Self</span> {
-		<span class="ident">TestNodeBuilder</span> {
-			<span class="ident">key</span>,
-			<span class="ident">para_id</span>,
-			<span class="ident">tokio_handle</span>,
-			<span class="ident">collator_key</span>: <span class="prelude-val">None</span>,
-			<span class="ident">parachain_nodes</span>: <span class="ident">Vec::new</span>(),
-			<span class="ident">parachain_nodes_exclusive</span>: <span class="bool-val">false</span>,
-			<span class="ident">relay_chain_nodes</span>: <span class="ident">Vec::new</span>(),
-			<span class="ident">wrap_announce_block</span>: <span class="prelude-val">None</span>,
-			<span class="ident">storage_update_func_parachain</span>: <span class="prelude-val">None</span>,
-			<span class="ident">storage_update_func_relay_chain</span>: <span class="prelude-val">None</span>,
-			<span class="ident">consensus</span>: <span class="ident">Consensus::RelayChain</span>,
-			<span class="ident">relay_chain_full_node_url</span>: <span class="prelude-val">None</span>,
+<span class="kw">impl </span>TestNodeBuilder {
+	<span class="doccomment">/// Create a new instance of `Self`.
+	///
+	/// `para_id` - The parachain id this node is running for.
+	/// `tokio_handle` - The tokio handler to use.
+	/// `key` - The key that will be used to generate the name and that will be passed as `dev_seed`.
+	</span><span class="kw">pub fn </span>new(para_id: ParaId, tokio_handle: tokio::runtime::Handle, key: Sr25519Keyring) -&gt; <span class="self">Self </span>{
+		TestNodeBuilder {
+			key,
+			para_id,
+			tokio_handle,
+			collator_key: <span class="prelude-val">None</span>,
+			parachain_nodes: Vec::new(),
+			parachain_nodes_exclusive: <span class="bool-val">false</span>,
+			relay_chain_nodes: Vec::new(),
+			wrap_announce_block: <span class="prelude-val">None</span>,
+			storage_update_func_parachain: <span class="prelude-val">None</span>,
+			storage_update_func_relay_chain: <span class="prelude-val">None</span>,
+			consensus: Consensus::RelayChain,
+			relay_chain_full_node_url: <span class="prelude-val">None</span>,
 		}
 	}
 
-	<span class="doccomment">/// Enable collator for this node.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_collator</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="self">Self</span> {
-		<span class="kw">let</span> <span class="ident">collator_key</span> <span class="op">=</span> <span class="ident">CollatorPair::generate</span>().<span class="number">0</span>;
-		<span class="self">self</span>.<span class="ident">collator_key</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">collator_key</span>);
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Enable collator for this node.
+	</span><span class="kw">pub fn </span>enable_collator(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+		<span class="kw">let </span>collator_key = CollatorPair::generate().<span class="number">0</span>;
+		<span class="self">self</span>.collator_key = <span class="prelude-val">Some</span>(collator_key);
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Instruct the node to exclusively connect to registered parachain nodes.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Parachain nodes can be registered using [`Self::connect_to_parachain_node`] and</span>
-	<span class="doccomment">/// [`Self::connect_to_parachain_nodes`].</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">exclusively_connect_to_registered_parachain_nodes</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">parachain_nodes_exclusive</span> <span class="op">=</span> <span class="bool-val">true</span>;
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Instruct the node to exclusively connect to registered parachain nodes.
+	///
+	/// Parachain nodes can be registered using [`Self::connect_to_parachain_node`] and
+	/// [`Self::connect_to_parachain_nodes`].
+	</span><span class="kw">pub fn </span>exclusively_connect_to_registered_parachain_nodes(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.parachain_nodes_exclusive = <span class="bool-val">true</span>;
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Make the node connect to the given parachain node.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// By default the node will not be connected to any node or will be able to discover any other</span>
-	<span class="doccomment">/// node.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">connect_to_parachain_node</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">node</span>: <span class="kw-2">&amp;</span><span class="ident">TestNode</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">parachain_nodes</span>.<span class="ident">push</span>(<span class="ident">node</span>.<span class="ident">addr</span>.<span class="ident">clone</span>());
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Make the node connect to the given parachain node.
+	///
+	/// By default the node will not be connected to any node or will be able to discover any other
+	/// node.
+	</span><span class="kw">pub fn </span>connect_to_parachain_node(<span class="kw-2">mut </span><span class="self">self</span>, node: <span class="kw-2">&amp;</span>TestNode) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.parachain_nodes.push(node.addr.clone());
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Make the node connect to the given parachain nodes.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// By default the node will not be connected to any node or will be able to discover any other</span>
-	<span class="doccomment">/// node.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">connect_to_parachain_nodes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-		<span class="kw-2">mut</span> <span class="self">self</span>,
-		<span class="ident">nodes</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">TestNode</span><span class="op">&gt;</span>,
-	) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">parachain_nodes</span>.<span class="ident">extend</span>(<span class="ident">nodes</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">addr</span>.<span class="ident">clone</span>()));
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Make the node connect to the given parachain nodes.
+	///
+	/// By default the node will not be connected to any node or will be able to discover any other
+	/// node.
+	</span><span class="kw">pub fn </span>connect_to_parachain_nodes&lt;<span class="lifetime">&#39;a</span>&gt;(
+		<span class="kw-2">mut </span><span class="self">self</span>,
+		nodes: <span class="kw">impl </span>IntoIterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TestNode&gt;,
+	) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.parachain_nodes.extend(nodes.into_iter().map(|n| n.addr.clone()));
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Make the node connect to the given relay chain node.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// By default the node will not be connected to any node or will be able to discover any other</span>
-	<span class="doccomment">/// node.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">connect_to_relay_chain_node</span>(
-		<span class="kw-2">mut</span> <span class="self">self</span>,
-		<span class="ident">node</span>: <span class="kw-2">&amp;</span><span class="ident">polkadot_test_service::PolkadotTestNode</span>,
-	) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">relay_chain_nodes</span>.<span class="ident">push</span>(<span class="ident">node</span>.<span class="ident">addr</span>.<span class="ident">clone</span>());
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Make the node connect to the given relay chain node.
+	///
+	/// By default the node will not be connected to any node or will be able to discover any other
+	/// node.
+	</span><span class="kw">pub fn </span>connect_to_relay_chain_node(
+		<span class="kw-2">mut </span><span class="self">self</span>,
+		node: <span class="kw-2">&amp;</span>polkadot_test_service::PolkadotTestNode,
+	) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.relay_chain_nodes.push(node.addr.clone());
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Make the node connect to the given relay chain nodes.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// By default the node will not be connected to any node or will be able to discover any other</span>
-	<span class="doccomment">/// node.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">connect_to_relay_chain_nodes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-		<span class="kw-2">mut</span> <span class="self">self</span>,
-		<span class="ident">nodes</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">polkadot_test_service::PolkadotTestNode</span><span class="op">&gt;</span>,
-	) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">relay_chain_nodes</span>.<span class="ident">extend</span>(<span class="ident">nodes</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">addr</span>.<span class="ident">clone</span>()));
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Make the node connect to the given relay chain nodes.
+	///
+	/// By default the node will not be connected to any node or will be able to discover any other
+	/// node.
+	</span><span class="kw">pub fn </span>connect_to_relay_chain_nodes&lt;<span class="lifetime">&#39;a</span>&gt;(
+		<span class="kw-2">mut </span><span class="self">self</span>,
+		nodes: <span class="kw">impl </span>IntoIterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>polkadot_test_service::PolkadotTestNode&gt;,
+	) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.relay_chain_nodes.extend(nodes.into_iter().map(|n| n.addr.clone()));
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Wrap the announce block function of this node.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wrap_announce_block</span>(
-		<span class="kw-2">mut</span> <span class="self">self</span>,
-		<span class="ident">wrap</span>: <span class="kw">impl</span> <span class="ident">FnOnce</span>(<span class="ident">AnnounceBlockFn</span>) -&gt; <span class="ident">AnnounceBlockFn</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">wrap_announce_block</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">wrap</span>));
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Wrap the announce block function of this node.
+	</span><span class="kw">pub fn </span>wrap_announce_block(
+		<span class="kw-2">mut </span><span class="self">self</span>,
+		wrap: <span class="kw">impl </span>FnOnce(AnnounceBlockFn) -&gt; AnnounceBlockFn + <span class="lifetime">&#39;static</span>,
+	) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.wrap_announce_block = <span class="prelude-val">Some</span>(Box::new(wrap));
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Allows accessing the parachain storage before the test node is built.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_storage_parachain</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">updater</span>: <span class="kw">impl</span> <span class="ident">Fn</span>() <span class="op">+</span> <span class="lifetime">&#39;static</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">storage_update_func_parachain</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">updater</span>));
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Allows accessing the parachain storage before the test node is built.
+	</span><span class="kw">pub fn </span>update_storage_parachain(<span class="kw-2">mut </span><span class="self">self</span>, updater: <span class="kw">impl </span>Fn() + <span class="lifetime">&#39;static</span>) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.storage_update_func_parachain = <span class="prelude-val">Some</span>(Box::new(updater));
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Allows accessing the relay chain storage before the test node is built.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_storage_relay_chain</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">updater</span>: <span class="kw">impl</span> <span class="ident">Fn</span>() <span class="op">+</span> <span class="lifetime">&#39;static</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">storage_update_func_relay_chain</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">updater</span>));
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Allows accessing the relay chain storage before the test node is built.
+	</span><span class="kw">pub fn </span>update_storage_relay_chain(<span class="kw-2">mut </span><span class="self">self</span>, updater: <span class="kw">impl </span>Fn() + <span class="lifetime">&#39;static</span>) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.storage_update_func_relay_chain = <span class="prelude-val">Some</span>(Box::new(updater));
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Use the null consensus that will never author any block.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">use_null_consensus</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">consensus</span> <span class="op">=</span> <span class="ident">Consensus::Null</span>;
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Use the null consensus that will never author any block.
+	</span><span class="kw">pub fn </span>use_null_consensus(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.consensus = Consensus::Null;
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Connect to full node via RPC.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">use_external_relay_chain_node_at_url</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">network_address</span>: <span class="ident">Url</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">relay_chain_full_node_url</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">network_address</span>);
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Connect to full node via RPC.
+	</span><span class="kw">pub fn </span>use_external_relay_chain_node_at_url(<span class="kw-2">mut </span><span class="self">self</span>, network_address: Url) -&gt; <span class="self">Self </span>{
+		<span class="self">self</span>.relay_chain_full_node_url = <span class="prelude-val">Some</span>(network_address);
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Connect to full node via RPC.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">use_external_relay_chain_node_at_port</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">port</span>: <span class="ident">u16</span>) -&gt; <span class="self">Self</span> {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">localhost_url</span> <span class="op">=</span>
-			<span class="ident">Url::parse</span>(<span class="string">&quot;ws://localhost&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Should be able to parse localhost Url&quot;</span>);
-		<span class="ident">localhost_url</span>.<span class="ident">set_port</span>(<span class="prelude-val">Some</span>(<span class="ident">port</span>)).<span class="ident">expect</span>(<span class="string">&quot;Should be able to set port&quot;</span>);
-		<span class="self">self</span>.<span class="ident">relay_chain_full_node_url</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">localhost_url</span>);
-		<span class="self">self</span>
-	}
+	<span class="doccomment">/// Connect to full node via RPC.
+	</span><span class="kw">pub fn </span>use_external_relay_chain_node_at_port(<span class="kw-2">mut </span><span class="self">self</span>, port: u16) -&gt; <span class="self">Self </span>{
+		<span class="kw">let </span><span class="kw-2">mut </span>localhost_url =
+			Url::parse(<span class="string">&quot;ws://localhost&quot;</span>).expect(<span class="string">&quot;Should be able to parse localhost Url&quot;</span>);
+		localhost_url.set_port(<span class="prelude-val">Some</span>(port)).expect(<span class="string">&quot;Should be able to set port&quot;</span>);
+		<span class="self">self</span>.relay_chain_full_node_url = <span class="prelude-val">Some</span>(localhost_url);
+		<span class="self">self
+	</span>}
 
-	<span class="doccomment">/// Build the [`TestNode`].</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">build</span>(<span class="self">self</span>) -&gt; <span class="ident">TestNode</span> {
-		<span class="kw">let</span> <span class="ident">parachain_config</span> <span class="op">=</span> <span class="ident">node_config</span>(
-			<span class="self">self</span>.<span class="ident">storage_update_func_parachain</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Box::new</span>(<span class="op">|</span><span class="op">|</span> ())),
-			<span class="self">self</span>.<span class="ident">tokio_handle</span>.<span class="ident">clone</span>(),
-			<span class="self">self</span>.<span class="ident">key</span>.<span class="ident">clone</span>(),
-			<span class="self">self</span>.<span class="ident">parachain_nodes</span>,
-			<span class="self">self</span>.<span class="ident">parachain_nodes_exclusive</span>,
-			<span class="self">self</span>.<span class="ident">para_id</span>,
-			<span class="self">self</span>.<span class="ident">collator_key</span>.<span class="ident">is_some</span>(),
+	<span class="doccomment">/// Build the [`TestNode`].
+	</span><span class="kw">pub async fn </span>build(<span class="self">self</span>) -&gt; TestNode {
+		<span class="kw">let </span>parachain_config = node_config(
+			<span class="self">self</span>.storage_update_func_parachain.unwrap_or_else(|| Box::new(|| ())),
+			<span class="self">self</span>.tokio_handle.clone(),
+			<span class="self">self</span>.key.clone(),
+			<span class="self">self</span>.parachain_nodes,
+			<span class="self">self</span>.parachain_nodes_exclusive,
+			<span class="self">self</span>.para_id,
+			<span class="self">self</span>.collator_key.is_some(),
 		)
-		.<span class="ident">expect</span>(<span class="string">&quot;could not generate Configuration&quot;</span>);
+		.expect(<span class="string">&quot;could not generate Configuration&quot;</span>);
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">relay_chain_config</span> <span class="op">=</span> <span class="ident">polkadot_test_service::node_config</span>(
-			<span class="self">self</span>.<span class="ident">storage_update_func_relay_chain</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Box::new</span>(<span class="op">|</span><span class="op">|</span> ())),
-			<span class="self">self</span>.<span class="ident">tokio_handle</span>,
-			<span class="self">self</span>.<span class="ident">key</span>,
-			<span class="self">self</span>.<span class="ident">relay_chain_nodes</span>,
+		<span class="kw">let </span><span class="kw-2">mut </span>relay_chain_config = polkadot_test_service::node_config(
+			<span class="self">self</span>.storage_update_func_relay_chain.unwrap_or_else(|| Box::new(|| ())),
+			<span class="self">self</span>.tokio_handle,
+			<span class="self">self</span>.key,
+			<span class="self">self</span>.relay_chain_nodes,
 			<span class="bool-val">false</span>,
 		);
 
-		<span class="kw">let</span> <span class="ident">collator_options</span> <span class="op">=</span>
-			<span class="ident">CollatorOptions</span> { <span class="ident">relay_chain_rpc_url</span>: <span class="self">self</span>.<span class="ident">relay_chain_full_node_url</span> };
+		<span class="kw">let </span>collator_options =
+			CollatorOptions { relay_chain_rpc_url: <span class="self">self</span>.relay_chain_full_node_url };
 
-		<span class="ident">relay_chain_config</span>.<span class="ident">network</span>.<span class="ident">node_name</span> <span class="op">=</span>
-			<span class="macro">format!</span>(<span class="string">&quot;{} (relay chain)&quot;</span>, <span class="ident">relay_chain_config</span>.<span class="ident">network</span>.<span class="ident">node_name</span>);
+		relay_chain_config.network.node_name =
+			<span class="macro">format!</span>(<span class="string">&quot;{} (relay chain)&quot;</span>, relay_chain_config.network.node_name);
 
-		<span class="kw">let</span> <span class="ident">multiaddr</span> <span class="op">=</span> <span class="ident">parachain_config</span>.<span class="ident">network</span>.<span class="ident">listen_addresses</span>[<span class="number">0</span>].<span class="ident">clone</span>();
-		<span class="kw">let</span> (<span class="ident">task_manager</span>, <span class="ident">client</span>, <span class="ident">network</span>, <span class="ident">rpc_handlers</span>, <span class="ident">transaction_pool</span>) <span class="op">=</span> <span class="ident">start_node_impl</span>(
-			<span class="ident">parachain_config</span>,
-			<span class="self">self</span>.<span class="ident">collator_key</span>,
-			<span class="ident">relay_chain_config</span>,
-			<span class="self">self</span>.<span class="ident">para_id</span>,
-			<span class="self">self</span>.<span class="ident">wrap_announce_block</span>,
-			<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="ident">jsonrpsee::RpcModule::new</span>(())),
-			<span class="self">self</span>.<span class="ident">consensus</span>,
-			<span class="ident">collator_options</span>,
+		<span class="kw">let </span>multiaddr = parachain_config.network.listen_addresses[<span class="number">0</span>].clone();
+		<span class="kw">let </span>(task_manager, client, network, rpc_handlers, transaction_pool) = start_node_impl(
+			parachain_config,
+			<span class="self">self</span>.collator_key,
+			relay_chain_config,
+			<span class="self">self</span>.para_id,
+			<span class="self">self</span>.wrap_announce_block,
+			|<span class="kw">_</span>| <span class="prelude-val">Ok</span>(jsonrpsee::RpcModule::new(())),
+			<span class="self">self</span>.consensus,
+			collator_options,
 		)
-		.<span class="kw">await</span>
-		.<span class="ident">expect</span>(<span class="string">&quot;could not create Cumulus test service&quot;</span>);
+		.<span class="kw">await
+		</span>.expect(<span class="string">&quot;could not create Cumulus test service&quot;</span>);
 
-		<span class="kw">let</span> <span class="ident">peer_id</span> <span class="op">=</span> <span class="ident">network</span>.<span class="ident">local_peer_id</span>().<span class="ident">clone</span>();
-		<span class="kw">let</span> <span class="ident">addr</span> <span class="op">=</span> <span class="ident">MultiaddrWithPeerId</span> { <span class="ident">multiaddr</span>, <span class="ident">peer_id</span> };
+		<span class="kw">let </span>peer_id = network.local_peer_id().clone();
+		<span class="kw">let </span>addr = MultiaddrWithPeerId { multiaddr, peer_id };
 
-		<span class="ident">TestNode</span> { <span class="ident">task_manager</span>, <span class="ident">client</span>, <span class="ident">network</span>, <span class="ident">addr</span>, <span class="ident">rpc_handlers</span>, <span class="ident">transaction_pool</span> }
+		TestNode { task_manager, client, network, addr, rpc_handlers, transaction_pool }
 	}
 }
 
-<span class="doccomment">/// Create a Cumulus `Configuration`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// By default an in-memory socket will be used, therefore you need to provide nodes if you want the</span>
-<span class="doccomment">/// node to be connected to other nodes. If `nodes_exclusive` is `true`, the node will only connect</span>
-<span class="doccomment">/// to the given `nodes` and not to any other node. The `storage_update_func` can be used to make</span>
-<span class="doccomment">/// adjustments to the runtime genesis.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">node_config</span>(
-	<span class="ident">storage_update_func</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(),
-	<span class="ident">tokio_handle</span>: <span class="ident">tokio::runtime::Handle</span>,
-	<span class="ident">key</span>: <span class="ident">Sr25519Keyring</span>,
-	<span class="ident">nodes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MultiaddrWithPeerId</span><span class="op">&gt;</span>,
-	<span class="ident">nodes_exlusive</span>: <span class="ident">bool</span>,
-	<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	<span class="ident">is_collator</span>: <span class="ident">bool</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Configuration</span>, <span class="ident">ServiceError</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">base_path</span> <span class="op">=</span> <span class="ident">BasePath::new_temp_dir</span>()<span class="question-mark">?</span>;
-	<span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="ident">base_path</span>.<span class="ident">path</span>().<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;cumulus_test_service_{}&quot;</span>, <span class="ident">key</span>.<span class="ident">to_string</span>()));
-	<span class="kw">let</span> <span class="ident">role</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">is_collator</span> { <span class="ident">Role::Authority</span> } <span class="kw">else</span> { <span class="ident">Role::Full</span> };
-	<span class="kw">let</span> <span class="ident">key_seed</span> <span class="op">=</span> <span class="ident">key</span>.<span class="ident">to_seed</span>();
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">spec</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">chain_spec::get_chain_spec</span>(<span class="ident">para_id</span>));
+<span class="doccomment">/// Create a Cumulus `Configuration`.
+///
+/// By default an in-memory socket will be used, therefore you need to provide nodes if you want the
+/// node to be connected to other nodes. If `nodes_exclusive` is `true`, the node will only connect
+/// to the given `nodes` and not to any other node. The `storage_update_func` can be used to make
+/// adjustments to the runtime genesis.
+</span><span class="kw">pub fn </span>node_config(
+	storage_update_func: <span class="kw">impl </span>Fn(),
+	tokio_handle: tokio::runtime::Handle,
+	key: Sr25519Keyring,
+	nodes: Vec&lt;MultiaddrWithPeerId&gt;,
+	nodes_exlusive: bool,
+	para_id: ParaId,
+	is_collator: bool,
+) -&gt; <span class="prelude-ty">Result</span>&lt;Configuration, ServiceError&gt; {
+	<span class="kw">let </span>base_path = BasePath::new_temp_dir()<span class="question-mark">?</span>;
+	<span class="kw">let </span>root = base_path.path().join(<span class="macro">format!</span>(<span class="string">&quot;cumulus_test_service_{}&quot;</span>, key.to_string()));
+	<span class="kw">let </span>role = <span class="kw">if </span>is_collator { Role::Authority } <span class="kw">else </span>{ Role::Full };
+	<span class="kw">let </span>key_seed = key.to_seed();
+	<span class="kw">let </span><span class="kw-2">mut </span>spec = Box::new(chain_spec::get_chain_spec(para_id));
 
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">storage</span> <span class="op">=</span> <span class="ident">spec</span>.<span class="ident">as_storage_builder</span>().<span class="ident">build_storage</span>().<span class="ident">expect</span>(<span class="string">&quot;could not build storage&quot;</span>);
+	<span class="kw">let </span><span class="kw-2">mut </span>storage = spec.as_storage_builder().build_storage().expect(<span class="string">&quot;could not build storage&quot;</span>);
 
-	<span class="ident">BasicExternalities::execute_with_storage</span>(<span class="kw-2">&amp;mut</span> <span class="ident">storage</span>, <span class="ident">storage_update_func</span>);
-	<span class="ident">spec</span>.<span class="ident">set_storage</span>(<span class="ident">storage</span>);
+	BasicExternalities::execute_with_storage(<span class="kw-2">&amp;mut </span>storage, storage_update_func);
+	spec.set_storage(storage);
 
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">network_config</span> <span class="op">=</span> <span class="ident">NetworkConfiguration::new</span>(
-		<span class="macro">format!</span>(<span class="string">&quot;{} (parachain)&quot;</span>, <span class="ident">key_seed</span>),
+	<span class="kw">let </span><span class="kw-2">mut </span>network_config = NetworkConfiguration::new(
+		<span class="macro">format!</span>(<span class="string">&quot;{} (parachain)&quot;</span>, key_seed),
 		<span class="string">&quot;network/test/0.1&quot;</span>,
-		<span class="ident">Default::default</span>(),
+		Default::default(),
 		<span class="prelude-val">None</span>,
 	);
 
-	<span class="kw">if</span> <span class="ident">nodes_exlusive</span> {
-		<span class="ident">network_config</span>.<span class="ident">default_peers_set</span>.<span class="ident">reserved_nodes</span> <span class="op">=</span> <span class="ident">nodes</span>;
-		<span class="ident">network_config</span>.<span class="ident">default_peers_set</span>.<span class="ident">non_reserved_mode</span> <span class="op">=</span>
-			<span class="ident">sc_network_common::config::NonReservedPeerMode::Deny</span>;
-	} <span class="kw">else</span> {
-		<span class="ident">network_config</span>.<span class="ident">boot_nodes</span> <span class="op">=</span> <span class="ident">nodes</span>;
+	<span class="kw">if </span>nodes_exlusive {
+		network_config.default_peers_set.reserved_nodes = nodes;
+		network_config.default_peers_set.non_reserved_mode =
+			sc_network_common::config::NonReservedPeerMode::Deny;
+	} <span class="kw">else </span>{
+		network_config.boot_nodes = nodes;
 	}
 
-	<span class="ident">network_config</span>.<span class="ident">allow_non_globals_in_dht</span> <span class="op">=</span> <span class="bool-val">true</span>;
+	network_config.allow_non_globals_in_dht = <span class="bool-val">true</span>;
 
-	<span class="ident">network_config</span>
-		.<span class="ident">listen_addresses</span>
-		.<span class="ident">push</span>(<span class="ident">multiaddr::Protocol::Memory</span>(<span class="ident">rand::random</span>()).<span class="ident">into</span>());
+	network_config
+		.listen_addresses
+		.push(multiaddr::Protocol::Memory(rand::random()).into());
 
-	<span class="ident">network_config</span>.<span class="ident">transport</span> <span class="op">=</span> <span class="ident">TransportConfig::MemoryOnly</span>;
+	network_config.transport = TransportConfig::MemoryOnly;
 
-	<span class="prelude-val">Ok</span>(<span class="ident">Configuration</span> {
-		<span class="ident">impl_name</span>: <span class="string">&quot;cumulus-test-node&quot;</span>.<span class="ident">to_string</span>(),
-		<span class="ident">impl_version</span>: <span class="string">&quot;0.1&quot;</span>.<span class="ident">to_string</span>(),
-		<span class="ident">role</span>,
-		<span class="ident">tokio_handle</span>,
-		<span class="ident">transaction_pool</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">network</span>: <span class="ident">network_config</span>,
-		<span class="ident">keystore</span>: <span class="ident">KeystoreConfig::InMemory</span>,
-		<span class="ident">keystore_remote</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">database</span>: <span class="ident">DatabaseSource::RocksDb</span> { <span class="ident">path</span>: <span class="ident">root</span>.<span class="ident">join</span>(<span class="string">&quot;db&quot;</span>), <span class="ident">cache_size</span>: <span class="number">128</span> },
-		<span class="ident">trie_cache_maximum_size</span>: <span class="prelude-val">Some</span>(<span class="number">64</span> <span class="op">*</span> <span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span>),
-		<span class="ident">state_pruning</span>: <span class="prelude-val">Some</span>(<span class="ident">PruningMode::ArchiveAll</span>),
-		<span class="ident">blocks_pruning</span>: <span class="ident">BlocksPruning::KeepAll</span>,
-		<span class="ident">chain_spec</span>: <span class="ident">spec</span>,
-		<span class="ident">wasm_method</span>: <span class="ident">WasmExecutionMethod::Interpreted</span>,
-		<span class="comment">// NOTE: we enforce the use of the native runtime to make the errors more debuggable</span>
-		<span class="ident">execution_strategies</span>: <span class="ident">ExecutionStrategies</span> {
-			<span class="ident">syncing</span>: <span class="ident">sc_client_api::ExecutionStrategy::NativeWhenPossible</span>,
-			<span class="ident">importing</span>: <span class="ident">sc_client_api::ExecutionStrategy::NativeWhenPossible</span>,
-			<span class="ident">block_construction</span>: <span class="ident">sc_client_api::ExecutionStrategy::NativeWhenPossible</span>,
-			<span class="ident">offchain_worker</span>: <span class="ident">sc_client_api::ExecutionStrategy::NativeWhenPossible</span>,
-			<span class="ident">other</span>: <span class="ident">sc_client_api::ExecutionStrategy::NativeWhenPossible</span>,
+	<span class="prelude-val">Ok</span>(Configuration {
+		impl_name: <span class="string">&quot;cumulus-test-node&quot;</span>.to_string(),
+		impl_version: <span class="string">&quot;0.1&quot;</span>.to_string(),
+		role,
+		tokio_handle,
+		transaction_pool: Default::default(),
+		network: network_config,
+		keystore: KeystoreConfig::InMemory,
+		keystore_remote: Default::default(),
+		database: DatabaseSource::RocksDb { path: root.join(<span class="string">&quot;db&quot;</span>), cache_size: <span class="number">128 </span>},
+		trie_cache_maximum_size: <span class="prelude-val">Some</span>(<span class="number">64 </span>* <span class="number">1024 </span>* <span class="number">1024</span>),
+		state_pruning: <span class="prelude-val">Some</span>(PruningMode::ArchiveAll),
+		blocks_pruning: BlocksPruning::KeepAll,
+		chain_spec: spec,
+		wasm_method: WasmExecutionMethod::Interpreted,
+		<span class="comment">// NOTE: we enforce the use of the native runtime to make the errors more debuggable
+		</span>execution_strategies: ExecutionStrategies {
+			syncing: sc_client_api::ExecutionStrategy::NativeWhenPossible,
+			importing: sc_client_api::ExecutionStrategy::NativeWhenPossible,
+			block_construction: sc_client_api::ExecutionStrategy::NativeWhenPossible,
+			offchain_worker: sc_client_api::ExecutionStrategy::NativeWhenPossible,
+			other: sc_client_api::ExecutionStrategy::NativeWhenPossible,
 		},
-		<span class="ident">rpc_http</span>: <span class="prelude-val">None</span>,
-		<span class="ident">rpc_ws</span>: <span class="prelude-val">None</span>,
-		<span class="ident">rpc_ipc</span>: <span class="prelude-val">None</span>,
-		<span class="ident">rpc_ws_max_connections</span>: <span class="prelude-val">None</span>,
-		<span class="ident">rpc_cors</span>: <span class="prelude-val">None</span>,
-		<span class="ident">rpc_methods</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">rpc_max_payload</span>: <span class="prelude-val">None</span>,
-		<span class="ident">rpc_max_request_size</span>: <span class="prelude-val">None</span>,
-		<span class="ident">rpc_max_response_size</span>: <span class="prelude-val">None</span>,
-		<span class="ident">rpc_id_provider</span>: <span class="prelude-val">None</span>,
-		<span class="ident">rpc_max_subs_per_conn</span>: <span class="prelude-val">None</span>,
-		<span class="ident">ws_max_out_buffer_capacity</span>: <span class="prelude-val">None</span>,
-		<span class="ident">prometheus_config</span>: <span class="prelude-val">None</span>,
-		<span class="ident">telemetry_endpoints</span>: <span class="prelude-val">None</span>,
-		<span class="ident">default_heap_pages</span>: <span class="prelude-val">None</span>,
-		<span class="ident">offchain_worker</span>: <span class="ident">OffchainWorkerConfig</span> { <span class="ident">enabled</span>: <span class="bool-val">true</span>, <span class="ident">indexing_enabled</span>: <span class="bool-val">false</span> },
-		<span class="ident">force_authoring</span>: <span class="bool-val">false</span>,
-		<span class="ident">disable_grandpa</span>: <span class="bool-val">false</span>,
-		<span class="ident">dev_key_seed</span>: <span class="prelude-val">Some</span>(<span class="ident">key_seed</span>),
-		<span class="ident">tracing_targets</span>: <span class="prelude-val">None</span>,
-		<span class="ident">tracing_receiver</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">max_runtime_instances</span>: <span class="number">8</span>,
-		<span class="ident">announce_block</span>: <span class="bool-val">true</span>,
-		<span class="ident">base_path</span>: <span class="prelude-val">Some</span>(<span class="ident">base_path</span>),
-		<span class="ident">informant_output_format</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">wasm_runtime_overrides</span>: <span class="prelude-val">None</span>,
-		<span class="ident">runtime_cache_size</span>: <span class="number">2</span>,
+		rpc_http: <span class="prelude-val">None</span>,
+		rpc_ws: <span class="prelude-val">None</span>,
+		rpc_ipc: <span class="prelude-val">None</span>,
+		rpc_ws_max_connections: <span class="prelude-val">None</span>,
+		rpc_cors: <span class="prelude-val">None</span>,
+		rpc_methods: Default::default(),
+		rpc_max_payload: <span class="prelude-val">None</span>,
+		rpc_max_request_size: <span class="prelude-val">None</span>,
+		rpc_max_response_size: <span class="prelude-val">None</span>,
+		rpc_id_provider: <span class="prelude-val">None</span>,
+		rpc_max_subs_per_conn: <span class="prelude-val">None</span>,
+		ws_max_out_buffer_capacity: <span class="prelude-val">None</span>,
+		prometheus_config: <span class="prelude-val">None</span>,
+		telemetry_endpoints: <span class="prelude-val">None</span>,
+		default_heap_pages: <span class="prelude-val">None</span>,
+		offchain_worker: OffchainWorkerConfig { enabled: <span class="bool-val">true</span>, indexing_enabled: <span class="bool-val">false </span>},
+		force_authoring: <span class="bool-val">false</span>,
+		disable_grandpa: <span class="bool-val">false</span>,
+		dev_key_seed: <span class="prelude-val">Some</span>(key_seed),
+		tracing_targets: <span class="prelude-val">None</span>,
+		tracing_receiver: Default::default(),
+		max_runtime_instances: <span class="number">8</span>,
+		announce_block: <span class="bool-val">true</span>,
+		base_path: <span class="prelude-val">Some</span>(base_path),
+		informant_output_format: Default::default(),
+		wasm_runtime_overrides: <span class="prelude-val">None</span>,
+		runtime_cache_size: <span class="number">2</span>,
 	})
 }
 
-<span class="kw">impl</span> <span class="ident">TestNode</span> {
-	<span class="doccomment">/// Wait for `count` blocks to be imported in the node and then exit. This function will not</span>
-	<span class="doccomment">/// return if no blocks are ever created, thus you should restrict the maximum amount of time of</span>
-	<span class="doccomment">/// the test execution.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wait_for_blocks</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">count</span>: <span class="ident">usize</span>) -&gt; <span class="kw">impl</span> <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> ()<span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">client</span>.<span class="ident">wait_for_blocks</span>(<span class="ident">count</span>)
+<span class="kw">impl </span>TestNode {
+	<span class="doccomment">/// Wait for `count` blocks to be imported in the node and then exit. This function will not
+	/// return if no blocks are ever created, thus you should restrict the maximum amount of time of
+	/// the test execution.
+	</span><span class="kw">pub fn </span>wait_for_blocks(<span class="kw-2">&amp;</span><span class="self">self</span>, count: usize) -&gt; <span class="kw">impl </span>Future&lt;Output = ()&gt; {
+		<span class="self">self</span>.client.wait_for_blocks(count)
 	}
 
-	<span class="doccomment">/// Send an extrinsic to this node.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">send_extrinsic</span>(
+	<span class="doccomment">/// Send an extrinsic to this node.
+	</span><span class="kw">pub async fn </span>send_extrinsic(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">function</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">runtime::RuntimeCall</span><span class="op">&gt;</span>,
-		<span class="ident">caller</span>: <span class="ident">Sr25519Keyring</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RpcTransactionOutput</span>, <span class="ident">RpcTransactionError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">extrinsic</span> <span class="op">=</span> <span class="ident">construct_extrinsic</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">client</span>, <span class="ident">function</span>, <span class="ident">caller</span>.<span class="ident">pair</span>(), <span class="prelude-val">Some</span>(<span class="number">0</span>));
+		function: <span class="kw">impl </span>Into&lt;runtime::RuntimeCall&gt;,
+		caller: Sr25519Keyring,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;RpcTransactionOutput, RpcTransactionError&gt; {
+		<span class="kw">let </span>extrinsic = construct_extrinsic(<span class="kw-2">&amp;*</span><span class="self">self</span>.client, function, caller.pair(), <span class="prelude-val">Some</span>(<span class="number">0</span>));
 
-		<span class="self">self</span>.<span class="ident">rpc_handlers</span>.<span class="ident">send_transaction</span>(<span class="ident">extrinsic</span>.<span class="ident">into</span>()).<span class="kw">await</span>
-	}
+		<span class="self">self</span>.rpc_handlers.send_transaction(extrinsic.into()).<span class="kw">await
+	</span>}
 
-	<span class="doccomment">/// Register a parachain at this relay chain.</span>
-	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">schedule_upgrade</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">validation</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">RpcTransactionError</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">call</span> <span class="op">=</span> <span class="ident">frame_system::Call::set_code</span> { <span class="ident">code</span>: <span class="ident">validation</span> };
+	<span class="doccomment">/// Register a parachain at this relay chain.
+	</span><span class="kw">pub async fn </span>schedule_upgrade(<span class="kw-2">&amp;</span><span class="self">self</span>, validation: Vec&lt;u8&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), RpcTransactionError&gt; {
+		<span class="kw">let </span>call = frame_system::Call::set_code { code: validation };
 
-		<span class="self">self</span>.<span class="ident">send_extrinsic</span>(
-			<span class="ident">runtime::SudoCall::sudo_unchecked_weight</span> {
-				<span class="ident">call</span>: <span class="ident">Box::new</span>(<span class="ident">call</span>.<span class="ident">into</span>()),
-				<span class="ident">weight</span>: <span class="ident">Weight::from_ref_time</span>(<span class="number">1_000</span>),
+		<span class="self">self</span>.send_extrinsic(
+			runtime::SudoCall::sudo_unchecked_weight {
+				call: Box::new(call.into()),
+				weight: Weight::from_ref_time(<span class="number">1_000</span>),
 			},
-			<span class="ident">Sr25519Keyring::Alice</span>,
+			Sr25519Keyring::Alice,
 		)
-		.<span class="kw">await</span>
-		.<span class="ident">map</span>(<span class="ident">drop</span>)
+		.<span class="kw">await
+		</span>.map(drop)
 	}
 }
 
-<span class="doccomment">/// Fetch account nonce for key pair</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fetch_nonce</span>(<span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="ident">Client</span>, <span class="ident">account</span>: <span class="ident">sp_core::sr25519::Public</span>) -&gt; <span class="ident">u32</span> {
-	<span class="kw">let</span> <span class="ident">best_hash</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">chain_info</span>().<span class="ident">best_hash</span>;
-	<span class="ident">client</span>
-		.<span class="ident">runtime_api</span>()
-		.<span class="ident">account_nonce</span>(<span class="kw-2">&amp;</span><span class="ident">generic::BlockId::Hash</span>(<span class="ident">best_hash</span>), <span class="ident">account</span>.<span class="ident">into</span>())
-		.<span class="ident">expect</span>(<span class="string">&quot;Fetching account nonce works; qed&quot;</span>)
+<span class="doccomment">/// Fetch account nonce for key pair
+</span><span class="kw">pub fn </span>fetch_nonce(client: <span class="kw-2">&amp;</span>Client, account: sp_core::sr25519::Public) -&gt; u32 {
+	<span class="kw">let </span>best_hash = client.chain_info().best_hash;
+	client
+		.runtime_api()
+		.account_nonce(<span class="kw-2">&amp;</span>generic::BlockId::Hash(best_hash), account.into())
+		.expect(<span class="string">&quot;Fetching account nonce works; qed&quot;</span>)
 }
 
-<span class="doccomment">/// Construct an extrinsic that can be applied to the test runtime.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">construct_extrinsic</span>(
-	<span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="ident">Client</span>,
-	<span class="ident">function</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">runtime::RuntimeCall</span><span class="op">&gt;</span>,
-	<span class="ident">caller</span>: <span class="ident">sp_core::sr25519::Pair</span>,
-	<span class="ident">nonce</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
-) -&gt; <span class="ident">runtime::UncheckedExtrinsic</span> {
-	<span class="kw">let</span> <span class="ident">function</span> <span class="op">=</span> <span class="ident">function</span>.<span class="ident">into</span>();
-	<span class="kw">let</span> <span class="ident">current_block_hash</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">info</span>().<span class="ident">best_hash</span>;
-	<span class="kw">let</span> <span class="ident">current_block</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">info</span>().<span class="ident">best_number</span>.<span class="ident">saturated_into</span>();
-	<span class="kw">let</span> <span class="ident">genesis_block</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">hash</span>(<span class="number">0</span>).<span class="ident">unwrap</span>().<span class="ident">unwrap</span>();
-	<span class="kw">let</span> <span class="ident">nonce</span> <span class="op">=</span> <span class="ident">nonce</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">fetch_nonce</span>(<span class="ident">client</span>, <span class="ident">caller</span>.<span class="ident">public</span>()));
-	<span class="kw">let</span> <span class="ident">period</span> <span class="op">=</span> <span class="ident">runtime::BlockHashCount::get</span>()
-		.<span class="ident">checked_next_power_of_two</span>()
-		.<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span> <span class="op">/</span> <span class="number">2</span>)
-		.<span class="ident">unwrap_or</span>(<span class="number">2</span>) <span class="kw">as</span> <span class="ident">u64</span>;
-	<span class="kw">let</span> <span class="ident">tip</span> <span class="op">=</span> <span class="number">0</span>;
-	<span class="kw">let</span> <span class="ident">extra</span>: <span class="ident">runtime::SignedExtra</span> <span class="op">=</span> (
-		<span class="ident">frame_system::CheckNonZeroSender</span>::<span class="op">&lt;</span><span class="ident">runtime::Runtime</span><span class="op">&gt;</span><span class="ident">::new</span>(),
-		<span class="ident">frame_system::CheckSpecVersion</span>::<span class="op">&lt;</span><span class="ident">runtime::Runtime</span><span class="op">&gt;</span><span class="ident">::new</span>(),
-		<span class="ident">frame_system::CheckGenesis</span>::<span class="op">&lt;</span><span class="ident">runtime::Runtime</span><span class="op">&gt;</span><span class="ident">::new</span>(),
-		<span class="ident">frame_system::CheckEra</span>::<span class="op">&lt;</span><span class="ident">runtime::Runtime</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">generic::Era::mortal</span>(
-			<span class="ident">period</span>,
-			<span class="ident">current_block</span>,
+<span class="doccomment">/// Construct an extrinsic that can be applied to the test runtime.
+</span><span class="kw">pub fn </span>construct_extrinsic(
+	client: <span class="kw-2">&amp;</span>Client,
+	function: <span class="kw">impl </span>Into&lt;runtime::RuntimeCall&gt;,
+	caller: sp_core::sr25519::Pair,
+	nonce: <span class="prelude-ty">Option</span>&lt;u32&gt;,
+) -&gt; runtime::UncheckedExtrinsic {
+	<span class="kw">let </span>function = function.into();
+	<span class="kw">let </span>current_block_hash = client.info().best_hash;
+	<span class="kw">let </span>current_block = client.info().best_number.saturated_into();
+	<span class="kw">let </span>genesis_block = client.hash(<span class="number">0</span>).unwrap().unwrap();
+	<span class="kw">let </span>nonce = nonce.unwrap_or_else(|| fetch_nonce(client, caller.public()));
+	<span class="kw">let </span>period = runtime::BlockHashCount::get()
+		.checked_next_power_of_two()
+		.map(|c| c / <span class="number">2</span>)
+		.unwrap_or(<span class="number">2</span>) <span class="kw">as </span>u64;
+	<span class="kw">let </span>tip = <span class="number">0</span>;
+	<span class="kw">let </span>extra: runtime::SignedExtra = (
+		frame_system::CheckNonZeroSender::&lt;runtime::Runtime&gt;::new(),
+		frame_system::CheckSpecVersion::&lt;runtime::Runtime&gt;::new(),
+		frame_system::CheckGenesis::&lt;runtime::Runtime&gt;::new(),
+		frame_system::CheckEra::&lt;runtime::Runtime&gt;::from(generic::Era::mortal(
+			period,
+			current_block,
 		)),
-		<span class="ident">frame_system::CheckNonce</span>::<span class="op">&lt;</span><span class="ident">runtime::Runtime</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">nonce</span>),
-		<span class="ident">frame_system::CheckWeight</span>::<span class="op">&lt;</span><span class="ident">runtime::Runtime</span><span class="op">&gt;</span><span class="ident">::new</span>(),
-		<span class="ident">pallet_transaction_payment::ChargeTransactionPayment</span>::<span class="op">&lt;</span><span class="ident">runtime::Runtime</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="ident">tip</span>),
+		frame_system::CheckNonce::&lt;runtime::Runtime&gt;::from(nonce),
+		frame_system::CheckWeight::&lt;runtime::Runtime&gt;::new(),
+		pallet_transaction_payment::ChargeTransactionPayment::&lt;runtime::Runtime&gt;::from(tip),
 	);
-	<span class="kw">let</span> <span class="ident">raw_payload</span> <span class="op">=</span> <span class="ident">runtime::SignedPayload::from_raw</span>(
-		<span class="ident">function</span>.<span class="ident">clone</span>(),
-		<span class="ident">extra</span>.<span class="ident">clone</span>(),
-		((), <span class="ident">runtime::VERSION</span>.<span class="ident">spec_version</span>, <span class="ident">genesis_block</span>, <span class="ident">current_block_hash</span>, (), (), ()),
+	<span class="kw">let </span>raw_payload = runtime::SignedPayload::from_raw(
+		function.clone(),
+		extra.clone(),
+		((), runtime::VERSION.spec_version, genesis_block, current_block_hash, (), (), ()),
 	);
-	<span class="kw">let</span> <span class="ident">signature</span> <span class="op">=</span> <span class="ident">raw_payload</span>.<span class="ident">using_encoded</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">caller</span>.<span class="ident">sign</span>(<span class="ident">e</span>));
-	<span class="ident">runtime::UncheckedExtrinsic::new_signed</span>(
-		<span class="ident">function</span>,
-		<span class="ident">caller</span>.<span class="ident">public</span>().<span class="ident">into</span>(),
-		<span class="ident">runtime::Signature::Sr25519</span>(<span class="ident">signature</span>),
-		<span class="ident">extra</span>,
+	<span class="kw">let </span>signature = raw_payload.using_encoded(|e| caller.sign(e));
+	runtime::UncheckedExtrinsic::new_signed(
+		function,
+		caller.public().into(),
+		runtime::Signature::Sr25519(signature),
+		extra,
 	)
 }
 
-<span class="doccomment">/// Run a relay-chain validator node.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This is essentially a wrapper around</span>
-<span class="doccomment">/// [`run_validator_node`](polkadot_test_service::run_validator_node).</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">run_relay_chain_validator_node</span>(
-	<span class="ident">tokio_handle</span>: <span class="ident">tokio::runtime::Handle</span>,
-	<span class="ident">key</span>: <span class="ident">Sr25519Keyring</span>,
-	<span class="ident">storage_update_func</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(),
-	<span class="ident">boot_nodes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MultiaddrWithPeerId</span><span class="op">&gt;</span>,
-	<span class="ident">websocket_port</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-) -&gt; <span class="ident">polkadot_test_service::PolkadotTestNode</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">polkadot_test_service::node_config</span>(
-		<span class="ident">storage_update_func</span>,
-		<span class="ident">tokio_handle</span>,
-		<span class="ident">key</span>,
-		<span class="ident">boot_nodes</span>,
+<span class="doccomment">/// Run a relay-chain validator node.
+///
+/// This is essentially a wrapper around
+/// [`run_validator_node`](polkadot_test_service::run_validator_node).
+</span><span class="kw">pub fn </span>run_relay_chain_validator_node(
+	tokio_handle: tokio::runtime::Handle,
+	key: Sr25519Keyring,
+	storage_update_func: <span class="kw">impl </span>Fn(),
+	boot_nodes: Vec&lt;MultiaddrWithPeerId&gt;,
+	websocket_port: <span class="prelude-ty">Option</span>&lt;u16&gt;,
+) -&gt; polkadot_test_service::PolkadotTestNode {
+	<span class="kw">let </span><span class="kw-2">mut </span>config = polkadot_test_service::node_config(
+		storage_update_func,
+		tokio_handle,
+		key,
+		boot_nodes,
 		<span class="bool-val">true</span>,
 	);
 
-	<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">port</span>) <span class="op">=</span> <span class="ident">websocket_port</span> {
-		<span class="ident">config</span>.<span class="ident">rpc_ws</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">SocketAddr::new</span>(<span class="ident">IpAddr::V4</span>(<span class="ident">Ipv4Addr::new</span>(<span class="number">127</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>)), <span class="ident">port</span>));
+	<span class="kw">if let </span><span class="prelude-val">Some</span>(port) = websocket_port {
+		config.rpc_ws = <span class="prelude-val">Some</span>(SocketAddr::new(IpAddr::V4(Ipv4Addr::new(<span class="number">127</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>)), port));
 	}
 
-	<span class="ident">polkadot_test_service::run_validator_node</span>(
-		<span class="ident">config</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">cumulus_test_relay_validation_worker_provider::VALIDATION_WORKER</span>.<span class="ident">into</span>()),
+	polkadot_test_service::run_validator_node(
+		config,
+		<span class="prelude-val">Some</span>(cumulus_test_relay_validation_worker_provider::VALIDATION_WORKER.into()),
 	)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_test_service" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_test_service" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

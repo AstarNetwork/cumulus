@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot-parachain/src/chain_spec/contracts.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>contracts.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../polkadot_parachain/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot-parachain/src/chain_spec/contracts.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>contracts.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../polkadot_parachain/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -277,284 +277,284 @@
 <span id="277">277</span>
 <span id="278">278</span>
 <span id="279">279</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::chain_spec</span>::{
-	<span class="ident">get_account_id_from_seed</span>, <span class="ident">get_collator_keys_from_seed</span>, <span class="ident">Extensions</span>, <span class="ident">SAFE_XCM_VERSION</span>,
+</span><span class="kw">use </span><span class="kw">crate</span>::chain_spec::{
+	get_account_id_from_seed, get_collator_keys_from_seed, Extensions, SAFE_XCM_VERSION,
 };
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core::ParaId</span>;
-<span class="kw">use</span> <span class="ident">hex_literal::hex</span>;
-<span class="kw">use</span> <span class="ident">parachains_common</span>::{<span class="ident">AccountId</span>, <span class="ident">AuraId</span>};
-<span class="kw">use</span> <span class="ident">sc_service::ChainType</span>;
-<span class="kw">use</span> <span class="ident">sp_core</span>::{<span class="ident">crypto::UncheckedInto</span>, <span class="ident">sr25519</span>};
+<span class="kw">use </span>cumulus_primitives_core::ParaId;
+<span class="kw">use </span>hex_literal::hex;
+<span class="kw">use </span>parachains_common::{AccountId, AuraId};
+<span class="kw">use </span>sc_service::ChainType;
+<span class="kw">use </span>sp_core::{crypto::UncheckedInto, sr25519};
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ContractsRococoChainSpec</span> <span class="op">=</span>
-	<span class="ident">sc_service::GenericChainSpec</span><span class="op">&lt;</span><span class="ident">contracts_rococo_runtime::GenesisConfig</span>, <span class="ident">Extensions</span><span class="op">&gt;</span>;
+<span class="kw">pub type </span>ContractsRococoChainSpec =
+	sc_service::GenericChainSpec&lt;contracts_rococo_runtime::GenesisConfig, Extensions&gt;;
 
-<span class="doccomment">/// No relay chain suffix because the id is the same over all relay chains.</span>
-<span class="kw">const</span> <span class="ident">CONTRACTS_PARACHAIN_ID</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1002</span>;
+<span class="doccomment">/// No relay chain suffix because the id is the same over all relay chains.
+</span><span class="kw">const </span>CONTRACTS_PARACHAIN_ID: u32 = <span class="number">1002</span>;
 
-<span class="doccomment">/// The existential deposit is determined by the runtime &quot;contracts-rococo&quot;.</span>
-<span class="kw">const</span> <span class="ident">CONTRACTS_ROCOCO_ED</span>: <span class="ident">contracts_rococo_runtime::Balance</span> <span class="op">=</span>
-	<span class="ident">contracts_rococo_runtime::constants::currency::EXISTENTIAL_DEPOSIT</span>;
+<span class="doccomment">/// The existential deposit is determined by the runtime &quot;contracts-rococo&quot;.
+</span><span class="kw">const </span>CONTRACTS_ROCOCO_ED: contracts_rococo_runtime::Balance =
+	contracts_rococo_runtime::constants::currency::EXISTENTIAL_DEPOSIT;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contracts_rococo_development_config</span>() -&gt; <span class="ident">ContractsRococoChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;ROC&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>contracts_rococo_development_config() -&gt; ContractsRococoChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;ROC&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12</span>.into());
 
-	<span class="ident">ContractsRococoChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Contracts on Rococo Development&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;contracts-rococo-dev&quot;</span>,
-		<span class="ident">ChainType::Development</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">contracts_rococo_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[
+	ContractsRococoChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Contracts on Rococo Development&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;contracts-rococo-dev&quot;</span>,
+		ChainType::Development,
+		<span class="kw">move </span>|| {
+			contracts_rococo_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">contracts_rococo_runtime::AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+						get_collator_keys_from_seed::&lt;contracts_rococo_runtime::AuraId&gt;(<span class="string">&quot;Alice&quot;</span>),
 					),
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">contracts_rococo_runtime::AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+						get_collator_keys_from_seed::&lt;contracts_rococo_runtime::AuraId&gt;(<span class="string">&quot;Bob&quot;</span>),
 					),
 				],
 				<span class="macro">vec!</span>[
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie//stash&quot;</span>),
 				],
-				<span class="ident">CONTRACTS_PARACHAIN_ID</span>.<span class="ident">into</span>(),
+				CONTRACTS_PARACHAIN_ID.into(),
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="ident">Extensions</span> {
-			<span class="ident">relay_chain</span>: <span class="string">&quot;rococo-local&quot;</span>.<span class="ident">into</span>(), <span class="comment">// You MUST set this to the correct network!</span>
-			<span class="ident">para_id</span>: <span class="ident">CONTRACTS_PARACHAIN_ID</span>,
+		Extensions {
+			relay_chain: <span class="string">&quot;rococo-local&quot;</span>.into(), <span class="comment">// You MUST set this to the correct network!
+			</span>para_id: CONTRACTS_PARACHAIN_ID,
 		},
 	)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contracts_rococo_local_config</span>() -&gt; <span class="ident">ContractsRococoChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;ROC&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>contracts_rococo_local_config() -&gt; ContractsRococoChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;ROC&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12</span>.into());
 
-	<span class="ident">ContractsRococoChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Contracts on Rococo&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;contracts-rococo-local&quot;</span>,
-		<span class="ident">ChainType::Local</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">contracts_rococo_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[
+	ContractsRococoChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Contracts on Rococo&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;contracts-rococo-local&quot;</span>,
+		ChainType::Local,
+		<span class="kw">move </span>|| {
+			contracts_rococo_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">contracts_rococo_runtime::AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+						get_collator_keys_from_seed::&lt;contracts_rococo_runtime::AuraId&gt;(<span class="string">&quot;Alice&quot;</span>),
 					),
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">contracts_rococo_runtime::AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+						get_collator_keys_from_seed::&lt;contracts_rococo_runtime::AuraId&gt;(<span class="string">&quot;Bob&quot;</span>),
 					),
 				],
 				<span class="macro">vec!</span>[
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie//stash&quot;</span>),
 				],
-				<span class="ident">CONTRACTS_PARACHAIN_ID</span>.<span class="ident">into</span>(),
+				CONTRACTS_PARACHAIN_ID.into(),
 			)
 		},
-		<span class="comment">// Bootnodes</span>
-		<span class="ident">Vec::new</span>(),
-		<span class="comment">// Telemetry</span>
-		<span class="prelude-val">None</span>,
-		<span class="comment">// Protocol ID</span>
-		<span class="prelude-val">None</span>,
-		<span class="comment">// Fork ID</span>
-		<span class="prelude-val">None</span>,
-		<span class="comment">// Properties</span>
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="comment">// Extensions</span>
-		<span class="ident">Extensions</span> {
-			<span class="ident">relay_chain</span>: <span class="string">&quot;rococo-local&quot;</span>.<span class="ident">into</span>(), <span class="comment">// You MUST set this to the correct network!</span>
-			<span class="ident">para_id</span>: <span class="ident">CONTRACTS_PARACHAIN_ID</span>,
+		<span class="comment">// Bootnodes
+		</span>Vec::new(),
+		<span class="comment">// Telemetry
+		</span><span class="prelude-val">None</span>,
+		<span class="comment">// Protocol ID
+		</span><span class="prelude-val">None</span>,
+		<span class="comment">// Fork ID
+		</span><span class="prelude-val">None</span>,
+		<span class="comment">// Properties
+		</span><span class="prelude-val">Some</span>(properties),
+		<span class="comment">// Extensions
+		</span>Extensions {
+			relay_chain: <span class="string">&quot;rococo-local&quot;</span>.into(), <span class="comment">// You MUST set this to the correct network!
+			</span>para_id: CONTRACTS_PARACHAIN_ID,
 		},
 	)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contracts_rococo_config</span>() -&gt; <span class="ident">ContractsRococoChainSpec</span> {
-	<span class="comment">// Give your base currency a unit name and decimal places</span>
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;ROC&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>contracts_rococo_config() -&gt; ContractsRococoChainSpec {
+	<span class="comment">// Give your base currency a unit name and decimal places
+	</span><span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;ROC&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12</span>.into());
 
-	<span class="ident">ContractsRococoChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Contracts on Rococo&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;contracts-rococo&quot;</span>,
-		<span class="ident">ChainType::Live</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">contracts_rococo_genesis</span>(
+	ContractsRococoChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Contracts on Rococo&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;contracts-rococo&quot;</span>,
+		ChainType::Live,
+		<span class="kw">move </span>|| {
+			contracts_rococo_genesis(
 				<span class="macro">vec!</span>[
-					<span class="comment">// 5GKFbTTgrVS4Vz1UWWHPqMZQNFWZtqo7H2KpCDyYhEL3aS26</span>
-					(
+					<span class="comment">// 5GKFbTTgrVS4Vz1UWWHPqMZQNFWZtqo7H2KpCDyYhEL3aS26
+					</span>(
 						<span class="macro">hex!</span>[<span class="string">&quot;bc09354c12c054c8f6b3da208485eacec4ac648bad348895273b37bab5a0937c&quot;</span>]
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>[<span class="string">&quot;bc09354c12c054c8f6b3da208485eacec4ac648bad348895273b37bab5a0937c&quot;</span>]
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
-					<span class="comment">// 5EPRJHm2GpABVWcwnAujcrhnrjFZyDGd5TwKFzkBoGgdRyv2</span>
-					(
+					<span class="comment">// 5EPRJHm2GpABVWcwnAujcrhnrjFZyDGd5TwKFzkBoGgdRyv2
+					</span>(
 						<span class="macro">hex!</span>[<span class="string">&quot;66be63b7bcbfb91040e5248e2d1ceb822cf219c57848c5924ffa3a1f8e67ba72&quot;</span>]
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>[<span class="string">&quot;66be63b7bcbfb91040e5248e2d1ceb822cf219c57848c5924ffa3a1f8e67ba72&quot;</span>]
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
-					<span class="comment">// 5GH62vrJrVZxLREcHzm2PR5uTLAT5RQMJitoztCGyaP4o3uM</span>
-					(
+					<span class="comment">// 5GH62vrJrVZxLREcHzm2PR5uTLAT5RQMJitoztCGyaP4o3uM
+					</span>(
 						<span class="macro">hex!</span>[<span class="string">&quot;ba62886472a0a9f66b5e39f1469ce1c5b3d8cad6be39078daf16f111e89d1e44&quot;</span>]
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>[<span class="string">&quot;ba62886472a0a9f66b5e39f1469ce1c5b3d8cad6be39078daf16f111e89d1e44&quot;</span>]
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
-					<span class="comment">// 5FHfoJDLdjRYX5KXLRqMDYBbWrwHLMtti21uK4QByUoUAbJF</span>
-					(
+					<span class="comment">// 5FHfoJDLdjRYX5KXLRqMDYBbWrwHLMtti21uK4QByUoUAbJF
+					</span>(
 						<span class="macro">hex!</span>[<span class="string">&quot;8e97f65cda001976311df9bed39e8d0c956089093e94a75ef76fe9347a0eda7b&quot;</span>]
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>[<span class="string">&quot;8e97f65cda001976311df9bed39e8d0c956089093e94a75ef76fe9347a0eda7b&quot;</span>]
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 				],
-				<span class="comment">// Warning: The configuration for a production chain should not contain</span>
-				<span class="comment">// any endowed accounts here, otherwise it&#39;ll be minting extra native tokens</span>
-				<span class="comment">// from the relay chain on the parachain.</span>
-				<span class="macro">vec!</span>[
-					<span class="comment">// NOTE: Remove endowed accounts if deployed on other relay chains.</span>
-					<span class="comment">// Endowed accounts</span>
-					<span class="macro">hex!</span>[<span class="string">&quot;baa78c7154c7f82d6d377177e20bcab65d327eca0086513f9964f5a0f6bdad56&quot;</span>].<span class="ident">into</span>(),
-					<span class="comment">// AccountId of an account which `ink-waterfall` uses for automated testing</span>
-					<span class="macro">hex!</span>[<span class="string">&quot;0e47e2344d523c3cc5c34394b0d58b9a4200e813a038e6c5a6163cc07d70b069&quot;</span>].<span class="ident">into</span>(),
+				<span class="comment">// Warning: The configuration for a production chain should not contain
+				// any endowed accounts here, otherwise it&#39;ll be minting extra native tokens
+				// from the relay chain on the parachain.
+				</span><span class="macro">vec!</span>[
+					<span class="comment">// NOTE: Remove endowed accounts if deployed on other relay chains.
+					// Endowed accounts
+					</span><span class="macro">hex!</span>[<span class="string">&quot;baa78c7154c7f82d6d377177e20bcab65d327eca0086513f9964f5a0f6bdad56&quot;</span>].into(),
+					<span class="comment">// AccountId of an account which `ink-waterfall` uses for automated testing
+					</span><span class="macro">hex!</span>[<span class="string">&quot;0e47e2344d523c3cc5c34394b0d58b9a4200e813a038e6c5a6163cc07d70b069&quot;</span>].into(),
 				],
-				<span class="ident">CONTRACTS_PARACHAIN_ID</span>.<span class="ident">into</span>(),
+				CONTRACTS_PARACHAIN_ID.into(),
 			)
 		},
-		<span class="comment">// Bootnodes</span>
-		<span class="macro">vec!</span>[
-			<span class="string">&quot;/dns/contracts-collator-0.parity-testnet.parity.io/tcp/30333/p2p/12D3KooWKg3Rpxcr9oJ8n6khoxpGKWztCZydtUZk2cojHqnfLrpj&quot;</span>
-				.<span class="ident">parse</span>()
-				.<span class="ident">expect</span>(<span class="string">&quot;MultiaddrWithPeerId&quot;</span>),
-			<span class="string">&quot;/dns/contracts-collator-1.parity-testnet.parity.io/tcp/30333/p2p/12D3KooWPEXYrz8tHU3nDtPoPw4V7ou5dzMEWSTuUj7vaWiYVAVh&quot;</span>
-				.<span class="ident">parse</span>()
-				.<span class="ident">expect</span>(<span class="string">&quot;MultiaddrWithPeerId&quot;</span>),
-			<span class="string">&quot;/dns/contracts-collator-2.parity-testnet.parity.io/tcp/30333/p2p/12D3KooWEVU8AFNary4nP4qEnEcwJaRuy59Wefekzdu9pKbnVEhk&quot;</span>
-				.<span class="ident">parse</span>()
-				.<span class="ident">expect</span>(<span class="string">&quot;MultiaddrWithPeerId&quot;</span>),
-			<span class="string">&quot;/dns/contracts-collator-3.parity-testnet.parity.io/tcp/30333/p2p/12D3KooWP6pV3ZmcXzGDjv8ZMgA6nZxfAKDxSz4VNiLx6vVCQgJX&quot;</span>
-				.<span class="ident">parse</span>()
-				.<span class="ident">expect</span>(<span class="string">&quot;MultiaddrWithPeerId&quot;</span>),
+		<span class="comment">// Bootnodes
+		</span><span class="macro">vec!</span>[
+			<span class="string">&quot;/dns/contracts-collator-0.parity-testnet.parity.io/tcp/30333/p2p/12D3KooWKg3Rpxcr9oJ8n6khoxpGKWztCZydtUZk2cojHqnfLrpj&quot;
+				</span>.parse()
+				.expect(<span class="string">&quot;MultiaddrWithPeerId&quot;</span>),
+			<span class="string">&quot;/dns/contracts-collator-1.parity-testnet.parity.io/tcp/30333/p2p/12D3KooWPEXYrz8tHU3nDtPoPw4V7ou5dzMEWSTuUj7vaWiYVAVh&quot;
+				</span>.parse()
+				.expect(<span class="string">&quot;MultiaddrWithPeerId&quot;</span>),
+			<span class="string">&quot;/dns/contracts-collator-2.parity-testnet.parity.io/tcp/30333/p2p/12D3KooWEVU8AFNary4nP4qEnEcwJaRuy59Wefekzdu9pKbnVEhk&quot;
+				</span>.parse()
+				.expect(<span class="string">&quot;MultiaddrWithPeerId&quot;</span>),
+			<span class="string">&quot;/dns/contracts-collator-3.parity-testnet.parity.io/tcp/30333/p2p/12D3KooWP6pV3ZmcXzGDjv8ZMgA6nZxfAKDxSz4VNiLx6vVCQgJX&quot;
+				</span>.parse()
+				.expect(<span class="string">&quot;MultiaddrWithPeerId&quot;</span>),
 		],
-		<span class="comment">// Telemetry</span>
-		<span class="prelude-val">None</span>,
-		<span class="comment">// Protocol ID</span>
-		<span class="prelude-val">None</span>,
-		<span class="comment">// Fork ID</span>
-		<span class="prelude-val">None</span>,
-		<span class="comment">// Properties</span>
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="comment">// Extensions</span>
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;rococo&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="ident">CONTRACTS_PARACHAIN_ID</span> },
+		<span class="comment">// Telemetry
+		</span><span class="prelude-val">None</span>,
+		<span class="comment">// Protocol ID
+		</span><span class="prelude-val">None</span>,
+		<span class="comment">// Fork ID
+		</span><span class="prelude-val">None</span>,
+		<span class="comment">// Properties
+		</span><span class="prelude-val">Some</span>(properties),
+		<span class="comment">// Extensions
+		</span>Extensions { relay_chain: <span class="string">&quot;rococo&quot;</span>.into(), para_id: CONTRACTS_PARACHAIN_ID },
 	)
 }
 
-<span class="kw">fn</span> <span class="ident">contracts_rococo_genesis</span>(
-	<span class="ident">invulnerables</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">AccountId</span>, <span class="ident">AuraId</span>)<span class="op">&gt;</span>,
-	<span class="ident">endowed_accounts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>,
-	<span class="ident">id</span>: <span class="ident">ParaId</span>,
-) -&gt; <span class="ident">contracts_rococo_runtime::GenesisConfig</span> {
-	<span class="ident">contracts_rococo_runtime::GenesisConfig</span> {
-		<span class="ident">system</span>: <span class="ident">contracts_rococo_runtime::SystemConfig</span> {
-			<span class="ident">code</span>: <span class="ident">contracts_rococo_runtime::WASM_BINARY</span>
-				.<span class="ident">expect</span>(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
-				.<span class="ident">to_vec</span>(),
+<span class="kw">fn </span>contracts_rococo_genesis(
+	invulnerables: Vec&lt;(AccountId, AuraId)&gt;,
+	endowed_accounts: Vec&lt;AccountId&gt;,
+	id: ParaId,
+) -&gt; contracts_rococo_runtime::GenesisConfig {
+	contracts_rococo_runtime::GenesisConfig {
+		system: contracts_rococo_runtime::SystemConfig {
+			code: contracts_rococo_runtime::WASM_BINARY
+				.expect(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
+				.to_vec(),
 		},
-		<span class="ident">balances</span>: <span class="ident">contracts_rococo_runtime::BalancesConfig</span> {
-			<span class="ident">balances</span>: <span class="ident">endowed_accounts</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">k</span><span class="op">|</span> (<span class="ident">k</span>, <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">60</span>)).<span class="ident">collect</span>(),
+		balances: contracts_rococo_runtime::BalancesConfig {
+			balances: endowed_accounts.iter().cloned().map(|k| (k, <span class="number">1 </span>&lt;&lt; <span class="number">60</span>)).collect(),
 		},
-		<span class="ident">parachain_info</span>: <span class="ident">contracts_rococo_runtime::ParachainInfoConfig</span> { <span class="ident">parachain_id</span>: <span class="ident">id</span> },
-		<span class="ident">collator_selection</span>: <span class="ident">contracts_rococo_runtime::CollatorSelectionConfig</span> {
-			<span class="ident">invulnerables</span>: <span class="ident">invulnerables</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">acc</span>).<span class="ident">collect</span>(),
-			<span class="ident">candidacy_bond</span>: <span class="ident">CONTRACTS_ROCOCO_ED</span> <span class="op">*</span> <span class="number">16</span>,
-			..<span class="ident">Default::default</span>()
+		parachain_info: contracts_rococo_runtime::ParachainInfoConfig { parachain_id: id },
+		collator_selection: contracts_rococo_runtime::CollatorSelectionConfig {
+			invulnerables: invulnerables.iter().cloned().map(|(acc, <span class="kw">_</span>)| acc).collect(),
+			candidacy_bond: CONTRACTS_ROCOCO_ED * <span class="number">16</span>,
+			..Default::default()
 		},
-		<span class="ident">session</span>: <span class="ident">contracts_rococo_runtime::SessionConfig</span> {
-			<span class="ident">keys</span>: <span class="ident">invulnerables</span>
-				.<span class="ident">into_iter</span>()
-				.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="ident">aura</span>)<span class="op">|</span> {
+		session: contracts_rococo_runtime::SessionConfig {
+			keys: invulnerables
+				.into_iter()
+				.map(|(acc, aura)| {
 					(
-						<span class="ident">acc</span>.<span class="ident">clone</span>(),                                    <span class="comment">// account id</span>
-						<span class="ident">acc</span>,                                            <span class="comment">// validator id</span>
-						<span class="ident">contracts_rococo_runtime::SessionKeys</span> { <span class="ident">aura</span> }, <span class="comment">// session keys</span>
-					)
+						acc.clone(),                                    <span class="comment">// account id
+						</span>acc,                                            <span class="comment">// validator id
+						</span>contracts_rococo_runtime::SessionKeys { aura }, <span class="comment">// session keys
+					</span>)
 				})
-				.<span class="ident">collect</span>(),
+				.collect(),
 		},
-		<span class="comment">// no need to pass anything to aura, in fact it will panic if we do. Session will take care</span>
-		<span class="comment">// of this.</span>
-		<span class="ident">aura</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">aura_ext</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">parachain_system</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">polkadot_xcm</span>: <span class="ident">contracts_rococo_runtime::PolkadotXcmConfig</span> {
-			<span class="ident">safe_xcm_version</span>: <span class="prelude-val">Some</span>(<span class="ident">SAFE_XCM_VERSION</span>),
+		<span class="comment">// no need to pass anything to aura, in fact it will panic if we do. Session will take care
+		// of this.
+		</span>aura: Default::default(),
+		aura_ext: Default::default(),
+		parachain_system: Default::default(),
+		polkadot_xcm: contracts_rococo_runtime::PolkadotXcmConfig {
+			safe_xcm_version: <span class="prelude-val">Some</span>(SAFE_XCM_VERSION),
 		},
-		<span class="ident">sudo</span>: <span class="ident">contracts_rococo_runtime::SudoConfig</span> {
-			<span class="ident">key</span>: <span class="prelude-val">Some</span>(
-				<span class="macro">hex!</span>[<span class="string">&quot;2681a28014e7d3a5bfb32a003b3571f53c408acbc28d351d6bf58f5028c4ef14&quot;</span>].<span class="ident">into</span>(),
+		sudo: contracts_rococo_runtime::SudoConfig {
+			key: <span class="prelude-val">Some</span>(
+				<span class="macro">hex!</span>[<span class="string">&quot;2681a28014e7d3a5bfb32a003b3571f53c408acbc28d351d6bf58f5028c4ef14&quot;</span>].into(),
 			),
 		},
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="polkadot_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="polkadot_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

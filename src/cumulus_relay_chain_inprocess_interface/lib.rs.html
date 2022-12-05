@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-inprocess-interface/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_inprocess_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_inprocess_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_inprocess_interface/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/relay-chain-inprocess-interface/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_relay_chain_inprocess_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_relay_chain_inprocess_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_relay_chain_inprocess_interface/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -518,525 +518,525 @@
 <span id="518">518</span>
 <span id="519">519</span>
 <span id="520">520</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">pin::Pin</span>, <span class="ident">sync::Arc</span>, <span class="ident">time::Duration</span>};
+</span><span class="kw">use </span>std::{pin::Pin, sync::Arc, time::Duration};
 
-<span class="kw">use</span> <span class="ident">async_trait::async_trait</span>;
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{
-	<span class="ident">relay_chain</span>::{
-		<span class="ident">runtime_api::ParachainHost</span>,
-		<span class="ident">v2</span>::{<span class="ident">CommittedCandidateReceipt</span>, <span class="ident">OccupiedCoreAssumption</span>, <span class="ident">SessionIndex</span>, <span class="ident">ValidatorId</span>},
-		<span class="ident">Block</span> <span class="kw">as</span> <span class="ident">PBlock</span>, <span class="ident">BlockId</span>, <span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">PHeader</span>, <span class="ident">InboundHrmpMessage</span>,
+<span class="kw">use </span>async_trait::async_trait;
+<span class="kw">use </span>cumulus_primitives_core::{
+	relay_chain::{
+		runtime_api::ParachainHost,
+		v2::{CommittedCandidateReceipt, OccupiedCoreAssumption, SessionIndex, ValidatorId},
+		Block <span class="kw">as </span>PBlock, BlockId, Hash <span class="kw">as </span>PHash, Header <span class="kw">as </span>PHeader, InboundHrmpMessage,
 	},
-	<span class="ident">InboundDownwardMessage</span>, <span class="ident">ParaId</span>, <span class="ident">PersistedValidationData</span>,
+	InboundDownwardMessage, ParaId, PersistedValidationData,
 };
-<span class="kw">use</span> <span class="ident">cumulus_relay_chain_interface</span>::{<span class="ident">RelayChainError</span>, <span class="ident">RelayChainInterface</span>, <span class="ident">RelayChainResult</span>};
-<span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">FutureExt</span>, <span class="ident">Stream</span>, <span class="ident">StreamExt</span>};
-<span class="kw">use</span> <span class="ident">polkadot_client</span>::{<span class="ident">ClientHandle</span>, <span class="ident">ExecuteWithClient</span>, <span class="ident">FullBackend</span>};
-<span class="kw">use</span> <span class="ident">polkadot_service</span>::{
-	<span class="ident">AuxStore</span>, <span class="ident">BabeApi</span>, <span class="ident">CollatorPair</span>, <span class="ident">Configuration</span>, <span class="ident">Handle</span>, <span class="ident">NewFull</span>, <span class="ident">TaskManager</span>,
+<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainError, RelayChainInterface, RelayChainResult};
+<span class="kw">use </span>futures::{FutureExt, Stream, StreamExt};
+<span class="kw">use </span>polkadot_client::{ClientHandle, ExecuteWithClient, FullBackend};
+<span class="kw">use </span>polkadot_service::{
+	AuxStore, BabeApi, CollatorPair, Configuration, Handle, NewFull, TaskManager,
 };
-<span class="kw">use</span> <span class="ident">sc_cli::SubstrateCli</span>;
-<span class="kw">use</span> <span class="ident">sc_client_api</span>::{
-	<span class="ident">blockchain::BlockStatus</span>, <span class="ident">Backend</span>, <span class="ident">BlockchainEvents</span>, <span class="ident">HeaderBackend</span>, <span class="ident">ImportNotifications</span>,
-	<span class="ident">StorageProof</span>, <span class="ident">UsageProvider</span>,
+<span class="kw">use </span>sc_cli::SubstrateCli;
+<span class="kw">use </span>sc_client_api::{
+	blockchain::BlockStatus, Backend, BlockchainEvents, HeaderBackend, ImportNotifications,
+	StorageProof, UsageProvider,
 };
-<span class="kw">use</span> <span class="ident">sc_telemetry::TelemetryWorkerHandle</span>;
-<span class="kw">use</span> <span class="ident">sp_api::ProvideRuntimeApi</span>;
-<span class="kw">use</span> <span class="ident">sp_consensus::SyncOracle</span>;
-<span class="kw">use</span> <span class="ident">sp_core</span>::{<span class="ident">sp_std::collections::btree_map::BTreeMap</span>, <span class="ident">Pair</span>};
-<span class="kw">use</span> <span class="ident">sp_state_machine</span>::{<span class="ident">Backend</span> <span class="kw">as</span> <span class="ident">StateBackend</span>, <span class="ident">StorageValue</span>};
+<span class="kw">use </span>sc_telemetry::TelemetryWorkerHandle;
+<span class="kw">use </span>sp_api::ProvideRuntimeApi;
+<span class="kw">use </span>sp_consensus::SyncOracle;
+<span class="kw">use </span>sp_core::{sp_std::collections::btree_map::BTreeMap, Pair};
+<span class="kw">use </span>sp_state_machine::{Backend <span class="kw">as </span>StateBackend, StorageValue};
 
-<span class="doccomment">/// The timeout in seconds after that the waiting for a block should be aborted.</span>
-<span class="kw">const</span> <span class="ident">TIMEOUT_IN_SECONDS</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">6</span>;
+<span class="doccomment">/// The timeout in seconds after that the waiting for a block should be aborted.
+</span><span class="kw">const </span>TIMEOUT_IN_SECONDS: u64 = <span class="number">6</span>;
 
-<span class="doccomment">/// Provides an implementation of the [`RelayChainInterface`] using a local in-process relay chain node.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RelayChainInProcessInterface</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span> {
-	<span class="ident">full_client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>,
-	<span class="ident">backend</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FullBackend</span><span class="op">&gt;</span>,
-	<span class="ident">sync_oracle</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">SyncOracle</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>,
-	<span class="ident">overseer_handle</span>: <span class="ident">Handle</span>,
+<span class="doccomment">/// Provides an implementation of the [`RelayChainInterface`] using a local in-process relay chain node.
+</span><span class="kw">pub struct </span>RelayChainInProcessInterface&lt;Client&gt; {
+	full_client: Arc&lt;Client&gt;,
+	backend: Arc&lt;FullBackend&gt;,
+	sync_oracle: Arc&lt;<span class="kw">dyn </span>SyncOracle + Send + Sync&gt;,
+	overseer_handle: Handle,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span> <span class="ident">RelayChainInProcessInterface</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// Create a new instance of [`RelayChainInProcessInterface`]</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-		<span class="ident">full_client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>,
-		<span class="ident">backend</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FullBackend</span><span class="op">&gt;</span>,
-		<span class="ident">sync_oracle</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">SyncOracle</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>,
-		<span class="ident">overseer_handle</span>: <span class="ident">Handle</span>,
-	) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> { <span class="ident">full_client</span>, <span class="ident">backend</span>, <span class="ident">sync_oracle</span>, <span class="ident">overseer_handle</span> }
+<span class="kw">impl</span>&lt;Client&gt; RelayChainInProcessInterface&lt;Client&gt; {
+	<span class="doccomment">/// Create a new instance of [`RelayChainInProcessInterface`]
+	</span><span class="kw">pub fn </span>new(
+		full_client: Arc&lt;Client&gt;,
+		backend: Arc&lt;FullBackend&gt;,
+		sync_oracle: Arc&lt;<span class="kw">dyn </span>SyncOracle + Send + Sync&gt;,
+		overseer_handle: Handle,
+	) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ full_client, backend, sync_oracle, overseer_handle }
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">RelayChainInProcessInterface</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> {
-			<span class="ident">full_client</span>: <span class="self">self</span>.<span class="ident">full_client</span>.<span class="ident">clone</span>(),
-			<span class="ident">backend</span>: <span class="self">self</span>.<span class="ident">backend</span>.<span class="ident">clone</span>(),
-			<span class="ident">sync_oracle</span>: <span class="self">self</span>.<span class="ident">sync_oracle</span>.<span class="ident">clone</span>(),
-			<span class="ident">overseer_handle</span>: <span class="self">self</span>.<span class="ident">overseer_handle</span>.<span class="ident">clone</span>(),
+<span class="kw">impl</span>&lt;T&gt; Clone <span class="kw">for </span>RelayChainInProcessInterface&lt;T&gt; {
+	<span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			full_client: <span class="self">self</span>.full_client.clone(),
+			backend: <span class="self">self</span>.backend.clone(),
+			sync_oracle: <span class="self">self</span>.sync_oracle.clone(),
+			overseer_handle: <span class="self">self</span>.overseer_handle.clone(),
 		}
 	}
 }
 
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span> <span class="ident">RelayChainInterface</span> <span class="kw">for</span> <span class="ident">RelayChainInProcessInterface</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Client</span>: <span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">BlockchainEvents</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">AuxStore</span>
-		<span class="op">+</span> <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>
-		<span class="op">+</span> <span class="ident">Sync</span>
-		<span class="op">+</span> <span class="ident">Send</span>,
-	<span class="ident">Client::Api</span>: <span class="ident">ParachainHost</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">BabeApi</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>,
+<span class="attribute">#[async_trait]
+</span><span class="kw">impl</span>&lt;Client&gt; RelayChainInterface <span class="kw">for </span>RelayChainInProcessInterface&lt;Client&gt;
+<span class="kw">where
+	</span>Client: ProvideRuntimeApi&lt;PBlock&gt;
+		+ BlockchainEvents&lt;PBlock&gt;
+		+ AuxStore
+		+ UsageProvider&lt;PBlock&gt;
+		+ Sync
+		+ Send,
+	Client::Api: ParachainHost&lt;PBlock&gt; + BabeApi&lt;PBlock&gt;,
 {
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retrieve_dmq_contents</span>(
+	<span class="kw">async fn </span>retrieve_dmq_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundDownwardMessage</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">full_client</span>.<span class="ident">runtime_api</span>().<span class="ident">dmq_contents_with_context</span>(
-			<span class="kw-2">&amp;</span><span class="ident">BlockId::hash</span>(<span class="ident">relay_parent</span>),
-			<span class="ident">sp_core::ExecutionContext::Importing</span>,
-			<span class="ident">para_id</span>,
+		para_id: ParaId,
+		relay_parent: PHash,
+	) -&gt; RelayChainResult&lt;Vec&lt;InboundDownwardMessage&gt;&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.full_client.runtime_api().dmq_contents_with_context(
+			<span class="kw-2">&amp;</span>BlockId::hash(relay_parent),
+			sp_core::ExecutionContext::Importing,
+			para_id,
 		)<span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retrieve_all_inbound_hrmp_channel_contents</span>(
+	<span class="kw">async fn </span>retrieve_all_inbound_hrmp_channel_contents(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">ParaId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">InboundHrmpMessage</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">full_client</span>.<span class="ident">runtime_api</span>().<span class="ident">inbound_hrmp_channels_contents_with_context</span>(
-			<span class="kw-2">&amp;</span><span class="ident">BlockId::hash</span>(<span class="ident">relay_parent</span>),
-			<span class="ident">sp_core::ExecutionContext::Importing</span>,
-			<span class="ident">para_id</span>,
+		para_id: ParaId,
+		relay_parent: PHash,
+	) -&gt; RelayChainResult&lt;BTreeMap&lt;ParaId, Vec&lt;InboundHrmpMessage&gt;&gt;&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.full_client.runtime_api().inbound_hrmp_channels_contents_with_context(
+			<span class="kw-2">&amp;</span>BlockId::hash(relay_parent),
+			sp_core::ExecutionContext::Importing,
+			para_id,
 		)<span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">persisted_validation_data</span>(
+	<span class="kw">async fn </span>persisted_validation_data(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">hash</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-		<span class="ident">occupied_core_assumption</span>: <span class="ident">OccupiedCoreAssumption</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">full_client</span>.<span class="ident">runtime_api</span>().<span class="ident">persisted_validation_data</span>(
-			<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="ident">hash</span>),
-			<span class="ident">para_id</span>,
-			<span class="ident">occupied_core_assumption</span>,
+		hash: PHash,
+		para_id: ParaId,
+		occupied_core_assumption: OccupiedCoreAssumption,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;PersistedValidationData&gt;&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.full_client.runtime_api().persisted_validation_data(
+			<span class="kw-2">&amp;</span>BlockId::Hash(hash),
+			para_id,
+			occupied_core_assumption,
 		)<span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">candidate_pending_availability</span>(
+	<span class="kw">async fn </span>candidate_pending_availability(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">hash</span>: <span class="ident">PHash</span>,
-		<span class="ident">para_id</span>: <span class="ident">ParaId</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CommittedCandidateReceipt</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>
-			.<span class="ident">full_client</span>
-			.<span class="ident">runtime_api</span>()
-			.<span class="ident">candidate_pending_availability</span>(<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="ident">hash</span>), <span class="ident">para_id</span>)<span class="question-mark">?</span>)
+		hash: PHash,
+		para_id: ParaId,
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;CommittedCandidateReceipt&gt;&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self
+			</span>.full_client
+			.runtime_api()
+			.candidate_pending_availability(<span class="kw-2">&amp;</span>BlockId::Hash(hash), para_id)<span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">session_index_for_child</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hash</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">SessionIndex</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">full_client</span>.<span class="ident">runtime_api</span>().<span class="ident">session_index_for_child</span>(<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="ident">hash</span>))<span class="question-mark">?</span>)
+	<span class="kw">async fn </span>session_index_for_child(<span class="kw-2">&amp;</span><span class="self">self</span>, hash: PHash) -&gt; RelayChainResult&lt;SessionIndex&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.full_client.runtime_api().session_index_for_child(<span class="kw-2">&amp;</span>BlockId::Hash(hash))<span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validators</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hash</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ValidatorId</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">full_client</span>.<span class="ident">runtime_api</span>().<span class="ident">validators</span>(<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="ident">hash</span>))<span class="question-mark">?</span>)
+	<span class="kw">async fn </span>validators(<span class="kw-2">&amp;</span><span class="self">self</span>, hash: PHash) -&gt; RelayChainResult&lt;Vec&lt;ValidatorId&gt;&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.full_client.runtime_api().validators(<span class="kw-2">&amp;</span>BlockId::Hash(hash))<span class="question-mark">?</span>)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">import_notification_stream</span>(
+	<span class="kw">async fn </span>import_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">notification_stream</span> <span class="op">=</span> <span class="self">self</span>
-			.<span class="ident">full_client</span>
-			.<span class="ident">import_notification_stream</span>()
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">notification</span><span class="op">|</span> <span class="ident">notification</span>.<span class="ident">header</span>);
-		<span class="prelude-val">Ok</span>(<span class="ident">Box::pin</span>(<span class="ident">notification_stream</span>))
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt; {
+		<span class="kw">let </span>notification_stream = <span class="self">self
+			</span>.full_client
+			.import_notification_stream()
+			.map(|notification| notification.header);
+		<span class="prelude-val">Ok</span>(Box::pin(notification_stream))
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">finality_notification_stream</span>(
+	<span class="kw">async fn </span>finality_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">notification_stream</span> <span class="op">=</span> <span class="self">self</span>
-			.<span class="ident">full_client</span>
-			.<span class="ident">finality_notification_stream</span>()
-			.<span class="ident">map</span>(<span class="op">|</span><span class="ident">notification</span><span class="op">|</span> <span class="ident">notification</span>.<span class="ident">header</span>);
-		<span class="prelude-val">Ok</span>(<span class="ident">Box::pin</span>(<span class="ident">notification_stream</span>))
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt; {
+		<span class="kw">let </span>notification_stream = <span class="self">self
+			</span>.full_client
+			.finality_notification_stream()
+			.map(|notification| notification.header);
+		<span class="prelude-val">Ok</span>(Box::pin(notification_stream))
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">best_block_hash</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">PHash</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">backend</span>.<span class="ident">blockchain</span>().<span class="ident">info</span>().<span class="ident">best_hash</span>)
+	<span class="kw">async fn </span>best_block_hash(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;PHash&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.backend.blockchain().info().best_hash)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">is_major_syncing</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">sync_oracle</span>.<span class="ident">is_major_syncing</span>())
+	<span class="kw">async fn </span>is_major_syncing(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;bool&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.sync_oracle.is_major_syncing())
 	}
 
-	<span class="kw">fn</span> <span class="ident">overseer_handle</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Handle</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">overseer_handle</span>.<span class="ident">clone</span>())
+	<span class="kw">fn </span>overseer_handle(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RelayChainResult&lt;Handle&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.overseer_handle.clone())
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_storage_by_key</span>(
+	<span class="kw">async fn </span>get_storage_by_key(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">key</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">StorageValue</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">backend</span>.<span class="ident">state_at</span>(<span class="kw-2">&amp;</span><span class="ident">relay_parent</span>)<span class="question-mark">?</span>;
-		<span class="ident">state</span>.<span class="ident">storage</span>(<span class="ident">key</span>).<span class="ident">map_err</span>(<span class="ident">RelayChainError::GenericError</span>)
+		relay_parent: PHash,
+		key: <span class="kw-2">&amp;</span>[u8],
+	) -&gt; RelayChainResult&lt;<span class="prelude-ty">Option</span>&lt;StorageValue&gt;&gt; {
+		<span class="kw">let </span>state = <span class="self">self</span>.backend.state_at(relay_parent)<span class="question-mark">?</span>;
+		state.storage(key).map_err(RelayChainError::GenericError)
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">prove_read</span>(
+	<span class="kw">async fn </span>prove_read(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">relay_parent</span>: <span class="ident">PHash</span>,
-		<span class="ident">relevant_keys</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">StorageProof</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">state_backend</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">backend</span>.<span class="ident">state_at</span>(<span class="kw-2">&amp;</span><span class="ident">relay_parent</span>)<span class="question-mark">?</span>;
+		relay_parent: PHash,
+		relevant_keys: <span class="kw-2">&amp;</span>Vec&lt;Vec&lt;u8&gt;&gt;,
+	) -&gt; RelayChainResult&lt;StorageProof&gt; {
+		<span class="kw">let </span>state_backend = <span class="self">self</span>.backend.state_at(relay_parent)<span class="question-mark">?</span>;
 
-		<span class="ident">sp_state_machine::prove_read</span>(<span class="ident">state_backend</span>, <span class="ident">relevant_keys</span>)
-			.<span class="ident">map_err</span>(<span class="ident">RelayChainError::StateMachineError</span>)
+		sp_state_machine::prove_read(state_backend, relevant_keys)
+			.map_err(RelayChainError::StateMachineError)
 	}
 
-	<span class="doccomment">/// Wait for a given relay chain block in an async way.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The caller needs to pass the hash of a block it waits for and the function will return when the</span>
-	<span class="doccomment">/// block is available or an error occurred.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The waiting for the block is implemented as follows:</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// 1. Get a read lock on the import lock from the backend.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// 2. Check if the block is already imported. If yes, return from the function.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// 3. If the block isn&#39;t imported yet, add an import notification listener.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// 4. Poll the import notification listener until the block is imported or the timeout is fired.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// The timeout is set to 6 seconds. This should be enough time to import the block in the current</span>
-	<span class="doccomment">/// round and if not, the new round of the relay chain already started anyway.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">wait_for_block</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hash</span>: <span class="ident">PHash</span>) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">listener</span> <span class="op">=</span>
-			<span class="kw">match</span> <span class="ident">check_block_in_chain</span>(<span class="self">self</span>.<span class="ident">backend</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">full_client</span>.<span class="ident">clone</span>(), <span class="ident">hash</span>)<span class="question-mark">?</span> {
-				<span class="ident">BlockCheckStatus::InChain</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
-				<span class="ident">BlockCheckStatus::Unknown</span>(<span class="ident">listener</span>) =&gt; <span class="ident">listener</span>,
+	<span class="doccomment">/// Wait for a given relay chain block in an async way.
+	///
+	/// The caller needs to pass the hash of a block it waits for and the function will return when the
+	/// block is available or an error occurred.
+	///
+	/// The waiting for the block is implemented as follows:
+	///
+	/// 1. Get a read lock on the import lock from the backend.
+	///
+	/// 2. Check if the block is already imported. If yes, return from the function.
+	///
+	/// 3. If the block isn&#39;t imported yet, add an import notification listener.
+	///
+	/// 4. Poll the import notification listener until the block is imported or the timeout is fired.
+	///
+	/// The timeout is set to 6 seconds. This should be enough time to import the block in the current
+	/// round and if not, the new round of the relay chain already started anyway.
+	</span><span class="kw">async fn </span>wait_for_block(<span class="kw-2">&amp;</span><span class="self">self</span>, hash: PHash) -&gt; RelayChainResult&lt;()&gt; {
+		<span class="kw">let </span><span class="kw-2">mut </span>listener =
+			<span class="kw">match </span>check_block_in_chain(<span class="self">self</span>.backend.clone(), <span class="self">self</span>.full_client.clone(), hash)<span class="question-mark">? </span>{
+				BlockCheckStatus::InChain =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
+				BlockCheckStatus::Unknown(listener) =&gt; listener,
 			};
 
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">timeout</span> <span class="op">=</span> <span class="ident">futures_timer::Delay::new</span>(<span class="ident">Duration::from_secs</span>(<span class="ident">TIMEOUT_IN_SECONDS</span>)).<span class="ident">fuse</span>();
+		<span class="kw">let </span><span class="kw-2">mut </span>timeout = futures_timer::Delay::new(Duration::from_secs(TIMEOUT_IN_SECONDS)).fuse();
 
-		<span class="kw">loop</span> {
-			<span class="macro">futures::select!</span> {
-				<span class="kw">_</span> <span class="op">=</span> <span class="ident">timeout</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RelayChainError::WaitTimeout</span>(<span class="ident">hash</span>)),
-				<span class="ident">evt</span> <span class="op">=</span> <span class="ident">listener</span>.<span class="ident">next</span>() =&gt; <span class="kw">match</span> <span class="ident">evt</span> {
-					<span class="prelude-val">Some</span>(<span class="ident">evt</span>) <span class="kw">if</span> <span class="ident">evt</span>.<span class="ident">hash</span> <span class="op">==</span> <span class="ident">hash</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
-					<span class="comment">// Not the event we waited on.</span>
-					<span class="prelude-val">Some</span>(<span class="kw">_</span>) =&gt; <span class="kw">continue</span>,
-					<span class="prelude-val">None</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RelayChainError::ImportListenerClosed</span>(<span class="ident">hash</span>)),
+		<span class="kw">loop </span>{
+			<span class="macro">futures::select! </span>{
+				<span class="kw">_ </span>= timeout =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(RelayChainError::WaitTimeout(hash)),
+				evt = listener.next() =&gt; <span class="kw">match </span>evt {
+					<span class="prelude-val">Some</span>(evt) <span class="kw">if </span>evt.hash == hash =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(()),
+					<span class="comment">// Not the event we waited on.
+					</span><span class="prelude-val">Some</span>(<span class="kw">_</span>) =&gt; <span class="kw">continue</span>,
+					<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(RelayChainError::ImportListenerClosed(hash)),
 				}
 			}
 		}
 	}
 
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">new_best_notification_stream</span>(
+	<span class="kw">async fn </span>new_best_notification_stream(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PHeader</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">notifications_stream</span> <span class="op">=</span>
-			<span class="self">self</span>.<span class="ident">full_client</span>
-				.<span class="ident">import_notification_stream</span>()
-				.<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">notification</span><span class="op">|</span> <span class="kw">async</span> <span class="kw">move</span> {
-					<span class="ident">notification</span>.<span class="ident">is_new_best</span>.<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">notification</span>.<span class="ident">header</span>)
+	) -&gt; RelayChainResult&lt;Pin&lt;Box&lt;<span class="kw">dyn </span>Stream&lt;Item = PHeader&gt; + Send&gt;&gt;&gt; {
+		<span class="kw">let </span>notifications_stream =
+			<span class="self">self</span>.full_client
+				.import_notification_stream()
+				.filter_map(|notification| <span class="kw">async move </span>{
+					notification.is_new_best.then(|| notification.header)
 				});
-		<span class="prelude-val">Ok</span>(<span class="ident">Box::pin</span>(<span class="ident">notifications_stream</span>))
+		<span class="prelude-val">Ok</span>(Box::pin(notifications_stream))
 	}
 }
 
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">BlockCheckStatus</span> {
-	<span class="doccomment">/// Block is in chain</span>
-	<span class="ident">InChain</span>,
-	<span class="doccomment">/// Block status is unknown, listener can be used to wait for notification</span>
-	<span class="ident">Unknown</span>(<span class="ident">ImportNotifications</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>),
+<span class="kw">pub enum </span>BlockCheckStatus {
+	<span class="doccomment">/// Block is in chain
+	</span>InChain,
+	<span class="doccomment">/// Block status is unknown, listener can be used to wait for notification
+	</span>Unknown(ImportNotifications&lt;PBlock&gt;),
 }
 
-<span class="comment">// Helper function to check if a block is in chain.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check_block_in_chain</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>(
-	<span class="ident">backend</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FullBackend</span><span class="op">&gt;</span>,
-	<span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>,
-	<span class="ident">hash</span>: <span class="ident">PHash</span>,
-) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span><span class="ident">BlockCheckStatus</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Client</span>: <span class="ident">BlockchainEvents</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>,
+<span class="comment">// Helper function to check if a block is in chain.
+</span><span class="kw">pub fn </span>check_block_in_chain&lt;Client&gt;(
+	backend: Arc&lt;FullBackend&gt;,
+	client: Arc&lt;Client&gt;,
+	hash: PHash,
+) -&gt; RelayChainResult&lt;BlockCheckStatus&gt;
+<span class="kw">where
+	</span>Client: BlockchainEvents&lt;PBlock&gt;,
 {
-	<span class="kw">let</span> <span class="ident">_lock</span> <span class="op">=</span> <span class="ident">backend</span>.<span class="ident">get_import_lock</span>().<span class="ident">read</span>();
+	<span class="kw">let </span>_lock = backend.get_import_lock().read();
 
-	<span class="kw">let</span> <span class="ident">block_id</span> <span class="op">=</span> <span class="ident">BlockId::Hash</span>(<span class="ident">hash</span>);
+	<span class="kw">let </span>block_id = BlockId::Hash(hash);
 
-	<span class="kw">if</span> <span class="ident">backend</span>.<span class="ident">blockchain</span>().<span class="ident">status</span>(<span class="ident">block_id</span>)<span class="question-mark">?</span> <span class="op">==</span> <span class="ident">BlockStatus::InChain</span> {
-		<span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">BlockCheckStatus::InChain</span>)
+	<span class="kw">if </span>backend.blockchain().status(block_id)<span class="question-mark">? </span>== BlockStatus::InChain {
+		<span class="kw">return </span><span class="prelude-val">Ok</span>(BlockCheckStatus::InChain)
 	}
 
-	<span class="kw">let</span> <span class="ident">listener</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">import_notification_stream</span>();
+	<span class="kw">let </span>listener = client.import_notification_stream();
 
-	<span class="prelude-val">Ok</span>(<span class="ident">BlockCheckStatus::Unknown</span>(<span class="ident">listener</span>))
+	<span class="prelude-val">Ok</span>(BlockCheckStatus::Unknown(listener))
 }
 
-<span class="doccomment">/// Builder for a concrete relay chain interface, created from a full node. Builds</span>
-<span class="doccomment">/// a [`RelayChainInProcessInterface`] to access relay chain data necessary for parachain operation.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The builder takes a [`polkadot_client::Client`]</span>
-<span class="doccomment">/// that wraps a concrete instance. By using [`polkadot_client::ExecuteWithClient`]</span>
-<span class="doccomment">/// the builder gets access to this concrete instance and instantiates a [`RelayChainInProcessInterface`] with it.</span>
-<span class="kw">struct</span> <span class="ident">RelayChainInProcessInterfaceBuilder</span> {
-	<span class="ident">polkadot_client</span>: <span class="ident">polkadot_client::Client</span>,
-	<span class="ident">backend</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FullBackend</span><span class="op">&gt;</span>,
-	<span class="ident">sync_oracle</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">SyncOracle</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>,
-	<span class="ident">overseer_handle</span>: <span class="ident">Handle</span>,
+<span class="doccomment">/// Builder for a concrete relay chain interface, created from a full node. Builds
+/// a [`RelayChainInProcessInterface`] to access relay chain data necessary for parachain operation.
+///
+/// The builder takes a [`polkadot_client::Client`]
+/// that wraps a concrete instance. By using [`polkadot_client::ExecuteWithClient`]
+/// the builder gets access to this concrete instance and instantiates a [`RelayChainInProcessInterface`] with it.
+</span><span class="kw">struct </span>RelayChainInProcessInterfaceBuilder {
+	polkadot_client: polkadot_client::Client,
+	backend: Arc&lt;FullBackend&gt;,
+	sync_oracle: Arc&lt;<span class="kw">dyn </span>SyncOracle + Send + Sync&gt;,
+	overseer_handle: Handle,
 }
 
-<span class="kw">impl</span> <span class="ident">RelayChainInProcessInterfaceBuilder</span> {
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build</span>(<span class="self">self</span>) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RelayChainInterface</span><span class="op">&gt;</span> {
-		<span class="self">self</span>.<span class="ident">polkadot_client</span>.<span class="ident">clone</span>().<span class="ident">execute_with</span>(<span class="self">self</span>)
+<span class="kw">impl </span>RelayChainInProcessInterfaceBuilder {
+	<span class="kw">pub fn </span>build(<span class="self">self</span>) -&gt; Arc&lt;<span class="kw">dyn </span>RelayChainInterface&gt; {
+		<span class="self">self</span>.polkadot_client.clone().execute_with(<span class="self">self</span>)
 	}
 }
 
-<span class="kw">impl</span> <span class="ident">ExecuteWithClient</span> <span class="kw">for</span> <span class="ident">RelayChainInProcessInterfaceBuilder</span> {
-	<span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RelayChainInterface</span><span class="op">&gt;</span>;
+<span class="kw">impl </span>ExecuteWithClient <span class="kw">for </span>RelayChainInProcessInterfaceBuilder {
+	<span class="kw">type </span>Output = Arc&lt;<span class="kw">dyn </span>RelayChainInterface&gt;;
 
-	<span class="kw">fn</span> <span class="ident">execute_with_client</span><span class="op">&lt;</span><span class="ident">Client</span>, <span class="ident">Api</span>, <span class="ident">Backend</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span>
-	<span class="kw">where</span>
-		<span class="ident">Client</span>: <span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>
-			<span class="op">+</span> <span class="ident">BlockchainEvents</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>
-			<span class="op">+</span> <span class="ident">AuxStore</span>
-			<span class="op">+</span> <span class="ident">UsageProvider</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>
-			<span class="op">+</span> <span class="lifetime">&#39;static</span>
-			<span class="op">+</span> <span class="ident">Sync</span>
-			<span class="op">+</span> <span class="ident">Send</span>,
-		<span class="ident">Client::Api</span>: <span class="ident">ParachainHost</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">BabeApi</span><span class="op">&lt;</span><span class="ident">PBlock</span><span class="op">&gt;</span>,
+	<span class="kw">fn </span>execute_with_client&lt;Client, Api, Backend&gt;(<span class="self">self</span>, client: Arc&lt;Client&gt;) -&gt; <span class="self">Self</span>::Output
+	<span class="kw">where
+		</span>Client: ProvideRuntimeApi&lt;PBlock&gt;
+			+ BlockchainEvents&lt;PBlock&gt;
+			+ AuxStore
+			+ UsageProvider&lt;PBlock&gt;
+			+ <span class="lifetime">&#39;static
+			</span>+ Sync
+			+ Send,
+		Client::Api: ParachainHost&lt;PBlock&gt; + BabeApi&lt;PBlock&gt;,
 	{
-		<span class="ident">Arc::new</span>(<span class="ident">RelayChainInProcessInterface::new</span>(
-			<span class="ident">client</span>,
-			<span class="self">self</span>.<span class="ident">backend</span>,
-			<span class="self">self</span>.<span class="ident">sync_oracle</span>,
-			<span class="self">self</span>.<span class="ident">overseer_handle</span>,
+		Arc::new(RelayChainInProcessInterface::new(
+			client,
+			<span class="self">self</span>.backend,
+			<span class="self">self</span>.sync_oracle,
+			<span class="self">self</span>.overseer_handle,
 		))
 	}
 }
 
-<span class="doccomment">/// Build the Polkadot full node using the given `config`.</span>
-<span class="attribute">#[<span class="ident">sc_tracing::logging::prefix_logs_with</span>(<span class="string">&quot;Relaychain&quot;</span>)]</span>
-<span class="kw">fn</span> <span class="ident">build_polkadot_full_node</span>(
-	<span class="ident">config</span>: <span class="ident">Configuration</span>,
-	<span class="ident">parachain_config</span>: <span class="kw-2">&amp;</span><span class="ident">Configuration</span>,
-	<span class="ident">telemetry_worker_handle</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryWorkerHandle</span><span class="op">&gt;</span>,
-	<span class="ident">hwbench</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sc_sysinfo::HwBench</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">NewFull</span><span class="op">&lt;</span><span class="ident">polkadot_client::Client</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CollatorPair</span><span class="op">&gt;</span>), <span class="ident">polkadot_service::Error</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> (<span class="ident">is_collator</span>, <span class="ident">maybe_collator_key</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">parachain_config</span>.<span class="ident">role</span>.<span class="ident">is_authority</span>() {
-		<span class="kw">let</span> <span class="ident">collator_key</span> <span class="op">=</span> <span class="ident">CollatorPair::generate</span>().<span class="number">0</span>;
-		(<span class="ident">polkadot_service::IsCollator::Yes</span>(<span class="ident">collator_key</span>.<span class="ident">clone</span>()), <span class="prelude-val">Some</span>(<span class="ident">collator_key</span>))
-	} <span class="kw">else</span> {
-		(<span class="ident">polkadot_service::IsCollator::No</span>, <span class="prelude-val">None</span>)
+<span class="doccomment">/// Build the Polkadot full node using the given `config`.
+</span><span class="attribute">#[sc_tracing::logging::prefix_logs_with(<span class="string">&quot;Relaychain&quot;</span>)]
+</span><span class="kw">fn </span>build_polkadot_full_node(
+	config: Configuration,
+	parachain_config: <span class="kw-2">&amp;</span>Configuration,
+	telemetry_worker_handle: <span class="prelude-ty">Option</span>&lt;TelemetryWorkerHandle&gt;,
+	hwbench: <span class="prelude-ty">Option</span>&lt;sc_sysinfo::HwBench&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(NewFull&lt;polkadot_client::Client&gt;, <span class="prelude-ty">Option</span>&lt;CollatorPair&gt;), polkadot_service::Error&gt; {
+	<span class="kw">let </span>(is_collator, maybe_collator_key) = <span class="kw">if </span>parachain_config.role.is_authority() {
+		<span class="kw">let </span>collator_key = CollatorPair::generate().<span class="number">0</span>;
+		(polkadot_service::IsCollator::Yes(collator_key.clone()), <span class="prelude-val">Some</span>(collator_key))
+	} <span class="kw">else </span>{
+		(polkadot_service::IsCollator::No, <span class="prelude-val">None</span>)
 	};
 
-	<span class="kw">let</span> <span class="ident">relay_chain_full_node</span> <span class="op">=</span> <span class="ident">polkadot_service::build_full</span>(
-		<span class="ident">config</span>,
-		<span class="ident">is_collator</span>,
+	<span class="kw">let </span>relay_chain_full_node = polkadot_service::build_full(
+		config,
+		is_collator,
 		<span class="prelude-val">None</span>,
-		<span class="comment">// Disable BEEFY. It should not be required by the internal relay chain node.</span>
-		<span class="bool-val">false</span>,
+		<span class="comment">// Disable BEEFY. It should not be required by the internal relay chain node.
+		</span><span class="bool-val">false</span>,
 		<span class="prelude-val">None</span>,
-		<span class="ident">telemetry_worker_handle</span>,
+		telemetry_worker_handle,
 		<span class="bool-val">true</span>,
-		<span class="ident">polkadot_service::RealOverseerGen</span>,
+		polkadot_service::RealOverseerGen,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="ident">hwbench</span>,
+		hwbench,
 	)<span class="question-mark">?</span>;
 
-	<span class="prelude-val">Ok</span>((<span class="ident">relay_chain_full_node</span>, <span class="ident">maybe_collator_key</span>))
+	<span class="prelude-val">Ok</span>((relay_chain_full_node, maybe_collator_key))
 }
 
-<span class="doccomment">/// Builds a relay chain interface by constructing a full relay chain node</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_inprocess_relay_chain</span>(
-	<span class="kw-2">mut</span> <span class="ident">polkadot_config</span>: <span class="ident">Configuration</span>,
-	<span class="ident">parachain_config</span>: <span class="kw-2">&amp;</span><span class="ident">Configuration</span>,
-	<span class="ident">telemetry_worker_handle</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TelemetryWorkerHandle</span><span class="op">&gt;</span>,
-	<span class="ident">task_manager</span>: <span class="kw-2">&amp;mut</span> <span class="ident">TaskManager</span>,
-	<span class="ident">hwbench</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">sc_sysinfo::HwBench</span><span class="op">&gt;</span>,
-) -&gt; <span class="ident">RelayChainResult</span><span class="op">&lt;</span>(<span class="ident">Arc</span><span class="op">&lt;</span>(<span class="kw">dyn</span> <span class="ident">RelayChainInterface</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>)<span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CollatorPair</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
-	<span class="comment">// This is essentially a hack, but we want to ensure that we send the correct node version</span>
-	<span class="comment">// to the telemetry.</span>
-	<span class="ident">polkadot_config</span>.<span class="ident">impl_version</span> <span class="op">=</span> <span class="ident">polkadot_cli::Cli::impl_version</span>();
-	<span class="ident">polkadot_config</span>.<span class="ident">impl_name</span> <span class="op">=</span> <span class="ident">polkadot_cli::Cli::impl_name</span>();
+<span class="doccomment">/// Builds a relay chain interface by constructing a full relay chain node
+</span><span class="kw">pub fn </span>build_inprocess_relay_chain(
+	<span class="kw-2">mut </span>polkadot_config: Configuration,
+	parachain_config: <span class="kw-2">&amp;</span>Configuration,
+	telemetry_worker_handle: <span class="prelude-ty">Option</span>&lt;TelemetryWorkerHandle&gt;,
+	task_manager: <span class="kw-2">&amp;mut </span>TaskManager,
+	hwbench: <span class="prelude-ty">Option</span>&lt;sc_sysinfo::HwBench&gt;,
+) -&gt; RelayChainResult&lt;(Arc&lt;(<span class="kw">dyn </span>RelayChainInterface + <span class="lifetime">&#39;static</span>)&gt;, <span class="prelude-ty">Option</span>&lt;CollatorPair&gt;)&gt; {
+	<span class="comment">// This is essentially a hack, but we want to ensure that we send the correct node version
+	// to the telemetry.
+	</span>polkadot_config.impl_version = polkadot_cli::Cli::impl_version();
+	polkadot_config.impl_name = polkadot_cli::Cli::impl_name();
 
-	<span class="kw">let</span> (<span class="ident">full_node</span>, <span class="ident">collator_key</span>) <span class="op">=</span> <span class="ident">build_polkadot_full_node</span>(
-		<span class="ident">polkadot_config</span>,
-		<span class="ident">parachain_config</span>,
-		<span class="ident">telemetry_worker_handle</span>,
-		<span class="ident">hwbench</span>,
+	<span class="kw">let </span>(full_node, collator_key) = build_polkadot_full_node(
+		polkadot_config,
+		parachain_config,
+		telemetry_worker_handle,
+		hwbench,
 	)<span class="question-mark">?</span>;
 
-	<span class="kw">let</span> <span class="ident">sync_oracle</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">SyncOracle</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">full_node</span>.<span class="ident">network</span>.<span class="ident">clone</span>());
-	<span class="kw">let</span> <span class="ident">relay_chain_interface_builder</span> <span class="op">=</span> <span class="ident">RelayChainInProcessInterfaceBuilder</span> {
-		<span class="ident">polkadot_client</span>: <span class="ident">full_node</span>.<span class="ident">client</span>.<span class="ident">clone</span>(),
-		<span class="ident">backend</span>: <span class="ident">full_node</span>.<span class="ident">backend</span>.<span class="ident">clone</span>(),
-		<span class="ident">sync_oracle</span>,
-		<span class="ident">overseer_handle</span>: <span class="ident">full_node</span>.<span class="ident">overseer_handle</span>.<span class="ident">clone</span>().<span class="ident">ok_or</span>(<span class="ident">RelayChainError::GenericError</span>(
-			<span class="string">&quot;Overseer not running in full node.&quot;</span>.<span class="ident">to_string</span>(),
+	<span class="kw">let </span>sync_oracle: Arc&lt;<span class="kw">dyn </span>SyncOracle + Send + Sync&gt; = Arc::new(full_node.network.clone());
+	<span class="kw">let </span>relay_chain_interface_builder = RelayChainInProcessInterfaceBuilder {
+		polkadot_client: full_node.client.clone(),
+		backend: full_node.backend.clone(),
+		sync_oracle,
+		overseer_handle: full_node.overseer_handle.clone().ok_or(RelayChainError::GenericError(
+			<span class="string">&quot;Overseer not running in full node.&quot;</span>.to_string(),
 		))<span class="question-mark">?</span>,
 	};
 
-	<span class="ident">task_manager</span>.<span class="ident">add_child</span>(<span class="ident">full_node</span>.<span class="ident">task_manager</span>);
+	task_manager.add_child(full_node.task_manager);
 
-	<span class="prelude-val">Ok</span>((<span class="ident">relay_chain_interface_builder</span>.<span class="ident">build</span>(), <span class="ident">collator_key</span>))
+	<span class="prelude-val">Ok</span>((relay_chain_interface_builder.build(), collator_key))
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+	<span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-	<span class="kw">use</span> <span class="ident">polkadot_primitives::v2::Block</span> <span class="kw">as</span> <span class="ident">PBlock</span>;
-	<span class="kw">use</span> <span class="ident">polkadot_test_client</span>::{
-		<span class="ident">construct_transfer_extrinsic</span>, <span class="ident">BlockBuilderExt</span>, <span class="ident">Client</span>, <span class="ident">ClientBlockImportExt</span>,
-		<span class="ident">DefaultTestClientBuilderExt</span>, <span class="ident">ExecutionStrategy</span>, <span class="ident">InitPolkadotBlockBuilder</span>,
-		<span class="ident">TestClientBuilder</span>, <span class="ident">TestClientBuilderExt</span>,
+	<span class="kw">use </span>polkadot_primitives::v2::Block <span class="kw">as </span>PBlock;
+	<span class="kw">use </span>polkadot_test_client::{
+		construct_transfer_extrinsic, BlockBuilderExt, Client, ClientBlockImportExt,
+		DefaultTestClientBuilderExt, ExecutionStrategy, InitPolkadotBlockBuilder,
+		TestClientBuilder, TestClientBuilderExt,
 	};
-	<span class="kw">use</span> <span class="ident">sp_consensus</span>::{<span class="ident">BlockOrigin</span>, <span class="ident">SyncOracle</span>};
-	<span class="kw">use</span> <span class="ident">sp_runtime::traits::Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>;
-	<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+	<span class="kw">use </span>sp_consensus::{BlockOrigin, SyncOracle};
+	<span class="kw">use </span>sp_runtime::traits::Block <span class="kw">as </span>BlockT;
+	<span class="kw">use </span>std::sync::Arc;
 
-	<span class="kw">use</span> <span class="ident">futures</span>::{<span class="ident">executor::block_on</span>, <span class="ident">poll</span>, <span class="ident">task::Poll</span>};
+	<span class="kw">use </span>futures::{executor::block_on, poll, task::Poll};
 
-	<span class="kw">struct</span> <span class="ident">DummyNetwork</span> {}
+	<span class="kw">struct </span>DummyNetwork {}
 
-	<span class="kw">impl</span> <span class="ident">SyncOracle</span> <span class="kw">for</span> <span class="ident">DummyNetwork</span> {
-		<span class="kw">fn</span> <span class="ident">is_major_syncing</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+	<span class="kw">impl </span>SyncOracle <span class="kw">for </span>DummyNetwork {
+		<span class="kw">fn </span>is_major_syncing(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
 			<span class="macro">unimplemented!</span>(<span class="string">&quot;Not needed for test&quot;</span>)
 		}
 
-		<span class="kw">fn</span> <span class="ident">is_offline</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+		<span class="kw">fn </span>is_offline(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
 			<span class="macro">unimplemented!</span>(<span class="string">&quot;Not needed for test&quot;</span>)
 		}
 	}
 
-	<span class="kw">fn</span> <span class="ident">build_client_backend_and_block</span>(
-	) -&gt; (<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>, <span class="ident">PBlock</span>, <span class="ident">RelayChainInProcessInterface</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>) {
-		<span class="kw">let</span> <span class="ident">builder</span> <span class="op">=</span>
-			<span class="ident">TestClientBuilder::new</span>().<span class="ident">set_execution_strategy</span>(<span class="ident">ExecutionStrategy::NativeWhenPossible</span>);
-		<span class="kw">let</span> <span class="ident">backend</span> <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">backend</span>();
-		<span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">builder</span>.<span class="ident">build</span>());
+	<span class="kw">fn </span>build_client_backend_and_block(
+	) -&gt; (Arc&lt;Client&gt;, PBlock, RelayChainInProcessInterface&lt;Client&gt;) {
+		<span class="kw">let </span>builder =
+			TestClientBuilder::new().set_execution_strategy(ExecutionStrategy::NativeWhenPossible);
+		<span class="kw">let </span>backend = builder.backend();
+		<span class="kw">let </span>client = Arc::new(builder.build());
 
-		<span class="kw">let</span> <span class="ident">block_builder</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">init_polkadot_block_builder</span>();
-		<span class="kw">let</span> <span class="ident">block</span> <span class="op">=</span> <span class="ident">block_builder</span>.<span class="ident">build</span>().<span class="ident">expect</span>(<span class="string">&quot;Finalizes the block&quot;</span>).<span class="ident">block</span>;
-		<span class="kw">let</span> <span class="ident">dummy_network</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">SyncOracle</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">DummyNetwork</span> {});
+		<span class="kw">let </span>block_builder = client.init_polkadot_block_builder();
+		<span class="kw">let </span>block = block_builder.build().expect(<span class="string">&quot;Finalizes the block&quot;</span>).block;
+		<span class="kw">let </span>dummy_network: Arc&lt;<span class="kw">dyn </span>SyncOracle + Sync + Send&gt; = Arc::new(DummyNetwork {});
 
-		<span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">_rx</span>) <span class="op">=</span> <span class="ident">metered::channel</span>(<span class="number">30</span>);
-		<span class="kw">let</span> <span class="ident">mock_handle</span> <span class="op">=</span> <span class="ident">Handle::new</span>(<span class="ident">tx</span>);
+		<span class="kw">let </span>(tx, _rx) = metered::channel(<span class="number">30</span>);
+		<span class="kw">let </span>mock_handle = Handle::new(tx);
 		(
-			<span class="ident">client</span>.<span class="ident">clone</span>(),
-			<span class="ident">block</span>,
-			<span class="ident">RelayChainInProcessInterface::new</span>(<span class="ident">client</span>, <span class="ident">backend</span>.<span class="ident">clone</span>(), <span class="ident">dummy_network</span>, <span class="ident">mock_handle</span>),
+			client.clone(),
+			block,
+			RelayChainInProcessInterface::new(client, backend.clone(), dummy_network, mock_handle),
 		)
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">returns_directly_for_available_block</span>() {
-		<span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">client</span>, <span class="ident">block</span>, <span class="ident">relay_chain_interface</span>) <span class="op">=</span> <span class="ident">build_client_backend_and_block</span>();
-		<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">hash</span>();
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>returns_directly_for_available_block() {
+		<span class="kw">let </span>(<span class="kw-2">mut </span>client, block, relay_chain_interface) = build_client_backend_and_block();
+		<span class="kw">let </span>hash = block.hash();
 
-		<span class="ident">block_on</span>(<span class="ident">client</span>.<span class="ident">import</span>(<span class="ident">BlockOrigin::Own</span>, <span class="ident">block</span>)).<span class="ident">expect</span>(<span class="string">&quot;Imports the block&quot;</span>);
+		block_on(client.import(BlockOrigin::Own, block)).expect(<span class="string">&quot;Imports the block&quot;</span>);
 
-		<span class="ident">block_on</span>(<span class="kw">async</span> <span class="kw">move</span> {
-			<span class="comment">// Should be ready on the first poll</span>
-			<span class="macro">assert!</span>(<span class="macro">matches!</span>(
-				<span class="macro">poll!</span>(<span class="ident">relay_chain_interface</span>.<span class="ident">wait_for_block</span>(<span class="ident">hash</span>)),
-				<span class="ident">Poll::Ready</span>(<span class="prelude-val">Ok</span>(()))
+		block_on(<span class="kw">async move </span>{
+			<span class="comment">// Should be ready on the first poll
+			</span><span class="macro">assert!</span>(<span class="macro">matches!</span>(
+				<span class="macro">poll!</span>(relay_chain_interface.wait_for_block(hash)),
+				Poll::Ready(<span class="prelude-val">Ok</span>(()))
 			));
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">resolve_after_block_import_notification_was_received</span>() {
-		<span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">client</span>, <span class="ident">block</span>, <span class="ident">relay_chain_interface</span>) <span class="op">=</span> <span class="ident">build_client_backend_and_block</span>();
-		<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">hash</span>();
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>resolve_after_block_import_notification_was_received() {
+		<span class="kw">let </span>(<span class="kw-2">mut </span>client, block, relay_chain_interface) = build_client_backend_and_block();
+		<span class="kw">let </span>hash = block.hash();
 
-		<span class="ident">block_on</span>(<span class="kw">async</span> <span class="kw">move</span> {
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">future</span> <span class="op">=</span> <span class="ident">relay_chain_interface</span>.<span class="ident">wait_for_block</span>(<span class="ident">hash</span>);
-			<span class="comment">// As the block is not yet imported, the first poll should return `Pending`</span>
-			<span class="macro">assert!</span>(<span class="macro">poll!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">future</span>).<span class="ident">is_pending</span>());
+		block_on(<span class="kw">async move </span>{
+			<span class="kw">let </span><span class="kw-2">mut </span>future = relay_chain_interface.wait_for_block(hash);
+			<span class="comment">// As the block is not yet imported, the first poll should return `Pending`
+			</span><span class="macro">assert!</span>(<span class="macro">poll!</span>(<span class="kw-2">&amp;mut </span>future).is_pending());
 
-			<span class="comment">// Import the block that should fire the notification</span>
-			<span class="ident">client</span>.<span class="ident">import</span>(<span class="ident">BlockOrigin::Own</span>, <span class="ident">block</span>).<span class="kw">await</span>.<span class="ident">expect</span>(<span class="string">&quot;Imports the block&quot;</span>);
+			<span class="comment">// Import the block that should fire the notification
+			</span>client.import(BlockOrigin::Own, block).<span class="kw">await</span>.expect(<span class="string">&quot;Imports the block&quot;</span>);
 
-			<span class="comment">// Now it should have received the notification and report that the block was imported</span>
-			<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="macro">poll!</span>(<span class="ident">future</span>), <span class="ident">Poll::Ready</span>(<span class="prelude-val">Ok</span>(()))));
+			<span class="comment">// Now it should have received the notification and report that the block was imported
+			</span><span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="macro">poll!</span>(future), Poll::Ready(<span class="prelude-val">Ok</span>(()))));
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">wait_for_block_time_out_when_block_is_not_imported</span>() {
-		<span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">block</span>, <span class="ident">relay_chain_interface</span>) <span class="op">=</span> <span class="ident">build_client_backend_and_block</span>();
-		<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">hash</span>();
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>wait_for_block_time_out_when_block_is_not_imported() {
+		<span class="kw">let </span>(<span class="kw">_</span>, block, relay_chain_interface) = build_client_backend_and_block();
+		<span class="kw">let </span>hash = block.hash();
 
 		<span class="macro">assert!</span>(<span class="macro">matches!</span>(
-			<span class="ident">block_on</span>(<span class="ident">relay_chain_interface</span>.<span class="ident">wait_for_block</span>(<span class="ident">hash</span>)),
-			<span class="prelude-val">Err</span>(<span class="ident">RelayChainError::WaitTimeout</span>(<span class="kw">_</span>))
+			block_on(relay_chain_interface.wait_for_block(hash)),
+			<span class="prelude-val">Err</span>(RelayChainError::WaitTimeout(<span class="kw">_</span>))
 		));
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">do_not_resolve_after_different_block_import_notification_was_received</span>() {
-		<span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">client</span>, <span class="ident">block</span>, <span class="ident">relay_chain_interface</span>) <span class="op">=</span> <span class="ident">build_client_backend_and_block</span>();
-		<span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">block</span>.<span class="ident">hash</span>();
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>do_not_resolve_after_different_block_import_notification_was_received() {
+		<span class="kw">let </span>(<span class="kw-2">mut </span>client, block, relay_chain_interface) = build_client_backend_and_block();
+		<span class="kw">let </span>hash = block.hash();
 
-		<span class="kw">let</span> <span class="ident">ext</span> <span class="op">=</span> <span class="ident">construct_transfer_extrinsic</span>(
-			<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">client</span>,
-			<span class="ident">sp_keyring::Sr25519Keyring::Alice</span>,
-			<span class="ident">sp_keyring::Sr25519Keyring::Bob</span>,
+		<span class="kw">let </span>ext = construct_transfer_extrinsic(
+			<span class="kw-2">&amp;*</span>client,
+			sp_keyring::Sr25519Keyring::Alice,
+			sp_keyring::Sr25519Keyring::Bob,
 			<span class="number">1000</span>,
 		);
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">block_builder</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">init_polkadot_block_builder</span>();
-		<span class="comment">// Push an extrinsic to get a different block hash.</span>
-		<span class="ident">block_builder</span>.<span class="ident">push_polkadot_extrinsic</span>(<span class="ident">ext</span>).<span class="ident">expect</span>(<span class="string">&quot;Push extrinsic&quot;</span>);
-		<span class="kw">let</span> <span class="ident">block2</span> <span class="op">=</span> <span class="ident">block_builder</span>.<span class="ident">build</span>().<span class="ident">expect</span>(<span class="string">&quot;Build second block&quot;</span>).<span class="ident">block</span>;
-		<span class="kw">let</span> <span class="ident">hash2</span> <span class="op">=</span> <span class="ident">block2</span>.<span class="ident">hash</span>();
+		<span class="kw">let </span><span class="kw-2">mut </span>block_builder = client.init_polkadot_block_builder();
+		<span class="comment">// Push an extrinsic to get a different block hash.
+		</span>block_builder.push_polkadot_extrinsic(ext).expect(<span class="string">&quot;Push extrinsic&quot;</span>);
+		<span class="kw">let </span>block2 = block_builder.build().expect(<span class="string">&quot;Build second block&quot;</span>).block;
+		<span class="kw">let </span>hash2 = block2.hash();
 
-		<span class="ident">block_on</span>(<span class="kw">async</span> <span class="kw">move</span> {
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">future</span> <span class="op">=</span> <span class="ident">relay_chain_interface</span>.<span class="ident">wait_for_block</span>(<span class="ident">hash</span>);
-			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">future2</span> <span class="op">=</span> <span class="ident">relay_chain_interface</span>.<span class="ident">wait_for_block</span>(<span class="ident">hash2</span>);
-			<span class="comment">// As the block is not yet imported, the first poll should return `Pending`</span>
-			<span class="macro">assert!</span>(<span class="macro">poll!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">future</span>).<span class="ident">is_pending</span>());
-			<span class="macro">assert!</span>(<span class="macro">poll!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">future2</span>).<span class="ident">is_pending</span>());
+		block_on(<span class="kw">async move </span>{
+			<span class="kw">let </span><span class="kw-2">mut </span>future = relay_chain_interface.wait_for_block(hash);
+			<span class="kw">let </span><span class="kw-2">mut </span>future2 = relay_chain_interface.wait_for_block(hash2);
+			<span class="comment">// As the block is not yet imported, the first poll should return `Pending`
+			</span><span class="macro">assert!</span>(<span class="macro">poll!</span>(<span class="kw-2">&amp;mut </span>future).is_pending());
+			<span class="macro">assert!</span>(<span class="macro">poll!</span>(<span class="kw-2">&amp;mut </span>future2).is_pending());
 
-			<span class="comment">// Import the block that should fire the notification</span>
-			<span class="ident">client</span>.<span class="ident">import</span>(<span class="ident">BlockOrigin::Own</span>, <span class="ident">block2</span>).<span class="kw">await</span>.<span class="ident">expect</span>(<span class="string">&quot;Imports the second block&quot;</span>);
+			<span class="comment">// Import the block that should fire the notification
+			</span>client.import(BlockOrigin::Own, block2).<span class="kw">await</span>.expect(<span class="string">&quot;Imports the second block&quot;</span>);
 
-			<span class="comment">// The import notification of the second block should not make this one finish</span>
-			<span class="macro">assert!</span>(<span class="macro">poll!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">future</span>).<span class="ident">is_pending</span>());
-			<span class="comment">// Now it should have received the notification and report that the block was imported</span>
-			<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="macro">poll!</span>(<span class="ident">future2</span>), <span class="ident">Poll::Ready</span>(<span class="prelude-val">Ok</span>(()))));
+			<span class="comment">// The import notification of the second block should not make this one finish
+			</span><span class="macro">assert!</span>(<span class="macro">poll!</span>(<span class="kw-2">&amp;mut </span>future).is_pending());
+			<span class="comment">// Now it should have received the notification and report that the block was imported
+			</span><span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="macro">poll!</span>(future2), Poll::Ready(<span class="prelude-val">Ok</span>(()))));
 
-			<span class="ident">client</span>.<span class="ident">import</span>(<span class="ident">BlockOrigin::Own</span>, <span class="ident">block</span>).<span class="kw">await</span>.<span class="ident">expect</span>(<span class="string">&quot;Imports the first block&quot;</span>);
+			client.import(BlockOrigin::Own, block).<span class="kw">await</span>.expect(<span class="string">&quot;Imports the first block&quot;</span>);
 
-			<span class="comment">// Now it should be ready</span>
-			<span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="macro">poll!</span>(<span class="ident">future</span>), <span class="ident">Poll::Ready</span>(<span class="prelude-val">Ok</span>(()))));
+			<span class="comment">// Now it should be ready
+			</span><span class="macro">assert!</span>(<span class="macro">matches!</span>(<span class="macro">poll!</span>(future), Poll::Ready(<span class="prelude-val">Ok</span>(()))));
 		});
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_inprocess_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_inprocess_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

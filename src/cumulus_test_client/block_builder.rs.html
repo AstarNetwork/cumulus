@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/client/src/block_builder.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>block_builder.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_test_client/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_test_client/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_test_client/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `test/client/src/block_builder.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>block_builder.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_test_client/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_test_client/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_test_client/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -175,182 +175,182 @@
 <span id="175">175</span>
 <span id="176">176</span>
 <span id="177">177</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Backend</span>, <span class="ident">Client</span>};
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core</span>::{<span class="ident">ParachainBlockData</span>, <span class="ident">PersistedValidationData</span>};
-<span class="kw">use</span> <span class="ident">cumulus_primitives_parachain_inherent</span>::{<span class="ident">ParachainInherentData</span>, <span class="ident">INHERENT_IDENTIFIER</span>};
-<span class="kw">use</span> <span class="ident">cumulus_test_relay_sproof_builder::RelayStateSproofBuilder</span>;
-<span class="kw">use</span> <span class="ident">cumulus_test_runtime</span>::{<span class="ident">Block</span>, <span class="ident">GetLastTimestamp</span>, <span class="ident">Hash</span>, <span class="ident">Header</span>};
-<span class="kw">use</span> <span class="ident">polkadot_primitives::v2</span>::{<span class="ident">BlockNumber</span> <span class="kw">as</span> <span class="ident">PBlockNumber</span>, <span class="ident">Hash</span> <span class="kw">as</span> <span class="ident">PHash</span>};
-<span class="kw">use</span> <span class="ident">sc_block_builder</span>::{<span class="ident">BlockBuilder</span>, <span class="ident">BlockBuilderProvider</span>};
-<span class="kw">use</span> <span class="ident">sp_api::ProvideRuntimeApi</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{
-	<span class="ident">generic::BlockId</span>,
-	<span class="ident">traits</span>::{<span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">HeaderT</span>},
+</span><span class="kw">use crate</span>::{Backend, Client};
+<span class="kw">use </span>cumulus_primitives_core::{ParachainBlockData, PersistedValidationData};
+<span class="kw">use </span>cumulus_primitives_parachain_inherent::{ParachainInherentData, INHERENT_IDENTIFIER};
+<span class="kw">use </span>cumulus_test_relay_sproof_builder::RelayStateSproofBuilder;
+<span class="kw">use </span>cumulus_test_runtime::{Block, GetLastTimestamp, Hash, Header};
+<span class="kw">use </span>polkadot_primitives::v2::{BlockNumber <span class="kw">as </span>PBlockNumber, Hash <span class="kw">as </span>PHash};
+<span class="kw">use </span>sc_block_builder::{BlockBuilder, BlockBuilderProvider};
+<span class="kw">use </span>sp_api::ProvideRuntimeApi;
+<span class="kw">use </span>sp_runtime::{
+	generic::BlockId,
+	traits::{Block <span class="kw">as </span>BlockT, Header <span class="kw">as </span>HeaderT},
 };
 
-<span class="doccomment">/// An extension for the Cumulus test client to init a block builder.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">InitBlockBuilder</span> {
-	<span class="doccomment">/// Init a specific block builder that works for the test runtime.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This will automatically create and push the inherents for you to make the block</span>
-	<span class="doccomment">/// valid for the test runtime.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// You can use the relay chain state sproof builder to arrange required relay chain state or</span>
-	<span class="doccomment">/// just use a default one.</span>
-	<span class="kw">fn</span> <span class="ident">init_block_builder</span>(
+<span class="doccomment">/// An extension for the Cumulus test client to init a block builder.
+</span><span class="kw">pub trait </span>InitBlockBuilder {
+	<span class="doccomment">/// Init a specific block builder that works for the test runtime.
+	///
+	/// This will automatically create and push the inherents for you to make the block
+	/// valid for the test runtime.
+	///
+	/// You can use the relay chain state sproof builder to arrange required relay chain state or
+	/// just use a default one.
+	</span><span class="kw">fn </span>init_block_builder(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">validation_data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">PBlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">relay_sproof_builder</span>: <span class="ident">RelayStateSproofBuilder</span>,
-	) -&gt; <span class="ident">sc_block_builder::BlockBuilder</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Client</span>, <span class="ident">Backend</span><span class="op">&gt;</span>;
+		validation_data: <span class="prelude-ty">Option</span>&lt;PersistedValidationData&lt;PHash, PBlockNumber&gt;&gt;,
+		relay_sproof_builder: RelayStateSproofBuilder,
+	) -&gt; sc_block_builder::BlockBuilder&lt;Block, Client, Backend&gt;;
 
-	<span class="doccomment">/// Init a specific block builder at a specific block that works for the test runtime.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Same as [`InitBlockBuilder::init_block_builder`] besides that it takes a</span>
-	<span class="doccomment">/// [`BlockId`] to say which should be the parent block of the block that is being build.</span>
-	<span class="kw">fn</span> <span class="ident">init_block_builder_at</span>(
+	<span class="doccomment">/// Init a specific block builder at a specific block that works for the test runtime.
+	///
+	/// Same as [`InitBlockBuilder::init_block_builder`] besides that it takes a
+	/// [`BlockId`] to say which should be the parent block of the block that is being build.
+	</span><span class="kw">fn </span>init_block_builder_at(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="kw-2">&amp;</span><span class="ident">BlockId</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-		<span class="ident">validation_data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">PBlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">relay_sproof_builder</span>: <span class="ident">RelayStateSproofBuilder</span>,
-	) -&gt; <span class="ident">sc_block_builder::BlockBuilder</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Client</span>, <span class="ident">Backend</span><span class="op">&gt;</span>;
+		at: <span class="kw-2">&amp;</span>BlockId&lt;Block&gt;,
+		validation_data: <span class="prelude-ty">Option</span>&lt;PersistedValidationData&lt;PHash, PBlockNumber&gt;&gt;,
+		relay_sproof_builder: RelayStateSproofBuilder,
+	) -&gt; sc_block_builder::BlockBuilder&lt;Block, Client, Backend&gt;;
 
-	<span class="doccomment">/// Init a specific block builder that works for the test runtime.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Same as [`InitBlockBuilder::init_block_builder`] besides that it takes a</span>
-	<span class="doccomment">/// [`BlockId`] to say which should be the parent block of the block that is being build and</span>
-	<span class="doccomment">/// it will use the given `timestamp` as input for the timestamp inherent.</span>
-	<span class="kw">fn</span> <span class="ident">init_block_builder_with_timestamp</span>(
+	<span class="doccomment">/// Init a specific block builder that works for the test runtime.
+	///
+	/// Same as [`InitBlockBuilder::init_block_builder`] besides that it takes a
+	/// [`BlockId`] to say which should be the parent block of the block that is being build and
+	/// it will use the given `timestamp` as input for the timestamp inherent.
+	</span><span class="kw">fn </span>init_block_builder_with_timestamp(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="kw-2">&amp;</span><span class="ident">BlockId</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-		<span class="ident">validation_data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">PBlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">relay_sproof_builder</span>: <span class="ident">RelayStateSproofBuilder</span>,
-		<span class="ident">timestamp</span>: <span class="ident">u64</span>,
-	) -&gt; <span class="ident">sc_block_builder::BlockBuilder</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Client</span>, <span class="ident">Backend</span><span class="op">&gt;</span>;
+		at: <span class="kw-2">&amp;</span>BlockId&lt;Block&gt;,
+		validation_data: <span class="prelude-ty">Option</span>&lt;PersistedValidationData&lt;PHash, PBlockNumber&gt;&gt;,
+		relay_sproof_builder: RelayStateSproofBuilder,
+		timestamp: u64,
+	) -&gt; sc_block_builder::BlockBuilder&lt;Block, Client, Backend&gt;;
 }
 
-<span class="kw">fn</span> <span class="ident">init_block_builder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-	<span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Client</span>,
-	<span class="ident">at</span>: <span class="kw-2">&amp;</span><span class="ident">BlockId</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">validation_data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">PBlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-	<span class="ident">relay_sproof_builder</span>: <span class="ident">RelayStateSproofBuilder</span>,
-	<span class="ident">timestamp</span>: <span class="ident">u64</span>,
-) -&gt; <span class="ident">BlockBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Block</span>, <span class="ident">Client</span>, <span class="ident">Backend</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">block_builder</span> <span class="op">=</span> <span class="ident">client</span>
-		.<span class="ident">new_block_at</span>(<span class="ident">at</span>, <span class="ident">Default::default</span>(), <span class="bool-val">true</span>)
-		.<span class="ident">expect</span>(<span class="string">&quot;Creates new block builder for test runtime&quot;</span>);
+<span class="kw">fn </span>init_block_builder&lt;<span class="lifetime">&#39;a</span>&gt;(
+	client: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Client,
+	at: <span class="kw-2">&amp;</span>BlockId&lt;Block&gt;,
+	validation_data: <span class="prelude-ty">Option</span>&lt;PersistedValidationData&lt;PHash, PBlockNumber&gt;&gt;,
+	relay_sproof_builder: RelayStateSproofBuilder,
+	timestamp: u64,
+) -&gt; BlockBuilder&lt;<span class="lifetime">&#39;a</span>, Block, Client, Backend&gt; {
+	<span class="kw">let </span><span class="kw-2">mut </span>block_builder = client
+		.new_block_at(at, Default::default(), <span class="bool-val">true</span>)
+		.expect(<span class="string">&quot;Creates new block builder for test runtime&quot;</span>);
 
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">inherent_data</span> <span class="op">=</span> <span class="ident">sp_inherents::InherentData::new</span>();
+	<span class="kw">let </span><span class="kw-2">mut </span>inherent_data = sp_inherents::InherentData::new();
 
-	<span class="ident">inherent_data</span>
-		.<span class="ident">put_data</span>(<span class="ident">sp_timestamp::INHERENT_IDENTIFIER</span>, <span class="kw-2">&amp;</span><span class="ident">timestamp</span>)
-		.<span class="ident">expect</span>(<span class="string">&quot;Put timestamp failed&quot;</span>);
+	inherent_data
+		.put_data(sp_timestamp::INHERENT_IDENTIFIER, <span class="kw-2">&amp;</span>timestamp)
+		.expect(<span class="string">&quot;Put timestamp failed&quot;</span>);
 
-	<span class="kw">let</span> (<span class="ident">relay_parent_storage_root</span>, <span class="ident">relay_chain_state</span>) <span class="op">=</span>
-		<span class="ident">relay_sproof_builder</span>.<span class="ident">into_state_root_and_proof</span>();
+	<span class="kw">let </span>(relay_parent_storage_root, relay_chain_state) =
+		relay_sproof_builder.into_state_root_and_proof();
 
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">validation_data</span> <span class="op">=</span> <span class="ident">validation_data</span>.<span class="ident">unwrap_or_default</span>();
+	<span class="kw">let </span><span class="kw-2">mut </span>validation_data = validation_data.unwrap_or_default();
 	<span class="macro">assert_eq!</span>(
-		<span class="ident">validation_data</span>.<span class="ident">relay_parent_storage_root</span>,
-		<span class="ident">Default::default</span>(),
+		validation_data.relay_parent_storage_root,
+		Default::default(),
 		<span class="string">&quot;Overriding the relay storage root is not implemented&quot;</span>,
 	);
-	<span class="ident">validation_data</span>.<span class="ident">relay_parent_storage_root</span> <span class="op">=</span> <span class="ident">relay_parent_storage_root</span>;
+	validation_data.relay_parent_storage_root = relay_parent_storage_root;
 
-	<span class="ident">inherent_data</span>
-		.<span class="ident">put_data</span>(
-			<span class="ident">INHERENT_IDENTIFIER</span>,
-			<span class="kw-2">&amp;</span><span class="ident">ParachainInherentData</span> {
-				<span class="ident">validation_data</span>,
-				<span class="ident">relay_chain_state</span>,
-				<span class="ident">downward_messages</span>: <span class="ident">Default::default</span>(),
-				<span class="ident">horizontal_messages</span>: <span class="ident">Default::default</span>(),
+	inherent_data
+		.put_data(
+			INHERENT_IDENTIFIER,
+			<span class="kw-2">&amp;</span>ParachainInherentData {
+				validation_data,
+				relay_chain_state,
+				downward_messages: Default::default(),
+				horizontal_messages: Default::default(),
 			},
 		)
-		.<span class="ident">expect</span>(<span class="string">&quot;Put validation function params failed&quot;</span>);
+		.expect(<span class="string">&quot;Put validation function params failed&quot;</span>);
 
-	<span class="kw">let</span> <span class="ident">inherents</span> <span class="op">=</span> <span class="ident">block_builder</span>.<span class="ident">create_inherents</span>(<span class="ident">inherent_data</span>).<span class="ident">expect</span>(<span class="string">&quot;Creates inherents&quot;</span>);
+	<span class="kw">let </span>inherents = block_builder.create_inherents(inherent_data).expect(<span class="string">&quot;Creates inherents&quot;</span>);
 
-	<span class="ident">inherents</span>
-		.<span class="ident">into_iter</span>()
-		.<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">ext</span><span class="op">|</span> <span class="ident">block_builder</span>.<span class="ident">push</span>(<span class="ident">ext</span>).<span class="ident">expect</span>(<span class="string">&quot;Pushes inherent&quot;</span>));
+	inherents
+		.into_iter()
+		.for_each(|ext| block_builder.push(ext).expect(<span class="string">&quot;Pushes inherent&quot;</span>));
 
-	<span class="ident">block_builder</span>
+	block_builder
 }
 
-<span class="kw">impl</span> <span class="ident">InitBlockBuilder</span> <span class="kw">for</span> <span class="ident">Client</span> {
-	<span class="kw">fn</span> <span class="ident">init_block_builder</span>(
+<span class="kw">impl </span>InitBlockBuilder <span class="kw">for </span>Client {
+	<span class="kw">fn </span>init_block_builder(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">validation_data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">PBlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">relay_sproof_builder</span>: <span class="ident">RelayStateSproofBuilder</span>,
-	) -&gt; <span class="ident">BlockBuilder</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Client</span>, <span class="ident">Backend</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">chain_info</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">chain_info</span>();
-		<span class="self">self</span>.<span class="ident">init_block_builder_at</span>(
-			<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="ident">chain_info</span>.<span class="ident">best_hash</span>),
-			<span class="ident">validation_data</span>,
-			<span class="ident">relay_sproof_builder</span>,
+		validation_data: <span class="prelude-ty">Option</span>&lt;PersistedValidationData&lt;PHash, PBlockNumber&gt;&gt;,
+		relay_sproof_builder: RelayStateSproofBuilder,
+	) -&gt; BlockBuilder&lt;Block, Client, Backend&gt; {
+		<span class="kw">let </span>chain_info = <span class="self">self</span>.chain_info();
+		<span class="self">self</span>.init_block_builder_at(
+			<span class="kw-2">&amp;</span>BlockId::Hash(chain_info.best_hash),
+			validation_data,
+			relay_sproof_builder,
 		)
 	}
 
-	<span class="kw">fn</span> <span class="ident">init_block_builder_at</span>(
+	<span class="kw">fn </span>init_block_builder_at(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="kw-2">&amp;</span><span class="ident">BlockId</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-		<span class="ident">validation_data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">PBlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">relay_sproof_builder</span>: <span class="ident">RelayStateSproofBuilder</span>,
-	) -&gt; <span class="ident">BlockBuilder</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Client</span>, <span class="ident">Backend</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">last_timestamp</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">runtime_api</span>().<span class="ident">get_last_timestamp</span>(<span class="ident">at</span>).<span class="ident">expect</span>(<span class="string">&quot;Get last timestamp&quot;</span>);
+		at: <span class="kw-2">&amp;</span>BlockId&lt;Block&gt;,
+		validation_data: <span class="prelude-ty">Option</span>&lt;PersistedValidationData&lt;PHash, PBlockNumber&gt;&gt;,
+		relay_sproof_builder: RelayStateSproofBuilder,
+	) -&gt; BlockBuilder&lt;Block, Client, Backend&gt; {
+		<span class="kw">let </span>last_timestamp = <span class="self">self</span>.runtime_api().get_last_timestamp(at).expect(<span class="string">&quot;Get last timestamp&quot;</span>);
 
-		<span class="kw">let</span> <span class="ident">timestamp</span> <span class="op">=</span> <span class="ident">last_timestamp</span> <span class="op">+</span> <span class="ident">cumulus_test_runtime::MinimumPeriod::get</span>();
+		<span class="kw">let </span>timestamp = last_timestamp + cumulus_test_runtime::MinimumPeriod::get();
 
-		<span class="ident">init_block_builder</span>(<span class="self">self</span>, <span class="ident">at</span>, <span class="ident">validation_data</span>, <span class="ident">relay_sproof_builder</span>, <span class="ident">timestamp</span>)
+		init_block_builder(<span class="self">self</span>, at, validation_data, relay_sproof_builder, timestamp)
 	}
 
-	<span class="kw">fn</span> <span class="ident">init_block_builder_with_timestamp</span>(
+	<span class="kw">fn </span>init_block_builder_with_timestamp(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">at</span>: <span class="kw-2">&amp;</span><span class="ident">BlockId</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-		<span class="ident">validation_data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PersistedValidationData</span><span class="op">&lt;</span><span class="ident">PHash</span>, <span class="ident">PBlockNumber</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-		<span class="ident">relay_sproof_builder</span>: <span class="ident">RelayStateSproofBuilder</span>,
-		<span class="ident">timestamp</span>: <span class="ident">u64</span>,
-	) -&gt; <span class="ident">sc_block_builder::BlockBuilder</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Client</span>, <span class="ident">Backend</span><span class="op">&gt;</span> {
-		<span class="ident">init_block_builder</span>(<span class="self">self</span>, <span class="ident">at</span>, <span class="ident">validation_data</span>, <span class="ident">relay_sproof_builder</span>, <span class="ident">timestamp</span>)
+		at: <span class="kw-2">&amp;</span>BlockId&lt;Block&gt;,
+		validation_data: <span class="prelude-ty">Option</span>&lt;PersistedValidationData&lt;PHash, PBlockNumber&gt;&gt;,
+		relay_sproof_builder: RelayStateSproofBuilder,
+		timestamp: u64,
+	) -&gt; sc_block_builder::BlockBuilder&lt;Block, Client, Backend&gt; {
+		init_block_builder(<span class="self">self</span>, at, validation_data, relay_sproof_builder, timestamp)
 	}
 }
 
-<span class="doccomment">/// Extension trait for the [`BlockBuilder`](sc_block_builder::BlockBuilder) to build directly a</span>
-<span class="doccomment">/// [`ParachainBlockData`].</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">BuildParachainBlockData</span> {
-	<span class="doccomment">/// Directly build the [`ParachainBlockData`] from the block that comes out of the block builder.</span>
-	<span class="kw">fn</span> <span class="ident">build_parachain_block</span>(<span class="self">self</span>, <span class="ident">parent_state_root</span>: <span class="ident">Hash</span>) -&gt; <span class="ident">ParachainBlockData</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Extension trait for the [`BlockBuilder`](sc_block_builder::BlockBuilder) to build directly a
+/// [`ParachainBlockData`].
+</span><span class="kw">pub trait </span>BuildParachainBlockData {
+	<span class="doccomment">/// Directly build the [`ParachainBlockData`] from the block that comes out of the block builder.
+	</span><span class="kw">fn </span>build_parachain_block(<span class="self">self</span>, parent_state_root: Hash) -&gt; ParachainBlockData&lt;Block&gt;;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">BuildParachainBlockData</span> <span class="kw">for</span> <span class="ident">sc_block_builder::BlockBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Block</span>, <span class="ident">Client</span>, <span class="ident">Backend</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">build_parachain_block</span>(<span class="self">self</span>, <span class="ident">parent_state_root</span>: <span class="ident">Hash</span>) -&gt; <span class="ident">ParachainBlockData</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="ident">built_block</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">build</span>().<span class="ident">expect</span>(<span class="string">&quot;Builds the block&quot;</span>);
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; BuildParachainBlockData <span class="kw">for </span>sc_block_builder::BlockBuilder&lt;<span class="lifetime">&#39;a</span>, Block, Client, Backend&gt; {
+	<span class="kw">fn </span>build_parachain_block(<span class="self">self</span>, parent_state_root: Hash) -&gt; ParachainBlockData&lt;Block&gt; {
+		<span class="kw">let </span>built_block = <span class="self">self</span>.build().expect(<span class="string">&quot;Builds the block&quot;</span>);
 
-		<span class="kw">let</span> <span class="ident">storage_proof</span> <span class="op">=</span> <span class="ident">built_block</span>
-			.<span class="ident">proof</span>
-			.<span class="ident">expect</span>(<span class="string">&quot;We enabled proof recording before.&quot;</span>)
-			.<span class="ident">into_compact_proof</span>::<span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Header</span> <span class="kw">as</span> <span class="ident">HeaderT</span><span class="op">&gt;</span><span class="ident">::Hashing</span><span class="op">&gt;</span>(<span class="ident">parent_state_root</span>)
-			.<span class="ident">expect</span>(<span class="string">&quot;Creates the compact proof&quot;</span>);
+		<span class="kw">let </span>storage_proof = built_block
+			.proof
+			.expect(<span class="string">&quot;We enabled proof recording before.&quot;</span>)
+			.into_compact_proof::&lt;&lt;Header <span class="kw">as </span>HeaderT&gt;::Hashing&gt;(parent_state_root)
+			.expect(<span class="string">&quot;Creates the compact proof&quot;</span>);
 
-		<span class="kw">let</span> (<span class="ident">header</span>, <span class="ident">extrinsics</span>) <span class="op">=</span> <span class="ident">built_block</span>.<span class="ident">block</span>.<span class="ident">deconstruct</span>();
-		<span class="ident">ParachainBlockData::new</span>(<span class="ident">header</span>, <span class="ident">extrinsics</span>, <span class="ident">storage_proof</span>)
+		<span class="kw">let </span>(header, extrinsics) = built_block.block.deconstruct();
+		ParachainBlockData::new(header, extrinsics, storage_proof)
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_test_client" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_test_client" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

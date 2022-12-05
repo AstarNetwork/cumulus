@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/relay-chain/src/import_queue.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>import_queue.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_relay_chain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_relay_chain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_relay_chain/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `client/consensus/relay-chain/src/import_queue.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>import_queue.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_client_consensus_relay_chain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_client_consensus_relay_chain/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_client_consensus_relay_chain/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -123,134 +123,130 @@
 <span id="123">123</span>
 <span id="124">124</span>
 <span id="125">125</span>
-<span id="126">126</span>
-<span id="127">127</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">marker::PhantomData</span>, <span class="ident">sync::Arc</span>};
+</span><span class="kw">use </span>std::{marker::PhantomData, sync::Arc};
 
-<span class="kw">use</span> <span class="ident">sc_consensus</span>::{
-	<span class="ident">import_queue</span>::{<span class="ident">BasicQueue</span>, <span class="ident">Verifier</span> <span class="kw">as</span> <span class="ident">VerifierT</span>},
-	<span class="ident">BlockImport</span>, <span class="ident">BlockImportParams</span>,
+<span class="kw">use </span>cumulus_client_consensus_common::ParachainBlockImport;
+
+<span class="kw">use </span>sc_consensus::{
+	import_queue::{BasicQueue, Verifier <span class="kw">as </span>VerifierT},
+	BlockImport, BlockImportParams,
 };
-<span class="kw">use</span> <span class="ident">sp_api::ProvideRuntimeApi</span>;
-<span class="kw">use</span> <span class="ident">sp_block_builder::BlockBuilder</span> <span class="kw">as</span> <span class="ident">BlockBuilderApi</span>;
-<span class="kw">use</span> <span class="ident">sp_blockchain::Result</span> <span class="kw">as</span> <span class="ident">ClientResult</span>;
-<span class="kw">use</span> <span class="ident">sp_consensus</span>::{<span class="ident">error::Error</span> <span class="kw">as</span> <span class="ident">ConsensusError</span>, <span class="ident">CacheKeyId</span>};
-<span class="kw">use</span> <span class="ident">sp_inherents</span>::{<span class="ident">CreateInherentDataProviders</span>, <span class="ident">InherentDataProvider</span>};
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{
-	<span class="ident">generic::BlockId</span>,
-	<span class="ident">traits</span>::{<span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">HeaderT</span>},
+<span class="kw">use </span>sp_api::ProvideRuntimeApi;
+<span class="kw">use </span>sp_block_builder::BlockBuilder <span class="kw">as </span>BlockBuilderApi;
+<span class="kw">use </span>sp_blockchain::Result <span class="kw">as </span>ClientResult;
+<span class="kw">use </span>sp_consensus::{error::Error <span class="kw">as </span>ConsensusError, CacheKeyId};
+<span class="kw">use </span>sp_inherents::{CreateInherentDataProviders, InherentDataProvider};
+<span class="kw">use </span>sp_runtime::{
+	generic::BlockId,
+	traits::{Block <span class="kw">as </span>BlockT, Header <span class="kw">as </span>HeaderT},
 };
 
-<span class="doccomment">/// A verifier that just checks the inherents.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Verifier</span><span class="op">&lt;</span><span class="ident">Client</span>, <span class="ident">Block</span>, <span class="ident">CIDP</span><span class="op">&gt;</span> {
-	<span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>,
-	<span class="ident">create_inherent_data_providers</span>: <span class="ident">CIDP</span>,
-	<span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A verifier that just checks the inherents.
+</span><span class="kw">pub struct </span>Verifier&lt;Client, Block, CIDP&gt; {
+	client: Arc&lt;Client&gt;,
+	create_inherent_data_providers: CIDP,
+	_marker: PhantomData&lt;Block&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Client</span>, <span class="ident">Block</span>, <span class="ident">CIDP</span><span class="op">&gt;</span> <span class="ident">Verifier</span><span class="op">&lt;</span><span class="ident">Client</span>, <span class="ident">Block</span>, <span class="ident">CIDP</span><span class="op">&gt;</span> {
-	<span class="doccomment">/// Create a new instance.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>, <span class="ident">create_inherent_data_providers</span>: <span class="ident">CIDP</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">Self</span> { <span class="ident">client</span>, <span class="ident">create_inherent_data_providers</span>, <span class="ident">_marker</span>: <span class="ident">PhantomData</span> }
+<span class="kw">impl</span>&lt;Client, Block, CIDP&gt; Verifier&lt;Client, Block, CIDP&gt; {
+	<span class="doccomment">/// Create a new instance.
+	</span><span class="kw">pub fn </span>new(client: Arc&lt;Client&gt;, create_inherent_data_providers: CIDP) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ client, create_inherent_data_providers, _marker: PhantomData }
 	}
 }
 
-<span class="attribute">#[<span class="ident">async_trait::async_trait</span>]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Client</span>, <span class="ident">Block</span>, <span class="ident">CIDP</span><span class="op">&gt;</span> <span class="ident">VerifierT</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Verifier</span><span class="op">&lt;</span><span class="ident">Client</span>, <span class="ident">Block</span>, <span class="ident">CIDP</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Block</span>: <span class="ident">BlockT</span>,
-	<span class="ident">Client</span>: <span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>,
-	<span class="op">&lt;</span><span class="ident">Client</span> <span class="kw">as</span> <span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::Api</span>: <span class="ident">BlockBuilderApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">CIDP</span>: <span class="ident">CreateInherentDataProviders</span><span class="op">&lt;</span><span class="ident">Block</span>, ()<span class="op">&gt;</span>,
+<span class="attribute">#[async_trait::async_trait]
+</span><span class="kw">impl</span>&lt;Client, Block, CIDP&gt; VerifierT&lt;Block&gt; <span class="kw">for </span>Verifier&lt;Client, Block, CIDP&gt;
+<span class="kw">where
+	</span>Block: BlockT,
+	Client: ProvideRuntimeApi&lt;Block&gt; + Send + Sync,
+	&lt;Client <span class="kw">as </span>ProvideRuntimeApi&lt;Block&gt;&gt;::Api: BlockBuilderApi&lt;Block&gt;,
+	CIDP: CreateInherentDataProviders&lt;Block, ()&gt;,
 {
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">verify</span>(
-		<span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-		<span class="kw-2">mut</span> <span class="ident">block_params</span>: <span class="ident">BlockImportParams</span><span class="op">&lt;</span><span class="ident">Block</span>, ()<span class="op">&gt;</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">BlockImportParams</span><span class="op">&lt;</span><span class="ident">Block</span>, ()<span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">CacheKeyId</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>)<span class="op">&gt;</span><span class="op">&gt;</span>), <span class="ident">String</span><span class="op">&gt;</span> {
-		<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner_body</span>) <span class="op">=</span> <span class="ident">block_params</span>.<span class="ident">body</span>.<span class="ident">take</span>() {
-			<span class="kw">let</span> <span class="ident">inherent_data_providers</span> <span class="op">=</span> <span class="self">self</span>
-				.<span class="ident">create_inherent_data_providers</span>
-				.<span class="ident">create_inherent_data_providers</span>(<span class="kw-2">*</span><span class="ident">block_params</span>.<span class="ident">header</span>.<span class="ident">parent_hash</span>(), ())
-				.<span class="kw">await</span>
-				.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>;
+	<span class="kw">async fn </span>verify(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		<span class="kw-2">mut </span>block_params: BlockImportParams&lt;Block, ()&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(BlockImportParams&lt;Block, ()&gt;, <span class="prelude-ty">Option</span>&lt;Vec&lt;(CacheKeyId, Vec&lt;u8&gt;)&gt;&gt;), String&gt; {
+		<span class="kw">if let </span><span class="prelude-val">Some</span>(inner_body) = block_params.body.take() {
+			<span class="kw">let </span>inherent_data_providers = <span class="self">self
+				</span>.create_inherent_data_providers
+				.create_inherent_data_providers(<span class="kw-2">*</span>block_params.header.parent_hash(), ())
+				.<span class="kw">await
+				</span>.map_err(|e| e.to_string())<span class="question-mark">?</span>;
 
-			<span class="kw">let</span> <span class="ident">inherent_data</span> <span class="op">=</span>
-				<span class="ident">inherent_data_providers</span>.<span class="ident">create_inherent_data</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+			<span class="kw">let </span>inherent_data = inherent_data_providers
+				.create_inherent_data()
+				.<span class="kw">await
+				</span>.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, e))<span class="question-mark">?</span>;
 
-			<span class="kw">let</span> <span class="ident">block</span> <span class="op">=</span> <span class="ident">Block::new</span>(<span class="ident">block_params</span>.<span class="ident">header</span>.<span class="ident">clone</span>(), <span class="ident">inner_body</span>);
+			<span class="kw">let </span>block = Block::new(block_params.header.clone(), inner_body);
 
-			<span class="kw">let</span> <span class="ident">inherent_res</span> <span class="op">=</span> <span class="self">self</span>
-				.<span class="ident">client</span>
-				.<span class="ident">runtime_api</span>()
-				.<span class="ident">check_inherents</span>(
-					<span class="kw-2">&amp;</span><span class="ident">BlockId::Hash</span>(<span class="kw-2">*</span><span class="ident">block</span>.<span class="ident">header</span>().<span class="ident">parent_hash</span>()),
-					<span class="ident">block</span>.<span class="ident">clone</span>(),
-					<span class="ident">inherent_data</span>,
+			<span class="kw">let </span>inherent_res = <span class="self">self
+				</span>.client
+				.runtime_api()
+				.check_inherents(
+					<span class="kw-2">&amp;</span>BlockId::Hash(<span class="kw-2">*</span>block.header().parent_hash()),
+					block.clone(),
+					inherent_data,
 				)
-				.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+				.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, e))<span class="question-mark">?</span>;
 
-			<span class="kw">if</span> <span class="op">!</span><span class="ident">inherent_res</span>.<span class="ident">ok</span>() {
-				<span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">e</span>) <span class="kw">in</span> <span class="ident">inherent_res</span>.<span class="ident">into_errors</span>() {
-					<span class="kw">match</span> <span class="ident">inherent_data_providers</span>.<span class="ident">try_handle_error</span>(<span class="kw-2">&amp;</span><span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">e</span>).<span class="kw">await</span> {
-						<span class="prelude-val">Some</span>(<span class="ident">r</span>) =&gt; <span class="ident">r</span>.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>,
-						<span class="prelude-val">None</span> =&gt; <span class="prelude-val">Err</span>(<span class="macro">format!</span>(
+			<span class="kw">if </span>!inherent_res.ok() {
+				<span class="kw">for </span>(i, e) <span class="kw">in </span>inherent_res.into_errors() {
+					<span class="kw">match </span>inherent_data_providers.try_handle_error(<span class="kw-2">&amp;</span>i, <span class="kw-2">&amp;</span>e).<span class="kw">await </span>{
+						<span class="prelude-val">Some</span>(r) =&gt; r.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, e))<span class="question-mark">?</span>,
+						<span class="prelude-val">None </span>=&gt; <span class="prelude-val">Err</span>(<span class="macro">format!</span>(
 							<span class="string">&quot;Unhandled inherent error from `{}`.&quot;</span>,
-							<span class="ident">String::from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">i</span>)
+							String::from_utf8_lossy(<span class="kw-2">&amp;</span>i)
 						))<span class="question-mark">?</span>,
 					}
 				}
 			}
 
-			<span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">inner_body</span>) <span class="op">=</span> <span class="ident">block</span>.<span class="ident">deconstruct</span>();
-			<span class="ident">block_params</span>.<span class="ident">body</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">inner_body</span>);
+			<span class="kw">let </span>(<span class="kw">_</span>, inner_body) = block.deconstruct();
+			block_params.body = <span class="prelude-val">Some</span>(inner_body);
 		}
 
-		<span class="ident">block_params</span>.<span class="ident">post_hash</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">block_params</span>.<span class="ident">header</span>.<span class="ident">hash</span>());
+		block_params.post_hash = <span class="prelude-val">Some</span>(block_params.header.hash());
 
-		<span class="prelude-val">Ok</span>((<span class="ident">block_params</span>, <span class="prelude-val">None</span>))
+		<span class="prelude-val">Ok</span>((block_params, <span class="prelude-val">None</span>))
 	}
 }
 
-<span class="doccomment">/// Start an import queue for a Cumulus collator that does not uses any special authoring logic.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">import_queue</span><span class="op">&lt;</span><span class="ident">Client</span>, <span class="ident">Block</span>: <span class="ident">BlockT</span>, <span class="ident">I</span>, <span class="ident">CIDP</span><span class="op">&gt;</span>(
-	<span class="ident">client</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span>,
-	<span class="ident">block_import</span>: <span class="ident">I</span>,
-	<span class="ident">create_inherent_data_providers</span>: <span class="ident">CIDP</span>,
-	<span class="ident">spawner</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">sp_core::traits::SpawnEssentialNamed</span>,
-	<span class="ident">registry</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">substrate_prometheus_endpoint::Registry</span><span class="op">&gt;</span>,
-) -&gt; <span class="ident">ClientResult</span><span class="op">&lt;</span><span class="ident">BasicQueue</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">I::Transaction</span><span class="op">&gt;</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">I</span>: <span class="ident">BlockImport</span><span class="op">&lt;</span><span class="ident">Block</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="ident">ConsensusError</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="ident">I::Transaction</span>: <span class="ident">Send</span>,
-	<span class="ident">Client</span>: <span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-	<span class="op">&lt;</span><span class="ident">Client</span> <span class="kw">as</span> <span class="ident">ProvideRuntimeApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::Api</span>: <span class="ident">BlockBuilderApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>,
-	<span class="ident">CIDP</span>: <span class="ident">CreateInherentDataProviders</span><span class="op">&lt;</span><span class="ident">Block</span>, ()<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="doccomment">/// Start an import queue for a Cumulus collator that does not uses any special authoring logic.
+</span><span class="kw">pub fn </span>import_queue&lt;Client, Block: BlockT, I, CIDP&gt;(
+	client: Arc&lt;Client&gt;,
+	block_import: ParachainBlockImport&lt;I&gt;,
+	create_inherent_data_providers: CIDP,
+	spawner: <span class="kw-2">&amp;</span><span class="kw">impl </span>sp_core::traits::SpawnEssentialNamed,
+	registry: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>substrate_prometheus_endpoint::Registry&gt;,
+) -&gt; ClientResult&lt;BasicQueue&lt;Block, I::Transaction&gt;&gt;
+<span class="kw">where
+	</span>I: BlockImport&lt;Block, Error = ConsensusError&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+	I::Transaction: Send,
+	Client: ProvideRuntimeApi&lt;Block&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+	&lt;Client <span class="kw">as </span>ProvideRuntimeApi&lt;Block&gt;&gt;::Api: BlockBuilderApi&lt;Block&gt;,
+	CIDP: CreateInherentDataProviders&lt;Block, ()&gt; + <span class="lifetime">&#39;static</span>,
 {
-	<span class="kw">let</span> <span class="ident">verifier</span> <span class="op">=</span> <span class="ident">Verifier::new</span>(<span class="ident">client</span>, <span class="ident">create_inherent_data_providers</span>);
+	<span class="kw">let </span>verifier = Verifier::new(client, create_inherent_data_providers);
 
-	<span class="prelude-val">Ok</span>(<span class="ident">BasicQueue::new</span>(
-		<span class="ident">verifier</span>,
-		<span class="ident">Box::new</span>(<span class="ident">cumulus_client_consensus_common::ParachainBlockImport::new</span>(<span class="ident">block_import</span>)),
-		<span class="prelude-val">None</span>,
-		<span class="ident">spawner</span>,
-		<span class="ident">registry</span>,
-	))
+	<span class="prelude-val">Ok</span>(BasicQueue::new(verifier, Box::new(block_import), <span class="prelude-val">None</span>, spawner, registry))
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_relay_chain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_relay_chain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

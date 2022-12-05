@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/common/src/impls.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impls.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../parachains_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/common/src/impls.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impls.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../parachains_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -280,287 +280,287 @@
 <span id="280">280</span>
 <span id="281">281</span>
 <span id="282">282</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright (C) 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// SPDX-License-Identifier: Apache-2.0</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright (C) 2021 Parity Technologies (UK) Ltd.
+// SPDX-License-Identifier: Apache-2.0
 
-<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="comment">// you may not use this file except in compliance with the License.</span>
-<span class="comment">// You may obtain a copy of the License at</span>
-<span class="comment">//</span>
-<span class="comment">// 	http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="comment">//</span>
-<span class="comment">// Unless required by applicable law or agreed to in writing, software</span>
-<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="comment">// See the License for the specific language governing permissions and</span>
-<span class="comment">// limitations under the License.</span>
+// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// 	http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-<span class="doccomment">//! Auxiliary struct/enums for parachain runtimes.</span>
-<span class="doccomment">//! Taken from polkadot/runtime/common (at a21cd64) and adapted for parachains.</span>
+</span><span class="doccomment">//! Auxiliary struct/enums for parachain runtimes.
+//! Taken from polkadot/runtime/common (at a21cd64) and adapted for parachains.
 
-<span class="kw">use</span> <span class="ident">frame_support::traits</span>::{
-	<span class="ident">fungibles</span>::{<span class="self">self</span>, <span class="ident">Balanced</span>, <span class="ident">CreditOf</span>},
-	<span class="ident">Contains</span>, <span class="ident">Currency</span>, <span class="ident">Get</span>, <span class="ident">Imbalance</span>, <span class="ident">OnUnbalanced</span>,
+</span><span class="kw">use </span>frame_support::traits::{
+	fungibles::{<span class="self">self</span>, Balanced, CreditOf},
+	Contains, Currency, Get, Imbalance, OnUnbalanced,
 };
-<span class="kw">use</span> <span class="ident">pallet_asset_tx_payment::HandleCredit</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::Zero</span>;
-<span class="kw">use</span> <span class="ident">sp_std::marker::PhantomData</span>;
-<span class="kw">use</span> <span class="ident">xcm::latest</span>::{<span class="ident">AssetId</span>, <span class="ident">Fungibility::Fungible</span>, <span class="ident">MultiAsset</span>, <span class="ident">MultiLocation</span>};
-<span class="kw">use</span> <span class="ident">xcm_executor::traits::FilterAssetLocation</span>;
+<span class="kw">use </span>pallet_asset_tx_payment::HandleCredit;
+<span class="kw">use </span>sp_runtime::traits::Zero;
+<span class="kw">use </span>sp_std::marker::PhantomData;
+<span class="kw">use </span>xcm::latest::{AssetId, Fungibility::Fungible, MultiAsset, MultiLocation};
+<span class="kw">use </span>xcm_executor::traits::FilterAssetLocation;
 
-<span class="doccomment">/// Type alias to conveniently refer to the `Currency::NegativeImbalance` associated type.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">NegativeImbalance</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">pallet_balances::Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">Currency</span><span class="op">&lt;</span>
-	<span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::AccountId</span>,
-<span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::NegativeImbalance</span>;
+<span class="doccomment">/// Type alias to conveniently refer to the `Currency::NegativeImbalance` associated type.
+</span><span class="kw">pub type </span>NegativeImbalance&lt;T&gt; = &lt;pallet_balances::Pallet&lt;T&gt; <span class="kw">as </span>Currency&lt;
+	&lt;T <span class="kw">as </span>frame_system::Config&gt;::AccountId,
+&gt;&gt;::NegativeImbalance;
 
-<span class="doccomment">/// Type alias to conveniently refer to `frame_system`&#39;s `Config::AccountId`.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::AccountId</span>;
+<span class="doccomment">/// Type alias to conveniently refer to `frame_system`&#39;s `Config::AccountId`.
+</span><span class="kw">pub type </span>AccountIdOf&lt;R&gt; = &lt;R <span class="kw">as </span>frame_system::Config&gt;::AccountId;
 
-<span class="doccomment">/// Implementation of `OnUnbalanced` that deposits the fees into a staking pot for later payout.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ToStakingPot</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">OnUnbalanced</span><span class="op">&lt;</span><span class="ident">NegativeImbalance</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ToStakingPot</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">R</span>: <span class="ident">pallet_balances::Config</span> <span class="op">+</span> <span class="ident">pallet_collator_selection::Config</span>,
-	<span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>:
-		<span class="ident">From</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span>,
-	<span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::RuntimeEvent</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">pallet_balances::Event</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Implementation of `OnUnbalanced` that deposits the fees into a staking pot for later payout.
+</span><span class="kw">pub struct </span>ToStakingPot&lt;R&gt;(PhantomData&lt;R&gt;);
+<span class="kw">impl</span>&lt;R&gt; OnUnbalanced&lt;NegativeImbalance&lt;R&gt;&gt; <span class="kw">for </span>ToStakingPot&lt;R&gt;
+<span class="kw">where
+	</span>R: pallet_balances::Config + pallet_collator_selection::Config,
+	AccountIdOf&lt;R&gt;:
+		From&lt;polkadot_primitives::v2::AccountId&gt; + Into&lt;polkadot_primitives::v2::AccountId&gt;,
+	&lt;R <span class="kw">as </span>frame_system::Config&gt;::RuntimeEvent: From&lt;pallet_balances::Event&lt;R&gt;&gt;,
 {
-	<span class="kw">fn</span> <span class="ident">on_nonzero_unbalanced</span>(<span class="ident">amount</span>: <span class="ident">NegativeImbalance</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) {
-		<span class="kw">let</span> <span class="ident">staking_pot</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">pallet_collator_selection::Pallet</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::account_id</span>();
-		<span class="op">&lt;</span><span class="ident">pallet_balances::Pallet</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::resolve_creating</span>(<span class="kw-2">&amp;</span><span class="ident">staking_pot</span>, <span class="ident">amount</span>);
+	<span class="kw">fn </span>on_nonzero_unbalanced(amount: NegativeImbalance&lt;R&gt;) {
+		<span class="kw">let </span>staking_pot = &lt;pallet_collator_selection::Pallet&lt;R&gt;&gt;::account_id();
+		&lt;pallet_balances::Pallet&lt;R&gt;&gt;::resolve_creating(<span class="kw-2">&amp;</span>staking_pot, amount);
 	}
 }
 
-<span class="doccomment">/// Implementation of `OnUnbalanced` that deals with the fees by combining tip and fee and passing</span>
-<span class="doccomment">/// the result on to `ToStakingPot`.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DealWithFees</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">OnUnbalanced</span><span class="op">&lt;</span><span class="ident">NegativeImbalance</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DealWithFees</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">R</span>: <span class="ident">pallet_balances::Config</span> <span class="op">+</span> <span class="ident">pallet_collator_selection::Config</span>,
-	<span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>:
-		<span class="ident">From</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span>,
-	<span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::RuntimeEvent</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">pallet_balances::Event</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Implementation of `OnUnbalanced` that deals with the fees by combining tip and fee and passing
+/// the result on to `ToStakingPot`.
+</span><span class="kw">pub struct </span>DealWithFees&lt;R&gt;(PhantomData&lt;R&gt;);
+<span class="kw">impl</span>&lt;R&gt; OnUnbalanced&lt;NegativeImbalance&lt;R&gt;&gt; <span class="kw">for </span>DealWithFees&lt;R&gt;
+<span class="kw">where
+	</span>R: pallet_balances::Config + pallet_collator_selection::Config,
+	AccountIdOf&lt;R&gt;:
+		From&lt;polkadot_primitives::v2::AccountId&gt; + Into&lt;polkadot_primitives::v2::AccountId&gt;,
+	&lt;R <span class="kw">as </span>frame_system::Config&gt;::RuntimeEvent: From&lt;pallet_balances::Event&lt;R&gt;&gt;,
 {
-	<span class="kw">fn</span> <span class="ident">on_unbalanceds</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">fees_then_tips</span>: <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">NegativeImbalance</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span>) {
-		<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">fees</span>) <span class="op">=</span> <span class="ident">fees_then_tips</span>.<span class="ident">next</span>() {
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">tips</span>) <span class="op">=</span> <span class="ident">fees_then_tips</span>.<span class="ident">next</span>() {
-				<span class="ident">tips</span>.<span class="ident">merge_into</span>(<span class="kw-2">&amp;mut</span> <span class="ident">fees</span>);
+	<span class="kw">fn </span>on_unbalanceds&lt;B&gt;(<span class="kw-2">mut </span>fees_then_tips: <span class="kw">impl </span>Iterator&lt;Item = NegativeImbalance&lt;R&gt;&gt;) {
+		<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>fees) = fees_then_tips.next() {
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(tips) = fees_then_tips.next() {
+				tips.merge_into(<span class="kw-2">&amp;mut </span>fees);
 			}
-			<span class="op">&lt;</span><span class="ident">ToStakingPot</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">OnUnbalanced</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::on_unbalanced</span>(<span class="ident">fees</span>);
+			&lt;ToStakingPot&lt;R&gt; <span class="kw">as </span>OnUnbalanced&lt;<span class="kw">_</span>&gt;&gt;::on_unbalanced(fees);
 		}
 	}
 }
 
-<span class="doccomment">/// A `HandleCredit` implementation that naively transfers the fees to the block author.</span>
-<span class="doccomment">/// Will drop and burn the assets in case the transfer fails.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AssetsToBlockAuthor</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">HandleCredit</span><span class="op">&lt;</span><span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>, <span class="ident">pallet_assets::Pallet</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AssetsToBlockAuthor</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">R</span>: <span class="ident">pallet_authorship::Config</span> <span class="op">+</span> <span class="ident">pallet_assets::Config</span>,
-	<span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>:
-		<span class="ident">From</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">polkadot_primitives::v2::AccountId</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A `HandleCredit` implementation that naively transfers the fees to the block author.
+/// Will drop and burn the assets in case the transfer fails.
+</span><span class="kw">pub struct </span>AssetsToBlockAuthor&lt;R&gt;(PhantomData&lt;R&gt;);
+<span class="kw">impl</span>&lt;R&gt; HandleCredit&lt;AccountIdOf&lt;R&gt;, pallet_assets::Pallet&lt;R&gt;&gt; <span class="kw">for </span>AssetsToBlockAuthor&lt;R&gt;
+<span class="kw">where
+	</span>R: pallet_authorship::Config + pallet_assets::Config,
+	AccountIdOf&lt;R&gt;:
+		From&lt;polkadot_primitives::v2::AccountId&gt; + Into&lt;polkadot_primitives::v2::AccountId&gt;,
 {
-	<span class="kw">fn</span> <span class="ident">handle_credit</span>(<span class="ident">credit</span>: <span class="ident">CreditOf</span><span class="op">&lt;</span><span class="ident">AccountIdOf</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>, <span class="ident">pallet_assets::Pallet</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span>) {
-		<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">author</span>) <span class="op">=</span> <span class="ident">pallet_authorship::Pallet</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="ident">::author</span>() {
-			<span class="comment">// In case of error: Will drop the result triggering the `OnDrop` of the imbalance.</span>
-			<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">pallet_assets::Pallet</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="ident">::resolve</span>(<span class="kw-2">&amp;</span><span class="ident">author</span>, <span class="ident">credit</span>);
+	<span class="kw">fn </span>handle_credit(credit: CreditOf&lt;AccountIdOf&lt;R&gt;, pallet_assets::Pallet&lt;R&gt;&gt;) {
+		<span class="kw">if let </span><span class="prelude-val">Some</span>(author) = pallet_authorship::Pallet::&lt;R&gt;::author() {
+			<span class="comment">// In case of error: Will drop the result triggering the `OnDrop` of the imbalance.
+			</span><span class="kw">let _ </span>= pallet_assets::Pallet::&lt;R&gt;::resolve(<span class="kw-2">&amp;</span>author, credit);
 		}
 	}
 }
 
-<span class="doccomment">/// Allow checking in assets that have issuance &gt; 0.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NonZeroIssuance</span><span class="op">&lt;</span><span class="ident">AccountId</span>, <span class="ident">Assets</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span>(<span class="ident">AccountId</span>, <span class="ident">Assets</span>)<span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">AccountId</span>, <span class="ident">Assets</span><span class="op">&gt;</span> <span class="ident">Contains</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Assets</span> <span class="kw">as</span> <span class="ident">fungibles::Inspect</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::AssetId</span><span class="op">&gt;</span>
-	<span class="kw">for</span> <span class="ident">NonZeroIssuance</span><span class="op">&lt;</span><span class="ident">AccountId</span>, <span class="ident">Assets</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-	<span class="ident">Assets</span>: <span class="ident">fungibles::Inspect</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Allow checking in assets that have issuance &gt; 0.
+</span><span class="kw">pub struct </span>NonZeroIssuance&lt;AccountId, Assets&gt;(PhantomData&lt;(AccountId, Assets)&gt;);
+<span class="kw">impl</span>&lt;AccountId, Assets&gt; Contains&lt;&lt;Assets <span class="kw">as </span>fungibles::Inspect&lt;AccountId&gt;&gt;::AssetId&gt;
+	<span class="kw">for </span>NonZeroIssuance&lt;AccountId, Assets&gt;
+<span class="kw">where
+	</span>Assets: fungibles::Inspect&lt;AccountId&gt;,
 {
-	<span class="kw">fn</span> <span class="ident">contains</span>(<span class="ident">id</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">Assets</span> <span class="kw">as</span> <span class="ident">fungibles::Inspect</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::AssetId</span>) -&gt; <span class="ident">bool</span> {
-		<span class="op">!</span><span class="ident">Assets::total_issuance</span>(<span class="kw-2">*</span><span class="ident">id</span>).<span class="ident">is_zero</span>()
+	<span class="kw">fn </span>contains(id: <span class="kw-2">&amp;</span>&lt;Assets <span class="kw">as </span>fungibles::Inspect&lt;AccountId&gt;&gt;::AssetId) -&gt; bool {
+		!Assets::total_issuance(<span class="kw-2">*</span>id).is_zero()
 	}
 }
 
-<span class="doccomment">/// Asset filter that allows all assets from a certain location.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AssetsFrom</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Get</span><span class="op">&lt;</span><span class="ident">MultiLocation</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">FilterAssetLocation</span> <span class="kw">for</span> <span class="ident">AssetsFrom</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">filter_asset_location</span>(<span class="ident">asset</span>: <span class="kw-2">&amp;</span><span class="ident">MultiAsset</span>, <span class="ident">origin</span>: <span class="kw-2">&amp;</span><span class="ident">MultiLocation</span>) -&gt; <span class="ident">bool</span> {
-		<span class="kw">let</span> <span class="ident">loc</span> <span class="op">=</span> <span class="ident">T::get</span>();
-		<span class="kw-2">&amp;</span><span class="ident">loc</span> <span class="op">==</span> <span class="ident">origin</span> <span class="op">&amp;&amp;</span>
-			<span class="macro">matches!</span>(<span class="ident">asset</span>, <span class="ident">MultiAsset</span> { <span class="ident">id</span>: <span class="ident">AssetId::Concrete</span>(<span class="ident">asset_loc</span>), <span class="ident">fun</span>: <span class="ident">Fungible</span>(<span class="ident">_a</span>) }
-			<span class="kw">if</span> <span class="ident">asset_loc</span>.<span class="ident">match_and_split</span>(<span class="kw-2">&amp;</span><span class="ident">loc</span>).<span class="ident">is_some</span>())
+<span class="doccomment">/// Asset filter that allows all assets from a certain location.
+</span><span class="kw">pub struct </span>AssetsFrom&lt;T&gt;(PhantomData&lt;T&gt;);
+<span class="kw">impl</span>&lt;T: Get&lt;MultiLocation&gt;&gt; FilterAssetLocation <span class="kw">for </span>AssetsFrom&lt;T&gt; {
+	<span class="kw">fn </span>filter_asset_location(asset: <span class="kw-2">&amp;</span>MultiAsset, origin: <span class="kw-2">&amp;</span>MultiLocation) -&gt; bool {
+		<span class="kw">let </span>loc = T::get();
+		<span class="kw-2">&amp;</span>loc == origin &amp;&amp;
+			<span class="macro">matches!</span>(asset, MultiAsset { id: AssetId::Concrete(asset_loc), fun: Fungible(_a) }
+			<span class="kw">if </span>asset_loc.match_and_split(<span class="kw-2">&amp;</span>loc).is_some())
 	}
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">frame_support</span>::{
-		<span class="ident">parameter_types</span>,
-		<span class="ident">traits</span>::{<span class="ident">FindAuthor</span>, <span class="ident">ValidatorRegistration</span>},
-		<span class="ident">PalletId</span>,
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+	<span class="kw">use super</span>::<span class="kw-2">*</span>;
+	<span class="kw">use </span>frame_support::{
+		parameter_types,
+		traits::{FindAuthor, ValidatorRegistration},
+		PalletId,
 	};
-	<span class="kw">use</span> <span class="ident">frame_system</span>::{<span class="ident">limits</span>, <span class="ident">EnsureRoot</span>};
-	<span class="kw">use</span> <span class="ident">pallet_collator_selection::IdentityCollator</span>;
-	<span class="kw">use</span> <span class="ident">polkadot_primitives::v2::AccountId</span>;
-	<span class="kw">use</span> <span class="ident">sp_core::H256</span>;
-	<span class="kw">use</span> <span class="ident">sp_runtime</span>::{
-		<span class="ident">testing::Header</span>,
-		<span class="ident">traits</span>::{<span class="ident">BlakeTwo256</span>, <span class="ident">IdentityLookup</span>},
-		<span class="ident">Perbill</span>,
+	<span class="kw">use </span>frame_system::{limits, EnsureRoot};
+	<span class="kw">use </span>pallet_collator_selection::IdentityCollator;
+	<span class="kw">use </span>polkadot_primitives::v2::AccountId;
+	<span class="kw">use </span>sp_core::H256;
+	<span class="kw">use </span>sp_runtime::{
+		testing::Header,
+		traits::{BlakeTwo256, IdentityLookup},
+		Perbill,
 	};
-	<span class="kw">use</span> <span class="ident">xcm::prelude</span>::<span class="kw-2">*</span>;
+	<span class="kw">use </span>xcm::prelude::<span class="kw-2">*</span>;
 
-	<span class="kw">type</span> <span class="ident">UncheckedExtrinsic</span> <span class="op">=</span> <span class="ident">frame_system::mocking::MockUncheckedExtrinsic</span><span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">Block</span> <span class="op">=</span> <span class="ident">frame_system::mocking::MockBlock</span><span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span>;
-	<span class="kw">const</span> <span class="ident">TEST_ACCOUNT</span>: <span class="ident">AccountId</span> <span class="op">=</span> <span class="ident">AccountId::new</span>([<span class="number">1</span>; <span class="number">32</span>]);
+	<span class="kw">type </span>UncheckedExtrinsic = frame_system::mocking::MockUncheckedExtrinsic&lt;Test&gt;;
+	<span class="kw">type </span>Block = frame_system::mocking::MockBlock&lt;Test&gt;;
+	<span class="kw">const </span>TEST_ACCOUNT: AccountId = AccountId::new([<span class="number">1</span>; <span class="number">32</span>]);
 
 	<span class="macro">frame_support::construct_runtime!</span>(
-		<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Test</span> <span class="kw">where</span>
-			<span class="ident">Block</span> <span class="op">=</span> <span class="ident">Block</span>,
-			<span class="ident">NodeBlock</span> <span class="op">=</span> <span class="ident">Block</span>,
-			<span class="ident">UncheckedExtrinsic</span> <span class="op">=</span> <span class="ident">UncheckedExtrinsic</span>,
+		<span class="kw">pub enum </span>Test <span class="kw">where
+			</span>Block = Block,
+			NodeBlock = Block,
+			UncheckedExtrinsic = UncheckedExtrinsic,
 		{
-			<span class="ident">System</span>: <span class="ident">frame_system</span>::{<span class="ident">Pallet</span>, <span class="ident">Call</span>, <span class="ident">Config</span>, <span class="ident">Storage</span>, <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>},
-			<span class="ident">Balances</span>: <span class="ident">pallet_balances</span>::{<span class="ident">Pallet</span>, <span class="ident">Call</span>, <span class="ident">Storage</span>, <span class="ident">Config</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>},
-			<span class="ident">CollatorSelection</span>: <span class="ident">pallet_collator_selection</span>::{<span class="ident">Pallet</span>, <span class="ident">Call</span>, <span class="ident">Storage</span>, <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>},
+			System: frame_system::{Pallet, Call, Config, Storage, Event&lt;T&gt;},
+			Balances: pallet_balances::{Pallet, Call, Storage, Config&lt;T&gt;, Event&lt;T&gt;},
+			CollatorSelection: pallet_collator_selection::{Pallet, Call, Storage, Event&lt;T&gt;},
 		}
 	);
 
-	<span class="macro">parameter_types!</span> {
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlockHashCount</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">250</span>;
-		<span class="kw">pub</span> <span class="ident">BlockLength</span>: <span class="ident">limits::BlockLength</span> <span class="op">=</span> <span class="ident">limits::BlockLength::max</span>(<span class="number">2</span> <span class="op">*</span> <span class="number">1024</span>);
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AvailableBlockRatio</span>: <span class="ident">Perbill</span> <span class="op">=</span> <span class="ident">Perbill::one</span>();
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MaxReserves</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">50</span>;
+	<span class="macro">parameter_types! </span>{
+		<span class="kw">pub const </span>BlockHashCount: u64 = <span class="number">250</span>;
+		<span class="kw">pub </span>BlockLength: limits::BlockLength = limits::BlockLength::max(<span class="number">2 </span>* <span class="number">1024</span>);
+		<span class="kw">pub const </span>AvailableBlockRatio: Perbill = Perbill::one();
+		<span class="kw">pub const </span>MaxReserves: u32 = <span class="number">50</span>;
 	}
 
-	<span class="kw">impl</span> <span class="ident">frame_system::Config</span> <span class="kw">for</span> <span class="ident">Test</span> {
-		<span class="kw">type</span> <span class="ident">BaseCallFilter</span> <span class="op">=</span> <span class="ident">frame_support::traits::Everything</span>;
-		<span class="kw">type</span> <span class="ident">RuntimeOrigin</span> <span class="op">=</span> <span class="ident">RuntimeOrigin</span>;
-		<span class="kw">type</span> <span class="ident">Index</span> <span class="op">=</span> <span class="ident">u64</span>;
-		<span class="kw">type</span> <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="ident">u64</span>;
-		<span class="kw">type</span> <span class="ident">RuntimeCall</span> <span class="op">=</span> <span class="ident">RuntimeCall</span>;
-		<span class="kw">type</span> <span class="ident">Hash</span> <span class="op">=</span> <span class="ident">H256</span>;
-		<span class="kw">type</span> <span class="ident">Hashing</span> <span class="op">=</span> <span class="ident">BlakeTwo256</span>;
-		<span class="kw">type</span> <span class="ident">AccountId</span> <span class="op">=</span> <span class="ident">AccountId</span>;
-		<span class="kw">type</span> <span class="ident">Lookup</span> <span class="op">=</span> <span class="ident">IdentityLookup</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::AccountId</span><span class="op">&gt;</span>;
-		<span class="kw">type</span> <span class="ident">Header</span> <span class="op">=</span> <span class="ident">Header</span>;
-		<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-		<span class="kw">type</span> <span class="ident">BlockHashCount</span> <span class="op">=</span> <span class="ident">BlockHashCount</span>;
-		<span class="kw">type</span> <span class="ident">BlockLength</span> <span class="op">=</span> <span class="ident">BlockLength</span>;
-		<span class="kw">type</span> <span class="ident">BlockWeights</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">DbWeight</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">Version</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">PalletInfo</span> <span class="op">=</span> <span class="ident">PalletInfo</span>;
-		<span class="kw">type</span> <span class="ident">AccountData</span> <span class="op">=</span> <span class="ident">pallet_balances::AccountData</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>;
-		<span class="kw">type</span> <span class="ident">OnNewAccount</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">OnKilledAccount</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">SystemWeightInfo</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">SS58Prefix</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">OnSetCode</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">MaxConsumers</span> <span class="op">=</span> <span class="ident">frame_support::traits::ConstU32</span><span class="op">&lt;</span><span class="number">16</span><span class="op">&gt;</span>;
+	<span class="kw">impl </span>frame_system::Config <span class="kw">for </span>Test {
+		<span class="kw">type </span>BaseCallFilter = frame_support::traits::Everything;
+		<span class="kw">type </span>RuntimeOrigin = RuntimeOrigin;
+		<span class="kw">type </span>Index = u64;
+		<span class="kw">type </span>BlockNumber = u64;
+		<span class="kw">type </span>RuntimeCall = RuntimeCall;
+		<span class="kw">type </span>Hash = H256;
+		<span class="kw">type </span>Hashing = BlakeTwo256;
+		<span class="kw">type </span>AccountId = AccountId;
+		<span class="kw">type </span>Lookup = IdentityLookup&lt;<span class="self">Self</span>::AccountId&gt;;
+		<span class="kw">type </span>Header = Header;
+		<span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+		<span class="kw">type </span>BlockHashCount = BlockHashCount;
+		<span class="kw">type </span>BlockLength = BlockLength;
+		<span class="kw">type </span>BlockWeights = ();
+		<span class="kw">type </span>DbWeight = ();
+		<span class="kw">type </span>Version = ();
+		<span class="kw">type </span>PalletInfo = PalletInfo;
+		<span class="kw">type </span>AccountData = pallet_balances::AccountData&lt;u64&gt;;
+		<span class="kw">type </span>OnNewAccount = ();
+		<span class="kw">type </span>OnKilledAccount = ();
+		<span class="kw">type </span>SystemWeightInfo = ();
+		<span class="kw">type </span>SS58Prefix = ();
+		<span class="kw">type </span>OnSetCode = ();
+		<span class="kw">type </span>MaxConsumers = frame_support::traits::ConstU32&lt;<span class="number">16</span>&gt;;
 	}
 
-	<span class="kw">impl</span> <span class="ident">pallet_balances::Config</span> <span class="kw">for</span> <span class="ident">Test</span> {
-		<span class="kw">type</span> <span class="ident">Balance</span> <span class="op">=</span> <span class="ident">u64</span>;
-		<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-		<span class="kw">type</span> <span class="ident">DustRemoval</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">ExistentialDeposit</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">AccountStore</span> <span class="op">=</span> <span class="ident">System</span>;
-		<span class="kw">type</span> <span class="ident">MaxLocks</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">WeightInfo</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">MaxReserves</span> <span class="op">=</span> <span class="ident">MaxReserves</span>;
-		<span class="kw">type</span> <span class="ident">ReserveIdentifier</span> <span class="op">=</span> [<span class="ident">u8</span>; <span class="number">8</span>];
+	<span class="kw">impl </span>pallet_balances::Config <span class="kw">for </span>Test {
+		<span class="kw">type </span>Balance = u64;
+		<span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+		<span class="kw">type </span>DustRemoval = ();
+		<span class="kw">type </span>ExistentialDeposit = ();
+		<span class="kw">type </span>AccountStore = System;
+		<span class="kw">type </span>MaxLocks = ();
+		<span class="kw">type </span>WeightInfo = ();
+		<span class="kw">type </span>MaxReserves = MaxReserves;
+		<span class="kw">type </span>ReserveIdentifier = [u8; <span class="number">8</span>];
 	}
 
-	<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OneAuthor</span>;
-	<span class="kw">impl</span> <span class="ident">FindAuthor</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OneAuthor</span> {
-		<span class="kw">fn</span> <span class="ident">find_author</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span><span class="op">&gt;</span>(<span class="kw">_</span>: <span class="ident">I</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>
-		<span class="kw">where</span>
-			<span class="ident">I</span>: <span class="lifetime">&#39;a</span>,
+	<span class="kw">pub struct </span>OneAuthor;
+	<span class="kw">impl </span>FindAuthor&lt;AccountId&gt; <span class="kw">for </span>OneAuthor {
+		<span class="kw">fn </span>find_author&lt;<span class="lifetime">&#39;a</span>, I&gt;(<span class="kw">_</span>: I) -&gt; <span class="prelude-ty">Option</span>&lt;AccountId&gt;
+		<span class="kw">where
+			</span>I: <span class="lifetime">&#39;a</span>,
 		{
-			<span class="prelude-val">Some</span>(<span class="ident">TEST_ACCOUNT</span>)
+			<span class="prelude-val">Some</span>(TEST_ACCOUNT)
 		}
 	}
 
-	<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IsRegistered</span>;
-	<span class="kw">impl</span> <span class="ident">ValidatorRegistration</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IsRegistered</span> {
-		<span class="kw">fn</span> <span class="ident">is_registered</span>(<span class="ident">_id</span>: <span class="kw-2">&amp;</span><span class="ident">AccountId</span>) -&gt; <span class="ident">bool</span> {
-			<span class="bool-val">true</span>
-		}
+	<span class="kw">pub struct </span>IsRegistered;
+	<span class="kw">impl </span>ValidatorRegistration&lt;AccountId&gt; <span class="kw">for </span>IsRegistered {
+		<span class="kw">fn </span>is_registered(_id: <span class="kw-2">&amp;</span>AccountId) -&gt; bool {
+			<span class="bool-val">true
+		</span>}
 	}
 
-	<span class="macro">parameter_types!</span> {
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PotId</span>: <span class="ident">PalletId</span> <span class="op">=</span> <span class="ident">PalletId</span>(<span class="kw-2">*</span><span class="string">b&quot;PotStake&quot;</span>);
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MaxCandidates</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">20</span>;
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MaxInvulnerables</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">20</span>;
-		<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MinCandidates</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span>;
+	<span class="macro">parameter_types! </span>{
+		<span class="kw">pub const </span>PotId: PalletId = PalletId(<span class="kw-2">*</span><span class="string">b&quot;PotStake&quot;</span>);
+		<span class="kw">pub const </span>MaxCandidates: u32 = <span class="number">20</span>;
+		<span class="kw">pub const </span>MaxInvulnerables: u32 = <span class="number">20</span>;
+		<span class="kw">pub const </span>MinCandidates: u32 = <span class="number">1</span>;
 	}
 
-	<span class="kw">impl</span> <span class="ident">pallet_collator_selection::Config</span> <span class="kw">for</span> <span class="ident">Test</span> {
-		<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-		<span class="kw">type</span> <span class="ident">Currency</span> <span class="op">=</span> <span class="ident">Balances</span>;
-		<span class="kw">type</span> <span class="ident">UpdateOrigin</span> <span class="op">=</span> <span class="ident">EnsureRoot</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>;
-		<span class="kw">type</span> <span class="ident">PotId</span> <span class="op">=</span> <span class="ident">PotId</span>;
-		<span class="kw">type</span> <span class="ident">MaxCandidates</span> <span class="op">=</span> <span class="ident">MaxCandidates</span>;
-		<span class="kw">type</span> <span class="ident">MinCandidates</span> <span class="op">=</span> <span class="ident">MinCandidates</span>;
-		<span class="kw">type</span> <span class="ident">MaxInvulnerables</span> <span class="op">=</span> <span class="ident">MaxInvulnerables</span>;
-		<span class="kw">type</span> <span class="ident">ValidatorId</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::AccountId</span>;
-		<span class="kw">type</span> <span class="ident">ValidatorIdOf</span> <span class="op">=</span> <span class="ident">IdentityCollator</span>;
-		<span class="kw">type</span> <span class="ident">ValidatorRegistration</span> <span class="op">=</span> <span class="ident">IsRegistered</span>;
-		<span class="kw">type</span> <span class="ident">KickThreshold</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">WeightInfo</span> <span class="op">=</span> ();
+	<span class="kw">impl </span>pallet_collator_selection::Config <span class="kw">for </span>Test {
+		<span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+		<span class="kw">type </span>Currency = Balances;
+		<span class="kw">type </span>UpdateOrigin = EnsureRoot&lt;AccountId&gt;;
+		<span class="kw">type </span>PotId = PotId;
+		<span class="kw">type </span>MaxCandidates = MaxCandidates;
+		<span class="kw">type </span>MinCandidates = MinCandidates;
+		<span class="kw">type </span>MaxInvulnerables = MaxInvulnerables;
+		<span class="kw">type </span>ValidatorId = &lt;<span class="self">Self </span><span class="kw">as </span>frame_system::Config&gt;::AccountId;
+		<span class="kw">type </span>ValidatorIdOf = IdentityCollator;
+		<span class="kw">type </span>ValidatorRegistration = IsRegistered;
+		<span class="kw">type </span>KickThreshold = ();
+		<span class="kw">type </span>WeightInfo = ();
 	}
 
-	<span class="kw">impl</span> <span class="ident">pallet_authorship::Config</span> <span class="kw">for</span> <span class="ident">Test</span> {
-		<span class="kw">type</span> <span class="ident">FindAuthor</span> <span class="op">=</span> <span class="ident">OneAuthor</span>;
-		<span class="kw">type</span> <span class="ident">UncleGenerations</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">FilterUncle</span> <span class="op">=</span> ();
-		<span class="kw">type</span> <span class="ident">EventHandler</span> <span class="op">=</span> ();
+	<span class="kw">impl </span>pallet_authorship::Config <span class="kw">for </span>Test {
+		<span class="kw">type </span>FindAuthor = OneAuthor;
+		<span class="kw">type </span>UncleGenerations = ();
+		<span class="kw">type </span>FilterUncle = ();
+		<span class="kw">type </span>EventHandler = ();
 	}
 
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_test_ext</span>() -&gt; <span class="ident">sp_io::TestExternalities</span> {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">frame_system::GenesisConfig::default</span>().<span class="ident">build_storage</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
-		<span class="comment">// We use default for brevity, but you can configure as desired if needed.</span>
-		<span class="ident">pallet_balances::GenesisConfig</span>::<span class="op">&lt;</span><span class="ident">Test</span><span class="op">&gt;</span><span class="ident">::default</span>()
-			.<span class="ident">assimilate_storage</span>(<span class="kw-2">&amp;mut</span> <span class="ident">t</span>)
-			.<span class="ident">unwrap</span>();
-		<span class="ident">t</span>.<span class="ident">into</span>()
+	<span class="kw">pub fn </span>new_test_ext() -&gt; sp_io::TestExternalities {
+		<span class="kw">let </span><span class="kw-2">mut </span>t = frame_system::GenesisConfig::default().build_storage::&lt;Test&gt;().unwrap();
+		<span class="comment">// We use default for brevity, but you can configure as desired if needed.
+		</span>pallet_balances::GenesisConfig::&lt;Test&gt;::default()
+			.assimilate_storage(<span class="kw-2">&amp;mut </span>t)
+			.unwrap();
+		t.into()
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">test_fees_and_tip_split</span>() {
-		<span class="ident">new_test_ext</span>().<span class="ident">execute_with</span>(<span class="op">|</span><span class="op">|</span> {
-			<span class="kw">let</span> <span class="ident">fee</span> <span class="op">=</span> <span class="ident">Balances::issue</span>(<span class="number">10</span>);
-			<span class="kw">let</span> <span class="ident">tip</span> <span class="op">=</span> <span class="ident">Balances::issue</span>(<span class="number">20</span>);
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>test_fees_and_tip_split() {
+		new_test_ext().execute_with(|| {
+			<span class="kw">let </span>fee = Balances::issue(<span class="number">10</span>);
+			<span class="kw">let </span>tip = Balances::issue(<span class="number">20</span>);
 
-			<span class="macro">assert_eq!</span>(<span class="ident">Balances::free_balance</span>(<span class="ident">TEST_ACCOUNT</span>), <span class="number">0</span>);
+			<span class="macro">assert_eq!</span>(Balances::free_balance(TEST_ACCOUNT), <span class="number">0</span>);
 
-			<span class="ident">DealWithFees::on_unbalanceds</span>(<span class="macro">vec!</span>[<span class="ident">fee</span>, <span class="ident">tip</span>].<span class="ident">into_iter</span>());
+			DealWithFees::on_unbalanceds(<span class="macro">vec!</span>[fee, tip].into_iter());
 
-			<span class="comment">// Author gets 100% of tip and 100% of fee = 30</span>
-			<span class="macro">assert_eq!</span>(<span class="ident">Balances::free_balance</span>(<span class="ident">CollatorSelection::account_id</span>()), <span class="number">30</span>);
+			<span class="comment">// Author gets 100% of tip and 100% of fee = 30
+			</span><span class="macro">assert_eq!</span>(Balances::free_balance(CollatorSelection::account_id()), <span class="number">30</span>);
 		});
 	}
 
-	<span class="attribute">#[<span class="ident">test</span>]</span>
-	<span class="kw">fn</span> <span class="ident">assets_from_filters_correctly</span>() {
-		<span class="macro">parameter_types!</span> {
-			<span class="kw">pub</span> <span class="ident">SomeSiblingParachain</span>: <span class="ident">MultiLocation</span> <span class="op">=</span> <span class="ident">MultiLocation::new</span>(<span class="number">1</span>, <span class="ident">X1</span>(<span class="ident">Parachain</span>(<span class="number">1234</span>)));
+	<span class="attribute">#[test]
+	</span><span class="kw">fn </span>assets_from_filters_correctly() {
+		<span class="macro">parameter_types! </span>{
+			<span class="kw">pub </span>SomeSiblingParachain: MultiLocation = MultiLocation::new(<span class="number">1</span>, X1(Parachain(<span class="number">1234</span>)));
 		}
 
-		<span class="kw">let</span> <span class="ident">asset_location</span> <span class="op">=</span> <span class="ident">SomeSiblingParachain::get</span>()
-			.<span class="ident">clone</span>()
-			.<span class="ident">pushed_with_interior</span>(<span class="ident">GeneralIndex</span>(<span class="number">42</span>))
-			.<span class="ident">expect</span>(<span class="string">&quot;multilocation will only have 2 junctions; qed&quot;</span>);
-		<span class="kw">let</span> <span class="ident">asset</span> <span class="op">=</span> <span class="ident">MultiAsset</span> { <span class="ident">id</span>: <span class="ident">Concrete</span>(<span class="ident">asset_location</span>), <span class="ident">fun</span>: <span class="number">1_000_000</span>.<span class="ident">into</span>() };
+		<span class="kw">let </span>asset_location = SomeSiblingParachain::get()
+			.clone()
+			.pushed_with_interior(GeneralIndex(<span class="number">42</span>))
+			.expect(<span class="string">&quot;multilocation will only have 2 junctions; qed&quot;</span>);
+		<span class="kw">let </span>asset = MultiAsset { id: Concrete(asset_location), fun: <span class="number">1_000_000</span>.into() };
 		<span class="macro">assert!</span>(
-			<span class="ident">AssetsFrom</span>::<span class="op">&lt;</span><span class="ident">SomeSiblingParachain</span><span class="op">&gt;</span><span class="ident">::filter_asset_location</span>(
-				<span class="kw-2">&amp;</span><span class="ident">asset</span>,
-				<span class="kw-2">&amp;</span><span class="ident">SomeSiblingParachain::get</span>()
+			AssetsFrom::&lt;SomeSiblingParachain&gt;::filter_asset_location(
+				<span class="kw-2">&amp;</span>asset,
+				<span class="kw-2">&amp;</span>SomeSiblingParachain::get()
 			),
-			<span class="string">&quot;AssetsFrom should allow assets from any of its interior locations&quot;</span>
-		);
+			<span class="string">&quot;AssetsFrom should allow assets from any of its interior locations&quot;
+		</span>);
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="parachains_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="parachains_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

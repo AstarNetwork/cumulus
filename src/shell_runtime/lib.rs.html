@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/runtimes/starters/shell/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../shell_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../shell_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../shell_runtime/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/runtimes/starters/shell/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../shell_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../shell_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../shell_runtime/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -355,362 +355,362 @@
 <span id="355">355</span>
 <span id="356">356</span>
 <span id="357">357</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! # Shell Runtime</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The Shell runtime defines a minimal parachain. It can listen for a downward message authorizing</span>
-<span class="doccomment">//! an upgrade into another parachain.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Generally (so far) only used as the first parachain on a Relay.</span>
+</span><span class="doccomment">//! # Shell Runtime
+//!
+//! The Shell runtime defines a minimal parachain. It can listen for a downward message authorizing
+//! an upgrade into another parachain.
+//!
+//! Generally (so far) only used as the first parachain on a Relay.
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
-<span class="comment">// `construct_runtime!` does a lot of recursion and requires us to increase the limit to 256.</span>
-<span class="attribute">#![<span class="ident">recursion_limit</span> <span class="op">=</span> <span class="string">&quot;256&quot;</span>]</span>
+</span><span class="attribute">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
+</span><span class="comment">// `construct_runtime!` does a lot of recursion and requires us to increase the limit to 256.
+</span><span class="attribute">#![recursion_limit = <span class="string">&quot;256&quot;</span>]
 
-<span class="comment">// Make the WASM binary available.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="macro">include!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">&quot;OUT_DIR&quot;</span>), <span class="string">&quot;/wasm_binary.rs&quot;</span>));
+</span><span class="comment">// Make the WASM binary available.
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="macro">include!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">&quot;OUT_DIR&quot;</span>), <span class="string">&quot;/wasm_binary.rs&quot;</span>));
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">xcm_config</span>;
+<span class="kw">pub mod </span>xcm_config;
 
-<span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Decode</span>, <span class="ident">Encode</span>};
-<span class="kw">use</span> <span class="ident">cumulus_pallet_parachain_system::RelayNumberStrictlyIncreases</span>;
-<span class="kw">use</span> <span class="ident">frame_support::unsigned::TransactionValidityError</span>;
-<span class="kw">use</span> <span class="ident">scale_info::TypeInfo</span>;
-<span class="kw">use</span> <span class="ident">sp_api::impl_runtime_apis</span>;
-<span class="kw">use</span> <span class="ident">sp_core::OpaqueMetadata</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime</span>::{
-	<span class="ident">create_runtime_str</span>, <span class="ident">generic</span>,
-	<span class="ident">traits</span>::{<span class="ident">AccountIdLookup</span>, <span class="ident">BlakeTwo256</span>, <span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>, <span class="ident">DispatchInfoOf</span>},
-	<span class="ident">transaction_validity</span>::{<span class="ident">TransactionSource</span>, <span class="ident">TransactionValidity</span>},
-	<span class="ident">ApplyExtrinsicResult</span>,
+<span class="kw">use </span>codec::{Decode, Encode};
+<span class="kw">use </span>cumulus_pallet_parachain_system::RelayNumberStrictlyIncreases;
+<span class="kw">use </span>frame_support::unsigned::TransactionValidityError;
+<span class="kw">use </span>scale_info::TypeInfo;
+<span class="kw">use </span>sp_api::impl_runtime_apis;
+<span class="kw">use </span>sp_core::OpaqueMetadata;
+<span class="kw">use </span>sp_runtime::{
+	create_runtime_str, generic,
+	traits::{AccountIdLookup, BlakeTwo256, Block <span class="kw">as </span>BlockT, DispatchInfoOf},
+	transaction_validity::{TransactionSource, TransactionValidity},
+	ApplyExtrinsicResult,
 };
-<span class="kw">use</span> <span class="ident">sp_std::prelude</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">sp_version::NativeVersion</span>;
-<span class="kw">use</span> <span class="ident">sp_version::RuntimeVersion</span>;
+<span class="kw">use </span>sp_std::prelude::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">use </span>sp_version::NativeVersion;
+<span class="kw">use </span>sp_version::RuntimeVersion;
 
-<span class="comment">// A few exports that help ease life for downstream crates.</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">frame_support</span>::{
-	<span class="ident">construct_runtime</span>,
-	<span class="ident">dispatch::DispatchClass</span>,
-	<span class="ident">parameter_types</span>,
-	<span class="ident">traits</span>::{<span class="ident">Everything</span>, <span class="ident">IsInVec</span>, <span class="ident">Randomness</span>},
-	<span class="ident">weights</span>::{
-		<span class="ident">constants</span>::{<span class="ident">BlockExecutionWeight</span>, <span class="ident">ExtrinsicBaseWeight</span>, <span class="ident">RocksDbWeight</span>, <span class="ident">WEIGHT_PER_SECOND</span>},
-		<span class="ident">IdentityFee</span>, <span class="ident">Weight</span>,
+<span class="comment">// A few exports that help ease life for downstream crates.
+</span><span class="kw">pub use </span>frame_support::{
+	construct_runtime,
+	dispatch::DispatchClass,
+	parameter_types,
+	traits::{Everything, IsInVec, Randomness},
+	weights::{
+		constants::{BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_PER_SECOND},
+		IdentityFee, Weight,
 	},
-	<span class="ident">StorageValue</span>,
+	StorageValue,
 };
-<span class="kw">use</span> <span class="ident">frame_system::limits</span>::{<span class="ident">BlockLength</span>, <span class="ident">BlockWeights</span>};
-<span class="kw">use</span> <span class="ident">parachains_common</span>::{<span class="ident">AccountId</span>, <span class="ident">Signature</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>, <span class="ident">test</span>))]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime::BuildStorage</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime</span>::{<span class="ident">Perbill</span>, <span class="ident">Permill</span>};
+<span class="kw">use </span>frame_system::limits::{BlockLength, BlockWeights};
+<span class="kw">use </span>parachains_common::{AccountId, Signature};
+<span class="attribute">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, test))]
+</span><span class="kw">pub use </span>sp_runtime::BuildStorage;
+<span class="kw">pub use </span>sp_runtime::{Perbill, Permill};
 
-<span class="doccomment">/// This runtime version.</span>
-<span class="attribute">#[<span class="ident">sp_version::runtime_version</span>]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VERSION</span>: <span class="ident">RuntimeVersion</span> <span class="op">=</span> <span class="ident">RuntimeVersion</span> {
-	<span class="ident">spec_name</span>: <span class="macro">create_runtime_str!</span>(<span class="string">&quot;shell&quot;</span>),
-	<span class="ident">impl_name</span>: <span class="macro">create_runtime_str!</span>(<span class="string">&quot;shell&quot;</span>),
-	<span class="ident">authoring_version</span>: <span class="number">1</span>,
-	<span class="ident">spec_version</span>: <span class="number">2</span>,
-	<span class="ident">impl_version</span>: <span class="number">0</span>,
-	<span class="ident">apis</span>: <span class="ident">RUNTIME_API_VERSIONS</span>,
-	<span class="ident">transaction_version</span>: <span class="number">1</span>,
-	<span class="ident">state_version</span>: <span class="number">0</span>,
+<span class="doccomment">/// This runtime version.
+</span><span class="attribute">#[sp_version::runtime_version]
+</span><span class="kw">pub const </span>VERSION: RuntimeVersion = RuntimeVersion {
+	spec_name: <span class="macro">create_runtime_str!</span>(<span class="string">&quot;shell&quot;</span>),
+	impl_name: <span class="macro">create_runtime_str!</span>(<span class="string">&quot;shell&quot;</span>),
+	authoring_version: <span class="number">1</span>,
+	spec_version: <span class="number">2</span>,
+	impl_version: <span class="number">0</span>,
+	apis: RUNTIME_API_VERSIONS,
+	transaction_version: <span class="number">1</span>,
+	state_version: <span class="number">0</span>,
 };
 
-<span class="doccomment">/// The version information used to identify this runtime when compiled natively.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">native_version</span>() -&gt; <span class="ident">NativeVersion</span> {
-	<span class="ident">NativeVersion</span> { <span class="ident">runtime_version</span>: <span class="ident">VERSION</span>, <span class="ident">can_author_with</span>: <span class="ident">Default::default</span>() }
+<span class="doccomment">/// The version information used to identify this runtime when compiled natively.
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">pub fn </span>native_version() -&gt; NativeVersion {
+	NativeVersion { runtime_version: VERSION, can_author_with: Default::default() }
 }
 
-<span class="doccomment">/// We assume that ~10% of the block weight is consumed by `on_initialize` handlers.</span>
-<span class="doccomment">/// This is used to limit the maximal weight of a single extrinsic.</span>
-<span class="kw">const</span> <span class="ident">AVERAGE_ON_INITIALIZE_RATIO</span>: <span class="ident">Perbill</span> <span class="op">=</span> <span class="ident">Perbill::from_percent</span>(<span class="number">10</span>);
-<span class="doccomment">/// We allow `Normal` extrinsics to fill up the block up to 75%, the rest can be used</span>
-<span class="doccomment">/// by  Operational  extrinsics.</span>
-<span class="kw">const</span> <span class="ident">NORMAL_DISPATCH_RATIO</span>: <span class="ident">Perbill</span> <span class="op">=</span> <span class="ident">Perbill::from_percent</span>(<span class="number">75</span>);
-<span class="doccomment">/// We allow for .5 seconds of compute with a 12 second average block time.</span>
-<span class="kw">const</span> <span class="ident">MAXIMUM_BLOCK_WEIGHT</span>: <span class="ident">Weight</span> <span class="op">=</span> <span class="ident">WEIGHT_PER_SECOND</span>
-	.<span class="ident">saturating_div</span>(<span class="number">2</span>)
-	.<span class="ident">set_proof_size</span>(<span class="ident">cumulus_primitives_core::relay_chain::v2::MAX_POV_SIZE</span> <span class="kw">as</span> <span class="ident">u64</span>);
+<span class="doccomment">/// We assume that ~10% of the block weight is consumed by `on_initialize` handlers.
+/// This is used to limit the maximal weight of a single extrinsic.
+</span><span class="kw">const </span>AVERAGE_ON_INITIALIZE_RATIO: Perbill = Perbill::from_percent(<span class="number">10</span>);
+<span class="doccomment">/// We allow `Normal` extrinsics to fill up the block up to 75%, the rest can be used
+/// by  Operational  extrinsics.
+</span><span class="kw">const </span>NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(<span class="number">75</span>);
+<span class="doccomment">/// We allow for .5 seconds of compute with a 12 second average block time.
+</span><span class="kw">const </span>MAXIMUM_BLOCK_WEIGHT: Weight = WEIGHT_PER_SECOND
+	.saturating_div(<span class="number">2</span>)
+	.set_proof_size(cumulus_primitives_core::relay_chain::v2::MAX_POV_SIZE <span class="kw">as </span>u64);
 
-<span class="macro">parameter_types!</span> {
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlockHashCount</span>: <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="number">250</span>;
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Version</span>: <span class="ident">RuntimeVersion</span> <span class="op">=</span> <span class="ident">VERSION</span>;
-	<span class="kw">pub</span> <span class="ident">RuntimeBlockLength</span>: <span class="ident">BlockLength</span> <span class="op">=</span>
-		<span class="ident">BlockLength::max_with_normal_ratio</span>(<span class="number">5</span> <span class="op">*</span> <span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span>, <span class="ident">NORMAL_DISPATCH_RATIO</span>);
-	<span class="kw">pub</span> <span class="ident">RuntimeBlockWeights</span>: <span class="ident">BlockWeights</span> <span class="op">=</span> <span class="ident">BlockWeights::builder</span>()
-		.<span class="ident">base_block</span>(<span class="ident">BlockExecutionWeight::get</span>())
-		.<span class="ident">for_class</span>(<span class="ident">DispatchClass::all</span>(), <span class="op">|</span><span class="ident">weights</span><span class="op">|</span> {
-			<span class="ident">weights</span>.<span class="ident">base_extrinsic</span> <span class="op">=</span> <span class="ident">ExtrinsicBaseWeight::get</span>();
+<span class="macro">parameter_types! </span>{
+	<span class="kw">pub const </span>BlockHashCount: BlockNumber = <span class="number">250</span>;
+	<span class="kw">pub const </span>Version: RuntimeVersion = VERSION;
+	<span class="kw">pub </span>RuntimeBlockLength: BlockLength =
+		BlockLength::max_with_normal_ratio(<span class="number">5 </span>* <span class="number">1024 </span>* <span class="number">1024</span>, NORMAL_DISPATCH_RATIO);
+	<span class="kw">pub </span>RuntimeBlockWeights: BlockWeights = BlockWeights::builder()
+		.base_block(BlockExecutionWeight::get())
+		.for_class(DispatchClass::all(), |weights| {
+			weights.base_extrinsic = ExtrinsicBaseWeight::get();
 		})
-		.<span class="ident">for_class</span>(<span class="ident">DispatchClass::Normal</span>, <span class="op">|</span><span class="ident">weights</span><span class="op">|</span> {
-			<span class="ident">weights</span>.<span class="ident">max_total</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">NORMAL_DISPATCH_RATIO</span> <span class="op">*</span> <span class="ident">MAXIMUM_BLOCK_WEIGHT</span>);
+		.for_class(DispatchClass::Normal, |weights| {
+			weights.max_total = <span class="prelude-val">Some</span>(NORMAL_DISPATCH_RATIO * MAXIMUM_BLOCK_WEIGHT);
 		})
-		.<span class="ident">for_class</span>(<span class="ident">DispatchClass::Operational</span>, <span class="op">|</span><span class="ident">weights</span><span class="op">|</span> {
-			<span class="ident">weights</span>.<span class="ident">max_total</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">MAXIMUM_BLOCK_WEIGHT</span>);
-			<span class="comment">// Operational transactions have some extra reserved space, so that they</span>
-			<span class="comment">// are included even if block reached `MAXIMUM_BLOCK_WEIGHT`.</span>
-			<span class="ident">weights</span>.<span class="ident">reserved</span> <span class="op">=</span> <span class="prelude-val">Some</span>(
-				<span class="ident">MAXIMUM_BLOCK_WEIGHT</span> <span class="op">-</span> <span class="ident">NORMAL_DISPATCH_RATIO</span> <span class="op">*</span> <span class="ident">MAXIMUM_BLOCK_WEIGHT</span>
+		.for_class(DispatchClass::Operational, |weights| {
+			weights.max_total = <span class="prelude-val">Some</span>(MAXIMUM_BLOCK_WEIGHT);
+			<span class="comment">// Operational transactions have some extra reserved space, so that they
+			// are included even if block reached `MAXIMUM_BLOCK_WEIGHT`.
+			</span>weights.reserved = <span class="prelude-val">Some</span>(
+				MAXIMUM_BLOCK_WEIGHT - NORMAL_DISPATCH_RATIO * MAXIMUM_BLOCK_WEIGHT
 			);
 		})
-		.<span class="ident">avg_block_initialization</span>(<span class="ident">AVERAGE_ON_INITIALIZE_RATIO</span>)
-		.<span class="ident">build_or_panic</span>();
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SS58Prefix</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">42</span>;
+		.avg_block_initialization(AVERAGE_ON_INITIALIZE_RATIO)
+		.build_or_panic();
+	<span class="kw">pub const </span>SS58Prefix: u8 = <span class="number">42</span>;
 }
 
-<span class="kw">impl</span> <span class="ident">frame_system::Config</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-	<span class="doccomment">/// The identifier used to distinguish between accounts.</span>
-	<span class="kw">type</span> <span class="ident">AccountId</span> <span class="op">=</span> <span class="ident">AccountId</span>;
-	<span class="doccomment">/// The aggregated dispatch type that is available for extrinsics.</span>
-	<span class="kw">type</span> <span class="ident">RuntimeCall</span> <span class="op">=</span> <span class="ident">RuntimeCall</span>;
-	<span class="doccomment">/// The lookup mechanism to get account ID from whatever is passed in dispatchers.</span>
-	<span class="kw">type</span> <span class="ident">Lookup</span> <span class="op">=</span> <span class="ident">AccountIdLookup</span><span class="op">&lt;</span><span class="ident">AccountId</span>, ()<span class="op">&gt;</span>;
-	<span class="doccomment">/// The index type for storing how many extrinsics an account has signed.</span>
-	<span class="kw">type</span> <span class="ident">Index</span> <span class="op">=</span> <span class="ident">Index</span>;
-	<span class="doccomment">/// The index type for blocks.</span>
-	<span class="kw">type</span> <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="ident">BlockNumber</span>;
-	<span class="doccomment">/// The type for hashing blocks and tries.</span>
-	<span class="kw">type</span> <span class="ident">Hash</span> <span class="op">=</span> <span class="ident">Hash</span>;
-	<span class="doccomment">/// The hashing algorithm used.</span>
-	<span class="kw">type</span> <span class="ident">Hashing</span> <span class="op">=</span> <span class="ident">BlakeTwo256</span>;
-	<span class="doccomment">/// The header type.</span>
-	<span class="kw">type</span> <span class="ident">Header</span> <span class="op">=</span> <span class="ident">generic::Header</span><span class="op">&lt;</span><span class="ident">BlockNumber</span>, <span class="ident">BlakeTwo256</span><span class="op">&gt;</span>;
-	<span class="doccomment">/// The ubiquitous event type.</span>
-	<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-	<span class="doccomment">/// The ubiquitous origin type.</span>
-	<span class="kw">type</span> <span class="ident">RuntimeOrigin</span> <span class="op">=</span> <span class="ident">RuntimeOrigin</span>;
-	<span class="doccomment">/// Maximum number of block number to block hash mappings to keep (oldest pruned first).</span>
-	<span class="kw">type</span> <span class="ident">BlockHashCount</span> <span class="op">=</span> <span class="ident">BlockHashCount</span>;
-	<span class="doccomment">/// Runtime version.</span>
-	<span class="kw">type</span> <span class="ident">Version</span> <span class="op">=</span> <span class="ident">Version</span>;
-	<span class="doccomment">/// Converts a module to an index of this module in the runtime.</span>
-	<span class="kw">type</span> <span class="ident">PalletInfo</span> <span class="op">=</span> <span class="ident">PalletInfo</span>;
-	<span class="kw">type</span> <span class="ident">AccountData</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">OnNewAccount</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">OnKilledAccount</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">DbWeight</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">BaseCallFilter</span> <span class="op">=</span> <span class="ident">frame_support::traits::Everything</span>;
-	<span class="kw">type</span> <span class="ident">SystemWeightInfo</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">BlockWeights</span> <span class="op">=</span> <span class="ident">RuntimeBlockWeights</span>;
-	<span class="kw">type</span> <span class="ident">BlockLength</span> <span class="op">=</span> <span class="ident">RuntimeBlockLength</span>;
-	<span class="kw">type</span> <span class="ident">SS58Prefix</span> <span class="op">=</span> <span class="ident">SS58Prefix</span>;
-	<span class="kw">type</span> <span class="ident">OnSetCode</span> <span class="op">=</span> <span class="ident">cumulus_pallet_parachain_system::ParachainSetCode</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">MaxConsumers</span> <span class="op">=</span> <span class="ident">frame_support::traits::ConstU32</span><span class="op">&lt;</span><span class="number">16</span><span class="op">&gt;</span>;
+<span class="kw">impl </span>frame_system::Config <span class="kw">for </span>Runtime {
+	<span class="doccomment">/// The identifier used to distinguish between accounts.
+	</span><span class="kw">type </span>AccountId = AccountId;
+	<span class="doccomment">/// The aggregated dispatch type that is available for extrinsics.
+	</span><span class="kw">type </span>RuntimeCall = RuntimeCall;
+	<span class="doccomment">/// The lookup mechanism to get account ID from whatever is passed in dispatchers.
+	</span><span class="kw">type </span>Lookup = AccountIdLookup&lt;AccountId, ()&gt;;
+	<span class="doccomment">/// The index type for storing how many extrinsics an account has signed.
+	</span><span class="kw">type </span>Index = Index;
+	<span class="doccomment">/// The index type for blocks.
+	</span><span class="kw">type </span>BlockNumber = BlockNumber;
+	<span class="doccomment">/// The type for hashing blocks and tries.
+	</span><span class="kw">type </span>Hash = Hash;
+	<span class="doccomment">/// The hashing algorithm used.
+	</span><span class="kw">type </span>Hashing = BlakeTwo256;
+	<span class="doccomment">/// The header type.
+	</span><span class="kw">type </span>Header = generic::Header&lt;BlockNumber, BlakeTwo256&gt;;
+	<span class="doccomment">/// The ubiquitous event type.
+	</span><span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+	<span class="doccomment">/// The ubiquitous origin type.
+	</span><span class="kw">type </span>RuntimeOrigin = RuntimeOrigin;
+	<span class="doccomment">/// Maximum number of block number to block hash mappings to keep (oldest pruned first).
+	</span><span class="kw">type </span>BlockHashCount = BlockHashCount;
+	<span class="doccomment">/// Runtime version.
+	</span><span class="kw">type </span>Version = Version;
+	<span class="doccomment">/// Converts a module to an index of this module in the runtime.
+	</span><span class="kw">type </span>PalletInfo = PalletInfo;
+	<span class="kw">type </span>AccountData = ();
+	<span class="kw">type </span>OnNewAccount = ();
+	<span class="kw">type </span>OnKilledAccount = ();
+	<span class="kw">type </span>DbWeight = ();
+	<span class="kw">type </span>BaseCallFilter = frame_support::traits::Everything;
+	<span class="kw">type </span>SystemWeightInfo = ();
+	<span class="kw">type </span>BlockWeights = RuntimeBlockWeights;
+	<span class="kw">type </span>BlockLength = RuntimeBlockLength;
+	<span class="kw">type </span>SS58Prefix = SS58Prefix;
+	<span class="kw">type </span>OnSetCode = cumulus_pallet_parachain_system::ParachainSetCode&lt;<span class="self">Self</span>&gt;;
+	<span class="kw">type </span>MaxConsumers = frame_support::traits::ConstU32&lt;<span class="number">16</span>&gt;;
 }
 
-<span class="macro">parameter_types!</span> {
-	<span class="comment">// We do anything the parent chain tells us in this runtime.</span>
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ReservedDmpWeight</span>: <span class="ident">Weight</span> <span class="op">=</span> <span class="ident">MAXIMUM_BLOCK_WEIGHT</span>.<span class="ident">saturating_div</span>(<span class="number">2</span>);
+<span class="macro">parameter_types! </span>{
+	<span class="comment">// We do anything the parent chain tells us in this runtime.
+	</span><span class="kw">pub const </span>ReservedDmpWeight: Weight = MAXIMUM_BLOCK_WEIGHT.saturating_div(<span class="number">2</span>);
 }
 
-<span class="kw">impl</span> <span class="ident">cumulus_pallet_parachain_system::Config</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-	<span class="kw">type</span> <span class="ident">RuntimeEvent</span> <span class="op">=</span> <span class="ident">RuntimeEvent</span>;
-	<span class="kw">type</span> <span class="ident">OnSystemEvent</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">SelfParaId</span> <span class="op">=</span> <span class="ident">parachain_info::Pallet</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">OutboundXcmpMessageSource</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">DmpMessageHandler</span> <span class="op">=</span> <span class="ident">cumulus_pallet_xcm::UnlimitedDmpExecution</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span>;
-	<span class="kw">type</span> <span class="ident">ReservedDmpWeight</span> <span class="op">=</span> <span class="ident">ReservedDmpWeight</span>;
-	<span class="kw">type</span> <span class="ident">XcmpMessageHandler</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">ReservedXcmpWeight</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">CheckAssociatedRelayNumber</span> <span class="op">=</span> <span class="ident">RelayNumberStrictlyIncreases</span>;
+<span class="kw">impl </span>cumulus_pallet_parachain_system::Config <span class="kw">for </span>Runtime {
+	<span class="kw">type </span>RuntimeEvent = RuntimeEvent;
+	<span class="kw">type </span>OnSystemEvent = ();
+	<span class="kw">type </span>SelfParaId = parachain_info::Pallet&lt;Runtime&gt;;
+	<span class="kw">type </span>OutboundXcmpMessageSource = ();
+	<span class="kw">type </span>DmpMessageHandler = cumulus_pallet_xcm::UnlimitedDmpExecution&lt;Runtime&gt;;
+	<span class="kw">type </span>ReservedDmpWeight = ReservedDmpWeight;
+	<span class="kw">type </span>XcmpMessageHandler = ();
+	<span class="kw">type </span>ReservedXcmpWeight = ();
+	<span class="kw">type </span>CheckAssociatedRelayNumber = RelayNumberStrictlyIncreases;
 }
 
-<span class="kw">impl</span> <span class="ident">parachain_info::Config</span> <span class="kw">for</span> <span class="ident">Runtime</span> {}
+<span class="kw">impl </span>parachain_info::Config <span class="kw">for </span>Runtime {}
 
-<span class="macro">construct_runtime!</span> {
-	<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Runtime</span> <span class="kw">where</span>
-		<span class="ident">Block</span> <span class="op">=</span> <span class="ident">Block</span>,
-		<span class="ident">NodeBlock</span> <span class="op">=</span> <span class="ident">generic::Block</span><span class="op">&lt;</span><span class="ident">Header</span>, <span class="ident">sp_runtime::OpaqueExtrinsic</span><span class="op">&gt;</span>,
-		<span class="ident">UncheckedExtrinsic</span> <span class="op">=</span> <span class="ident">UncheckedExtrinsic</span>,
+<span class="macro">construct_runtime! </span>{
+	<span class="kw">pub enum </span>Runtime <span class="kw">where
+		</span>Block = Block,
+		NodeBlock = generic::Block&lt;Header, sp_runtime::OpaqueExtrinsic&gt;,
+		UncheckedExtrinsic = UncheckedExtrinsic,
 	{
-		<span class="ident">System</span>: <span class="ident">frame_system</span>::{<span class="ident">Pallet</span>, <span class="ident">Call</span>, <span class="ident">Storage</span>, <span class="ident">Config</span>, <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>},
-		<span class="ident">ParachainSystem</span>: <span class="ident">cumulus_pallet_parachain_system</span>::{
-			<span class="ident">Pallet</span>, <span class="ident">Call</span>, <span class="ident">Config</span>, <span class="ident">Storage</span>, <span class="ident">Inherent</span>, <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">ValidateUnsigned</span>,
+		System: frame_system::{Pallet, Call, Storage, Config, Event&lt;T&gt;},
+		ParachainSystem: cumulus_pallet_parachain_system::{
+			Pallet, Call, Config, Storage, Inherent, Event&lt;T&gt;, ValidateUnsigned,
 		},
-		<span class="ident">ParachainInfo</span>: <span class="ident">parachain_info</span>::{<span class="ident">Pallet</span>, <span class="ident">Storage</span>, <span class="ident">Config</span>},
+		ParachainInfo: parachain_info::{Pallet, Storage, Config},
 
-		<span class="comment">// DMP handler.</span>
-		<span class="ident">CumulusXcm</span>: <span class="ident">cumulus_pallet_xcm</span>::{<span class="ident">Pallet</span>, <span class="ident">Call</span>, <span class="ident">Storage</span>, <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">Origin</span>},
+		<span class="comment">// DMP handler.
+		</span>CumulusXcm: cumulus_pallet_xcm::{Pallet, Call, Storage, Event&lt;T&gt;, Origin},
 	}
 }
 
-<span class="doccomment">/// Simple implementation which fails any transaction which is signed.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">sp_core::RuntimeDebug</span>, <span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">TypeInfo</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DisallowSigned</span>;
-<span class="kw">impl</span> <span class="ident">sp_runtime::traits::SignedExtension</span> <span class="kw">for</span> <span class="ident">DisallowSigned</span> {
-	<span class="kw">const</span> <span class="ident">IDENTIFIER</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;DisallowSigned&quot;</span>;
-	<span class="kw">type</span> <span class="ident">AccountId</span> <span class="op">=</span> <span class="ident">AccountId</span>;
-	<span class="kw">type</span> <span class="ident">Call</span> <span class="op">=</span> <span class="ident">RuntimeCall</span>;
-	<span class="kw">type</span> <span class="ident">AdditionalSigned</span> <span class="op">=</span> ();
-	<span class="kw">type</span> <span class="ident">Pre</span> <span class="op">=</span> ();
-	<span class="kw">fn</span> <span class="ident">additional_signed</span>(
+<span class="doccomment">/// Simple implementation which fails any transaction which is signed.
+</span><span class="attribute">#[derive(Eq, PartialEq, Clone, Default, sp_core::RuntimeDebug, Encode, Decode, TypeInfo)]
+</span><span class="kw">pub struct </span>DisallowSigned;
+<span class="kw">impl </span>sp_runtime::traits::SignedExtension <span class="kw">for </span>DisallowSigned {
+	<span class="kw">const </span>IDENTIFIER: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str = <span class="string">&quot;DisallowSigned&quot;</span>;
+	<span class="kw">type </span>AccountId = AccountId;
+	<span class="kw">type </span>Call = RuntimeCall;
+	<span class="kw">type </span>AdditionalSigned = ();
+	<span class="kw">type </span>Pre = ();
+	<span class="kw">fn </span>additional_signed(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-	) -&gt; <span class="ident">sp_std::result::Result</span><span class="op">&lt;</span>(), <span class="ident">sp_runtime::transaction_validity::TransactionValidityError</span><span class="op">&gt;</span> {
+	) -&gt; sp_std::result::Result&lt;(), sp_runtime::transaction_validity::TransactionValidityError&gt; {
 		<span class="prelude-val">Ok</span>(())
 	}
-	<span class="kw">fn</span> <span class="ident">pre_dispatch</span>(
+	<span class="kw">fn </span>pre_dispatch(
 		<span class="self">self</span>,
-		<span class="ident">who</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::AccountId</span>,
-		<span class="ident">call</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Call</span>,
-		<span class="ident">info</span>: <span class="kw-2">&amp;</span><span class="ident">DispatchInfoOf</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Call</span><span class="op">&gt;</span>,
-		<span class="ident">len</span>: <span class="ident">usize</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Pre</span>, <span class="ident">TransactionValidityError</span><span class="op">&gt;</span> {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">validate</span>(<span class="ident">who</span>, <span class="ident">call</span>, <span class="ident">info</span>, <span class="ident">len</span>).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ())<span class="question-mark">?</span>)
+		who: <span class="kw-2">&amp;</span><span class="self">Self</span>::AccountId,
+		call: <span class="kw-2">&amp;</span><span class="self">Self</span>::Call,
+		info: <span class="kw-2">&amp;</span>DispatchInfoOf&lt;<span class="self">Self</span>::Call&gt;,
+		len: usize,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Pre, TransactionValidityError&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.validate(who, call, info, len).map(|<span class="kw">_</span>| ())<span class="question-mark">?</span>)
 	}
-	<span class="kw">fn</span> <span class="ident">validate</span>(
+	<span class="kw">fn </span>validate(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		<span class="ident">_who</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::AccountId</span>,
-		<span class="ident">_call</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Call</span>,
-		<span class="ident">_info</span>: <span class="kw-2">&amp;</span><span class="ident">sp_runtime::traits::DispatchInfoOf</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Call</span><span class="op">&gt;</span>,
-		<span class="ident">_len</span>: <span class="ident">usize</span>,
-	) -&gt; <span class="ident">TransactionValidity</span> {
-		<span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">sp_runtime::transaction_validity::InvalidTransaction::BadProof</span>;
-		<span class="prelude-val">Err</span>(<span class="ident">sp_runtime::transaction_validity::TransactionValidityError::Invalid</span>(<span class="ident">i</span>))
+		_who: <span class="kw-2">&amp;</span><span class="self">Self</span>::AccountId,
+		_call: <span class="kw-2">&amp;</span><span class="self">Self</span>::Call,
+		_info: <span class="kw-2">&amp;</span>sp_runtime::traits::DispatchInfoOf&lt;<span class="self">Self</span>::Call&gt;,
+		_len: usize,
+	) -&gt; TransactionValidity {
+		<span class="kw">let </span>i = sp_runtime::transaction_validity::InvalidTransaction::BadProof;
+		<span class="prelude-val">Err</span>(sp_runtime::transaction_validity::TransactionValidityError::Invalid(i))
 	}
 }
 
-<span class="doccomment">/// Index of a transaction in the chain.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Index</span> <span class="op">=</span> <span class="ident">u32</span>;
-<span class="doccomment">/// A hash of some data used by the chain.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Hash</span> <span class="op">=</span> <span class="ident">sp_core::H256</span>;
-<span class="doccomment">/// An index to a block.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="ident">u32</span>;
-<span class="doccomment">/// The address format for describing accounts.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Address</span> <span class="op">=</span> <span class="ident">sp_runtime::MultiAddress</span><span class="op">&lt;</span><span class="ident">AccountId</span>, ()<span class="op">&gt;</span>;
-<span class="doccomment">/// Block header type as expected by this runtime.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Header</span> <span class="op">=</span> <span class="ident">generic::Header</span><span class="op">&lt;</span><span class="ident">BlockNumber</span>, <span class="ident">BlakeTwo256</span><span class="op">&gt;</span>;
-<span class="doccomment">/// Block type as expected by this runtime.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Block</span> <span class="op">=</span> <span class="ident">generic::Block</span><span class="op">&lt;</span><span class="ident">Header</span>, <span class="ident">UncheckedExtrinsic</span><span class="op">&gt;</span>;
-<span class="doccomment">/// A Block signed with a Justification</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SignedBlock</span> <span class="op">=</span> <span class="ident">generic::SignedBlock</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>;
-<span class="doccomment">/// BlockId type as expected by this runtime.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BlockId</span> <span class="op">=</span> <span class="ident">generic::BlockId</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>;
-<span class="doccomment">/// The SignedExtension to the basic transaction logic.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SignedExtra</span> <span class="op">=</span> <span class="ident">DisallowSigned</span>;
-<span class="doccomment">/// Unchecked extrinsic type as expected by this runtime.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">UncheckedExtrinsic</span> <span class="op">=</span>
-	<span class="ident">generic::UncheckedExtrinsic</span><span class="op">&lt;</span><span class="ident">Address</span>, <span class="ident">RuntimeCall</span>, <span class="ident">Signature</span>, <span class="ident">SignedExtra</span><span class="op">&gt;</span>;
-<span class="doccomment">/// Extrinsic type that has already been checked.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">CheckedExtrinsic</span> <span class="op">=</span> <span class="ident">generic::CheckedExtrinsic</span><span class="op">&lt;</span><span class="ident">AccountId</span>, <span class="ident">RuntimeCall</span>, <span class="ident">SignedExtra</span><span class="op">&gt;</span>;
-<span class="doccomment">/// Executive: handles dispatch to the various modules.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Executive</span> <span class="op">=</span> <span class="ident">frame_executive::Executive</span><span class="op">&lt;</span>
-	<span class="ident">Runtime</span>,
-	<span class="ident">Block</span>,
-	<span class="ident">frame_system::ChainContext</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span>,
-	<span class="ident">Runtime</span>,
-	<span class="ident">AllPalletsWithSystem</span>,
-<span class="op">&gt;</span>;
+<span class="doccomment">/// Index of a transaction in the chain.
+</span><span class="kw">pub type </span>Index = u32;
+<span class="doccomment">/// A hash of some data used by the chain.
+</span><span class="kw">pub type </span>Hash = sp_core::H256;
+<span class="doccomment">/// An index to a block.
+</span><span class="kw">pub type </span>BlockNumber = u32;
+<span class="doccomment">/// The address format for describing accounts.
+</span><span class="kw">pub type </span>Address = sp_runtime::MultiAddress&lt;AccountId, ()&gt;;
+<span class="doccomment">/// Block header type as expected by this runtime.
+</span><span class="kw">pub type </span>Header = generic::Header&lt;BlockNumber, BlakeTwo256&gt;;
+<span class="doccomment">/// Block type as expected by this runtime.
+</span><span class="kw">pub type </span>Block = generic::Block&lt;Header, UncheckedExtrinsic&gt;;
+<span class="doccomment">/// A Block signed with a Justification
+</span><span class="kw">pub type </span>SignedBlock = generic::SignedBlock&lt;Block&gt;;
+<span class="doccomment">/// BlockId type as expected by this runtime.
+</span><span class="kw">pub type </span>BlockId = generic::BlockId&lt;Block&gt;;
+<span class="doccomment">/// The SignedExtension to the basic transaction logic.
+</span><span class="kw">pub type </span>SignedExtra = DisallowSigned;
+<span class="doccomment">/// Unchecked extrinsic type as expected by this runtime.
+</span><span class="kw">pub type </span>UncheckedExtrinsic =
+	generic::UncheckedExtrinsic&lt;Address, RuntimeCall, Signature, SignedExtra&gt;;
+<span class="doccomment">/// Extrinsic type that has already been checked.
+</span><span class="kw">pub type </span>CheckedExtrinsic = generic::CheckedExtrinsic&lt;AccountId, RuntimeCall, SignedExtra&gt;;
+<span class="doccomment">/// Executive: handles dispatch to the various modules.
+</span><span class="kw">pub type </span>Executive = frame_executive::Executive&lt;
+	Runtime,
+	Block,
+	frame_system::ChainContext&lt;Runtime&gt;,
+	Runtime,
+	AllPalletsWithSystem,
+&gt;;
 
-<span class="macro">impl_runtime_apis!</span> {
-	<span class="kw">impl</span> <span class="ident">sp_api::Core</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-		<span class="kw">fn</span> <span class="ident">version</span>() -&gt; <span class="ident">RuntimeVersion</span> {
-			<span class="ident">VERSION</span>
+<span class="macro">impl_runtime_apis! </span>{
+	<span class="kw">impl </span>sp_api::Core&lt;Block&gt; <span class="kw">for </span>Runtime {
+		<span class="kw">fn </span>version() -&gt; RuntimeVersion {
+			VERSION
 		}
 
-		<span class="kw">fn</span> <span class="ident">execute_block</span>(<span class="ident">block</span>: <span class="ident">Block</span>) {
-			<span class="ident">Executive::execute_block</span>(<span class="ident">block</span>)
+		<span class="kw">fn </span>execute_block(block: Block) {
+			Executive::execute_block(block)
 		}
 
-		<span class="kw">fn</span> <span class="ident">initialize_block</span>(<span class="ident">header</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span>) {
-			<span class="ident">Executive::initialize_block</span>(<span class="ident">header</span>)
-		}
-	}
-
-	<span class="kw">impl</span> <span class="ident">sp_api::Metadata</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-		<span class="kw">fn</span> <span class="ident">metadata</span>() -&gt; <span class="ident">OpaqueMetadata</span> {
-			<span class="ident">OpaqueMetadata::new</span>(<span class="ident">Runtime::metadata</span>().<span class="ident">into</span>())
+		<span class="kw">fn </span>initialize_block(header: <span class="kw-2">&amp;</span>&lt;Block <span class="kw">as </span>BlockT&gt;::Header) {
+			Executive::initialize_block(header)
 		}
 	}
 
-	<span class="kw">impl</span> <span class="ident">sp_block_builder::BlockBuilder</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-		<span class="kw">fn</span> <span class="ident">apply_extrinsic</span>(
-			<span class="ident">extrinsic</span>: <span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Extrinsic</span>,
-		) -&gt; <span class="ident">ApplyExtrinsicResult</span> {
-			<span class="ident">Executive::apply_extrinsic</span>(<span class="ident">extrinsic</span>)
-		}
-
-		<span class="kw">fn</span> <span class="ident">finalize_block</span>() -&gt; <span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span> {
-			<span class="ident">Executive::finalize_block</span>()
-		}
-
-		<span class="kw">fn</span> <span class="ident">inherent_extrinsics</span>(<span class="ident">data</span>: <span class="ident">sp_inherents::InherentData</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Extrinsic</span><span class="op">&gt;</span> {
-			<span class="ident">data</span>.<span class="ident">create_extrinsics</span>()
-		}
-
-		<span class="kw">fn</span> <span class="ident">check_inherents</span>(<span class="ident">block</span>: <span class="ident">Block</span>, <span class="ident">data</span>: <span class="ident">sp_inherents::InherentData</span>) -&gt; <span class="ident">sp_inherents::CheckInherentsResult</span> {
-			<span class="ident">data</span>.<span class="ident">check_extrinsics</span>(<span class="kw-2">&amp;</span><span class="ident">block</span>)
+	<span class="kw">impl </span>sp_api::Metadata&lt;Block&gt; <span class="kw">for </span>Runtime {
+		<span class="kw">fn </span>metadata() -&gt; OpaqueMetadata {
+			OpaqueMetadata::new(Runtime::metadata().into())
 		}
 	}
 
-	<span class="kw">impl</span> <span class="ident">sp_transaction_pool::runtime_api::TaggedTransactionQueue</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-		<span class="kw">fn</span> <span class="ident">validate_transaction</span>(
-			<span class="ident">source</span>: <span class="ident">TransactionSource</span>,
-			<span class="ident">tx</span>: <span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Extrinsic</span>,
-			<span class="ident">block_hash</span>: <span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Hash</span>,
-		) -&gt; <span class="ident">TransactionValidity</span> {
-			<span class="ident">Executive::validate_transaction</span>(<span class="ident">source</span>, <span class="ident">tx</span>, <span class="ident">block_hash</span>)
+	<span class="kw">impl </span>sp_block_builder::BlockBuilder&lt;Block&gt; <span class="kw">for </span>Runtime {
+		<span class="kw">fn </span>apply_extrinsic(
+			extrinsic: &lt;Block <span class="kw">as </span>BlockT&gt;::Extrinsic,
+		) -&gt; ApplyExtrinsicResult {
+			Executive::apply_extrinsic(extrinsic)
+		}
+
+		<span class="kw">fn </span>finalize_block() -&gt; &lt;Block <span class="kw">as </span>BlockT&gt;::Header {
+			Executive::finalize_block()
+		}
+
+		<span class="kw">fn </span>inherent_extrinsics(data: sp_inherents::InherentData) -&gt; Vec&lt;&lt;Block <span class="kw">as </span>BlockT&gt;::Extrinsic&gt; {
+			data.create_extrinsics()
+		}
+
+		<span class="kw">fn </span>check_inherents(block: Block, data: sp_inherents::InherentData) -&gt; sp_inherents::CheckInherentsResult {
+			data.check_extrinsics(<span class="kw-2">&amp;</span>block)
 		}
 	}
 
-	<span class="kw">impl</span> <span class="ident">sp_offchain::OffchainWorkerApi</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-		<span class="kw">fn</span> <span class="ident">offchain_worker</span>(<span class="ident">header</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span>) {
-			<span class="ident">Executive::offchain_worker</span>(<span class="ident">header</span>)
+	<span class="kw">impl </span>sp_transaction_pool::runtime_api::TaggedTransactionQueue&lt;Block&gt; <span class="kw">for </span>Runtime {
+		<span class="kw">fn </span>validate_transaction(
+			source: TransactionSource,
+			tx: &lt;Block <span class="kw">as </span>BlockT&gt;::Extrinsic,
+			block_hash: &lt;Block <span class="kw">as </span>BlockT&gt;::Hash,
+		) -&gt; TransactionValidity {
+			Executive::validate_transaction(source, tx, block_hash)
 		}
 	}
 
-	<span class="kw">impl</span> <span class="ident">sp_session::SessionKeys</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-		<span class="kw">fn</span> <span class="ident">decode_session_keys</span>(<span class="kw">_</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">sp_core::crypto::KeyTypeId</span>)<span class="op">&gt;</span><span class="op">&gt;</span> {
-			<span class="prelude-val">Some</span>(<span class="ident">Vec::new</span>())
-		}
-
-		<span class="kw">fn</span> <span class="ident">generate_session_keys</span>(<span class="kw">_</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-			<span class="ident">Vec::new</span>()
+	<span class="kw">impl </span>sp_offchain::OffchainWorkerApi&lt;Block&gt; <span class="kw">for </span>Runtime {
+		<span class="kw">fn </span>offchain_worker(header: <span class="kw-2">&amp;</span>&lt;Block <span class="kw">as </span>BlockT&gt;::Header) {
+			Executive::offchain_worker(header)
 		}
 	}
 
-	<span class="kw">impl</span> <span class="ident">cumulus_primitives_core::CollectCollationInfo</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
-		<span class="kw">fn</span> <span class="ident">collect_collation_info</span>(<span class="ident">header</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident">Block</span> <span class="kw">as</span> <span class="ident">BlockT</span><span class="op">&gt;</span><span class="ident">::Header</span>) -&gt; <span class="ident">cumulus_primitives_core::CollationInfo</span> {
-			<span class="ident">ParachainSystem::collect_collation_info</span>(<span class="ident">header</span>)
+	<span class="kw">impl </span>sp_session::SessionKeys&lt;Block&gt; <span class="kw">for </span>Runtime {
+		<span class="kw">fn </span>decode_session_keys(<span class="kw">_</span>: Vec&lt;u8&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;(Vec&lt;u8&gt;, sp_core::crypto::KeyTypeId)&gt;&gt; {
+			<span class="prelude-val">Some</span>(Vec::new())
+		}
+
+		<span class="kw">fn </span>generate_session_keys(<span class="kw">_</span>: <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;) -&gt; Vec&lt;u8&gt; {
+			Vec::new()
 		}
 	}
-}
 
-<span class="kw">struct</span> <span class="ident">CheckInherents</span>;
-
-<span class="kw">impl</span> <span class="ident">cumulus_pallet_parachain_system::CheckInherents</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CheckInherents</span> {
-	<span class="kw">fn</span> <span class="ident">check_inherents</span>(
-		<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Block</span>,
-		<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">cumulus_pallet_parachain_system::RelayChainStateProof</span>,
-	) -&gt; <span class="ident">sp_inherents::CheckInherentsResult</span> {
-		<span class="ident">sp_inherents::CheckInherentsResult::new</span>()
+	<span class="kw">impl </span>cumulus_primitives_core::CollectCollationInfo&lt;Block&gt; <span class="kw">for </span>Runtime {
+		<span class="kw">fn </span>collect_collation_info(header: <span class="kw-2">&amp;</span>&lt;Block <span class="kw">as </span>BlockT&gt;::Header) -&gt; cumulus_primitives_core::CollationInfo {
+			ParachainSystem::collect_collation_info(header)
+		}
 	}
 }
 
-<span class="macro">cumulus_pallet_parachain_system::register_validate_block!</span> {
-	<span class="ident">Runtime</span> <span class="op">=</span> <span class="ident">Runtime</span>,
-	<span class="ident">BlockExecutor</span> <span class="op">=</span> <span class="ident">Executive</span>,
-	<span class="ident">CheckInherents</span> <span class="op">=</span> <span class="ident">CheckInherents</span>,
+<span class="kw">struct </span>CheckInherents;
+
+<span class="kw">impl </span>cumulus_pallet_parachain_system::CheckInherents&lt;Block&gt; <span class="kw">for </span>CheckInherents {
+	<span class="kw">fn </span>check_inherents(
+		<span class="kw">_</span>: <span class="kw-2">&amp;</span>Block,
+		<span class="kw">_</span>: <span class="kw-2">&amp;</span>cumulus_pallet_parachain_system::RelayChainStateProof,
+	) -&gt; sp_inherents::CheckInherentsResult {
+		sp_inherents::CheckInherentsResult::new()
+	}
+}
+
+<span class="macro">cumulus_pallet_parachain_system::register_validate_block! </span>{
+	Runtime = Runtime,
+	BlockExecutor = Executive,
+	CheckInherents = CheckInherents,
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="shell_runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="shell_runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

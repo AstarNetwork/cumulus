@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/common/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../parachains_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/common/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../parachains_common/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../parachains_common/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -113,120 +113,120 @@
 <span id="113">113</span>
 <span id="114">114</span>
 <span id="115">115</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright (C) 2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// SPDX-License-Identifier: Apache-2.0</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright (C) 2021 Parity Technologies (UK) Ltd.
+// SPDX-License-Identifier: Apache-2.0
 
-<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="comment">// you may not use this file except in compliance with the License.</span>
-<span class="comment">// You may obtain a copy of the License at</span>
-<span class="comment">//</span>
-<span class="comment">// 	http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="comment">//</span>
-<span class="comment">// Unless required by applicable law or agreed to in writing, software</span>
-<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="comment">// See the License for the specific language governing permissions and</span>
-<span class="comment">// limitations under the License.</span>
+// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// 	http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
+</span><span class="attribute">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">impls</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">xcm_config</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">constants</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">opaque</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
+</span><span class="kw">pub mod </span>impls;
+<span class="kw">pub mod </span>xcm_config;
+<span class="kw">pub use </span>constants::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>opaque::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>types::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// Common types of parachains.</span>
-<span class="kw">mod</span> <span class="ident">types</span> {
-	<span class="kw">use</span> <span class="ident">sp_runtime::traits</span>::{<span class="ident">IdentifyAccount</span>, <span class="ident">Verify</span>};
+<span class="doccomment">/// Common types of parachains.
+</span><span class="kw">mod </span>types {
+	<span class="kw">use </span>sp_runtime::traits::{IdentifyAccount, Verify};
 
-	<span class="doccomment">/// An index to a block.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="ident">u32</span>;
+	<span class="doccomment">/// An index to a block.
+	</span><span class="kw">pub type </span>BlockNumber = u32;
 
-	<span class="doccomment">/// Alias to 512-bit hash when used in the context of a transaction signature on the chain.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Signature</span> <span class="op">=</span> <span class="ident">sp_runtime::MultiSignature</span>;
+	<span class="doccomment">/// Alias to 512-bit hash when used in the context of a transaction signature on the chain.
+	</span><span class="kw">pub type </span>Signature = sp_runtime::MultiSignature;
 
-	<span class="doccomment">/// Some way of identifying an account on the chain. We intentionally make it equivalent</span>
-	<span class="doccomment">/// to the public key of our transaction signing scheme.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">AccountId</span> <span class="op">=</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Signature</span> <span class="kw">as</span> <span class="ident">Verify</span><span class="op">&gt;</span><span class="ident">::Signer</span> <span class="kw">as</span> <span class="ident">IdentifyAccount</span><span class="op">&gt;</span><span class="ident">::AccountId</span>;
+	<span class="doccomment">/// Some way of identifying an account on the chain. We intentionally make it equivalent
+	/// to the public key of our transaction signing scheme.
+	</span><span class="kw">pub type </span>AccountId = &lt;&lt;Signature <span class="kw">as </span>Verify&gt;::Signer <span class="kw">as </span>IdentifyAccount&gt;::AccountId;
 
-	<span class="doccomment">/// The type for looking up accounts. We don&#39;t expect more than 4 billion of them, but you</span>
-	<span class="doccomment">/// never know...</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">AccountIndex</span> <span class="op">=</span> <span class="ident">u32</span>;
+	<span class="doccomment">/// The type for looking up accounts. We don&#39;t expect more than 4 billion of them, but you
+	/// never know...
+	</span><span class="kw">pub type </span>AccountIndex = u32;
 
-	<span class="doccomment">/// Balance of an account.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Balance</span> <span class="op">=</span> <span class="ident">u128</span>;
+	<span class="doccomment">/// Balance of an account.
+	</span><span class="kw">pub type </span>Balance = u128;
 
-	<span class="doccomment">/// Index of a transaction in the chain.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Index</span> <span class="op">=</span> <span class="ident">u32</span>;
+	<span class="doccomment">/// Index of a transaction in the chain.
+	</span><span class="kw">pub type </span>Index = u32;
 
-	<span class="doccomment">/// A hash of some data used by the chain.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Hash</span> <span class="op">=</span> <span class="ident">sp_core::H256</span>;
+	<span class="doccomment">/// A hash of some data used by the chain.
+	</span><span class="kw">pub type </span>Hash = sp_core::H256;
 
-	<span class="doccomment">/// Digest item type.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">DigestItem</span> <span class="op">=</span> <span class="ident">sp_runtime::generic::DigestItem</span>;
+	<span class="doccomment">/// Digest item type.
+	</span><span class="kw">pub type </span>DigestItem = sp_runtime::generic::DigestItem;
 
-	<span class="comment">// Aura consensus authority.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">AuraId</span> <span class="op">=</span> <span class="ident">sp_consensus_aura::sr25519::AuthorityId</span>;
+	<span class="comment">// Aura consensus authority.
+	</span><span class="kw">pub type </span>AuraId = sp_consensus_aura::sr25519::AuthorityId;
 
-	<span class="comment">// Aura consensus authority used by Statemint.</span>
-	<span class="comment">//</span>
-	<span class="comment">// Because of registering the authorities with an ed25519 key before switching from Shell</span>
-	<span class="comment">// to Statemint, we were required to deploy a hotfix that changed Statemint to ed22519.</span>
-	<span class="comment">// In the future that may change again.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">StatemintAuraId</span> <span class="op">=</span> <span class="ident">sp_consensus_aura::ed25519::AuthorityId</span>;
+	<span class="comment">// Aura consensus authority used by Statemint.
+	//
+	// Because of registering the authorities with an ed25519 key before switching from Shell
+	// to Statemint, we were required to deploy a hotfix that changed Statemint to ed22519.
+	// In the future that may change again.
+	</span><span class="kw">pub type </span>StatemintAuraId = sp_consensus_aura::ed25519::AuthorityId;
 
-	<span class="comment">// Id used for identifying assets.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">AssetId</span> <span class="op">=</span> <span class="ident">u32</span>;
+	<span class="comment">// Id used for identifying assets.
+	</span><span class="kw">pub type </span>AssetId = u32;
 }
 
-<span class="doccomment">/// Common constants of parachains.</span>
-<span class="kw">mod</span> <span class="ident">constants</span> {
-	<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::types::BlockNumber</span>;
-	<span class="kw">use</span> <span class="ident">frame_support::weights</span>::{<span class="ident">constants::WEIGHT_PER_SECOND</span>, <span class="ident">Weight</span>};
-	<span class="kw">use</span> <span class="ident">sp_runtime::Perbill</span>;
-	<span class="doccomment">/// This determines the average expected block time that we are targeting. Blocks will be</span>
-	<span class="doccomment">/// produced at a minimum duration defined by `SLOT_DURATION`. `SLOT_DURATION` is picked up by</span>
-	<span class="doccomment">/// `pallet_timestamp` which is in turn picked up by `pallet_aura` to implement `fn</span>
-	<span class="doccomment">/// slot_duration()`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// Change this to adjust the block time.</span>
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MILLISECS_PER_BLOCK</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">12000</span>;
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SLOT_DURATION</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="ident">MILLISECS_PER_BLOCK</span>;
+<span class="doccomment">/// Common constants of parachains.
+</span><span class="kw">mod </span>constants {
+	<span class="kw">use </span><span class="kw">super</span>::types::BlockNumber;
+	<span class="kw">use </span>frame_support::weights::{constants::WEIGHT_PER_SECOND, Weight};
+	<span class="kw">use </span>sp_runtime::Perbill;
+	<span class="doccomment">/// This determines the average expected block time that we are targeting. Blocks will be
+	/// produced at a minimum duration defined by `SLOT_DURATION`. `SLOT_DURATION` is picked up by
+	/// `pallet_timestamp` which is in turn picked up by `pallet_aura` to implement `fn
+	/// slot_duration()`.
+	///
+	/// Change this to adjust the block time.
+	</span><span class="kw">pub const </span>MILLISECS_PER_BLOCK: u64 = <span class="number">12000</span>;
+	<span class="kw">pub const </span>SLOT_DURATION: u64 = MILLISECS_PER_BLOCK;
 
-	<span class="comment">// Time is measured by number of blocks.</span>
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MINUTES</span>: <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="number">60_000</span> <span class="op">/</span> (<span class="ident">MILLISECS_PER_BLOCK</span> <span class="kw">as</span> <span class="ident">BlockNumber</span>);
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HOURS</span>: <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="ident">MINUTES</span> <span class="op">*</span> <span class="number">60</span>;
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DAYS</span>: <span class="ident">BlockNumber</span> <span class="op">=</span> <span class="ident">HOURS</span> <span class="op">*</span> <span class="number">24</span>;
+	<span class="comment">// Time is measured by number of blocks.
+	</span><span class="kw">pub const </span>MINUTES: BlockNumber = <span class="number">60_000 </span>/ (MILLISECS_PER_BLOCK <span class="kw">as </span>BlockNumber);
+	<span class="kw">pub const </span>HOURS: BlockNumber = MINUTES * <span class="number">60</span>;
+	<span class="kw">pub const </span>DAYS: BlockNumber = HOURS * <span class="number">24</span>;
 
-	<span class="doccomment">/// We assume that ~5% of the block weight is consumed by `on_initialize` handlers. This is</span>
-	<span class="doccomment">/// used to limit the maximal weight of a single extrinsic.</span>
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AVERAGE_ON_INITIALIZE_RATIO</span>: <span class="ident">Perbill</span> <span class="op">=</span> <span class="ident">Perbill::from_percent</span>(<span class="number">5</span>);
-	<span class="doccomment">/// We allow `Normal` extrinsics to fill up the block up to 75%, the rest can be used by</span>
-	<span class="doccomment">/// Operational  extrinsics.</span>
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NORMAL_DISPATCH_RATIO</span>: <span class="ident">Perbill</span> <span class="op">=</span> <span class="ident">Perbill::from_percent</span>(<span class="number">75</span>);
+	<span class="doccomment">/// We assume that ~5% of the block weight is consumed by `on_initialize` handlers. This is
+	/// used to limit the maximal weight of a single extrinsic.
+	</span><span class="kw">pub const </span>AVERAGE_ON_INITIALIZE_RATIO: Perbill = Perbill::from_percent(<span class="number">5</span>);
+	<span class="doccomment">/// We allow `Normal` extrinsics to fill up the block up to 75%, the rest can be used by
+	/// Operational  extrinsics.
+	</span><span class="kw">pub const </span>NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(<span class="number">75</span>);
 
-	<span class="doccomment">/// We allow for 0.5 seconds of compute with a 6 second average block time.</span>
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAXIMUM_BLOCK_WEIGHT</span>: <span class="ident">Weight</span> <span class="op">=</span> <span class="ident">WEIGHT_PER_SECOND</span>
-		.<span class="ident">saturating_div</span>(<span class="number">2</span>)
-		.<span class="ident">set_proof_size</span>(<span class="ident">polkadot_primitives::v2::MAX_POV_SIZE</span> <span class="kw">as</span> <span class="ident">u64</span>);
+	<span class="doccomment">/// We allow for 0.5 seconds of compute with a 6 second average block time.
+	</span><span class="kw">pub const </span>MAXIMUM_BLOCK_WEIGHT: Weight = WEIGHT_PER_SECOND
+		.saturating_div(<span class="number">2</span>)
+		.set_proof_size(polkadot_primitives::v2::MAX_POV_SIZE <span class="kw">as </span>u64);
 }
 
-<span class="doccomment">/// Opaque types. These are used by the CLI to instantiate machinery that don&#39;t need to know</span>
-<span class="doccomment">/// the specifics of the runtime. They can then be made to be agnostic over specific formats</span>
-<span class="doccomment">/// of data like extrinsics, allowing for them to continue syncing the network through upgrades</span>
-<span class="doccomment">/// to even the core data structures.</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">opaque</span> {
-	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">sp_runtime</span>::{<span class="ident">generic</span>, <span class="ident">traits::BlakeTwo256</span>};
+<span class="doccomment">/// Opaque types. These are used by the CLI to instantiate machinery that don&#39;t need to know
+/// the specifics of the runtime. They can then be made to be agnostic over specific formats
+/// of data like extrinsics, allowing for them to continue syncing the network through upgrades
+/// to even the core data structures.
+</span><span class="kw">pub mod </span>opaque {
+	<span class="kw">use super</span>::<span class="kw-2">*</span>;
+	<span class="kw">use </span>sp_runtime::{generic, traits::BlakeTwo256};
 
-	<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime::OpaqueExtrinsic</span> <span class="kw">as</span> <span class="ident">UncheckedExtrinsic</span>;
-	<span class="doccomment">/// Opaque block header type.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Header</span> <span class="op">=</span> <span class="ident">generic::Header</span><span class="op">&lt;</span><span class="ident">BlockNumber</span>, <span class="ident">BlakeTwo256</span><span class="op">&gt;</span>;
-	<span class="doccomment">/// Opaque block type.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Block</span> <span class="op">=</span> <span class="ident">generic::Block</span><span class="op">&lt;</span><span class="ident">Header</span>, <span class="ident">UncheckedExtrinsic</span><span class="op">&gt;</span>;
-	<span class="doccomment">/// Opaque block identifier type.</span>
-	<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BlockId</span> <span class="op">=</span> <span class="ident">generic::BlockId</span><span class="op">&lt;</span><span class="ident">Block</span><span class="op">&gt;</span>;
+	<span class="kw">pub use </span>sp_runtime::OpaqueExtrinsic <span class="kw">as </span>UncheckedExtrinsic;
+	<span class="doccomment">/// Opaque block header type.
+	</span><span class="kw">pub type </span>Header = generic::Header&lt;BlockNumber, BlakeTwo256&gt;;
+	<span class="doccomment">/// Opaque block type.
+	</span><span class="kw">pub type </span>Block = generic::Block&lt;Header, UncheckedExtrinsic&gt;;
+	<span class="doccomment">/// Opaque block identifier type.
+	</span><span class="kw">pub type </span>BlockId = generic::BlockId&lt;Block&gt;;
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="parachains_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="parachains_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

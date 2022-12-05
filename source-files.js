@@ -1,6 +1,8 @@
 var sourcesIndex = JSON.parse('{\
 "asset_test_utils":["",[],["lib.rs"]],\
-"collectives_polkadot_runtime":["",[["weights",[],["block_weights.rs","cumulus_pallet_xcmp_queue.rs","extrinsic_weights.rs","frame_system.rs","mod.rs","pallet_balances.rs","pallet_collator_selection.rs","pallet_multisig.rs","pallet_proxy.rs","pallet_session.rs","pallet_timestamp.rs","pallet_utility.rs","paritydb_weights.rs","rocksdb_weights.rs"]]],["constants.rs","impls.rs","lib.rs","xcm_config.rs"]],\
+"bridge_hub_kusama_runtime":["",[["weights",[],["block_weights.rs","cumulus_pallet_xcmp_queue.rs","extrinsic_weights.rs","frame_system.rs","mod.rs","pallet_balances.rs","pallet_collator_selection.rs","pallet_multisig.rs","pallet_session.rs","pallet_timestamp.rs","pallet_utility.rs","paritydb_weights.rs","rocksdb_weights.rs"]]],["constants.rs","lib.rs","xcm_config.rs"]],\
+"bridge_hub_rococo_runtime":["",[["weights",[],["block_weights.rs","cumulus_pallet_xcmp_queue.rs","extrinsic_weights.rs","frame_system.rs","mod.rs","pallet_balances.rs","pallet_collator_selection.rs","pallet_multisig.rs","pallet_session.rs","pallet_timestamp.rs","pallet_utility.rs","paritydb_weights.rs","rocksdb_weights.rs"]]],["constants.rs","lib.rs","xcm_config.rs"]],\
+"collectives_polkadot_runtime":["",[["weights",[],["block_weights.rs","cumulus_pallet_xcmp_queue.rs","extrinsic_weights.rs","frame_system.rs","mod.rs","pallet_alliance.rs","pallet_balances.rs","pallet_collator_selection.rs","pallet_collective.rs","pallet_multisig.rs","pallet_proxy.rs","pallet_session.rs","pallet_timestamp.rs","pallet_utility.rs","paritydb_weights.rs","rocksdb_weights.rs"]]],["constants.rs","impls.rs","lib.rs","xcm_config.rs"]],\
 "contracts_rococo_runtime":["",[["weights",[],["block_weights.rs","extrinsic_weights.rs","mod.rs","paritydb_weights.rs","rocksdb_weights.rs"]]],["constants.rs","contracts.rs","lib.rs","xcm_config.rs"]],\
 "cumulus_client_cli":["",[],["lib.rs"]],\
 "cumulus_client_collator":["",[],["lib.rs"]],\
@@ -39,7 +41,7 @@ var sourcesIndex = JSON.parse('{\
 "parachain_template_runtime":["",[["weights",[],["block_weights.rs","extrinsic_weights.rs","mod.rs","paritydb_weights.rs","rocksdb_weights.rs"]]],["lib.rs","xcm_config.rs"]],\
 "parachains_common":["",[],["impls.rs","lib.rs","xcm_config.rs"]],\
 "penpal_runtime":["",[["weights",[],["block_weights.rs","extrinsic_weights.rs","mod.rs","paritydb_weights.rs","rocksdb_weights.rs"]]],["lib.rs","xcm_config.rs"]],\
-"polkadot_parachain":["",[["chain_spec",[],["collectives.rs","contracts.rs","mod.rs","penpal.rs","rococo_parachain.rs","seedling.rs","shell.rs","statemint.rs"]]],["cli.rs","command.rs","main.rs","rpc.rs","service.rs"]],\
+"polkadot_parachain":["",[["chain_spec",[],["bridge_hubs.rs","collectives.rs","contracts.rs","mod.rs","penpal.rs","rococo_parachain.rs","seedling.rs","shell.rs","statemint.rs"]]],["cli.rs","command.rs","main.rs","rpc.rs","service.rs"]],\
 "rococo_parachain_runtime":["",[],["lib.rs"]],\
 "seedling_runtime":["",[],["lib.rs"]],\
 "shell_runtime":["",[],["lib.rs","xcm_config.rs"]],\

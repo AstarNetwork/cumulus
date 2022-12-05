@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot-parachain/src/chain_spec/statemint.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>statemint.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../polkadot_parachain/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot-parachain/src/chain_spec/statemint.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>statemint.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../polkadot_parachain/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../polkadot_parachain/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -615,622 +615,622 @@
 <span id="615">615</span>
 <span id="616">616</span>
 <span id="617">617</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::chain_spec</span>::{
-	<span class="ident">get_account_id_from_seed</span>, <span class="ident">get_collator_keys_from_seed</span>, <span class="ident">Extensions</span>, <span class="ident">SAFE_XCM_VERSION</span>,
+</span><span class="kw">use </span><span class="kw">crate</span>::chain_spec::{
+	get_account_id_from_seed, get_collator_keys_from_seed, Extensions, SAFE_XCM_VERSION,
 };
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core::ParaId</span>;
-<span class="kw">use</span> <span class="ident">hex_literal::hex</span>;
-<span class="kw">use</span> <span class="ident">parachains_common</span>::{<span class="ident">AccountId</span>, <span class="ident">AuraId</span>, <span class="ident">Balance</span> <span class="kw">as</span> <span class="ident">StatemintBalance</span>, <span class="ident">StatemintAuraId</span>};
-<span class="kw">use</span> <span class="ident">sc_service::ChainType</span>;
-<span class="kw">use</span> <span class="ident">sp_core</span>::{<span class="ident">crypto::UncheckedInto</span>, <span class="ident">sr25519</span>};
+<span class="kw">use </span>cumulus_primitives_core::ParaId;
+<span class="kw">use </span>hex_literal::hex;
+<span class="kw">use </span>parachains_common::{AccountId, AuraId, Balance <span class="kw">as </span>StatemintBalance, StatemintAuraId};
+<span class="kw">use </span>sc_service::ChainType;
+<span class="kw">use </span>sp_core::{crypto::UncheckedInto, sr25519};
 
-<span class="doccomment">/// Specialized `ChainSpec` for the normal parachain runtime.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">StatemintChainSpec</span> <span class="op">=</span>
-	<span class="ident">sc_service::GenericChainSpec</span><span class="op">&lt;</span><span class="ident">statemint_runtime::GenesisConfig</span>, <span class="ident">Extensions</span><span class="op">&gt;</span>;
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">StatemineChainSpec</span> <span class="op">=</span>
-	<span class="ident">sc_service::GenericChainSpec</span><span class="op">&lt;</span><span class="ident">statemine_runtime::GenesisConfig</span>, <span class="ident">Extensions</span><span class="op">&gt;</span>;
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">WestmintChainSpec</span> <span class="op">=</span>
-	<span class="ident">sc_service::GenericChainSpec</span><span class="op">&lt;</span><span class="ident">westmint_runtime::GenesisConfig</span>, <span class="ident">Extensions</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Specialized `ChainSpec` for the normal parachain runtime.
+</span><span class="kw">pub type </span>StatemintChainSpec =
+	sc_service::GenericChainSpec&lt;statemint_runtime::GenesisConfig, Extensions&gt;;
+<span class="kw">pub type </span>StatemineChainSpec =
+	sc_service::GenericChainSpec&lt;statemine_runtime::GenesisConfig, Extensions&gt;;
+<span class="kw">pub type </span>WestmintChainSpec =
+	sc_service::GenericChainSpec&lt;westmint_runtime::GenesisConfig, Extensions&gt;;
 
-<span class="kw">const</span> <span class="ident">STATEMINT_ED</span>: <span class="ident">StatemintBalance</span> <span class="op">=</span> <span class="ident">statemint_runtime::constants::currency::EXISTENTIAL_DEPOSIT</span>;
-<span class="kw">const</span> <span class="ident">STATEMINE_ED</span>: <span class="ident">StatemintBalance</span> <span class="op">=</span> <span class="ident">statemine_runtime::constants::currency::EXISTENTIAL_DEPOSIT</span>;
-<span class="kw">const</span> <span class="ident">WESTMINT_ED</span>: <span class="ident">StatemintBalance</span> <span class="op">=</span> <span class="ident">westmint_runtime::constants::currency::EXISTENTIAL_DEPOSIT</span>;
+<span class="kw">const </span>STATEMINT_ED: StatemintBalance = statemint_runtime::constants::currency::EXISTENTIAL_DEPOSIT;
+<span class="kw">const </span>STATEMINE_ED: StatemintBalance = statemine_runtime::constants::currency::EXISTENTIAL_DEPOSIT;
+<span class="kw">const </span>WESTMINT_ED: StatemintBalance = westmint_runtime::constants::currency::EXISTENTIAL_DEPOSIT;
 
-<span class="doccomment">/// Generate the session keys from individual elements.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The input must be a tuple of individual keys (a single arg for now since we have just one key).</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">statemint_session_keys</span>(<span class="ident">keys</span>: <span class="ident">StatemintAuraId</span>) -&gt; <span class="ident">statemint_runtime::SessionKeys</span> {
-	<span class="ident">statemint_runtime::SessionKeys</span> { <span class="ident">aura</span>: <span class="ident">keys</span> }
+<span class="doccomment">/// Generate the session keys from individual elements.
+///
+/// The input must be a tuple of individual keys (a single arg for now since we have just one key).
+</span><span class="kw">pub fn </span>statemint_session_keys(keys: StatemintAuraId) -&gt; statemint_runtime::SessionKeys {
+	statemint_runtime::SessionKeys { aura: keys }
 }
 
-<span class="doccomment">/// Generate the session keys from individual elements.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The input must be a tuple of individual keys (a single arg for now since we have just one key).</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">statemine_session_keys</span>(<span class="ident">keys</span>: <span class="ident">AuraId</span>) -&gt; <span class="ident">statemine_runtime::SessionKeys</span> {
-	<span class="ident">statemine_runtime::SessionKeys</span> { <span class="ident">aura</span>: <span class="ident">keys</span> }
+<span class="doccomment">/// Generate the session keys from individual elements.
+///
+/// The input must be a tuple of individual keys (a single arg for now since we have just one key).
+</span><span class="kw">pub fn </span>statemine_session_keys(keys: AuraId) -&gt; statemine_runtime::SessionKeys {
+	statemine_runtime::SessionKeys { aura: keys }
 }
 
-<span class="doccomment">/// Generate the session keys from individual elements.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The input must be a tuple of individual keys (a single arg for now since we have just one key).</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">westmint_session_keys</span>(<span class="ident">keys</span>: <span class="ident">AuraId</span>) -&gt; <span class="ident">westmint_runtime::SessionKeys</span> {
-	<span class="ident">westmint_runtime::SessionKeys</span> { <span class="ident">aura</span>: <span class="ident">keys</span> }
+<span class="doccomment">/// Generate the session keys from individual elements.
+///
+/// The input must be a tuple of individual keys (a single arg for now since we have just one key).
+</span><span class="kw">pub fn </span>westmint_session_keys(keys: AuraId) -&gt; westmint_runtime::SessionKeys {
+	westmint_runtime::SessionKeys { aura: keys }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">statemint_development_config</span>() -&gt; <span class="ident">StatemintChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;ss58Format&quot;</span>.<span class="ident">into</span>(), <span class="number">0</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;DOT&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">10</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>statemint_development_config() -&gt; StatemintChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;ss58Format&quot;</span>.into(), <span class="number">0</span>.into());
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;DOT&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">10</span>.into());
 
-	<span class="ident">StatemintChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Statemint Development&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;statemint_dev&quot;</span>,
-		<span class="ident">ChainType::Local</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">statemint_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[(
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">StatemintAuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
+	StatemintChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Statemint Development&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;statemint_dev&quot;</span>,
+		ChainType::Local,
+		<span class="kw">move </span>|| {
+			statemint_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[(
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_collator_keys_from_seed::&lt;StatemintAuraId&gt;(<span class="string">&quot;Alice&quot;</span>),
 				)],
 				<span class="macro">vec!</span>[
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob//stash&quot;</span>),
 				],
-				<span class="number">1000</span>.<span class="ident">into</span>(),
+				<span class="number">1000</span>.into(),
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;polkadot-dev&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="number">1000</span> },
+		<span class="prelude-val">Some</span>(properties),
+		Extensions { relay_chain: <span class="string">&quot;polkadot-dev&quot;</span>.into(), para_id: <span class="number">1000 </span>},
 	)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">statemint_local_config</span>() -&gt; <span class="ident">StatemintChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;ss58Format&quot;</span>.<span class="ident">into</span>(), <span class="number">0</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;DOT&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">10</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>statemint_local_config() -&gt; StatemintChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;ss58Format&quot;</span>.into(), <span class="number">0</span>.into());
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;DOT&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">10</span>.into());
 
-	<span class="ident">StatemintChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Statemint Local&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;statemint_local&quot;</span>,
-		<span class="ident">ChainType::Local</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">statemint_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[
+	StatemintChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Statemint Local&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;statemint_local&quot;</span>,
+		ChainType::Local,
+		<span class="kw">move </span>|| {
+			statemint_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">StatemintAuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+						get_collator_keys_from_seed::&lt;StatemintAuraId&gt;(<span class="string">&quot;Alice&quot;</span>),
 					),
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">StatemintAuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+						get_collator_keys_from_seed::&lt;StatemintAuraId&gt;(<span class="string">&quot;Bob&quot;</span>),
 					),
 				],
 				<span class="macro">vec!</span>[
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie//stash&quot;</span>),
 				],
-				<span class="number">1000</span>.<span class="ident">into</span>(),
+				<span class="number">1000</span>.into(),
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;polkadot-local&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="number">1000</span> },
+		<span class="prelude-val">Some</span>(properties),
+		Extensions { relay_chain: <span class="string">&quot;polkadot-local&quot;</span>.into(), para_id: <span class="number">1000 </span>},
 	)
 }
 
-<span class="comment">// Not used for syncing, but just to determine the genesis values set for the upgrade from shell.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">statemint_config</span>() -&gt; <span class="ident">StatemintChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;ss58Format&quot;</span>.<span class="ident">into</span>(), <span class="number">0</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;DOT&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">10</span>.<span class="ident">into</span>());
+<span class="comment">// Not used for syncing, but just to determine the genesis values set for the upgrade from shell.
+</span><span class="kw">pub fn </span>statemint_config() -&gt; StatemintChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;ss58Format&quot;</span>.into(), <span class="number">0</span>.into());
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;DOT&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">10</span>.into());
 
-	<span class="ident">StatemintChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Statemint&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;statemint&quot;</span>,
-		<span class="ident">ChainType::Live</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">statemint_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[
+	StatemintChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Statemint&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;statemint&quot;</span>,
+		ChainType::Live,
+		<span class="kw">move </span>|| {
+			statemint_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;4c3d674d2a01060f0ded218e5dcc6f90c1726f43df79885eb3e22d97a20d5421&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;4c3d674d2a01060f0ded218e5dcc6f90c1726f43df79885eb3e22d97a20d5421&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;c7d7d38d16bc23c6321152c50306212dc22c0efc04a2e52b5cccfc31ab3d7811&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;c7d7d38d16bc23c6321152c50306212dc22c0efc04a2e52b5cccfc31ab3d7811&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;c5c07ba203d7375675f5c1ebe70f0a5bb729ae57b48bcc877fcc2ab21309b762&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;c5c07ba203d7375675f5c1ebe70f0a5bb729ae57b48bcc877fcc2ab21309b762&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;0b2d0013fb974794bd7aa452465b567d48ef70373fe231a637c1fb7c547e85b3&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;0b2d0013fb974794bd7aa452465b567d48ef70373fe231a637c1fb7c547e85b3&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 				],
 				<span class="macro">vec!</span>[],
-				<span class="number">1000u32</span>.<span class="ident">into</span>(),
+				<span class="number">1000u32</span>.into(),
 			)
 		},
 		<span class="macro">vec!</span>[
-			<span class="string">&quot;/ip4/34.65.251.121/tcp/30334/p2p/12D3KooWG3GrM6XKMM4gp3cvemdwUvu96ziYoJmqmetLZBXE8bSa&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
-			<span class="string">&quot;/ip4/34.65.35.228/tcp/30334/p2p/12D3KooWMRyTLrCEPcAQD6c4EnudL3vVzg9zji3whvsMYPUYevpq&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
-			<span class="string">&quot;/ip4/34.83.247.146/tcp/30334/p2p/12D3KooWE4jFh5FpJDkWVZhnWtFnbSqRhdjvC7Dp9b8b3FTuubQC&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
-			<span class="string">&quot;/ip4/104.199.117.230/tcp/30334/p2p/12D3KooWG9R8pVXKumVo2rdkeVD4j5PVhRTqmYgLHY3a4yPYgLqM&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
+			<span class="string">&quot;/ip4/34.65.251.121/tcp/30334/p2p/12D3KooWG3GrM6XKMM4gp3cvemdwUvu96ziYoJmqmetLZBXE8bSa&quot;</span>.parse().unwrap(),
+			<span class="string">&quot;/ip4/34.65.35.228/tcp/30334/p2p/12D3KooWMRyTLrCEPcAQD6c4EnudL3vVzg9zji3whvsMYPUYevpq&quot;</span>.parse().unwrap(),
+			<span class="string">&quot;/ip4/34.83.247.146/tcp/30334/p2p/12D3KooWE4jFh5FpJDkWVZhnWtFnbSqRhdjvC7Dp9b8b3FTuubQC&quot;</span>.parse().unwrap(),
+			<span class="string">&quot;/ip4/104.199.117.230/tcp/30334/p2p/12D3KooWG9R8pVXKumVo2rdkeVD4j5PVhRTqmYgLHY3a4yPYgLqM&quot;</span>.parse().unwrap(),
 		],
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;polkadot&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="number">1000</span> },
+		<span class="prelude-val">Some</span>(properties),
+		Extensions { relay_chain: <span class="string">&quot;polkadot&quot;</span>.into(), para_id: <span class="number">1000 </span>},
 	)
 }
 
-<span class="kw">fn</span> <span class="ident">statemint_genesis</span>(
-	<span class="ident">invulnerables</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">AccountId</span>, <span class="ident">StatemintAuraId</span>)<span class="op">&gt;</span>,
-	<span class="ident">endowed_accounts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>,
-	<span class="ident">id</span>: <span class="ident">ParaId</span>,
-) -&gt; <span class="ident">statemint_runtime::GenesisConfig</span> {
-	<span class="ident">statemint_runtime::GenesisConfig</span> {
-		<span class="ident">system</span>: <span class="ident">statemint_runtime::SystemConfig</span> {
-			<span class="ident">code</span>: <span class="ident">statemint_runtime::WASM_BINARY</span>
-				.<span class="ident">expect</span>(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
-				.<span class="ident">to_vec</span>(),
+<span class="kw">fn </span>statemint_genesis(
+	invulnerables: Vec&lt;(AccountId, StatemintAuraId)&gt;,
+	endowed_accounts: Vec&lt;AccountId&gt;,
+	id: ParaId,
+) -&gt; statemint_runtime::GenesisConfig {
+	statemint_runtime::GenesisConfig {
+		system: statemint_runtime::SystemConfig {
+			code: statemint_runtime::WASM_BINARY
+				.expect(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
+				.to_vec(),
 		},
-		<span class="ident">balances</span>: <span class="ident">statemint_runtime::BalancesConfig</span> {
-			<span class="ident">balances</span>: <span class="ident">endowed_accounts</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">k</span><span class="op">|</span> (<span class="ident">k</span>, <span class="ident">STATEMINT_ED</span> <span class="op">*</span> <span class="number">4096</span>)).<span class="ident">collect</span>(),
+		balances: statemint_runtime::BalancesConfig {
+			balances: endowed_accounts.iter().cloned().map(|k| (k, STATEMINT_ED * <span class="number">4096</span>)).collect(),
 		},
-		<span class="ident">parachain_info</span>: <span class="ident">statemint_runtime::ParachainInfoConfig</span> { <span class="ident">parachain_id</span>: <span class="ident">id</span> },
-		<span class="ident">collator_selection</span>: <span class="ident">statemint_runtime::CollatorSelectionConfig</span> {
-			<span class="ident">invulnerables</span>: <span class="ident">invulnerables</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">acc</span>).<span class="ident">collect</span>(),
-			<span class="ident">candidacy_bond</span>: <span class="ident">STATEMINT_ED</span> <span class="op">*</span> <span class="number">16</span>,
-			..<span class="ident">Default::default</span>()
+		parachain_info: statemint_runtime::ParachainInfoConfig { parachain_id: id },
+		collator_selection: statemint_runtime::CollatorSelectionConfig {
+			invulnerables: invulnerables.iter().cloned().map(|(acc, <span class="kw">_</span>)| acc).collect(),
+			candidacy_bond: STATEMINT_ED * <span class="number">16</span>,
+			..Default::default()
 		},
-		<span class="ident">session</span>: <span class="ident">statemint_runtime::SessionConfig</span> {
-			<span class="ident">keys</span>: <span class="ident">invulnerables</span>
-				.<span class="ident">into_iter</span>()
-				.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="ident">aura</span>)<span class="op">|</span> {
+		session: statemint_runtime::SessionConfig {
+			keys: invulnerables
+				.into_iter()
+				.map(|(acc, aura)| {
 					(
-						<span class="ident">acc</span>.<span class="ident">clone</span>(),                  <span class="comment">// account id</span>
-						<span class="ident">acc</span>,                          <span class="comment">// validator id</span>
-						<span class="ident">statemint_session_keys</span>(<span class="ident">aura</span>), <span class="comment">// session keys</span>
-					)
+						acc.clone(),                  <span class="comment">// account id
+						</span>acc,                          <span class="comment">// validator id
+						</span>statemint_session_keys(aura), <span class="comment">// session keys
+					</span>)
 				})
-				.<span class="ident">collect</span>(),
+				.collect(),
 		},
-		<span class="comment">// no need to pass anything to aura, in fact it will panic if we do. Session will take care</span>
-		<span class="comment">// of this.</span>
-		<span class="ident">aura</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">aura_ext</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">parachain_system</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">polkadot_xcm</span>: <span class="ident">statemint_runtime::PolkadotXcmConfig</span> {
-			<span class="ident">safe_xcm_version</span>: <span class="prelude-val">Some</span>(<span class="ident">SAFE_XCM_VERSION</span>),
+		<span class="comment">// no need to pass anything to aura, in fact it will panic if we do. Session will take care
+		// of this.
+		</span>aura: Default::default(),
+		aura_ext: Default::default(),
+		parachain_system: Default::default(),
+		polkadot_xcm: statemint_runtime::PolkadotXcmConfig {
+			safe_xcm_version: <span class="prelude-val">Some</span>(SAFE_XCM_VERSION),
 		},
 	}
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">statemine_development_config</span>() -&gt; <span class="ident">StatemineChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;ss58Format&quot;</span>.<span class="ident">into</span>(), <span class="number">2</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;KSM&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>statemine_development_config() -&gt; StatemineChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;ss58Format&quot;</span>.into(), <span class="number">2</span>.into());
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;KSM&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12</span>.into());
 
-	<span class="ident">StatemineChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Statemine Development&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;statemine_dev&quot;</span>,
-		<span class="ident">ChainType::Local</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">statemine_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[(
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
+	StatemineChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Statemine Development&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;statemine_dev&quot;</span>,
+		ChainType::Local,
+		<span class="kw">move </span>|| {
+			statemine_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[(
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_collator_keys_from_seed::&lt;AuraId&gt;(<span class="string">&quot;Alice&quot;</span>),
 				)],
 				<span class="macro">vec!</span>[
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob//stash&quot;</span>),
 				],
-				<span class="number">1000</span>.<span class="ident">into</span>(),
+				<span class="number">1000</span>.into(),
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;kusama-dev&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="number">1000</span> },
+		<span class="prelude-val">Some</span>(properties),
+		Extensions { relay_chain: <span class="string">&quot;kusama-dev&quot;</span>.into(), para_id: <span class="number">1000 </span>},
 	)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">statemine_local_config</span>() -&gt; <span class="ident">StatemineChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;ss58Format&quot;</span>.<span class="ident">into</span>(), <span class="number">2</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;KSM&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>statemine_local_config() -&gt; StatemineChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;ss58Format&quot;</span>.into(), <span class="number">2</span>.into());
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;KSM&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12</span>.into());
 
-	<span class="ident">StatemineChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Statemine Local&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;statemine_local&quot;</span>,
-		<span class="ident">ChainType::Local</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">statemine_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[
+	StatemineChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Statemine Local&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;statemine_local&quot;</span>,
+		ChainType::Local,
+		<span class="kw">move </span>|| {
+			statemine_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+						get_collator_keys_from_seed::&lt;AuraId&gt;(<span class="string">&quot;Alice&quot;</span>),
 					),
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+						get_collator_keys_from_seed::&lt;AuraId&gt;(<span class="string">&quot;Bob&quot;</span>),
 					),
 				],
 				<span class="macro">vec!</span>[
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie//stash&quot;</span>),
 				],
-				<span class="number">1000</span>.<span class="ident">into</span>(),
+				<span class="number">1000</span>.into(),
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;kusama-local&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="number">1000</span> },
+		<span class="prelude-val">Some</span>(properties),
+		Extensions { relay_chain: <span class="string">&quot;kusama-local&quot;</span>.into(), para_id: <span class="number">1000 </span>},
 	)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">statemine_config</span>() -&gt; <span class="ident">StatemineChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;ss58Format&quot;</span>.<span class="ident">into</span>(), <span class="number">2</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;KSM&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>statemine_config() -&gt; StatemineChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;ss58Format&quot;</span>.into(), <span class="number">2</span>.into());
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;KSM&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12</span>.into());
 
-	<span class="ident">StatemineChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Statemine&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;statemine&quot;</span>,
-		<span class="ident">ChainType::Live</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">statemine_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[
+	StatemineChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Statemine&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;statemine&quot;</span>,
+		ChainType::Live,
+		<span class="kw">move </span>|| {
+			statemine_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;50673d59020488a4ffc9d8c6de3062a65977046e6990915617f85fef6d349730&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;50673d59020488a4ffc9d8c6de3062a65977046e6990915617f85fef6d349730&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;fe8102dbc244e7ea2babd9f53236d67403b046154370da5c3ea99def0bd0747a&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;fe8102dbc244e7ea2babd9f53236d67403b046154370da5c3ea99def0bd0747a&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;38144b5398e5d0da5ec936a3af23f5a96e782f676ab19d45f29075ee92eca76a&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;38144b5398e5d0da5ec936a3af23f5a96e782f676ab19d45f29075ee92eca76a&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;3253947640e309120ae70fa458dcacb915e2ddd78f930f52bd3679ec63fc4415&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;3253947640e309120ae70fa458dcacb915e2ddd78f930f52bd3679ec63fc4415&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 				],
-				<span class="ident">Vec::new</span>(),
-				<span class="number">1000</span>.<span class="ident">into</span>(),
+				Vec::new(),
+				<span class="number">1000</span>.into(),
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;kusama&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="number">1000</span> },
+		<span class="prelude-val">Some</span>(properties),
+		Extensions { relay_chain: <span class="string">&quot;kusama&quot;</span>.into(), para_id: <span class="number">1000 </span>},
 	)
 }
 
-<span class="kw">fn</span> <span class="ident">statemine_genesis</span>(
-	<span class="ident">invulnerables</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">AccountId</span>, <span class="ident">AuraId</span>)<span class="op">&gt;</span>,
-	<span class="ident">endowed_accounts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>,
-	<span class="ident">id</span>: <span class="ident">ParaId</span>,
-) -&gt; <span class="ident">statemine_runtime::GenesisConfig</span> {
-	<span class="ident">statemine_runtime::GenesisConfig</span> {
-		<span class="ident">system</span>: <span class="ident">statemine_runtime::SystemConfig</span> {
-			<span class="ident">code</span>: <span class="ident">statemine_runtime::WASM_BINARY</span>
-				.<span class="ident">expect</span>(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
-				.<span class="ident">to_vec</span>(),
+<span class="kw">fn </span>statemine_genesis(
+	invulnerables: Vec&lt;(AccountId, AuraId)&gt;,
+	endowed_accounts: Vec&lt;AccountId&gt;,
+	id: ParaId,
+) -&gt; statemine_runtime::GenesisConfig {
+	statemine_runtime::GenesisConfig {
+		system: statemine_runtime::SystemConfig {
+			code: statemine_runtime::WASM_BINARY
+				.expect(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
+				.to_vec(),
 		},
-		<span class="ident">balances</span>: <span class="ident">statemine_runtime::BalancesConfig</span> {
-			<span class="ident">balances</span>: <span class="ident">endowed_accounts</span>
-				.<span class="ident">iter</span>()
-				.<span class="ident">cloned</span>()
-				.<span class="ident">map</span>(<span class="op">|</span><span class="ident">k</span><span class="op">|</span> (<span class="ident">k</span>, <span class="ident">STATEMINE_ED</span> <span class="op">*</span> <span class="number">524_288</span>))
-				.<span class="ident">collect</span>(),
+		balances: statemine_runtime::BalancesConfig {
+			balances: endowed_accounts
+				.iter()
+				.cloned()
+				.map(|k| (k, STATEMINE_ED * <span class="number">524_288</span>))
+				.collect(),
 		},
-		<span class="ident">parachain_info</span>: <span class="ident">statemine_runtime::ParachainInfoConfig</span> { <span class="ident">parachain_id</span>: <span class="ident">id</span> },
-		<span class="ident">collator_selection</span>: <span class="ident">statemine_runtime::CollatorSelectionConfig</span> {
-			<span class="ident">invulnerables</span>: <span class="ident">invulnerables</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">acc</span>).<span class="ident">collect</span>(),
-			<span class="ident">candidacy_bond</span>: <span class="ident">STATEMINE_ED</span> <span class="op">*</span> <span class="number">16</span>,
-			..<span class="ident">Default::default</span>()
+		parachain_info: statemine_runtime::ParachainInfoConfig { parachain_id: id },
+		collator_selection: statemine_runtime::CollatorSelectionConfig {
+			invulnerables: invulnerables.iter().cloned().map(|(acc, <span class="kw">_</span>)| acc).collect(),
+			candidacy_bond: STATEMINE_ED * <span class="number">16</span>,
+			..Default::default()
 		},
-		<span class="ident">session</span>: <span class="ident">statemine_runtime::SessionConfig</span> {
-			<span class="ident">keys</span>: <span class="ident">invulnerables</span>
-				.<span class="ident">into_iter</span>()
-				.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="ident">aura</span>)<span class="op">|</span> {
+		session: statemine_runtime::SessionConfig {
+			keys: invulnerables
+				.into_iter()
+				.map(|(acc, aura)| {
 					(
-						<span class="ident">acc</span>.<span class="ident">clone</span>(),                  <span class="comment">// account id</span>
-						<span class="ident">acc</span>,                          <span class="comment">// validator id</span>
-						<span class="ident">statemine_session_keys</span>(<span class="ident">aura</span>), <span class="comment">// session keys</span>
-					)
+						acc.clone(),                  <span class="comment">// account id
+						</span>acc,                          <span class="comment">// validator id
+						</span>statemine_session_keys(aura), <span class="comment">// session keys
+					</span>)
 				})
-				.<span class="ident">collect</span>(),
+				.collect(),
 		},
-		<span class="ident">aura</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">aura_ext</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">parachain_system</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">polkadot_xcm</span>: <span class="ident">statemine_runtime::PolkadotXcmConfig</span> {
-			<span class="ident">safe_xcm_version</span>: <span class="prelude-val">Some</span>(<span class="ident">SAFE_XCM_VERSION</span>),
+		aura: Default::default(),
+		aura_ext: Default::default(),
+		parachain_system: Default::default(),
+		polkadot_xcm: statemine_runtime::PolkadotXcmConfig {
+			safe_xcm_version: <span class="prelude-val">Some</span>(SAFE_XCM_VERSION),
 		},
 	}
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">westmint_development_config</span>() -&gt; <span class="ident">WestmintChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;WND&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>westmint_development_config() -&gt; WestmintChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;WND&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12</span>.into());
 
-	<span class="ident">WestmintChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Westmint Development&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;westmint_dev&quot;</span>,
-		<span class="ident">ChainType::Local</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">westmint_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[(
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
+	WestmintChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Westmint Development&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;westmint_dev&quot;</span>,
+		ChainType::Local,
+		<span class="kw">move </span>|| {
+			westmint_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[(
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_collator_keys_from_seed::&lt;AuraId&gt;(<span class="string">&quot;Alice&quot;</span>),
 				)],
 				<span class="macro">vec!</span>[
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob//stash&quot;</span>),
 				],
-				<span class="number">1000</span>.<span class="ident">into</span>(),
+				<span class="number">1000</span>.into(),
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;westend&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="number">1000</span> },
+		<span class="prelude-val">Some</span>(properties),
+		Extensions { relay_chain: <span class="string">&quot;westend&quot;</span>.into(), para_id: <span class="number">1000 </span>},
 	)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">westmint_local_config</span>() -&gt; <span class="ident">WestmintChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;WND&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>westmint_local_config() -&gt; WestmintChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;WND&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12</span>.into());
 
-	<span class="ident">WestmintChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Westmint Local&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;westmint_local&quot;</span>,
-		<span class="ident">ChainType::Local</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">westmint_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[
+	WestmintChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Westmint Local&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;westmint_local&quot;</span>,
+		ChainType::Local,
+		<span class="kw">move </span>|| {
+			westmint_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+						get_collator_keys_from_seed::&lt;AuraId&gt;(<span class="string">&quot;Alice&quot;</span>),
 					),
 					(
-						<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-						<span class="ident">get_collator_keys_from_seed</span>::<span class="op">&lt;</span><span class="ident">AuraId</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
+						get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+						get_collator_keys_from_seed::&lt;AuraId&gt;(<span class="string">&quot;Bob&quot;</span>),
 					),
 				],
 				<span class="macro">vec!</span>[
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Alice//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Bob//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Charlie//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Dave//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Eve//stash&quot;</span>),
-					<span class="ident">get_account_id_from_seed</span>::<span class="op">&lt;</span><span class="ident">sr25519::Public</span><span class="op">&gt;</span>(<span class="string">&quot;Ferdie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Alice//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Bob//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Charlie//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Dave//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Eve//stash&quot;</span>),
+					get_account_id_from_seed::&lt;sr25519::Public&gt;(<span class="string">&quot;Ferdie//stash&quot;</span>),
 				],
-				<span class="number">1000</span>.<span class="ident">into</span>(),
+				<span class="number">1000</span>.into(),
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;westend-local&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="number">1000</span> },
+		<span class="prelude-val">Some</span>(properties),
+		Extensions { relay_chain: <span class="string">&quot;westend-local&quot;</span>.into(), para_id: <span class="number">1000 </span>},
 	)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">westmint_config</span>() -&gt; <span class="ident">WestmintChainSpec</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">properties</span> <span class="op">=</span> <span class="ident">sc_chain_spec::Properties::new</span>();
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenSymbol&quot;</span>.<span class="ident">into</span>(), <span class="string">&quot;WND&quot;</span>.<span class="ident">into</span>());
-	<span class="ident">properties</span>.<span class="ident">insert</span>(<span class="string">&quot;tokenDecimals&quot;</span>.<span class="ident">into</span>(), <span class="number">12</span>.<span class="ident">into</span>());
+<span class="kw">pub fn </span>westmint_config() -&gt; WestmintChainSpec {
+	<span class="kw">let </span><span class="kw-2">mut </span>properties = sc_chain_spec::Properties::new();
+	properties.insert(<span class="string">&quot;tokenSymbol&quot;</span>.into(), <span class="string">&quot;WND&quot;</span>.into());
+	properties.insert(<span class="string">&quot;tokenDecimals&quot;</span>.into(), <span class="number">12</span>.into());
 
-	<span class="ident">WestmintChainSpec::from_genesis</span>(
-		<span class="comment">// Name</span>
-		<span class="string">&quot;Westmint&quot;</span>,
-		<span class="comment">// ID</span>
-		<span class="string">&quot;westmint&quot;</span>,
-		<span class="ident">ChainType::Live</span>,
-		<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-			<span class="ident">westmint_genesis</span>(
-				<span class="comment">// initial collators.</span>
-				<span class="macro">vec!</span>[
+	WestmintChainSpec::from_genesis(
+		<span class="comment">// Name
+		</span><span class="string">&quot;Westmint&quot;</span>,
+		<span class="comment">// ID
+		</span><span class="string">&quot;westmint&quot;</span>,
+		ChainType::Live,
+		<span class="kw">move </span>|| {
+			westmint_genesis(
+				<span class="comment">// initial collators.
+				</span><span class="macro">vec!</span>[
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;9cfd429fa002114f33c1d3e211501d62830c9868228eb3b4b8ae15a83de04325&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;9cfd429fa002114f33c1d3e211501d62830c9868228eb3b4b8ae15a83de04325&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;12a03fb4e7bda6c9a07ec0a11d03c24746943e054ff0bb04938970104c783876&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;12a03fb4e7bda6c9a07ec0a11d03c24746943e054ff0bb04938970104c783876&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;1256436307dfde969324e95b8c62cb9101f520a39435e6af0f7ac07b34e1931f&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;1256436307dfde969324e95b8c62cb9101f520a39435e6af0f7ac07b34e1931f&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 					(
 						<span class="macro">hex!</span>(<span class="string">&quot;98102b7bca3f070f9aa19f58feed2c0a4e107d203396028ec17a47e1ed80e322&quot;</span>)
-							.<span class="ident">into</span>(),
+							.into(),
 						<span class="macro">hex!</span>(<span class="string">&quot;98102b7bca3f070f9aa19f58feed2c0a4e107d203396028ec17a47e1ed80e322&quot;</span>)
-							.<span class="ident">unchecked_into</span>(),
+							.unchecked_into(),
 					),
 				],
-				<span class="ident">Vec::new</span>(),
-				<span class="number">1000</span>.<span class="ident">into</span>(),
+				Vec::new(),
+				<span class="number">1000</span>.into(),
 			)
 		},
-		<span class="ident">Vec::new</span>(),
+		Vec::new(),
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
 		<span class="prelude-val">None</span>,
-		<span class="prelude-val">Some</span>(<span class="ident">properties</span>),
-		<span class="ident">Extensions</span> { <span class="ident">relay_chain</span>: <span class="string">&quot;westend&quot;</span>.<span class="ident">into</span>(), <span class="ident">para_id</span>: <span class="number">1000</span> },
+		<span class="prelude-val">Some</span>(properties),
+		Extensions { relay_chain: <span class="string">&quot;westend&quot;</span>.into(), para_id: <span class="number">1000 </span>},
 	)
 }
 
-<span class="kw">fn</span> <span class="ident">westmint_genesis</span>(
-	<span class="ident">invulnerables</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">AccountId</span>, <span class="ident">AuraId</span>)<span class="op">&gt;</span>,
-	<span class="ident">endowed_accounts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>,
-	<span class="ident">id</span>: <span class="ident">ParaId</span>,
-) -&gt; <span class="ident">westmint_runtime::GenesisConfig</span> {
-	<span class="ident">westmint_runtime::GenesisConfig</span> {
-		<span class="ident">system</span>: <span class="ident">westmint_runtime::SystemConfig</span> {
-			<span class="ident">code</span>: <span class="ident">westmint_runtime::WASM_BINARY</span>
-				.<span class="ident">expect</span>(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
-				.<span class="ident">to_vec</span>(),
+<span class="kw">fn </span>westmint_genesis(
+	invulnerables: Vec&lt;(AccountId, AuraId)&gt;,
+	endowed_accounts: Vec&lt;AccountId&gt;,
+	id: ParaId,
+) -&gt; westmint_runtime::GenesisConfig {
+	westmint_runtime::GenesisConfig {
+		system: westmint_runtime::SystemConfig {
+			code: westmint_runtime::WASM_BINARY
+				.expect(<span class="string">&quot;WASM binary was not build, please build it!&quot;</span>)
+				.to_vec(),
 		},
-		<span class="ident">balances</span>: <span class="ident">westmint_runtime::BalancesConfig</span> {
-			<span class="ident">balances</span>: <span class="ident">endowed_accounts</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">k</span><span class="op">|</span> (<span class="ident">k</span>, <span class="ident">WESTMINT_ED</span> <span class="op">*</span> <span class="number">4096</span>)).<span class="ident">collect</span>(),
+		balances: westmint_runtime::BalancesConfig {
+			balances: endowed_accounts.iter().cloned().map(|k| (k, WESTMINT_ED * <span class="number">4096</span>)).collect(),
 		},
-		<span class="ident">parachain_info</span>: <span class="ident">westmint_runtime::ParachainInfoConfig</span> { <span class="ident">parachain_id</span>: <span class="ident">id</span> },
-		<span class="ident">collator_selection</span>: <span class="ident">westmint_runtime::CollatorSelectionConfig</span> {
-			<span class="ident">invulnerables</span>: <span class="ident">invulnerables</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">acc</span>).<span class="ident">collect</span>(),
-			<span class="ident">candidacy_bond</span>: <span class="ident">WESTMINT_ED</span> <span class="op">*</span> <span class="number">16</span>,
-			..<span class="ident">Default::default</span>()
+		parachain_info: westmint_runtime::ParachainInfoConfig { parachain_id: id },
+		collator_selection: westmint_runtime::CollatorSelectionConfig {
+			invulnerables: invulnerables.iter().cloned().map(|(acc, <span class="kw">_</span>)| acc).collect(),
+			candidacy_bond: WESTMINT_ED * <span class="number">16</span>,
+			..Default::default()
 		},
-		<span class="ident">session</span>: <span class="ident">westmint_runtime::SessionConfig</span> {
-			<span class="ident">keys</span>: <span class="ident">invulnerables</span>
-				.<span class="ident">into_iter</span>()
-				.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">acc</span>, <span class="ident">aura</span>)<span class="op">|</span> {
+		session: westmint_runtime::SessionConfig {
+			keys: invulnerables
+				.into_iter()
+				.map(|(acc, aura)| {
 					(
-						<span class="ident">acc</span>.<span class="ident">clone</span>(),                 <span class="comment">// account id</span>
-						<span class="ident">acc</span>,                         <span class="comment">// validator id</span>
-						<span class="ident">westmint_session_keys</span>(<span class="ident">aura</span>), <span class="comment">// session keys</span>
-					)
+						acc.clone(),                 <span class="comment">// account id
+						</span>acc,                         <span class="comment">// validator id
+						</span>westmint_session_keys(aura), <span class="comment">// session keys
+					</span>)
 				})
-				.<span class="ident">collect</span>(),
+				.collect(),
 		},
-		<span class="comment">// no need to pass anything to aura, in fact it will panic if we do. Session will take care</span>
-		<span class="comment">// of this.</span>
-		<span class="ident">aura</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">aura_ext</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">parachain_system</span>: <span class="ident">Default::default</span>(),
-		<span class="ident">polkadot_xcm</span>: <span class="ident">westmint_runtime::PolkadotXcmConfig</span> {
-			<span class="ident">safe_xcm_version</span>: <span class="prelude-val">Some</span>(<span class="ident">SAFE_XCM_VERSION</span>),
+		<span class="comment">// no need to pass anything to aura, in fact it will panic if we do. Session will take care
+		// of this.
+		</span>aura: Default::default(),
+		aura_ext: Default::default(),
+		parachain_system: Default::default(),
+		polkadot_xcm: westmint_runtime::PolkadotXcmConfig {
+			safe_xcm_version: <span class="prelude-val">Some</span>(SAFE_XCM_VERSION),
 		},
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="polkadot_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="polkadot_parachain" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

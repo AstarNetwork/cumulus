@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/pallets/ping/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_ping/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_ping/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_ping/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `parachains/pallets/ping/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cumulus_ping/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cumulus_ping/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cumulus_ping/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -232,134 +232,134 @@
 <span id="232">232</span>
 <span id="233">233</span>
 <span id="234">234</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of Cumulus.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.
+// This file is part of Cumulus.
 
-<span class="comment">// Cumulus is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
+// Cumulus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
-<span class="comment">// Cumulus is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
+// Cumulus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+// You should have received a copy of the GNU General Public License
+// along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
-<span class="doccomment">//! Pallet to spam the XCM/UMP.</span>
+</span><span class="doccomment">//! Pallet to spam the XCM/UMP.
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
+</span><span class="attribute">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
 
-<span class="kw">use</span> <span class="ident">cumulus_pallet_xcm</span>::{<span class="ident">ensure_sibling_para</span>, <span class="ident">Origin</span> <span class="kw">as</span> <span class="ident">CumulusOrigin</span>};
-<span class="kw">use</span> <span class="ident">cumulus_primitives_core::ParaId</span>;
-<span class="kw">use</span> <span class="ident">frame_support</span>::{<span class="ident">parameter_types</span>, <span class="ident">BoundedVec</span>};
-<span class="kw">use</span> <span class="ident">frame_system::Config</span> <span class="kw">as</span> <span class="ident">SystemConfig</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::Saturating</span>;
-<span class="kw">use</span> <span class="ident">sp_std::prelude</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">xcm::latest::prelude</span>::<span class="kw-2">*</span>;
+</span><span class="kw">use </span>cumulus_pallet_xcm::{ensure_sibling_para, Origin <span class="kw">as </span>CumulusOrigin};
+<span class="kw">use </span>cumulus_primitives_core::ParaId;
+<span class="kw">use </span>frame_support::{parameter_types, BoundedVec};
+<span class="kw">use </span>frame_system::Config <span class="kw">as </span>SystemConfig;
+<span class="kw">use </span>sp_runtime::traits::Saturating;
+<span class="kw">use </span>sp_std::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span>xcm::latest::prelude::<span class="kw-2">*</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">pallet</span>::<span class="kw-2">*</span>;
+<span class="kw">pub use </span>pallet::<span class="kw-2">*</span>;
 
-<span class="macro">parameter_types!</span> {
-	<span class="kw">const</span> <span class="ident">MaxParachains</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">100</span>;
-	<span class="kw">const</span> <span class="ident">MaxPayloadSize</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1024</span>;
+<span class="macro">parameter_types! </span>{
+	<span class="kw">const </span>MaxParachains: u32 = <span class="number">100</span>;
+	<span class="kw">const </span>MaxPayloadSize: u32 = <span class="number">1024</span>;
 }
 
-<span class="attribute">#[<span class="ident">frame_support::pallet</span>]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">pallet</span> {
-	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">frame_support::pallet_prelude</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">frame_system::pallet_prelude</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[frame_support::pallet]
+</span><span class="kw">pub mod </span>pallet {
+	<span class="kw">use super</span>::<span class="kw-2">*</span>;
+	<span class="kw">use </span>frame_support::pallet_prelude::<span class="kw-2">*</span>;
+	<span class="kw">use </span>frame_system::pallet_prelude::<span class="kw-2">*</span>;
 
-	<span class="attribute">#[<span class="ident">pallet::pallet</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::generate_store</span>(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">trait</span> <span class="ident">Store</span>)]</span>
-	<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw">_</span>);
+	<span class="attribute">#[pallet::pallet]
+	#[pallet::generate_store(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">trait </span>Store)]
+	</span><span class="kw">pub struct </span>Pallet&lt;T&gt;(<span class="kw">_</span>);
 
-	<span class="doccomment">/// The module configuration trait.</span>
-	<span class="attribute">#[<span class="ident">pallet::config</span>]</span>
-	<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Config</span>: <span class="ident">frame_system::Config</span> {
-		<span class="doccomment">/// The overarching event type.</span>
-		<span class="kw">type</span> <span class="ident">RuntimeEvent</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IsType</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">frame_system::Config</span><span class="op">&gt;</span><span class="ident">::RuntimeEvent</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The module configuration trait.
+	</span><span class="attribute">#[pallet::config]
+	</span><span class="kw">pub trait </span>Config: frame_system::Config {
+		<span class="doccomment">/// The overarching event type.
+		</span><span class="kw">type </span>RuntimeEvent: From&lt;Event&lt;<span class="self">Self</span>&gt;&gt; + IsType&lt;&lt;<span class="self">Self </span><span class="kw">as </span>frame_system::Config&gt;::RuntimeEvent&gt;;
 
-		<span class="kw">type</span> <span class="ident">RuntimeOrigin</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">SystemConfig</span><span class="op">&gt;</span><span class="ident">::RuntimeOrigin</span><span class="op">&gt;</span>
-			<span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CumulusOrigin</span>, <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::RuntimeOrigin</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+		<span class="kw">type </span>RuntimeOrigin: From&lt;&lt;<span class="self">Self </span><span class="kw">as </span>SystemConfig&gt;::RuntimeOrigin&gt;
+			+ Into&lt;<span class="prelude-ty">Result</span>&lt;CumulusOrigin, &lt;<span class="self">Self </span><span class="kw">as </span>Config&gt;::RuntimeOrigin&gt;&gt;;
 
-		<span class="doccomment">/// The overarching call type; we assume sibling chains use the same type.</span>
-		<span class="kw">type</span> <span class="ident">RuntimeCall</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Call</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Encode</span>;
+		<span class="doccomment">/// The overarching call type; we assume sibling chains use the same type.
+		</span><span class="kw">type </span>RuntimeCall: From&lt;Call&lt;<span class="self">Self</span>&gt;&gt; + Encode;
 
-		<span class="kw">type</span> <span class="ident">XcmSender</span>: <span class="ident">SendXcm</span>;
+		<span class="kw">type </span>XcmSender: SendXcm;
 	}
 
-	<span class="doccomment">/// The target parachains to ping.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">Targets</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span>
+	<span class="doccomment">/// The target parachains to ping.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>Targets&lt;T: Config&gt; = StorageValue&lt;
 		<span class="kw">_</span>,
-		<span class="ident">BoundedVec</span><span class="op">&lt;</span>(<span class="ident">ParaId</span>, <span class="ident">BoundedVec</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">MaxPayloadSize</span><span class="op">&gt;</span>), <span class="ident">MaxParachains</span><span class="op">&gt;</span>,
-		<span class="ident">ValueQuery</span>,
-	<span class="op">&gt;</span>;
+		BoundedVec&lt;(ParaId, BoundedVec&lt;u8, MaxPayloadSize&gt;), MaxParachains&gt;,
+		ValueQuery,
+	&gt;;
 
-	<span class="doccomment">/// The total number of pings sent.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">PingCount</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">StorageValue</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">u32</span>, <span class="ident">ValueQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The total number of pings sent.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>PingCount&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, u32, ValueQuery&gt;;
 
-	<span class="doccomment">/// The sent pings.</span>
-	<span class="attribute">#[<span class="ident">pallet::storage</span>]</span>
-	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">Pings</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="op">=</span>
-		<span class="ident">StorageMap</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Blake2_128Concat</span>, <span class="ident">u32</span>, <span class="ident">T::BlockNumber</span>, <span class="ident">OptionQuery</span><span class="op">&gt;</span>;
+	<span class="doccomment">/// The sent pings.
+	</span><span class="attribute">#[pallet::storage]
+	</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type </span>Pings&lt;T: Config&gt; =
+		StorageMap&lt;<span class="kw">_</span>, Blake2_128Concat, u32, T::BlockNumber, OptionQuery&gt;;
 
-	<span class="attribute">#[<span class="ident">pallet::event</span>]</span>
-	<span class="attribute">#[<span class="ident">pallet::generate_deposit</span>(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">deposit_event</span>)]</span>
-	<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> {
-		<span class="ident">PingSent</span>(<span class="ident">ParaId</span>, <span class="ident">u32</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>),
-		<span class="ident">Pinged</span>(<span class="ident">ParaId</span>, <span class="ident">u32</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>),
-		<span class="ident">PongSent</span>(<span class="ident">ParaId</span>, <span class="ident">u32</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>),
-		<span class="ident">Ponged</span>(<span class="ident">ParaId</span>, <span class="ident">u32</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">T::BlockNumber</span>),
-		<span class="ident">ErrorSendingPing</span>(<span class="ident">SendError</span>, <span class="ident">ParaId</span>, <span class="ident">u32</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>),
-		<span class="ident">ErrorSendingPong</span>(<span class="ident">SendError</span>, <span class="ident">ParaId</span>, <span class="ident">u32</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>),
-		<span class="ident">UnknownPong</span>(<span class="ident">ParaId</span>, <span class="ident">u32</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>),
+	<span class="attribute">#[pallet::event]
+	#[pallet::generate_deposit(<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>deposit_event)]
+	</span><span class="kw">pub enum </span>Event&lt;T: Config&gt; {
+		PingSent(ParaId, u32, Vec&lt;u8&gt;),
+		Pinged(ParaId, u32, Vec&lt;u8&gt;),
+		PongSent(ParaId, u32, Vec&lt;u8&gt;),
+		Ponged(ParaId, u32, Vec&lt;u8&gt;, T::BlockNumber),
+		ErrorSendingPing(SendError, ParaId, u32, Vec&lt;u8&gt;),
+		ErrorSendingPong(SendError, ParaId, u32, Vec&lt;u8&gt;),
+		UnknownPong(ParaId, u32, Vec&lt;u8&gt;),
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::error</span>]</span>
-	<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Error</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="doccomment">/// Too many parachains have been added as a target.</span>
-		<span class="ident">TooManyTargets</span>,
-		<span class="doccomment">/// The payload provided is too large, limit is 1024 bytes.</span>
-		<span class="ident">PayloadTooLarge</span>,
+	<span class="attribute">#[pallet::error]
+	</span><span class="kw">pub enum </span>Error&lt;T&gt; {
+		<span class="doccomment">/// Too many parachains have been added as a target.
+		</span>TooManyTargets,
+		<span class="doccomment">/// The payload provided is too large, limit is 1024 bytes.
+		</span>PayloadTooLarge,
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::hooks</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Hooks</span><span class="op">&lt;</span><span class="ident">BlockNumberFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="kw">fn</span> <span class="ident">on_finalize</span>(<span class="ident">n</span>: <span class="ident">T::BlockNumber</span>) {
-			<span class="kw">for</span> (<span class="ident">para</span>, <span class="ident">payload</span>) <span class="kw">in</span> <span class="ident">Targets</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::get</span>().<span class="ident">into_iter</span>() {
-				<span class="kw">let</span> <span class="ident">seq</span> <span class="op">=</span> <span class="ident">PingCount</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">seq</span><span class="op">|</span> {
-					<span class="kw-2">*</span><span class="ident">seq</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-					<span class="kw-2">*</span><span class="ident">seq</span>
+	<span class="attribute">#[pallet::hooks]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; <span class="kw">for </span>Pallet&lt;T&gt; {
+		<span class="kw">fn </span>on_finalize(n: T::BlockNumber) {
+			<span class="kw">for </span>(para, payload) <span class="kw">in </span>Targets::&lt;T&gt;::get().into_iter() {
+				<span class="kw">let </span>seq = PingCount::&lt;T&gt;::mutate(|seq| {
+					<span class="kw-2">*</span>seq += <span class="number">1</span>;
+					<span class="kw-2">*</span>seq
 				});
-				<span class="kw">match</span> <span class="ident">T::XcmSender::send_xcm</span>(
-					(<span class="number">1</span>, <span class="ident">Junction::Parachain</span>(<span class="ident">para</span>.<span class="ident">into</span>())),
-					<span class="ident">Xcm</span>(<span class="macro">vec!</span>[<span class="ident">Transact</span> {
-						<span class="ident">origin_type</span>: <span class="ident">OriginKind::Native</span>,
-						<span class="ident">require_weight_at_most</span>: <span class="number">1_000</span>,
-						<span class="ident">call</span>: <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::RuntimeCall::from</span>(<span class="ident">Call</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::ping</span> {
-							<span class="ident">seq</span>,
-							<span class="ident">payload</span>: <span class="ident">payload</span>.<span class="ident">clone</span>().<span class="ident">to_vec</span>(),
+				<span class="kw">match </span>T::XcmSender::send_xcm(
+					(<span class="number">1</span>, Junction::Parachain(para.into())),
+					Xcm(<span class="macro">vec!</span>[Transact {
+						origin_type: OriginKind::Native,
+						require_weight_at_most: <span class="number">1_000</span>,
+						call: &lt;T <span class="kw">as </span>Config&gt;::RuntimeCall::from(Call::&lt;T&gt;::ping {
+							seq,
+							payload: payload.clone().to_vec(),
 						})
-						.<span class="ident">encode</span>()
-						.<span class="ident">into</span>(),
+						.encode()
+						.into(),
 					}]),
 				) {
 					<span class="prelude-val">Ok</span>(()) =&gt; {
-						<span class="ident">Pings</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::insert</span>(<span class="ident">seq</span>, <span class="ident">n</span>);
-						<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::PingSent</span>(<span class="ident">para</span>, <span class="ident">seq</span>, <span class="ident">payload</span>.<span class="ident">to_vec</span>()));
+						Pings::&lt;T&gt;::insert(seq, n);
+						<span class="self">Self</span>::deposit_event(Event::PingSent(para, seq, payload.to_vec()));
 					},
-					<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-						<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::ErrorSendingPing</span>(
-							<span class="ident">e</span>,
-							<span class="ident">para</span>,
-							<span class="ident">seq</span>,
-							<span class="ident">payload</span>.<span class="ident">to_vec</span>(),
+					<span class="prelude-val">Err</span>(e) =&gt; {
+						<span class="self">Self</span>::deposit_event(Event::ErrorSendingPing(
+							e,
+							para,
+							seq,
+							payload.to_vec(),
 						));
 					},
 				}
@@ -367,104 +367,104 @@
 		}
 	}
 
-	<span class="attribute">#[<span class="ident">pallet::call</span>]</span>
-	<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Pallet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-		<span class="attribute">#[<span class="ident">pallet::weight</span>(<span class="number">0</span>)]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">para</span>: <span class="ident">ParaId</span>, <span class="ident">payload</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="ident">payload</span> <span class="op">=</span> <span class="ident">BoundedVec</span>::<span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">MaxPayloadSize</span><span class="op">&gt;</span><span class="ident">::try_from</span>(<span class="ident">payload</span>)
-				.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::PayloadTooLarge</span>)<span class="question-mark">?</span>;
-			<span class="ident">Targets</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::try_mutate</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> {
-				<span class="ident">t</span>.<span class="ident">try_push</span>((<span class="ident">para</span>, <span class="ident">payload</span>)).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::TooManyTargets</span>)
+	<span class="attribute">#[pallet::call]
+	</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		</span><span class="kw">pub fn </span>start(origin: OriginFor&lt;T&gt;, para: ParaId, payload: Vec&lt;u8&gt;) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			<span class="kw">let </span>payload = BoundedVec::&lt;u8, MaxPayloadSize&gt;::try_from(payload)
+				.map_err(|<span class="kw">_</span>| Error::&lt;T&gt;::PayloadTooLarge)<span class="question-mark">?</span>;
+			Targets::&lt;T&gt;::try_mutate(|t| {
+				t.try_push((para, payload)).map_err(|<span class="kw">_</span>| Error::&lt;T&gt;::TooManyTargets)
 			})<span class="question-mark">?</span>;
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[<span class="ident">pallet::weight</span>(<span class="number">0</span>)]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_many</span>(
-			<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-			<span class="ident">para</span>: <span class="ident">ParaId</span>,
-			<span class="ident">count</span>: <span class="ident">u32</span>,
-			<span class="ident">payload</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-		) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="kw">let</span> <span class="ident">bounded_payload</span> <span class="op">=</span> <span class="ident">BoundedVec</span>::<span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">MaxPayloadSize</span><span class="op">&gt;</span><span class="ident">::try_from</span>(<span class="ident">payload</span>)
-				.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::PayloadTooLarge</span>)<span class="question-mark">?</span>;
-			<span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">count</span> {
-				<span class="ident">Targets</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::try_mutate</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> {
-					<span class="ident">t</span>.<span class="ident">try_push</span>((<span class="ident">para</span>, <span class="ident">bounded_payload</span>.<span class="ident">clone</span>()))
-						.<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Error</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::TooManyTargets</span>)
+		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		</span><span class="kw">pub fn </span>start_many(
+			origin: OriginFor&lt;T&gt;,
+			para: ParaId,
+			count: u32,
+			payload: Vec&lt;u8&gt;,
+		) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			<span class="kw">let </span>bounded_payload = BoundedVec::&lt;u8, MaxPayloadSize&gt;::try_from(payload)
+				.map_err(|<span class="kw">_</span>| Error::&lt;T&gt;::PayloadTooLarge)<span class="question-mark">?</span>;
+			<span class="kw">for _ in </span><span class="number">0</span>..count {
+				Targets::&lt;T&gt;::try_mutate(|t| {
+					t.try_push((para, bounded_payload.clone()))
+						.map_err(|<span class="kw">_</span>| Error::&lt;T&gt;::TooManyTargets)
 				})<span class="question-mark">?</span>;
 			}
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[<span class="ident">pallet::weight</span>(<span class="number">0</span>)]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stop</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">para</span>: <span class="ident">ParaId</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="ident">Targets</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> {
-				<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">t</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span>(<span class="ident">p</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">p</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="ident">para</span>) {
-					<span class="ident">t</span>.<span class="ident">swap_remove</span>(<span class="ident">p</span>);
+		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		</span><span class="kw">pub fn </span>stop(origin: OriginFor&lt;T&gt;, para: ParaId) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			Targets::&lt;T&gt;::mutate(|t| {
+				<span class="kw">if let </span><span class="prelude-val">Some</span>(p) = t.iter().position(|(p, <span class="kw">_</span>)| p == <span class="kw-2">&amp;</span>para) {
+					t.swap_remove(p);
 				}
 			});
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[<span class="ident">pallet::weight</span>(<span class="number">0</span>)]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stop_all</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">maybe_para</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParaId</span><span class="op">&gt;</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="ident">ensure_root</span>(<span class="ident">origin</span>)<span class="question-mark">?</span>;
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">para</span>) <span class="op">=</span> <span class="ident">maybe_para</span> {
-				<span class="ident">Targets</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::mutate</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">retain</span>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">x</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">x</span> <span class="op">!</span><span class="op">=</span> <span class="ident">para</span>));
-			} <span class="kw">else</span> {
-				<span class="ident">Targets</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::kill</span>();
+		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		</span><span class="kw">pub fn </span>stop_all(origin: OriginFor&lt;T&gt;, maybe_para: <span class="prelude-ty">Option</span>&lt;ParaId&gt;) -&gt; DispatchResult {
+			ensure_root(origin)<span class="question-mark">?</span>;
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(para) = maybe_para {
+				Targets::&lt;T&gt;::mutate(|t| t.retain(|<span class="kw-2">&amp;</span>(x, <span class="kw">_</span>)| x != para));
+			} <span class="kw">else </span>{
+				Targets::&lt;T&gt;::kill();
 			}
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[<span class="ident">pallet::weight</span>(<span class="number">0</span>)]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ping</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">seq</span>: <span class="ident">u32</span>, <span class="ident">payload</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="comment">// Only accept pings from other chains.</span>
-			<span class="kw">let</span> <span class="ident">para</span> <span class="op">=</span> <span class="ident">ensure_sibling_para</span>(<span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::RuntimeOrigin::from</span>(<span class="ident">origin</span>))<span class="question-mark">?</span>;
+		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		</span><span class="kw">pub fn </span>ping(origin: OriginFor&lt;T&gt;, seq: u32, payload: Vec&lt;u8&gt;) -&gt; DispatchResult {
+			<span class="comment">// Only accept pings from other chains.
+			</span><span class="kw">let </span>para = ensure_sibling_para(&lt;T <span class="kw">as </span>Config&gt;::RuntimeOrigin::from(origin))<span class="question-mark">?</span>;
 
-			<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::Pinged</span>(<span class="ident">para</span>, <span class="ident">seq</span>, <span class="ident">payload</span>.<span class="ident">clone</span>()));
-			<span class="kw">match</span> <span class="ident">T::XcmSender::send_xcm</span>(
-				(<span class="number">1</span>, <span class="ident">Junction::Parachain</span>(<span class="ident">para</span>.<span class="ident">into</span>())),
-				<span class="ident">Xcm</span>(<span class="macro">vec!</span>[<span class="ident">Transact</span> {
-					<span class="ident">origin_type</span>: <span class="ident">OriginKind::Native</span>,
-					<span class="ident">require_weight_at_most</span>: <span class="number">1_000</span>,
-					<span class="ident">call</span>: <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::RuntimeCall::from</span>(<span class="ident">Call</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::pong</span> {
-						<span class="ident">seq</span>,
-						<span class="ident">payload</span>: <span class="ident">payload</span>.<span class="ident">clone</span>(),
+			<span class="self">Self</span>::deposit_event(Event::Pinged(para, seq, payload.clone()));
+			<span class="kw">match </span>T::XcmSender::send_xcm(
+				(<span class="number">1</span>, Junction::Parachain(para.into())),
+				Xcm(<span class="macro">vec!</span>[Transact {
+					origin_type: OriginKind::Native,
+					require_weight_at_most: <span class="number">1_000</span>,
+					call: &lt;T <span class="kw">as </span>Config&gt;::RuntimeCall::from(Call::&lt;T&gt;::pong {
+						seq,
+						payload: payload.clone(),
 					})
-					.<span class="ident">encode</span>()
-					.<span class="ident">into</span>(),
+					.encode()
+					.into(),
 				}]),
 			) {
-				<span class="prelude-val">Ok</span>(()) =&gt; <span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::PongSent</span>(<span class="ident">para</span>, <span class="ident">seq</span>, <span class="ident">payload</span>)),
-				<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::ErrorSendingPong</span>(<span class="ident">e</span>, <span class="ident">para</span>, <span class="ident">seq</span>, <span class="ident">payload</span>)),
+				<span class="prelude-val">Ok</span>(()) =&gt; <span class="self">Self</span>::deposit_event(Event::PongSent(para, seq, payload)),
+				<span class="prelude-val">Err</span>(e) =&gt; <span class="self">Self</span>::deposit_event(Event::ErrorSendingPong(e, para, seq, payload)),
 			}
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[<span class="ident">pallet::weight</span>(<span class="number">0</span>)]</span>
-		<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pong</span>(<span class="ident">origin</span>: <span class="ident">OriginFor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">seq</span>: <span class="ident">u32</span>, <span class="ident">payload</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="ident">DispatchResult</span> {
-			<span class="comment">// Only accept pings from other chains.</span>
-			<span class="kw">let</span> <span class="ident">para</span> <span class="op">=</span> <span class="ident">ensure_sibling_para</span>(<span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::RuntimeOrigin::from</span>(<span class="ident">origin</span>))<span class="question-mark">?</span>;
+		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		</span><span class="kw">pub fn </span>pong(origin: OriginFor&lt;T&gt;, seq: u32, payload: Vec&lt;u8&gt;) -&gt; DispatchResult {
+			<span class="comment">// Only accept pings from other chains.
+			</span><span class="kw">let </span>para = ensure_sibling_para(&lt;T <span class="kw">as </span>Config&gt;::RuntimeOrigin::from(origin))<span class="question-mark">?</span>;
 
-			<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sent_at</span>) <span class="op">=</span> <span class="ident">Pings</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::take</span>(<span class="ident">seq</span>) {
-				<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::Ponged</span>(
-					<span class="ident">para</span>,
-					<span class="ident">seq</span>,
-					<span class="ident">payload</span>,
-					<span class="ident">frame_system::Pallet</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::block_number</span>().<span class="ident">saturating_sub</span>(<span class="ident">sent_at</span>),
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(sent_at) = Pings::&lt;T&gt;::take(seq) {
+				<span class="self">Self</span>::deposit_event(Event::Ponged(
+					para,
+					seq,
+					payload,
+					frame_system::Pallet::&lt;T&gt;::block_number().saturating_sub(sent_at),
 				));
-			} <span class="kw">else</span> {
-				<span class="comment">// Pong received for a ping we apparently didn&#39;t send?!</span>
-				<span class="ident"><span class="self">Self</span>::deposit_event</span>(<span class="ident">Event::UnknownPong</span>(<span class="ident">para</span>, <span class="ident">seq</span>, <span class="ident">payload</span>));
+			} <span class="kw">else </span>{
+				<span class="comment">// Pong received for a ping we apparently didn&#39;t send?!
+				</span><span class="self">Self</span>::deposit_event(Event::UnknownPong(para, seq, payload));
 			}
 			<span class="prelude-val">Ok</span>(())
 		}
 	}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_ping" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_ping" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
