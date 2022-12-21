@@ -814,6 +814,7 @@
 <span id="814">814</span>
 <span id="815">815</span>
 <span id="816">816</span>
+<span id="817">817</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -843,7 +844,7 @@
 <span class="kw">use </span>cumulus_primitives_core::{relay_chain::BlockNumber <span class="kw">as </span>RelayBlockNumber, DmpMessageHandler};
 <span class="kw">use </span>frame_support::{
 	traits::EnsureOrigin,
-	weights::{constants::WEIGHT_PER_MILLIS, Weight},
+	weights::{constants::WEIGHT_REF_TIME_PER_MILLIS, Weight},
 };
 <span class="kw">pub use </span>pallet::<span class="kw-2">*</span>;
 <span class="kw">use </span>scale_info::TypeInfo;
@@ -868,8 +869,8 @@
 	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
 		<span class="self">Self </span>{
 			max_individual: Weight::from_parts(
-				<span class="number">10u64 </span>* WEIGHT_PER_MILLIS.ref_time(), <span class="comment">// 10 ms of execution time maximum by default
-				</span>DEFAULT_POV_SIZE,                     <span class="comment">// 64 KB of proof size by default
+				<span class="number">10u64 </span>* WEIGHT_REF_TIME_PER_MILLIS, <span class="comment">// 10 ms of execution time maximum by default
+				</span>DEFAULT_POV_SIZE,                   <span class="comment">// 64 KB of proof size by default
 			</span>),
 		}
 	}
@@ -972,7 +973,8 @@
 		///
 		/// Events:
 		/// - `OverweightServiced`: On success.
-		</span><span class="attribute">#[pallet::weight(Weight::from_ref_time(weight_limit.saturating_add(<span class="number">1_000_000</span>)))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">0</span>)]
+		#[pallet::weight(Weight::from_ref_time(weight_limit.saturating_add(<span class="number">1_000_000</span>)))]
 		</span><span class="kw">pub fn </span>service_overweight(
 			origin: OriginFor&lt;T&gt;,
 			index: OverweightIndex,

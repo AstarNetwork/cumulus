@@ -1580,24 +1580,6 @@
 <span id="1580">1580</span>
 <span id="1581">1581</span>
 <span id="1582">1582</span>
-<span id="1583">1583</span>
-<span id="1584">1584</span>
-<span id="1585">1585</span>
-<span id="1586">1586</span>
-<span id="1587">1587</span>
-<span id="1588">1588</span>
-<span id="1589">1589</span>
-<span id="1590">1590</span>
-<span id="1591">1591</span>
-<span id="1592">1592</span>
-<span id="1593">1593</span>
-<span id="1594">1594</span>
-<span id="1595">1595</span>
-<span id="1596">1596</span>
-<span id="1597">1597</span>
-<span id="1598">1598</span>
-<span id="1599">1599</span>
-<span id="1600">1600</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -1622,16 +1604,14 @@
 };
 <span class="kw">use </span>cumulus_client_network::BlockAnnounceValidator;
 <span class="kw">use </span>cumulus_client_service::{
-	prepare_node_config, start_collator, start_full_node, StartCollatorParams, StartFullNodeParams,
+	build_relay_chain_interface, prepare_node_config, start_collator, start_full_node,
+	StartCollatorParams, StartFullNodeParams,
 };
 <span class="kw">use </span>cumulus_primitives_core::{
 	relay_chain::v2::{Hash <span class="kw">as </span>PHash, PersistedValidationData},
 	ParaId,
 };
-<span class="kw">use </span>cumulus_relay_chain_inprocess_interface::build_inprocess_relay_chain;
-<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainError, RelayChainInterface, RelayChainResult};
-<span class="kw">use </span>cumulus_relay_chain_minimal_node::build_minimal_relay_chain_node;
-<span class="kw">use </span>polkadot_service::CollatorPair;
+<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainError, RelayChainInterface};
 <span class="kw">use </span>sp_core::Pair;
 
 <span class="kw">use </span>jsonrpsee::RpcModule;
@@ -1643,7 +1623,7 @@
 <span class="kw">use </span>futures::lock::Mutex;
 <span class="kw">use </span>sc_consensus::{
 	import_queue::{BasicQueue, Verifier <span class="kw">as </span>VerifierT},
-	BlockImportParams,
+	BlockImportParams, ImportQueue,
 };
 <span class="kw">use </span>sc_executor::WasmExecutor;
 <span class="kw">use </span>sc_network::NetworkService;
@@ -1673,7 +1653,8 @@
 
 <span class="kw">type </span>ParachainBackend = TFullBackend&lt;Block&gt;;
 
-<span class="kw">type </span>ParachainBlockImport&lt;RuntimeApi&gt; = TParachainBlockImport&lt;Arc&lt;ParachainClient&lt;RuntimeApi&gt;&gt;&gt;;
+<span class="kw">type </span>ParachainBlockImport&lt;RuntimeApi&gt; =
+	TParachainBlockImport&lt;Block, Arc&lt;ParachainClient&lt;RuntimeApi&gt;&gt;, ParachainBackend&gt;;
 
 <span class="doccomment">/// Native executor instance.
 </span><span class="kw">pub struct </span>ShellRuntimeExecutor;
@@ -1877,7 +1858,7 @@
 		client.clone(),
 	);
 
-	<span class="kw">let </span>block_import = ParachainBlockImport::new(client.clone());
+	<span class="kw">let </span>block_import = ParachainBlockImport::new(client.clone(), backend.clone());
 
 	<span class="kw">let </span>import_queue = build_import_queue(
 		client.clone(),
@@ -1899,27 +1880,6 @@
 	};
 
 	<span class="prelude-val">Ok</span>(params)
-}
-
-<span class="kw">async fn </span>build_relay_chain_interface(
-	polkadot_config: Configuration,
-	parachain_config: <span class="kw-2">&amp;</span>Configuration,
-	telemetry_worker_handle: <span class="prelude-ty">Option</span>&lt;TelemetryWorkerHandle&gt;,
-	task_manager: <span class="kw-2">&amp;mut </span>TaskManager,
-	collator_options: CollatorOptions,
-	hwbench: <span class="prelude-ty">Option</span>&lt;sc_sysinfo::HwBench&gt;,
-) -&gt; RelayChainResult&lt;(Arc&lt;(<span class="kw">dyn </span>RelayChainInterface + <span class="lifetime">&#39;static</span>)&gt;, <span class="prelude-ty">Option</span>&lt;CollatorPair&gt;)&gt; {
-	<span class="kw">match </span>collator_options.relay_chain_rpc_url {
-		<span class="prelude-val">Some</span>(relay_chain_url) =&gt;
-			build_minimal_relay_chain_node(polkadot_config, task_manager, relay_chain_url).<span class="kw">await</span>,
-		<span class="prelude-val">None </span>=&gt; build_inprocess_relay_chain(
-			polkadot_config,
-			parachain_config,
-			telemetry_worker_handle,
-			task_manager,
-			hwbench,
-		),
-	}
 }
 
 <span class="doccomment">/// Start a shell node with the given parachain `Configuration` and relay chain `Configuration`.
@@ -2004,14 +1964,15 @@
 	<span class="kw">let </span>validator = parachain_config.role.is_authority();
 	<span class="kw">let </span>prometheus_registry = parachain_config.prometheus_registry().cloned();
 	<span class="kw">let </span>transaction_pool = params.transaction_pool.clone();
-	<span class="kw">let </span>import_queue = cumulus_client_service::SharedImportQueue::new(params.import_queue);
+	<span class="kw">let </span>import_queue_service = params.import_queue.service();
+
 	<span class="kw">let </span>(network, system_rpc_tx, tx_handler_controller, start_network) =
 		sc_service::build_network(sc_service::BuildNetworkParams {
 			config: <span class="kw-2">&amp;</span>parachain_config,
 			client: client.clone(),
 			transaction_pool: transaction_pool.clone(),
 			spawn_handle: task_manager.spawn_handle(),
-			import_queue: import_queue.clone(),
+			import_queue: params.import_queue,
 			block_announce_validator_builder: <span class="prelude-val">Some</span>(Box::new(|<span class="kw">_</span>| {
 				Box::new(block_announce_validator)
 			})),
@@ -2080,7 +2041,7 @@
 			relay_chain_interface,
 			spawner,
 			parachain_consensus,
-			import_queue,
+			import_queue: import_queue_service,
 			collator_key: collator_key.expect(<span class="string">&quot;Command line arguments do not allow this. qed&quot;</span>),
 			relay_chain_slot_duration,
 		};
@@ -2094,7 +2055,7 @@
 			para_id,
 			relay_chain_interface,
 			relay_chain_slot_duration,
-			import_queue,
+			import_queue: import_queue_service,
 		};
 
 		start_full_node(params)<span class="question-mark">?</span>;
@@ -2187,14 +2148,15 @@
 	<span class="kw">let </span>validator = parachain_config.role.is_authority();
 	<span class="kw">let </span>prometheus_registry = parachain_config.prometheus_registry().cloned();
 	<span class="kw">let </span>transaction_pool = params.transaction_pool.clone();
-	<span class="kw">let </span>import_queue = cumulus_client_service::SharedImportQueue::new(params.import_queue);
+	<span class="kw">let </span>import_queue_service = params.import_queue.service();
+
 	<span class="kw">let </span>(network, system_rpc_tx, tx_handler_controller, start_network) =
 		sc_service::build_network(sc_service::BuildNetworkParams {
 			config: <span class="kw-2">&amp;</span>parachain_config,
 			client: client.clone(),
 			transaction_pool: transaction_pool.clone(),
 			spawn_handle: task_manager.spawn_handle(),
-			import_queue: import_queue.clone(),
+			import_queue: params.import_queue,
 			block_announce_validator_builder: <span class="prelude-val">Some</span>(Box::new(|<span class="kw">_</span>| {
 				Box::new(block_announce_validator)
 			})),
@@ -2276,7 +2238,7 @@
 			relay_chain_interface: relay_chain_interface.clone(),
 			spawner,
 			parachain_consensus,
-			import_queue,
+			import_queue: import_queue_service,
 			collator_key: collator_key.expect(<span class="string">&quot;Command line arguments do not allow this. qed&quot;</span>),
 			relay_chain_slot_duration,
 		};
@@ -2290,7 +2252,7 @@
 			para_id,
 			relay_chain_interface,
 			relay_chain_slot_duration,
-			import_queue,
+			import_queue: import_queue_service,
 		};
 
 		start_full_node(params)<span class="question-mark">?</span>;
@@ -2763,6 +2725,7 @@
 			<span class="kw">let </span>telemetry2 = telemetry.clone();
 			<span class="kw">let </span>prometheus_registry2 = prometheus_registry.map(|r| (<span class="kw-2">*</span>r).clone());
 			<span class="kw">let </span>relay_chain_for_aura = relay_chain_interface.clone();
+
 			<span class="kw">let </span>aura_consensus = BuildOnAccess::Uninitialized(<span class="prelude-val">Some</span>(Box::new(<span class="kw">move </span>|| {
 				<span class="kw">let </span>slot_duration =
 					cumulus_client_consensus_aura::slot_duration(<span class="kw-2">&amp;*</span>client2).unwrap();
@@ -2956,14 +2919,15 @@
 	<span class="kw">let </span>validator = parachain_config.role.is_authority();
 	<span class="kw">let </span>prometheus_registry = parachain_config.prometheus_registry().cloned();
 	<span class="kw">let </span>transaction_pool = params.transaction_pool.clone();
-	<span class="kw">let </span>import_queue = cumulus_client_service::SharedImportQueue::new(params.import_queue);
+	<span class="kw">let </span>import_queue_service = params.import_queue.service();
+
 	<span class="kw">let </span>(network, system_rpc_tx, tx_handler_controller, start_network) =
 		sc_service::build_network(sc_service::BuildNetworkParams {
 			config: <span class="kw-2">&amp;</span>parachain_config,
 			client: client.clone(),
 			transaction_pool: transaction_pool.clone(),
 			spawn_handle: task_manager.spawn_handle(),
-			import_queue: import_queue.clone(),
+			import_queue: params.import_queue,
 			block_announce_validator_builder: <span class="prelude-val">Some</span>(Box::new(|<span class="kw">_</span>| {
 				Box::new(block_announce_validator)
 			})),
@@ -3044,7 +3008,7 @@
 			relay_chain_interface,
 			spawner,
 			parachain_consensus,
-			import_queue,
+			import_queue: import_queue_service,
 			collator_key: collator_key.expect(<span class="string">&quot;Command line arguments do not allow this. qed&quot;</span>),
 			relay_chain_slot_duration,
 		};
@@ -3058,7 +3022,7 @@
 			para_id,
 			relay_chain_interface,
 			relay_chain_slot_duration,
-			import_queue,
+			import_queue: import_queue_service,
 		};
 
 		start_full_node(params)<span class="question-mark">?</span>;

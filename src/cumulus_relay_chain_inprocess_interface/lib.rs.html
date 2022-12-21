@@ -516,8 +516,6 @@
 <span id="516">516</span>
 <span id="517">517</span>
 <span id="518">518</span>
-<span id="519">519</span>
-<span id="520">520</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -785,9 +783,7 @@
 {
 	<span class="kw">let </span>_lock = backend.get_import_lock().read();
 
-	<span class="kw">let </span>block_id = BlockId::Hash(hash);
-
-	<span class="kw">if </span>backend.blockchain().status(block_id)<span class="question-mark">? </span>== BlockStatus::InChain {
+	<span class="kw">if </span>backend.blockchain().status(hash)<span class="question-mark">? </span>== BlockStatus::InChain {
 		<span class="kw">return </span><span class="prelude-val">Ok</span>(BlockCheckStatus::InChain)
 	}
 

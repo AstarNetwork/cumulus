@@ -526,6 +526,11 @@
 <span id="526">526</span>
 <span id="527">527</span>
 <span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright (C) 2021 Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -814,7 +819,8 @@
 	<span class="attribute">#[pallet::call]
 	</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
 		<span class="doccomment">/// Set the list of invulnerable (fixed) collators.
-		</span><span class="attribute">#[pallet::weight(T::WeightInfo::set_invulnerables(new.len() <span class="kw">as </span>u32))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">0</span>)]
+		#[pallet::weight(T::WeightInfo::set_invulnerables(new.len() <span class="kw">as </span>u32))]
 		</span><span class="kw">pub fn </span>set_invulnerables(
 			origin: OriginFor&lt;T&gt;,
 			new: Vec&lt;T::AccountId&gt;,
@@ -843,7 +849,8 @@
 		<span class="doccomment">/// Set the ideal number of collators (not including the invulnerables).
 		/// If lowering this number, then the number of running collators could be higher than this figure.
 		/// Aside from that edge case, there should be no other way to have more collators than the desired number.
-		</span><span class="attribute">#[pallet::weight(T::WeightInfo::set_desired_candidates())]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">1</span>)]
+		#[pallet::weight(T::WeightInfo::set_desired_candidates())]
 		</span><span class="kw">pub fn </span>set_desired_candidates(
 			origin: OriginFor&lt;T&gt;,
 			max: u32,
@@ -859,7 +866,8 @@
 		}
 
 		<span class="doccomment">/// Set the candidacy bond amount.
-		</span><span class="attribute">#[pallet::weight(T::WeightInfo::set_candidacy_bond())]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">2</span>)]
+		#[pallet::weight(T::WeightInfo::set_candidacy_bond())]
 		</span><span class="kw">pub fn </span>set_candidacy_bond(
 			origin: OriginFor&lt;T&gt;,
 			bond: BalanceOf&lt;T&gt;,
@@ -874,7 +882,8 @@
 		/// registered session keys and (b) be able to reserve the `CandidacyBond`.
 		///
 		/// This call is not available to `Invulnerable` collators.
-		</span><span class="attribute">#[pallet::weight(T::WeightInfo::register_as_candidate(T::MaxCandidates::get()))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">3</span>)]
+		#[pallet::weight(T::WeightInfo::register_as_candidate(T::MaxCandidates::get()))]
 		</span><span class="kw">pub fn </span>register_as_candidate(origin: OriginFor&lt;T&gt;) -&gt; DispatchResultWithPostInfo {
 			<span class="kw">let </span>who = ensure_signed(origin)<span class="question-mark">?</span>;
 
@@ -919,7 +928,8 @@
 		/// This call will fail if the total number of candidates would drop below `MinCandidates`.
 		///
 		/// This call is not available to `Invulnerable` collators.
-		</span><span class="attribute">#[pallet::weight(T::WeightInfo::leave_intent(T::MaxCandidates::get()))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">4</span>)]
+		#[pallet::weight(T::WeightInfo::leave_intent(T::MaxCandidates::get()))]
 		</span><span class="kw">pub fn </span>leave_intent(origin: OriginFor&lt;T&gt;) -&gt; DispatchResultWithPostInfo {
 			<span class="kw">let </span>who = ensure_signed(origin)<span class="question-mark">?</span>;
 			<span class="macro">ensure!</span>(

@@ -1125,6 +1125,10 @@
 <span id="1125">1125</span>
 <span id="1126">1126</span>
 <span id="1127">1127</span>
+<span id="1128">1128</span>
+<span id="1129">1129</span>
+<span id="1130">1130</span>
+<span id="1131">1131</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2020 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -1462,7 +1466,8 @@
 		///
 		/// As a side effect, this function upgrades the current validation function
 		/// if the appropriate time has come.
-		</span><span class="attribute">#[pallet::weight((<span class="number">0</span>, DispatchClass::Mandatory))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">0</span>)]
+		#[pallet::weight((<span class="number">0</span>, DispatchClass::Mandatory))]
 		</span><span class="comment">// TODO: This weight should be corrected.
 		</span><span class="kw">pub fn </span>set_validation_data(
 			origin: OriginFor&lt;T&gt;,
@@ -1558,7 +1563,8 @@
 			<span class="prelude-val">Ok</span>(PostDispatchInfo { actual_weight: <span class="prelude-val">Some</span>(total_weight), pays_fee: Pays::No })
 		}
 
-		<span class="attribute">#[pallet::weight((<span class="number">1_000</span>, DispatchClass::Operational))]
+		<span class="attribute">#[pallet::call_index(<span class="number">1</span>)]
+		#[pallet::weight((<span class="number">1_000</span>, DispatchClass::Operational))]
 		</span><span class="kw">pub fn </span>sudo_send_upward_message(
 			origin: OriginFor&lt;T&gt;,
 			message: UpwardMessage,
@@ -1568,7 +1574,8 @@
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[pallet::weight((<span class="number">1_000_000</span>, DispatchClass::Operational))]
+		<span class="attribute">#[pallet::call_index(<span class="number">2</span>)]
+		#[pallet::weight((<span class="number">1_000_000</span>, DispatchClass::Operational))]
 		</span><span class="kw">pub fn </span>authorize_upgrade(origin: OriginFor&lt;T&gt;, code_hash: T::Hash) -&gt; DispatchResult {
 			ensure_root(origin)<span class="question-mark">?</span>;
 
@@ -1578,7 +1585,8 @@
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[pallet::weight(<span class="number">1_000_000</span>)]
+		<span class="attribute">#[pallet::call_index(<span class="number">3</span>)]
+		#[pallet::weight(<span class="number">1_000_000</span>)]
 		</span><span class="kw">pub fn </span>enact_authorized_upgrade(
 			<span class="kw">_</span>: OriginFor&lt;T&gt;,
 			code: Vec&lt;u8&gt;,

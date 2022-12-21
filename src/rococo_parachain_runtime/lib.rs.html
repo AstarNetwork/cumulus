@@ -751,6 +751,9 @@
 <span id="751">751</span>
 <span id="752">752</span>
 <span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -799,7 +802,9 @@
 		Randomness,
 	},
 	weights::{
-		constants::{BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_PER_SECOND},
+		constants::{
+			BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_REF_TIME_PER_SECOND,
+		},
 		ConstantMultiplier, IdentityFee, Weight,
 	},
 	StorageValue,
@@ -852,10 +857,10 @@
 	spec_name: <span class="macro">create_runtime_str!</span>(<span class="string">&quot;test-parachain&quot;</span>),
 	impl_name: <span class="macro">create_runtime_str!</span>(<span class="string">&quot;test-parachain&quot;</span>),
 	authoring_version: <span class="number">1</span>,
-	spec_version: <span class="number">9320</span>,
+	spec_version: <span class="number">9330</span>,
 	impl_version: <span class="number">0</span>,
 	apis: RUNTIME_API_VERSIONS,
-	transaction_version: <span class="number">2</span>,
+	transaction_version: <span class="number">3</span>,
 	state_version: <span class="number">0</span>,
 };
 
@@ -890,9 +895,10 @@
 /// by  Operational  extrinsics.
 </span><span class="kw">const </span>NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(<span class="number">75</span>);
 <span class="doccomment">/// We allow for .5 seconds of compute with a 12 second average block time.
-</span><span class="kw">const </span>MAXIMUM_BLOCK_WEIGHT: Weight = WEIGHT_PER_SECOND
-	.saturating_div(<span class="number">2</span>)
-	.set_proof_size(cumulus_primitives_core::relay_chain::v2::MAX_POV_SIZE <span class="kw">as </span>u64);
+</span><span class="kw">const </span>MAXIMUM_BLOCK_WEIGHT: Weight = Weight::from_parts(
+	WEIGHT_REF_TIME_PER_SECOND.saturating_div(<span class="number">2</span>),
+	cumulus_primitives_core::relay_chain::v2::MAX_POV_SIZE <span class="kw">as </span>u64,
+);
 
 <span class="macro">parameter_types! </span>{
 	<span class="kw">pub const </span>BlockHashCount: BlockNumber = <span class="number">250</span>;

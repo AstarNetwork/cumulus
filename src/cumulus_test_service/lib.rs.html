@@ -821,6 +821,16 @@
 <span id="821">821</span>
 <span id="822">822</span>
 <span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -871,6 +881,7 @@
 <span class="kw">use </span>polkadot_primitives::v2::{CollatorPair, Hash <span class="kw">as </span>PHash, PersistedValidationData};
 <span class="kw">use </span>polkadot_service::ProvideRuntimeApi;
 <span class="kw">use </span>sc_client_api::execution_extensions::ExecutionStrategies;
+<span class="kw">use </span>sc_consensus::ImportQueue;
 <span class="kw">use </span>sc_network::{multiaddr, NetworkBlock, NetworkService};
 <span class="kw">use </span>sc_network_common::{config::TransportConfig, service::NetworkStateInfo};
 <span class="kw">use </span>sc_service::{
@@ -939,10 +950,14 @@
 	sc_executor::NativeElseWasmExecutor&lt;RuntimeExecutor&gt;,
 &gt;;
 
+<span class="doccomment">/// The backend type being used by the test service.
+</span><span class="kw">pub type </span>Backend = TFullBackend&lt;Block&gt;;
+
+<span class="doccomment">/// The block-import type being used by the test service.
+</span><span class="kw">pub type </span>ParachainBlockImport = TParachainBlockImport&lt;Block, Arc&lt;Client&gt;, Backend&gt;;
+
 <span class="doccomment">/// Transaction pool type used by the test service
 </span><span class="kw">pub type </span>TransactionPool = Arc&lt;sc_transaction_pool::FullPool&lt;Block, Client&gt;&gt;;
-
-<span class="kw">type </span>ParachainBlockImport = TParachainBlockImport&lt;Arc&lt;Client&gt;&gt;;
 
 <span class="doccomment">/// Starts a `ServiceBuilder` for a full service.
 ///
@@ -953,7 +968,7 @@
 ) -&gt; <span class="prelude-ty">Result</span>&lt;
 	PartialComponents&lt;
 		Client,
-		TFullBackend&lt;Block&gt;,
+		Backend,
 		(),
 		sc_consensus::import_queue::BasicQueue&lt;Block, PrefixedMemoryDB&lt;BlakeTwo256&gt;&gt;,
 		sc_transaction_pool::FullPool&lt;Block, Client&gt;,
@@ -972,7 +987,7 @@
 		sc_service::new_full_parts::&lt;Block, RuntimeApi, <span class="kw">_</span>&gt;(config, <span class="prelude-val">None</span>, executor)<span class="question-mark">?</span>;
 	<span class="kw">let </span>client = Arc::new(client);
 
-	<span class="kw">let </span>block_import = ParachainBlockImport::new(client.clone());
+	<span class="kw">let </span>block_import = ParachainBlockImport::new(client.clone(), backend.clone());
 
 	<span class="kw">let </span>registry = config.prometheus_registry();
 
@@ -1012,10 +1027,14 @@
 	collator_options: CollatorOptions,
 	task_manager: <span class="kw-2">&amp;mut </span>TaskManager,
 ) -&gt; RelayChainResult&lt;Arc&lt;<span class="kw">dyn </span>RelayChainInterface + <span class="lifetime">&#39;static</span>&gt;&gt; {
-	<span class="kw">if let </span><span class="prelude-val">Some</span>(relay_chain_url) = collator_options.relay_chain_rpc_url {
-		<span class="kw">return </span>build_minimal_relay_chain_node(relay_chain_config, task_manager, relay_chain_url)
-			.<span class="kw">await
-			</span>.map(|r| r.<span class="number">0</span>)
+	<span class="kw">if </span>!collator_options.relay_chain_rpc_urls.is_empty() {
+		<span class="kw">return </span>build_minimal_relay_chain_node(
+			relay_chain_config,
+			task_manager,
+			collator_options.relay_chain_rpc_urls,
+		)
+		.<span class="kw">await
+		</span>.map(|r| r.<span class="number">0</span>)
 	}
 
 	<span class="kw">let </span>relay_chain_full_node = polkadot_test_service::new_full(
@@ -1092,14 +1111,15 @@
 	<span class="kw">let </span>block_announce_validator_builder = <span class="kw">move </span>|<span class="kw">_</span>| Box::new(block_announce_validator) <span class="kw">as </span>Box&lt;<span class="kw">_</span>&gt;;
 
 	<span class="kw">let </span>prometheus_registry = parachain_config.prometheus_registry().cloned();
-	<span class="kw">let </span>import_queue = cumulus_client_service::SharedImportQueue::new(params.import_queue);
+	<span class="kw">let </span>import_queue_service = params.import_queue.service();
+
 	<span class="kw">let </span>(network, system_rpc_tx, tx_handler_controller, start_network) =
 		sc_service::build_network(sc_service::BuildNetworkParams {
 			config: <span class="kw-2">&amp;</span>parachain_config,
 			client: client.clone(),
 			transaction_pool: transaction_pool.clone(),
 			spawn_handle: task_manager.spawn_handle(),
-			import_queue: import_queue.clone(),
+			import_queue: params.import_queue,
 			block_announce_validator_builder: <span class="prelude-val">Some</span>(Box::new(block_announce_validator_builder)),
 			warp_sync: <span class="prelude-val">None</span>,
 		})<span class="question-mark">?</span>;
@@ -1116,7 +1136,7 @@
 		task_manager: <span class="kw-2">&amp;mut </span>task_manager,
 		config: parachain_config,
 		keystore: params.keystore_container.sync_keystore(),
-		backend,
+		backend: backend.clone(),
 		network: network.clone(),
 		system_rpc_tx,
 		tx_handler_controller,
@@ -1185,7 +1205,7 @@
 			parachain_consensus,
 			relay_chain_interface,
 			collator_key,
-			import_queue,
+			import_queue: import_queue_service,
 			relay_chain_slot_duration: Duration::from_secs(<span class="number">6</span>),
 		};
 
@@ -1197,7 +1217,7 @@
 			task_manager: <span class="kw-2">&amp;mut </span>task_manager,
 			para_id,
 			relay_chain_interface,
-			import_queue,
+			import_queue: import_queue_service,
 			<span class="comment">// The slot duration is currently used internally only to configure
 			// the recovery delay of pov-recovery. We don&#39;t want to wait for too
 			// long on the full node to recover, so we reduce this time here.
@@ -1250,7 +1270,7 @@
 	storage_update_func_parachain: <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Fn()&gt;&gt;,
 	storage_update_func_relay_chain: <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Fn()&gt;&gt;,
 	consensus: Consensus,
-	relay_chain_full_node_url: <span class="prelude-ty">Option</span>&lt;Url&gt;,
+	relay_chain_full_node_url: Vec&lt;Url&gt;,
 }
 
 <span class="kw">impl </span>TestNodeBuilder {
@@ -1272,7 +1292,7 @@
 			storage_update_func_parachain: <span class="prelude-val">None</span>,
 			storage_update_func_relay_chain: <span class="prelude-val">None</span>,
 			consensus: Consensus::RelayChain,
-			relay_chain_full_node_url: <span class="prelude-val">None</span>,
+			relay_chain_full_node_url: <span class="macro">vec!</span>[],
 		}
 	}
 
@@ -1366,7 +1386,7 @@
 
 	<span class="doccomment">/// Connect to full node via RPC.
 	</span><span class="kw">pub fn </span>use_external_relay_chain_node_at_url(<span class="kw-2">mut </span><span class="self">self</span>, network_address: Url) -&gt; <span class="self">Self </span>{
-		<span class="self">self</span>.relay_chain_full_node_url = <span class="prelude-val">Some</span>(network_address);
+		<span class="self">self</span>.relay_chain_full_node_url = <span class="macro">vec!</span>[network_address];
 		<span class="self">self
 	</span>}
 
@@ -1375,7 +1395,7 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>localhost_url =
 			Url::parse(<span class="string">&quot;ws://localhost&quot;</span>).expect(<span class="string">&quot;Should be able to parse localhost Url&quot;</span>);
 		localhost_url.set_port(<span class="prelude-val">Some</span>(port)).expect(<span class="string">&quot;Should be able to set port&quot;</span>);
-		<span class="self">self</span>.relay_chain_full_node_url = <span class="prelude-val">Some</span>(localhost_url);
+		<span class="self">self</span>.relay_chain_full_node_url = <span class="macro">vec!</span>[localhost_url];
 		<span class="self">self
 	</span>}
 
@@ -1401,7 +1421,7 @@
 		);
 
 		<span class="kw">let </span>collator_options =
-			CollatorOptions { relay_chain_rpc_url: <span class="self">self</span>.relay_chain_full_node_url };
+			CollatorOptions { relay_chain_rpc_urls: <span class="self">self</span>.relay_chain_full_node_url };
 
 		relay_chain_config.network.node_name =
 			<span class="macro">format!</span>(<span class="string">&quot;{} (relay chain)&quot;</span>, relay_chain_config.network.node_name);

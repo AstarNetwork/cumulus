@@ -445,6 +445,8 @@
 <span id="445">445</span>
 <span id="446">446</span>
 <span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -740,9 +742,11 @@
 	<span class="doccomment">/// EXPERIMENTAL: Specify an URL to a relay chain full node to communicate with.
 	</span><span class="attribute">#[arg(
 		long,
-		value_parser = validate_relay_chain_url
-	)]
-	</span><span class="kw">pub </span>relay_chain_rpc_url: <span class="prelude-ty">Option</span>&lt;Url&gt;,
+		value_parser = validate_relay_chain_url,
+		num_args = <span class="number">0</span>..,
+		alias = <span class="string">&quot;relay-chain-rpc-url&quot;
+	</span>)]
+	</span><span class="kw">pub </span>relay_chain_rpc_urls: Vec&lt;Url&gt;,
 }
 
 <span class="kw">impl </span>RunCmd {
@@ -757,7 +761,7 @@
 
 	<span class="doccomment">/// Create [`CollatorOptions`] representing options only relevant to parachain collator nodes
 	</span><span class="kw">pub fn </span>collator_options(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; CollatorOptions {
-		CollatorOptions { relay_chain_rpc_url: <span class="self">self</span>.relay_chain_rpc_url.clone() }
+		CollatorOptions { relay_chain_rpc_urls: <span class="self">self</span>.relay_chain_rpc_urls.clone() }
 	}
 }
 
@@ -765,7 +769,7 @@
 </span><span class="attribute">#[derive(Clone, Debug)]
 </span><span class="kw">pub struct </span>CollatorOptions {
 	<span class="doccomment">/// Location of relay chain full node
-	</span><span class="kw">pub </span>relay_chain_rpc_url: <span class="prelude-ty">Option</span>&lt;Url&gt;,
+	</span><span class="kw">pub </span>relay_chain_rpc_urls: Vec&lt;Url&gt;,
 }
 
 <span class="doccomment">/// A non-redundant version of the `RunCmd` that sets the `validator` field when the

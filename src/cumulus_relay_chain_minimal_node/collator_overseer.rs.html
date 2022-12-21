@@ -243,6 +243,18 @@
 <span id="243">243</span>
 <span id="244">244</span>
 <span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.
 // This file is part of Polkadot.
 
@@ -468,8 +480,14 @@
 			f = finality.next() =&gt; {
 				<span class="kw">match </span>f {
 					<span class="prelude-val">Some</span>(header) =&gt; {
-						<span class="macro">tracing::info!</span>(target: <span class="string">&quot;minimal-polkadot-node&quot;</span>, <span class="string">&quot;Received finalized block via RPC: #{} ({})&quot;</span>, header.number, header.hash());
-		<span class="kw">let </span>block_info = BlockInfo { hash: header.hash(), parent_hash: header.parent_hash, number: header.number };
+						<span class="macro">tracing::info!</span>(
+							target: <span class="string">&quot;minimal-polkadot-node&quot;</span>,
+							<span class="string">&quot;Received finalized block via RPC: #{} ({} -&gt; {})&quot;</span>,
+							header.number,
+							header.parent_hash,
+							header.hash()
+						);
+						<span class="kw">let </span>block_info = BlockInfo { hash: header.hash(), parent_hash: header.parent_hash, number: header.number };
 						handle.block_finalized(block_info).<span class="kw">await</span>;
 					}
 					<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(RelayChainError::GenericError(<span class="string">&quot;Relay chain finality stream ended.&quot;</span>.to_string())),
@@ -478,8 +496,14 @@
 			i = imports.next() =&gt; {
 				<span class="kw">match </span>i {
 					<span class="prelude-val">Some</span>(header) =&gt; {
-						<span class="macro">tracing::info!</span>(target: <span class="string">&quot;minimal-polkadot-node&quot;</span>, <span class="string">&quot;Received imported block via RPC: #{} ({})&quot;</span>, header.number, header.hash());
-		<span class="kw">let </span>block_info = BlockInfo { hash: header.hash(), parent_hash: header.parent_hash, number: header.number };
+						<span class="macro">tracing::info!</span>(
+							target: <span class="string">&quot;minimal-polkadot-node&quot;</span>,
+							<span class="string">&quot;Received imported block via RPC: #{} ({} -&gt; {})&quot;</span>,
+							header.number,
+							header.parent_hash,
+							header.hash()
+						);
+						<span class="kw">let </span>block_info = BlockInfo { hash: header.hash(), parent_hash: header.parent_hash, number: header.number };
 						handle.block_imported(block_info).<span class="kw">await</span>;
 					}
 					<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(RelayChainError::GenericError(<span class="string">&quot;Relay chain import stream ended.&quot;</span>.to_string())),

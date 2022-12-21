@@ -66,7 +66,7 @@
 </span><span class="doccomment">/// A special pallet that exposes dispatchables that are only useful for testing.
 </span><span class="kw">pub use </span>pallet::<span class="kw-2">*</span>;
 
-<span class="attribute">#[frame_support::pallet]
+<span class="attribute">#[frame_support::pallet(dev_mode)]
 </span><span class="kw">pub mod </span>pallet {
 	<span class="kw">use </span>frame_support::pallet_prelude::<span class="kw-2">*</span>;
 	<span class="kw">use </span>frame_system::pallet_prelude::<span class="kw-2">*</span>;

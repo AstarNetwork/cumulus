@@ -153,19 +153,19 @@
 		<span class="self">Self </span>{ recoveries: Default::default(), candidates: Default::default(), overseer_handle }
 	}
 
-	<span class="doccomment">/// Recover the given `pending_candidate`.
+	<span class="doccomment">/// Recover the given `candidate`.
 	</span><span class="kw">pub async fn </span>recover_candidate(
 		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
 		block_hash: Block::Hash,
-		pending_candidate: <span class="kw">crate</span>::PendingCandidate&lt;Block&gt;,
+		candidate: <span class="kw-2">&amp;</span><span class="kw">crate</span>::Candidate&lt;Block&gt;,
 	) {
 		<span class="kw">let </span>(tx, rx) = oneshot::channel();
 
 		<span class="self">self</span>.overseer_handle
 			.send_msg(
 				AvailabilityRecoveryMessage::RecoverAvailableData(
-					pending_candidate.receipt,
-					pending_candidate.session_index,
+					candidate.receipt.clone(),
+					candidate.session_index,
 					<span class="prelude-val">None</span>,
 					tx,
 				),

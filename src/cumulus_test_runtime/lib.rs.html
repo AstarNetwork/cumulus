@@ -481,6 +481,9 @@
 <span id="481">481</span>
 <span id="482">482</span>
 <span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -533,7 +536,9 @@
 	parameter_types,
 	traits::{ConstU8, Randomness},
 	weights::{
-		constants::{BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_PER_SECOND},
+		constants::{
+			BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_REF_TIME_PER_SECOND,
+		},
 		ConstantMultiplier, IdentityFee, Weight,
 	},
 	StorageValue,
@@ -623,9 +628,10 @@
 /// by  Operational  extrinsics.
 </span><span class="kw">const </span>NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(<span class="number">75</span>);
 <span class="doccomment">/// We allow for .5 seconds of compute with a 12 second average block time.
-</span><span class="kw">const </span>MAXIMUM_BLOCK_WEIGHT: Weight = WEIGHT_PER_SECOND
-	.saturating_div(<span class="number">2</span>)
-	.set_proof_size(cumulus_primitives_core::relay_chain::v2::MAX_POV_SIZE <span class="kw">as </span>u64);
+</span><span class="kw">const </span>MAXIMUM_BLOCK_WEIGHT: Weight = Weight::from_parts(
+	WEIGHT_REF_TIME_PER_SECOND.saturating_div(<span class="number">2</span>),
+	cumulus_primitives_core::relay_chain::v2::MAX_POV_SIZE <span class="kw">as </span>u64,
+);
 
 <span class="macro">parameter_types! </span>{
 	<span class="kw">pub const </span>BlockHashCount: BlockNumber = <span class="number">250</span>;

@@ -356,33 +356,6 @@
 <span id="356">356</span>
 <span id="357">357</span>
 <span id="358">358</span>
-<span id="359">359</span>
-<span id="360">360</span>
-<span id="361">361</span>
-<span id="362">362</span>
-<span id="363">363</span>
-<span id="364">364</span>
-<span id="365">365</span>
-<span id="366">366</span>
-<span id="367">367</span>
-<span id="368">368</span>
-<span id="369">369</span>
-<span id="370">370</span>
-<span id="371">371</span>
-<span id="372">372</span>
-<span id="373">373</span>
-<span id="374">374</span>
-<span id="375">375</span>
-<span id="376">376</span>
-<span id="377">377</span>
-<span id="378">378</span>
-<span id="379">379</span>
-<span id="380">380</span>
-<span id="381">381</span>
-<span id="382">382</span>
-<span id="383">383</span>
-<span id="384">384</span>
-<span id="385">385</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -406,6 +379,7 @@
 <span class="kw">use </span>sc_network::{NetworkService, SyncState};
 
 <span class="kw">use </span>sc_client_api::HeaderBackend;
+<span class="kw">use </span>sc_consensus::{BlockImportError, BlockImportStatus, JustificationSyncLink, Link};
 <span class="kw">use </span>sc_network_common::{
 	config::{
 		NonDefaultSetConfig, NonReservedPeerMode, NotificationHandshake, ProtocolId, SetConfig,
@@ -414,12 +388,10 @@
 	service::NetworkSyncForkRequest,
 	sync::{
 		message::{BlockAnnouncesHandshake, BlockRequest},
-		Metrics, SyncStatus,
+		BadPeer, Metrics, OnBlockData, PollBlockAnnounceValidation, SyncStatus,
 	},
 };
 <span class="kw">use </span>sc_service::{error::Error, Configuration, NetworkStarter, SpawnTaskHandle};
-<span class="kw">use </span>sp_consensus::BlockOrigin;
-<span class="kw">use </span>sp_runtime::Justifications;
 
 <span class="kw">use </span>std::{iter, sync::Arc};
 
@@ -465,7 +437,6 @@
 		chain_sync: Box::new(chain_sync),
 		network_config: config.network.clone(),
 		chain: client.clone(),
-		import_queue: Box::new(DummyImportQueue),
 		protocol_id,
 		metrics_registry: config.prometheus_config.as_ref().map(|config| config.registry.clone()),
 		block_announce_config,
@@ -638,28 +609,6 @@
 		<span class="macro">unimplemented!</span>(<span class="string">&quot;Not supported on the RPC collator&quot;</span>)
 	}
 
-	<span class="kw">fn </span>on_blocks_processed(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		_imported: usize,
-		_count: usize,
-		_results: Vec&lt;(
-			<span class="prelude-ty">Result</span>&lt;
-				sc_consensus::BlockImportStatus&lt;polkadot_service::NumberFor&lt;B&gt;&gt;,
-				sc_consensus::BlockImportError,
-			&gt;,
-			&lt;B <span class="kw">as </span>BlockT&gt;::Hash,
-		)&gt;,
-	) -&gt; Box&lt;
-		<span class="kw">dyn </span>Iterator&lt;
-			Item = <span class="prelude-ty">Result</span>&lt;
-				(PeerId, sc_network_common::sync::message::BlockRequest&lt;B&gt;),
-				sc_network_common::sync::BadPeer,
-			&gt;,
-		&gt;,
-	&gt; {
-		Box::new(std::iter::empty())
-	}
-
 	<span class="kw">fn </span>on_justification_import(
 		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
 		_hash: &lt;B <span class="kw">as </span>BlockT&gt;::Hash,
@@ -692,12 +641,7 @@
 		std::task::Poll::Pending
 	}
 
-	<span class="kw">fn </span>peer_disconnected(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		_who: <span class="kw-2">&amp;</span>PeerId,
-	) -&gt; <span class="prelude-ty">Option</span>&lt;sc_network_common::sync::OnBlockData&lt;B&gt;&gt; {
-		<span class="prelude-val">None
-	</span>}
+	<span class="kw">fn </span>peer_disconnected(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _who: <span class="kw-2">&amp;</span>PeerId) {}
 
 	<span class="kw">fn </span>metrics(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; sc_network_common::sync::Metrics {
 		Metrics {
@@ -723,7 +667,7 @@
 	<span class="kw">fn </span>poll(
 		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
 		_cx: <span class="kw-2">&amp;mut </span>std::task::Context,
-	) -&gt; std::task::Poll&lt;sc_network_common::sync::PollResult&lt;B&gt;&gt; {
+	) -&gt; std::task::Poll&lt;PollBlockAnnounceValidation&lt;B::Header&gt;&gt; {
 		std::task::Poll::Pending
 	}
 
@@ -734,39 +678,41 @@
 	<span class="kw">fn </span>num_active_peers(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
 		<span class="number">0
 	</span>}
-}
 
-<span class="kw">struct </span>DummyImportQueue;
-
-<span class="kw">impl </span>sc_service::ImportQueue&lt;Block&gt; <span class="kw">for </span>DummyImportQueue {
-	<span class="kw">fn </span>import_blocks(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		_origin: BlockOrigin,
-		_blocks: Vec&lt;sc_consensus::IncomingBlock&lt;Block&gt;&gt;,
-	) {
-	}
-
-	<span class="kw">fn </span>import_justifications(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		_who: PeerId,
-		_hash: Hash,
-		_number: NumberFor&lt;Block&gt;,
-		_justifications: Justifications,
-	) {
-	}
-
-	<span class="kw">fn </span>poll_actions(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		_cx: <span class="kw-2">&amp;mut </span>futures::task::Context,
-		_link: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>sc_consensus::import_queue::Link&lt;Block&gt;,
-	) {
-	}
+	<span class="kw">fn </span>process_block_response_data(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _blocks_to_import: <span class="prelude-ty">Result</span>&lt;OnBlockData&lt;B&gt;, BadPeer&gt;) {}
 }
 
 <span class="kw">struct </span>DummyChainSyncService&lt;B&gt;(std::marker::PhantomData&lt;B&gt;);
 
 <span class="kw">impl</span>&lt;B: BlockT&gt; NetworkSyncForkRequest&lt;B::Hash, NumberFor&lt;B&gt;&gt; <span class="kw">for </span>DummyChainSyncService&lt;B&gt; {
 	<span class="kw">fn </span>set_sync_fork_request(<span class="kw-2">&amp;</span><span class="self">self</span>, _peers: Vec&lt;PeerId&gt;, _hash: B::Hash, _number: NumberFor&lt;B&gt;) {}
+}
+
+<span class="kw">impl</span>&lt;B: BlockT&gt; JustificationSyncLink&lt;B&gt; <span class="kw">for </span>DummyChainSyncService&lt;B&gt; {
+	<span class="kw">fn </span>request_justification(<span class="kw-2">&amp;</span><span class="self">self</span>, _hash: <span class="kw-2">&amp;</span>B::Hash, _number: NumberFor&lt;B&gt;) {}
+
+	<span class="kw">fn </span>clear_justification_requests(<span class="kw-2">&amp;</span><span class="self">self</span>) {}
+}
+
+<span class="kw">impl</span>&lt;B: BlockT&gt; Link&lt;B&gt; <span class="kw">for </span>DummyChainSyncService&lt;B&gt; {
+	<span class="kw">fn </span>blocks_processed(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_imported: usize,
+		_count: usize,
+		_results: Vec&lt;(<span class="prelude-ty">Result</span>&lt;BlockImportStatus&lt;NumberFor&lt;B&gt;&gt;, BlockImportError&gt;, B::Hash)&gt;,
+	) {
+	}
+
+	<span class="kw">fn </span>justification_imported(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		_who: PeerId,
+		_hash: <span class="kw-2">&amp;</span>B::Hash,
+		_number: NumberFor&lt;B&gt;,
+		_success: bool,
+	) {
+	}
+
+	<span class="kw">fn </span>request_justification(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _hash: <span class="kw-2">&amp;</span>B::Hash, _number: NumberFor&lt;B&gt;) {}
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_relay_chain_minimal_node" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

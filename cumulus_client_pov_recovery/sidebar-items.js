@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["RecoveryDelay","The delay between observing an unknown block and recovering this block."]],"struct":[["PoVRecovery","Encapsulates the logic of the pov recovery."]]};
+window.SIDEBAR_ITEMS = {"enum":[["RecoveryKind","Type of recovery to trigger."]],"struct":[["PoVRecovery","Encapsulates the logic of the pov recovery."],["RecoveryDelay","The delay between observing an unknown block and triggering the recovery of a block."],["RecoveryRequest","Structure used to trigger an explicit recovery request via `PoVRecovery`."]]};

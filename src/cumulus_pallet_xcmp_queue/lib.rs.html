@@ -1149,6 +1149,15 @@
 <span id="1149">1149</span>
 <span id="1150">1150</span>
 <span id="1151">1151</span>
+<span id="1152">1152</span>
+<span id="1153">1153</span>
+<span id="1154">1154</span>
+<span id="1155">1155</span>
+<span id="1156">1156</span>
+<span id="1157">1157</span>
+<span id="1158">1158</span>
+<span id="1159">1159</span>
+<span id="1160">1160</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -1196,7 +1205,7 @@
 };
 <span class="kw">use </span>frame_support::{
 	traits::EnsureOrigin,
-	weights::{constants::WEIGHT_PER_MILLIS, Weight},
+	weights::{constants::WEIGHT_REF_TIME_PER_MILLIS, Weight},
 };
 <span class="kw">use </span>rand_chacha::{
 	rand_core::{RngCore, SeedableRng},
@@ -1285,7 +1294,8 @@
 		///
 		/// Events:
 		/// - `OverweightServiced`: On success.
-		</span><span class="attribute">#[pallet::weight((Weight::from_ref_time(weight_limit.saturating_add(<span class="number">1_000_000</span>)), DispatchClass::Operational,))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">0</span>)]
+		#[pallet::weight((Weight::from_ref_time(weight_limit.saturating_add(<span class="number">1_000_000</span>)), DispatchClass::Operational,))]
 		</span><span class="kw">pub fn </span>service_overweight(
 			origin: OriginFor&lt;T&gt;,
 			index: OverweightIndex,
@@ -1311,7 +1321,8 @@
 		<span class="doccomment">/// Suspends all XCM executions for the XCMP queue, regardless of the sender&#39;s origin.
 		///
 		/// - `origin`: Must pass `ControllerOrigin`.
-		</span><span class="attribute">#[pallet::weight((T::DbWeight::get().writes(<span class="number">1</span>), DispatchClass::Operational,))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">1</span>)]
+		#[pallet::weight((T::DbWeight::get().writes(<span class="number">1</span>), DispatchClass::Operational,))]
 		</span><span class="kw">pub fn </span>suspend_xcm_execution(origin: OriginFor&lt;T&gt;) -&gt; DispatchResult {
 			T::ControllerOrigin::ensure_origin(origin)<span class="question-mark">?</span>;
 
@@ -1325,7 +1336,8 @@
 		/// Note that this function doesn&#39;t change the status of the in/out bound channels.
 		///
 		/// - `origin`: Must pass `ControllerOrigin`.
-		</span><span class="attribute">#[pallet::weight((T::DbWeight::get().writes(<span class="number">1</span>), DispatchClass::Operational,))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">2</span>)]
+		#[pallet::weight((T::DbWeight::get().writes(<span class="number">1</span>), DispatchClass::Operational,))]
 		</span><span class="kw">pub fn </span>resume_xcm_execution(origin: OriginFor&lt;T&gt;) -&gt; DispatchResult {
 			T::ControllerOrigin::ensure_origin(origin)<span class="question-mark">?</span>;
 
@@ -1339,7 +1351,8 @@
 		///
 		/// - `origin`: Must pass `Root`.
 		/// - `new`: Desired value for `QueueConfigData.suspend_value`
-		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_u32(), DispatchClass::Operational,))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">3</span>)]
+		#[pallet::weight((T::WeightInfo::set_config_with_u32(), DispatchClass::Operational,))]
 		</span><span class="kw">pub fn </span>update_suspend_threshold(origin: OriginFor&lt;T&gt;, new: u32) -&gt; DispatchResult {
 			ensure_root(origin)<span class="question-mark">?</span>;
 			QueueConfig::&lt;T&gt;::mutate(|data| data.suspend_threshold = new);
@@ -1352,7 +1365,8 @@
 		///
 		/// - `origin`: Must pass `Root`.
 		/// - `new`: Desired value for `QueueConfigData.drop_threshold`
-		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_u32(),DispatchClass::Operational,))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">4</span>)]
+		#[pallet::weight((T::WeightInfo::set_config_with_u32(),DispatchClass::Operational,))]
 		</span><span class="kw">pub fn </span>update_drop_threshold(origin: OriginFor&lt;T&gt;, new: u32) -&gt; DispatchResult {
 			ensure_root(origin)<span class="question-mark">?</span>;
 			QueueConfig::&lt;T&gt;::mutate(|data| data.drop_threshold = new);
@@ -1365,7 +1379,8 @@
 		///
 		/// - `origin`: Must pass `Root`.
 		/// - `new`: Desired value for `QueueConfigData.resume_threshold`
-		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_u32(), DispatchClass::Operational,))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">5</span>)]
+		#[pallet::weight((T::WeightInfo::set_config_with_u32(), DispatchClass::Operational,))]
 		</span><span class="kw">pub fn </span>update_resume_threshold(origin: OriginFor&lt;T&gt;, new: u32) -&gt; DispatchResult {
 			ensure_root(origin)<span class="question-mark">?</span>;
 			QueueConfig::&lt;T&gt;::mutate(|data| data.resume_threshold = new);
@@ -1377,7 +1392,8 @@
 		///
 		/// - `origin`: Must pass `Root`.
 		/// - `new`: Desired value for `QueueConfigData.threshold_weight`
-		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_weight(), DispatchClass::Operational,))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">6</span>)]
+		#[pallet::weight((T::WeightInfo::set_config_with_weight(), DispatchClass::Operational,))]
 		</span><span class="kw">pub fn </span>update_threshold_weight(origin: OriginFor&lt;T&gt;, new: XcmWeight) -&gt; DispatchResult {
 			ensure_root(origin)<span class="question-mark">?</span>;
 			QueueConfig::&lt;T&gt;::mutate(|data| data.threshold_weight = Weight::from_ref_time(new));
@@ -1390,7 +1406,8 @@
 		///
 		/// - `origin`: Must pass `Root`.
 		/// - `new`: Desired value for `QueueConfigData.weight_restrict_decay`.
-		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_weight(), DispatchClass::Operational,))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">7</span>)]
+		#[pallet::weight((T::WeightInfo::set_config_with_weight(), DispatchClass::Operational,))]
 		</span><span class="kw">pub fn </span>update_weight_restrict_decay(
 			origin: OriginFor&lt;T&gt;,
 			new: XcmWeight,
@@ -1408,7 +1425,8 @@
 		///
 		/// - `origin`: Must pass `Root`.
 		/// - `new`: Desired value for `QueueConfigData.xcmp_max_individual_weight`.
-		</span><span class="attribute">#[pallet::weight((T::WeightInfo::set_config_with_weight(), DispatchClass::Operational,))]
+		</span><span class="attribute">#[pallet::call_index(<span class="number">8</span>)]
+		#[pallet::weight((T::WeightInfo::set_config_with_weight(), DispatchClass::Operational,))]
 		</span><span class="kw">pub fn </span>update_xcmp_max_individual_weight(
 			origin: OriginFor&lt;T&gt;,
 			new: XcmWeight,
@@ -1615,7 +1633,7 @@
 			threshold_weight: Weight::from_ref_time(<span class="number">100_000</span>),
 			weight_restrict_decay: Weight::from_ref_time(<span class="number">2</span>),
 			xcmp_max_individual_weight: Weight::from_parts(
-				<span class="number">20u64 </span>* WEIGHT_PER_MILLIS.ref_time(),
+				<span class="number">20u64 </span>* WEIGHT_REF_TIME_PER_MILLIS,
 				DEFAULT_POV_SIZE,
 			),
 		}

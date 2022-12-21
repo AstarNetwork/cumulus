@@ -88,8 +88,8 @@
 		<span class="doccomment">/// `ParityDB` can be enabled with a feature flag, but is still experimental. These weights
 		/// are available for brave runtime engineers who may want to try this out as default.
 		</span><span class="kw">pub const </span>ParityDbWeight: RuntimeDbWeight = RuntimeDbWeight {
-			read: <span class="number">8_000 </span>* constants::WEIGHT_PER_NANOS.ref_time(),
-			write: <span class="number">50_000 </span>* constants::WEIGHT_PER_NANOS.ref_time(),
+			read: <span class="number">8_000 </span>* constants::WEIGHT_REF_TIME_PER_NANOS,
+			write: <span class="number">50_000 </span>* constants::WEIGHT_REF_TIME_PER_NANOS,
 		};
 	}
 
@@ -105,20 +105,20 @@
 		</span><span class="kw">fn </span>sane() {
 			<span class="comment">// At least 1 µs.
 			</span><span class="macro">assert!</span>(
-				W::get().reads(<span class="number">1</span>).ref_time() &gt;= constants::WEIGHT_PER_MICROS.ref_time(),
+				W::get().reads(<span class="number">1</span>).ref_time() &gt;= constants::WEIGHT_REF_TIME_PER_MICROS,
 				<span class="string">&quot;Read weight should be at least 1 µs.&quot;
 			</span>);
 			<span class="macro">assert!</span>(
-				W::get().writes(<span class="number">1</span>).ref_time() &gt;= constants::WEIGHT_PER_MICROS.ref_time(),
+				W::get().writes(<span class="number">1</span>).ref_time() &gt;= constants::WEIGHT_REF_TIME_PER_MICROS,
 				<span class="string">&quot;Write weight should be at least 1 µs.&quot;
 			</span>);
 			<span class="comment">// At most 1 ms.
 			</span><span class="macro">assert!</span>(
-				W::get().reads(<span class="number">1</span>).ref_time() &lt;= constants::WEIGHT_PER_MILLIS.ref_time(),
+				W::get().reads(<span class="number">1</span>).ref_time() &lt;= constants::WEIGHT_REF_TIME_PER_MILLIS,
 				<span class="string">&quot;Read weight should be at most 1 ms.&quot;
 			</span>);
 			<span class="macro">assert!</span>(
-				W::get().writes(<span class="number">1</span>).ref_time() &lt;= constants::WEIGHT_PER_MILLIS.ref_time(),
+				W::get().writes(<span class="number">1</span>).ref_time() &lt;= constants::WEIGHT_REF_TIME_PER_MILLIS,
 				<span class="string">&quot;Write weight should be at most 1 ms.&quot;
 			</span>);
 		}

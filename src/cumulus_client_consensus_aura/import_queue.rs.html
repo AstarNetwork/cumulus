@@ -121,6 +121,7 @@
 <span id="121">121</span>
 <span id="122">122</span>
 <span id="123">123</span>
+<span id="124">124</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -140,7 +141,7 @@
 </span><span class="doccomment">//! Parachain specific wrapper for the AuRa import queue.
 
 </span><span class="kw">use </span>codec::Codec;
-<span class="kw">use </span>cumulus_client_consensus_common::ParachainBlockImport;
+<span class="kw">use </span>cumulus_client_consensus_common::ParachainBlockImportMarker;
 <span class="kw">use </span>sc_client_api::{backend::AuxStore, BlockOf, UsageProvider};
 <span class="kw">use </span>sc_consensus::{import_queue::DefaultImportQueue, BlockImport};
 <span class="kw">use </span>sc_consensus_aura::{AuraVerifier, CompatibilityMode};
@@ -160,7 +161,7 @@
 <span class="doccomment">/// Parameters for [`import_queue`].
 </span><span class="kw">pub struct </span>ImportQueueParams&lt;<span class="lifetime">&#39;a</span>, I, C, CIDP, S&gt; {
 	<span class="doccomment">/// The block import to use.
-	</span><span class="kw">pub </span>block_import: ParachainBlockImport&lt;I&gt;,
+	</span><span class="kw">pub </span>block_import: I,
 	<span class="doccomment">/// The client to interact with the chain.
 	</span><span class="kw">pub </span>client: Arc&lt;C&gt;,
 	<span class="doccomment">/// The inherent data providers, to create the inherent data.
@@ -196,6 +197,7 @@
 		+ UsageProvider&lt;Block&gt;
 		+ HeaderBackend&lt;Block&gt;,
 	I: BlockImport&lt;Block, Error = ConsensusError, Transaction = sp_api::TransactionFor&lt;C, Block&gt;&gt;
+		+ ParachainBlockImportMarker
 		+ Send
 		+ Sync
 		+ <span class="lifetime">&#39;static</span>,

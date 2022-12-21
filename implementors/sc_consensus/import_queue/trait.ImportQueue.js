@@ -1,3 +1,0 @@
-(function() {var implementors = {
-"cumulus_client_service":[["impl&lt;Block:&nbsp;BlockT&gt; ImportQueue&lt;Block&gt; for <a class=\"struct\" href=\"cumulus_client_service/struct.SharedImportQueue.html\" title=\"struct cumulus_client_service::SharedImportQueue\">SharedImportQueue</a>&lt;Block&gt;"]]
-};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

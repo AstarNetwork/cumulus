@@ -191,6 +191,10 @@
 <span id="191">191</span>
 <span id="192">192</span>
 <span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -275,7 +279,10 @@
 		ValidationParams,
 	};
 	<span class="kw">use </span>cumulus_test_relay_sproof_builder::RelayStateSproofBuilder;
-	<span class="kw">use </span>sp_runtime::{generic::BlockId, traits::Header <span class="kw">as </span>HeaderT};
+	<span class="kw">use </span>sp_runtime::{
+		generic::BlockId,
+		traits::{Block <span class="kw">as </span>BlockT, Header <span class="kw">as </span>HeaderT},
+	};
 	<span class="kw">use </span>std::{env, process::Command, str::FromStr};
 
 	<span class="kw">const </span>SLOT_DURATION: u64 = <span class="number">6000</span>;
@@ -299,14 +306,14 @@
 
 	<span class="kw">fn </span>build_block(
 		client: <span class="kw-2">&amp;</span>Client,
-		at: BlockId&lt;Block&gt;,
+		hash: &lt;Block <span class="kw">as </span>BlockT&gt;::Hash,
 		timestamp: u64,
 		relay_chain_slot: Slot,
 	) -&gt; (ParachainBlockData, PHash) {
 		<span class="kw">let </span>sproof_builder =
 			RelayStateSproofBuilder { current_slot: relay_chain_slot, ..Default::default() };
 
-		<span class="kw">let </span>parent_header = client.header(<span class="kw-2">&amp;</span>at).ok().flatten().expect(<span class="string">&quot;Genesis header exists&quot;</span>);
+		<span class="kw">let </span>parent_header = client.header(hash).ok().flatten().expect(<span class="string">&quot;Genesis header exists&quot;</span>);
 
 		<span class="kw">let </span>relay_parent_storage_root = sproof_builder.clone().into_state_root_and_proof().<span class="number">0</span>;
 
@@ -318,7 +325,7 @@
 
 		<span class="kw">let </span>block = client
 			.init_block_builder_with_timestamp(
-				<span class="kw-2">&amp;</span>at,
+				<span class="kw-2">&amp;</span>BlockId::Hash(hash),
 				<span class="prelude-val">Some</span>(validation_data),
 				sproof_builder,
 				timestamp,
@@ -339,19 +346,20 @@
 				.expect(<span class="string">&quot;TIMESTAMP is a valid `u64`&quot;</span>);
 
 			<span class="kw">let </span>block =
-				build_block(<span class="kw-2">&amp;</span>client, BlockId::number(<span class="number">0</span>), SLOT_DURATION, <span class="number">1</span>.into()).<span class="number">0</span>.into_block();
-			futures::executor::block_on(client.import(sp_consensus::BlockOrigin::Own, block))
-				.unwrap();
+				build_block(<span class="kw-2">&amp;</span>client, client.chain_info().genesis_hash, SLOT_DURATION, <span class="number">1</span>.into())
+					.<span class="number">0
+					</span>.into_block();
+			futures::executor::block_on(
+				client.import(sp_consensus::BlockOrigin::Own, block.clone()),
+			)
+			.unwrap();
 
+			<span class="kw">let </span>hashof1 = block.hash();
 			<span class="kw">let </span>(block, relay_chain_root) =
-				build_block(<span class="kw-2">&amp;</span>client, BlockId::number(<span class="number">1</span>), timestamp, relay_chain_slot.into());
+				build_block(<span class="kw-2">&amp;</span>client, hashof1, timestamp, relay_chain_slot.into());
 
 			<span class="kw">let </span>header = call_validate_block(
-				client
-					.header(<span class="kw-2">&amp;</span>BlockId::number(<span class="number">1</span>))
-					.ok()
-					.flatten()
-					.expect(<span class="string">&quot;Genesis header exists&quot;</span>),
+				client.header(hashof1).ok().flatten().expect(<span class="string">&quot;Genesis header exists&quot;</span>),
 				block.clone(),
 				relay_chain_root,
 			)

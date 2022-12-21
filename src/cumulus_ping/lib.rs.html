@@ -232,6 +232,12 @@
 <span id="232">232</span>
 <span id="233">233</span>
 <span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -369,7 +375,8 @@
 
 	<span class="attribute">#[pallet::call]
 	</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
-		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		<span class="attribute">#[pallet::call_index(<span class="number">0</span>)]
+		#[pallet::weight(<span class="number">0</span>)]
 		</span><span class="kw">pub fn </span>start(origin: OriginFor&lt;T&gt;, para: ParaId, payload: Vec&lt;u8&gt;) -&gt; DispatchResult {
 			ensure_root(origin)<span class="question-mark">?</span>;
 			<span class="kw">let </span>payload = BoundedVec::&lt;u8, MaxPayloadSize&gt;::try_from(payload)
@@ -380,7 +387,8 @@
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		<span class="attribute">#[pallet::call_index(<span class="number">1</span>)]
+		#[pallet::weight(<span class="number">0</span>)]
 		</span><span class="kw">pub fn </span>start_many(
 			origin: OriginFor&lt;T&gt;,
 			para: ParaId,
@@ -399,7 +407,8 @@
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		<span class="attribute">#[pallet::call_index(<span class="number">2</span>)]
+		#[pallet::weight(<span class="number">0</span>)]
 		</span><span class="kw">pub fn </span>stop(origin: OriginFor&lt;T&gt;, para: ParaId) -&gt; DispatchResult {
 			ensure_root(origin)<span class="question-mark">?</span>;
 			Targets::&lt;T&gt;::mutate(|t| {
@@ -410,7 +419,8 @@
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		<span class="attribute">#[pallet::call_index(<span class="number">3</span>)]
+		#[pallet::weight(<span class="number">0</span>)]
 		</span><span class="kw">pub fn </span>stop_all(origin: OriginFor&lt;T&gt;, maybe_para: <span class="prelude-ty">Option</span>&lt;ParaId&gt;) -&gt; DispatchResult {
 			ensure_root(origin)<span class="question-mark">?</span>;
 			<span class="kw">if let </span><span class="prelude-val">Some</span>(para) = maybe_para {
@@ -421,7 +431,8 @@
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		<span class="attribute">#[pallet::call_index(<span class="number">4</span>)]
+		#[pallet::weight(<span class="number">0</span>)]
 		</span><span class="kw">pub fn </span>ping(origin: OriginFor&lt;T&gt;, seq: u32, payload: Vec&lt;u8&gt;) -&gt; DispatchResult {
 			<span class="comment">// Only accept pings from other chains.
 			</span><span class="kw">let </span>para = ensure_sibling_para(&lt;T <span class="kw">as </span>Config&gt;::RuntimeOrigin::from(origin))<span class="question-mark">?</span>;
@@ -446,7 +457,8 @@
 			<span class="prelude-val">Ok</span>(())
 		}
 
-		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		<span class="attribute">#[pallet::call_index(<span class="number">5</span>)]
+		#[pallet::weight(<span class="number">0</span>)]
 		</span><span class="kw">pub fn </span>pong(origin: OriginFor&lt;T&gt;, seq: u32, payload: Vec&lt;u8&gt;) -&gt; DispatchResult {
 			<span class="comment">// Only accept pings from other chains.
 			</span><span class="kw">let </span>para = ensure_sibling_para(&lt;T <span class="kw">as </span>Config&gt;::RuntimeOrigin::from(origin))<span class="question-mark">?</span>;

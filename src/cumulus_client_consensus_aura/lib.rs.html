@@ -220,6 +220,10 @@
 <span id="220">220</span>
 <span id="221">221</span>
 <span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -246,7 +250,7 @@
 
 </span><span class="kw">use </span>codec::{Decode, Encode};
 <span class="kw">use </span>cumulus_client_consensus_common::{
-	ParachainBlockImport, ParachainCandidate, ParachainConsensus,
+	ParachainBlockImportMarker, ParachainCandidate, ParachainConsensus,
 };
 <span class="kw">use </span>cumulus_primitives_core::{relay_chain::v2::Hash <span class="kw">as </span>PHash, PersistedValidationData};
 
@@ -297,7 +301,7 @@
 </span><span class="kw">pub struct </span>BuildAuraConsensusParams&lt;PF, BI, CIDP, Client, BS, SO&gt; {
 	<span class="kw">pub </span>proposer_factory: PF,
 	<span class="kw">pub </span>create_inherent_data_providers: CIDP,
-	<span class="kw">pub </span>block_import: ParachainBlockImport&lt;BI&gt;,
+	<span class="kw">pub </span>block_import: BI,
 	<span class="kw">pub </span>para_client: Arc&lt;Client&gt;,
 	<span class="kw">pub </span>backoff_authoring_blocks: <span class="prelude-ty">Option</span>&lt;BS&gt;,
 	<span class="kw">pub </span>sync_oracle: SO,
@@ -336,7 +340,11 @@
 		</span>Client:
 			ProvideRuntimeApi&lt;B&gt; + BlockOf + AuxStore + HeaderBackend&lt;B&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
 		Client::Api: AuraApi&lt;B, P::Public&gt;,
-		BI: BlockImport&lt;B, Transaction = sp_api::TransactionFor&lt;Client, B&gt;&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+		BI: BlockImport&lt;B, Transaction = sp_api::TransactionFor&lt;Client, B&gt;&gt;
+			+ ParachainBlockImportMarker
+			+ Send
+			+ Sync
+			+ <span class="lifetime">&#39;static</span>,
 		SO: SyncOracle + Send + Sync + Clone + <span class="lifetime">&#39;static</span>,
 		BS: BackoffAuthoringBlocksStrategy&lt;NumberFor&lt;B&gt;&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
 		PF: Environment&lt;B, Error = Error&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,

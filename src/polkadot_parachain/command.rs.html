@@ -1149,6 +1149,15 @@
 <span id="1149">1149</span>
 <span id="1150">1150</span>
 <span id="1151">1151</span>
+<span id="1152">1152</span>
+<span id="1153">1153</span>
+<span id="1154">1154</span>
+<span id="1155">1155</span>
+<span id="1156">1156</span>
+<span id="1157">1157</span>
+<span id="1158">1158</span>
+<span id="1159">1159</span>
+<span id="1160">1160</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -1833,43 +1842,52 @@
 			<span class="kw">let </span>task_manager =
 				sc_service::TaskManager::new(runner.config().tokio_handle.clone(), <span class="kw-2">*</span>registry)
 					.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;Error: {:?}&quot;</span>, e))<span class="question-mark">?</span>;
+			<span class="kw">use </span>sc_executor::{sp_wasm_interface::ExtendedHostFunctions, NativeExecutionDispatch};
+			<span class="kw">type </span>HostFunctionsOf&lt;E&gt; = ExtendedHostFunctions&lt;
+				sp_io::SubstrateHostFunctions,
+				&lt;E <span class="kw">as </span>NativeExecutionDispatch&gt;::ExtendHostFunctions,
+			&gt;;
 
 			<span class="kw">match </span>runner.config().chain_spec.runtime() {
-				Runtime::Statemine =&gt; runner.async_run(|config| {
-					<span class="prelude-val">Ok</span>((cmd.run::&lt;Block, StatemineRuntimeExecutor&gt;(config), task_manager))
+				Runtime::Statemine =&gt; runner.async_run(|<span class="kw">_</span>| {
+					<span class="prelude-val">Ok</span>((
+						cmd.run::&lt;Block, HostFunctionsOf&lt;StatemineRuntimeExecutor&gt;&gt;(),
+						task_manager,
+					))
 				}),
-				Runtime::Westmint =&gt; runner.async_run(|config| {
-					<span class="prelude-val">Ok</span>((cmd.run::&lt;Block, WestmintRuntimeExecutor&gt;(config), task_manager))
+				Runtime::Westmint =&gt; runner.async_run(|<span class="kw">_</span>| {
+					<span class="prelude-val">Ok</span>((cmd.run::&lt;Block, HostFunctionsOf&lt;WestmintRuntimeExecutor&gt;&gt;(), task_manager))
 				}),
-				Runtime::Statemint =&gt; runner.async_run(|config| {
-					<span class="prelude-val">Ok</span>((cmd.run::&lt;Block, StatemintRuntimeExecutor&gt;(config), task_manager))
+				Runtime::Statemint =&gt; runner.async_run(|<span class="kw">_</span>| {
+					<span class="prelude-val">Ok</span>((
+						cmd.run::&lt;Block, HostFunctionsOf&lt;StatemintRuntimeExecutor&gt;&gt;(),
+						task_manager,
+					))
 				}),
 				Runtime::CollectivesPolkadot | Runtime::CollectivesWestend =&gt;
-					runner.async_run(|config| {
+					runner.async_run(|<span class="kw">_</span>| {
 						<span class="prelude-val">Ok</span>((
-							cmd.run::&lt;Block, CollectivesPolkadotRuntimeExecutor&gt;(config),
+							cmd.run::&lt;Block, HostFunctionsOf&lt;CollectivesPolkadotRuntimeExecutor&gt;&gt;(),
 							task_manager,
 						))
 					}),
 				Runtime::BridgeHub(bridge_hub_runtime_type) =&gt; <span class="kw">match </span>bridge_hub_runtime_type {
 					chain_spec::bridge_hubs::BridgeHubRuntimeType::Kusama |
 					chain_spec::bridge_hubs::BridgeHubRuntimeType::KusamaLocal |
-					chain_spec::bridge_hubs::BridgeHubRuntimeType::KusamaDevelopment =&gt;
-						runner.async_run(|config| {
-							<span class="prelude-val">Ok</span>((
-								cmd.run::&lt;Block, BridgeHubKusamaRuntimeExecutor&gt;(config),
-								task_manager,
-							))
-						}),
+					chain_spec::bridge_hubs::BridgeHubRuntimeType::KusamaDevelopment =&gt; runner.async_run(|<span class="kw">_</span>| {
+						<span class="prelude-val">Ok</span>((
+							cmd.run::&lt;Block, HostFunctionsOf&lt;BridgeHubKusamaRuntimeExecutor&gt;&gt;(),
+							task_manager,
+						))
+					}),
 					chain_spec::bridge_hubs::BridgeHubRuntimeType::Rococo |
 					chain_spec::bridge_hubs::BridgeHubRuntimeType::RococoLocal |
-					chain_spec::bridge_hubs::BridgeHubRuntimeType::RococoDevelopment =&gt;
-						runner.async_run(|config| {
-							<span class="prelude-val">Ok</span>((
-								cmd.run::&lt;Block, BridgeHubRococoRuntimeExecutor&gt;(config),
-								task_manager,
-							))
-						}),
+					chain_spec::bridge_hubs::BridgeHubRuntimeType::RococoDevelopment =&gt; runner.async_run(|<span class="kw">_</span>| {
+						<span class="prelude-val">Ok</span>((
+							cmd.run::&lt;Block, HostFunctionsOf&lt;BridgeHubRococoRuntimeExecutor&gt;&gt;(),
+							task_manager,
+						))
+					}),
 					<span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(<span class="macro">format!</span>(
 						<span class="string">&quot;Chain &#39;{:?}&#39; doesn&#39;t support try-runtime for bridge_hub_runtime_type: {:?}&quot;</span>,
 						runner.config().chain_spec.runtime(),
@@ -1877,15 +1895,15 @@
 					)
 					.into()),
 				},
-				Runtime::Shell =&gt; runner.async_run(|config| {
+				Runtime::Shell =&gt; runner.async_run(|<span class="kw">_</span>| {
 					<span class="prelude-val">Ok</span>((
-						cmd.run::&lt;Block, <span class="kw">crate</span>::service::ShellRuntimeExecutor&gt;(config),
+						cmd.run::&lt;Block, HostFunctionsOf&lt;<span class="kw">crate</span>::service::ShellRuntimeExecutor&gt;&gt;(),
 						task_manager,
 					))
 				}),
-				Runtime::ContractsRococo =&gt; runner.async_run(|config| {
+				Runtime::ContractsRococo =&gt; runner.async_run(|<span class="kw">_</span>| {
 					<span class="prelude-val">Ok</span>((
-						cmd.run::&lt;Block, <span class="kw">crate</span>::service::ContractsRococoRuntimeExecutor&gt;(config),
+						cmd.run::&lt;Block, HostFunctionsOf&lt;<span class="kw">crate</span>::service::ContractsRococoRuntimeExecutor&gt;&gt;(),
 						task_manager,
 					))
 				}),
@@ -1942,7 +1960,7 @@
 				<span class="macro">info!</span>(<span class="string">&quot;Parachain genesis state: {}&quot;</span>, genesis_state);
 				<span class="macro">info!</span>(<span class="string">&quot;Is collating: {}&quot;</span>, <span class="kw">if </span>config.role.is_authority() { <span class="string">&quot;yes&quot; </span>} <span class="kw">else </span>{ <span class="string">&quot;no&quot; </span>});
 
-				<span class="kw">if </span>collator_options.relay_chain_rpc_url.is_some() &amp;&amp; cli.relaychain_args.len() &gt; <span class="number">0 </span>{
+				<span class="kw">if </span>!collator_options.relay_chain_rpc_urls.is_empty() &amp;&amp; cli.relaychain_args.len() &gt; <span class="number">0 </span>{
 					<span class="macro">warn!</span>(<span class="string">&quot;Detected relay chain node arguments together with --relay-chain-rpc-url. This command starts a minimal Polkadot node that only uses a network-related subset of all relay chain CLI options.&quot;</span>);
 				}
 

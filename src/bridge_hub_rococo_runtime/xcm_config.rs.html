@@ -184,6 +184,13 @@
 <span id="184">184</span>
 <span id="185">185</span>
 <span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -218,9 +225,10 @@
 <span class="kw">use </span>xcm_builder::{
 	AccountId32Aliases, AllowKnownQueryResponses, AllowSubscriptionsFrom,
 	AllowTopLevelPaidExecutionFrom, AllowUnpaidExecutionFrom, CurrencyAdapter, EnsureXcmOrigin,
-	FixedWeightBounds, IsConcrete, LocationInverter, ParentIsPreset, RelayChainAsNative,
+	IsConcrete, LocationInverter, ParentAsSuperuser, ParentIsPreset, RelayChainAsNative,
 	SiblingParachainAsNative, SiblingParachainConvertsVia, SignedAccountId32AsNative,
 	SignedToAccountId32, SovereignSignedViaLocation, TakeWeightCredit, UsingComponents,
+	WeightInfoBounds,
 };
 <span class="kw">use </span>xcm_executor::XcmExecutor;
 
@@ -229,6 +237,7 @@
 	<span class="kw">pub const </span>RelayNetwork: NetworkId = NetworkId::Any;
 	<span class="kw">pub </span>RelayChainOrigin: RuntimeOrigin = cumulus_pallet_xcm::Origin::Relay.into();
 	<span class="kw">pub </span>Ancestry: MultiLocation = Parachain(ParachainInfo::parachain_id().into()).into();
+	<span class="kw">pub const </span>MaxInstructions: u32 = <span class="number">100</span>;
 }
 
 <span class="doccomment">/// Type for specifying how a `MultiLocation` can be converted into an `AccountId`. This is used
@@ -271,18 +280,15 @@
 	<span class="comment">// Native converter for sibling Parachains; will convert to a `SiblingPara` origin when
 	// recognized.
 	</span>SiblingParachainAsNative&lt;cumulus_pallet_xcm::Origin, RuntimeOrigin&gt;,
+	<span class="comment">// Superuser converter for the Relay-chain (Parent) location. This will allow it to issue a
+	// transaction from the Root origin.
+	</span>ParentAsSuperuser&lt;RuntimeOrigin&gt;,
 	<span class="comment">// Native signed account converter; this just converts an `AccountId32` origin into a normal
 	// `Origin::Signed` origin of the same 32-byte value.
 	</span>SignedAccountId32AsNative&lt;RelayNetwork, RuntimeOrigin&gt;,
 	<span class="comment">// Xcm origins can be represented natively under the Xcm pallet&#39;s Xcm origin.
 	</span>XcmPassthrough&lt;RuntimeOrigin&gt;,
 );
-
-<span class="macro">parameter_types! </span>{
-	<span class="comment">// One XCM operation is 1_000_000_000 weight - almost certainly a conservative estimate.
-	</span><span class="kw">pub </span>UnitWeightCost: u64 = <span class="number">1_000_000_000</span>;
-	<span class="kw">pub const </span>MaxInstructions: u32 = <span class="number">100</span>;
-}
 
 <span class="macro">match_types! </span>{
 	<span class="kw">pub type </span>ParentOrParentsExecutivePlurality: <span class="kw">impl </span>Contains&lt;MultiLocation&gt; = {
@@ -324,7 +330,11 @@
 	</span><span class="kw">type </span>IsTeleporter = ConcreteNativeAssetFrom&lt;RelayLocation&gt;;
 	<span class="kw">type </span>LocationInverter = LocationInverter&lt;Ancestry&gt;;
 	<span class="kw">type </span>Barrier = Barrier;
-	<span class="kw">type </span>Weigher = FixedWeightBounds&lt;UnitWeightCost, RuntimeCall, MaxInstructions&gt;;
+	<span class="kw">type </span>Weigher = WeightInfoBounds&lt;
+		<span class="kw">crate</span>::weights::xcm::BridgeHubRococoXcmWeight&lt;RuntimeCall&gt;,
+		RuntimeCall,
+		MaxInstructions,
+	&gt;;
 	<span class="kw">type </span>Trader =
 		UsingComponents&lt;WeightToFee, RelayLocation, AccountId, Balances, ToAuthor&lt;Runtime&gt;&gt;;
 	<span class="kw">type </span>ResponseHandler = PolkadotXcm;
@@ -358,7 +368,11 @@
 	<span class="kw">type </span>XcmExecutor = XcmExecutor&lt;XcmConfig&gt;;
 	<span class="kw">type </span>XcmTeleportFilter = Everything;
 	<span class="kw">type </span>XcmReserveTransferFilter = Nothing; <span class="comment">// This parachain is not meant as a reserve location.
-	</span><span class="kw">type </span>Weigher = FixedWeightBounds&lt;UnitWeightCost, RuntimeCall, MaxInstructions&gt;;
+	</span><span class="kw">type </span>Weigher = WeightInfoBounds&lt;
+		<span class="kw">crate</span>::weights::xcm::BridgeHubRococoXcmWeight&lt;RuntimeCall&gt;,
+		RuntimeCall,
+		MaxInstructions,
+	&gt;;
 	<span class="kw">type </span>LocationInverter = LocationInverter&lt;Ancestry&gt;;
 	<span class="kw">type </span>RuntimeOrigin = RuntimeOrigin;
 	<span class="kw">type </span>RuntimeCall = RuntimeCall;

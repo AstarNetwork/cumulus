@@ -258,6 +258,8 @@
 <span id="258">258</span>
 <span id="259">259</span>
 <span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -294,11 +296,10 @@
 //! 5. After the parachain candidate got backed and included, all collators start at 1.
 
 </span><span class="kw">use </span>cumulus_client_consensus_common::{
-	ParachainBlockImport, ParachainCandidate, ParachainConsensus,
+	ParachainBlockImportMarker, ParachainCandidate, ParachainConsensus,
 };
 <span class="kw">use </span>cumulus_primitives_core::{relay_chain::v2::Hash <span class="kw">as </span>PHash, ParaId, PersistedValidationData};
 <span class="kw">use </span>cumulus_relay_chain_interface::RelayChainInterface;
-<span class="kw">use </span>parking_lot::Mutex;
 
 <span class="kw">use </span>sc_consensus::{BlockImport, BlockImportParams};
 <span class="kw">use </span>sp_consensus::{
@@ -306,6 +307,8 @@
 };
 <span class="kw">use </span>sp_inherents::{CreateInherentDataProviders, InherentData, InherentDataProvider};
 <span class="kw">use </span>sp_runtime::traits::{Block <span class="kw">as </span>BlockT, Header <span class="kw">as </span>HeaderT};
+
+<span class="kw">use </span>parking_lot::Mutex;
 <span class="kw">use </span>std::{marker::PhantomData, sync::Arc, time::Duration};
 
 <span class="kw">mod </span>import_queue;
@@ -316,11 +319,11 @@
 <span class="doccomment">/// The implementation of the relay-chain provided consensus for parachains.
 </span><span class="kw">pub struct </span>RelayChainConsensus&lt;B, PF, BI, RCInterface, CIDP&gt; {
 	para_id: ParaId,
-	_phantom: PhantomData&lt;B&gt;,
 	proposer_factory: Arc&lt;Mutex&lt;PF&gt;&gt;,
 	create_inherent_data_providers: Arc&lt;CIDP&gt;,
-	block_import: Arc&lt;futures::lock::Mutex&lt;ParachainBlockImport&lt;BI&gt;&gt;&gt;,
+	block_import: Arc&lt;futures::lock::Mutex&lt;BI&gt;&gt;,
 	relay_chain_interface: RCInterface,
+	_phantom: PhantomData&lt;B&gt;,
 }
 
 <span class="kw">impl</span>&lt;B, PF, BI, RCInterface, CIDP&gt; Clone <span class="kw">for </span>RelayChainConsensus&lt;B, PF, BI, RCInterface, CIDP&gt;
@@ -330,11 +333,11 @@
 	<span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
 		<span class="self">Self </span>{
 			para_id: <span class="self">self</span>.para_id,
-			_phantom: PhantomData,
 			proposer_factory: <span class="self">self</span>.proposer_factory.clone(),
 			create_inherent_data_providers: <span class="self">self</span>.create_inherent_data_providers.clone(),
 			block_import: <span class="self">self</span>.block_import.clone(),
 			relay_chain_interface: <span class="self">self</span>.relay_chain_interface.clone(),
+			_phantom: PhantomData,
 		}
 	}
 }
@@ -342,6 +345,7 @@
 <span class="kw">impl</span>&lt;B, PF, BI, RCInterface, CIDP&gt; RelayChainConsensus&lt;B, PF, BI, RCInterface, CIDP&gt;
 <span class="kw">where
 	</span>B: BlockT,
+	BI: ParachainBlockImportMarker,
 	RCInterface: RelayChainInterface,
 	CIDP: CreateInherentDataProviders&lt;B, (PHash, PersistedValidationData)&gt;,
 {
@@ -350,7 +354,7 @@
 		para_id: ParaId,
 		proposer_factory: PF,
 		create_inherent_data_providers: CIDP,
-		block_import: ParachainBlockImport&lt;BI&gt;,
+		block_import: BI,
 		relay_chain_interface: RCInterface,
 	) -&gt; <span class="self">Self </span>{
 		<span class="self">Self </span>{
@@ -403,7 +407,7 @@
 <span class="kw">where
 	</span>B: BlockT,
 	RCInterface: RelayChainInterface + Clone,
-	BI: BlockImport&lt;B&gt; + Send + Sync,
+	BI: BlockImport&lt;B&gt; + ParachainBlockImportMarker + Send + Sync,
 	PF: Environment&lt;B&gt; + Send + Sync,
 	PF::Proposer: Proposer&lt;
 		B,
@@ -481,7 +485,7 @@
 	<span class="kw">pub </span>para_id: ParaId,
 	<span class="kw">pub </span>proposer_factory: PF,
 	<span class="kw">pub </span>create_inherent_data_providers: CIDP,
-	<span class="kw">pub </span>block_import: ParachainBlockImport&lt;BI&gt;,
+	<span class="kw">pub </span>block_import: BI,
 	<span class="kw">pub </span>relay_chain_interface: RCInterface,
 }
 
@@ -506,7 +510,7 @@
 		ProofRecording = EnableProofRecording,
 		Proof = &lt;EnableProofRecording <span class="kw">as </span>ProofRecording&gt;::Proof,
 	&gt;,
-	BI: BlockImport&lt;Block&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+	BI: BlockImport&lt;Block&gt; + ParachainBlockImportMarker + Send + Sync + <span class="lifetime">&#39;static</span>,
 	CIDP: CreateInherentDataProviders&lt;Block, (PHash, PersistedValidationData)&gt; + <span class="lifetime">&#39;static</span>,
 	RCInterface: RelayChainInterface + Clone + <span class="lifetime">&#39;static</span>,
 {

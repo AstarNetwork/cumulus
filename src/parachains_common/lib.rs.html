@@ -113,6 +113,7 @@
 <span id="113">113</span>
 <span id="114">114</span>
 <span id="115">115</span>
+<span id="116">116</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright (C) 2021 Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -183,7 +184,7 @@
 <span class="doccomment">/// Common constants of parachains.
 </span><span class="kw">mod </span>constants {
 	<span class="kw">use </span><span class="kw">super</span>::types::BlockNumber;
-	<span class="kw">use </span>frame_support::weights::{constants::WEIGHT_PER_SECOND, Weight};
+	<span class="kw">use </span>frame_support::weights::{constants::WEIGHT_REF_TIME_PER_SECOND, Weight};
 	<span class="kw">use </span>sp_runtime::Perbill;
 	<span class="doccomment">/// This determines the average expected block time that we are targeting. Blocks will be
 	/// produced at a minimum duration defined by `SLOT_DURATION`. `SLOT_DURATION` is picked up by
@@ -207,9 +208,10 @@
 	</span><span class="kw">pub const </span>NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(<span class="number">75</span>);
 
 	<span class="doccomment">/// We allow for 0.5 seconds of compute with a 6 second average block time.
-	</span><span class="kw">pub const </span>MAXIMUM_BLOCK_WEIGHT: Weight = WEIGHT_PER_SECOND
-		.saturating_div(<span class="number">2</span>)
-		.set_proof_size(polkadot_primitives::v2::MAX_POV_SIZE <span class="kw">as </span>u64);
+	</span><span class="kw">pub const </span>MAXIMUM_BLOCK_WEIGHT: Weight = Weight::from_parts(
+		WEIGHT_REF_TIME_PER_SECOND.saturating_div(<span class="number">2</span>),
+		polkadot_primitives::v2::MAX_POV_SIZE <span class="kw">as </span>u64,
+	);
 }
 
 <span class="doccomment">/// Opaque types. These are used by the CLI to instantiate machinery that don&#39;t need to know

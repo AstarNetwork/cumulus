@@ -915,7 +915,7 @@
 		<span class="kw">let </span>para_id = ParaId::from(<span class="number">100</span>);
 		<span class="kw">let </span>announce_block = |<span class="kw">_</span>, <span class="kw">_</span>| ();
 		<span class="kw">let </span>client = Arc::new(TestClientBuilder::new().build());
-		<span class="kw">let </span>header = client.header(<span class="kw-2">&amp;</span>BlockId::Number(<span class="number">0</span>)).unwrap().unwrap();
+		<span class="kw">let </span>header = client.header(client.chain_info().genesis_hash).unwrap().unwrap();
 
 		<span class="kw">let </span>(sub_tx, sub_rx) = mpsc::channel(<span class="number">64</span>);
 

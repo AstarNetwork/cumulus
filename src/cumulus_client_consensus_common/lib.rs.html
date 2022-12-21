@@ -118,6 +118,61 @@
 <span id="118">118</span>
 <span id="119">119</span>
 <span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -135,13 +190,22 @@
 // along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
 </span><span class="kw">use </span>polkadot_primitives::v2::{Hash <span class="kw">as </span>PHash, PersistedValidationData};
-<span class="kw">use </span>sc_consensus::BlockImport;
-<span class="kw">use </span>sp_runtime::traits::Block <span class="kw">as </span>BlockT;
 
+<span class="kw">use </span>sc_client_api::Backend;
+<span class="kw">use </span>sc_consensus::{shared_data::SharedData, BlockImport, ImportResult};
+<span class="kw">use </span>sp_runtime::traits::{Block <span class="kw">as </span>BlockT, Header <span class="kw">as </span>HeaderT};
+
+<span class="kw">use </span>std::sync::Arc;
+
+<span class="kw">mod </span>level_monitor;
 <span class="kw">mod </span>parachain_consensus;
 <span class="attribute">#[cfg(test)]
 </span><span class="kw">mod </span>tests;
+
 <span class="kw">pub use </span>parachain_consensus::run_parachain_consensus;
+
+<span class="kw">use </span>level_monitor::LevelMonitor;
+<span class="kw">pub use </span>level_monitor::{LevelLimit, MAX_LEAVES_PER_LEVEL_SENSIBLE_DEFAULT};
 
 <span class="doccomment">/// The result of [`ParachainConsensus::produce_candidate`].
 </span><span class="kw">pub struct </span>ParachainCandidate&lt;B&gt; {
@@ -194,49 +258,95 @@
 /// This is used to set `block_import_params.fork_choice` to `false` as long as the block origin is
 /// not `NetworkInitialSync`. The best block for parachains is determined by the relay chain. Meaning
 /// we will update the best block, as it is included by the relay-chain.
-</span><span class="kw">pub struct </span>ParachainBlockImport&lt;I&gt;(I);
+</span><span class="kw">pub struct </span>ParachainBlockImport&lt;Block: BlockT, BI, BE&gt; {
+	inner: BI,
+	monitor: <span class="prelude-ty">Option</span>&lt;SharedData&lt;LevelMonitor&lt;Block, BE&gt;&gt;&gt;,
+}
 
-<span class="kw">impl</span>&lt;I&gt; ParachainBlockImport&lt;I&gt; {
+<span class="kw">impl</span>&lt;Block: BlockT, BI, BE: Backend&lt;Block&gt;&gt; ParachainBlockImport&lt;Block, BI, BE&gt; {
 	<span class="doccomment">/// Create a new instance.
-	</span><span class="kw">pub fn </span>new(inner: I) -&gt; <span class="self">Self </span>{
-		<span class="self">Self</span>(inner)
+	///
+	/// The number of leaves per level limit is set to `LevelLimit::Default`.
+	</span><span class="kw">pub fn </span>new(inner: BI, backend: Arc&lt;BE&gt;) -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>::new_with_limit(inner, backend, LevelLimit::Default)
+	}
+
+	<span class="doccomment">/// Create a new instance with an explicit limit to the number of leaves per level.
+	///
+	/// This function alone doesn&#39;t enforce the limit on levels for old imported blocks,
+	/// the limit is eventually enforced only when new blocks are imported.
+	</span><span class="kw">pub fn </span>new_with_limit(inner: BI, backend: Arc&lt;BE&gt;, level_leaves_max: LevelLimit) -&gt; <span class="self">Self </span>{
+		<span class="kw">let </span>level_limit = <span class="kw">match </span>level_leaves_max {
+			LevelLimit::None =&gt; <span class="prelude-val">None</span>,
+			LevelLimit::Some(limit) =&gt; <span class="prelude-val">Some</span>(limit),
+			LevelLimit::Default =&gt; <span class="prelude-val">Some</span>(MAX_LEAVES_PER_LEVEL_SENSIBLE_DEFAULT),
+		};
+
+		<span class="kw">let </span>monitor =
+			level_limit.map(|level_limit| SharedData::new(LevelMonitor::new(level_limit, backend)));
+
+		<span class="self">Self </span>{ inner, monitor }
 	}
 }
 
-<span class="kw">impl</span>&lt;I: Clone&gt; Clone <span class="kw">for </span>ParachainBlockImport&lt;I&gt; {
+<span class="kw">impl</span>&lt;Block: BlockT, I: Clone, BE&gt; Clone <span class="kw">for </span>ParachainBlockImport&lt;Block, I, BE&gt; {
 	<span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
-		ParachainBlockImport(<span class="self">self</span>.<span class="number">0</span>.clone())
+		ParachainBlockImport { inner: <span class="self">self</span>.inner.clone(), monitor: <span class="self">self</span>.monitor.clone() }
 	}
 }
 
 <span class="attribute">#[async_trait::async_trait]
-</span><span class="kw">impl</span>&lt;Block, I&gt; BlockImport&lt;Block&gt; <span class="kw">for </span>ParachainBlockImport&lt;I&gt;
+</span><span class="kw">impl</span>&lt;Block, BI, BE&gt; BlockImport&lt;Block&gt; <span class="kw">for </span>ParachainBlockImport&lt;Block, BI, BE&gt;
 <span class="kw">where
 	</span>Block: BlockT,
-	I: BlockImport&lt;Block&gt; + Send,
+	BI: BlockImport&lt;Block&gt; + Send,
+	BE: Backend&lt;Block&gt;,
 {
-	<span class="kw">type </span>Error = I::Error;
-	<span class="kw">type </span>Transaction = I::Transaction;
+	<span class="kw">type </span>Error = BI::Error;
+	<span class="kw">type </span>Transaction = BI::Transaction;
 
 	<span class="kw">async fn </span>check_block(
 		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
 		block: sc_consensus::BlockCheckParams&lt;Block&gt;,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;sc_consensus::ImportResult, <span class="self">Self</span>::Error&gt; {
-		<span class="self">self</span>.<span class="number">0</span>.check_block(block).<span class="kw">await
+		<span class="self">self</span>.inner.check_block(block).<span class="kw">await
 	</span>}
 
 	<span class="kw">async fn </span>import_block(
 		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		<span class="kw-2">mut </span>block_import_params: sc_consensus::BlockImportParams&lt;Block, <span class="self">Self</span>::Transaction&gt;,
+		<span class="kw-2">mut </span>params: sc_consensus::BlockImportParams&lt;Block, <span class="self">Self</span>::Transaction&gt;,
 		cache: std::collections::HashMap&lt;sp_consensus::CacheKeyId, Vec&lt;u8&gt;&gt;,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;sc_consensus::ImportResult, <span class="self">Self</span>::Error&gt; {
+		<span class="comment">// Blocks are stored within the backend by using POST hash.
+		</span><span class="kw">let </span>hash = params.post_hash();
+		<span class="kw">let </span>number = <span class="kw-2">*</span>params.header.number();
+
 		<span class="comment">// Best block is determined by the relay chain, or if we are doing the initial sync
 		// we import all blocks as new best.
-		</span>block_import_params.fork_choice = <span class="prelude-val">Some</span>(sc_consensus::ForkChoiceStrategy::Custom(
-			block_import_params.origin == sp_consensus::BlockOrigin::NetworkInitialSync,
+		</span>params.fork_choice = <span class="prelude-val">Some</span>(sc_consensus::ForkChoiceStrategy::Custom(
+			params.origin == sp_consensus::BlockOrigin::NetworkInitialSync,
 		));
-		<span class="self">self</span>.<span class="number">0</span>.import_block(block_import_params, cache).<span class="kw">await
-	</span>}
+
+		<span class="kw">let </span>maybe_lock = <span class="self">self</span>.monitor.as_ref().map(|monitor_lock| {
+			<span class="kw">let </span><span class="kw-2">mut </span>monitor = monitor_lock.shared_data_locked();
+			monitor.enforce_limit(number);
+			monitor.release_mutex()
+		});
+
+		<span class="kw">let </span>res = <span class="self">self</span>.inner.import_block(params, cache).<span class="kw">await</span><span class="question-mark">?</span>;
+
+		<span class="kw">if let </span>(<span class="prelude-val">Some</span>(<span class="kw-2">mut </span>monitor_lock), ImportResult::Imported(<span class="kw">_</span>)) = (maybe_lock, <span class="kw-2">&amp;</span>res) {
+			<span class="kw">let </span><span class="kw-2">mut </span>monitor = monitor_lock.upgrade();
+			monitor.block_imported(number, hash);
+		}
+
+		<span class="prelude-val">Ok</span>(res)
+	}
 }
+
+<span class="doccomment">/// Marker trait denoting a block import type that fits the parachain requirements.
+</span><span class="kw">pub trait </span>ParachainBlockImportMarker {}
+
+<span class="kw">impl</span>&lt;B: BlockT, BI, BE&gt; ParachainBlockImportMarker <span class="kw">for </span>ParachainBlockImport&lt;B, BI, BE&gt; {}
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cumulus_client_consensus_common" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

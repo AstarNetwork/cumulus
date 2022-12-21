@@ -333,11 +333,11 @@
 	</span>BlockchainError(<span class="attribute">#[from] </span>sp_blockchain::Error),
 	<span class="attribute">#[error(<span class="string">&quot;State machine error occured: {0}&quot;</span>)]
 	</span>StateMachineError(Box&lt;<span class="kw">dyn </span>sp_state_machine::Error&gt;),
-	<span class="attribute">#[error(<span class="string">&quot;Unable to call RPC method &#39;{0}&#39; due to error: {1}&quot;</span>)]
-	</span>RpcCallError(String, JsonRpcError),
+	<span class="attribute">#[error(<span class="string">&quot;Unable to call RPC method &#39;{0}&#39;&quot;</span>)]
+	</span>RpcCallError(String),
 	<span class="attribute">#[error(<span class="string">&quot;RPC Error: &#39;{0}&#39;&quot;</span>)]
 	</span>JsonRpcError(<span class="attribute">#[from] </span>JsonRpcError),
-	<span class="attribute">#[error(<span class="string">&quot;Unable to reach RpcStreamWorker: {0}&quot;</span>)]
+	<span class="attribute">#[error(<span class="string">&quot;Unable to communicate with RPC worker: {0}&quot;</span>)]
 	</span>WorkerCommunicationError(String),
 	<span class="attribute">#[error(<span class="string">&quot;Scale codec deserialization error: {0}&quot;</span>)]
 	</span>DeserializationError(CodecError),

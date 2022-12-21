@@ -432,6 +432,40 @@
 <span id="432">432</span>
 <span id="433">433</span>
 <span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -449,7 +483,6 @@
 // along with Cumulus.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
 </span><span class="kw">use </span>async_trait::async_trait;
-<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainInterface, RelayChainResult};
 <span class="kw">use </span>sc_client_api::{
 	Backend, BlockBackend, BlockImportNotification, BlockchainEvents, Finalizer, UsageProvider,
 };
@@ -461,14 +494,24 @@
 	traits::{Block <span class="kw">as </span>BlockT, Header <span class="kw">as </span>HeaderT},
 };
 
+<span class="kw">use </span>cumulus_client_pov_recovery::{RecoveryDelay, RecoveryKind, RecoveryRequest};
+<span class="kw">use </span>cumulus_relay_chain_interface::{RelayChainInterface, RelayChainResult};
+
 <span class="kw">use </span>polkadot_primitives::v2::{Hash <span class="kw">as </span>PHash, Id <span class="kw">as </span>ParaId, OccupiedCoreAssumption};
 
 <span class="kw">use </span>codec::Decode;
-<span class="kw">use </span>futures::{select, FutureExt, Stream, StreamExt};
+<span class="kw">use </span>futures::{channel::mpsc::Sender, select, FutureExt, Stream, StreamExt};
 
-<span class="kw">use </span>std::{pin::Pin, sync::Arc};
+<span class="kw">use </span>std::{pin::Pin, sync::Arc, time::Duration};
 
 <span class="kw">const </span>LOG_TARGET: <span class="kw-2">&amp;</span>str = <span class="string">&quot;cumulus-consensus&quot;</span>;
+
+<span class="comment">// Delay range to trigger explicit requests.
+// The chosen value doesn&#39;t have any special meaning, a random delay within the order of
+// seconds in practice should be a good enough to allow a quick recovery without DOSing
+// the relay chain.
+</span><span class="kw">const </span>RECOVERY_DELAY: RecoveryDelay =
+	RecoveryDelay { min: Duration::ZERO, max: Duration::from_secs(<span class="number">30</span>) };
 
 <span class="doccomment">/// Helper for the relay chain client. This is expected to be a lightweight handle like an `Arc`.
 </span><span class="attribute">#[async_trait]
@@ -516,7 +559,7 @@
 		<span class="kw">let </span>finalized_head = <span class="kw">if let </span><span class="prelude-val">Some</span>(h) = finalized_heads.next().<span class="kw">await </span>{
 			h
 		} <span class="kw">else </span>{
-			<span class="macro">tracing::debug!</span>(target: <span class="string">&quot;cumulus-consensus&quot;</span>, <span class="string">&quot;Stopping following finalized head.&quot;</span>);
+			<span class="macro">tracing::debug!</span>(target: LOG_TARGET, <span class="string">&quot;Stopping following finalized head.&quot;</span>);
 			<span class="kw">return
 		</span>};
 
@@ -524,7 +567,7 @@
 			<span class="prelude-val">Ok</span>(header) =&gt; header,
 			<span class="prelude-val">Err</span>(err) =&gt; {
 				<span class="macro">tracing::debug!</span>(
-					target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+					target: LOG_TARGET,
 					error = <span class="question-mark">?</span>err,
 					<span class="string">&quot;Could not decode parachain header while following finalized heads.&quot;</span>,
 				);
@@ -539,12 +582,12 @@
 			<span class="kw">if let </span><span class="prelude-val">Err</span>(e) = parachain.finalize_block(hash, <span class="prelude-val">None</span>, <span class="bool-val">true</span>) {
 				<span class="kw">match </span>e {
 					ClientError::UnknownBlock(<span class="kw">_</span>) =&gt; <span class="macro">tracing::debug!</span>(
-						target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+						target: LOG_TARGET,
 						block_hash = <span class="question-mark">?</span>hash,
 						<span class="string">&quot;Could not finalize block because it is unknown.&quot;</span>,
 					),
 					<span class="kw">_ </span>=&gt; <span class="macro">tracing::warn!</span>(
-						target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+						target: LOG_TARGET,
 						error = <span class="question-mark">?</span>e,
 						block_hash = <span class="question-mark">?</span>hash,
 						<span class="string">&quot;Failed to finalize block&quot;</span>,
@@ -570,6 +613,7 @@
 	parachain: Arc&lt;P&gt;,
 	relay_chain: R,
 	announce_block: Arc&lt;<span class="kw">dyn </span>Fn(Block::Hash, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;) + Send + Sync&gt;,
+	recovery_chan_tx: <span class="prelude-ty">Option</span>&lt;Sender&lt;RecoveryRequest&lt;Block&gt;&gt;&gt;,
 ) <span class="kw">where
 	</span>Block: BlockT,
 	P: Finalizer&lt;Block, B&gt;
@@ -582,8 +626,13 @@
 	R: RelaychainClient,
 	B: Backend&lt;Block&gt;,
 {
-	<span class="kw">let </span>follow_new_best =
-		follow_new_best(para_id, parachain.clone(), relay_chain.clone(), announce_block);
+	<span class="kw">let </span>follow_new_best = follow_new_best(
+		para_id,
+		parachain.clone(),
+		relay_chain.clone(),
+		announce_block,
+		recovery_chan_tx,
+	);
 	<span class="kw">let </span>follow_finalized_head = follow_finalized_head(para_id, parachain, relay_chain);
 	<span class="macro">select! </span>{
 		<span class="kw">_ </span>= follow_new_best.fuse() =&gt; {},
@@ -597,6 +646,7 @@
 	parachain: Arc&lt;P&gt;,
 	relay_chain: R,
 	announce_block: Arc&lt;<span class="kw">dyn </span>Fn(Block::Hash, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;) + Send + Sync&gt;,
+	recovery_chan_tx: <span class="prelude-ty">Option</span>&lt;Sender&lt;RecoveryRequest&lt;Block&gt;&gt;&gt;,
 ) <span class="kw">where
 	</span>Block: BlockT,
 	P: Finalizer&lt;Block, B&gt;
@@ -631,10 +681,11 @@
 						h,
 						<span class="kw-2">&amp;*</span>parachain,
 						<span class="kw-2">&amp;mut </span>unset_best_header,
+						recovery_chan_tx.clone(),
 					).<span class="kw">await</span>,
 					<span class="prelude-val">None </span>=&gt; {
 						<span class="macro">tracing::debug!</span>(
-							target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+							target: LOG_TARGET,
 							<span class="string">&quot;Stopping following new best.&quot;</span>,
 						);
 						<span class="kw">return
@@ -651,7 +702,7 @@
 					).<span class="kw">await</span>,
 					<span class="prelude-val">None </span>=&gt; {
 						<span class="macro">tracing::debug!</span>(
-							target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+							target: LOG_TARGET,
 							<span class="string">&quot;Stopping following imported blocks.&quot;</span>,
 						);
 						<span class="kw">return
@@ -710,7 +761,7 @@
 			import_block_as_new_best(unset_hash, unset_best_header, parachain).<span class="kw">await</span>;
 		},
 		state =&gt; <span class="macro">tracing::debug!</span>(
-			target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+			target: LOG_TARGET,
 			<span class="question-mark">?</span>unset_best_header,
 			<span class="question-mark">?</span>notification.header,
 			<span class="question-mark">?</span>state,
@@ -724,6 +775,7 @@
 	head: Vec&lt;u8&gt;,
 	parachain: <span class="kw-2">&amp;</span>P,
 	unset_best_header: <span class="kw-2">&amp;mut </span><span class="prelude-ty">Option</span>&lt;Block::Header&gt;,
+	<span class="kw-2">mut </span>recovery_chan_tx: <span class="prelude-ty">Option</span>&lt;Sender&lt;RecoveryRequest&lt;Block&gt;&gt;&gt;,
 ) <span class="kw">where
 	</span>Block: BlockT,
 	P: UsageProvider&lt;Block&gt; + Send + Sync + BlockBackend&lt;Block&gt;,
@@ -733,7 +785,7 @@
 		<span class="prelude-val">Ok</span>(header) =&gt; header,
 		<span class="prelude-val">Err</span>(err) =&gt; {
 			<span class="macro">tracing::debug!</span>(
-				target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+				target: LOG_TARGET,
 				error = <span class="question-mark">?</span>err,
 				<span class="string">&quot;Could not decode Parachain header while following best heads.&quot;</span>,
 			);
@@ -745,7 +797,7 @@
 
 	<span class="kw">if </span>parachain.usage_info().chain.best_hash == hash {
 		<span class="macro">tracing::debug!</span>(
-			target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+			target: LOG_TARGET,
 			block_hash = <span class="question-mark">?</span>hash,
 			<span class="string">&quot;Skipping set new best block, because block is already the best.&quot;</span>,
 		)
@@ -759,7 +811,7 @@
 			},
 			<span class="prelude-val">Ok</span>(BlockStatus::InChainPruned) =&gt; {
 				<span class="macro">tracing::error!</span>(
-					target: <span class="string">&quot;cumulus-collator&quot;</span>,
+					target: LOG_TARGET,
 					block_hash = <span class="question-mark">?</span>hash,
 					<span class="string">&quot;Trying to set pruned block as new best!&quot;</span>,
 				);
@@ -768,14 +820,30 @@
 				<span class="kw-2">*</span>unset_best_header = <span class="prelude-val">Some</span>(parachain_head);
 
 				<span class="macro">tracing::debug!</span>(
-					target: <span class="string">&quot;cumulus-collator&quot;</span>,
+					target: LOG_TARGET,
 					block_hash = <span class="question-mark">?</span>hash,
 					<span class="string">&quot;Parachain block not yet imported, waiting for import to enact as best block.&quot;</span>,
 				);
+
+				<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref mut </span>recovery_chan_tx) = recovery_chan_tx {
+					<span class="comment">// Best effort channel to actively encourage block recovery.
+					// An error here is not fatal; the relay chain continuously re-announces
+					// the best block, thus we will have other opportunities to retry.
+					</span><span class="kw">let </span>req =
+						RecoveryRequest { hash, delay: RECOVERY_DELAY, kind: RecoveryKind::Full };
+					<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = recovery_chan_tx.try_send(req) {
+						<span class="macro">tracing::warn!</span>(
+							target: LOG_TARGET,
+							block_hash = <span class="question-mark">?</span>hash,
+							error = <span class="question-mark">?</span>err,
+							<span class="string">&quot;Unable to notify block recovery subsystem&quot;
+						</span>)
+					}
+				}
 			},
 			<span class="prelude-val">Err</span>(e) =&gt; {
 				<span class="macro">tracing::error!</span>(
-					target: <span class="string">&quot;cumulus-collator&quot;</span>,
+					target: LOG_TARGET,
 					block_hash = <span class="question-mark">?</span>hash,
 					error = <span class="question-mark">?</span>e,
 					<span class="string">&quot;Failed to get block status of block.&quot;</span>,
@@ -795,7 +863,7 @@
 	<span class="kw">let </span>best_number = parachain.usage_info().chain.best_number;
 	<span class="kw">if </span><span class="kw-2">*</span>header.number() &lt; best_number {
 		<span class="macro">tracing::debug!</span>(
-			target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+			target: LOG_TARGET,
 			%best_number,
 			block_number = %header.number(),
 			<span class="string">&quot;Skipping importing block as new best block, because there already exists a \
@@ -811,7 +879,7 @@
 
 	<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = (<span class="kw-2">&amp;*</span>parachain).import_block(block_import_params, Default::default()).<span class="kw">await </span>{
 		<span class="macro">tracing::warn!</span>(
-			target: <span class="string">&quot;cumulus-consensus&quot;</span>,
+			target: LOG_TARGET,
 			block_hash = <span class="question-mark">?</span>hash,
 			error = <span class="question-mark">?</span>err,
 			<span class="string">&quot;Failed to set new best block.&quot;</span>,

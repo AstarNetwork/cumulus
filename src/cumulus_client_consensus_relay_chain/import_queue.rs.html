@@ -123,6 +123,10 @@
 <span id="123">123</span>
 <span id="124">124</span>
 <span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -141,7 +145,7 @@
 
 </span><span class="kw">use </span>std::{marker::PhantomData, sync::Arc};
 
-<span class="kw">use </span>cumulus_client_consensus_common::ParachainBlockImport;
+<span class="kw">use </span>cumulus_client_consensus_common::ParachainBlockImportMarker;
 
 <span class="kw">use </span>sc_consensus::{
 	import_queue::{BasicQueue, Verifier <span class="kw">as </span>VerifierT},
@@ -232,13 +236,17 @@
 <span class="doccomment">/// Start an import queue for a Cumulus collator that does not uses any special authoring logic.
 </span><span class="kw">pub fn </span>import_queue&lt;Client, Block: BlockT, I, CIDP&gt;(
 	client: Arc&lt;Client&gt;,
-	block_import: ParachainBlockImport&lt;I&gt;,
+	block_import: I,
 	create_inherent_data_providers: CIDP,
 	spawner: <span class="kw-2">&amp;</span><span class="kw">impl </span>sp_core::traits::SpawnEssentialNamed,
 	registry: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>substrate_prometheus_endpoint::Registry&gt;,
 ) -&gt; ClientResult&lt;BasicQueue&lt;Block, I::Transaction&gt;&gt;
 <span class="kw">where
-	</span>I: BlockImport&lt;Block, Error = ConsensusError&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
+	</span>I: BlockImport&lt;Block, Error = ConsensusError&gt;
+		+ ParachainBlockImportMarker
+		+ Send
+		+ Sync
+		+ <span class="lifetime">&#39;static</span>,
 	I::Transaction: Send,
 	Client: ProvideRuntimeApi&lt;Block&gt; + Send + Sync + <span class="lifetime">&#39;static</span>,
 	&lt;Client <span class="kw">as </span>ProvideRuntimeApi&lt;Block&gt;&gt;::Api: BlockBuilderApi&lt;Block&gt;,

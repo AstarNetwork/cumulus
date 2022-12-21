@@ -99,6 +99,7 @@
 <span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
+<span id="102">102</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2022 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
@@ -162,7 +163,8 @@
 
 	<span class="attribute">#[pallet::call]
 	</span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
-		<span class="attribute">#[pallet::weight(<span class="number">0</span>)]
+		<span class="attribute">#[pallet::call_index(<span class="number">0</span>)]
+		#[pallet::weight(<span class="number">0</span>)]
 		</span><span class="kw">pub fn </span>schedule_migration(
 			origin: OriginFor&lt;T&gt;,
 			code: Vec&lt;u8&gt;,

@@ -155,7 +155,7 @@
 <span class="kw">use </span>frame_support::{
 	pallet_prelude::<span class="kw-2">*</span>,
 	traits::StorageVersion,
-	weights::{constants::WEIGHT_PER_MILLIS, Weight},
+	weights::{constants::WEIGHT_REF_TIME_PER_MILLIS, Weight},
 };
 <span class="kw">use </span>xcm::latest::Weight <span class="kw">as </span>XcmWeight;
 
@@ -197,7 +197,7 @@
 				resume_threshold: <span class="number">1</span>,
 				threshold_weight: <span class="number">100_000</span>,
 				weight_restrict_decay: <span class="number">2</span>,
-				xcmp_max_individual_weight: <span class="number">20u64 </span>* WEIGHT_PER_MILLIS.ref_time(),
+				xcmp_max_individual_weight: <span class="number">20u64 </span>* WEIGHT_REF_TIME_PER_MILLIS,
 			}
 		}
 	}

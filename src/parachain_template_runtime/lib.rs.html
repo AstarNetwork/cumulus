@@ -762,7 +762,7 @@
 	parameter_types,
 	traits::{ConstU32, ConstU64, ConstU8, Everything},
 	weights::{
-		constants::WEIGHT_PER_SECOND, ConstantMultiplier, Weight, WeightToFeeCoefficient,
+		constants::WEIGHT_REF_TIME_PER_SECOND, ConstantMultiplier, Weight, WeightToFeeCoefficient,
 		WeightToFeeCoefficients, WeightToFeePolynomial,
 	},
 	PalletId,
@@ -948,9 +948,10 @@
 </span><span class="kw">const </span>NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(<span class="number">75</span>);
 
 <span class="doccomment">/// We allow for 0.5 of a second of compute with a 12 second average block time.
-</span><span class="kw">const </span>MAXIMUM_BLOCK_WEIGHT: Weight = WEIGHT_PER_SECOND
-	.saturating_div(<span class="number">2</span>)
-	.set_proof_size(cumulus_primitives_core::relay_chain::v2::MAX_POV_SIZE <span class="kw">as </span>u64);
+</span><span class="kw">const </span>MAXIMUM_BLOCK_WEIGHT: Weight = Weight::from_parts(
+	WEIGHT_REF_TIME_PER_SECOND.saturating_div(<span class="number">2</span>),
+	cumulus_primitives_core::relay_chain::v2::MAX_POV_SIZE <span class="kw">as </span>u64,
+);
 
 <span class="doccomment">/// The version information used to identify this runtime when compiled natively.
 </span><span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
@@ -1362,21 +1363,20 @@
 
 	<span class="attribute">#[cfg(feature = <span class="string">&quot;try-runtime&quot;</span>)]
 	</span><span class="kw">impl </span>frame_try_runtime::TryRuntime&lt;Block&gt; <span class="kw">for </span>Runtime {
-		<span class="kw">fn </span>on_runtime_upgrade() -&gt; (Weight, Weight) {
-			<span class="macro">log::info!</span>(<span class="string">&quot;try-runtime::on_runtime_upgrade parachain-template.&quot;</span>);
-			<span class="kw">let </span>weight = Executive::try_runtime_upgrade().unwrap();
+		<span class="kw">fn </span>on_runtime_upgrade(checks: bool) -&gt; (Weight, Weight) {
+			<span class="kw">let </span>weight = Executive::try_runtime_upgrade(checks).unwrap();
 			(weight, RuntimeBlockWeights::get().max_block)
 		}
 
-		<span class="kw">fn </span>execute_block(block: Block, state_root_check: bool, select: frame_try_runtime::TryStateSelect) -&gt; Weight {
-			<span class="macro">log::info!</span>(
-				target: <span class="string">&quot;runtime::parachain-template&quot;</span>, <span class="string">&quot;try-runtime: executing block #{} ({:?}) / root checks: {:?} / sanity-checks: {:?}&quot;</span>,
-				block.header.number,
-				block.header.hash(),
-				state_root_check,
-				select,
-			);
-			Executive::try_execute_block(block, state_root_check, select).expect(<span class="string">&quot;try_execute_block failed&quot;</span>)
+		<span class="kw">fn </span>execute_block(
+			block: Block,
+			state_root_check: bool,
+			signature_check: bool,
+			select: frame_try_runtime::TryStateSelect,
+		) -&gt; Weight {
+			<span class="comment">// NOTE: intentional unwrap: we don&#39;t want to propagate the error backwards, and want to
+			// have a backtrace here.
+			</span>Executive::try_execute_block(block, state_root_check, signature_check, select).unwrap()
 		}
 	}
 

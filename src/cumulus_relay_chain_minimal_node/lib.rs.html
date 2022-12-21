@@ -300,7 +300,7 @@
 <span class="kw">pub async fn </span>build_minimal_relay_chain_node(
 	polkadot_config: Configuration,
 	task_manager: <span class="kw-2">&amp;mut </span>TaskManager,
-	relay_chain_url: Url,
+	relay_chain_url: Vec&lt;Url&gt;,
 ) -&gt; RelayChainResult&lt;(Arc&lt;(<span class="kw">dyn </span>RelayChainInterface + <span class="lifetime">&#39;static</span>)&gt;, <span class="prelude-ty">Option</span>&lt;CollatorPair&gt;)&gt; {
 	<span class="kw">let </span>client = cumulus_relay_chain_rpc_interface::create_client_and_start_worker(
 		relay_chain_url,

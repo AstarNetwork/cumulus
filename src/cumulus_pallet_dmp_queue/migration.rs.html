@@ -124,7 +124,7 @@
 <span class="kw">use </span>frame_support::{
 	pallet_prelude::<span class="kw-2">*</span>,
 	traits::StorageVersion,
-	weights::{constants::WEIGHT_PER_MILLIS, Weight},
+	weights::{constants::WEIGHT_REF_TIME_PER_MILLIS, Weight},
 };
 <span class="kw">use </span>xcm::latest::Weight <span class="kw">as </span>XcmWeight;
 
@@ -155,7 +155,7 @@
 
 	<span class="kw">impl </span>Default <span class="kw">for </span>ConfigData {
 		<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
-			ConfigData { max_individual: <span class="number">10u64 </span>* WEIGHT_PER_MILLIS.ref_time() }
+			ConfigData { max_individual: <span class="number">10u64 </span>* WEIGHT_REF_TIME_PER_MILLIS }
 		}
 	}
 }
